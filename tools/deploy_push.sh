@@ -2,7 +2,7 @@
 # 체험판 → GitHub(yeniej21-crypto/OBANG) main → 넷리파이 자동 배포
 # 끝나면 작업 원본을 source 브랜치에 자동 백업(backup.sh)한다.
 # 사용: bash deploy_push.sh "바뀐 내용 한 줄"
-# 되돌리기: 배포마다 deploy-YYYYMMDD-HHMM 태그가 붙는다 → bash rollback.sh deploy-...
+# 되돌리기: bash rollback.sh 로 배포 목록을 보고 → bash rollback.sh <커밋번호>
 set -e
 SP=$(cd "$(dirname "$0")" && pwd)
 python3 "$SP/check_js.py" || { echo "배포 중단: 스크립트 오류"; exit 1; }
@@ -20,7 +20,7 @@ if git -c user.name="Claude" -c user.email="noreply@anthropic.com" commit -q -m 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_01FmgSvuqEnPSFM3XEzPX8mV"; then
   git push -q origin main && git log --oneline | head -1
-  git tag -f "deploy-$STAMP" >/dev/null && git push -q -f origin "deploy-$STAMP" && echo "되돌리기 표시: deploy-$STAMP"
+  echo "$STAMP $(git rev-parse --short HEAD) ${1:-체험판 업데이트}" >> "$SP/DEPLOYS.log"
 else
   echo "배포본: 바뀐 것 없음"
 fi

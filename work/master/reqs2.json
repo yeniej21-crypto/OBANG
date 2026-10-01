@@ -1,0 +1,62 @@
+[
+ {
+  "index": 0,
+  "params": {
+   "model": "nano_banana_pro",
+   "aspect_ratio": "9:16",
+   "resolution": "2k",
+   "use_unlim": false,
+   "prompt": "Ultra-realistic editorial photograph, full-frame camera, 35mm lens at f/2.2, natural skin texture with pores, wrinkles and sun spots, real fabric texture, true-to-life color, cinematic but natural light, indistinguishable from a real photo. A Korean saju master in his late 60s with a sharp, cool analyst personality: very short-cropped silver buzz cut, angular face with hollow cheeks, a deep vertical crease between his brows, clean-shaven with faint silver stubble, thin gold half-moon reading glasses low on his nose, peering over them with one eyebrow slightly raised, unimpressed. He wears a black cashmere turtleneck with sleeves pushed up and a thin silver ring; long ink-stained fingers flick one bead of a worn wooden abacus. Setting: a cramped second-floor workroom above an old print shop in Euljiro, Seoul, at night: a single brass desk lamp throws a hard pool of warm light on a tabbed, dog-eared almanac and pencil-covered calculation sheets and a steel ruler; everything else sinks into deep shadow, the dark shapes of an old printing press behind him, a dusty window with blurred red and teal neon from the alley below rim-lighting his silhouette. Camera: low three-quarter angle across the desk, the abacus large and out of focus in the foreground, desk edge receding diagonally, waist-up. Strong sense of depth and perspective: clear foreground, midground and background layers, converging lines, foreground objects out of focus. He must not resemble any real person. A distinctive, memorable character with a unique silhouette, not a generic grandfather. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "index": 1,
+  "params": {
+   "model": "seedream_v5_pro",
+   "aspect_ratio": "9:16",
+   "resolution": "2k",
+   "use_unlim": false,
+   "prompt": "Semi-realistic 2.5D Korean webtoon illustration, painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle texture, refined line work, cinematic rim light, strong three-dimensional volume and depth. A Korean saju master in his late 60s with a sharp, cool analyst personality: very short-cropped silver buzz cut, angular face with hollow cheeks, a deep vertical crease between his brows, clean-shaven with faint silver stubble, thin gold half-moon reading glasses low on his nose, peering over them with one eyebrow slightly raised, unimpressed. He wears a black cashmere turtleneck with sleeves pushed up and a thin silver ring; long ink-stained fingers flick one bead of a worn wooden abacus. Setting: a cramped second-floor workroom above an old print shop in Euljiro, Seoul, at night: a single brass desk lamp throws a hard pool of warm light on a tabbed, dog-eared almanac and pencil-covered calculation sheets and a steel ruler; everything else sinks into deep shadow, the dark shapes of an old printing press behind him, a dusty window with blurred red and teal neon from the alley below rim-lighting his silhouette. Camera: low three-quarter angle across the desk, the abacus large and out of focus in the foreground, desk edge receding diagonally, waist-up. Strong sense of depth and perspective: clear foreground, midground and background layers, converging lines, foreground objects out of focus. He must not resemble any real person. A distinctive, memorable character with a unique silhouette, not a generic grandfather. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "index": 2,
+  "params": {
+   "model": "nano_banana_pro",
+   "aspect_ratio": "9:16",
+   "resolution": "2k",
+   "use_unlim": false,
+   "prompt": "Ultra-realistic editorial photograph, full-frame camera, 35mm lens at f/2.2, natural skin texture with pores, wrinkles and sun spots, real fabric texture, true-to-life color, cinematic but natural light, indistinguishable from a real photo. A Korean saju master in his early 70s, an eccentric mountain hermit who came down to the city: completely shaved, sun-tanned head, thick bushy white eyebrows that curl upward at the tips, a short scruffy white beard, crinkled laughing eyes with a piercing, uncanny gaze, a mischievous lopsided grin. He wears a faded indigo cotton work jacket with patched elbows over a rough hemp shirt (not a monk robe), a string of dark wooden beads wrapped around his wrist. He sits cross-legged on the worn wooden floor under the deep eaves of an old mountain hermitage in the rain, shaking a smooth, hand-polished bamboo fortune cylinder, one divination stick leaping out in mid-air. Rain streams off the tiled eaves in the out-of-focus foreground, a small black iron kettle steams beside him, misty pine ridges recede layer by layer behind. Camera: slightly low angle, floorboards and the eave line converging toward the mountains, full upper body. Strong sense of depth and perspective: clear foreground, midground and background layers, converging lines, foreground objects out of focus. He must not resemble any real person. A distinctive, memorable character with a unique silhouette, not a generic grandfather. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "index": 3,
+  "params": {
+   "model": "seedream_v5_pro",
+   "aspect_ratio": "9:16",
+   "resolution": "2k",
+   "use_unlim": false,
+   "prompt": "Semi-realistic 2.5D Korean webtoon illustration, painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle texture, refined line work, cinematic rim light, strong three-dimensional volume and depth. A Korean saju master in his early 70s, an eccentric mountain hermit who came down to the city: completely shaved, sun-tanned head, thick bushy white eyebrows that curl upward at the tips, a short scruffy white beard, crinkled laughing eyes with a piercing, uncanny gaze, a mischievous lopsided grin. He wears a faded indigo cotton work jacket with patched elbows over a rough hemp shirt (not a monk robe), a string of dark wooden beads wrapped around his wrist. He sits cross-legged on the worn wooden floor under the deep eaves of an old mountain hermitage in the rain, shaking a smooth, hand-polished bamboo fortune cylinder, one divination stick leaping out in mid-air. Rain streams off the tiled eaves in the out-of-focus foreground, a small black iron kettle steams beside him, misty pine ridges recede layer by layer behind. Camera: slightly low angle, floorboards and the eave line converging toward the mountains, full upper body. Strong sense of depth and perspective: clear foreground, midground and background layers, converging lines, foreground objects out of focus. He must not resemble any real person. A distinctive, memorable character with a unique silhouette, not a generic grandfather. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "index": 4,
+  "params": {
+   "model": "nano_banana_pro",
+   "aspect_ratio": "9:16",
+   "resolution": "2k",
+   "use_unlim": false,
+   "prompt": "Ultra-realistic editorial photograph, full-frame camera, 35mm lens at f/2.2, natural skin texture with pores, wrinkles and sun spots, real fabric texture, true-to-life color, cinematic but natural light, indistinguishable from a real photo. A Korean saju master in his mid 60s, a passionate former professor: silver hair swept back with a few unruly strands falling over his forehead, a neatly trimmed short charcoal-and-silver beard, thick black horn-rimmed glasses pushed up onto his head, intense deep-set eyes, caught mid-explanation with one hand raised holding a stub of chalk, a confident half-smile. He wears a brown herringbone tweed jacket over an ivory hanbok jeogori whose white collar band (dongjeong) shows at the neck, a deep blue pocket square. Setting: a tall, cluttered private study: floor-to-ceiling shelves of stitched old books and worn hardcovers, a rolling library ladder, a large blackboard behind him covered only in abstract chalk circles, lines and arrows forming a five-element cycle diagram (no writing at all), a tall arched window pouring a beam of light where chalk dust floats. Camera: 35mm from slightly below, bookshelves converging upward for strong vertical perspective, a stack of books blurred in the near foreground, waist-up. Strong sense of depth and perspective: clear foreground, midground and background layers, converging lines, foreground objects out of focus. He must not resemble any real person. A distinctive, memorable character with a unique silhouette, not a generic grandfather. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "index": 5,
+  "params": {
+   "model": "seedream_v5_pro",
+   "aspect_ratio": "9:16",
+   "resolution": "2k",
+   "use_unlim": false,
+   "prompt": "Semi-realistic 2.5D Korean webtoon illustration, painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle texture, refined line work, cinematic rim light, strong three-dimensional volume and depth. A Korean saju master in his mid 60s, a passionate former professor: silver hair swept back with a few unruly strands falling over his forehead, a neatly trimmed short charcoal-and-silver beard, thick black horn-rimmed glasses pushed up onto his head, intense deep-set eyes, caught mid-explanation with one hand raised holding a stub of chalk, a confident half-smile. He wears a brown herringbone tweed jacket over an ivory hanbok jeogori whose white collar band (dongjeong) shows at the neck, a deep blue pocket square. Setting: a tall, cluttered private study: floor-to-ceiling shelves of stitched old books and worn hardcovers, a rolling library ladder, a large blackboard behind him covered only in abstract chalk circles, lines and arrows forming a five-element cycle diagram (no writing at all), a tall arched window pouring a beam of light where chalk dust floats. Camera: 35mm from slightly below, bookshelves converging upward for strong vertical perspective, a stack of books blurred in the near foreground, waist-up. Strong sense of depth and perspective: clear foreground, midground and background layers, converging lines, foreground objects out of focus. He must not resemble any real person. A distinctive, memorable character with a unique silhouette, not a generic grandfather. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ }
+]

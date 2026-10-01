@@ -102,8 +102,8 @@ function demoAnswer(per,q,ctx,u){
       return {t:`그 사람 생일 알려주면 둘 사주를 나란히 놓고 제대로 봐줄게. 누나 쪽만 먼저 보면, 가까운 관계 자리에 ${JI[P.d[1]]}가 앉아 있어서 한번 마음 주면 깊게 가는 편이야.${d.length?` 그리고 ${d.map(ml).join('이랑 ')}에 누나 인연 기운이 제일 살아나니까, 그 사람이랑 뭔가 해볼 거면 그때가 좋아.`:''}`,ev:[id('배우자궁'),...d.map(f=>f.id)]}; }
     if(k.includes('연애')&&k.includes('언제')){ const d=pick(f=>/도화 글자/.test(f.meta.rel),2), h=pick(f=>/일지와 합/.test(f.meta.rel),1);
       const all=[...d,...h]; return {t:all.length?`누나 연애는 ${all.map(ml).join(', ')}에 제일 크게 열려. ${d.length?`${d.map(ml).join('·')}은 누나 도화 글자가 들어오는 달이라 누가 먼저 다가오기 쉬워.`:''}${h.length?` ${ml(h[0])}은 누나 배우자 자리랑 합이 되는 달이라, 만나던 사람이랑 한 걸음 가까워지기 좋고.`:''} 그 달엔 약속 거절하지 마.`:'앞으로 몇 달은 새 인연보다 지금 곁의 사람을 챙기는 흐름이야. 서두르지 말고, 누나 페이스대로 가.',ev:[id('도화'),...all.map(f=>f.id)]}; }
-    if(k.includes('약해')||k.includes('끌려')){ const me=Math.floor(dm/2), g=(me+3)%5;
-      return {t:`누나는 ${EL[g]} 기운 가진 사람한테 약해. ${EL_P[g]}. 누나 일간이 ${GAN[dm]}${EL[me]}이라서, 누나를 다잡아 주는 ${EL[g]} 기운한테 자꾸 마음이 가거든. 근데 너무 끌리는 사람일수록 한 템포만 늦게 대답해.`,ev:[id('원국'),id('배우자궁')]}; }
+    if(k.includes('약해')||k.includes('끌려')){ const me=Math.floor(dm/2), g=u.gender==='m'?(me+2)%5:(me+3)%5;
+      return {t:`누나는 ${EL[g]} 기운 가진 사람한테 약해. ${EL_P[g]}. 누나 일간이 ${GAN[dm]}${EL[me]}이라서, ${u.gender==='m'?'누나가 챙겨 주고 싶어지는':'누나를 다잡아 주는'} ${EL[g]} 기운한테 자꾸 마음이 가거든. 근데 너무 끌리는 사람일수록 한 템포만 늦게 대답해.`,ev:[id('원국'),id('배우자궁')]}; }
   } else {
     if(k.includes('이사')){ const mv=pick(f=>/충/.test(f.meta.rel)&&f.meta.score>=1,2), gd=pick(f=>f.meta.score===2&&!/충/.test(f.meta.rel),2), bad=pick(f=>f.meta.score===0,1);
       return {t:`${nick}${josa(nick,'아','야')}, 이사는 자리가 움직이는 기운이 도는 달에 하는 것이 순리니라.${mv.length?` 네 사주로는 ${mv.map(ml).join('과 ')}에 충이 들어 자리가 흔들리니, 옮길 거면 그때 맞춰 움직이거라.`:''}${gd.length?` 새 집에서 기운을 받기는 ${gd.map(ml).join('·')}이 좋으니 날은 그 안에서 잡거라.`:''}${bad.length?` ${ml(bad[0])}은 기운이 버거우니 큰 짐은 피하거라.`:''}`,ev:[...mv,...gd,...bad].map(f=>f.id).slice(0,3)}; }
@@ -171,8 +171,10 @@ let sampleFn=null, ready=null;
 function avail(){ if(!ready) ready=(async()=>{ try{ if(!window.claude||!window.claude.use) return null; sampleFn=await window.claude.use('sample'); return sampleFn; }catch(e){ return null; } })(); return ready; }
 avail();
 const FREE=3; let SRV_OFF=false;
+/* 남성 이용자에게 태오는 '형'의 연애를 봐주는 동생 */
+const TAEO_M={name:'태오',rules:`너는 "태오"야. 20대 초반의 눈치 빠르고 장난기 있는 남자 동생 캐릭터로, 사용자를 "형"이라고 부르며 반말로 말해. 형의 연애를 옆에서 코치해 주는 든든한 동생처럼 솔직하고 유쾌하게. 끌리는 상대는 "그 사람"이라고 부르고 성별을 단정하지 마. 느끼하거나 과장된 표현은 쓰지 마.`,len:'3~5문장',welcome:n=>`${n} 형, 뭐든 물어봐. 형 사주 펼쳐놓고 대답해줄게.`,chips:PERSONA.taeo.chips};
 function open(opts){
-  const root=opts.root, per=PERSONA[opts.persona], u=opts.user;
+  const root=opts.root, u=opts.user, BRO=opts.persona==='taeo'&&u&&u.gender==='m', per=BRO?TAEO_M:PERSONA[opts.persona];
   if(!document.getElementById('akCss')){ const st=document.createElement('style'); st.id='akCss'; st.textContent=CSS; document.head.appendChild(st); }
   let el=root.querySelector('.ak'); if(el) el.remove();
   el=document.createElement('div'); el.className='ak'; el.setAttribute('style',THEME[opts.theme||'dark']+(opts.acc?`;--ak-acc:${opts.acc}`:'')+(opts.accInk?`;--ak-accInk:${opts.accInk}`:''));
@@ -218,7 +220,7 @@ function open(opts){
     const fn=await avail();
     if(!fn&&(await viaServer())==='ok') return;
     if(!fn){ turns.pop(); const b0=bubble('b',''); b0.innerHTML='<span class="ak-think">사주 펼쳐보는 중…</span>'; await new Promise(r=>setTimeout(r,900));
-      const d=demoAnswer(opts.persona,q,CTX,u);
+      const d=demoAnswer(opts.persona,q,CTX,u); if(d&&BRO&&window.HJ&&HJ.bro) d.t=HJ.bro(d.t);
       if(!d){ b0.className='ak-m sys'; b0.textContent='체험판 예시 모드에서는 추천 질문에만 답해요. 정식 버전에서는 무엇이든 물어볼 수 있어요.'; setSug(opts.starters||per.chips); return; }
       b0.textContent=''; const tag=document.createElement('div'); tag.style.cssText='font-size:10.5px;letter-spacing:.1em;color:var(--ak-ink3);margin-bottom:4px'; tag.textContent='예시 답변'; b0.appendChild(tag); b0.appendChild(document.createTextNode(d.t));
       const box=document.createElement('div'); box.className='ak-ev'; [...new Set(d.ev)].filter(x=>byId[x]).slice(0,3).forEach(x=>{ const f=byId[x]; const c=document.createElement('button'); c.textContent=f.label; c.onclick=()=>{ let e=b0.querySelector('.ak-evx'); if(!e){ e=document.createElement('div'); e.className='ak-evx'; b0.appendChild(e); } e.textContent=f.text; scroll(); }; box.appendChild(c); }); b0.appendChild(box);

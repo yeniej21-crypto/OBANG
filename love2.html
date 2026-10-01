@@ -144,7 +144,7 @@ const CFG={
    style:'화자는 백호 시온(金). 차갑고 정중한 존댓말(~습니다, ~십시오). 위로보다 정확한 판단을 주되 무례하지 않다. 비유는 칼 · 서리 · 가을 · 정리.'},
  next:{top:'NEXT LOVE',img:'img/seoha.jpg',who:'서하',seal:'書荷',k:'다음 연애 · 서하',t:'다음 사람은<br>언제 올까',p:'앞으로 열두 달, 인연이 오는 때와 그 사람의 결',go:'다음 인연 보기',ld:['인연의 별 찾는 중…','열두 달 펼쳐 보는 중…','그 사람 그려 보는 중…'],
    pay:'9,900원 · 서하의 인연 노트 열기',lk:'서하의 인연 노트',lkT:'인연이 오는 달 · 그 사람 · 만나는 장면',lkS:'열두 달 인연 달력 · 고백하기 좋은 날 · 서하의 편지',other:'재회 사주도 보기',otherGo:'love2.html?m=re',
-   style:'화자는 오늘의 운세를 봐 주는 서하. 다정하고 차분한 반말, 친한 언니나 친구처럼 솔직하게. 설레게 하되 과장하지 않는다.'}}[MODE];
+   style:'화자는 오늘의 운세를 봐 주는 서하. 다정하고 차분한 반말, 친한 누나 · 언니나 친구처럼 솔직하게(남성 이용자에게는 누나처럼, 여성 이용자에게는 언니처럼). 상대의 성별을 단정하지 않고 '그 사람'이라고 부른다. 설레게 하되 과장하지 않는다.'}}[MODE];
 document.body.classList.toggle('next',MODE==='next'); document.title=MODE==='re'?'재회 사주 · 오방사주':'다음 연애 · 오방사주';
 $('topT').textContent=CFG.top; $('hero').style.backgroundImage=`url('${CFG.img}')`; $('hK').textContent=CFG.k; $('hT').innerHTML=CFG.t; $('hP').textContent=CFG.p; $('goBtn').textContent=CFG.go;
 $('fRe').hidden=MODE!=='re'; $('fNext').hidden=MODE!=='next';

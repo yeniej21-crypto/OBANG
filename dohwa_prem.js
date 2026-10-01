@@ -12,7 +12,7 @@ function loveDays(){ const P=F.P, dm=F.dm, db=P.d[1], mb=P.m[1], yb=P.y[1], love
   for(let t=Date.UTC(2027,1,4);t<=Date.UTC(2028,1,3);t+=864e5){ const d=new Date(t), y=d.getUTCFullYear(), m=d.getUTCMonth()+1, dd=d.getUTCDate(), w=d.getUTCDay(); const [s,b]=S_.dayPillar(y,m,dd);
     if(S_.isChung(b,db)||S_.isChung(b,mb)) continue; const g1=S_.rel(dm,stEl(s)), v=(S_.isHap(b,db)?3:0)+(X.ganHap(s,dm)?2.5:0)+(g1===loveG?1.5:0)+(X.shinsal(b,P,s).includes('도화')?1.5:0)+(w===5||w===6?1:0); if(v>=4) out.push({y,m,d:dd,w,s,b,v}); }
   const r=[], used=new Set(); out.sort((a,b)=>b.v-a.v||a.y-b.y||a.m-b.m||a.d-b.d).forEach(o=>{ const k=o.y*100+o.m; if(r.length<4&&!used.has(k)){ used.add(k); r.push(o); } }); return r.sort((a,b)=>a.y-b.y||a.m-b.m||a.d-b.d); }
-function prep(){ const D=window.DHF&&window.DHF(); if(!D) return false; HON=D.bro?'형':'누나';
+function prep(){ const D=window.DHF&&window.DHF(); if(!D) return false; HON=D.bro?'형':'누나'; if(window.PK) PK.male=!!D.bro;
   F=window.Prem2Core.build(S_,X,D.inp); F.nick=D.nick; F.male=D.inp.g==='m'; F.T=D.T; F.score=D.score;
   const loveG=F.male?2:3; F.months.forEach(o=>o.love=loveScore(o,loveG)); F.days=loveDays(); F.loveG=loveG;
   const P=F.P; F.stars=[['년간',P.y[0],1],['월간',P.m[0],1],['시간',P.h&&P.h[0],1],['년지',P.y[1],0],['월지',P.m[1],0],['일지',P.d[1],0],['시지',P.h&&P.h[1],0]].filter(x=>x[1]!=null).filter(([n,v,st])=>(st?S_.rel(F.dm,stEl(v)):S_.relBranch(F.dm,v))===loveG).map(x=>x[0]);
@@ -29,7 +29,7 @@ function card(ids){ const P=F.P, dm=F.dm, gz=p=>p?GAN[p[0]]+JI[p[1]]:'모름';
    고백하기좋은날:F.days.map(o=>`${o.y}.${o.m}.${o.d}(${DOW[o.w]}) ${GAN[o.s]}${JI[o.b]}일`)};
   c.달=(ids||F.months.map((o,i)=>i)).map(i=>{ const o=F.months[i]; return {번호:i,달:o.start.m+'월',절기:o.term,간지:o.gz,천간십성:o.t1,지지십성:o.t2,연애점수:o.love,관계:o.br.map(r=>r.at+' '+r.k).concat(o.sr.map(r=>r.at+' '+r.k)),신살:o.ss}; });
   return JSON.stringify(c); }
-function prompts(){ const A=window.PremAI, ST0=A.STYLE.taeo.replace(/누나/g,HON)+'\n'+A.COMMON.replace('이름을 부를 때는 {N} 토큰만 쓴다(화면이 이름과 호격으로 바꾼다). 이름을 직접 쓰지 않는다.',`상대는 "${HON}"라고만 부른다.`);
+function prompts(){ const A=window.PremAI, ST0=(HON==='형'?A.STYLE.taeo_m:A.STYLE.taeo)+'\n'+A.COMMON.replace('이름을 부를 때는 {N} 토큰만 쓴다(화면이 이름과 호격으로 바꾼다). 이름을 직접 쓰지 않는다.',`상대는 "${HON}"라고만 부른다.`);
   const core=`${ST0}\n\n[할 일] 도화 사주 프리미엄 '태오의 깊은 편지'의 본문을 쓴다. 연애 · 끌림 · 인연에 집중한다.
 출력 JSON 형식: {"nature":["${HON} 도화의 정체 3~4단락. 도화 유형, 원국의 도화 · 홍염 같은 신살, 인연의 별 자리, 일지 십성으로 본 매력. 단락마다 130~200자"],"pattern":["${HON}의 연애 패턴 2~3단락. 끌리는 사람과 오래 남는 사람, 반복하는 실수. 단락마다 130~200자"],"meet":["올해 만날 사람 2~3단락. 연애 점수가 높은 달, 만나는 장소와 상황, 그 사람의 결. 단락마다 120~180자"],"warn":["조심할 인연 2단락. 일지와 충 · 원진이 걸리는 결, 흔들리는 달. 단락마다 100~160자"],"letter":["태오의 편지 5~6단락, 단락마다 50~110자. 설레지만 가볍지 않게, 마지막은 다음에 또 오라는 말"]}
 

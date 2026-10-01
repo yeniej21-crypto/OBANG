@@ -231,7 +231,7 @@ $('goBtn').onclick=async()=>{
   $('nA').textContent=a.n; $('nB').textContent=b.n; $('tA').textContent=TYPES[R.tA][0]; $('tB').textContent=TYPES[R.tB][0];
   $('scT').textContent=R.title; $('v1').textContent=R.pull; $('v2').textContent=R.stay;
   $('pts').innerHTML=R.pts.slice(0,5).map((p,i)=>`<div class="pt"><i>${i+1}</i><div>${p[0]}<span class="chip2">${p[1]}</span></div></div>`).join('');
-  $('say').textContent=R.say;
+  $('say').textContent=a.g==='m'&&window.HJ?HJ.bro(R.say):R.say;
   /* 두 사람의 여덟 글자 + 일지(배우자 자리) 관계 */
   const COL=['#5fcf95','#ff7a5c','#e8b64f','#dfe5ee','#7ea6ff'], L=['시','일','월','년'];
   const row=(P,o,tgt)=>`<div class="nm">${o.n}</div>`+[P.h,P.d,P.m,P.y].map((p,i)=>p?`<div class="c${i===1?' me':''}">${p[1]===tgt&&i!==1?'<span class="pk">桃</span>':''}<b style="color:${COL[stEl(p[0])]}">${GAN[p[0]]}</b><b style="color:${COL[BR_EL[p[1]]]}">${JI[p[1]]}</b></div>`:'<div class="c" style="color:#555"><b>·</b><b>·</b></div>').join('');

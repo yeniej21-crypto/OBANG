@@ -43,6 +43,10 @@ function gl(t){ if(typeof t!=='string') return t; const done=new Set();
     if(a==='('||'없데'.includes(a)&&a) return m; if(/[가-힣]/.test(b)&&!/[은는이가을를의와과도]/.test(b)) return m; done.add(m); return m+'('+TERM[m]+')'; }).replace(/x^/,''); }
 function glAll(x){ if(typeof x==='string') return fixP(gl(x)); if(Array.isArray(x)) return x.map(glAll); if(x&&typeof x==='object'){ const o={}; for(const k in x) o[k]=glAll(x[k]); return o; } return x; }
 function evItem(t){ t=String(t); if(t.includes('(')) return t; for(const w of Object.keys(ONE)) if(t===w||t.endsWith(' '+w)) return t+'('+ONE[w]+')'; const w=t.split(' ').pop(); return TERM[w]?t+'('+TERM[w]+')':t; }
-window.HJ={read,fix:walk,gl,glAll,evItem,TERM};
+/* 남성 이용자 호칭: 누나 → 형 (조사까지 맞춤) · 여성 기준 칭찬 말 → 남녀 공통 말 */
+const BRO_P={가:'형이',는:'형은',를:'형을',랑:'형이랑',와:'형과',야:'형이야',라고:'형이라고',라서:'형이라서',였:'형이었',여:'형이여'};
+function bro(t){ return String(t==null?'':t).replace(/누나(라고|라서|가|는|를|랑|와|야|였|여)?/g,(m,p)=>p?BRO_P[p]:'형')
+  .replace(/예뻐 보이/g,'멋있어 보이').replace(/예쁠/g,'멋있을').replace(/예뻐/g,'멋있어').replace(/예쁜/g,'멋진').replace(/예쁘/g,'멋있').replace(/이뻐/g,'멋있어'); }
+window.HJ={read,fix:walk,gl,glAll,evItem,TERM,bro};
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
 })();

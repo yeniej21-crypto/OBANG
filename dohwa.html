@@ -413,8 +413,11 @@ function unlock(){ if(unlocked) return; unlocked=true; [$('vA'),$('vB'),$('vR')]
 const log=$('log'), dock=$('dock');
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 function scroll(){ log.scrollTo({top:log.scrollHeight,behavior:'smooth'}); }
+const H=t=>S&&S.bro&&window.HJ?HJ.bro(t):t;
+/* 남성 이용자: 화면 글자의 '누나'를 '형'으로 (조사 · 칭찬 말까지) */
+function broDom(root){ if(!S.bro||!window.HJ) return; const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT); let n; while((n=w.nextNode())){ if(/누나|예쁘|예뻐|예쁠|예쁜/.test(n.nodeValue)) n.nodeValue=HJ.bro(n.nodeValue); } }
 async function say(text,face){
-  if(face) still(face);
+  text=H(text); if(face) still(face);
   const d=document.createElement('div'); d.className='msg t dots'; d.innerHTML='<i></i><i></i><i></i>'; log.appendChild(d); scroll();
   await wait(Math.min(1500,650+text.length*28));
   d.className='msg t'; d.textContent=text; scroll();
@@ -483,11 +486,11 @@ const vA=$('vA'), vB=$('vB'); let front=vA, back=vB;
 const LEAD=0.14;
 let subGen=0;
 function subsFor(v,key){ const cues=SUBS[key]||[]; let last=-1; const s=$('sub'); const my=++subGen;
-  const tick=()=>{ if(my!==subGen) return; let i=-1; cues.forEach((c,j)=>{ if(v.currentTime>=c[0]) i=j; }); if(i!==last){ last=i; s.classList.remove('on'); if(i>=0) setTimeout(()=>{ if(my!==subGen) return; s.textContent=cues[i][1]; s.classList.add('on'); },120); } if(!v.ended) requestAnimationFrame(tick); };
+  const tick=()=>{ if(my!==subGen) return; let i=-1; cues.forEach((c,j)=>{ if(v.currentTime>=c[0]) i=j; }); if(i!==last){ last=i; s.classList.remove('on'); if(i>=0) setTimeout(()=>{ if(my!==subGen) return; s.textContent=H(cues[i][1]); s.classList.add('on'); },120); } if(!v.ended) requestAnimationFrame(tick); };
   requestAnimationFrame(tick); }
 async function playSeq(keys){
   for(let i=0;i<keys.length;i++){
-    const k=keys[i]; const v=back; v.src=await fetchClip(k); v.currentTime=0;
+    const k=keys[i]; const v=back; v.src=await fetchClip(k); v.currentTime=0; v.muted=!!S.bro;
     await new Promise(r=>{ if(v.readyState>=2) r(); else v.onloadeddata=()=>r(); setTimeout(r,2500); });
     try{ await v.play(); }catch(e){}
     v.classList.add('on'); if(front!==v) front.classList.remove('on');
@@ -503,16 +506,16 @@ let S={name:'',nick:'',bro:false,date:null,hour:-1};
 function nickOf(n){ return (/^[가-힣]{3}$/.test(n))?n.slice(1):n; }
 async function flow(){
   await wait(700);
-  await say('어? 누나 왔네.','base');
+  await say('어? 왔네.','base');
   await say('여기 처음이지? 나 태오야.');
-  await say('누나 이름 뭐야?');
+  await say('이름 뭐야?');
   S.name=await askName(); S.nick=nickOf(S.name);
-  await say(`${S.nick}… 이름 예쁘다.`,'wink');
-  await say('누나랑 잘 어울려.');
-  await say('근데 누나 맞지? 설마 형이야?');
-  const g=await choose(['누나 맞아','형이야']);
-  if(g===1){ S.bro=true; await say('…형이었어?','wow'); await say('음… 그래도 누나라고 부를게 ㅎ','wink'); }
-  else await say('역시. 목소리만 들어도 알았어 ㅎ','wink');
+  await say(`${S.nick}… 이름 좋다.`,'wink');
+  await say('근데 누나야, 형이야?');
+  const g=await choose(SAVED&&SAVED.g==='m'?['형이야','누나야']:['누나야','형이야']);
+  const male=SAVED&&SAVED.g==='m'?g===0:g===1;
+  if(male){ S.bro=true; broDom(stage); await say('오, 형이구나. 반가워 형 ㅎ','wow'); await say('오늘은 내가 형 연애 코치 해줄게.','wink'); }
+  else { await say('역시. 그럴 줄 알았어 ㅎ','wink'); await say('누나랑 이름 잘 어울려.'); }
   await say('누나 태어난 날 알려줘.','base');
   await say('양력인지 음력인지도 골라줘.');
   S.date=await askDate();
@@ -528,7 +531,7 @@ async function flow(){
   await toVideo();
 }
 async function toVideo(){
-  bgm(.12,1.2);
+  bgm(S.bro?.3:.12,1.2);
   still('chin'); await wait(700);
   stage.classList.add('push'); $('flash').classList.remove('go'); void $('flash').offsetWidth; $('flash').classList.add('go');
   await wait(900);
@@ -541,7 +544,7 @@ let R;
 async function loadingSeq(){
   const {y,m,d,cal}=S.date; R=saju(y,m,d,S.hour,cal);
   bgm(.32,1.5);
-  $('steps').innerHTML=STEPS.map(s=>`<li><span class="ck"></span>${s}</li>`).join('');
+  $('steps').innerHTML=STEPS.map(s=>`<li><span class="ck"></span>${H(s)}</li>`).join('');
   const cols=[R.h,R.d,R.m,R.y]; const won=$('won'); won.innerHTML='';
   cols.forEach(c=>{ if(!c) return; [GAN[c[0]],JI[c[1]]].forEach((ch,i)=>{ const s=document.createElement('span'); s.textContent=ch; if(i===1&&PEACH.includes(c[1])) s.dataset.dh=1; won.appendChild(s); }); });
   stage.classList.add('load'); stage.classList.remove('vid');
@@ -577,7 +580,7 @@ async function showResult(){
   const L=[['올해 인연이 들어오는 달','누나 사주에서 도화가 가장 세게 열리는 달은 바로 그 달이야'],['누나가 끌리는 사람, 누나한테 끌리는 사람','둘이 다르다는 게 문제야, 누나는 늘 반대쪽을 골랐거든'],['도화를 살리는 법','색, 향, 그리고 누나가 제일 예뻐 보이는 시간대까지'],['조심해야 할 인연','이 사람만큼은 피해, 첫인상이 제일 좋은 사람일 거야']];
   const lk='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
   $('rLock').innerHTML=L.map(l=>`<div class="lock"><div class="ic">${lk}</div><div><b>${l[0]}</b><span>${l[1]}</span></div></div>`).join('');
-  stage.classList.remove('load','push'); stage.classList.add('res');
+  broDom($('res')||stage); stage.classList.remove('load','push'); stage.classList.add('res');
   bgm(.2,1.5);
   await wait(700);
   $('rGauge').style.width=score+'%';
@@ -587,13 +590,13 @@ async function showResult(){
   $('pay').classList.add('on');
 }
 async function playHero(){
-  const v=$('vR'); v.src=await fetchClip('v4');
+  const v=$('vR'); v.src=await fetchClip('v4'); v.muted=!!S.bro;
   await new Promise(r=>{ if(v.readyState>=2) r(); else v.onloadeddata=()=>r(); setTimeout(r,2500); });
-  bgm(.1,.6);
+  bgm(S.bro?.26:.1,.6);
   try{ await v.play(); }catch(e){ return; }
   v.classList.add('on');
   const h=$('hsub'), cues=SUBS.v4; let last=-1;
-  await new Promise(r=>{ const f=()=>{ let i=-1; cues.forEach((c,j)=>{ if(v.currentTime>=c[0]) i=j; }); if(i!==last){ last=i; h.classList.remove('on'); if(i>=0) setTimeout(()=>{ h.textContent=cues[i][1]; h.classList.add('on'); },100); } if(v.ended) return r(); requestAnimationFrame(f); }; requestAnimationFrame(f); });
+  await new Promise(r=>{ const f=()=>{ let i=-1; cues.forEach((c,j)=>{ if(v.currentTime>=c[0]) i=j; }); if(i!==last){ last=i; h.classList.remove('on'); if(i>=0) setTimeout(()=>{ h.textContent=H(cues[i][1]); h.classList.add('on'); },100); } if(v.ended) return r(); requestAnimationFrame(f); }; requestAnimationFrame(f); });
   setTimeout(()=>h.classList.remove('on'),900);
   bgm(.2,1.2);
 }
@@ -612,7 +615,7 @@ async function makeCard(){
   const SANS='"Noto Sans KR","Apple SD Gothic Neo",sans-serif', SERIF='"Noto Serif KR","Nanum Myeongjo",serif';
   x.textBaseline='alphabetic'; x.fillStyle='#ffd9cc'; x.font=`700 34px ${SANS}`; spaced(x,'桃花 · 도화 사주',80,120,8,'left');
   x.textAlign='left';
-  const cx=W/2; x.fillStyle='#ffd9cc'; x.font=`700 38px ${SANS}`; spaced(x,`${S.nick} 누나의 도화 유형`,cx,1150,6,'center');
+  const cx=W/2; x.fillStyle='#ffd9cc'; x.font=`700 38px ${SANS}`; spaced(x,H(`${S.nick} 누나의 도화 유형`),cx,1150,6,'center');
   x.fillStyle='#fff'; x.font=`900 150px ${SERIF}`; x.textAlign='center'; x.shadowColor='rgba(255,143,166,.35)'; x.shadowBlur=40; x.fillText(RES.T.n,cx,1320); x.shadowBlur=0;
   x.fillStyle='#d6cbc4'; x.font=`500 44px ${SANS}`; x.fillText(RES.T.d,cx,1400);
   // index
@@ -667,9 +670,9 @@ function buildLetter(){
   const hps=marks.filter(x=>x.hp).map(x=>x.m+'월'), chs=marks.filter(x=>x.chg).map(x=>x.m+'월');
   $('calTx').innerHTML=`누나 도화가 제일 크게 피는 달은 <b>${peakM}월</b>이야. 그 달엔 약속 거절하지 마.${hps.length?` ${hps.join('·')}은 마음이 묶이는 달이라 관계가 한 걸음 깊어지고,`:''}${chs.length?` ${chs.join('·')}은 흔들리는 달이니까 싸워도 그날 풀어.`:''}<span class="chip2">${JI[tg]} 도화 · 일지 ${JI[db]}</span>`;
   // attraction
-  const me=Math.floor(dm/2), gw=(me+3)%5 /* 관성: 나를 이기는 */, sk=(me+1)%5 /* 식상: 내가 낳는 */;
+  const me=Math.floor(dm/2), gw=S.bro?(me+2)%5 /* 남성 인연의 별 재성: 내가 이기는 */:(me+3)%5 /* 여성 인연의 별 관성: 나를 이기는 */, sk=(me+1)%5 /* 식상: 내가 낳는 */, gwN=S.bro?'재성':'관성';
   $('two').innerHTML=`<div><small>누나가 끌리는 사람</small><b>${EL_N[gw]} 기질</b><span>${EL_P[gw]}</span></div><div><small>누나한테 빠지는 사람</small><b>${EL_N[sk]} 기질</b><span>${EL_P[sk]}</span></div>`;
-  $('twoTx').innerHTML=`문제는 이 둘이 다르다는 거야. 누나는 늘 ${EL_N[gw].split("(")[0]} 같은 사람한테 끌렸는데, 정작 누나 곁에 오래 남는 건 ${EL_N[sk].split("(")[0]} 같은 사람이거든.<span class="chip2">일간 ${GAN[dm]} · 관성 ${EL_N[gw].slice(-2,-1)} · 식상 ${EL_N[sk].slice(-2,-1)}</span>`;
+  $('twoTx').innerHTML=`문제는 이 둘이 다르다는 거야. 누나는 늘 ${EL_N[gw].split("(")[0]} 같은 사람한테 끌렸는데, 정작 누나 곁에 오래 남는 건 ${EL_N[sk].split("(")[0]} 같은 사람이거든.<span class="chip2">일간 ${GAN[dm]} · ${gwN} ${EL_N[gw].slice(-2,-1)} · 식상 ${EL_N[sk].slice(-2,-1)}</span>`;
   // kit
   const K=KIT[tg]; $('kitSub').textContent=`누나 도화 글자 ${JI[tg]} 기준`;
   $('kit').innerHTML=`<div><small>색</small><span>${K.c}</span></div><div><small>향</small><span>${K.h}</span></div><div><small>시간</small><span>${K.t}</span></div><div><small>장소</small><span>${K.p}</span></div>`;
@@ -678,14 +681,15 @@ function buildLetter(){
   $('warnTx').innerHTML=`<b>${TTI_L[cb]}띠</b>, 아니면 사주에 ${JI[cb]}이(가) 센 사람. 첫인상이 제일 좋은 사람일 거야. 설레는 거랑 편한 건 다르니까, 이 사람 앞에서는 한 템포만 늦게 대답해.`;
   $('bye').innerHTML=`${S.nick} 누나. 도화는 타고나는 거지만, 피우는 건 누나가 하는 거야. ${peakM}월에 누나가 제일 예쁠 거니까… 그때 나한테도 얘기해줘.`;
   $('lp').style.backgroundImage=`url('${IMG.chin}')`;
+  broDom($('letter'));
 }
 async function playLetter(){
-  const v=$('vL'), ls=$('ls'); bgm(.08,.8);
+  const v=$('vL'), ls=$('ls'); bgm(S.bro?.26:.08,.8);
   for(const k of ['L1','L2']){
-    v.src=await fetchClip(k); await new Promise(r=>{ if(v.readyState>=2) r(); else v.onloadeddata=()=>r(); setTimeout(r,2500); });
+    v.src=await fetchClip(k); v.muted=!!S.bro; await new Promise(r=>{ if(v.readyState>=2) r(); else v.onloadeddata=()=>r(); setTimeout(r,2500); });
     try{ await v.play(); }catch(e){ break; } v.classList.add('on');
     const cues=SUBS[k]; let last=-1;
-    await new Promise(r=>{ const f=()=>{ let i=-1; cues.forEach((c,j)=>{ if(v.currentTime>=c[0]) i=j; }); if(i!==last){ last=i; ls.classList.remove('on'); if(i>=0) setTimeout(()=>{ ls.textContent=cues[i][1]; ls.classList.add('on'); },100); } if(v.ended||(v.duration&&v.currentTime>=v.duration-0.1)) return r(); requestAnimationFrame(f); }; requestAnimationFrame(f); });
+    await new Promise(r=>{ const f=()=>{ let i=-1; cues.forEach((c,j)=>{ if(v.currentTime>=c[0]) i=j; }); if(i!==last){ last=i; ls.classList.remove('on'); if(i>=0) setTimeout(()=>{ ls.textContent=H(cues[i][1]); ls.classList.add('on'); },100); } if(v.ended||(v.duration&&v.currentTime>=v.duration-0.1)) return r(); requestAnimationFrame(f); }; requestAnimationFrame(f); });
   }
   ls.classList.remove('on'); bgm(.2,1.2);
 }

@@ -3,7 +3,8 @@
 (function(){
 const bt=w=>{ const c=w.charCodeAt(w.length-1)-0xAC00; return c>=0&&c<11172&&c%28>0; };
 const esc=t=>String(t==null?'':t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-function tok(t,nick){ if(!nick) return esc(t).replace(/\{N\}/g,'너').replace(/\{P\}/g,'당신').replace(/\{S\}/g,'누나'); return esc(t).replace(/\{N\}/g,nick+(bt(nick)?'아':'야')).replace(/\{P\}/g,nick+'님').replace(/\{S\}/g,'누나'); }
+function tok(t,nick){ let s=!nick?esc(t).replace(/\{N\}/g,'너').replace(/\{P\}/g,'당신').replace(/\{S\}/g,'누나'):esc(t).replace(/\{N\}/g,nick+(bt(nick)?'아':'야')).replace(/\{P\}/g,nick+'님').replace(/\{S\}/g,'누나');
+  return K.male&&window.HJ&&HJ.bro?HJ.bro(s):s; }
 const K={
  tok,esc,bt,
  gl:x=>window.HJ?HJ.glAll(x):x,

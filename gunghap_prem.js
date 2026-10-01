@@ -29,7 +29,7 @@ function togetherDays(){ const A=FA.P, B=FB.P, out=[];
     const v=(hA?2.5:0)+(hB?2.5:0)+(gA||gB?1.5:0)+(dA||dB?1:0)+(w===5||w===6?1:0);
     if(v>=4) out.push({y,m,d:dd,w,s,b,v,why:[hA&&hB?'두 사람 배우자 자리와 모두 합':hA?'나의 배우자 자리와 합':hB?'그 사람 배우자 자리와 합':'',gA||gB?'일간과 천간합':'',dA||dB?'도화가 뜨는 날':''].filter(Boolean)}); }
   const r=[], used=new Set(); out.sort((a,b)=>b.v-a.v||a.m-b.m||a.d-b.d).forEach(o=>{ const k=o.y*100+o.m; if(r.length<4&&!used.has(k)){ used.add(k); r.push(o); } }); return r.sort((a,b)=>a.y-b.y||a.m-b.m||a.d-b.d); }
-function prep(){ D=window.GHF; if(!D) return false; HON=D.a.g==='m'?'형':'누나';
+function prep(){ D=window.GHF; if(!D) return false; HON=D.a.g==='m'?'형':'누나'; if(window.PK) PK.male=D.a.g==='m';
   FA=window.Prem2Core.build(S_,X,sol(D.a)); FB=window.Prem2Core.build(S_,X,sol(D.b));
   const gA=FA.male?2:3, gB=FB.male?2:3;
   M=FA.months.map((oa,i)=>{ const ob=FB.months[i]; const la=loveScore(oa,gA), lb=loveScore(ob,gB);
@@ -61,7 +61,7 @@ function card(ids){ const gz=p=>p?GAN[p[0]]+JI[p[1]]:'모름', R=D.R;
   else c.달=(ids||M.map((o,i)=>i)).map(i=>{ const o=M[i]; return {번호:i,달:o.start.m+'월',절기:o.term,간지:o.gz,둘의점수:o.t,나의연애점수:o.la,그사람연애점수:o.lb,둘다열림:o.both,일지충:o.clash,
     나기준:o.oa.br.map(r=>r.at+' '+r.k).concat(o.oa.sr.map(r=>r.at+' '+r.k)).concat(o.oa.ss),그사람기준:o.ob.br.map(r=>r.at+' '+r.k).concat(o.ob.sr.map(r=>r.at+' '+r.k)).concat(o.ob.ss)}; });
   return JSON.stringify(c); }
-function prompts(){ const A=window.PremAI, ST0=A.STYLE.taeo.replace(/누나/g,HON)+'\n'+A.COMMON.replace('이름을 부를 때는 {N} 토큰만 쓴다(화면이 이름과 호격으로 바꾼다). 이름을 직접 쓰지 않는다.',`이름은 쓰지 않는다. 듣는 사람은 "${HON}", 상대는 "그 사람"이라고만 부른다.`);
+function prompts(){ const A=window.PremAI, ST0=(HON==='형'?A.STYLE.taeo_m:A.STYLE.taeo)+'\n'+A.COMMON.replace('이름을 부를 때는 {N} 토큰만 쓴다(화면이 이름과 호격으로 바꾼다). 이름을 직접 쓰지 않는다.',`이름은 쓰지 않는다. 듣는 사람은 "${HON}", 상대는 "그 사람"이라고만 부른다.`);
   const core=`${ST0}\n\n[할 일] 도화 궁합 프리미엄 '둘의 인연 타이밍'의 본문을 쓴다. 두 사람의 관계에 집중한다.
 출력 JSON 형식: {"bond":["둘의 궁합 정체 3~4단락. 끌림과 오래 감의 이유, 배우자 자리(일지)끼리의 관계, 원국 교차, 오행 보완. 단락마다 130~200자"],"fight":["부딪히는 지점과 푸는 법 2~3단락. 충 · 원진 · 형 같은 근거, 싸움이 붙는 장면과 푸는 순서. 단락마다 120~180자"],"roles":["서로에게 어떤 사람인지 2단락. 첫 단락은 그 사람이 ${HON}에게, 둘째 단락은 ${HON}가 그 사람에게. 단락마다 110~170자"],"missions":[{"t":"오래 가는 법 제목 8~16자","d":"구체적인 행동 설명 50~90자"}],"letter":["태오의 편지 5~6단락, 단락마다 50~110자. 둘을 응원하되 가볍지 않게, 마지막은 다음에 또 오라는 말"]}
 missions는 정확히 3개.

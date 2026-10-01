@@ -78,3 +78,10 @@ function upd(){ const R=document.documentElement; R.classList.toggle('pcw',MQ.ma
 MQ.addEventListener('change',upd); WIDE.addEventListener('change',upd);
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',upd); else upd();
 })();
+
+/* 위 막대 바탕: depth3d.js가 없는 화면(다음 연애 · 재회 등)도 내리면 화면 바탕색 막을 깔아 제목 · 버튼이 글자와 겹치지 않게 */
+(function(){ if(window.Depth3D||window.__obTsd) return; window.__obTsd=1; try{
+  const st=document.createElement('style'); st.textContent='.stage>.top{transition:background .3s}.stage>.top.tsd{background:var(--tsd);box-shadow:0 12px 14px -6px var(--tsd)}'; document.head.appendChild(st);
+  let bg=0; const set=on=>{ const top=document.querySelector('.stage>.top'); if(!top) return; if(on&&!bg){ const c=getComputedStyle(document.querySelector('.stage')).backgroundColor||'rgb(12,10,15)', m=c.match(/[\d.]+/g)||[12,10,15]; bg=1; top.style.setProperty('--tsd',`rgba(${m[0]},${m[1]},${m[2]},.96)`); top.style.setProperty('--tsd0',`rgba(${m[0]},${m[1]},${m[2]},0)`); } top.classList.toggle('tsd',on); };
+  document.addEventListener('scroll',e=>{ const t=e.target; if(!t||!t.closest||!t.closest('.stage')||t.classList.contains('stage')) return; set(t.scrollTop>40); },true);
+}catch(e){} })();

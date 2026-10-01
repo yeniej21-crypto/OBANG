@@ -1149,7 +1149,6 @@ const H=HOST.clips;
 const V={intro:HOST.intro,t1:H+'t1.mp4',t1a:H+'t1a.mp4',t1b:H+'t1b.mp4',t2:H+'t2.mp4',t3:H+'t3.mp4',t4:H+'t4.mp4',t5:H+'t5.mp4',t6:H+'t6.mp4',idle:H+'idle.mp4',
   rv_wood:'v/rv_wood.mp4',rv_fire:'v/rv_fire.mp4',rv_earth:'v/rv_earth.mp4',rv_metal:'v/rv_metal.mp4',rv_water:'v/rv_water.mp4'};
 const LINES=HOST.lines;
-const CUE=HOST.cue||{}; /* 줄마다 시작 초(말소리 기준). 줄 수가 같을 때만 쓰고, 없으면 글자 수 비례 */
 const FALLBACK_DUR=Object.assign({intro:6,idle:5,rv:5},HOST.dur);
 const POSTER={host:HOST.poster};
 // host-specific copy
@@ -1236,10 +1235,10 @@ function subs(key){
   return lines.map(t=>{const p=document.createElement('p');p.textContent=t;box.appendChild(p);return p;});
 }
 function clearSubs(){ $('subLines').innerHTML=''; $('who').classList.remove('on'); }
-function schedule(els,dur,tok,cue){
+function schedule(els,dur,tok){
   if(!els.length) return;
   const total=els.reduce((a,e)=>a+e.textContent.length,0), span=Math.max(dur-0.45,1.2);
-  let t=0.08; els.forEach((e,i)=>{ const at=(cue&&cue.length===els.length)?cue[i]:t; setTimeout(()=>{ if(tok!==cancelTok) return; if(i>0) els[i-1].style.display='none'; e.classList.add('on'); },at*1000); t+=span*(e.textContent.length/total); });
+  let t=0.08; els.forEach((e,i)=>{ const at=t; setTimeout(()=>{ if(tok!==cancelTok) return; if(i>0) els[i-1].style.display='none'; e.classList.add('on'); },at*1000); t+=span*(e.textContent.length/total); });
 }
 function play(key,{loop=false,posterKey='host',showSubs=true,next=null}={}){
   const tok=++cancelTok;
@@ -1252,7 +1251,7 @@ function play(key,{loop=false,posterKey='host',showSubs=true,next=null}={}){
     const els=showSubs?subs(key):(clearSubs(),[]);
     const fallback=()=>{ // clip unavailable: still + timed subs
       setPoster(POSTER[posterKey]||null); front.classList.remove('on'); back.classList.remove('on');
-      const d=FALLBACK_DUR[key.startsWith('rv_')?'rv':key]||5; schedule(els,d,tok,CUE[key]);
+      const d=FALLBACK_DUR[key.startsWith('rv_')?'rv':key]||5; schedule(els,d,tok);
       if(!loop) setTimeout(()=>{ if(tok===cancelTok) finish(); },d*1000); else finish();
     };
     if(!v._ready) return fallback();
@@ -1262,7 +1261,7 @@ function play(key,{loop=false,posterKey='host',showSubs=true,next=null}={}){
     v.classList.add('on'); front.classList.remove('on'); setPoster(null);
     const old=front; front=v; back=old;
     setTimeout(()=>{ if(back!==old) return; old.pause(); if(next && tok===cancelTok) old._p=prep(old,next); },FADE+60);
-    schedule(els,v.duration||5,tok,CUE[key]);
+    schedule(els,v.duration||5,tok);
     if(loop) return finish();
     v.onended=()=>{ if(front===v) finish(); };
     const tick=()=>{ if(done||tok!==cancelTok) return; if(v.ended||(v.duration&&v.currentTime>=v.duration-LEAD)) return finish(); requestAnimationFrame(tick); };

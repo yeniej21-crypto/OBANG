@@ -187,6 +187,8 @@ h1{font-family:var(--brush)!important;font-weight:400!important;letter-spacing:0
 .gi .kw{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .gi .kw span{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:0;padding:3px 10px;color:var(--ink-2)}
 </style>
+<link rel="stylesheet" href="premkit.css">
+<style>.pay.done .pr{display:none}</style>
 </head>
 <body>
 <div class="stage" id="stage">
@@ -239,6 +241,7 @@ h1{font-family:var(--brush)!important;font-weight:400!important;letter-spacing:0
         <div class="blur"><p class="p">서른넷에서 서른여섯 사이, 문서로 들어오는 인연을 놓치지 말 것. 마흔 초반의 이동은 길하나 동업은 피할 것. 재물은 쉰 전후로 크게 모이니 그 전에 그릇을 넓혀 둘 것. 결혼의 인연은 두 번 문을 두드린다…</p></div>
         <div class="ov"><b>대운별 상세 · 결혼·재물 시기 달력</b><small>10년마다 할 일과 피할 일, 인생의 결정적인 해 세 번</small></div>
       </div>
+      <div id="prem" hidden></div>
       <p class="note">체험판입니다. 만세력(절기·음력)과 대운은 실제 계산값이며, 풀이 문장은 명리 규칙에 따라 자동 구성됩니다. 정식 서비스 전 명리 전문가 검수를 거칠 예정입니다.</p>
     </div>
   </div>
@@ -404,6 +407,8 @@ function render(name,sol,h,orig){
   $('flds').innerHTML=F.map(f=>`<div class="fd"><b>${f[0]}<em>${star(f[1])}</em></b><p>${f[2]}${why(f[3])}</p></div>`).join('');
   const Q=[`${nick}의 전성기는 ${best.age}세에 온다. 그 전의 시간은 그릇을 키우는 때다.`,`${nick}는 ${DM_KW[dm][0]}의 그릇이다. ${best.age}세 무렵 크게 쓰일 것이다.`];
   $('qTop').textContent=Q[best.age>age?0:1];
+  window.LFF={name,nick,inp:{y:sol.y,m:sol.m,d:sol.d,h,g:gender,now:new Date().getFullYear()}};
+  const pr=$('prem'); if(pr){ pr.hidden=true; pr.innerHTML=''; } const lk=document.querySelector('.lockS'); if(lk) lk.hidden=false; $('pay').classList.remove('done'); $('payBtn').textContent='현암의 평생 상세 풀이 열기';
 }
 function drawLife(L,age,best,low){
   const W=340,H=190,l=26,r=10,t=18,b=30; const maxA=L[L.length-1].age+10, minA=Math.max(0,L[0].age-2);
@@ -421,10 +426,16 @@ function drawLife(L,age,best,low){
   s+=`<text x="${W-r}" y="${H-1}" font-size="9" fill="#877d70" text-anchor="end">나이(대운 시작)</text>`;
   $('life').innerHTML=s;
 }
-$('payBtn').onclick=()=>toast('체험판이라 결제는 여기까지예요');
+$('payBtn').onclick=()=>{ const pr=$('prem'); if(!$('pay').classList.contains('done')){ if(!window.LifePrem) return; LifePrem.open(); $('pay').classList.add('done'); $('payBtn').textContent='상세 풀이로 가기'; toast('체험판이라 결제 없이 열었어요'); } pr.scrollIntoView({behavior:'smooth',block:'start'}); };
 $('back2').onclick=()=>{ show('sIntro'); };
 $('back1').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
 </script>
+<script src="saju_x.js"></script>
+<script src="life_core.js"></script>
+<script src="life_sample.js"></script>
+<script src="premai.js"></script>
+<script src="premkit.js"></script>
+<script src="life_prem.js"></script>
 <script src="reveal.js"></script>
 <script src="archive.js"></script>
 <script src="depth3d.js"></script>

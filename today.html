@@ -395,7 +395,7 @@ document.addEventListener('click',e=>{ const b=e.target.closest('[data-g]'); if(
 $('flip').onclick=()=>$('flip').classList.toggle('on');
 $('editBtn').onclick=()=>{ prefill(ME&&ME.me); show('sIn'); };
 $('back1').onclick=$('back2').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
-$('pushBtn').onclick=()=>toast('체험판: 내일 아침 8시 알림이 예약됐어요');
+$('pushBtn').onclick=()=>{ if(!window.ObNotify) return toast('체험판: 내일 아침 8시 알림이 예약됐어요'); ObNotify.ask({title:'내일 아침 운세 받기',img:'img/seoha.jpg',head:'내일 아침 8시, 서하의 오늘 운세',sub:'어디로 보낼지 골라 줘'}).then(v=>{ if(v==='push') toast('내일 아침 8시에 알림으로 보낼게요'); }); };
 $('askBtn').onclick=()=>{ location.href='chat.html?h=seoha&from=today'; };
 /* 저장된 내 정보가 있으면 바로 결과 */
 (function(){ const me=loadMe(); if(me&&me.y){ prefill(me); start(me); } })();
@@ -407,6 +407,6 @@ MenuIntro.play({src:'v/menu/today.mp4',poster:'img/seoha.jpg',who:'서하 · 오
 <script src="archive.js"></script>
 <script src="depth3d.js"></script>
 <script>window.Depth3D&&setTimeout(()=>Depth3D.watch('.hero,#heroP,.ch,#sLoad'),200);</script>
-<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
 </body>
 </html>

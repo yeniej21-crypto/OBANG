@@ -558,7 +558,7 @@ async function card(){ const W=1080,H=1920, cv=document.createElement('canvas');
   x.fillStyle='#d0c7bb'; x.font='42px "Song Myung", serif'; const words=String(RES.share[2]).split(' '); let line='', yy=1600; words.forEach(w=>{ const t=line?line+' '+w:w; if(x.measureText(t).width>W-160){ x.fillText(line,W/2,yy); yy+=62; line=w; } else line=t; }); if(line) x.fillText(line,W/2,yy);
   x.fillStyle='rgba(243,215,155,.85)'; x.font='700 30px "Noto Sans KR",sans-serif'; x.fillText(`OBANG SAJU · 오방사주 무료 존 · ${CUR.t}`,W/2,1860);
   return new Promise(ok=>cv.toBlob(ok,'image/jpeg',.9)); }
-$('shareBtn').onclick=async()=>{ toast('카드를 만드는 중…'); blob=await card(); if(!blob) return; $('shImg').src=URL.createObjectURL(blob); $('sheet').classList.add('on'); };
+$('shareBtn').onclick=async()=>{ toast('카드를 만드는 중…'); blob=await card(); if(!blob) return; if(window.ObShare) return ObShare.sheet({blob,name:`obang-free-${KEY}.jpg`,title:'오방사주 무료 존'}); $('shImg').src=URL.createObjectURL(blob); $('sheet').classList.add('on'); };
 $('shX').onclick=()=>$('sheet').classList.remove('on');
 $('shSave').onclick=()=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`obang-free-${KEY}.jpg`; document.body.appendChild(a); a.click(); a.remove(); toast('이미지를 저장했어요'); };
 $('shSend').onclick=async()=>{ const f=new File([blob],`obang-free-${KEY}.jpg`,{type:'image/jpeg'}); try{ if(navigator.canShare&&navigator.canShare({files:[f]})) await navigator.share({files:[f],title:'오방사주 무료 존'}); else $('shSave').onclick(); }catch(e){} };
@@ -572,6 +572,6 @@ window._free={T,ORDER,HOST};
 <script src="archive.js"></script>
 <script src="depth3d.js"></script>
 <script src="hscroll.js"></script>
-<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
 </body>
 </html>

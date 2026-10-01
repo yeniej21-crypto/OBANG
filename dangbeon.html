@@ -201,7 +201,7 @@ async function stickerPng(){ const d=today(), s=ST.days[key(d)]; if(!s) throw 0;
   x.fillStyle='#1f1a15'; x.font='400 50px "Song Myung"'; x.fillText(SAY[s.el][s.ex],540,1110);
   x.fillStyle='#8a8178'; x.font='500 28px "Noto Sans KR"'; x.fillText(`오방사주 · 오늘의 당번 · ${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}`,540,1250);
   return cv.toDataURL('image/png'); }
-function sheet(u,name){ $('shImg').src=u; $('sheet').classList.add('on'); $('shDl').onclick=()=>{ const a=document.createElement('a'); a.href=u; a.download=name; a.click(); }; }
+function sheet(u,name){ if(window.ObShare) return ObShare.sheet({src:u,name,title:'오방사주 오늘의 당번'}); $('shImg').src=u; $('sheet').classList.add('on'); $('shDl').onclick=()=>{ const a=document.createElement('a'); a.href=u; a.download=name; a.click(); }; }
 $('save').onclick=async()=>{ try{ sheet(await stickerPng(),'obang-stamp.png'); }catch(e){ toast('이미지를 만들지 못했어요'); } };
 $('shX').onclick=()=>$('sheet').classList.remove('on');
 $('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
@@ -209,6 +209,6 @@ render();
 </script>
 <script src="archive.js"></script>
 <script src="depth3d.js"></script>
-<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
 </body>
 </html>

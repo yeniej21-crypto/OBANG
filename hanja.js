@@ -15,7 +15,7 @@ const PP={은:['은','는'],는:['은','는'],이:['이','가'],가:['이','가'
 function fixP(t){ return t.replace(/([가-힣])\(([^()]*)\)(은|는|이|가|을|를|과|와)(?=[\s,.·)]|$)/g,(m,c,inner,j)=>{ const code=c.charCodeAt(0)-0xAC00, bat=code%28>0; return c+'('+inner+')'+PP[j][bat?0:1]; }); }
 function fixText(n){ const t=n.nodeValue; if(!t||!HAS.test(t)) return; const p=n.parentElement; if(!p||p.closest(SKIP)) return; const nx=n.nextSibling; if(nx&&nx.nodeType===1&&nx.classList.contains('hj-k')) return;
   const fs=parseFloat(getComputedStyle(p).fontSize)||14, pure=/^\s*[甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戌亥木火土金水年月日時·\s]+\s*$/.test(t);
-  const big=fs>=19, narrow=pure&&[...t.trim()].length<=2&&p.getBoundingClientRect().width<46;
+  const big=fs>=19, narrow=pure&&[...t.replace(/[\s·]/g,'')].length<=2;
   if(pure&&(big||narrow)){ /* 큰 한자 칸 · 좁은 칸: 옆에 작은 한글 */
     const f=document.createDocumentFragment(); let last=0; t.replace(RE,(m,o)=>{ if(o>last) f.appendChild(document.createTextNode(t.slice(last,o)));
       [...m].forEach(c=>{ f.appendChild(document.createTextNode(c)); const k=document.createElement('span'); k.className='hj-k'+(big?'':' hj-s'); k.textContent=M[c]||''; f.appendChild(k); }); last=o+m.length; return m; });

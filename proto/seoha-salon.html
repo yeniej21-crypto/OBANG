@@ -715,6 +715,8 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .home .bMis p{margin-top:2px;font-size:13px;line-height:1.45}
 .home .tday+.band{margin-top:18px}
 
+/* 멤버십 목록 표시 */
+.subList li i{width:6px;height:6px;margin-top:8px;background:var(--gold);border-radius:0}
 /* 세로가 짧은 노트북 화면 */
 @media (min-width:700px) and (max-height:800px){.opEnd{padding-top:calc(env(safe-area-inset-top,0px) + 17vh)}}
 @media (min-width:700px) and (max-height:680px){.opEnd{padding-top:calc(env(safe-area-inset-top,0px) + 9vh)}.opEnd h2{font-size:38px!important}.opEnd p{font-size:18px}.opRes{margin-top:10px}}
@@ -886,7 +888,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   <div class="ov night" id="ovNight"><div><small>다음 날</small><b id="nightT">07:59</b></div></div>
   <div class="ov lockS" id="ovLock"><div class="in"><div class="dt" id="lockD"></div><div class="tm">8:00</div>
     <div class="noti" id="noti" role="button" tabindex="0"><div class="pic" id="notiPic"><i>五</i></div><div class="tx"><div class="r1"><b id="notiN"></b><span>지금</span></div><p id="notiM"></p></div></div></div>
-    <div class="hint2">알림을 눌러보세요</div></div>
+    <div class="hint2">내일 아침 이렇게 도착해요 · 눌러 보기</div></div>
   <div class="panel" id="pMission"><div class="sheet mcard"><div class="k" id="mK"></div><p id="mTx"></p><button class="choice primary" id="mDone">완료했어</button></div><button class="link" id="mLater">나중에 할게</button></div>
   <div class="ov gaugeS" id="ovGauge">
     <div class="gH"><small>개운 1일차</small><b id="gTitle"></b></div>
@@ -894,17 +896,17 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <div class="gBox"><h4>연속 개운</h4><div class="streak" id="gStreak"></div><p class="hint" id="gStreakTx"></p></div>
     <div class="gBox"><h4 id="calH"></h4><div class="cal" id="gCal"></div>
       <div class="keyday"><div><span>🔒 연락운이 가장 강한 날</span><em id="kd1"></em></div><div><span>🔒 말조심해야 하는 날</span><em id="kd2"></em></div></div></div>
-    <button class="choice primary" id="gSub" style="margin-top:16px">중요한 날 미리 알림 받기</button>
+    <button class="choice primary" id="gSub" style="margin-top:16px">멤버십으로 매달 받기</button>
     <button class="link homeLink" data-home="1">홈으로</button>
   </div>
   <div class="ov subS" id="ovSub">
     <div class="gH"><small>개운 멤버십</small><b>사주는 보는 게 아니라,<br>매일 바꾸는 거야.</b></div>
     <ul class="subList">
-      <li><i>☀️</i>매일 아침 수호신의 개운 미션</li>
-      <li><i>📈</i>기운 게이지 · 월말 기운 리포트</li>
-      <li><i>🔔</i>중요한 날 전날 밤 미리 알림</li>
-      <li><i>🎧</i>수호신 음성 편지 · 현신 컷 해금</li>
-      <li><i>💬</i>서하에게 직접 묻기</li>
+      <li><i></i>매달 1일, 수호신의 이달 편지(이달 운 · 좋은 날 · 조심할 날)</li>
+      <li><i></i>매일 아침 개운 미션 · 당번 도장 전부 열림</li>
+      <li><i></i>매달 엽전 지급, 상세 풀이와 교환</li>
+      <li><i></i>서하와 수호신에게 매일 묻기</li>
+      <li><i></i>중요한 날 전날 카카오톡으로 안내</li>
     </ul>
     <div class="subPrice"><b>월 9,900원</b><span>첫 7일 무료</span></div>
     <button class="choice primary" id="subGo">7일 무료로 시작하기</button>
@@ -1342,7 +1344,7 @@ $('ctaPartner').onclick=partnerStart;
 $('partnerGo').onclick=partnerGo;
 $('rpMore').onclick=partnerMore;
 $('payGo').onclick=()=>toast('체험판: 결제 화면으로 이동합니다');
-$('ctaPay').onclick=()=>toast('체험판: 결제 화면으로 이동합니다');
+$('ctaPay').onclick=()=>{ if(!window.ObPay) return toast('체험판: 결제 화면으로 이동합니다'); ObPay.open({name:'서하의 상담 · 전체 리포트',who:'서하',desc:'고민 상담 전문 · 열두 달 흐름 · 개운 처방',price:29000,img:'img/seoha.jpg',after:()=>toast('체험판이라 상담은 여기까지예요. 정식 오픈 때 열려요')}); };
 /* ---------- membership demo ---------- */
 const MS={wood:{push:'일어났어? 오늘 미션 왔어 🌿',l:['좋은 아침.','오늘은 초록색 하나 걸치고,','동쪽으로 딱 10분만 걸어.']},
   fire:{push:'일어나. 오늘 미션 하나 줄게 🔥',l:['일어났어?','오늘은 네가 먼저 연락해.','망설이면 불 꺼진다.']},
@@ -1356,7 +1358,8 @@ const iga=n=>{ const c=n.charCodeAt(n.length-1)-0xAC00; return n+((c>=0&&c%28)?'
 function memberStart(){
   const g=GODS[S.low]; fetchClip('m_'+S.low);
   $('preAv').style.backgroundImage=`url("img/${S.low}.jpg")`;
-  $('preTx').innerHTML=`내일 아침 8시,<br>${iga(g.n)} 첫 개운 미션 보낼게.<br>알림 켜줄래?`;
+  $('preTx').innerHTML=`내일 아침 8시,<br>${iga(g.n)} 첫 개운 미션 보낼게.`;
+  if(window.ObNotify){ ObNotify.ask({title:'아침 미션 받기',img:`img/${S.low}.jpg`,head:`내일 아침 8시, ${g.n}의 첫 개운 미션`,sub:'어디로 보낼지 골라 줘'}).then(v=>{ if(v) nextMorning(); }); return; }
   ov('ovPre');
 }
 async function nextMorning(){
@@ -1496,7 +1499,7 @@ $('cPartner').onclick=()=>partnerStart();
 $('tBal').onclick=()=>showGauge();
 document.querySelectorAll('[data-go]').forEach(e=>e.onclick=()=>{ if(e.dataset.go==='partner') partnerStart(); else { fetchClip('m_'+S.low); openMission(); } });
 document.querySelectorAll('.lockc').forEach(e=>e.onclick=()=>toast('정식 오픈 때 열려요'));
-$('hBell').onclick=()=>toast('내일 아침 8시, 수호신 미션이 예약돼 있어요'); const toIntro=()=>{ try{ sessionStorage.removeItem('toHome'); }catch(e){} location.reload(); };
+$('hBell').onclick=()=>{ if(S&&S.low) memberStart(); else toast('수호신을 먼저 만나면 아침 미션을 받을 수 있어요'); }; const toIntro=()=>{ try{ sessionStorage.removeItem('toHome'); }catch(e){} location.reload(); };
 $('hMenu').onclick=()=>$('hMenuS').classList.add('on');
 $('hMenuS').onclick=e=>{ if(e.target.id==='hMenuS') $('hMenuS').classList.remove('on'); const b=e.target.closest('[data-m]'); if(!b) return; $('hMenuS').classList.remove('on'); if(b.dataset.m==='intro') toIntro(); else if(b.dataset.m==='arch') archOpen(); else goPage(b.dataset.m); };
 $('hSalon').onclick=toIntro; $('cObgh').onclick=$('rkObgh').onclick=()=>goPage('obgh.html'); $('hMyChar').onclick=()=>goPage('avatar.html'); $('cLife').onclick=()=>goPage('lifetime.html'); $('cRe').onclick=$('rkRe').onclick=()=>goPage('love2.html?m=re'); $('cNext').onclick=()=>goPage('love2.html?m=next'); document.querySelector('.hBar .logo').onclick=toIntro;
@@ -1613,7 +1616,7 @@ $('backBtn').onclick=()=>{
 $('ctaHome').onclick=showHome;
 $('goHome').onclick=async()=>{ await unlock(); showHome(); };
 document.querySelectorAll('[data-home]').forEach(b=>b.onclick=showHome);
-$('subGo').onclick=()=>toast('체험판: 7일 무료 체험이 시작됩니다');
+$('subGo').onclick=()=>{ if(!window.ObPay) return toast('체험판: 7일 무료 체험이 시작됩니다'); const k=S&&S.low||'wood'; ObPay.open({name:'오방 멤버십 · 월 구독',who:'수호신',desc:'매달 수호신의 편지 · 매일 개운 미션 · 엽전 · 매일 상담',price:9900,img:`img/${k}.jpg`,trial:'첫 7일 무료, 이후 매달',cta:'7일 무료로 시작하기',agree:'7일 무료 체험이 끝나면 매달 9,900원이 자동 결제되고, 마이페이지에서 언제든 해지할 수 있음을 확인했어요.',okTitle:'멤버십이 시작됐어요',okText:'내일 아침 첫 편지가 도착해요',after:()=>{ ov(null); toast('체험판: 멤버십 체험이 시작됐어요'); }}); };
 $('ctaAvatar').onclick=()=>goPage('avatar.html');
 $('ctaShare').onclick=()=>toast('체험판: 공유 카드 생성');
 $('muteBtn').onclick=()=>{ muted=!muted; [vA,vB].forEach(v=>v.muted=muted); bgm(bgmLevel,.2); $('waves').style.display=muted?'none':''; $('muteBtn').setAttribute('aria-label',muted?'소리 켜기':'소리 끄기'); };
@@ -1749,4 +1752,4 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.con
 <script src="hscroll.js"></script>
 <script src="menuintro.js"></script>
 
-<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>

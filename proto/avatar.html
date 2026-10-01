@@ -334,7 +334,7 @@ async function makeCard(){ const W=1080,H=1920, cv=document.createElement('canva
   ps.forEach((p,i)=>{ const cx=W/2+(i-1.5)*130; if(!p){ x.fillStyle='#555'; x.fillText('·',cx,1730); x.fillText('·',cx,1810); return; } x.fillStyle=COL[Math.floor(p[0]/2)]; x.fillText(GAN[p[0]],cx,1730); x.fillStyle=COL[BR_EL[p[1]]]; x.fillText(JI[p[1]],cx,1810); });
   x.fillStyle='rgba(243,215,155,.8)'; x.font='700 28px "Noto Sans KR",sans-serif'; x.fillText('OBANG SAJU · 오방사주',W/2,1880);
   return new Promise(ok=>cv.toBlob(ok,'image/jpeg',.9)); }
-$('shareBtn').onclick=async()=>{ toast('카드를 만드는 중…'); cardBlob=await makeCard(); if(!cardBlob) return; $('shImg').src=URL.createObjectURL(cardBlob); $('sheet').classList.add('on'); };
+$('shareBtn').onclick=async()=>{ toast('카드를 만드는 중…'); cardBlob=await makeCard(); if(!cardBlob) return; if(window.ObShare) return ObShare.sheet({blob:cardBlob,name:'my-saju-character.jpg',title:'사주가 그린 나'}); $('shImg').src=URL.createObjectURL(cardBlob); $('sheet').classList.add('on'); };
 $('shX').onclick=()=>$('sheet').classList.remove('on');
 $('shSave').onclick=()=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(cardBlob); a.download='my-saju-character.jpg'; document.body.appendChild(a); a.click(); a.remove(); toast('이미지를 저장했어요'); };
 $('shSend').onclick=async()=>{ const f=new File([cardBlob],'my-saju-character.jpg',{type:'image/jpeg'}); try{ if(navigator.canShare&&navigator.canShare({files:[f]})) await navigator.share({files:[f],title:'사주가 그린 나'}); else $('shSave').onclick(); }catch(e){} };
@@ -353,6 +353,6 @@ $('goBtn').onclick=()=>{ const me={name:$('nm').value.trim(),g:gender,cal,y:+$('
 (function(){ const me=loadMe(); if(me&&me.y){ prefill(me); reveal(me); } })();
 })();
 </script>
-<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
 </body>
 </html>

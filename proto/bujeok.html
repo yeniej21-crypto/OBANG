@@ -253,7 +253,7 @@ async function wallPng(){ const e=EL[el], cv=document.createElement('canvas'); c
   const g=x.createLinearGradient(0,0,0,1920); g.addColorStop(0,'#fbf8f3'); g.addColorStop(1,e.p); x.fillStyle=g; x.fillRect(0,0,1080,1920);
   const W=700, H=Math.round(700*1046/648), X=190, Y=1920-H-230; x.save(); x.shadowColor='rgba(60,40,20,.28)'; x.shadowBlur=60; x.shadowOffsetY=24; x.fillStyle='#e9dfb8'; x.fillRect(X,Y,W,H); x.restore();
   await drawCard(x,X,Y,W,H); x.fillStyle='#8a8178'; x.textAlign='center'; x.font='500 28px "Noto Sans KR"'; x.fillText(`오방사주 · ${e.k} ${e.n}의 ${USE[use][0]} 부적`,540,1920-140); return cv.toDataURL('image/png'); }
-function sheet(u,name){ $('shImg').src=u; $('sheet').classList.add('on'); $('shDl').onclick=()=>{ const a=document.createElement('a'); a.href=u; a.download=name; a.click(); }; }
+function sheet(u,name){ if(window.ObShare) return ObShare.sheet({src:u,name,title:'오방사주 부적 카드'}); $('shImg').src=u; $('sheet').classList.add('on'); $('shDl').onclick=()=>{ const a=document.createElement('a'); a.href=u; a.download=name; a.click(); }; }
 $('save').onclick=async()=>{ try{ sheet(await cardPng(),'obang-bujeok-card.png'); }catch(e){ toast('이미지를 만들지 못했어요'); } };
 $('wall').onclick=async()=>{ try{ sheet(await wallPng(),'obang-bujeok-wallpaper.png'); }catch(e){ toast('이미지를 만들지 못했어요'); } };
 $('shX').onclick=()=>$('sheet').classList.remove('on');
@@ -270,6 +270,6 @@ render();
 (function(){ const c=$('card'), f=$('foil'); if(window.Depth3D&&Depth3D.holo){ Depth3D.holo(c,{face:$('face'),max:14}); }
   function loop(){ const t=window.Depth3D&&Depth3D.tilt?Depth3D.tilt():{x:0,y:0}; f.style.setProperty('--sx',(50+t.x*45)+'%'); f.style.setProperty('--sy',(50+t.y*45)+'%'); requestAnimationFrame(loop); } loop(); })();
 </script>
-<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
 </body>
 </html>

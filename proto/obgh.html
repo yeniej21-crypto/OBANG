@@ -266,7 +266,7 @@ async function card(){ const W=1080,H=1920, cv=document.createElement('canvas');
   RES.slice(1).forEach((g2,i)=>{ x.fillStyle=g2.c; x.font='700 34px "Noto Sans KR",sans-serif'; x.fillText(`${i+2}위 ${g2.n} ${g2.s}`,W/2+(i%2?1:-1)*220,1650+Math.floor(i/2)*60); });
   x.fillStyle='rgba(243,215,155,.85)'; x.font='700 30px "Noto Sans KR",sans-serif'; x.fillText('OBANG SAJU · 오방 궁합',W/2,1870);
   return new Promise(ok=>cv.toBlob(ok,'image/jpeg',.9)); }
-$('shareBtn').onclick=async()=>{ toast('카드를 만드는 중…'); blob=await card(); $('shImg').src=URL.createObjectURL(blob); $('sheet').classList.add('on'); };
+$('shareBtn').onclick=async()=>{ toast('카드를 만드는 중…'); blob=await card(); if(window.ObShare) return ObShare.sheet({blob,name:'obang-match.jpg',title:'오방 궁합'}); $('shImg').src=URL.createObjectURL(blob); $('sheet').classList.add('on'); };
 $('shX').onclick=()=>$('sheet').classList.remove('on');
 $('shSave').onclick=()=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='obang-match.jpg'; document.body.appendChild(a); a.click(); a.remove(); toast('이미지를 저장했어요'); };
 $('shSend').onclick=async()=>{ const f=new File([blob],'obang-match.jpg',{type:'image/jpeg'}); try{ if(navigator.canShare&&navigator.canShare({files:[f]})) await navigator.share({files:[f],title:'오방 궁합'}); else $('shSave').onclick(); }catch(e){} };
@@ -276,6 +276,6 @@ addEventListener('load',()=>{ if(window.Depth3D) Depth3D.mount($('hero'),{src:'i
 <script src="reveal.js"></script>
 <script src="archive.js"></script>
 <script src="depth3d.js"></script>
-<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
 </body>
 </html>

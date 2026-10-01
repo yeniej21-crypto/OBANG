@@ -3,6 +3,7 @@
 # 사용: bash deploy_push.sh "바뀐 내용 한 줄"
 set -e
 SP=$(cd "$(dirname "$0")" && pwd)
+python3 "$SP/check_js.py" || { echo "배포 중단: 스크립트 오류"; exit 1; }
 python3 "$SP/build_site.py"
 R=/home/claude/obang
 [ -d $R/.git ] || git clone --depth 1 https://github.com/yeniej21-crypto/OBANG $R

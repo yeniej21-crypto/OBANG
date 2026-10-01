@@ -633,7 +633,7 @@ async function makeCard(){
   x.fillStyle='#6f6560'; x.font=`500 28px ${SANS}`; x.fillText('오방사주 · 나의 도화 알아보기',cx+26,1900); try{ const mk=await loadImg('img/brand/mark.svg'); const tw=x.measureText('오방사주 · 나의 도화 알아보기').width; x.drawImage(mk,cx+26-tw/2-52,1868,40,40); }catch(e){}
   return await new Promise(r=>c.toBlob(r,'image/png'));
 }
-$('shareBtn').onclick=async()=>{ toast('카드 만드는 중…'); cardBlob=await makeCard(); $('shareImg').src=URL.createObjectURL(cardBlob); $('shareOv').classList.add('on'); };
+$('shareBtn').onclick=async()=>{ toast('카드 만드는 중…'); cardBlob=await makeCard(); if(window.ObShare) return ObShare.sheet({blob:cardBlob,name:'my-dohwa.png',title:'나의 도화 유형',text:`나는 ${RES.T.n}. 도화 지수 ${RES.score}%`}); $('shareImg').src=URL.createObjectURL(cardBlob); $('shareOv').classList.add('on'); };
 $('shareX').onclick=()=>$('shareOv').classList.remove('on');
 $('saveBtn').onclick=()=>{ if(!cardBlob) return; const a=document.createElement('a'); a.href=URL.createObjectURL(cardBlob); a.download='my-dohwa.png'; document.body.appendChild(a); a.click(); a.remove(); toast('이미지를 저장했어요'); };
 $('sendBtn').onclick=async()=>{ if(!cardBlob) return; const f=new File([cardBlob],'my-dohwa.png',{type:'image/png'});
@@ -714,6 +714,6 @@ $('startBtn').onclick=()=>{ unlock(); startBgm(); $('splash').classList.add('off
 <script src="premai.js"></script>
 <script src="premkit.js"></script>
 <script src="dohwa_prem.js"></script>
-<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
 </body>
 </html>

@@ -540,7 +540,7 @@ function drawChart(MO,best,warn){
 function openAsk(first){ if(!window.AskChat||!ASKU) return; AskChat.open({persona:'halmae',theme:'paper',root:$('stage'),avatar:'img/halmae.jpg',user:ASKU,first,tier:'default'}); }
 $('askBtn').onclick=()=>openAsk();
 document.querySelectorAll('.askS .qs button').forEach(b=>b.onclick=()=>openAsk(b.dataset.q));
-$('payBtn').onclick=()=>{ const pr=$('prem'); if(!$('pay').classList.contains('done')){ if(!window.SNPrem) return; SNPrem.open(); $('pay').classList.add('done'); $('payBtn').textContent='상세 풀이로 가기'; toast('체험판이라 결제 없이 열었어요'); } pr.scrollIntoView({behavior:'smooth',block:'start'}); };
+$('payBtn').onclick=()=>{ const pr=$('prem'); if(!$('pay').classList.contains('done')){ if(!window.SNPrem) return; SNPrem.open(); $('pay').classList.add('done'); $('payBtn').textContent='상세 풀이로 가기'; toast('상세 풀이를 열었어요'); } pr.scrollIntoView({behavior:'smooth',block:'start'}); };
 $('back2').onclick=()=>{ show('sIntro'); };
 $('back1').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
 </script>
@@ -552,6 +552,6 @@ MenuIntro.play({src:'v/halmae.mp4',poster:'img/halmae.jpg',who:'삼신 할매 ·
 <script src="archive.js"></script>
 <script src="depth3d.js"></script>
 <script>window.Depth3D&&setTimeout(()=>Depth3D.watch('.hero,#heroP,.ch,#sLoad'),200);</script>
-<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
 </body>
 </html>

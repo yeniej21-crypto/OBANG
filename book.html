@@ -7,11 +7,12 @@
 <link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
 <style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
 /* 오방사주 세계관 책 제1권 《팔자에 신이 들었다》 — v4 '살아 있는 팝업북'
    인물을 배경에서 오려 낸 그림(img/pop/*.webp)이 장을 펼치면 종이에서 일어서고, 액자 위로 머리가 튀어나온다.
    폰 기울기·마우스에 따라 책 전체와 배경·인물이 다른 깊이로 움직이고, 장마다 기운의 입자가 책 밖으로 흘러나온다.
    인물을 누르면 그 인물의 영상(눈 뜨는 수호신 · 말하는 고양이)이 액자 속에서 깨어난다. 흰 종이, 글자는 진한 색, 폰트는 홈과 같은 Noto Sans KR. */
-:root{--kr:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--ink:#111;--ink2:#2b2b2b;--ink3:#666;--red:#c8372d;--c:#c8372d;--tx:0;--ty:0;color-scheme:light}
+:root{--kr:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--ink:#111;--ink2:#2b2b2b;--ink3:#666;--red:#c8372d;--c:#c8372d;--tx:0;--ty:0;--brush:'OBrush','Noto Sans KR',serif;color-scheme:light}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{margin:0;background:#0a0908;color:var(--ink);font-family:var(--kr);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word;user-select:none;-webkit-user-select:none;-webkit-font-smoothing:antialiased}
@@ -176,6 +177,14 @@ button{font-family:inherit;cursor:pointer}
 .toc button.it.on{color:var(--red)}
 .snd{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 70px);transform:translateX(-50%);z-index:70;background:rgba(255,255,255,.95);color:#111;font-size:13px;font-weight:700;padding:9px 14px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 .snd.on{opacity:1}
+.hd,.g8h,.nm b,.ctl h1,.nx h2,.toc h3{font-family:var(--brush);font-weight:400;letter-spacing:0}
+.hd{font-size:30px;line-height:1.2}
+.flt .hd{font-size:38px}
+.g8h{font-size:44px;line-height:1.12}
+.nm b{font-size:40px}
+.ctl h1{font-size:clamp(60px,18vw,82px);line-height:1.02}
+.nx h2{font-size:36px;line-height:1.22}
+.toc h3{font-size:32px}
 </style>
 </head>
 <body>

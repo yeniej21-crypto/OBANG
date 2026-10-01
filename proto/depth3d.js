@@ -117,7 +117,7 @@
   /* 가려져 있다가 드러날 때(메뉴 인트로가 끝날 때 등) 등장 연출을 다시 */
   function replay(){ const n=performance.now(); list.forEach(r=>r.t0=n); kick(); }
   /* 상단 바: 내용이 위로 올라오면 화면 바탕색 막을 깔아서 제목·버튼이 글자와 겹치지 않게 (모든 서브 화면 공통) */
-  (function(){ try{ const st=document.createElement('style'); st.textContent='.stage>.top{transition:background .3s,box-shadow .3s}.stage>.top.tsd{background:linear-gradient(180deg,var(--tsd) 0,var(--tsd) 70%,var(--tsd0));}'; (document.head||document.documentElement).appendChild(st);
+  (function(){ try{ const st=document.createElement('style'); st.textContent='.stage>.top{transition:background .3s,box-shadow .3s}.stage>.top.tsd{background:var(--tsd);box-shadow:0 12px 14px -6px var(--tsd)}'; (document.head||document.documentElement).appendChild(st);
     let top=null, bg=null; const set=on=>{ top=top||document.querySelector('.stage>.top'); if(!top) return; if(on&&!bg){ const c=getComputedStyle(document.querySelector('.stage')).backgroundColor||'rgb(12,10,15)'; const m=c.match(/[\d.]+/g)||[12,10,15]; bg=1; top.style.setProperty('--tsd',`rgba(${m[0]},${m[1]},${m[2]},.96)`); top.style.setProperty('--tsd0',`rgba(${m[0]},${m[1]},${m[2]},0)`); } top.classList.toggle('tsd',on); };
     document.addEventListener('scroll',e=>{ const t=e.target; if(!t||!t.closest||!t.closest('.stage')) return; if(t.classList&&t.classList.contains('stage')) return; set(t.scrollTop>40); },true);
     document.addEventListener('click',()=>setTimeout(()=>{ const sc=[...document.querySelectorAll('.stage .scr.on,.stage .scr.on .scroll')].find(x=>x.scrollHeight>x.clientHeight); if(!sc||sc.scrollTop<=40) set(false); },600),true);

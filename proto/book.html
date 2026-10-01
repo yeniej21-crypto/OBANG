@@ -150,6 +150,7 @@ button{font-family:inherit;cursor:pointer}
 .how li b{display:block;font-size:15px;font-weight:900;color:var(--ink)}
 .cta{display:flex;gap:6px;margin-top:12px}
 .cta button{flex:1;height:48px;border:0;background:#111;color:#fff;font-size:14.5px;font-weight:900}
+.cta button{white-space:nowrap;padding:0 6px}
 .cta button.gh{background:#fff;color:#111;box-shadow:inset 0 0 0 1.5px #111}
 .t-how .pop{height:30%}
 .t-how .txt{top:calc(58px + 30% + 22px);bottom:16px}
@@ -185,6 +186,37 @@ button{font-family:inherit;cursor:pointer}
 .ctl h1{font-size:clamp(60px,18vw,82px);line-height:1.02}
 .nx h2{font-size:36px;line-height:1.22}
 .toc h3{font-size:32px}
+
+/* 작은 폰: 글이 넘치면 그림 액자를 줄이고(fit), 그래도 넘치면 글자를 한 단계 줄인다(.tight) */
+.face.tight .bd{font-size:14px;line-height:1.6}
+.face.tight .bd p{margin-bottom:6px}
+.face.tight .q{font-size:15.5px}
+.face.tight .hd{font-size:26px;margin:3px 0 6px}
+.face.tight .nm b{font-size:34px}
+.face.tight .spec{margin:4px 0 6px;font-size:13px}
+.face.tight .how li{padding:6px 0;font-size:13px}
+.face.tight .how li b{font-size:14px}
+.face.tight .cta{margin-top:8px}
+.face.tight .cta button{height:44px;font-size:13.5px}
+.face.tight .g8h{font-size:36px}
+.face.tight .g8t{margin-top:14px}
+.face.tight .g8t i{height:52px;font-size:28px}
+.face.tight .g8e{margin-top:10px}
+.face.tight .g8e b{font-size:19px}
+.face.tight .g8b{margin-top:12px}
+.face.tight .nx h2{font-size:30px}
+.face.tight .nx p{font-size:14.5px}
+.face.tight2 .g8h{font-size:32px}
+.face.tight2 .g8t i{height:44px;font-size:24px}
+.face.tight2 .g8t small{font-size:10.5px}
+.face.tight2 .bd{font-size:13.5px;line-height:1.55}
+.face.tight3 .g8e{display:none}
+.face.tight3 .g8t{margin-top:10px}
+@media (max-height:700px){.ctl h1{font-size:clamp(48px,15vw,60px)!important}.cfg{left:8%;width:84%}.flt .hd{font-size:32px}.nx h2{font-size:30px}}
+/* 작은 신 액자: 비어 보이지 않게 종이 바탕 + 가운데 */
+.mini{align-items:center;padding-bottom:0;background:radial-gradient(70% 60% at 50% 60%,#fff8ec,#f1e6d3 75%)}
+.mini::after{content:"";position:absolute;left:12%;right:12%;bottom:22%;height:10px;background:radial-gradient(50% 50% at 50% 50%,rgba(90,60,30,.18),rgba(90,60,30,0));pointer-events:none}
+.mini i{width:18.5%}
 </style>
 </head>
 <body>
@@ -262,6 +294,17 @@ $('book').innerHTML=PAGES.map((p,i)=>`<div class="leaf t-${p.t}" data-i="${i}" s
 const leaves=[...document.querySelectorAll('.leaf')];
 $('tocL').innerHTML=PAGES.map((p,i)=>`<button class="it" type="button" data-i="${i}">${p.toc||`${p.ch} · ${p.hd}`}<span>${String(i).padStart(2,'0')}</span></button>`).join('');
 
+/* 글이 액자 아래 공간보다 길면 액자 높이를 줄이고, 그래도 넘치면 글자를 줄인다 */
+function fitPages(){ document.querySelectorAll('#book .face.front').forEach(f=>{ f.classList.remove('tight','tight2','tight3'); const H=f.clientHeight; if(!H) return;
+  const tx=f.querySelector('.txt'), box=f.querySelector('.pop,.mini'), g8=f.querySelector('.g8w'), nx=f.querySelector('.nx');
+  if(tx&&box){ const how=f.closest('.t-how'), gap=how?22:32, bot=how?16:48, maxP=H*(how?.30:.44), minP=H*(how?.2:.26);
+    const run=()=>{ tx.style.top='58px'; tx.style.bottom='auto'; const need=tx.offsetHeight; tx.style.bottom=''; const ph=Math.max(minP,Math.min(maxP,H-58-gap-bot-need)); box.style.height=ph+'px'; tx.style.top=(58+ph+gap)+'px'; return need<=H-58-ph-gap-bot+1; };
+    if(!run()){ f.classList.add('tight'); if(!run()){ f.classList.add('tight2'); run(); } } return; }
+  if(g8){ const fits=()=>{ g8.style.bottom='auto'; const h=g8.offsetHeight; g8.style.bottom=''; return h<=H-36; }; for(const c of ['tight','tight2','tight3']){ if(fits()) break; f.classList.add(c); } return; }
+  }); }
+fitPages(); addEventListener('resize',()=>{ clearTimeout(fitPages._t); fitPages._t=setTimeout(fitPages,150); });
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fitPages); setTimeout(fitPages,1200);
+
 let AC=null; const ac=()=>{ try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); return AC; }catch(e){ return null; } };
 function rustle(){ const A=ac(); if(!A) return; const d=.45, n=A.createBuffer(1,A.sampleRate*d,A.sampleRate), a=n.getChannelData(0); for(let i=0;i<a.length;i++){ const t=i/a.length; a[i]=(Math.random()*2-1)*Math.pow(1-t,2.2)*(t<.08?t/.08:1)*(.6+.4*Math.sin(t*38)); }
   const s=A.createBufferSource(); s.buffer=n; const f=A.createBiquadFilter(); f.type='bandpass'; f.frequency.value=2600; f.Q.value=.7; const g=A.createGain(); g.gain.value=.08; s.connect(f); f.connect(g); g.connect(A.destination); s.start(); }
@@ -292,6 +335,8 @@ function go(n,sound=true){ n=Math.max(0,Math.min(N-1,n)); if(n===cur) return;
   cur=n; if(sound) rustle(); try{ navigator.vibrate&&navigator.vibrate(8); }catch(e){} activate(); }
 $('next').onclick=()=>go(cur+1); $('prev').onclick=()=>go(cur-1);
 document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(cur+1); if(e.key==='ArrowLeft') go(cur-1); });
+/* book.html#p=9 로 들어오면 그 쪽부터 */
+setTimeout(()=>{ try{ const m=location.hash.match(/p=(\d+)/); if(m) go(+m[1],false); }catch(e){} },300);
 
 function toastS(t){ const e=$('snd'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1600); }
 function wake(l){ const P=PAGES[+l.dataset.i], pop=l.querySelector('.pop');

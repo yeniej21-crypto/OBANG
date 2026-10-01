@@ -8,6 +8,7 @@ const IP_DAY = 8, ALL_DAY = 300, ALL_MONTH = 4000;
 const ORIGINS = [/^https:\/\/obangsaju\.netlify\.app$/, /^https:\/\/[a-z0-9-]+--obangsaju\.netlify\.app$/, /^http:\/\/localhost(:\d+)?$/];
 const out = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
 export default async (req, context) => {
+  if (req.method === "GET") return out({ ok: true, key: !!process.env.ANTHROPIC_API_KEY, model: MODEL });
   if (req.method !== "POST") return out({ error: "method" }, 405);
   const origin = req.headers.get("origin") || "";
   if (origin && !ORIGINS.some(r => r.test(origin))) return out({ error: "origin" }, 403);

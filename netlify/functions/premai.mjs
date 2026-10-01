@@ -12,6 +12,7 @@ async function sha(s) { const b = await crypto.subtle.digest("SHA-256", new Text
 function parse(t) { t = String(t || "").trim(); try { return JSON.parse(t); } catch {} const m = t.match(/```(?:json)?\s*([\s\S]*?)```/); if (m) { try { return JSON.parse(m[1]); } catch {} }
   const a = Math.min(...["{", "["].map(c => { const i = t.indexOf(c); return i < 0 ? 1e9 : i; })), z = Math.max(t.lastIndexOf("}"), t.lastIndexOf("]")); if (a < z) { try { return JSON.parse(t.slice(a, z + 1)); } catch {} } return null; }
 export default async (req, context) => {
+  if (req.method === "GET") return out({ ok: true, key: !!process.env.ANTHROPIC_API_KEY, model: MODEL });
   if (req.method !== "POST") return out({ error: "method" }, 405);
   const origin = req.headers.get("origin") || "";
   if (origin && !ORIGINS.some(r => r.test(origin))) return out({ error: "origin" }, 403);

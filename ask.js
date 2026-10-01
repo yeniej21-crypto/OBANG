@@ -205,7 +205,7 @@ function open(opts){
       if(c==='limit'){ turns.pop(); b.className='ak-m sys'; b.textContent='오늘 체험 상담 질문을 다 썼어요. 내일 다시 이야기해요.'; return 'ok'; }
       if(['nokey','http404','origin','http405'].includes(c)) SRV_OFF=true;
       if(SRV_OFF){ b.remove(); return 'skip'; }
-      turns.pop(); b.className='ak-m sys'; b.textContent='연결이 잠깐 끊겼어요. 다시 보내 주세요.'; return 'ok';
+      turns.pop(); b.className='ak-m sys'; b.textContent=`연결이 잠깐 끊겼어요. 다시 보내 주세요. (오류: ${c}${j&&j.status?' '+j.status:''})`; return 'ok';
     }catch(e){ SRV_OFF=true; b.remove(); return 'skip'; }
     finally{ busy=false; btn.disabled=!inp.value.trim(); } }
   async function send(q){

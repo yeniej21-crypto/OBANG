@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>커리어 사주 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+
+/* 커리어 사주 — 도준(황룡)이 읽는 일 사주 리포트. 어두운 차콜 + 황룡 금빛, 리포트형 레이아웃. */
+:root{
+  --brush:'OBrush','Noto Serif KR',serif; --bmj:'Song Myung','Noto Serif KR',serif;
+  --bg:#08090c; --stage:#0c0d11; --card:#14161b; --card-2:#1a1d23; --line:rgba(240,220,180,.1); --line-2:rgba(211,161,58,.35);
+  --ink:#f5f1ea; --ink-2:#cbc5bb; --ink-3:#8b867e;
+  --acc:#d3a13a; --acc-2:#f0c96a; --blue:#8fb4ff; --good:#7fd6a6; --bad:#ff8a7a;
+  --wood:#46b47f; --fire:#ec5a43; --earth:#d3a13a; --metal:#c9d1dc; --water:#5b8ce6;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --serif:'Noto Serif KR',"Nanum Myeongjo",serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button,select,input{font-family:inherit}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--stage);overflow:hidden;overflow:clip}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;opacity:0;pointer-events:none;transition:opacity .45s}
+.scr::-webkit-scrollbar{display:none}
+.scr.on{opacity:1;pointer-events:auto}
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px;background:linear-gradient(180deg,var(--stage) 70%,rgba(12,13,17,0))}
+.ib{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.ib svg{width:18px;height:18px}
+.top b{font-size:14px;font-weight:700}
+.top .tag{margin-left:auto;font-family:var(--serif);font-size:12px;font-weight:900;color:var(--acc-2);border:1px solid var(--line-2);border-radius:8px;padding:4px 8px;letter-spacing:.06em}
+.wrap{padding:0 16px calc(env(safe-area-inset-bottom,0px) + 34px)}
+
+.hero{position:relative;height:330px;border-radius:22px;overflow:hidden;background:#000 center 12%/cover no-repeat;margin-bottom:14px}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,9,12,0) 38%,rgba(8,9,12,.94))}
+.hero div{position:absolute;left:18px;right:18px;bottom:18px;z-index:1}
+.hero small{font-size:11px;letter-spacing:.24em;color:var(--acc-2);font-weight:700}
+.hero h1{margin:6px 0 8px;font-family:var(--serif);font-size:26px;font-weight:900;line-height:1.3}
+.hero p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.hero p b{color:var(--acc-2)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:10px}
+.card h3{margin:0 0 10px;font-size:12.5px;color:var(--ink-3);font-weight:500}
+.seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:rgba(255,255,255,.03)}
+.seg button{flex:1;height:40px;border:0;background:none;color:var(--ink-2);font-size:13.5px;cursor:pointer}
+.seg button.on{background:rgba(211,161,58,.18);color:var(--acc-2);font-weight:700}
+.chipset{display:flex;flex-wrap:wrap;gap:6px}
+.chipset button{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--ink-2);border-radius:999px;padding:9px 13px;font-size:13.5px;cursor:pointer}
+.chipset button.on{border-color:var(--acc);background:rgba(211,161,58,.16);color:var(--acc-2);font-weight:700}
+.g3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:6px;margin-top:8px}
+select,input[type=text]{height:44px;border-radius:11px;border:1px solid var(--line);background:#1a1c21;color:var(--ink);font-size:15px;padding:0 10px;width:100%}
+.go{width:100%;height:54px;border:0;border-radius:15px;background:var(--acc);color:#16110a;font-size:16px;font-weight:800;cursor:pointer}
+.go.sub{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid var(--line);font-weight:700}
+.fine{font-size:11.5px;color:var(--ink-3);text-align:center;margin:10px 0 0;line-height:1.6}
+
+/* loading */
+#sLoad{display:flex;flex-direction:column;justify-content:flex-end;background:#000 center 12%/cover no-repeat}
+#sLoad:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 30%,rgba(8,9,12,.95) 78%)}
+#sLoad .in{position:relative;padding:0 22px calc(env(safe-area-inset-bottom,0px) + 60px)}
+#sLoad .who{font-size:12px;letter-spacing:.2em;color:var(--acc-2);font-weight:700}
+#sLoad .ln{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.55;min-height:3.2em;margin-top:8px;transition:opacity .35s}
+#sLoad .steps{margin-top:18px;display:grid;gap:7px}
+#sLoad .steps div{display:flex;gap:9px;align-items:center;font-size:13px;color:var(--ink-3);transition:color .3s}
+#sLoad .steps i{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--ink-3);flex:none;display:grid;place-items:center;font-style:normal;font-size:10px}
+#sLoad .steps div.on{color:var(--ink)} #sLoad .steps div.on i{border-color:var(--acc);background:var(--acc);color:#111}
+#sLoad.on .kb{animation:kb 9s ease-out forwards}
+
+/* result */
+.type{position:relative;border-radius:22px;overflow:hidden;background:#000 right 18%/cover no-repeat;min-height:300px;border:1px solid var(--line-2)}
+.type:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,11,14,.97) 42%,rgba(10,11,14,.35) 80%,rgba(10,11,14,.1))}
+.type .in{position:relative;padding:20px 18px 18px;width:74%}
+.type small{font-size:11px;letter-spacing:.2em;color:var(--acc-2);font-weight:700}
+.type .en{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--acc-2);margin-top:12px;line-height:1}
+.type h2{margin:4px 0 2px;font-family:var(--serif);font-size:29px;font-weight:900;line-height:1.2}
+.type .x{font-size:12.5px;color:var(--ink-2)}
+.type p{margin:14px 0 0;font-size:14px;line-height:1.7;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.chips button{border:1px solid rgba(211,161,58,.4);background:rgba(211,161,58,.08);color:var(--acc-2);font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;cursor:pointer;font-family:var(--serif)}
+.chips button.g{border-color:rgba(127,214,166,.4);background:rgba(127,214,166,.08);color:var(--good)}
+.chips button.bad{border-color:rgba(255,138,122,.4);background:rgba(255,138,122,.08);color:var(--bad)}
+.sh{margin:28px 2px 10px}
+.sh small{display:block;font-size:11px;letter-spacing:.16em;color:var(--acc-2);font-weight:700}
+.sh b{display:block;font-size:17.5px;font-weight:700;margin-top:4px;line-height:1.4}
+.radar{display:grid;grid-template-columns:1fr;gap:4px;padding:10px 10px 14px}
+.radar svg{width:100%;max-width:300px;margin:0 auto;display:block;overflow:visible}
+.radar svg text{fill:var(--ink-2);font-size:11.5px;font-family:var(--sans);font-weight:700}
+.radar svg text.v{fill:var(--acc-2);font-size:11px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px}
+.sw{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sw>div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px}
+.sw h4{margin:0 0 8px;font-size:12.5px;color:var(--good)} .sw>div.w h4{color:var(--bad)}
+.sw ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.sw li{font-size:13px;line-height:1.5;color:var(--ink-2);padding-left:12px;position:relative}
+.sw li:before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--good)} .sw>div.w li:before{background:var(--bad)}
+.jobs{display:flex;flex-wrap:wrap;gap:6px}
+.jobs span{background:var(--card-2);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:13.5px;font-weight:700}
+.jobs span.hi{border-color:var(--acc);color:var(--acc-2)}
+.kv{display:grid;gap:8px}
+.kv>div{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 14px}
+.kv i{flex:none;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-style:normal;font-family:var(--serif);font-weight:900;font-size:16px;background:rgba(255,255,255,.05)}
+.kv b{display:block;font-size:14.5px}
+.kv p{margin:3px 0 0;font-size:13px;line-height:1.6;color:var(--ink-2)}
+.year{background:linear-gradient(135deg,#1b1710,#14161b);border:1px solid var(--line-2);border-radius:18px;padding:15px}
+.year .yh{display:flex;align-items:center;gap:12px}
+.year .yh em{font-style:normal;font-family:var(--serif);font-weight:900;font-size:34px;color:var(--acc-2);line-height:1}
+.year .yh b{font-size:15px;line-height:1.45}
+.year p{margin:10px 0 0;font-size:13.5px;line-height:1.7;color:var(--ink-2)}
+.hm{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 12px 12px}
+.hm table{width:100%;border-collapse:separate;border-spacing:3px}
+.hm th{font-size:10.5px;color:var(--ink-3);font-weight:500;padding:0}
+.hm th.r{text-align:left;font-size:12px;color:var(--ink-2);font-weight:700;white-space:nowrap;padding-right:4px;width:52px}
+.hm td{height:30px;border-radius:6px;background:rgba(211,161,58,var(--a));position:relative;text-align:center;font-size:11px;color:#1a140a;font-weight:800}
+.hm td.best{box-shadow:0 0 0 1.5px var(--acc-2)}
+.hm td.best:after{content:"★";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:11px;text-shadow:0 0 4px rgba(0,0,0,.6)}
+.hm td.warn{background:rgba(255,138,122,.22)}
+.hm .lg{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--ink-3);margin-top:8px;padding:0 4px}
+.picks{display:grid;gap:7px;margin-top:10px}
+.picks div{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 13px}
+.picks span{flex:none;font-size:11px;font-weight:800;border-radius:7px;padding:3px 7px;background:rgba(211,161,58,.16);color:var(--acc-2)}
+.picks span.x{background:rgba(255,138,122,.14);color:var(--bad)}
+.picks b{font-size:14.5px} .picks small{margin-left:auto;font-size:11.5px;color:var(--ink-3);font-family:var(--serif);text-align:right}
+.say{display:flex;gap:12px;align-items:flex-start;margin:22px 0 0;padding:15px;border-radius:18px;background:var(--card-2);border:1px solid var(--line-2)}
+.say .av{flex:none;width:46px;height:46px;border-radius:50%;background:#000 center 14%/cover;box-shadow:0 0 0 2px var(--card-2),0 0 0 3.5px var(--acc)}
+.say b{display:block;font-size:11.5px;color:var(--acc-2);letter-spacing:.1em;margin-bottom:4px}
+.say p{margin:0;font-family:var(--serif);font-size:15px;line-height:1.65;font-weight:700}
+.lock{margin-top:14px;border:1px dashed var(--acc);border-radius:18px;padding:16px;text-align:center;background:rgba(211,161,58,.05)}
+.lock b{display:block;font-family:var(--serif);font-size:16px}
+.lock ul{margin:10px 0 12px;padding:0;list-style:none;font-size:13px;color:var(--ink-2);line-height:1.9}
+.lock ul li:before{content:"🔒 "}
+.cta{display:grid;gap:8px;margin-top:12px}
+.note{font-size:11.5px;color:var(--ink-3);line-height:1.65;margin:16px 2px 0}
+.ov{position:absolute;inset:0;z-index:50;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .3s}
+.ov.on{opacity:1;pointer-events:auto}
+.sheet{width:100%;background:#16181d;border-radius:22px 22px 0 0;border-top:1px solid var(--line-2);padding:20px 18px calc(env(safe-area-inset-bottom,0px) + 22px)}
+.sheet small{font-size:11px;letter-spacing:.2em;color:var(--acc-2);font-weight:700}
+.sheet b{display:block;font-family:var(--serif);font-size:21px;margin:6px 0 8px}
+.sheet p{margin:0 0 16px;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.toast{position:absolute;left:50%;bottom:40px;transform:translate(-50%,8px);z-index:60;background:#f5f1ea;color:#111;font-size:13.5px;padding:10px 16px;border-radius:999px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* 붓글씨 헤드라인 (East Sea Dokdo) + 붓 명조 보조 (Song Myung) */
+.hero h1{font-family:var(--brush)!important;font-weight:400!important;font-size:37px!important;line-height:1.2!important}
+.type h2{font-family:var(--brush)!important;font-weight:400!important;font-size:36px!important}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="scr on" id="sIn">
+    <div class="top"><button class="ib" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>커리어 사주</b><span class="tag">黃龍 · 도준</span></div>
+    <div class="wrap">
+      <div class="hero" style="background-image:url('img/earth.jpg')"><div><small>CAREER · 일 사주 리포트</small><h1>스펙 말고,<br>타고난 판부터 보자</h1><p>"어디서 일해야 네가 제일 비싸지는지,<br>언제 움직여야 하는지. <b>내가 정리해줄게.</b>"</p></div></div>
+      <div class="card"><h3>지금 나는</h3><div class="chipset" id="sit"><button class="on" data-v="work">직장인</button><button data-v="move">이직 준비</button><button data-v="job">취준생</button><button data-v="free">프리랜서·창업</button><button data-v="study">학생</button></div></div>
+      <div class="card"><h3>이름 (선택) · 성별</h3><input type="text" id="nm" maxlength="8" placeholder="예) 은주"><div class="seg" id="gSeg" style="margin-top:8px"><button class="on" data-v="f">여자</button><button data-v="m">남자</button></div></div>
+      <div class="card"><h3>생년월일</h3>
+        <div class="seg" id="cSeg"><button data-v="s" class="on">양력</button><button data-v="l">음력</button></div>
+        <div class="g3"><select id="by" aria-label="년"></select><select id="bm" aria-label="월"></select><select id="bd" aria-label="일"></select></div>
+        <select id="bh" aria-label="태어난 시" style="margin-top:6px"></select></div>
+      <button class="go" id="goBtn">내 커리어 사주 보기</button>
+      <p class="fine">십성 구조로 적성을, 오행으로 업계를, 2027년 월운으로 움직일 때를 봅니다.</p>
+    </div>
+  </div>
+
+  <div class="scr" id="sLoad" style="background-image:url('img/earth.jpg')">
+    <div class="in"><div class="who">도준 · 黃龍</div><div class="ln" id="ldT"></div>
+      <div class="steps" id="ldS"><div><i>✓</i>원국 여덟 글자 세우기</div><div><i>✓</i>십성으로 일 능력치 계산</div><div><i>✓</i>도움 오행으로 업계 고르기</div><div><i>✓</i>2027년 열두 달 커리어 운 읽기</div></div></div>
+  </div>
+
+  <div class="scr" id="sOut">
+    <div class="top"><button class="ib" id="back2" aria-label="다시 입력"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="whoT">커리어 리포트</b><span class="tag" id="ilju"></span></div>
+    <div class="wrap">
+      <div class="type" style="background-image:url('img/earth.jpg')"><div class="in"><small>너의 일 유형</small><span class="en" id="tEn"></span><h2 id="tNm"></h2><span class="x" id="tX"></span><p id="tDesc"></p><div class="chips" id="tWhy"></div></div></div>
+
+      <div class="sh"><small>능력치</small><b>사주로 본 일 능력치 다섯</b></div>
+      <div class="card radar"><div id="radar"></div><div class="chips" id="rWhy" style="justify-content:center"></div></div>
+
+      <div class="sw"><div><h4>강점</h4><ul id="stL"></ul></div><div class="w"><h4>조심할 습관</h4><ul id="wkL"></ul></div></div>
+
+      <div class="sh"><small>적성</small><b id="jobH">잘 맞는 직무</b></div>
+      <div class="jobs" id="jobs"></div>
+      <div class="sh"><small>업계</small><b id="indH"></b></div>
+      <div class="jobs" id="inds"></div>
+
+      <div class="sh"><small>일하는 방식</small><b>맞는 조직, 맞는 사람</b></div>
+      <div class="kv" id="kv"></div>
+
+      <div class="sh"><small>2027 丁未年</small><b>내년, 언제 움직여야 할까</b></div>
+      <div class="year"><div class="yh"><em id="yGz">丁</em><b id="yT"></b></div><p id="yP"></p><div class="chips" id="yWhy"></div></div>
+      <div class="hm"><table id="hm"></table><div class="lg"><span>진할수록 기운이 강한 달</span><span>★ 가장 좋은 달</span><span style="color:var(--bad)">■ 일지 충 · 변동 주의</span></div></div>
+      <div class="picks" id="picks"></div>
+
+      <div class="sh"><small>지금 10년</small><b id="duH"></b></div>
+      <div class="kv" id="du"></div>
+
+      <div class="say"><div class="av" style="background-image:url('img/earth.jpg')"></div><div><b>도준의 한마디</b><p id="sayT"></p></div></div>
+
+      <div class="lock"><b>2027 커리어 로드맵 전체 열기</b><ul><li>달별 액션 플랜 (지원·면접·협상 타이밍)</li><li>면접·입사일 택일 (시간대까지)</li><li>연봉 협상에서 먹히는 한 문장</li></ul><button class="go" id="payBtn">19,900원 · 로드맵 받기</button></div>
+      <div class="cta"><button class="go sub" id="askBtn">도준에게 커리어 고민 직접 묻기</button><button class="go sub" id="tgBtn">면접·계약 날짜 잡기 (택일)</button></div>
+      <p class="note">체험판입니다. 원국은 실제 만세력(절기 시각 계산)으로 세우고, 적성은 일간 기준 십성 분포(월지 가중), 업계는 신강·신약에 따른 도움 오행, 2027년 월별 운은 월운 십성과 일지·월지의 합·충으로 자동 산출합니다.</p>
+    </div>
+  </div>
+  <div class="ov" id="ov"><div class="sheet"><small>근거 풀이</small><b id="ovT"></b><p id="ovP"></p><button class="go" id="ovX">알겠어</button></div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script src="menuintro.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const Sj=window.Saju; const {GAN,JI,EL,stEl,BR_EL}=Sj;
+const HOURS=['자시 (23:30~01:29)','축시 (01:30~03:29)','인시 (03:30~05:29)','묘시 (05:30~07:29)','진시 (07:30~09:29)','사시 (09:30~11:29)','오시 (11:30~13:29)','미시 (13:30~15:29)','신시 (15:30~17:29)','유시 (17:30~19:29)','술시 (19:30~21:29)','해시 (21:30~23:29)'];
+const ELN=['목(木)','화(火)','토(土)','금(金)','수(水)'];
+const ELC=['var(--wood)','var(--fire)','var(--earth)','var(--metal)','var(--water)'];
+const ZOD=['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
+const GRP=['비겁','식상','재성','관성','인성'];
+const AX=['추진력','표현력','사업감각','조직력','전문성'];
+const TYPE=[
+ {n:'독립 개척자',en:'The Pioneer',d:'남 밑에서 오래 못 버텨. 내 판, 내 사람, 내 속도로 움직일 때 제일 잘해.',jobs:['창업 · 1인 사업','프리랜서','영업 리더','스포츠 · 피트니스','총괄 PM'],st:['밀어붙이는 추진력','경쟁에서 안 밀리는 멘탈','사람을 모으는 리더십'],wk:['혼자 다 하려다 번아웃','위임을 못 해서 병목이 됨']},
+ {n:'크리에이터',en:'The Creator',d:'머릿속에 있는 걸 밖으로 꺼낼 때 돈이 되는 사람. 표현하고 만드는 자리에서 빛나.',jobs:['콘텐츠 · 브랜드 마케터','디자이너','서비스 기획자','강사 · 코치','크리에이터'],st:['아이디어와 표현력','트렌드를 읽는 감','말로 설득하는 힘'],wk:['규칙이 빡빡하면 금방 질림','윗사람과 말로 부딪힘']},
+ {n:'비즈니스 메이커',en:'The Dealmaker',d:'숫자와 결과로 말하는 사람. 기회를 알아보고 거래를 성사시키는 감각이 있어.',jobs:['사업개발 · 영업','재무 · 투자','커머스 · MD','유통 · 무역','스타트업 운영'],st:['현실 감각과 계산','기회를 먼저 보는 눈','성과로 증명하는 힘'],wk:['결과에 쫓겨 사람을 놓침','몸을 갈아 넣는 버릇']},
+ {n:'조직의 리더',en:'The Leader',d:'체계 안에서 올라가는 사람. 책임을 맡길수록 커지고, 직함이 잘 어울려.',jobs:['대기업 · 공공기관','경영지원 · 관리','법무 · 행정','HR · 인사','프로젝트 매니저'],st:['책임감과 신뢰','규칙을 만들고 지키는 힘','위기에서 버티는 인내'],wk:['인정 못 받으면 속으로 곪음','완벽주의로 일을 쥐고 있음']},
+ {n:'전문가',en:'The Expert',d:'한 분야를 깊게 파서 대체 불가가 되는 사람. 자격과 지식이 곧 무기야.',jobs:['연구 · 개발','교육 · 상담','IT 개발','의료 · 약학','데이터 분석'],st:['깊이 있는 전문성','배우는 속도','분석과 통찰'],wk:['생각이 길어 실행이 늦음','완성도에 갇혀 출시를 못 함']}];
+const ROLE=['팀을 이끄는 리드','브랜드·콘텐츠 담당','사업개발 담당','관리자나 PM','전문 담당자'];
+const MIX=[['추진력 있는 ','직접 뛰는 '],['아이디어형 ','말 잘하는 '],['숫자에 밝은 ','실속파 '],['체계적인 ','믿음직한 '],['분석형 ','공부하는 ']];
+const IND=[['교육','출판','패션','헬스케어','친환경'],['미디어 · 엔터','광고','뷰티','플랫폼 IT','공연 · 전시'],['부동산','유통','HR · 중개','건설 · 공간','식품'],['금융','법률','제조 · 하드웨어','보안','컨설팅'],['무역 · 물류','여행 · 항공','콘텐츠 · 웹툰','심리 · 상담','음료 · F&B']];
+const YEAR_TX=[['독립과 경쟁의 해','내 이름을 걸고 뭔가를 해볼 에너지가 커. 대신 동료와 성과를 나눠야 하는 장면이 늘어.'],['표현과 변화의 해','하던 일을 새 방식으로 바꾸고 싶어져. 이직·새 프로젝트·사이드잡 에너지가 강한 해야.'],['성과와 돈의 해','한 만큼 숫자로 찍히는 해. 연봉·인센티브·계약 이야기를 꺼내기 좋아.'],['자리와 책임의 해','승진·발탁·스카우트 운이 들어와. 대신 책임과 압박도 함께 커져.'],['배움과 준비의 해','자격증·공부·문서 운이 좋아. 올해 쌓은 게 다음 판을 열어.']];
+const DU_TX=['내 이름으로 서는 10년. 독립·창업 욕구가 커지는 시기야.','만들고 표현하는 10년. 커리어 방향을 바꾸기 좋은 시기야.','돈과 성과를 쌓는 10년. 벌 수 있을 때 크게 벌어두는 시기야.','자리를 잡는 10년. 직함과 책임이 커지는 시기야.','실력을 쌓는 10년. 전문성과 자격이 나중에 몇 배로 돌아와.'];
+const GLOSS={
+ '십성':'내 일간(태어난 날의 천간)을 기준으로 다른 글자와의 관계를 열 가지로 나눈 거예요. 비겁(나와 같은 기운)·식상(내가 만드는 것)·재성(내가 다루는 것=돈·결과)·관성(나를 다스리는 것=조직·직함)·인성(나를 돕는 것=지식·문서)으로 묶어 일 능력치를 계산했어요.',
+ '월지':'태어난 달의 지지예요. 사회생활·직업 자리를 뜻해서 가장 무겁게(2배) 반영했어요.',
+ '도움 오행':'사주가 강하면 기운을 쓰게 해주는 오행이, 약하면 힘을 보태는 오행이 도움이 돼요. 잘 맞는 업계는 이 오행의 업종에서 골랐어요.',
+ '세운':'그해를 다스리는 간지예요. 2027년은 丁未(정미)년이고, 丁이 내 일간에게 어떤 십성인지가 한 해 커리어의 성격이 돼요.',
+ '월운':'달마다 바뀌는 간지예요. 월운의 십성과 내 일지·월지와의 합·충으로 달별 이직·승진·연봉 운을 계산했어요.',
+ '충':'정반대 지지끼리 부딪히는 관계예요. 일지·월지와 충이 드는 달은 변동(이동·교체)이 생기기 쉬워서, 이직 에너지는 크지만 안정은 약해요.',
+ '합':'지지끼리 서로 끌어당기는 관계예요. 일지와 합이 드는 달은 사람 운과 인정 운이 부드러워요.',
+ '대운':'10년 단위로 바뀌는 큰 흐름이에요. 지금 대운의 천간이 내게 어떤 십성인지가 이 10년의 커리어 테마가 돼요.'};
+function gloss(k,x){ $('ovT').textContent=x||k; $('ovP').textContent=GLOSS[k]||''; $('ov').classList.add('on'); }
+$('ovX').onclick=()=>$('ov').classList.remove('on'); $('ov').onclick=e=>{ if(e.target===$('ov')) $('ov').classList.remove('on'); };
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-g]'); if(b) gloss(b.dataset.g,b.textContent); });
+function why(h){ return h.map(c=>`<button class="${c[2]||''}" data-g="${c[1]}">${c[0]}</button>`).join(''); }
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2000); }
+function show(id){ ['sIn','sLoad','sOut'].forEach(s=>$(s).classList.toggle('on',s===id)); $(id).scrollTop=0; }
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* 입력 */
+let cal='s', gender='f', sit='work';
+(function(){
+  const by=$('by'),bm=$('bm'),bd=$('bd'),bh=$('bh');
+  for(let y=2008;y>=1955;y--) by.add(new Option(y+'년',y,false,y===1996));
+  for(let m=1;m<=12;m++) bm.add(new Option(m+'월',m,false,m===5));
+  window.fillD=()=>{ const n=cal==='s'?new Date(+by.value,+bm.value,0).getDate():30, cur=+bd.value||14; bd.innerHTML=''; for(let d=1;d<=n;d++) bd.add(new Option(d+'일',d,false,d===Math.min(cur,n))); };
+  fillD(); by.onchange=fillD; bm.onchange=fillD;
+  bh.add(new Option('태어난 시 모름','x',true,true)); HOURS.forEach((h,i)=>bh.add(new Option(h,i)));
+  const seg=(id,cb)=>$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{ $(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); cb(b.dataset.v); });
+  seg('cSeg',v=>{ cal=v; fillD(); }); seg('gSeg',v=>gender=v); seg('sit',v=>sit=v);
+  try{ const me=JSON.parse(sessionStorage.getItem('me')||'null'); if(me&&me.y){ cal=me.cal||'s'; gender=me.g||'f';
+    ['cSeg','gSeg'].forEach((id,i)=>$(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.v===[cal,gender][i])));
+    $('nm').value=me.name||''; by.value=me.y; bm.value=me.m; fillD(); bd.value=me.d; bh.value=me.h==null?'x':me.h; } }catch(e){}
+})();
+
+/* 계산 */
+function analyze(me){
+  let sol={y:me.y,m:me.m,d:me.d}; if(me.cal==='l'){ sol=Sj.lunarToSolar(me.y,me.m,me.d,false); if(!sol) return null; }
+  const P=Sj.pillars(sol.y,sol.m,sol.d,me.h), dm=P.d[0], de=stEl(dm), st=Sj.strength(P), cnt=Sj.elCount(P);
+  const raw=[0,0,0,0,0], src=[[],[],[],[],[]];
+  const add=(g,w,lab)=>{ raw[g]+=w; src[g].push(lab); };
+  add(Sj.rel(dm,stEl(P.y[0])),1,'년간 '+GAN[P.y[0]]); add(Sj.rel(dm,stEl(P.m[0])),1,'월간 '+GAN[P.m[0]]);
+  add(Sj.relBranch(dm,P.y[1]),1,'년지 '+JI[P.y[1]]); add(Sj.relBranch(dm,P.m[1]),2,'월지 '+JI[P.m[1]]); add(Sj.relBranch(dm,P.d[1]),1.5,'일지 '+JI[P.d[1]]);
+  if(P.h){ add(Sj.rel(dm,stEl(P.h[0])),1,'시간 '+GAN[P.h[0]]); add(Sj.relBranch(dm,P.h[1]),1,'시지 '+JI[P.h[1]]); }
+  const mg=Sj.relBranch(dm,P.m[1]);
+  const order=[0,1,2,3,4].sort((a,b)=>raw[b]-raw[a]||(b===mg)-(a===mg)||a-b);
+  const main=order[0], sub=order[1], low=order[4];
+  const cands=st.strong?[(de+1)%5,(de+2)%5,(de+3)%5]:[(de+4)%5,de]; let fav=cands[0]; cands.forEach(e=>{ if(cnt[e]<cnt[fav]) fav=e; });
+  const mx=Math.max(...raw); const stat=raw.map(v=>Math.round(30+70*v/mx));
+  return {me,sol,P,dm,de,st,cnt,raw,src,main,sub,low,fav,stat,mg};
+}
+function months2027(A){
+  const {dm,P,st}=A; const out=[];
+  for(let m=1;m<=12;m++){ const mp=Sj.monthPillarAt(2027,m,20); const tg=Sj.tgStem(dm,mp[0]), g=Sj.rel(dm,stEl(mp[0])), gb=Sj.relBranch(dm,mp[1]);
+    const fav=Sj.favorable(st,g), chD=Sj.isChung(mp[1],P.d[1]), chM=Sj.isChung(mp[1],P.m[1]), hapD=Sj.isHap(mp[1],P.d[1]);
+    const has=k=>(g===k?1:0)+(gb===k?.6:0);
+    let move=48+14*has(1)+6*has(2)+(chD?10:0)+(chM?8:0)+(fav?6:0)-4*has(3);
+    let promo=48+16*has(3)+8*has(4)+(fav?6:0)-(tg==='상관'?10:0)-(chD?8:0)+(hapD?6:0);
+    let money=48+16*has(2)+6*has(1)+(fav?5:0)-(tg==='겁재'?12:0)-(chD?5:0);
+    const c=v=>Math.max(15,Math.min(97,Math.round(v)));
+    out.push({m,mp,tg,g,move:c(move),promo:c(promo),money:c(money),chD,chM,hapD}); }
+  return out;
+}
+function radarSVG(v){
+  const R=100,cx=150,cy=128; const pt=(i,r)=>{ const a=(-90+i*72)*Math.PI/180; return [cx+r*Math.cos(a),cy+r*Math.sin(a)]; };
+  let g=''; [0.25,0.5,0.75,1].forEach(k=>{ g+=`<polygon points="${[0,1,2,3,4].map(i=>pt(i,R*k).join(',')).join(' ')}" fill="none" stroke="rgba(255,255,255,${k===1?.16:.07})"/>`; });
+  [0,1,2,3,4].forEach(i=>{ const [x,y]=pt(i,R); g+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(255,255,255,.07)"/>`; });
+  const poly=v.map((s,i)=>pt(i,R*s/100).join(',')).join(' ');
+  g+=`<polygon id="rp" points="${[0,1,2,3,4].map(i=>pt(i,2).join(',')).join(' ')}" data-to="${poly}" fill="rgba(211,161,58,.28)" stroke="#f0c96a" stroke-width="2" stroke-linejoin="round" style="transition:all 1s"/>`;
+  v.forEach((s,i)=>{ const [x,y]=pt(i,R+22); const [vx,vy]=pt(i,R*s/100); g+=`<circle cx="${vx}" cy="${vy}" r="3.2" fill="#f0c96a"/><text x="${x}" y="${y-2}" text-anchor="middle">${AX[i]}</text><text class="v" x="${x}" y="${y+14}" text-anchor="middle">${s}</text>`; });
+  return `<svg viewBox="0 0 300 262">${g}</svg>`;
+}
+function render(A){
+  const {me,P,dm,de,st,raw,src,main,sub,low,fav,stat}=A; const T=TYPE[main], nm=me.name||'너';
+  $('whoT').textContent=me.name?`${me.name}의 커리어 리포트`:'커리어 리포트'; $('ilju').textContent=`${GAN[dm]}${JI[P.d[1]]}일주`;
+  $('tEn').textContent=T.en; $('tNm').textContent=T.n; $('tX').textContent=`${MIX[sub][0]}${T.n} · ${GRP[main]} 중심, ${GRP[sub]} 보조`;
+  $('tDesc').textContent=T.d;
+  $('tWhy').innerHTML=why([[`${GRP[main]} ${raw[main]}`,'십성'],[`월지 ${JI[P.m[1]]} = ${GRP[A.mg]}`,'월지'],[st.label,'십성']]);
+  $('radar').innerHTML=radarSVG(stat); requestAnimationFrame(()=>setTimeout(()=>{ const p=document.getElementById('rp'); p.setAttribute('points',p.dataset.to); },80));
+  $('rWhy').innerHTML=why([0,1,2,3,4].filter(i=>src[i].length).map(i=>[`${AX[i]} ← ${src[i].join(', ')}`,'십성']));
+  const lowTx=raw[low]===0?`${AX[low]}(${GRP[low]})이 원국에 없어. 그 역할은 사람으로 채워.`:`${AX[low]}이 제일 약해. 이 부분은 파트너에게 맡겨.`;
+  $('stL').innerHTML=T.st.map(x=>`<li>${x}</li>`).join('')+(sub!==main?`<li>${TYPE[sub].st[0]}</li>`:'');
+  $('wkL').innerHTML=T.wk.map(x=>`<li>${x}</li>`).join('')+`<li>${lowTx}</li>`;
+  const jobs=[...T.jobs.slice(0,4),...TYPE[sub].jobs.slice(0,2)];
+  $('jobs').innerHTML=jobs.map((j,i)=>`<span class="${i<2?'hi':''}">${j}</span>`).join('');
+  $('jobH').textContent=sit==='free'?'혼자 해도 잘 되는 분야':'잘 맞는 직무';
+  $('indH').textContent=`${ELN[fav]} 기운이 도와주는 업계`;
+  $('inds').innerHTML=IND[fav].map((j,i)=>`<span class="${i<2?'hi':''}">${j}</span>`).join('')+`<div class="chips" style="width:100%">${why([[`도움 오행 ${EL[fav]}`,'도움 오행']])}</div>`;
+  // org & people
+  const org=(st.strong&&(main===0||main===1))?['스타트업 · 자율형 조직','결재 라인이 짧고 내가 주도할 수 있는 곳에서 속도가 나.']:(main===3||main===4)?['체계 있는 대기업 · 공공','역할과 평가 기준이 분명한 곳에서 실력이 쌓여.']:main===2?['성과 보상이 확실한 곳','인센티브·지분처럼 한 만큼 받는 구조가 동기부여가 돼.']:['팀 단위로 움직이는 중견 조직','작은 팀의 핵심 역할을 맡을 때 제일 편해.'];
+  const helpEl=(de+4)%5, clashZ=(P.y[1]+6)%12, partnerEl=low;
+  $('kv').innerHTML=[
+    ['組',org[0],org[1]+(st.strong?' 주도권을 쥐어야 속도가 나는 타입이야.':' 좋은 사수와 팀이 있을 때 실력이 두 배가 되는 타입이야.')],
+    ['師','키워주는 상사',`${ELN[helpEl]} 일간인 사람. 너를 받쳐주는 기운(인성)이라, 이런 상사 밑에서 크게 배워.`],
+    ['伴','같이 가면 좋은 동료',`${ELN[(de+partnerEl)%5]} 기운이 강한 사람. 너한테 비어 있는 ${AX[partnerEl]}을 채워줘.`],
+    ['衝','속도가 다른 사람',`${ZOD[clashZ]}띠. 네 띠와 충이라 일하는 템포가 달라. 역할을 먼저 나누면 오히려 좋은 콤비가 돼.`]
+  ].map(([i,b,p])=>`<div><i style="color:var(--acc-2)">${i}</i><div><b>${b}</b><p>${p}</p></div></div>`).join('');
+  // 2027
+  const yg=Sj.rel(dm,stEl(3)), yTg=Sj.tgStem(dm,3), yb=7; const Y=YEAR_TX[yg];
+  $('yGz').textContent='丁未'; $('yT').textContent=`2027년은 ${Y[0]}`;
+  const yCh=Sj.isChung(yb,P.d[1]), yHap=Sj.isHap(yb,P.d[1]), yChM=Sj.isChung(yb,P.m[1]);
+  $('yP').textContent=Y[1]+(yCh?' 게다가 未가 네 일지와 부딪혀서, 자리 이동이 실제로 일어날 가능성이 커.':yChM?' 未가 네 월지(직업 자리)와 부딪혀서 부서·회사 변동 신호가 있어.':yHap?' 未가 네 일지와 합이라, 사람을 통해 기회가 들어와.':'');
+  $('yWhy').innerHTML=why([[`세운 丁 = ${yTg}`,'세운'],...(yCh?[[`未${JI[P.d[1]]} 충`,'충','bad']]:[]),...(yChM?[[`월지 ${JI[P.m[1]]}와 충`,'충','bad']]:[]),...(yHap?[[`未${JI[P.d[1]]} 합`,'합','g']]:[])]);
+  const M=months2027(A); const rows=sit==='job'||sit==='study'?[['promo','합격·입사'],['move','새 출발'],['money','첫 연봉']]:sit==='free'?[['money','수입'],['move','새 판 벌리기'],['promo','인정·계약']]:[['move','이직'],['promo','승진·인정'],['money','연봉·성과']];
+  const best={}; rows.forEach(([k])=>{ best[k]=[...M].sort((a,b)=>b[k]-a[k])[0].m; });
+  let h='<tr><th></th>'+M.map(x=>`<th>${x.m}</th>`).join('')+'</tr>';
+  rows.forEach(([k,l])=>{ h+=`<tr><th class="r">${l}</th>`+M.map(x=>`<td class="${best[k]===x.m?'best':''} ${x.chD&&k==='promo'?'warn':''}" style="--a:${(0.06+0.8*Math.max(0,x[k]-35)/62).toFixed(2)}" title="${x.m}월 ${x[k]}"></td>`).join('')+'</tr>'; });
+  $('hm').innerHTML=h;
+  const worst=[...M].sort((a,b)=>(a.promo+a.money)-(b.promo+b.money))[0];
+  const pk=rows.map(([k,l])=>{ const x=M.find(z=>z.m===best[k]); return `<div><span>${l}</span><b>2027년 ${x.m}월</b><small>${GAN[x.mp[0]]}${JI[x.mp[1]]}월 · ${x.tg}${x.hapD?' · 일지 합':x.chD?' · 변동':''}</small></div>`; }).join('');
+  $('picks').innerHTML=pk+`<div><span class="x">조심</span><b>2027년 ${worst.m}월</b><small>${GAN[worst.mp[0]]}${JI[worst.mp[1]]}월 · ${worst.tg}${worst.chD?' · 일지 충':''}</small></div>`;
+  // 대운
+  const DU=Sj.daeun(P,me.g==='m'); const age=2026-A.sol.y+1; let cur=DU.list[0]; DU.list.forEach(x=>{ if(age>=x.age&&age<x.age+10) cur=x; });
+  const nxt=DU.list[DU.list.indexOf(cur)+1]; const cg=Sj.rel(dm,stEl(cur.s));
+  $('duH').textContent=`${GAN[cur.s]}${JI[cur.b]} 대운 · ${cur.age}~${cur.age+9}세`;
+  $('du').innerHTML=`<div><i style="color:var(--acc-2)">${GAN[cur.s]}</i><div><b>지금은 ${GRP[cg]}의 10년</b><p>${DU_TX[cg]} ${Sj.favorable(st,cg)?'사주가 반기는 흐름이라 밀어붙여도 좋아.':'힘을 빼는 흐름이라 체력과 속도 조절이 먼저야.'}</p><div class="chips">${why([[`대운 ${GAN[cur.s]} = ${GRP[cg]}`,'대운']])}</div></div></div>`+(nxt?`<div><i style="color:var(--ink-3)">${GAN[nxt.s]}</i><div><b>${nxt.age}세부터는 ${GRP[Sj.rel(dm,stEl(nxt.s))]}의 10년</b><p>${DU_TX[Sj.rel(dm,stEl(nxt.s))]}</p></div></div>`:'');
+  const bm=best[rows[0][0]];
+  const lead={work:`지금 자리에서 버틸지 고민되지? ${bm}월 전까진 칼 갈아 둬.`,move:`이직은 2027년 ${bm}월이 제일 좋아. 그 전에 포트폴리오부터 정리해.`,job:`합격운은 ${bm}월에 제일 세. 그 전 석 달이 승부야.`,free:`수입이 제일 크게 들어오는 건 ${bm}월이야. 그때 가격을 올려.`,study:`${bm}월에 기회가 와. 지금은 ${AX[main]}을 키우는 게 먼저야.`}[sit];
+  $('sayT').textContent=`${nm==='너'?'':nm+', '}너는 ${T.n} 쪽이야. ${IND[fav][0]}이나 ${IND[fav][1]} 쪽에서 ${ROLE[main]} 역할을 맡으면 값이 제일 비싸져. ${lead}`;
+}
+$('goBtn').onclick=async()=>{
+  const me={name:$('nm').value.trim(),g:gender,cal,y:+$('by').value,m:+$('bm').value,d:+$('bd').value,h:$('bh').value==='x'?null:+$('bh').value};
+  const A=analyze(me); if(!A){ toast('없는 음력 날짜예요'); return; }
+  try{ const old=JSON.parse(sessionStorage.getItem('me')||'{}'); sessionStorage.setItem('me',JSON.stringify(Object.assign(old,me))); }catch(e){}
+  render(A); show('sLoad');
+  const lines=['이력서 말고,\n네 사주부터 볼게.',`…월지에 ${GRP[A.mg]}이 앉았네.`,`${TYPE[A.main].n} 쪽이야.\n역시.`];
+  const steps=$('ldS').children; [...steps].forEach(s=>s.classList.remove('on'));
+  for(let i=0;i<lines.length;i++){ $('ldT').style.opacity=0; await wait(250); $('ldT').innerText=lines[i]; $('ldT').style.opacity=1; steps[i]&&steps[i].classList.add('on'); if(i===2) steps[3].classList.add('on'); await wait(1300); }
+  show('sOut');
+};
+$('back2').onclick=()=>show('sIn');
+$('back1').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+$('payBtn').onclick=()=>toast('체험판이라 결제는 여기까지예요');
+$('askBtn').onclick=()=>{ location.href='chat.html?h=earth&from=career'; };
+$('tgBtn').onclick=()=>{ if(window.MenuIntro) MenuIntro.go('taegil.html'); else location.href='taegil.html'; };
+
+/* 첫 화면 캐릭터 인트로 */
+MenuIntro.play({src:'v/menu/career.mp4',poster:'img/earth.jpg',who:'도준 · 黃龍',title:'커리어 사주',subs:[[0,'스펙 말고,'],[1.8,'타고난 판부터 보자.'],[4.3,'네가 제일 비싸지는 자리.']]});
+</script>
+<script src="reveal.js"></script>
+<script src="archive.js"></script>
+<script src="depth3d.js"></script>
+<script>window.Depth3D&&setTimeout(()=>Depth3D.watch('.hero,#heroP,.ch,#sLoad'),200);</script>
+</body>
+</html>

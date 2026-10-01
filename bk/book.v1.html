@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>사주에 빈칸이 있어서, 신이 찾아왔다 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@400;500;700;900&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 오방사주 세계관 책 — 제1권 《사주에 빈칸이 있어서, 신이 찾아왔다》
+   한 장씩 넘기는 책(왼쪽 모서리를 축으로 3D로 넘어감 · 손가락으로 끌어 넘기기 · 종이 소리 합성).
+   그림은 깊이 지도로 살아 움직이고(Depth3D), 신들은 기존 영상(v/rv_*.mp4 등)을 무음 반복. 크레딧 사용 없음.
+   각진 면(동그라미만 예외) · 제목 끝 부호 없음 · 본문에도 물음표/느낌표/말줄임표 없음. */
+:root{
+  --brush:'OBrush','Song Myung',serif; --bmj:'Song Myung','Noto Serif KR',serif; --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --paper:#efe6d3; --paper2:#e6dbc4; --ink:#2a2018; --ink2:#5b4c3c; --ink3:#8d7c67; --red:#b23a2c; --gold:#b8862f;
+  --c:#b23a2c; color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#0d0a08;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word;user-select:none;-webkit-user-select:none}
+button{font-family:inherit;cursor:pointer}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:radial-gradient(120% 80% at 50% 40%,#2a211a,#0d0a08 75%);overflow:hidden}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
+.top{position:absolute;left:0;right:0;top:0;z-index:60;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 8px;pointer-events:none}
+.top>*{pointer-events:auto}
+.ib{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,240,220,.2);background:rgba(20,15,11,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;place-items:center;color:#f1e6d2}
+.ib svg{width:17px;height:17px}
+.top b{flex:1;min-width:0;font-size:11.5px;font-weight:800;letter-spacing:.16em;color:rgba(241,230,210,.75);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* 책 */
+.book{position:absolute;left:12px;right:12px;top:calc(env(safe-area-inset-top,0px) + 54px);bottom:calc(env(safe-area-inset-bottom,0px) + 54px);perspective:2200px}
+.book::before{content:"";position:absolute;inset:6px -4px -6px 4px;background:#cdbf9f;box-shadow:0 26px 50px rgba(0,0,0,.55)} /* 뒤에 쌓인 종이 두께 */
+.leaf{position:absolute;inset:0;transform-origin:0 50%;transform-style:preserve-3d;transition:transform .85s cubic-bezier(.3,.7,.2,1);will-change:transform}
+.leaf.turned{transform:rotateY(-178deg)}
+.leaf.drag{transition:none}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;background:var(--paper);
+  background-image:radial-gradient(120% 90% at 100% 50%,rgba(0,0,0,0) 60%,rgba(80,55,25,.12)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
+.face::after{content:"";position:absolute;top:0;bottom:0;left:0;width:26px;background:linear-gradient(90deg,rgba(60,40,15,.22),rgba(60,40,15,0));pointer-events:none;z-index:9} /* 제본 쪽 그늘 */
+.back{transform:rotateY(180deg);background:var(--paper2)}
+.back::after{left:auto;right:0;background:linear-gradient(270deg,rgba(60,40,15,.22),rgba(60,40,15,0))}
+.shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.28));opacity:0;transition:opacity .85s;z-index:10}
+.leaf.moving .shade{opacity:1}
+
+/* 페이지 안 */
+.plate{position:relative;height:49%;background:#1a1410 center/cover no-repeat;overflow:hidden}
+.plate video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
+.plate video.on{opacity:1}
+.plate::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 62%,rgba(239,230,211,.0) 80%,var(--paper) 100%);pointer-events:none;z-index:3}
+.plate .cap{position:absolute;left:16px;top:14px;z-index:4;font-size:10.5px;font-weight:800;letter-spacing:.22em;color:rgba(255,244,228,.85);text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.txt{position:relative;padding:2px 22px 30px 26px;height:51%;display:flex;flex-direction:column}
+.ch{font-size:11px;font-weight:800;letter-spacing:.22em;color:var(--c)}
+.hd{margin:5px 0 8px;font-family:var(--brush);font-weight:400;font-size:28px;line-height:1.15;color:var(--ink)}
+.bd{font-family:var(--serif);font-weight:500;font-size:14px;line-height:1.75;color:var(--ink)}
+.bd p{margin:0 0 6px;opacity:0;transform:translateY(6px);transition:opacity .7s,transform .7s}
+.cur .bd p{opacity:1;transform:none}
+.cur .bd p:nth-child(2){transition-delay:.25s}.cur .bd p:nth-child(3){transition-delay:.5s}.cur .bd p:nth-child(4){transition-delay:.75s}.cur .bd p:nth-child(5){transition-delay:1s}
+.pg{position:absolute;right:18px;bottom:12px;font-family:var(--serif);font-size:11px;color:var(--ink3);letter-spacing:.1em}
+.run{position:absolute;left:26px;bottom:12px;font-size:10px;color:var(--ink3);letter-spacing:.14em}
+/* 신 소개 */
+.god .plate{height:54%}
+.god .txt{height:46%}
+.prof{display:flex;flex-wrap:wrap;gap:5px;margin:-2px 0 9px}
+.prof i{font-style:normal;font-size:11.5px;font-weight:700;padding:3px 7px;background:rgba(60,40,15,.07);color:var(--ink2)}
+.prof i:first-child{background:var(--c);color:#fff}
+.q{margin-top:auto;margin-bottom:4px;padding-left:12px;border-left:2px solid var(--c);font-family:var(--bmj);font-size:17px;line-height:1.5;color:var(--ink)}
+.god .hd{display:flex;align-items:baseline;gap:9px}
+.god .hd small{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--c);letter-spacing:.08em}
+/* 표지 */
+.cover .face{background:#120e0b}
+.cover .plate{position:absolute;inset:0;height:auto}
+.cover .plate::after{background:linear-gradient(180deg,rgba(10,8,6,.1) 0%,rgba(10,8,6,0) 35%,rgba(10,8,6,.92) 78%)}
+.cover .ct{position:absolute;left:24px;right:24px;bottom:56px;z-index:5;color:#f4ead8}
+.cover .ct small{display:block;font-size:11px;font-weight:800;letter-spacing:.26em;color:#e3b866}
+.cover .ct h1{margin:12px 0 10px;font-family:var(--brush);font-weight:400;font-size:40px;line-height:1.18}
+.cover .ct p{margin:0;font-family:var(--bmj);font-size:15px;color:rgba(244,234,216,.75)}
+.cover .mark{position:absolute;right:22px;top:66px;z-index:5;width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(227,184,102,.8);display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:22px;color:#e3b866}
+.cover .hint{position:absolute;left:0;right:0;bottom:18px;z-index:5;text-align:center;font-size:11.5px;color:rgba(244,234,216,.55);letter-spacing:.08em;animation:hint 2.4s ease-in-out infinite}
+@keyframes hint{50%{transform:translateX(-6px);opacity:.9}}
+/* 네 사람 · 작은 신 · 사용법 */
+.g8{position:relative;height:49%;background:#17120e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.g8 .cap{position:absolute;left:16px;top:14px;font-size:10.5px;font-weight:800;letter-spacing:.22em;color:rgba(255,244,228,.7)}
+.g8g{display:grid;grid-template-columns:repeat(4,52px);gap:8px}
+.g8g i{height:62px;display:grid;place-items:center;font-style:normal;font-family:var(--serif);font-weight:900;font-size:28px;color:var(--gc);background:rgba(255,244,228,.05);box-shadow:inset 0 0 0 1px rgba(255,244,228,.1);opacity:0;transform:translateY(8px)}
+.cur .g8g i{animation:gin .6s var(--d) ease forwards}
+@keyframes gin{to{opacity:1;transform:none}}
+.g8g i.emp{color:rgba(227,184,102,.9);font-family:var(--sans);font-size:20px;box-shadow:inset 0 0 0 1.5px rgba(227,184,102,.7);background:transparent}
+.cur .g8g i.emp{animation:gin .6s var(--d) ease forwards,pulse 1.6s 1.4s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:inset 0 0 0 1.5px rgba(227,184,102,.2),0 0 18px rgba(227,184,102,.35)}}
+.g8l{display:flex;gap:6px}
+.g8l span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:13px;color:#fff;background:var(--gc)}
+.g8l span.emp{background:transparent;color:rgba(227,184,102,.9);box-shadow:inset 0 0 0 1.5px rgba(227,184,102,.7);border:0}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);height:49%;gap:2px;background:#1a1410}
+.trio div{position:relative;background:#222 center 22%/cover no-repeat}
+.trio div b{position:absolute;left:0;right:0;bottom:0;padding:18px 8px 7px;font-size:12px;font-weight:700;color:#fff;text-align:center;background:linear-gradient(0deg,rgba(0,0,0,.75),rgba(0,0,0,0))}
+.minis{height:44%;display:flex;align-items:center;justify-content:center;gap:4px;padding:18px 10px 0;background:radial-gradient(70% 70% at 50% 60%,#fff8ec,var(--paper) 70%)}
+.minis i{width:19%;aspect-ratio:1;border-radius:50%;background:#f3ede3 50% 14%/185% no-repeat;box-shadow:0 0 0 3px var(--paper),0 8px 16px rgba(60,40,15,.18);animation:bob 2.6s ease-in-out infinite}
+.minis i:nth-child(2){animation-delay:.3s}.minis i:nth-child(3){animation-delay:.6s}.minis i:nth-child(4){animation-delay:.9s}.minis i:nth-child(5){animation-delay:1.2s}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.how{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.how li{display:grid;grid-template-columns:26px 1fr;gap:8px;font-family:var(--serif);font-size:13.5px;line-height:1.55}
+.how li em{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;font-family:var(--sans);font-size:11.5px;font-weight:800;display:grid;place-items:center;margin-top:1px}
+.how li b{font-weight:700}
+.end{margin-top:10px;font-family:var(--bmj);font-size:17px;color:var(--red)}
+.cta{display:flex;gap:6px;margin-top:auto;margin-bottom:0;padding-top:10px}
+.cta button{flex:1;height:46px;border:0;background:var(--ink);color:#f4ead8;font-size:13.5px;font-weight:800}
+.cta button.gh{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(60,40,15,.3)}
+.bk2 .front{background:#16110d}
+.nx{position:absolute;inset:0;color:#f1e6d2;display:flex;flex-direction:column;justify-content:flex-end;padding:0 28px 60px}
+.bk2 small{font-size:11px;font-weight:800;letter-spacing:.24em;color:#e3b866}
+.bk2 h2{margin:12px 0 10px;font-family:var(--brush);font-weight:400;font-size:34px;line-height:1.2}
+.bk2 p{margin:0;font-family:var(--serif);font-size:14px;line-height:1.8;color:rgba(241,230,210,.7)}
+
+/* 아래 막대 · 목차 */
+.bar{position:absolute;left:0;right:0;bottom:0;z-index:60;height:calc(env(safe-area-inset-bottom,0px) + 50px);padding:0 16px env(safe-area-inset-bottom,0px);display:flex;align-items:center;gap:12px;color:rgba(241,230,210,.7);font-size:12px}
+.bar .nv{width:34px;height:34px;border:1px solid rgba(255,240,220,.2);background:transparent;color:#f1e6d2;display:grid;place-items:center}
+.bar .nv:disabled{opacity:.25}
+.bar .nv svg{width:16px;height:16px}
+.prog{flex:1;height:2px;background:rgba(255,240,220,.15);position:relative}
+.prog i{position:absolute;left:0;top:0;bottom:0;background:#e3b866;transition:width .6s}
+.toc{position:absolute;inset:0;z-index:80;background:rgba(10,8,6,.92);display:none;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 70px) 26px 30px;color:#f1e6d2}
+.toc.on{display:flex}
+.toc small{font-size:11px;font-weight:800;letter-spacing:.24em;color:#e3b866}
+.toc h3{margin:8px 0 18px;font-family:var(--brush);font-weight:400;font-size:28px}
+.toc button{display:flex;justify-content:space-between;gap:12px;width:100%;padding:12px 0;border:0;border-bottom:1px solid rgba(255,240,220,.1);background:none;color:#f1e6d2;font-family:var(--serif);font-size:15px;text-align:left}
+.toc button span{color:rgba(241,230,210,.45);font-family:var(--sans);font-size:12px}
+.toc button.on{color:#e3b866}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="runT">오방사주 세계관 · 제1권</b><button class="ib" id="tocB" aria-label="목차"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h9"/></svg></button></div>
+  <div class="book" id="book"></div>
+  <div class="bar"><button class="nv" id="prev" aria-label="이전 장"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="prog"><i id="prog"></i></div><span id="pgN">1 / 15</span><button class="nv" id="next" aria-label="다음 장"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></div>
+  <div class="toc" id="toc"><small>목차</small><h3>사주에 빈칸이 있어서, 신이 찾아왔다</h3><div id="tocL"></div></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+/* 페이지: t=종류, img=그림(깊이 지도 있으면 dep), vid=무음 반복 영상 */
+const GOD=(k,n,h,el,dir,col,job,c,body,q)=>({t:'god',k,n,h,el,dir,col,job,c,body,q,img:`img/${k}.jpg`,dep:true,pos:'.5 .18',vid:`v/rv_${k}.mp4`,toc:`${h} ${n}`});
+const PAGES=[
+  {t:'cover',img:'img/intro0.jpg',dep:true,pos:'.5 .4',toc:'표지'},
+  {t:'text',ch:'프롤로그',hd:'지도에 없는 문',img:'img/intro0.jpg',dep:true,pos:'.5 .45',vid:'v/op_take.mp4',cap:'PROLOGUE',body:[
+    '서울 어딘가, 지도에는 없는 골목이 있다.',
+    '그 끝에 붉은 문이 하나 서 있는데, 이상하게도 아무에게나 보이지 않는다.',
+    '문이 보이는 사람은 딱 한 부류다. 사주에 한 칸이 비어 있는 사람.',
+    '그날 밤, 당신 눈에 그 문이 보였다.']},
+  {t:'grid8',ch:'제1장',hd:'여덟 글자와 빈칸',cap:'CHAPTER 1',body:[
+    '사람은 태어나는 순간 여덟 글자를 받는다. 해와 달과 날과 시가 새겨 준 글자.',
+    '그 글자들은 나무, 불, 흙, 쇠, 물. 다섯 기운으로 이루어져 있다.',
+    '여덟 칸에 다섯 기운을 고르게 담고 태어나는 사람은 거의 없다. 어떤 기운은 넘치고, 어떤 기운은 한 칸도 없다.',
+    '옛사람들은 그 빈칸을 두고 이렇게 말했다. 비어 있는 곳으로 운이 샌다고.']},
+  {t:'text',ch:'제2장',hd:'다섯 방위의 신들',img:'img/kv_house.jpg',dep:true,cap:'CHAPTER 2',body:[
+    '아주 오래전부터 다섯 방위를 지키는 신들이 있었다. 동쪽의 청룡, 남쪽의 주작, 가운데의 황룡, 서쪽의 백호, 북쪽의 현무.',
+    '사람들은 그들을 오방신이라 불렀고, 집을 짓든 길을 떠나든 먼저 다섯 방위에 인사를 올렸다.',
+    '시간이 흘러 사람들이 그 이름을 잊자, 신들은 사라지는 대신 모습을 바꾸기로 했다.',
+    '사람의 얼굴을 하고, 사람의 도시에서, 빈칸이 있는 사람을 기다리기로.']},
+  GOD('wood','하람','靑龍','木','동쪽','초록','새 시작과 다음 인연','#3f8f62',
+    ['동쪽 문을 지키는 나무의 신. 봄보다 먼저 깨어나 새싹이 올라올 자리를 고른다.','말수가 적고 다정하다. 새로 시작하려는 사람 곁에 조용히 앉아 있다가, 망설이는 발끝을 한 번 밀어 준다.'],'늦게 피는 꽃도 봄은 봄이야'),
+  GOD('fire','이안','朱雀','火','남쪽','빨강','고백과 결단','#c0402c',
+    ['남쪽 하늘을 나는 불의 신. 사람들 마음속에서 꺼져 가는 불씨를 귀신같이 알아챈다.','나른하고 무심한 척하지만, 고백과 결단의 순간에는 누구보다 뜨겁다.'],'망설이면 불 꺼진다. 오늘은 네가 먼저 가'),
+  GOD('earth','도준','黃龍','土','가운데','노랑','안정과 관계','#a9791f',
+    ['다섯 방위의 한가운데를 지키는 흙의 신. 흔들리는 것들을 붙잡아 제자리를 찾아 준다.','무뚝뚝하지만, 가장 오래 곁에 남는 쪽은 언제나 도준이다.'],'흔들려도 돼. 발밑은 내가 잡고 있을게'),
+  GOD('metal','시온','白虎','金','서쪽','흰색','정리와 결단','#6f7885',
+    ['서쪽 문을 지키는 쇠의 신. 끊어야 할 것과 남겨야 할 것을 한눈에 가른다.','차갑고 건조한 목소리로 정곡을 찌르지만, 그 칼끝은 언제나 사람을 살리는 쪽을 향한다.'],'안 맞는 건 끊어. 비워야 들어와'),
+  GOD('water','재이','玄武','水','북쪽','남색','속마음과 지혜','#2f4a7a',
+    ['북쪽 깊은 물을 지키는 물의 신. 사람이 말하지 못한 속마음이 흘러드는 곳에 산다.','조용히 듣고, 오래 기억하고, 꼭 필요한 순간에만 입을 연다.'],'말 안 해도 알아. 그래도 한 번은 말해 줘'),
+  {t:'text',ch:'제3장',hd:'살롱의 주인',img:'img/seoha.jpg',dep:true,pos:'.5 .25',cap:'CHAPTER 3',body:[
+    '신들은 사람에게 직접 말을 걸 수 없다. 그래서 문 안쪽에는 신의 말을 옮기는 사람이 한 명 있다.',
+    '한남동 어느 건물 꼭대기, 간판 없는 살롱의 주인 서하.',
+    '서하는 당신의 여덟 글자를 펼쳐 놓고 빈칸을 찾는다. 그리고 그 자리를 채워 줄 신을 불러 앉힌다.',
+    '"네 사주, 한 칸이 비어 있어. 그 빈자리, 신이 채워 줄게"']},
+  {t:'trio',ch:'제4장',hd:'문 너머의 방들',cap:'CHAPTER 4',people:[['img/tarot/mujin.jpg','무진 · 카드방'],['img/taeo/base.jpg','태오 · 도화'],['img/halmae.jpg','할매 · 정통']],body:[
+    '살롱 말고도 문 너머에는 불이 켜진 방이 몇 개 더 있다.',
+    '한밤에만 여는 카드방에는 타로를 읽는 무진이, 복숭아꽃 향이 나는 펜트하우스에는 도화를 보는 태오가, 오래된 한옥에는 정통 사주를 짚는 할매가 산다.',
+    '모두 신들과 오래 알고 지낸 사이다. 어느 방에 먼저 들를지는 당신 마음이다.']},
+  {t:'mini',ch:'제5장',hd:'작아진 신들',cap:'CHAPTER 5',body:[
+    '사람 곁에 오래 머무는 데는 힘이 든다. 그래서 신들은 낮이 되면 손바닥만 하게 작아진다.',
+    '작아진 신들은 점괘통을 흔들어 괘를 뽑고, 부적 속에 들어가 살고, 하루씩 돌아가며 당번을 서서 도장을 찍어 준다.',
+    '크게 보면 신이고, 작게 보면 친구다.']},
+  {t:'text',ch:'제6장',hd:'뒷골목의 묘당',img:'img/cat/madam.jpg',pos:'.5 .22',cap:'CHAPTER 6',vid:'v/cat/madam.mp4',body:[
+    '신당 뒷골목, 초가 녹아내리는 작은 가게에는 고양이들이 산다.',
+    '신들의 심부름을 하다 눌러앉았다는 여섯 마리. 그중 가장 아름다운 흰 고양이가 이곳의 마담이다.',
+    '고양이들은 큰 운명 대신 작은 점을 본다. 이번 달의 연애, 간밤의 꿈, 그 사람의 속마음 같은 것들.']},
+  {t:'how',ch:'에필로그',hd:'빈칸을 채우는 법',img:'img/op_take_end.jpg',dep:true,pos:'.5 .5',cap:'EPILOGUE',toc:'에필로그 · 빈칸을 채우는 법'},
+  {t:'next',toc:'제2권 예고'}];
+const N=PAGES.length;
+
+function plate(p){ const bp=(p.pos||'.5 .3').split(' ').map(v=>v*100+'%').join(' '); return `<div class="plate" data-img="${p.img}" ${p.dep?`data-dep="1"`:''} data-pos="${p.pos||'.5 .3'}" style="background-image:url('${p.img}');background-position:${bp}">${p.vid?`<video muted loop playsinline preload="none" data-src="${p.vid}" style="object-position:${bp}"></video>`:''}${p.cap?`<span class="cap">${p.cap}</span>`:''}</div>`; }
+function front(p,i){
+  const pg=`<span class="pg">${i}</span><span class="run">사주에 빈칸이 있어서, 신이 찾아왔다</span>`;
+  if(p.t==='cover') return `${plate(p)}<div class="mark">五</div><div class="ct"><small>오방사주 세계관 · 제1권</small><h1>사주에 빈칸이 있어서,<br>신이 찾아왔다</h1><p>다섯 신과 한 사람의 이야기</p></div><div class="hint">넘겨서 읽기 ‹</div>`;
+  if(p.t==='god') return `${plate(Object.assign({cap:`${p.h} · ${p.el}`},p))}<div class="txt"><div class="ch">오방의 신 · ${p.dir}</div><div class="hd">${p.n}<small>${p.h}</small></div><div class="prof"><i>${p.el}</i><i>${p.dir}</i><i>${p.col}</i><i>${p.job}</i></div><div class="bd">${p.body.map(t=>`<p>${t}</p>`).join('')}</div><div class="q">${p.q}</div></div>${pg}`;
+  if(p.t==='grid8'){ const G=[['甲','#3f8f62'],['子','#2f4a7a'],['丙','#c0402c'],['午','#c0402c'],['庚','#6f7885'],['',''],['壬','#2f4a7a'],['申','#6f7885']];
+    return `<div class="g8"><span class="cap">CHAPTER 1</span><div class="g8g">${G.map(([c,col],j)=>c?`<i style="--gc:${col};--d:${j*.12}s">${c}</i>`:`<i class="emp" style="--d:${j*.12}s">?</i>`).join('')}</div><div class="g8l"><span style="--gc:#3f8f62">木</span><span style="--gc:#c0402c">火</span><span class="emp">土</span><span style="--gc:#6f7885">金</span><span style="--gc:#2f4a7a">水</span></div></div><div class="txt"><div class="ch">${p.ch}</div><div class="hd">${p.hd}</div><div class="bd">${p.body.map(t=>`<p>${t}</p>`).join('')}</div></div>${pg}`; }
+  if(p.t==='trio') return `<div class="trio">${p.people.map(([u,n])=>`<div style="background-image:url('${u}')"><b>${n}</b></div>`).join('')}</div><div class="txt"><div class="ch">${p.ch}</div><div class="hd">${p.hd}</div><div class="bd">${p.body.map(t=>`<p>${t}</p>`).join('')}</div></div>${pg}`;
+  if(p.t==='mini') return `<div class="minis">${['wood','fire','earth','metal','water'].map(k=>`<i style="background-image:url('img/mini/${k}.jpg')"></i>`).join('')}</div><div class="txt" style="height:56%"><div class="ch">${p.ch}</div><div class="hd">${p.hd}</div><div class="bd">${p.body.map(t=>`<p>${t}</p>`).join('')}</div></div>${pg}`;
+  if(p.t==='how') return `${plate(p)}<div class="txt"><div class="ch">${p.ch}</div><div class="hd">${p.hd}</div><ul class="how">
+    <li><em>1</em><span><b>문을 두드린다</b> 생일을 알려 주면 빈칸이 보인다</span></li>
+    <li><em>2</em><span><b>내 신을 만난다</b> 빈칸을 채워 줄 수호신이 곁에 온다</span></li>
+    <li><em>3</em><span><b>매일 조금씩 채운다</b> 개운 미션과 당번 도장</span></li>
+    <li><em>4</em><span><b>가끔은 가볍게 논다</b> 오방 뽑기 · 부적 카드 · 묘당</span></li></ul>
+    <div class="end">빈칸은 모자람이 아니라, 신이 앉을 자리다</div>
+    <div class="cta"><button type="button" data-go="home">내 빈칸 찾으러 가기</button><button class="gh" type="button" data-go="restart">처음부터</button></div></div>${pg}`;
+  if(p.t==='next') return `<div class="nx" style="background:linear-gradient(180deg,rgba(14,10,8,.35),rgba(14,10,8,.95) 62%),url('img/kv_house.jpg') center 30%/cover no-repeat"><small>제2권 · 곧 열림</small><h2>오행 하우스<br>다섯 신, 비어 있는 의자 하나</h2><p>빈칸을 채우러 온 신들이 한집에 모여 살게 된다. 여섯 번째 의자는 누구의 자리일까. 그 답은 당신의 여덟 글자에 있다</p><div class="cta" style="margin:28px 0 0"><button type="button" data-go="home" style="background:#e3b866;color:#1a1208">오방사주로 돌아가기</button></div></div>`;
+  return `${plate(p)}<div class="txt"><div class="ch">${p.ch}</div><div class="hd">${p.hd}</div><div class="bd">${p.body.map(t=>`<p>${t}</p>`).join('')}</div></div>${pg}`; }
+/* 뒷면: 넘기는 동안 보이는 종이 뒷면(글자 비침만) */
+const backFace='<div class="face back"></div>';
+$('book').innerHTML=PAGES.map((p,i)=>`<div class="leaf ${p.t==='cover'?'cover':''} ${p.t==='next'?'bk2':''}" data-i="${i}" style="z-index:${N-i}${p.c?`;--c:${p.c}`:''}"><div class="face front">${front(p,i)}</div>${backFace}<div class="shade"></div></div>`).join('');
+const leaves=[...document.querySelectorAll('.leaf')];
+$('tocL').innerHTML=PAGES.map((p,i)=>`<button type="button" data-i="${i}">${p.toc||`${p.ch} · ${p.hd}`}<span>${i}</span></button>`).join('');
+
+/* 종이 넘기는 소리(합성) */
+let AC=null; function rustle(){ try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); const d=.45, n=AC.createBuffer(1,AC.sampleRate*d,AC.sampleRate), a=n.getChannelData(0); for(let i=0;i<a.length;i++){ const t=i/a.length; a[i]=(Math.random()*2-1)*Math.pow(1-t,2.2)*(t<.08?t/.08:1)*(.6+.4*Math.sin(t*38)); }
+  const s=AC.createBufferSource(); s.buffer=n; const f=AC.createBiquadFilter(); f.type='bandpass'; f.frequency.value=2600; f.Q.value=.7; const g=AC.createGain(); g.gain.value=.16; s.connect(f); f.connect(g); g.connect(AC.destination); s.start(); }catch(e){} }
+
+/* 현재 장: 영상 재생 · 그림 깊이 효과 켜기 */
+let cur=0;
+function activate(){ leaves.forEach((l,i)=>{ const on=i===cur; l.classList.toggle('cur',on);
+    l.querySelectorAll('video').forEach(v=>{ if(on){ if(!v.getAttribute('src')) v.src=v.dataset.src; v.onplaying=()=>v.classList.add('on'); v.play().catch(()=>{}); } else { try{ v.pause(); }catch(e){} } });
+    const pl=l.querySelector('.plate[data-dep]'); if(pl&&window.Depth3D){ if(on&&!pl._d3&&!pl.querySelector('video.on')){ const u=pl.dataset.img, d=u.replace(/\.jpg$/,'_d.jpg'); const im=new Image(); im.onload=()=>{ if(i===cur&&!pl._d3) Depth3D.mount(pl,{src:u,pos:pl.dataset.pos.split(' ').map(Number),str:.9}); }; im.src=d; } else if(!on&&pl._d3){ Depth3D.unmount(pl); } } });
+  $('prev').disabled=cur===0; $('next').disabled=cur===N-1; $('pgN').textContent=`${cur+1} / ${N}`; $('prog').style.width=(cur/(N-1)*100)+'%';
+  const p=PAGES[cur]; $('runT').textContent=p.t==='cover'?'오방사주 세계관 · 제1권':(p.toc||`${p.ch} · ${p.hd}`);
+  $('tocL').querySelectorAll('button').forEach((b,i)=>b.classList.toggle('on',i===cur));
+  try{ sessionStorage.setItem('obBookPg',cur); }catch(e){} }
+function go(n,sound=true){ n=Math.max(0,Math.min(N-1,n)); if(n===cur) return; const fwd=n>cur;
+  leaves.forEach((l,i)=>{ const t=i<n; if(l.classList.contains('turned')!==t){ l.classList.add('moving'); setTimeout(()=>l.classList.remove('moving'),900); } l.classList.toggle('turned',t); });
+  cur=n; if(sound) rustle(); try{ navigator.vibrate&&navigator.vibrate(8); }catch(e){} activate(); }
+$('next').onclick=()=>go(cur+1); $('prev').onclick=()=>go(cur-1);
+document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(cur+1); if(e.key==='ArrowLeft') go(cur-1); });
+
+/* 손가락으로 끌어 넘기기 · 가장자리 탭 */
+let drag=null;
+$('book').addEventListener('pointerdown',e=>{ if(e.target.closest('button')) return; const r=$('book').getBoundingClientRect(); drag={x:e.clientX,y:e.clientY,w:r.width,left:e.clientX-r.left<r.width*.35,moved:false,leaf:null,dir:0}; });
+window.addEventListener('pointermove',e=>{ if(!drag) return; const dx=e.clientX-drag.x; if(!drag.moved&&Math.abs(dx)<8) return;
+  if(!drag.moved){ drag.moved=true; drag.dir=dx<0?1:-1; drag.leaf=drag.dir>0?leaves[cur]:leaves[cur-1]; if(!drag.leaf||(drag.dir>0&&cur===N-1)){ drag.leaf=null; return; } drag.leaf.classList.add('drag','moving'); }
+  if(!drag.leaf) return; const k=Math.max(0,Math.min(1,drag.dir>0?-dx/drag.w:1-dx/drag.w)); drag.k=k; drag.leaf.style.transform=`rotateY(${-178*k}deg)`; });
+window.addEventListener('pointerup',e=>{ if(!drag) return; const d=drag; drag=null;
+  if(d.leaf){ d.leaf.classList.remove('drag'); d.leaf.style.transform=''; setTimeout(()=>d.leaf.classList.remove('moving'),900);
+    if(d.dir>0) { if(d.k>.28) go(cur+1); } else { if(d.k<.72) go(cur-1); } return; }
+  if(!d.moved){ if(e.target.closest('button')) return; if(d.left) go(cur-1); else go(cur+1); } });
+
+/* 버튼 */
+$('book').addEventListener('click',e=>{ const b=e.target.closest('[data-go]'); if(!b) return; if(b.dataset.go==='restart'){ go(0); return; } try{ sessionStorage.setItem('toHome','1'); }catch(_){} location.href='./'; });
+$('tocB').onclick=()=>$('toc').classList.toggle('on');
+$('toc').onclick=e=>{ const b=e.target.closest('[data-i]'); if(b) go(+b.dataset.i); $('toc').classList.remove('on'); };
+$('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+/* 읽던 곳부터 */
+(()=>{ let s=0; try{ s=+(sessionStorage.getItem('obBookPg')||0); }catch(e){} if(s>0&&s<N){ cur=0; go(s,false); } else activate(); })();
+</script>
+<script src="depth3d.js"></script>
+<script>if(window.Depth3D&&Depth3D.enableGyro) try{ Depth3D.enableGyro(); }catch(e){}</script>
+</body>
+</html>

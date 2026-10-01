@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="early.js"></script>
 <title>2027 신년운세 · 오방사주</title>
 <link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700;900&family=Song+Myung&display=swap">
@@ -544,7 +545,8 @@ $('payBtn').onclick=()=>{ const pr=$('prem'); if(!$('pay').classList.contains('d
 $('back2').onclick=()=>{ show('sIntro'); };
 $('back1').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
 </script>
-<script src="hscroll.js">
+<script src="hscroll.js"></script>
+<script>
 /* 첫 화면 캐릭터 인트로 */
 MenuIntro.play({src:'v/halmae.mp4',poster:'img/halmae.jpg',who:'삼신 할매 · 三神',title:'2027 신년운세',end:6.3,subs:[[0.3,'왔구나.'],[2.1,'…네 내년 열두 달,'],[4.0,'이 할미가 다 봐 뒀다.']]});
 </script>

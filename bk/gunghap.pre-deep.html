@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>도화 궁합 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+
+/* 도화 궁합 — 친구 초대형. 링크(?f=)로 받은 사람은 보낸 사람과의 궁합을, 직접 들어온 사람은 두 명을 입력. 도화 사주와 같은 밤 톤. */
+:root{
+  --brush:'OBrush','Noto Serif KR',serif; --bmj:'Song Myung','Noto Serif KR',serif;
+  --stage:#0c0a0e; --ink:#f7f1ec; --ink-2:#d6cbc4; --ink-3:#9a8f89;
+  --glass:rgba(20,14,20,.55); --line:rgba(255,226,214,.16);
+  --peach:#ffb9a6; --peach-2:#ffd9cc; --blush:#ff8fa6; --rose:#e9667f;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --serif:'Noto Serif KR',"Nanum Myeongjo",serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#07060a;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button,select,input{font-family:inherit}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--stage);overflow:hidden;overflow:clip}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;opacity:0;pointer-events:none;transition:opacity .5s}
+.scr::-webkit-scrollbar{display:none}
+.scr.on{opacity:1;pointer-events:auto}
+.back{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);left:14px;z-index:20;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.back svg{width:20px;height:20px}
+.hero{position:relative;height:46vh;min-height:320px;max-height:420px;background:#000 center 18%/cover no-repeat}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,10,14,.3),transparent 25%,rgba(12,10,14,.2) 55%,var(--stage) 98%)}
+.hero .ht{position:absolute;left:20px;right:20px;bottom:6px;z-index:2}
+.hero small{font-size:12px;letter-spacing:.24em;color:var(--peach-2)}
+.hero h1{margin:6px 0 6px;font-family:var(--serif);font-size:32px;font-weight:900}
+.hero p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.6}
+.inv{margin:14px 16px 0;padding:14px;border-radius:16px;background:linear-gradient(135deg,rgba(255,185,166,.16),rgba(233,102,127,.1));border:1px solid rgba(255,185,166,.4);font-size:14px;line-height:1.6}
+.inv b{color:var(--peach)}
+.who{margin:14px 16px 0;padding:16px;border-radius:18px;background:#151016;border:1px solid var(--line)}
+.who h3{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:14px;color:var(--peach-2)}
+.who h3 i{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:rgba(255,185,166,.16);font-size:12px}
+.who.locked{opacity:.9}
+.who .lk{font-size:14px;color:var(--ink-2)}
+.field{width:100%;height:46px;border-radius:12px;border:1px solid var(--line);background:#1b141a;color:var(--ink);padding:0 14px;font-size:16px;outline:none}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.seg{display:flex;background:rgba(255,255,255,.06);border-radius:12px;padding:3px}
+.seg button{flex:1;height:36px;border:0;border-radius:10px;background:none;color:var(--ink-2);font-weight:700;font-size:13.5px;cursor:pointer}
+.seg button.on{background:var(--peach);color:#2a0d14}
+.sel3{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:6px;margin-top:8px}
+select{height:46px;border-radius:12px;border:1px solid var(--line);background:#1b141a;color:var(--ink);font-size:15px;padding:0 8px;width:100%}
+.cta{display:block;width:calc(100% - 32px);margin:16px 16px 0;height:56px;border:0;border-radius:16px;background:linear-gradient(135deg,#ffc7b8,#ff8fa6);color:#2a0d14;font-size:16.5px;font-weight:900;cursor:pointer;box-shadow:0 10px 30px rgba(255,143,166,.3)}
+.fine{text-align:center;font-size:12px;color:var(--ink-3);margin:12px 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
+/* loading */
+.ld{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 30px}
+.hearts{position:relative;width:170px;height:110px;margin-bottom:26px}
+.hearts span{position:absolute;top:10px;width:90px;height:90px;border-radius:50%;background:center 18%/cover no-repeat;box-shadow:0 0 0 2px var(--peach);transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+.hearts span:first-child{left:0;transform:translateX(-24px)}
+.hearts span:last-child{right:0;transform:translateX(24px);background:#2a1a24;display:grid;place-items:center;font-family:var(--serif);font-size:30px;font-weight:900;color:var(--peach)}
+.ld.go .hearts span:first-child{transform:translateX(12px)}.ld.go .hearts span:last-child{transform:translateX(-12px)}
+.ld h2{font-family:var(--serif);font-size:20px;margin:0 0 6px}.ld p{margin:0;color:var(--ink-3);font-size:13.5px;min-height:20px}
+/* result */
+.rs{padding:calc(env(safe-area-inset-top,0px) + 64px) 16px calc(env(safe-area-inset-bottom,0px) + 30px)}
+.pair{display:grid;grid-template-columns:1fr 60px 1fr;align-items:center;text-align:center}
+.pair .p b{display:block;font-size:15px;margin-top:8px}
+.pair .p small{display:block;font-size:12px;color:var(--peach-2);margin-top:2px;font-family:var(--serif)}
+.pair .av{width:78px;height:78px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:30px;font-weight:900;background:linear-gradient(135deg,#2a1a24,#3a2230);box-shadow:0 0 0 2px rgba(255,185,166,.6)}
+.pair .mid{font-size:26px;color:var(--rose)}
+.score{text-align:center;margin:22px 0 4px}
+.score small{display:block;font-size:12px;letter-spacing:.22em;color:var(--peach-2)}
+.score b{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:84px;line-height:1;color:var(--peach)}
+.score h2{margin:4px 0 0;font-family:var(--serif);font-size:23px}
+.bars{margin:18px 0 0;display:grid;gap:12px}
+.bar{display:grid;grid-template-columns:48px 1fr 34px;gap:10px;align-items:center;font-size:13px}
+.bar .t{height:10px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden}
+.bar .t i{display:block;height:100%;width:0;border-radius:5px;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.bar span{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.box{margin-top:14px;border-radius:20px;background:#151016;border:1px solid rgba(255,220,208,.1);padding:18px}
+.box h3{margin:0 0 10px;font-size:13px;letter-spacing:.08em;color:var(--peach-2)}
+.pt{display:flex;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.06);font-size:14.5px;line-height:1.65}
+.pt:first-of-type{border-top:0;padding-top:0}
+.pt i{flex:none;font-style:normal;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;background:rgba(255,185,166,.14);color:var(--peach);margin-top:2px}
+.chip2{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;background:rgba(255,185,166,.12);color:var(--peach-2);margin-left:6px;vertical-align:1px;font-family:var(--serif)}
+.say{display:flex;gap:12px}.say .av2{flex:none;width:44px;height:44px;border-radius:50%;background:center 18%/cover;border:1.5px solid var(--peach)}
+.say p{margin:0;font-size:15px;line-height:1.7}
+.lockb{position:relative;overflow:hidden}
+.lockb .bl{filter:blur(5px);user-select:none;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.lockb .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(21,16,22,.2),rgba(21,16,22,.92) 45%);text-align:center;gap:4px}
+.lockb .ov b{font-family:var(--serif);font-size:16px}.lockb .ov small{font-size:12.5px;color:var(--ink-2)}
+.btns{display:grid;gap:8px;margin-top:16px}
+.btns button{height:52px;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink)}
+.btns button.pri{border:0;background:linear-gradient(135deg,#ffc7b8,#ff8fa6);color:#2a0d14;font-weight:900}
+.toast{position:absolute;left:50%;bottom:60px;transform:translate(-50%,10px);z-index:60;background:rgba(30,20,26,.95);border:1px solid var(--line);padding:12px 18px;border-radius:14px;font-size:14px;opacity:0;transition:all .35s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* 붓글씨 헤드라인 (East Sea Dokdo) + 붓 명조 보조 (Song Myung) */
+.hero h1,#hT{font-family:var(--brush)!important;font-weight:400!important;font-size:33px!important;line-height:1.2!important}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <button class="back" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+
+  <div class="scr on" id="sIn">
+    <div class="hero" style="background-image:url('img/taeo/wink.jpg')"><div class="ht"><small>桃花 · 도화 궁합</small><h1 id="hT">둘이 얼마나 끌릴까</h1><p id="hP">두 사람의 도화와 일지를 맞대 보면,<br>끌림과 오래 갈 힘이 따로 보여.</p></div></div>
+    <div class="inv" id="inv" hidden></div>
+    <div class="who" id="wA"></div>
+    <div class="who" id="wB"></div>
+    <button class="cta" id="goBtn">궁합 보기</button>
+    <p class="fine">생년월일은 궁합 계산에만 쓰여요 · 체험판</p>
+  </div>
+
+  <div class="scr ld" id="sLd">
+    <div class="hearts"><span style="background-image:url('img/taeo/base.jpg')"></span><span>♡</span></div>
+    <h2>태오가 둘 사주를 맞대 보는 중</h2><p id="lTx"></p>
+  </div>
+
+  <div class="scr" id="sRs"><div class="rs">
+    <div class="pair"><div class="p"><div class="av" id="aA"></div><b id="nA"></b><small id="tA"></small></div><div class="mid">♥</div><div class="p"><div class="av" id="aB"></div><b id="nB"></b><small id="tB"></small></div></div>
+    <div class="score"><small>도화 궁합</small><b id="sc">0</b><h2 id="scT"></h2></div>
+    <div class="bars"><div class="bar"><b>끌림</b><div class="t"><i id="b1" style="background:linear-gradient(90deg,#ffd0c2,#ff8fa6)"></i></div><span id="v1"></span></div><div class="bar"><b>오래 감</b><div class="t"><i id="b2" style="background:linear-gradient(90deg,#c9d7ff,#8fa8ff)"></i></div><span id="v2"></span></div></div>
+    <div class="box"><h3>이렇게 봤어</h3><div id="pts"></div></div>
+    <div class="box"><h3>태오가</h3><div class="say"><div class="av2" style="background-image:url('img/taeo/base.jpg')"></div><p id="say"></p></div></div>
+    <div class="box lockb"><h3>둘의 2027 인연 타이밍</h3><div class="bl">둘의 도화가 동시에 열리는 달은 ○월과 ○월이야. 이 두 달에 먼저 연락하는 쪽이 관계를 끌고 가게 돼. 싸우기 쉬운 달은 ○월, 그땐 말보다 만남이 먼저야.</div><div class="ov"><b>둘이 가까워지는 달 · 멀어지는 달</b><small>월별 타이밍 · 먼저 연락해도 되는 날</small></div></div>
+    <div class="btns"><button class="pri" id="payBtn">14,900원 · 둘의 인연 타이밍 열기</button><button id="invBtn">다른 사람에게 궁합 신청하기</button><button id="myBtn">나도 내 도화 보러 가기</button></div>
+  </div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script src="menuintro.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const Sj=window.Saju; const {GAN,JI,EL,BR_EL,stEl}=Sj;
+const HOURS=['자시','축시','인시','묘시','진시','사시','오시','미시','신시','유시','술시','해시'];
+const TYPES={3:['봄꽃 도화','첫눈에 스며드는 타입'],6:['햇살 도화','있기만 해도 분위기가 바뀌는 타입'],9:['달빛 도화','가까이 와야 보이는 타입'],0:['밤의 도화','대화로 빠지게 만드는 타입']};
+const ga=n=>{ const c=n.charCodeAt(n.length-1)-0xAC00; return n+((c>=0&&c<11172&&c%28)?'이':'가'); };
+const target=b=>[2,6,10].includes(b)?3:[8,0,4].includes(b)?9:[5,9,1].includes(b)?6:0;
+const enc=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const dec=s=>{ try{ s=s.replace(/-/g,'+').replace(/_/g,'/'); return JSON.parse(decodeURIComponent(escape(atob(s)))); }catch(e){ return null; } };
+const SAVED=(()=>{ try{ return JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){ return null; } })();
+const saveMe=o=>{ try{ const old=SAVED||JSON.parse(sessionStorage.getItem('me')||'null')||{}; sessionStorage.setItem('me',JSON.stringify(Object.assign({},old,o))); }catch(e){} };
+const SP=SAVED&&SAVED.y?{n:SAVED.name||'',g:SAVED.g||'f',c:SAVED.cal||'s',y:SAVED.y,m:SAVED.m,d:SAVED.d,h:SAVED.h==null?-1:SAVED.h}:null;
+const q=new URLSearchParams(location.search); const FROM=q.get('f')?dec(q.get('f')):null; const ME=q.get('me')?dec(q.get('me')):null;
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2200); }
+function form(el,title,idx,pre){
+  el.innerHTML=`<h3><i>${idx}</i>${title}</h3><input class="field" data-k="n" maxlength="10" placeholder="이름" value="${pre&&pre.n?pre.n:''}">
+   <div class="row2"><div class="seg" data-k="g"><button data-v="f" class="${!pre||pre.g!=='m'?'on':''}">여성</button><button data-v="m" class="${pre&&pre.g==='m'?'on':''}">남성</button></div><div class="seg" data-k="c"><button data-v="s" class="${!pre||pre.c!=='l'?'on':''}">양력</button><button data-v="l" class="${pre&&pre.c==='l'?'on':''}">음력</button></div></div>
+   <div class="sel3"><select data-k="y"></select><select data-k="m"></select><select data-k="d"></select></div>
+   <select data-k="h" style="margin-top:6px"></select>`;
+  const Y=el.querySelector('[data-k=y]'),M=el.querySelector('[data-k=m]'),D=el.querySelector('[data-k=d]'),H=el.querySelector('[data-k=h]');
+  const dy=pre&&pre.y||(idx===1?1996:1994), dm=pre&&pre.m||(idx===1?5:3), dd=pre&&pre.d||(idx===1?14:8);
+  for(let y=2008;y>=1955;y--) Y.add(new Option(y+'년',y,false,y===dy));
+  for(let m=1;m<=12;m++) M.add(new Option(m+'월',m,false,m===dm));
+  const fill=()=>{ const n=new Date(+Y.value,+M.value,0).getDate(); const cur=+D.value||dd; D.innerHTML=''; for(let d=1;d<=31;d++) if(d<=Math.max(n,30)) D.add(new Option(d+'일',d,false,d===Math.min(cur,31))); };
+  fill(); Y.onchange=fill; M.onchange=fill;
+  H.add(new Option('태어난 시 모름','x',!(pre&&pre.h!=null&&pre.h>=0))); HOURS.forEach((h,i)=>H.add(new Option(h,i,false,pre&&pre.h===i)));
+  el.querySelectorAll('.seg').forEach(sg=>sg.querySelectorAll('button').forEach(b=>b.onclick=()=>sg.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))));
+}
+function read(el){ const g=k=>el.querySelector(`[data-k=${k}]`); const seg=k=>el.querySelector(`.seg[data-k=${k}] .on`).dataset.v;
+  return {n:g('n').value.trim()||'나',g:seg('g'),c:seg('c'),y:+g('y').value,m:+g('m').value,d:+g('d').value,h:g('h').value==='x'?-1:+g('h').value}; }
+function lockedCard(el,title,idx,p){ el.classList.add('locked'); el.innerHTML=`<h3><i>${idx}</i>${title}</h3><div class="lk">${p.n} · ${p.g==='m'?'남성':'여성'} · 생년월일은 비공개로 계산돼요</div>`; }
+if(FROM){ $('inv').hidden=false; $('inv').innerHTML=`<b>${FROM.n}</b>님이 너랑 <b>도화 궁합</b>을 보고 싶대. 네 생일만 넣으면, 둘이 얼마나 끌리는지 바로 보여줄게.`;
+  $('hT').textContent=`${FROM.n}님이 궁합을 신청했어`; form($('wA'),'나',1,SP); lockedCard($('wB'),'신청한 사람',2,FROM); }
+else { form($('wA'),'나',1,ME||SP); form($('wB'),'그 사람',2,null); }
+function toP(o){ let s={y:o.y,m:o.m,d:o.d}; if(o.c==='l'){ const c=Sj.lunarToSolar(o.y,o.m,o.d,false); if(c) s=c; } return Sj.pillars(s.y,s.m,s.d,o.h>=0?o.h:null); }
+function compat(A,B,a,b){
+  const ea=stEl(A.d[0]), eb=stEl(B.d[0]); const gen=(x,z)=>(x+1)%5===z, ctl=(x,z)=>(x+2)%5===z;
+  const chA=[A.y,A.m,A.d,A.h].filter(Boolean).map(p=>p[1]), chB=[B.y,B.m,B.d,B.h].filter(Boolean).map(p=>p[1]);
+  const tA=target(A.d[1]), tB=target(B.d[1]);
+  let pull=48, stay=50; const pts=[];
+  if(chA.includes(tB)){ pull+=16; pts.push([`${a.n}의 사주에 ${b.n}의 도화 글자 ${JI[tB]}가 있어. ${b.n} 쪽에서 먼저 눈길이 가기 쉬운 사이야.`,`${JI[tB]} 도화`]); }
+  if(chB.includes(tA)){ pull+=16; pts.push([`${b.n}의 사주에 ${a.n}의 도화 글자 ${JI[tA]}가 있어. ${ga(a.n)} 이유 없이 끌리는 쪽이야.`,`${JI[tA]} 도화`]); }
+  if(ctl(ea,eb)||ctl(eb,ea)){ pull+=10; const who=ctl(ea,eb)?a.n:b.n; pts.push([`일간이 ${EL[ea]}와 ${EL[eb]}, 한쪽이 한쪽을 이기는 관계야. ${who} 쪽이 주도하고, 그 긴장이 곧 설렘이 돼.`,`${GAN[A.d[0]]}·${GAN[B.d[0]]} 상극`]); }
+  if(gen(ea,eb)||gen(eb,ea)){ stay+=15; const giver=gen(ea,eb)?a.n:b.n; pts.push([`일간이 ${EL[ea]}와 ${EL[eb]}, 서로 살려주는 상생이야. ${giver} 쪽이 챙겨주고 받는 쪽이 편안해지는 사이.`,`${GAN[A.d[0]]}·${GAN[B.d[0]]} 상생`]); }
+  if(ea===eb){ stay+=8; pull-=2; pts.push([`둘 다 ${EL[ea]} 일간이야. 친구처럼 말이 잘 통하지만, 둘 다 고집이 같은 방향이라 양보가 필요해.`,`같은 ${EL[ea]}`]); }
+  if(Sj.isHap(A.d[1],B.d[1])){ stay+=18; pts.push([`배우자 자리(일지) ${JI[A.d[1]]}와 ${JI[B.d[1]]}가 합이야. 한번 묶이면 쉽게 안 풀리는 사이.`,`${JI[A.d[1]]}${JI[B.d[1]]} 합`]); }
+  if(Sj.isChung(A.d[1],B.d[1])){ stay-=14; pull+=8; pts.push([`일지 ${JI[A.d[1]]}와 ${JI[B.d[1]]}가 충이야. 만나면 불꽃 튀고 싸워도 크게 싸워. 대신 서로를 확 깨워주는 사이.`,`${JI[A.d[1]]}${JI[B.d[1]]} 충`]); }
+  if(Sj.isHap(A.y[1],B.y[1])){ stay+=7; pts.push([`띠끼리도 합이 돼. 집안·주변 사람들과도 잘 어울리는 조합이야.`,`${JI[A.y[1]]}${JI[B.y[1]]} 합`]); }
+  if(Sj.isChung(A.y[1],B.y[1])){ stay-=7; pts.push([`띠끼리는 충이야. 사는 방식이나 주변 환경이 달라서 맞춰가는 시간이 필요해.`,`${JI[A.y[1]]}${JI[B.y[1]]} 충`]); }
+  const cA=Sj.elCount(A), cB=Sj.elCount(B); const wA=cA.indexOf(Math.min(...cA)), sB=cB.indexOf(Math.max(...cB)), wB=cB.indexOf(Math.min(...cB)), sA=cA.indexOf(Math.max(...cA));
+  if(wA===sB){ stay+=9; pts.push([`${a.n}에게 부족한 ${EL[wA]} 기운을 ${ga(b.n)} 넉넉히 갖고 있어. 옆에 있으면 채워지는 느낌이 드는 이유.`,`${EL[wA]} 보완`]); }
+  if(wB===sA){ stay+=9; pts.push([`반대로 ${b.n}에게 모자란 ${EL[wB]}를 ${ga(a.n)} 채워줘.`,`${EL[wB]} 보완`]); }
+  if(!pts.length) pts.push([`둘 사이에 크게 부딪히거나 묶이는 글자는 없어. 극적인 사이보다는 천천히 쌓아가는 사이야.`,'무난']);
+  pull=Math.max(35,Math.min(97,pull)); stay=Math.max(30,Math.min(97,stay));
+  const total=Math.max(52,Math.min(98,Math.round((pull+stay)/2+6)));
+  const title=pull>=70&&stay>=65?'끌리고, 오래 가는 사이':pull>=70?'불꽃 튀는 사이':stay>=65?'편안하게 스며드는 사이':'천천히 알아가야 하는 사이';
+  const say={ '끌리고, 오래 가는 사이':`솔직히 좀 부럽다. 끌림도 있고 버티는 힘도 있어. 이런 조합은 타이밍만 맞으면 금방이야.`, '불꽃 튀는 사이':`첫 만남부터 확 끌리는 사이야. 근데 불은 빨리 붙고 빨리 번져. 싸운 날은 그날 풀기, 그것만 지키면 돼.`, '편안하게 스며드는 사이':`설렘보다 편안함이 먼저 오는 사이야. 근데 그게 제일 오래 가. 누나가 먼저 한 번만 다가가 봐.`, '천천히 알아가야 하는 사이':`처음엔 잘 모르겠는 사이야. 대신 알면 알수록 달라지는 조합이니까, 한두 번 만나고 판단하지 마.`}[title];
+  return {pull,stay,total,title,pts,say,tA,tB};
+}
+$('goBtn').onclick=async()=>{
+  const a=read($('wA')); const b=FROM||read($('wB'));
+  const A=toP(a), B=toP(b); const R=compat(A,B,a,b);
+  ['sIn','sLd','sRs'].forEach(s=>$(s).classList.toggle('on',s==='sLd'));
+  $('sLd').classList.remove('go'); requestAnimationFrame(()=>requestAnimationFrame(()=>$('sLd').classList.add('go')));
+  for(const t of ['두 사람 만세력 세우는 중…','도화 글자 맞대 보는 중…','일지 합·충 확인하는 중…']){ $('lTx').textContent=t; await new Promise(r=>setTimeout(r,650)); }
+  $('aA').textContent=a.n.length>=2?a.n.slice(-2):a.n; $('aB').textContent=b.n.length>=2?b.n.slice(-2):b.n; $('aA').style.fontSize=$('aB').style.fontSize='22px';
+  $('nA').textContent=a.n; $('nB').textContent=b.n; $('tA').textContent=TYPES[R.tA][0]; $('tB').textContent=TYPES[R.tB][0];
+  $('scT').textContent=R.title; $('v1').textContent=R.pull; $('v2').textContent=R.stay;
+  $('pts').innerHTML=R.pts.slice(0,5).map((p,i)=>`<div class="pt"><i>${i+1}</i><div>${p[0]}<span class="chip2">${p[1]}</span></div></div>`).join('');
+  $('say').textContent=R.say;
+  ['sIn','sLd','sRs'].forEach(s=>$(s).classList.toggle('on',s==='sRs')); $('sRs').scrollTop=0;
+  setTimeout(()=>{ $('b1').style.width=R.pull+'%'; $('b2').style.width=R.stay+'%'; const t0=performance.now(); (function f(t){ const p=Math.min(1,(t-t0)/1500); $('sc').textContent=Math.round(R.total*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(f); })(t0); },200);
+  window._me=a;
+};
+$('invBtn').onclick=async()=>{ const me=window._me||read($('wA')); const url=new URL('gunghap.html?f='+enc(me),location.href).href;
+  try{ if(navigator.share){ await navigator.share({title:'도화 궁합',text:`${me.n}님이 너랑 도화 궁합을 보고 싶대`,url}); return; } }catch(e){ if(e&&e.name==='AbortError') return; }
+  try{ await navigator.clipboard.writeText(url); toast('궁합 신청 링크를 복사했어요'); }catch(e){ prompt('이 링크를 보내세요',url); } };
+$('myBtn').onclick=()=>{ location.href='dohwa.html'; };
+$('payBtn').onclick=()=>toast('체험판이라 결제는 여기까지예요');
+$('back').onclick=()=>{ if($('sRs').classList.contains('on')&&!FROM){ ['sIn','sLd','sRs'].forEach(s=>$(s).classList.toggle('on',s==='sIn')); return; } if(history.length>1) history.back(); else location.href='./'; };
+
+/* 첫 화면 캐릭터 인트로 */
+MenuIntro.play({src:'v/menu/gunghap.mp4',poster:'img/taeo/wink.jpg',who:'태오 · 桃花',title:'도화 궁합',subs:[[1.0,'그 사람 생일 알아?'],[3.8,'누나한테 끌리는지 봐줄게.']]});
+</script>
+<script src="reveal.js"></script>
+<script src="archive.js"></script>
+<script src="depth3d.js"></script>
+<script>window.Depth3D&&setTimeout(()=>Depth3D.watch('.hero,#heroP,.ch,#sLoad'),200);</script>
+</body>
+</html>

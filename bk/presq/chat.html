@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>자유 상담 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+
+/* 자유 상담 — 오방 수호신·살롱 캐릭터 중 한 명을 골라 내 사주로 자유 대화. 대화창은 ask.js(AskChat)를 캐릭터별 말투·색으로 연다. */
+:root{
+  --brush:'OBrush','Noto Serif KR',serif; --bmj:'Song Myung','Noto Serif KR',serif;
+  --bg:#07060a; --stage:#0c0b0f; --card:#141217; --line:rgba(255,240,220,.1);
+  --ink:#f6f1ea; --ink-2:#cfc6ba; --ink-3:#8e867c; --gold:#e3b866; --gold-2:#f3d79b;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --serif:'Noto Serif KR',"Nanum Myeongjo",serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button,select,input{font-family:inherit}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--stage);overflow:hidden;overflow:clip}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}
+.scr::-webkit-scrollbar{display:none}
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px;background:linear-gradient(180deg,var(--stage) 70%,rgba(12,11,15,0))}
+.ib{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.ib svg{width:18px;height:18px}
+.top b{font-size:14px;font-weight:700}
+.wrap{padding:0 16px calc(env(safe-area-inset-bottom,0px) + 34px)}
+.hd{margin:4px 2px 16px}
+.hd small{display:block;font-size:11.5px;letter-spacing:.2em;color:var(--gold-2);font-weight:700}
+.hd h1{margin:6px 0 6px;font-family:var(--serif);font-size:25px;font-weight:900;line-height:1.35}
+.hd p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.rec{display:flex;gap:12px;align-items:center;border-radius:18px;padding:12px;background:linear-gradient(120deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--c);cursor:pointer;margin-bottom:6px}
+.rec .av{flex:none;width:58px;height:58px;border-radius:50%;background:#000 center 16%/cover;box-shadow:0 0 0 2px var(--stage),0 0 0 3.5px var(--c)}
+.rec small{display:block;font-size:11.5px;color:var(--c);font-weight:700}
+.rec b{display:block;font-size:15.5px;margin-top:3px}
+.rec span{display:block;font-size:12.5px;color:var(--ink-2);margin-top:2px}
+.rec i{margin-left:auto;flex:none;font-style:normal;font-size:12px;font-weight:800;color:#15110a;background:var(--c);border-radius:999px;padding:7px 11px}
+.sh{margin:24px 2px 10px;display:flex;align-items:baseline;gap:8px}
+.sh b{font-size:16.5px}
+.sh small{font-size:12px;color:var(--ink-3)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ch{position:relative;aspect-ratio:3/4;border-radius:18px;overflow:hidden;background:#000 center 16%/cover no-repeat;cursor:pointer;border:1px solid var(--line);text-align:left;padding:0;color:#fff}
+.ch:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(8,7,10,.92))}
+.ch .hj{position:absolute;top:10px;left:10px;z-index:1;font-family:var(--serif);font-weight:900;font-size:12px;padding:3px 8px;border-radius:8px;background:rgba(0,0,0,.45);border:1px solid var(--c);color:var(--c);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.ch .mine{position:absolute;top:10px;right:10px;z-index:1;font-size:10.5px;font-weight:800;border-radius:999px;padding:4px 8px;background:var(--c);color:#111}
+.ch .t{position:absolute;left:12px;right:12px;bottom:12px;z-index:1}
+.ch .t b{display:block;font-family:var(--serif);font-size:21px;font-weight:900}
+.ch .t small{display:block;font-size:11.5px;color:var(--c);font-weight:700;margin-top:2px}
+.ch .t span{display:block;font-size:12px;color:rgba(255,255,255,.8);margin-top:6px;line-height:1.45}
+.ch.wide{grid-column:1/-1;aspect-ratio:16/10}
+.ch.wide .t b{font-size:23px}
+.note{font-size:11.5px;color:var(--ink-3);line-height:1.65;margin:18px 2px 0}
+
+/* 생년월일 시트 */
+.ov{position:absolute;inset:0;z-index:60;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .3s}
+.ov.on{opacity:1;pointer-events:auto}
+.sheet{width:100%;background:#16131a;border-radius:22px 22px 0 0;border-top:1px solid var(--line);padding:18px 16px calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateY(20px);transition:transform .3s}
+.ov.on .sheet{transform:none}
+.sheet .who{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.sheet .who .av{width:44px;height:44px;border-radius:50%;background:#000 center 16%/cover;box-shadow:0 0 0 2px var(--c)}
+.sheet .who p{margin:0;font-size:14.5px;line-height:1.5}
+.sheet h3{margin:12px 0 6px;font-size:12.5px;color:var(--ink-3);font-weight:500}
+.seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:rgba(255,255,255,.03)}
+.seg button{flex:1;height:40px;border:0;background:none;color:var(--ink-2);font-size:13.5px;cursor:pointer}
+.seg button.on{background:rgba(227,184,102,.18);color:var(--gold-2);font-weight:700}
+.g3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:6px;margin-top:6px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+select,input[type=text]{height:44px;border-radius:11px;border:1px solid var(--line);background:#1f1b22;color:var(--ink);font-size:15px;padding:0 10px;width:100%}
+.go{width:100%;height:52px;border:0;border-radius:15px;background:var(--c,var(--gold));color:#15110a;font-size:15.5px;font-weight:800;cursor:pointer;margin-top:14px}
+.toast{position:absolute;left:50%;bottom:40px;transform:translate(-50%,8px);z-index:90;background:#f6f1ea;color:#111;font-size:13.5px;padding:10px 16px;border-radius:999px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* 붓글씨 헤드라인 (East Sea Dokdo) + 붓 명조 보조 (Song Myung) */
+.hd h1{font-family:var(--brush)!important;font-weight:400!important;font-size:36px!important;line-height:1.2!important}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="scr" id="sel">
+    <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>자유 상담</b></div>
+    <div class="wrap">
+      <div class="hd"><small>FREE TALK · 내 사주로 무엇이든</small><h1>오늘은 누구한테<br>털어놓을래?</h1><p>캐릭터마다 잘 보는 분야와 말투가 달라요.<br>누굴 골라도 네 사주를 펼쳐놓고, 근거를 보여주면서 답해줘요.</p></div>
+      <div id="recBox"></div>
+      <div class="sh"><b>오방 수호신</b><small>다섯 방위, 다섯 기운</small></div>
+      <div class="grid" id="gOb"></div>
+      <div class="sh"><b>살롱의 사람들</b><small>분야별 전문</small></div>
+      <div class="grid" id="gSal"></div>
+      <p class="note">체험판입니다. claude.ai에서 열면 실제 AI가 사주 계산값(원국·오행·대운·세운·월운)을 근거로 자유롭게 답하고, 그 밖에서는 캐릭터별 추천 질문에 예시 답변을 보여줘요. 무료 질문 3번 뒤에는 대화권 결제 화면이 나와요.</p>
+    </div>
+  </div>
+
+  <div class="ov" id="ov"><div class="sheet" id="sheet">
+    <div class="who"><div class="av" id="shAv"></div><p id="shT"></p></div>
+    <div class="g2"><input type="text" id="nm" maxlength="8" placeholder="이름"><div class="seg" id="gSeg"><button class="on" data-v="f">여자</button><button data-v="m">남자</button></div></div>
+    <h3>생년월일</h3>
+    <div class="seg" id="cSeg"><button data-v="s" class="on">양력</button><button data-v="l">음력</button></div>
+    <div class="g3"><select id="by" aria-label="년"></select><select id="bm" aria-label="월"></select><select id="bd" aria-label="일"></select></div>
+    <select id="bh" aria-label="태어난 시" style="margin-top:6px"></select>
+    <button class="go" id="shGo">대화 시작하기</button>
+  </div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script src="ask.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const Sj=window.Saju;
+const CH={
+  wood:{n:'하람',h:'靑龍 · 木',img:'img/wood.jpg',tag:'새 시작 · 다음 인연',d:'"새로 시작해도 될까?"',acc:'#46b47f',el:0},
+  fire:{n:'이안',h:'朱雀 · 火',img:'img/fire.jpg',tag:'고백 · 결단',d:'"고백해도 될까?"',acc:'#ec5a43',el:1},
+  earth:{n:'도준',h:'黃龍 · 土',img:'img/earth.jpg',tag:'일 · 돈 · 안정',d:'"이직해도 될까?"',acc:'#d3a13a',el:2},
+  metal:{n:'시온',h:'白虎 · 金',img:'img/sion.jpg',tag:'정리 · 속마음 · 재회',d:'"재회 가능성 있어?"',acc:'#c9d1dc',ink:'#111',el:3},
+  water:{n:'재이',h:'玄武 · 水',img:'img/water.jpg',tag:'마음 · 나를 알기',d:'"요즘 마음이 복잡해"',acc:'#5b8ce6',el:4},
+  seoha:{n:'서하',h:'살롱 주인',img:'img/seoha.jpg',tag:'무엇이든 · 올해 흐름',d:'"요즘 왜 이렇게 안 풀려?"',acc:'#e3b866'},
+  taeo:{n:'태오',h:'桃花',img:'img/taeo/base.jpg',tag:'연애 · 매력 · 도화',d:'"올해 연애 언제 풀려?"',acc:'#ffb9a6'},
+  halmae:{n:'삼신 할매',h:'三神',img:'img/halmae.jpg',tag:'정통 · 이사 · 돈 · 조심할 달',d:'"조심할 달이 언제입니까?"',acc:'#d9b38c',ink:'#1a120a'}
+};
+const ALIAS={seoha:'seoha',taeo:'taeo',halmae:'halmae',wood:'wood',fire:'fire',earth:'earth',metal:'metal',water:'water',haram:'wood',ian:'fire',dojun:'earth',sion:'metal',jaei:'water'};
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2000); }
+function loadMe(){ try{ return JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){ return null; } }
+function saveMe(o){ try{ const old=loadMe()||{}; sessionStorage.setItem('me',JSON.stringify(Object.assign(old,o))); }catch(e){} }
+const rang=w=>{ const c=w.charCodeAt(w.length-1)-0xAC00; return w+((c>=0&&c<11172&&c%28)?'이랑':'랑'); };
+const nickOf=n=>(/^[가-힣]{3}$/.test(n))?n.slice(1):n;
+function solarOf(me){ if(me.cal==='l'){ const c=Sj.lunarToSolar(me.y,me.m,me.d,false); if(c) return c; } return {y:me.y,m:me.m,d:me.d}; }
+function lowEl(me){ const s=solarOf(me); const P=Sj.pillars(s.y,s.m,s.d,me.h==null?null:+me.h); const c=Sj.elCount(P); let lo=0; c.forEach((v,i)=>{ if(v<c[lo]) lo=i; }); return lo; }
+function card(k,wide,mine){ const c=CH[k]; return `<button class="ch ${wide?'wide':''}" data-k="${k}" style="--c:${c.acc};background-image:url('${c.img}')"><span class="hj">${c.h}</span>${mine?'<span class="mine">내 수호신</span>':''}<div class="t"><b>${c.n}</b><small>${c.tag}</small><span>${c.d}</span></div></button>`; }
+function renderSel(){
+  const me=loadMe(); let mine=null;
+  if(me&&me.y){ const lo=lowEl(me); mine=Object.keys(CH).find(k=>CH[k].el===lo); const c=CH[mine];
+    $('recBox').innerHTML=`<div class="rec" data-k="${mine}" style="--c:${c.acc}"><div class="av" style="background-image:url('${c.img}')"></div><div><small>${me.name?me.name+'님':'네'} 사주에 제일 모자란 ${'木火土金水'[lo]} 기운</small><b>${rang(c.n)} 먼저 얘기해 볼래?</b><span>${c.tag}</span></div><i>대화</i></div>`; }
+  $('gOb').innerHTML=['wood','fire','earth','metal','water'].map((k,i)=>card(k,i===4,k===mine)).join('');
+  $('gSal').innerHTML=['seoha','taeo','halmae'].map((k,i)=>card(k,i===2,false)).join('');
+  document.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>pick(b.dataset.k));
+}
+/* 생년월일 시트 */
+let cal='s', gender='f', want=null;
+(function(){
+  const by=$('by'),bm=$('bm'),bd=$('bd'),bh=$('bh');
+  for(let y=2008;y>=1955;y--) by.add(new Option(y+'년',y,false,y===1996));
+  for(let m=1;m<=12;m++) bm.add(new Option(m+'월',m,false,m===5));
+  window.fillD=()=>{ const n=cal==='s'?new Date(+by.value,+bm.value,0).getDate():30, cur=+bd.value||14; bd.innerHTML=''; for(let d=1;d<=n;d++) bd.add(new Option(d+'일',d,false,d===Math.min(cur,n))); };
+  fillD(); by.onchange=fillD; bm.onchange=fillD;
+  const HOURS=['자시 (23:30~01:29)','축시 (01:30~03:29)','인시 (03:30~05:29)','묘시 (05:30~07:29)','진시 (07:30~09:29)','사시 (09:30~11:29)','오시 (11:30~13:29)','미시 (13:30~15:29)','신시 (15:30~17:29)','유시 (17:30~19:29)','술시 (19:30~21:29)','해시 (21:30~23:29)'];
+  bh.add(new Option('태어난 시 모름','x',true,true)); HOURS.forEach((h,i)=>bh.add(new Option(h,i)));
+  const seg=(id,cb)=>$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{ $(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); cb(b.dataset.v); });
+  seg('cSeg',v=>{ cal=v; fillD(); }); seg('gSeg',v=>gender=v);
+})();
+$('ov').onclick=e=>{ if(e.target.id==='ov') $('ov').classList.remove('on'); };
+$('shGo').onclick=()=>{
+  const name=$('nm').value.trim(); if(!name){ toast('이름을 알려줘'); $('nm').focus(); return; }
+  const me={name,g:gender,cal,y:+$('by').value,m:+$('bm').value,d:+$('bd').value,h:$('bh').value==='x'?null:+$('bh').value};
+  if(cal==='l'&&!Sj.lunarToSolar(me.y,me.m,me.d,false)){ toast('없는 음력 날짜예요'); return; }
+  saveMe(me); $('ov').classList.remove('on'); renderSel(); setTimeout(()=>openChat(want),250);
+};
+function pick(k){
+  want=k; const me=loadMe();
+  if(me&&me.y&&me.name){ openChat(k); return; }
+  const c=CH[k]; $('sheet').style.setProperty('--c',c.acc); $('shAv').style.backgroundImage=`url('${c.img}')`;
+  $('shT').innerHTML=`<b>${c.n}</b> · 이야기 전에 네 사주부터 펼쳐볼게.<br><span style="color:var(--ink-3);font-size:12.5px">한 번만 입력하면 다른 메뉴에서도 이어져요.</span>`;
+  if(me){ $('nm').value=me.name||''; }
+  $('ov').classList.add('on');
+}
+function openChat(k){
+  const c=CH[k], me=loadMe(); if(!window.AskChat||!me) return;
+  AskChat.open({persona:k,theme:'dark',root:$('stage'),avatar:c.img,acc:c.acc,accInk:c.ink||'#fff',user:{name:me.name,nick:nickOf(me.name),gender:me.g||'f',solar:solarOf(me),hour:me.h==null?-1:+me.h},tier:'default'});
+}
+$('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+renderSel();
+/* 다른 메뉴에서 캐릭터를 지정해 들어온 경우 바로 연결 */
+(function(){ const q=new URLSearchParams(location.search).get('h'); const k=q&&ALIAS[q]; if(k) setTimeout(()=>pick(k),350); })();
+</script>
+<script src="depth3d.js"></script>
+<script>window.Depth3D&&setTimeout(()=>Depth3D.watch('.hero,#heroP,.ch,#sLoad'),200);</script>
+</body>
+</html>

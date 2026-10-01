@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>오방 뽑기 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 오방 뽑기 — 대나무 점괘통을 흔들면 산가지가 톡 튀어나오고, 그 괘의 기운을 맡은 미니 수호신이 읽어 준다.
+   본편(누아르)과 달리 밝고 귀여운 톤: 한지빛 흰 바탕 + 오행 파스텔. 각진 면, 문장 끝 부호 없음. */
+:root{
+  --brush:'OBrush','Song Myung',serif; --bmj:'Song Myung','Noto Serif KR',serif;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --paper:#fbf8f3; --paper2:#f4eee4; --ink:#1f1a15; --ink2:#5d544a; --ink3:#8a8178; --gold:#b8862f; --line:rgba(60,40,20,.1);
+  --c:#b8862f; --cp:#f4eee4; color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#efe9df;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button{font-family:inherit;cursor:pointer}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--paper);overflow:hidden}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;box-shadow:0 30px 80px rgba(60,40,20,.18)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;opacity:0;pointer-events:none;transition:opacity .45s}
+.scr::-webkit-scrollbar{display:none}
+.scr.on{opacity:1;pointer-events:auto}
+.top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 14px 10px;pointer-events:none}
+.top>*{pointer-events:auto}
+.ib{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.7);display:grid;place-items:center;color:var(--ink)}
+.ib svg{width:18px;height:18px}
+.top b{font-size:12.5px;font-weight:800;letter-spacing:.16em;color:var(--ink2)}
+.stage>.top.tsd b{color:var(--ink2)}
+
+/* 1. 흔들기 */
+.intro{min-height:100%;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 66px) 20px calc(env(safe-area-inset-bottom,0px) + 22px);background:radial-gradient(80% 45% at 50% 58%,var(--cp),rgba(251,248,243,0) 70%)}
+.intro .k{font-size:11.5px;font-weight:800;letter-spacing:.2em;color:var(--gold)}
+.intro h1{margin:8px 0 6px;font-family:var(--brush);font-weight:400;font-size:52px;line-height:1.05;letter-spacing:-.01em}
+.intro .sub{margin:0;font-family:var(--bmj);font-size:17px;color:var(--ink2)}
+.cast{display:flex;gap:6px;margin-top:18px}
+.cast i{width:40px;height:40px;border-radius:50%;background:#fff 50% 15%/180% no-repeat;box-shadow:0 0 0 2px var(--paper),0 0 0 3.5px var(--ec)}
+.cast span{margin-left:6px;align-self:center;font-size:12px;color:var(--ink3);line-height:1.4}
+.tongW{position:relative;flex:1;min-height:300px;display:grid;place-items:center;margin:4px 0 6px}
+.tong{position:relative;width:min(62vw,250px);aspect-ratio:1;background:url('img/mini/tong.jpg') center/118% no-repeat;border-radius:50%;cursor:pointer;transform-origin:50% 85%}
+.tong::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 10px var(--paper)}
+.tong.shake{animation:shake .16s ease-in-out infinite alternate}
+@keyframes shake{0%{transform:rotate(-9deg) translateX(-6px)}100%{transform:rotate(9deg) translateX(6px)}}
+.tong.idle{animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{50%{transform:rotate(-2deg) translateY(-4px)}}
+.stick{position:absolute;left:50%;top:50%;width:14px;height:170px;margin:-150px 0 0 -7px;background:linear-gradient(90deg,#c99a55,#e9c585 45%,#b98843);box-shadow:0 6px 14px rgba(80,50,10,.25);opacity:0;transform:translateY(40px);z-index:2}
+.stick::after{content:"";position:absolute;left:50%;bottom:-16px;width:8px;height:18px;margin-left:-4px;background:#c8372d;clip-path:polygon(0 0,100% 0,80% 100%,20% 100%)}
+.stick b{position:absolute;left:50%;top:14px;transform:translateX(-50%);writing-mode:vertical-rl;font-family:var(--bmj);font-size:13px;color:#5a3b10;letter-spacing:.1em}
+.stick.pop{animation:pop .75s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes pop{0%{opacity:1;transform:translateY(40px) rotate(0)}100%{opacity:1;transform:translateY(-120px) rotate(-10deg)}}
+.spark{position:absolute;left:50%;top:22%;width:5px;height:5px;border-radius:50%;background:var(--c);pointer-events:none;animation:sp .9s ease-out forwards}
+@keyframes sp{to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
+.chips{display:flex;gap:6px;justify-content:center;margin-bottom:12px}
+.chips button{height:36px;padding:0 15px;border:1px solid var(--line);background:#fff;color:var(--ink2);font-size:13.5px;font-weight:500}
+.chips button.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:700}
+.go{width:100%;height:56px;border:0;background:var(--ink);color:#fff;font-size:16px;font-weight:800;letter-spacing:.02em}
+.go:disabled{opacity:.5}
+.hint{margin:10px 0 0;text-align:center;font-size:12px;color:var(--ink3)}
+
+/* 2. 결과 */
+.res{padding:calc(env(safe-area-inset-top,0px) + 80px) 18px calc(env(safe-area-inset-bottom,0px) + 30px)}
+.head{text-align:center}
+.head small{display:block;font-size:12px;letter-spacing:.14em;color:var(--ink3);font-weight:700}
+.grade{display:inline-block;margin-top:12px;padding:6px 14px;font-size:14px;font-weight:900;letter-spacing:.3em;text-indent:.3em;color:#fff;background:var(--c)}
+.grade.care{background:#fff;color:var(--c);box-shadow:inset 0 0 0 1.5px var(--c)}
+.head h1{margin:12px 0 4px;font-family:var(--bmj);font-weight:400;font-size:32px;line-height:1.25}
+.head p{margin:0;font-size:14px;color:var(--ink2)}
+.stageM{position:relative;margin:18px -18px 0;padding:6px 18px 18px;background:linear-gradient(180deg,rgba(251,248,243,0),var(--cp) 40%,var(--cp))}
+.mini{width:190px;height:190px;margin:0 auto;background:#fff center/cover no-repeat;border-radius:50%;box-shadow:0 0 0 6px #fff,0 14px 30px rgba(60,40,20,.12);animation:hop .7s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes hop{0%{transform:translateY(20px) scale(.85);opacity:0}100%{transform:none;opacity:1}}
+.bub{position:relative;margin:18px 0 0;background:#fff;padding:16px 16px 15px;box-shadow:0 8px 24px rgba(60,40,20,.08)}
+.bub::before{content:"";position:absolute;left:50%;top:-9px;margin-left:-9px;border:9px solid transparent;border-top:0;border-bottom-color:#fff}
+.bub small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--c)}
+.bub p{margin:6px 0 0;font-family:var(--bmj);font-size:19px;line-height:1.55;color:var(--ink)}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:14px}
+.tiles div{background:#fff;padding:12px 8px;text-align:center}
+.tiles dt{font-size:11px;color:var(--ink3)}
+.tiles dd{margin:5px 0 0;font-size:14px;font-weight:700}
+.tiles i{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px;margin-right:5px;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+.act{margin-top:6px;background:#fff;padding:13px 14px;display:flex;gap:10px;align-items:center}
+.act small{flex:none;font-size:11.5px;font-weight:800;color:var(--c);letter-spacing:.06em}
+.act b{font-size:14.5px;font-weight:600}
+.row2{display:flex;gap:8px;margin-top:18px}
+.btn{flex:1;height:50px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:800;font-size:14.5px}
+.btn.pr{border:0;background:var(--ink);color:#fff}
+.up{display:flex;gap:12px;align-items:center;width:100%;margin-top:10px;padding:12px;border:0;background:var(--paper2);text-align:left;color:var(--ink)}
+.up .th{flex:none;width:52px;height:52px;border-radius:50%;background:#000 center 20%/cover no-repeat}
+.up small{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--c)}
+.up b{display:block;font-size:14.5px;margin-top:2px}
+.up span{display:block;font-size:12px;color:var(--ink3);margin-top:2px}
+.up em{margin-left:auto;font-style:normal;font-size:18px;color:var(--ink3)}
+.foot{margin:18px 0 0;text-align:center;font-size:11.5px;line-height:1.6;color:var(--ink3)}
+.sheet{position:absolute;inset:0;z-index:90;background:rgba(20,16,12,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px}
+.sheet.on{display:flex}
+.sheet img{max-height:70vh;max-width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.sheet .row2{width:100%;max-width:330px;margin:0}
+.toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 90px);transform:translateX(-50%);z-index:95;background:rgba(31,26,21,.92);color:#fff;font-size:13.5px;padding:10px 16px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>OBANG · 뽑기</b></div>
+
+  <section class="scr on" id="sIn"><div class="intro">
+    <div class="k">FREE · 하루 한 번</div>
+    <h1>오방 뽑기</h1>
+    <p class="sub">통을 흔들면, 오늘의 괘가 톡</p>
+    <div class="cast" id="cast"></div>
+    <div class="tongW"><div class="tong idle" id="tong" role="button" aria-label="점괘통 흔들기"></div><div class="stick" id="stick"><b id="stickN"></b></div></div>
+    <div class="chips" id="topics"><button class="on" data-k="today" type="button">오늘</button><button data-k="love" type="button">연애</button><button data-k="work" type="button">일</button><button data-k="money" type="button">돈</button></div>
+    <button class="go" id="go" type="button">흔들기</button>
+    <p class="hint" id="hint">통을 누르거나, 폰을 살짝 흔들어도 돼요</p>
+  </div></section>
+
+  <section class="scr" id="sRs"><div class="res">
+    <div class="head"><small id="rNo"></small><span class="grade" id="rGrade"></span><h1 id="rName"></h1><p id="rHead"></p></div>
+    <div class="stageM"><div class="mini" id="rMini"></div>
+      <div class="bub"><small id="rWho"></small><p id="rLine"></p></div>
+      <div class="tiles"><div><dt>행운 색</dt><dd id="rColor"></dd></div><div><dt>행운 아이템</dt><dd id="rItem"></dd></div><div><dt>피할 것</dt><dd id="rAvoid"></dd></div></div>
+      <div class="act"><small>오늘의 한 수</small><b id="rAct"></b></div>
+    </div>
+    <span id="rTopic" hidden></span>
+    <div class="row2"><button class="btn pr" id="save" type="button">결과 이미지 저장</button><button class="btn" id="again" type="button">다시 흔들기</button></div>
+    <button class="up" id="up" type="button"><span class="th" id="upTh"></span><div><small id="upK"></small><b id="upT"></b><span id="upS"></span></div><em>›</em></button>
+    <p class="foot">산가지는 매번 무작위로 뽑혀요. 재미로 보는 오늘의 한 괘예요</p>
+  </div></section>
+
+  <div class="sheet" id="sheet"><img id="shImg" alt="결과 이미지"><div class="row2"><button class="btn pr" id="shDl" type="button">이미지 받기</button><button class="btn" id="shX" type="button">닫기</button></div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const E={
+  wood:{k:'木',n:'하람',c:'#3f9f6e',p:'#e2f1e7',color:['초록','#5fb487'],item:'작은 화분',avoid:'미루기',act:'창문 열고 5분 걷기',ch:'wood',
+    names:{A:'새싹이 트는 괘',B:'가지가 뻗는 괘',C:'뿌리 내리는 괘',D:'덩굴이 얽힌 괘'},
+    L:{today:['오늘은 시작하는 쪽이 이겨. 미뤄 둔 거 하나만 꺼내 봐','마음이 좀 얽혀 있지. 오늘은 한 가지만 풀어도 충분해'],
+       love:['먼저 안부 한 줄 보내 봐. 그게 싹이 돼','지금 재촉하면 꼬여. 물 주듯이 천천히'],
+       work:['새 제안, 새 방식. 손 들어도 되는 날이야','일이 덩굴처럼 엉켰네. 순서부터 다시 적어 보자'],
+       money:['작게 심은 게 자라는 흐름이야. 적금 하나 괜찮아','여기저기 새는 곳이 있어. 구독부터 정리해 봐']}},
+  fire:{k:'火',n:'이안',c:'#e0553f',p:'#fce3dc',color:['빨강','#e8624d'],item:'빨간 립밤',avoid:'욱하는 말',act:'하고 싶던 말 한 줄 보내기',ch:'fire',
+    names:{A:'불꽃이 이는 괘',B:'등불이 켜지는 괘',C:'온기가 도는 괘',D:'불씨가 튀는 괘'},
+    L:{today:['오늘 너 좀 빛나. 숨지 말고 앞에 서','열이 오르는 날이야. 말하기 전에 딱 셋만 세'],
+       love:['고백각이야. 망설이면 불 꺼진다','질투 불씨 조심. 확인은 내일 해도 돼'],
+       work:['발표, 제안, 협상. 오늘은 네 목소리가 먹혀','급하게 밀어붙이면 타. 한 번만 더 검토해'],
+       money:['쓰는 만큼 돌아오는 날. 나를 위한 투자는 괜찮아','기분 따라 결제 금지. 장바구니에 하루만 재워 둬']}},
+  earth:{k:'土',n:'도준',c:'#c48f1d',p:'#f7ecc9',color:['노랑','#e3b84f'],item:'따뜻한 떡',avoid:'충동 결제',act:'지갑 정리하기',ch:'earth',
+    names:{A:'곳간이 차는 괘',B:'땅이 단단한 괘',C:'싹을 품은 괘',D:'돌이 무거운 괘'},
+    L:{today:['든든한 하루야. 기본만 해도 운이 붙어','몸이 무거운 날. 오늘은 제자리 지키는 게 이기는 거야'],
+       love:['편안함이 매력인 날이야. 같이 밥 먹자고 해 봐','서운한 거 쌓아 두지 마. 가볍게 한 번 말해'],
+       work:['꾸준히 한 게 인정받는 흐름이야','일이 더딘 건 네 탓 아니야. 오늘은 정리만 해도 돼'],
+       money:['곳간이 차는 날. 들어올 돈은 꼭 챙겨 받아','큰 결정은 다음 주로. 오늘은 지키는 날이야']}},
+  metal:{k:'金',n:'시온',c:'#6f7889',p:'#eceef2',color:['흰색','#f4f5f8'],item:'은반지',avoid:'날 선 말',act:'안 쓰는 것 하나 버리기',ch:'metal',
+    names:{A:'방울이 울리는 괘',B:'칼끝이 서는 괘',C:'거울이 맑은 괘',D:'쇠가 녹스는 괘'},
+    L:{today:['정리하면 운이 들어와. 책상부터 시작해','말이 날카로워지기 쉬워. 한 번 삼키고 말해'],
+       love:['애매한 관계에 선 긋기 좋은 날. 네 기준대로 가','차갑게 들릴 수 있어. 말끝에 웃음 하나 붙여'],
+       work:['결단 내릴 타이밍이야. 미뤄 둔 선택은 오늘 해','완벽주의 주의. 80점이면 제출해'],
+       money:['새는 돈 잘라 내기 딱 좋은 날. 해지 버튼 눌러','계약서 작은 글씨 다시 봐']}},
+  water:{k:'水',n:'재이',c:'#2f5fb0',p:'#dfe8f7',color:['남색','#34518f'],item:'물 한 잔',avoid:'밤샘 고민',act:'자기 전 물 한 잔',ch:'water',
+    names:{A:'물길이 트이는 괘',B:'샘이 솟는 괘',C:'잔잔한 호수 괘',D:'장마가 드는 괘'},
+    L:{today:['감이 잘 맞는 날. 첫 느낌 믿어도 돼','생각이 깊어지면 가라앉아. 오늘은 일찍 자'],
+       love:['마음이 통하는 날이야. 긴 대화 한 번 해 봐','혼자 상상하지 마. 궁금하면 물어봐'],
+       work:['아이디어가 흐르는 날. 메모장 켜 둬','정보가 넘치는 날. 확인 안 된 말은 흘려보내'],
+       money:['흐름이 들어오는 날. 부수입 기회 챙겨','감정 소비 조심. 새벽 쇼핑 금지']}}
+};
+const ORDER=['wood','fire','earth','metal','water'];
+const GR={A:['대길','오늘은 네 편이 제일 많은 날'],B:['길','흐름이 너를 밀어주는 날'],C:['소길','작게, 그래도 확실하게 좋은 날'],D:['조심','한 박자 쉬어 가면 괜찮은 날']};
+const TOPIC={today:'오늘',love:'연애',work:'일',money:'돈'};
+const UP={today:['오늘의 운세','내 사주로 보는 오늘 하루','today.html','img/seoha.jpg'],love:['도화 사주','태오가 봐주는 나의 매력','dohwa.html','img/taeo/base.jpg'],work:['커리어 사주','내 일 유형과 움직일 달','career.html','img/earth.jpg'],money:['2027 신년 운세','삼신 할매가 열두 달을 읽는다','sinnyeon.html','img/halmae.jpg']};
+let topic='today', busy=false, R=null;
+const rnd=n=>{ const a=new Uint32Array(1); crypto.getRandomValues(a); return a[0]%n; };
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1800); }
+function show(id){ document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id===id)); }
+$('cast').innerHTML=ORDER.map(k=>`<i style="--ec:${E[k].c};background-image:url('img/mini/${k}.jpg')"></i>`).join('')+'<span>다섯 수호신 중<br>한 명이 읽어 줘요</span>';
+$('topics').querySelectorAll('button').forEach(b=>b.onclick=()=>{ $('topics').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); topic=b.dataset.k; });
+
+/* 소리: 대나무 산가지 달그락 */
+let AC=null; const ctx=()=>{ try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==='suspended') AC.resume(); }catch(e){} return AC; };
+function clack(t0,v){ const a=ctx(); if(!a) return; const o=a.createOscillator(), g=a.createGain(); o.type='triangle'; o.frequency.value=900+Math.random()*700; g.gain.setValueAtTime(v,a.currentTime+t0); g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+t0+.06); o.connect(g).connect(a.destination); o.start(a.currentTime+t0); o.stop(a.currentTime+t0+.07); }
+function chime(){ const a=ctx(); if(!a) return; [660,990].forEach((f,i)=>{ const o=a.createOscillator(), g=a.createGain(); o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(.12,a.currentTime+i*.12); g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+i*.12+.8); o.connect(g).connect(a.destination); o.start(a.currentTime+i*.12); o.stop(a.currentTime+i*.12+.85); }); }
+
+function draw(){ /* 대길 15 · 길 35 · 소길 35 · 조심 15 */
+  const r=rnd(100), g=r<15?'A':r<50?'B':r<85?'C':'D', el=ORDER[rnd(5)], no=1+rnd(50);
+  return {g,el,no,topic}; }
+function shake(){ if(busy) return; busy=true; ctx(); $('go').disabled=true; const t=$('tong'), st=$('stick');
+  st.classList.remove('pop'); t.classList.remove('idle'); t.classList.add('shake'); if(navigator.vibrate) navigator.vibrate([30,40,30,40,30]);
+  for(let i=0;i<14;i++) clack(i*.09,.05+Math.random()*.05);
+  R=draw(); document.documentElement.style.setProperty('--c',E[R.el].c); document.documentElement.style.setProperty('--cp',E[R.el].p);
+  setTimeout(()=>{ t.classList.remove('shake'); $('stickN').textContent=`제 ${R.no} 번`; st.classList.add('pop'); chime();
+    const w=$('tongW')||t.parentNode; for(let k=0;k<16;k++){ const s=document.createElement('i'); s.className='spark'; const a=Math.random()*Math.PI*2, d=50+Math.random()*70; s.style.setProperty('--x',Math.cos(a)*d+'px'); s.style.setProperty('--y',Math.sin(a)*d+'px'); t.parentNode.appendChild(s); setTimeout(()=>s.remove(),950); }
+    setTimeout(()=>{ render(); show('sRs'); $('sRs').scrollTop=0; busy=false; $('go').disabled=false; t.classList.add('idle'); try{ localStorage.setItem('obPpg:'+new Date().toDateString(),JSON.stringify(R)); }catch(e){} },1300);
+  },1250); }
+function render(){ const e=E[R.el], gr=GR[R.g], care=R.g==='D';
+  $('rNo').textContent=`${TOPIC[R.topic]} · 제 ${R.no} 번 산가지`;
+  $('rGrade').textContent=gr[0]; $('rGrade').classList.toggle('care',care);
+  $('rName').textContent=e.names[R.g]; $('rHead').textContent=gr[1];
+  $('rMini').style.backgroundImage=`url('img/mini/${R.el}.jpg')`;
+  const jo=n=>{ const c=n.charCodeAt(n.length-1)-0xAC00; return n+((c>=0&&c%28)?'이가':'가'); };
+  $('rWho').textContent=`${e.k} · ${jo(e.n)} 읽어 줄게`;
+  $('rLine').textContent=e.L[R.topic][care?1:0];
+  $('rColor').innerHTML=`<i style="background:${e.color[1]}"></i>${e.color[0]}`; $('rItem').textContent=e.item; $('rAvoid').textContent=e.avoid; $('rAct').textContent=e.act;
+  $('rTopic').textContent=TOPIC[R.topic];
+  const u=UP[R.topic]; $('upTh').style.backgroundImage=`url('${u[3]}')`; $('upK').textContent='더 깊게 보기'; $('upT').textContent=u[0]; $('upS').textContent=u[1]; $('up').onclick=()=>go(u[2]); }
+$('go').onclick=shake; $('tong').onclick=shake;
+$('again').onclick=()=>{ show('sIn'); setTimeout(shake,450); };
+/* 폰 흔들기 */
+let lastShake=0;
+function onMotion(e){ const a=e.accelerationIncludingGravity||e.acceleration; if(!a) return; const m=Math.abs(a.x||0)+Math.abs(a.y||0)+Math.abs(a.z||0); if(m>34&&$('sIn').classList.contains('on')){ const n=performance.now(); if(n-lastShake>1500){ lastShake=n; shake(); } } }
+function motionOn(){ try{ const D=window.DeviceMotionEvent; if(D&&typeof D.requestPermission==='function'){ D.requestPermission().then(r=>{ if(r==='granted') addEventListener('devicemotion',onMotion); }).catch(()=>{}); } else addEventListener('devicemotion',onMotion); }catch(e){} }
+addEventListener('pointerdown',function once(){ motionOn(); removeEventListener('pointerdown',once,true); },true);
+
+/* 결과 이미지 1080×1350 */
+function loadImg(src){ return new Promise((ok,no)=>{ const i=new Image(); i.onload=()=>ok(i); i.onerror=no; i.src=src; }); }
+async function card(){ const e=E[R.el], gr=GR[R.g]; const cv=document.createElement('canvas'); cv.width=1080; cv.height=1350; const x=cv.getContext('2d');
+  x.fillStyle='#fbf8f3'; x.fillRect(0,0,1080,1350); x.fillStyle=e.p; x.fillRect(0,560,1080,790);
+  x.textAlign='center'; x.fillStyle='#b8862f'; x.font='800 30px "Noto Sans KR"'; x.fillText('OBANG · 오방 뽑기',540,110);
+  x.fillStyle='#8a8178'; x.font='700 30px "Noto Sans KR"'; x.fillText(`${TOPIC[R.topic]} · 제 ${R.no} 번 산가지`,540,170);
+  const care=R.g==='D'; x.fillStyle=care?'#fff':e.c; x.fillRect(430,205,220,70); if(care){ x.strokeStyle=e.c; x.lineWidth=4; x.strokeRect(432,207,216,66); }
+  x.fillStyle=care?e.c:'#fff'; x.font='900 38px "Noto Sans KR"'; x.fillText(gr[0].split('').join(' '),540,254);
+  x.fillStyle='#1f1a15'; x.font='76px "Song Myung"'; x.fillText(e.names[R.g],540,380); x.fillStyle='#5d544a'; x.font='500 34px "Noto Sans KR"'; x.fillText(gr[1],540,440);
+  try{ const im=await loadImg(`img/mini/${R.el}.jpg`); x.save(); x.beginPath(); x.arc(540,720,210,0,Math.PI*2); x.fillStyle='#fff'; x.fill(); x.clip(); x.drawImage(im,330,510,420,420); x.restore(); }catch(err){}
+  x.fillStyle='#fff'; x.fillRect(90,975,900,230); x.fillStyle=e.c; x.font='800 28px "Noto Sans KR"'; x.fillText(`${e.k} · ${e.n}`,540,1030);
+  x.fillStyle='#1f1a15'; x.font='44px "Song Myung"'; const line=e.L[R.topic][care?1:0], parts=line.split('. '); parts.slice(0,2).forEach((p,i)=>x.fillText(p,540,1100+i*62));
+  x.fillStyle='#8a8178'; x.font='500 26px "Noto Sans KR"'; x.fillText('오방사주 · 통을 흔들면 오늘의 괘가 톡',540,1290);
+  return cv.toDataURL('image/png'); }
+$('save').onclick=async()=>{ const u=await card(); $('shImg').src=u; $('sheet').classList.add('on'); $('shDl').onclick=()=>{ const a=document.createElement('a'); a.href=u; a.download='obang-ppopgi.png'; a.click(); }; };
+$('shX').onclick=()=>$('sheet').classList.remove('on');
+function go(u){ try{ sessionStorage.setItem('toHome',''); }catch(e){} location.href=u; }
+$('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+/* 오늘 이미 뽑았으면 안내만 */
+try{ const t=JSON.parse(localStorage.getItem('obPpg:'+new Date().toDateString())||'null'); if(t&&E[t.el]){ $('hint').textContent=`오늘 이미 ${E[t.el].names[t.g]}를 뽑았어요 · 한 번 더 흔들어도 돼요`; } }catch(e){}
+</script>
+<script src="archive.js"></script>
+<script src="depth3d.js"></script>
+</body>
+</html>

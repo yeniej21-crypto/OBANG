@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>택일 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700;900&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+
+/* 택일 — 목적별로 내 사주와 일진을 맞춰 좋은 날을 고른다. 정통 섹션 공통 톤: 한지 바탕·먹색 명조·붉은 인장. */
+:root{
+  --brush:'OBrush','Noto Serif KR',serif; --bmj:'Song Myung','Noto Serif KR',serif;
+  --paper:#f3ede2; --paper-2:#ebe3d5; --card:#fbf8f2; --ink:#1f1b16; --ink-2:#4a433a; --ink-3:#877d70; --line:#d9cfbf;
+  --seal:#b3322a; --good:#2f6b4f;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --serif:'Noto Serif KR',"Nanum Myeongjo",serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#d8cfbf;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button,select,input{font-family:inherit}
+.stage{position:relative;width:100%;max-width:460px;height:100%;overflow:hidden;overflow:clip;background:var(--paper);background-image:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.7),transparent 55%),radial-gradient(ellipse at 100% 100%,rgba(200,184,160,.35),transparent 60%)}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;border-radius:22px;box-shadow:0 30px 80px rgba(60,40,20,.35)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;opacity:0;pointer-events:none;transition:opacity .5s}
+.scr::-webkit-scrollbar{display:none}
+.scr.on{opacity:1;pointer-events:auto}
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px;background:linear-gradient(180deg,var(--paper) 70%,rgba(243,237,226,0))}
+.back{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.back svg{width:18px;height:18px}
+.top b{font-family:var(--serif);font-size:14px;font-weight:700;letter-spacing:.08em}
+.seal{display:inline-grid;place-items:center;border-radius:6px;background:var(--seal);color:#fff4ea;font-family:var(--serif);font-weight:900;text-align:center;transform:rotate(-4deg);box-shadow:inset 0 0 0 2px rgba(255,240,230,.35)}
+.top .seal{margin-left:auto;width:34px;height:34px;font-size:13px}
+.wrap{padding:0 18px calc(env(safe-area-inset-bottom,0px) + 30px)}
+.hero{position:relative;height:210px;border-radius:20px;overflow:hidden;background:#231d1a center 40%/cover no-repeat;margin-bottom:18px}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,15,12,.1),rgba(20,15,12,.75))}
+.hero div{position:absolute;left:18px;right:18px;bottom:16px;z-index:1;color:#f3ede2}
+.hero small{font-size:11.5px;letter-spacing:.24em;color:#e6c98f}
+.hero h1{margin:6px 0 4px;font-family:var(--serif);font-size:26px;font-weight:900}
+.hero p{margin:0;font-size:13px;color:#e3d8c8}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
+.card h3{margin:0 0 10px;font-size:13px;color:var(--ink-3);letter-spacing:.06em}
+.purp{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.purp button{height:62px;border-radius:12px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink);font-size:13.5px;font-weight:700;line-height:1.3}
+.purp button small{display:block;font-size:10.5px;color:var(--ink-3);font-weight:500}
+.purp button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.purp button.on small{color:#cfc3b3}
+.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.seg button{flex:1;height:40px;border:0;background:none;color:var(--ink-2);font-size:13.5px;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--paper);font-weight:700}
+.grid3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:6px;margin-top:8px}
+select{height:44px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:15px;padding:0 8px;width:100%}
+.go{width:100%;height:54px;border:0;border-radius:14px;background:var(--ink);color:var(--paper);font-size:16px;font-weight:700;cursor:pointer}
+.fine{font-size:11.5px;color:var(--ink-3);text-align:center;margin-top:10px;line-height:1.6}
+.hd small{display:block;font-size:12px;color:var(--seal);letter-spacing:.2em;font-weight:700}
+.hd h2{margin:6px 0 4px;font-family:var(--serif);font-size:23px;font-weight:900;line-height:1.35}
+.hd p{margin:0 0 14px;font-size:12.5px;color:var(--ink-3)}
+.best{display:grid;gap:8px}
+.day{display:grid;grid-template-columns:66px 1fr auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.day.top1{border-color:var(--seal);box-shadow:0 0 0 1px var(--seal)}
+.day .dt{text-align:center;border-right:1px dashed var(--line);padding-right:10px}
+.day .dt b{display:block;font-family:var(--serif);font-size:20px;line-height:1;white-space:nowrap;letter-spacing:-.02em}
+.day .dt small{display:block;font-size:11px;color:var(--ink-3);margin-top:3px}
+.day .tx b{font-size:14.5px}
+.day .tx b em{font-style:normal;font-family:var(--serif);color:var(--ink-2);font-weight:700;margin-left:6px}
+.day .tx p{margin:4px 0 0;font-size:12px;color:var(--ink-3)}
+.why{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.why span{border:1px solid rgba(179,50,42,.35);background:#fff6f2;color:var(--seal);font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;font-family:var(--serif)}
+.why span.g{border-color:rgba(47,107,79,.35);background:#f0f7f2;color:var(--good)}
+.day .sc{font-family:var(--serif);font-size:22px;font-weight:900;color:var(--seal)}
+.day .sc small{display:block;font-size:10px;color:var(--ink-3);text-align:center;font-family:var(--sans);font-weight:500}
+.cal{margin-top:6px}
+.cal h4{margin:14px 0 8px;font-family:var(--serif);font-size:15px}
+.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cg .w{font-size:11px;color:var(--ink-3);padding-bottom:2px}
+.cg .d{aspect-ratio:1;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;background:#fff;border:1px solid transparent;position:relative}
+.cg .d small{font-size:8.5px;color:var(--ink-3);font-family:var(--serif)}
+.cg .d.out{background:none;color:#c9bfb0}
+.cg .d.out small{display:none}
+.cg .d.top{background:var(--seal);color:#fff}
+.cg .d.top small{color:#ffd9d3}
+.cg .d.good{border-color:var(--good);color:var(--good);font-weight:700}
+.cg .d.bad{color:#b9ada0;text-decoration:line-through}
+.cg .d.sonx:after{content:"";position:absolute;top:4px;right:4px;width:5px;height:5px;border-radius:50%;background:#c9a86a}
+.lg{display:flex;flex-wrap:wrap;gap:10px;font-size:11.5px;color:var(--ink-2);margin-top:10px}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.quote{display:flex;gap:12px;align-items:flex-start;margin:14px 0;padding:14px;border-radius:16px;background:#2a2320;color:#f3ede2}
+.quote .av{flex:none;width:44px;height:44px;border-radius:50%;background:#000 center 20%/cover;box-shadow:0 0 0 2px #c9a86a}
+.quote b{display:block;font-size:11px;letter-spacing:.2em;color:#c9a86a;margin-bottom:4px}
+.quote p{margin:0;font-family:var(--serif);font-size:14.5px;line-height:1.6;font-weight:700}
+.note{font-size:11.5px;color:var(--ink-3);line-height:1.6;margin:14px 2px 0}
+.lock{margin-top:12px;background:var(--card);border:1px dashed var(--seal);border-radius:16px;padding:14px;text-align:center}
+.lock b{font-family:var(--serif);font-size:15px}.lock small{display:block;font-size:12px;color:var(--ink-2);margin:4px 0 10px}
+.lock .go{height:46px;font-size:14.5px}
+.toast{position:absolute;left:50%;bottom:40px;transform:translate(-50%,8px);z-index:60;background:var(--ink);color:var(--paper);font-size:13.5px;padding:10px 16px;border-radius:999px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* 붓글씨 헤드라인 (East Sea Dokdo) + 붓 명조 보조 (Song Myung) */
+.hero h1{font-family:var(--brush)!important;font-weight:400!important;font-size:34px!important;line-height:1.2!important}
+.hd h2{font-family:var(--bmj)!important;font-weight:400!important}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="scr on" id="sIn">
+    <div class="top"><button class="back" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>오방사주 · 택일</b><span class="seal">吉</span></div>
+    <div class="wrap">
+      <div class="hero" style="background-image:url('img/taegil.jpg');background-position:center 8%"><div><small>擇日 · 좋은 날 고르기</small><h1>그날, 해도 되는 날일까</h1><p>내 사주와 날마다 바뀌는 일진을 맞춰 길한 날을 골라준다.</p></div></div>
+      <div class="card"><h3>무엇을 하려고 하나요</h3>
+        <div class="purp" id="purp">
+          <button class="on" data-p="move">이사<small>입주·이전</small></button>
+          <button data-p="contract">계약<small>서류·도장</small></button>
+          <button data-p="love">고백·데이트<small>첫 만남</small></button>
+          <button data-p="exam">면접·시험<small>평가받는 날</small></button>
+          <button data-p="open">개업·시작<small>첫 출근·런칭</small></button>
+          <button data-p="talk">중요한 대화<small>협상·화해</small></button>
+        </div></div>
+      <div class="card"><h3>언제 안에서 고를까요</h3><div class="seg" id="rSeg"><button data-v="30" class="on">30일</button><button data-v="60">60일</button><button data-v="90">90일</button></div></div>
+      <div class="card"><h3>내 생년월일</h3>
+        <div class="seg" id="cSeg"><button data-v="s" class="on">양력</button><button data-v="l">음력</button></div>
+        <div class="grid3"><select id="by" aria-label="년"></select><select id="bm" aria-label="월"></select><select id="bd" aria-label="일"></select></div>
+        <select id="bh" aria-label="태어난 시" style="margin-top:6px"></select></div>
+      <button class="go" id="goBtn">좋은 날 찾기</button>
+      <p class="fine">일진(그날의 간지)과 내 사주의 합·충, 목적에 맞는 십성,<br>이사는 손 없는 날까지 함께 봅니다.</p>
+    </div>
+  </div>
+  <div class="scr" id="sOut">
+    <div class="top"><button class="back" id="back2" aria-label="다시 고르기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>택일 결과</b><span class="seal">吉</span></div>
+    <div class="wrap">
+      <div class="hd"><small id="oK"></small><h2 id="oT"></h2><p id="oS"></p></div>
+      <div class="best" id="best"></div>
+      <div class="quote"><div class="av" style="background-image:url('img/taegil.jpg');background-position:center 12%"></div><div><b>택일 명인 월하</b><p id="qT"></p></div></div>
+      <div class="card cal" id="cal"></div>
+      <div class="lock"><b>시간까지 맞춘 정밀 택일</b><small>그날 가장 좋은 시간대 · 방향 · 함께할 사람의 사주까지</small><button class="go" id="payBtn">9,900원 · 정밀 택일 받기</button></div>
+      <p class="note">체험판입니다. 일진은 실제 만세력 계산값이며, 점수는 명리 규칙(일지·년지 합충형, 목적별 십성, 신강·신약, 손 없는 날)으로 자동 산출합니다. 중요한 일정은 개인 사정을 함께 고려하세요.</p>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script src="menuintro.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const Sj=window.Saju; const {GAN,JI,EL,stEl}=Sj;
+const HOURS=['자시 (23:30~01:29)','축시 (01:30~03:29)','인시 (03:30~05:29)','묘시 (05:30~07:29)','진시 (07:30~09:29)','사시 (09:30~11:29)','오시 (11:30~13:29)','미시 (13:30~15:29)','신시 (15:30~17:29)','유시 (17:30~19:29)','술시 (19:30~21:29)','해시 (21:30~23:29)'];
+const PUR={move:{n:'이사',want:['정인','편인','정재'],avoid:['겁재','상관'],q:'새 집에 기운이 머무는 날'},contract:{n:'계약',want:['정관','정재','정인'],avoid:['겁재','편관','상관'],q:'도장이 제 몫을 하는 날'},love:{n:'고백·데이트',want:['식신','정재','정관'],avoid:['겁재','편관'],q:'마음이 전해지는 날'},exam:{n:'면접·시험',want:['정관','정인','편인'],avoid:['상관','겁재'],q:'평가하는 눈이 너를 알아보는 날'},open:{n:'개업·시작',want:['식신','정재','편재'],avoid:['겁재','편관'],q:'첫 단추가 잘 끼워지는 날'},talk:{n:'중요한 대화',want:['식신','정인','정관'],avoid:['상관','편관'],q:'말이 부드럽게 닿는 날'}};
+let purpose='move', range=30, cal='s';
+(function(){
+  const by=$('by'),bm=$('bm'),bd=$('bd'),bh=$('bh');
+  for(let y=2008;y>=1955;y--) by.add(new Option(y+'년',y,false,y===1996));
+  for(let m=1;m<=12;m++) bm.add(new Option(m+'월',m,false,m===5));
+  const fill=()=>{ const n=cal==='s'?new Date(+by.value,+bm.value,0).getDate():30, cur=+bd.value||14; bd.innerHTML=''; for(let d=1;d<=n;d++) bd.add(new Option(d+'일',d,false,d===Math.min(cur,n))); };
+  fill(); by.onchange=fill; bm.onchange=fill;
+  bh.add(new Option('태어난 시 모름','x',true,true)); HOURS.forEach((h,i)=>bh.add(new Option(h,i)));
+  const seg=(id,cb)=>$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{ $(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); cb(b.dataset.v); });
+  seg('rSeg',v=>range=+v); seg('cSeg',v=>{ cal=v; fill(); });
+  $('purp').querySelectorAll('button').forEach(b=>b.onclick=()=>{ $('purp').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); purpose=b.dataset.p; });
+})();
+function show(id){ ['sIn','sOut'].forEach(s=>$(s).classList.toggle('on',s===id)); $(id).scrollTop=0; }
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2000); }
+const WD='일월화수목금토';
+const doTarget=b=>[2,6,10].includes(b)?3:[8,0,4].includes(b)?9:[5,9,1].includes(b)?6:0;
+$('goBtn').onclick=()=>{
+  let y=+$('by').value,m=+$('bm').value,d=+$('bd').value; const h=$('bh').value==='x'?null:+$('bh').value;
+  let sol={y,m,d}; if(cal==='l'){ sol=Sj.lunarToSolar(y,m,d,false); if(!sol){ toast('없는 음력 날짜예요'); return; } }
+  const P=Sj.pillars(sol.y,sol.m,sol.d,h), dm=P.d[0], st=Sj.strength(P), me=P.d[1], yb=P.y[1], peach=doTarget(me);
+  const U=PUR[purpose]; const t0=new Date(); t0.setHours(0,0,0,0); const base=Sj.dayIdx(t0.getFullYear(),t0.getMonth()+1,t0.getDate());
+  const days=[];
+  for(let i=1;i<=range;i++){
+    const dd=Sj.fromIdx(base+i); const p=Sj.dayPillar(dd.y,dd.m,dd.d); const tg=Sj.tgStem(dm,p[0]); const lun=Sj.solarToLunar(dd.y,dd.m,dd.d);
+    const wd=new Date(dd.y,dd.m-1,dd.d).getDay(); let sc=55; const why=[], bad=[];
+    if(Sj.isChung(p[1],me)){ sc-=35; bad.push(`${JI[p[1]]}${JI[me]} 충`); }
+    if(Sj.isChung(p[1],yb)){ sc-=12; bad.push('띠와 충'); }
+    if(Sj.isHyung(p[1],me)){ sc-=8; bad.push('형'); }
+    if(Sj.isHap(p[1],me)){ sc+=15; why.push(['일지 합','g']); }
+    if(Sj.isHap(p[1],yb)){ sc+=5; why.push(['띠와 합','g']); }
+    if(U.want.includes(tg)){ sc+=13; why.push([tg+'일','']); }
+    if(U.avoid.includes(tg)){ sc-=10; bad.push(tg+'일'); }
+    if(Sj.favorable(st,Sj.rel(dm,stEl(p[0])))){ sc+=6; }
+    const son=lun&&[9,0].includes(lun.d%10);
+    if(purpose==='move'&&son){ sc+=18; why.unshift(['손 없는 날','g']); }
+    if(purpose==='love'&&p[1]===peach){ sc+=18; why.unshift(['도화일','g']); }
+    if(['move','love','open'].includes(purpose)&&(wd===0||wd===6)){ sc+=3; }
+    sc=Math.max(10,Math.min(98,Math.round(sc)));
+    days.push({dd,p,tg,lun,wd,sc,why,bad,son,chung:Sj.isChung(p[1],me)});
+  }
+  const ok=days.filter(x=>!x.chung&&!x.bad.includes('띠와 충'));
+  const top=[...ok].sort((a,b)=>b.sc-a.sc).slice(0,5);
+  const topSet=new Set(top.map(x=>x.dd.y*10000+x.dd.m*100+x.dd.d));
+  $('oK').textContent=`擇日 · ${U.n}`; $('oT').textContent=`${U.n}하기 좋은 날 다섯`;
+  $('oS').textContent=`앞으로 ${range}일 · 일간 ${GAN[dm]}${EL[stEl(dm)]} · 일지 ${JI[me]} · ${st.label}`;
+  $('best').innerHTML=top.map((x,i)=>`<div class="day ${i===0?'top1':''}"><div class="dt"><b>${x.dd.m}.${x.dd.d}</b><small>${WD[x.wd]}요일</small></div><div class="tx"><b>${i===0?'가장 좋은 날':['두 번째','세 번째','네 번째','다섯 번째'][i-1]}<em>${GAN[x.p[0]]}${JI[x.p[1]]}일</em></b><p>음력 ${x.lun?`${x.lun.m}월 ${x.lun.d}일${x.lun.leap?'(윤)':''}`:''}</p><div class="why">${x.why.slice(0,3).map(w=>`<span class="${w[1]}">${w[0]}</span>`).join('')}${x.why.length?'':'<span>무난한 날</span>'}</div></div><div class="sc">${x.sc}<small>점</small></div></div>`).join('');
+  const worst=days.filter(x=>x.chung).slice(0,3);
+  const t=top[0]; $('qT').textContent=`${U.q}은 ${t.dd.m}월 ${t.dd.d}일이야. ${t.why.length?t.why.map(w=>w[0]).slice(0,2).join('에 ')+'이 겹친 날이지.':''}${worst.length?` ${worst.map(x=>`${x.dd.m}월 ${x.dd.d}일`).join(', ')}은 네 일지와 부딪히니 피해.`:''}`;
+  // calendar by month
+  const byM={}; days.forEach(x=>{ const k=x.dd.y+'-'+x.dd.m; (byM[k]=byM[k]||[]).push(x); });
+  let html=''; Object.keys(byM).forEach(k=>{ const [yy,mm]=k.split('-').map(Number); const first=new Date(yy,mm-1,1).getDay(), n=new Date(yy,mm,0).getDate(); const map={}; byM[k].forEach(x=>map[x.dd.d]=x);
+    html+=`<h4>${yy}년 ${mm}월</h4><div class="cg">${[...WD].map(w=>`<div class="w">${w}</div>`).join('')}${'<div></div>'.repeat(first)}`;
+    for(let d=1;d<=n;d++){ const x=map[d]; if(!x){ html+=`<div class="d out">${d}</div>`; continue; } const cls=topSet.has(yy*10000+mm*100+d)?'top':x.chung?'bad':x.sc>=70?'good':''; html+=`<div class="d ${cls} ${purpose==='move'&&x.son?'sonx':''}">${d}<small>${GAN[x.p[0]]}${JI[x.p[1]]}</small></div>`; }
+    html+='</div>'; });
+  $('cal').innerHTML=html+`<div class="lg"><span><i style="background:var(--seal)"></i>추천 다섯 날</span><span><i style="border:1.5px solid var(--good)"></i>좋은 날</span><span><i style="background:#e6ddd0"></i>일지와 충(피할 날)</span>${purpose==='move'?'<span><i style="background:#c9a86a;border-radius:50%"></i>손 없는 날</span>':''}</div>`;
+  show('sOut');
+};
+$('back2').onclick=()=>show('sIn');
+$('back1').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
+$('payBtn').onclick=()=>toast('체험판이라 결제는 여기까지예요');
+
+/* 첫 화면 캐릭터 인트로 */
+MenuIntro.play({src:'v/menu/taegil.mp4',poster:'img/taegil.jpg',who:'월하 · 擇日',title:'택일',subs:[[0.9,'그날…'],[2.2,'해도 되는 날일까.'],[4.6,'날은 내가 골라줄게.']]});
+</script>
+<script src="depth3d.js"></script>
+<script>window.Depth3D&&setTimeout(()=>Depth3D.watch('.hero,#heroP,.ch,#sLoad'),200);</script>
+</body>
+</html>

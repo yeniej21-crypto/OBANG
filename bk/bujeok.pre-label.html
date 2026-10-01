@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>부적 카드 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 부적 카드 — 내 사주에 모자란 기운의 미니가 사는 부적을, 모으는 수집 카드로. 카드 그림(img/card/{el}.jpg) 위에 이름·용도·날짜는 코드로 얹는다.
+   기울이면 홀로그램 광택(depth3d.js holo). 희귀도: 일반 · 레어(금빛) · 홀로(무지개). */
+:root{
+  --brush:'OBrush','Song Myung',serif; --bmj:'Song Myung','Noto Serif KR',serif; --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --paper:#fbf8f3; --paper2:#f4eee4; --ink:#1f1a15; --ink2:#5d544a; --ink3:#8a8178; --red:#c8372d; --gold:#b8862f; --line:rgba(60,40,20,.1);
+  --c:#3f9f6e; --cp:#e2f1e7; color-scheme:light;
+  /* 카드 그림 속 빈칸 위치(%) — 그림 확인 후 맞춤 */
+  
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#efe9df;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button{font-family:inherit;cursor:pointer}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--paper);overflow:hidden}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;box-shadow:0 30px 80px rgba(60,40,20,.18)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}
+.scr::-webkit-scrollbar{display:none}
+.top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 14px 10px;pointer-events:none}
+.top>*{pointer-events:auto}
+.ib{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.7);display:grid;place-items:center;color:var(--ink)}
+.ib svg{width:18px;height:18px}
+.top b{font-size:12.5px;font-weight:800;letter-spacing:.16em;color:var(--ink2)}
+.wrap{padding:calc(env(safe-area-inset-top,0px) + 64px) 18px calc(env(safe-area-inset-bottom,0px) + 30px);background:radial-gradient(90% 38% at 50% 30%,var(--cp),rgba(251,248,243,0) 70%)}
+.hd .k{font-size:11.5px;font-weight:800;letter-spacing:.2em;color:var(--red)}
+.hd h1{margin:8px 0 4px;font-family:var(--brush);font-weight:400;font-size:44px;line-height:1.08}
+.hd p{margin:0;font-family:var(--bmj);font-size:16px;color:var(--ink2)}
+
+/* 카드 */
+.cardW{position:relative;margin:22px auto 0;width:min(78vw,320px);perspective:1000px}
+.card{position:relative;width:100%;aspect-ratio:648/1046;border-radius:8px!important;overflow:hidden;background:#e9dfb8 center/cover no-repeat;box-shadow:0 18px 40px rgba(60,40,20,.28),0 2px 0 rgba(255,255,255,.6) inset;transform-style:preserve-3d;transition:transform .2s}
+.card .face{position:absolute;inset:0;border-radius:inherit}
+.card .foil{position:absolute;inset:0;pointer-events:none;mix-blend-mode:color-dodge;opacity:0;background:linear-gradient(115deg,rgba(255,0,128,0) 20%,rgba(255,120,120,.5) 32%,rgba(255,230,120,.55) 40%,rgba(120,255,200,.5) 48%,rgba(120,180,255,.5) 56%,rgba(220,140,255,.45) 64%,rgba(255,0,128,0) 76%);background-size:250% 250%;background-position:var(--sx,50%) var(--sy,50%);transition:opacity .4s}
+.card.r2 .foil{opacity:.35;background:linear-gradient(115deg,rgba(255,215,120,0) 25%,rgba(255,215,130,.75) 45%,rgba(255,245,210,.9) 50%,rgba(255,200,110,.7) 55%,rgba(255,215,120,0) 75%);background-size:250% 250%;background-position:var(--sx,50%) var(--sy,50%)}
+.card.r3 .foil{opacity:.55}
+.card .seal{position:absolute;left:42.7%;width:14.6%;top:86.5%;height:8.3%;z-index:4;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;font-family:var(--serif);font-weight:900;font-size:clamp(9px,2.7vw,12px);line-height:1;letter-spacing:.02em;color:#b0231a;opacity:.92;mix-blend-mode:multiply}
+/* 카드 위 라벨: 등급 매긴 카드 케이스처럼 */
+.label{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;margin-bottom:8px;padding:9px 12px;background:#fff;box-shadow:inset 0 0 0 1.5px #c8372d,0 6px 16px rgba(60,40,20,.08)}
+.label b{display:block;font-family:var(--serif);font-weight:900;font-size:14px;color:#1f1a15}
+.label small{display:block;font-size:11px;color:var(--ink3);margin-top:2px;letter-spacing:.02em}
+.label em{font-style:normal;text-align:right;font-family:var(--serif);font-weight:900;font-size:12px;letter-spacing:.14em;color:#c8372d}
+.label em i{display:block;font-style:normal;font-family:var(--sans);font-weight:500;font-size:10.5px;letter-spacing:0;color:var(--ink3);margin-top:2px}
+.rar{display:flex;justify-content:center;gap:8px;align-items:center;margin-top:14px}
+.rar span{font-size:11.5px;font-weight:800;letter-spacing:.14em;padding:5px 10px;background:#fff;color:var(--ink2);box-shadow:inset 0 0 0 1px var(--line)}
+.rar span.r2{background:linear-gradient(135deg,#f6e3a8,#d9ab4f);color:#3a2708;box-shadow:none}
+.rar span.r3{background:linear-gradient(120deg,#ffc6d9,#fff0a8,#b8f5dc,#bcd6ff,#e6c4ff);color:#2b2230;box-shadow:none}
+.rar small{font-size:12px;color:var(--ink3)}
+.tilt{margin:8px 0 0;text-align:center;font-size:12px;color:var(--ink3)}
+
+/* 용도 */
+.lab{margin:22px 2px 8px;font-size:12.5px;font-weight:700;color:var(--ink2)}
+.uses{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.uses button{height:40px;border:1px solid var(--line);background:#fff;color:var(--ink2);font-size:13.5px;font-weight:500}
+.uses button.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:700}
+.bless{margin-top:12px;background:#fff;padding:15px 16px}
+.bless small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--c)}
+.bless p{margin:6px 0 0;font-family:var(--bmj);font-size:18px;line-height:1.55}
+/* 근거 */
+.why{margin-top:10px;background:var(--paper2);padding:15px 16px}
+.why h3{margin:0 0 10px;font-size:12px;letter-spacing:.14em;color:var(--gold);font-weight:800}
+.why ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.why li{display:grid;grid-template-columns:62px 1fr;gap:8px;font-size:13.5px;line-height:1.55;color:var(--ink2)}
+.why li b{color:var(--ink);font-weight:700}
+.why .nb{margin:10px 0 0;font-size:11.5px;line-height:1.6;color:var(--ink3)}
+.row2{display:flex;gap:8px;margin-top:16px}
+.btn{flex:1;height:50px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:800;font-size:14.5px}
+.btn.pr{border:0;background:var(--ink);color:#fff}
+/* 도감 */
+.col{margin-top:22px}
+.col h3{display:flex;justify-content:space-between;margin:0 2px 10px;font-size:13px;font-weight:700;color:var(--ink2)}
+.col h3 small{font-weight:500;color:var(--ink3)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.grid div{position:relative;aspect-ratio:648/1046;background:#ebe4d8;overflow:hidden}
+.grid div.has{background:#e9dfb8 center/cover no-repeat}
+.grid div.lock::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--bmj);font-size:22px;color:#c2b8a8}
+.grid div i{position:absolute;left:0;right:0;bottom:0;padding:3px 0;text-align:center;font-style:normal;font-size:10px;font-weight:700;color:#fff;background:rgba(31,26,21,.72)}
+.grid div.r3::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,198,217,.35),rgba(255,240,168,.35),rgba(184,245,220,.35),rgba(188,214,255,.35));mix-blend-mode:color-dodge}
+.price{margin:18px 0 0;text-align:center;font-size:12px;line-height:1.6;color:var(--ink3)}
+.price b{color:var(--red)}
+.sheet{position:absolute;inset:0;z-index:90;background:rgba(20,16,12,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px}
+.sheet.on{display:flex}
+.sheet img{max-height:70vh;max-width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.sheet .row2{width:100%;max-width:330px;margin:0}
+.toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 90px);transform:translateX(-50%);z-index:95;background:rgba(31,26,21,.92);color:#fff;font-size:13.5px;padding:10px 16px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+.hsh,.hgl{display:none}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>OBANG · 부적 카드</b></div>
+  <div class="scr"><div class="wrap">
+    <div class="hd"><div class="k">NEW · 하루 한 장</div><h1>오늘의 부적 카드</h1><p>내 사주에 모자란 기운이, 부적 속에 산다</p></div>
+    <div class="cardW"><div class="label"><div><b id="cT"></b><small id="cB"></small></div><em id="cR"></em></div><div class="card" id="card"><div class="face" id="face"></div><div class="foil" id="foil"></div><div class="seal" id="cS"></div></div></div>
+    <div class="rar"><span id="rar"></span><small id="rarS"></small></div>
+    <p class="tilt">폰을 기울이면 부적이 반짝여요</p>
+
+    <div class="lab">무엇을 빌어 볼까</div>
+    <div class="uses" id="uses"><button data-k="money" type="button">재물</button><button class="on" data-k="love" type="button">인연</button><button data-k="pass" type="button">합격</button><button data-k="health" type="button">건강</button><button data-k="guard" type="button">액막이</button></div>
+    <div class="bless"><small id="bK"></small><p id="bT"></p></div>
+
+    <div class="why"><h3>이 부적은 이렇게 그렸어요</h3><ul id="whyL"></ul><p class="nb">부적 형식(괴황지 · 주사 붉은 획 · 도장)은 전통을 따르고, 그 안의 미니 · 사신 · 문양 · 색 · 방위 · 숫자는 내 사주에서 나와요. 마음을 다잡는 부적이에요</p></div>
+
+    <div class="row2"><button class="btn pr" id="save" type="button">카드 저장</button><button class="btn" id="wall" type="button">배경화면으로 받기</button></div>
+
+    <div class="col"><h3>모은 부적 <small id="colN"></small></h3><div class="grid" id="grid"></div></div>
+    <p class="price">정식 오픈 때 <b>990원</b> · 체험판에서는 무료로 모을 수 있어요<br>지금은 木 하람 부적만 열려 있어요</p>
+  </div></div>
+  <div class="sheet" id="sheet"><img id="shImg" alt="부적 카드 이미지"><div class="row2"><button class="btn pr" id="shDl" type="button">이미지 받기</button><button class="btn" id="shX" type="button">닫기</button></div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const EL={wood:{k:'木',n:'하람',god:'청룡',dir:'동쪽',num:'3 · 8',color:'초록',sw:'#5fb487',feed:'水',feedN:'물결 문양',c:'#3f9f6e',p:'#e2f1e7',img:'img/card/wood.jpg'}};
+const ELK=['wood','fire','earth','metal','water'], ELN={wood:'木',fire:'火',earth:'土',metal:'金',water:'水'}, ELG={wood:'하람',fire:'이안',earth:'도준',metal:'시온',water:'재이'};
+const USE={money:['재물','작게 심은 게 크게 자라. 새는 돈부터 막자'],love:['인연','먼저 건넨 안부 한 줄이 싹이 돼'],pass:['합격','매일 조금씩. 뿌리가 끝까지 버텨 줄 거야'],health:['건강','창문 열고 숨 크게. 초록을 가까이 둬'],guard:['액막이','얽힌 덩굴은 내가 걷어 줄게']};
+const RAR=[['일반','','매일 나오는 부적'],['레어','r2','금빛이 도는 부적'],['홀로','r3','무지개로 빛나는 부적 · 드물게 나와요']];
+let use='love';
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1800); }
+function me(){ try{ return JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){ return null; } }
+const today=new Date(), dstr=`${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
+function hash(s){ let h=2166136261; for(const ch of s){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; }
+function rarity(){ const m=me(), r=hash(dstr+'|'+use+'|'+((m&&m.name)||'')+'|'+((m&&m.y)||''))%100; return r<10?2:r<40?1:0; }
+/* 내 사주에서 가장 모자란 기운 */
+function lowEl(){ const m=me(), S=window.Saju; if(!m||!m.y||!S) return null; try{ let s={y:m.y,m:m.m,d:m.d}; if(m.cal==='l'){ s=S.lunarToSolar(m.y,m.m,m.d,false)||s; } const P=S.pillars(s.y,s.m,s.d,m.h==null?null:+m.h), c=S.elCount(P); let lo=0; c.forEach((v,i)=>{ if(v<c[lo]) lo=i; }); return {k:ELK[lo],cnt:c}; }catch(e){ return null; } }
+function render(){ const e=EL.wood, m=me(), u=USE[use], r=rarity(), R=RAR[r];
+  document.documentElement.style.setProperty('--c',e.c); document.documentElement.style.setProperty('--cp',e.p);
+  $('face').style.background=`url('${e.img}') center/cover no-repeat`;
+  $('cT').textContent=`${e.k} · ${e.n}의 ${u[0]} 부적`;
+  $('cB').textContent=`${m&&m.name?m.name+' · ':''}${dstr}`;
+  $('cR').innerHTML=`${R[0]}<i>No. ${String(hash(dstr+use)%900+100)}</i>`;
+  $('cS').textContent=(m&&m.name?m.name:'오방').slice(0,3);
+  $('card').className='card '+R[1]; $('rar').className=R[1]; $('rar').textContent=R[0]; $('rarS').textContent=R[2];
+  $('bK').textContent=`${e.k} · ${e.n} · ${u[0]} 부적`; $('bT').textContent=u[1];
+  const lo=lowEl(); const li=[];
+  if(lo){ li.push(`<li><b>내 사주</b><span>여덟 글자 중 ${ELK.map((k,i)=>ELN[k]+' '+lo.cnt[i]).join(' · ')} · 가장 모자란 기운은 <b>${ELN[lo.k]}</b></span></li>`);
+    if(lo.k!=='wood') li.push(`<li><b>체험판</b><span>원래는 ${ELN[lo.k]} ${ELG[lo.k]} 부적이 나와요. 지금은 하람 부적으로 보여드려요</span></li>`); }
+  li.push(`<li><b>주인공</b><span>${e.k} 기운을 맡은 미니 수호신 ${e.n}</span></li>`,`<li><b>사신</b><span>${e.k}의 수호신 ${e.god}이 붉은 선으로 감싸요</span></li>`,`<li><b>상생</b><span>${e.feed}가 ${e.k}을 살려서, 아래에 ${e.feedN}</span></li>`,`<li><b>행운</b><span>색 ${e.color} · 방위 ${e.dir} · 숫자 ${e.num}</span></li>`,`<li><b>북두칠성</b><span>예부터 부적에 넣던 수명과 복의 별</span></li>`);
+  $('whyL').innerHTML=li.join('');
+  collect(r); }
+/* 도감: 오늘 · 용도별로 한 장씩 */
+function readCol(){ try{ return JSON.parse(localStorage.getItem('obCards')||'[]'); }catch(e){ return []; } }
+function collect(r){ const a=readCol(), id=dstr+'|'+use; if(!a.find(x=>x.id===id)){ a.unshift({id,el:'wood',use,r,d:dstr}); try{ localStorage.setItem('obCards',JSON.stringify(a.slice(0,60))); }catch(e){} } drawCol(); }
+function drawCol(){ const a=readCol(); $('colN').textContent=`${a.length}장 · 홀로 ${a.filter(x=>x.r===2).length}장`;
+  const cells=[]; for(let i=0;i<10;i++){ const x=a[i]; cells.push(x?`<div class="has ${RAR[x.r][1]}" style="background-image:url('${EL[x.el].img}')"><i>${USE[x.use][0]}</i></div>`:'<div class="lock"></div>'); } $('grid').innerHTML=cells.join(''); }
+$('uses').querySelectorAll('button').forEach(b=>b.onclick=()=>{ $('uses').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); use=b.dataset.k; render(); const c=$('card'); c.animate([{transform:'rotateY(0)'},{transform:'rotateY(180deg)'},{transform:'rotateY(360deg)'}],{duration:700,easing:'cubic-bezier(.3,.7,.2,1)'}); });
+
+/* 이미지: 카드 · 배경화면 */
+function loadImg(src){ return new Promise((ok,no)=>{ const i=new Image(); i.onload=()=>ok(i); i.onerror=no; i.src=src; }); }
+async function drawCard(x,X,Y,W,H){ const e=EL.wood, m=me(), u=USE[use], r=rarity(); const im=await loadImg(e.img); x.save(); x.beginPath(); x.rect(X,Y,W,H); x.clip(); x.drawImage(im,X,Y,W,H);
+  if(r>0){ const g=x.createLinearGradient(X,Y,X+W,Y+H); if(r===2){ ['rgba(255,150,180,.28)','rgba(255,240,150,.28)','rgba(150,255,210,.28)','rgba(150,190,255,.28)','rgba(220,160,255,.28)'].forEach((c,i)=>g.addColorStop(i/4,c)); } else { g.addColorStop(0,'rgba(255,220,140,0)'); g.addColorStop(.5,'rgba(255,225,150,.32)'); g.addColorStop(1,'rgba(255,220,140,0)'); } x.globalCompositeOperation='screen'; x.fillStyle=g; x.fillRect(X,Y,W,H); x.globalCompositeOperation='source-over'; }
+  x.restore();
+  /* 도장 속 이름(세로) */
+  const nm=(m&&m.name?m.name:'오방').slice(0,3), sx=X+W*.5, sy=Y+H*.865, sh=H*.083, fs=Math.round(W*.04); x.fillStyle='rgba(176,35,26,.92)'; x.textAlign='center'; x.font=`900 ${fs}px "Noto Serif KR"`;
+  nm.split('').forEach((ch,i)=>x.fillText(ch,sx,sy+sh/2-(nm.length*fs*1.02)/2+fs*.88+i*fs*1.02)); }
+function drawLabel(x,X,Y,W,H){ const e=EL.wood, m=me(), u=USE[use], R=RAR[rarity()]; x.fillStyle='#fff'; x.fillRect(X,Y,W,H); x.strokeStyle='#c8372d'; x.lineWidth=Math.max(3,W*.006); x.strokeRect(X+x.lineWidth/2,Y+x.lineWidth/2,W-x.lineWidth,H-x.lineWidth);
+  const p=W*.04; x.textAlign='left'; x.fillStyle='#1f1a15'; x.font=`900 ${Math.round(H*.3)}px "Noto Serif KR"`; x.fillText(`${e.k} · ${e.n}의 ${u[0]} 부적`,X+p,Y+H*.47);
+  x.fillStyle='#8a8178'; x.font=`500 ${Math.round(H*.22)}px "Noto Sans KR"`; x.fillText(`${m&&m.name?m.name+' · ':''}${dstr}`,X+p,Y+H*.8);
+  x.textAlign='right'; x.fillStyle='#c8372d'; x.font=`900 ${Math.round(H*.28)}px "Noto Serif KR"`; x.fillText(R[0].split('').join(' '),X+W-p,Y+H*.47);
+  x.fillStyle='#8a8178'; x.font=`500 ${Math.round(H*.2)}px "Noto Sans KR"`; x.fillText(`No. ${hash(dstr+use)%900+100}`,X+W-p,Y+H*.8); }
+async function cardPng(){ const W=860, H=Math.round(W*1046/648), L=130, cv=document.createElement('canvas'); cv.width=W+80; cv.height=H+L+100; const x=cv.getContext('2d'); x.fillStyle='#fbf8f3'; x.fillRect(0,0,cv.width,cv.height);
+  drawLabel(x,40,40,W,L-20); await drawCard(x,40,40+L,W,H); return cv.toDataURL('image/png'); }
+async function wallPng(){ const e=EL.wood, cv=document.createElement('canvas'); cv.width=1080; cv.height=1920; const x=cv.getContext('2d');
+  const g=x.createLinearGradient(0,0,0,1920); g.addColorStop(0,'#fbf8f3'); g.addColorStop(1,e.p); x.fillStyle=g; x.fillRect(0,0,1080,1920);
+  const W=700, H=Math.round(700*1046/648), X=190, Y=1920-H-230; x.save(); x.shadowColor='rgba(60,40,20,.28)'; x.shadowBlur=60; x.shadowOffsetY=24; x.fillStyle='#e9dfb8'; x.fillRect(X,Y,W,H); x.restore();
+  await drawCard(x,X,Y,W,H); x.fillStyle='#8a8178'; x.textAlign='center'; x.font='500 28px "Noto Sans KR"'; x.fillText(`오방사주 · ${e.k} ${e.n}의 ${USE[use][0]} 부적`,540,1920-140); return cv.toDataURL('image/png'); }
+function sheet(u,name){ $('shImg').src=u; $('sheet').classList.add('on'); $('shDl').onclick=()=>{ const a=document.createElement('a'); a.href=u; a.download=name; a.click(); }; }
+$('save').onclick=async()=>{ try{ sheet(await cardPng(),'obang-bujeok-card.png'); }catch(e){ toast('이미지를 만들지 못했어요'); } };
+$('wall').onclick=async()=>{ try{ sheet(await wallPng(),'obang-bujeok-wallpaper.png'); }catch(e){ toast('이미지를 만들지 못했어요'); } };
+$('shX').onclick=()=>$('sheet').classList.remove('on');
+$('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+render();
+</script>
+<script src="archive.js"></script>
+<script src="depth3d.js"></script>
+<script>
+/* 기울이면 카드가 3D로 기울고 광택이 흐른다 */
+(function(){ const c=$('card'), f=$('foil'); if(window.Depth3D&&Depth3D.holo){ Depth3D.holo(c,{face:$('face'),max:14}); }
+  function loop(){ const t=window.Depth3D&&Depth3D.tilt?Depth3D.tilt():{x:0,y:0}; f.style.setProperty('--sx',(50+t.x*45)+'%'); f.style.setProperty('--sy',(50+t.y*45)+'%'); requestAnimationFrame(loop); } loop(); })();
+</script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>부적 카드 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 부적 카드 — 내 사주에 모자란 기운의 미니가 사는 부적을, 모으는 수집 카드로. 카드 그림(img/card/{el}.jpg) 위에 이름·용도·날짜는 코드로 얹는다.
+   기울이면 홀로그램 광택(depth3d.js holo). 희귀도: 일반 · 레어(금빛) · 홀로(무지개). */
+:root{
+  --brush:'OBrush','Song Myung',serif; --bmj:'Song Myung','Noto Serif KR',serif; --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --paper:#fbf8f3; --paper2:#f4eee4; --ink:#1f1a15; --ink2:#5d544a; --ink3:#8a8178; --red:#c8372d; --gold:#b8862f; --line:rgba(60,40,20,.1);
+  --c:#3f9f6e; --cp:#e2f1e7; color-scheme:light;
+  /* 카드 그림 속 빈칸 위치(%) — 그림 확인 후 맞춤 */
+  
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#efe9df;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button{font-family:inherit;cursor:pointer}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--paper);overflow:hidden}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;box-shadow:0 30px 80px rgba(60,40,20,.18)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}
+.scr::-webkit-scrollbar{display:none}
+.top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 14px 10px;pointer-events:none}
+.top>*{pointer-events:auto}
+.ib{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.7);display:grid;place-items:center;color:var(--ink)}
+.ib svg{width:18px;height:18px}
+.top b{font-size:12.5px;font-weight:800;letter-spacing:.16em;color:var(--ink2)}
+.wrap{padding:calc(env(safe-area-inset-top,0px) + 64px) 18px calc(env(safe-area-inset-bottom,0px) + 30px);background:radial-gradient(90% 38% at 50% 30%,var(--cp),rgba(251,248,243,0) 70%)}
+.hd .k{font-size:11.5px;font-weight:800;letter-spacing:.2em;color:var(--red)}
+.hd h1{margin:8px 0 4px;font-family:var(--brush);font-weight:400;font-size:44px;line-height:1.08}
+.hd p{margin:0;font-family:var(--bmj);font-size:16px;color:var(--ink2)}
+
+/* 카드 */
+.cardW{position:relative;margin:22px auto 0;width:min(78vw,320px);perspective:1000px}
+.card{position:relative;width:100%;aspect-ratio:648/1046;border-radius:8px!important;overflow:hidden;background:#e9dfb8 center/cover no-repeat;box-shadow:0 18px 40px rgba(60,40,20,.28),0 2px 0 rgba(255,255,255,.6) inset;transform-style:preserve-3d;transition:transform .2s}
+.card .face{position:absolute;inset:0;border-radius:inherit}
+.card .foil{position:absolute;inset:0;pointer-events:none;mix-blend-mode:color-dodge;opacity:0;background:linear-gradient(115deg,rgba(255,0,128,0) 20%,rgba(255,120,120,.5) 32%,rgba(255,230,120,.55) 40%,rgba(120,255,200,.5) 48%,rgba(120,180,255,.5) 56%,rgba(220,140,255,.45) 64%,rgba(255,0,128,0) 76%);background-size:250% 250%;background-position:var(--sx,50%) var(--sy,50%);transition:opacity .4s}
+.card.r2 .foil{opacity:.55;mix-blend-mode:soft-light;background:linear-gradient(115deg,rgba(255,215,120,0) 25%,rgba(255,215,130,.75) 45%,rgba(255,245,210,.9) 50%,rgba(255,200,110,.7) 55%,rgba(255,215,120,0) 75%);background-size:250% 250%;background-position:var(--sx,50%) var(--sy,50%)}
+.card.r3 .foil{opacity:.55}
+.card .seal{position:absolute;left:42.7%;width:14.6%;top:86.5%;height:8.3%;z-index:4;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;font-family:var(--serif);font-weight:900;font-size:clamp(9px,2.7vw,12px);line-height:1;letter-spacing:.02em;color:#b0231a;opacity:.92;mix-blend-mode:multiply}
+/* 카드 케이스(슬랩) + 라벨: 먹색 라벨 · 붉은 도장 속 용도 문양 · 금빛 글자 */
+.slab{position:relative;padding:9px;background:linear-gradient(150deg,rgba(255,255,255,.85),rgba(236,230,220,.6));box-shadow:inset 0 0 0 1px rgba(255,255,255,.95),inset 0 0 0 2px rgba(120,100,70,.08),0 22px 44px rgba(60,40,20,.2)}
+.slab::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.35) 46%,rgba(255,255,255,0) 54%);z-index:6}
+.label{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:11px;margin-bottom:8px;padding:10px 12px 10px 10px;background:#1f1a15;color:#f4ecdc;position:relative}
+.label::before{content:"";position:absolute;inset:3px;border:1px solid rgba(214,176,98,.35);pointer-events:none}
+.label .mo{width:40px;height:40px;display:grid;place-items:center;background:#c8372d;color:#fbf1dc;box-shadow:inset 0 0 0 2px rgba(255,235,210,.28)}
+.label .mo svg{width:26px;height:26px}
+.label .lt small{display:block;font-size:10px;font-weight:700;letter-spacing:.24em;color:#d6b062}
+.label .lt b{display:block;margin-top:3px;font-family:var(--serif);font-weight:900;font-size:15.5px;letter-spacing:-.01em;color:#fbf5e8}
+.label .lt span{display:block;margin-top:2px;font-size:11px;color:rgba(244,236,220,.6)}
+.label .lr{text-align:right}
+.label .lr em{display:inline-block;font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.16em;padding:4px 8px 3px;color:#f4ecdc;box-shadow:inset 0 0 0 1px rgba(244,236,220,.45)}
+.label .lr em.r2{background:linear-gradient(135deg,#f6e3a8,#d9ab4f);color:#2a1c05;box-shadow:none}
+.label .lr em.r3{background:linear-gradient(120deg,#ffc6d9,#fff0a8,#b8f5dc,#bcd6ff,#e6c4ff);color:#2b2230;box-shadow:none}
+.label .lr span{display:block;margin-top:6px;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.06em;color:rgba(244,236,220,.55)}
+.rar{display:flex;justify-content:center;gap:8px;align-items:center;margin-top:14px}
+.rar span{font-size:11.5px;font-weight:800;letter-spacing:.14em;padding:5px 10px;background:#fff;color:var(--ink2);box-shadow:inset 0 0 0 1px var(--line)}
+.rar span.r2{background:linear-gradient(135deg,#f6e3a8,#d9ab4f);color:#3a2708;box-shadow:none}
+.rar span.r3{background:linear-gradient(120deg,#ffc6d9,#fff0a8,#b8f5dc,#bcd6ff,#e6c4ff);color:#2b2230;box-shadow:none}
+.rar small{font-size:12px;color:var(--ink3)}
+.tilt{margin:8px 0 0;text-align:center;font-size:12px;color:var(--ink3)}
+
+/* 용도 */
+.lab{margin:22px 2px 8px;font-size:12.5px;font-weight:700;color:var(--ink2)}
+.uses{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.uses button{height:40px;border:1px solid var(--line);background:#fff;color:var(--ink2);font-size:13.5px;font-weight:500}
+.uses button.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:700}
+.lab small{margin-left:4px;font-size:11.5px;font-weight:700;color:var(--c)}
+.els{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.els button{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;padding:8px 0 7px;border:1px solid var(--line);background:#fff;color:var(--ink2);font-size:12.5px;font-weight:500}
+.els button i{width:42px;height:42px;border-radius:50%!important;background:#eee center 18%/cover no-repeat;box-shadow:0 0 0 2px #fff,0 0 0 3px transparent;transition:box-shadow .2s}
+.els button.on{border-color:var(--ink);color:var(--ink);font-weight:800}
+.els button.on i{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--c)}
+.els button.low::after{content:"추천";position:absolute;top:4px;right:4px;font-size:9.5px;font-weight:800;letter-spacing:.04em;color:#fff;background:var(--red);padding:2px 4px 1px}
+.bless{margin-top:12px;background:#fff;padding:15px 16px}
+.bless small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--c)}
+.bless p{margin:6px 0 0;font-family:var(--bmj);font-size:18px;line-height:1.55}
+/* 근거 */
+.why{margin-top:26px;padding:22px 2px 4px;border-top:1px solid var(--line)}
+.why h3{margin:0 0 16px;font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.wm{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.wm div{padding:10px 0 9px;text-align:center;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.wm b{display:block;font-family:var(--serif);font-size:20px;font-weight:900;color:var(--ink);line-height:1.1}
+.wm span{display:block;margin-top:4px;font-size:12px;font-weight:700;color:var(--ink3)}
+.wm .lo{background:var(--c);box-shadow:none}
+.wm .lo b,.wm .lo span{color:#fff}
+.wmT{margin:12px 0 0;font-size:15px;line-height:1.6;color:var(--ink);font-weight:500}
+.wmT b{color:var(--c);font-weight:800}
+.why ul{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:18px 16px}
+.why li:last-child{grid-column:1/-1}
+.why li small{display:block;font-size:12px;font-weight:800;color:var(--c);letter-spacing:.02em}
+.why li span{display:block;margin-top:4px;font-size:14px;line-height:1.55;color:var(--ink2)}
+.luck{display:grid;grid-template-columns:repeat(3,1fr);margin-top:20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.luck div{padding:13px 4px;text-align:center}
+.luck div+div{border-left:1px solid var(--line)}
+.luck small{display:block;font-size:12px;color:var(--ink3);font-weight:700}
+.luck b{display:block;margin-top:3px;font-size:16px;font-weight:800;color:var(--ink)}
+.row2{display:flex;gap:8px;margin-top:16px}
+.btn{flex:1;height:50px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:800;font-size:14.5px}
+.btn.pr{border:0;background:var(--ink);color:#fff}
+/* 도감 */
+.col{margin-top:22px}
+.col h3{display:flex;justify-content:space-between;margin:0 2px 10px;font-size:13px;font-weight:700;color:var(--ink2)}
+.col h3 small{font-weight:500;color:var(--ink3)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.grid div{position:relative;aspect-ratio:648/1046;background:#ebe4d8;overflow:hidden}
+.grid div.has{background:#e9dfb8 center/cover no-repeat}
+.grid div.lock::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--bmj);font-size:22px;color:#c2b8a8}
+.grid div i{position:absolute;left:0;right:0;bottom:0;padding:3px 0;text-align:center;font-style:normal;font-size:10px;font-weight:700;color:#fff;background:rgba(31,26,21,.72)}
+.grid div.r3::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,198,217,.35),rgba(255,240,168,.35),rgba(184,245,220,.35),rgba(188,214,255,.35));mix-blend-mode:color-dodge}
+.price{margin:18px 0 0;text-align:center;font-size:12px;line-height:1.6;color:var(--ink3)}
+.price b{color:var(--red)}
+.sheet{position:absolute;inset:0;z-index:90;background:rgba(20,16,12,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px}
+.sheet.on{display:flex}
+.sheet img{max-height:70vh;max-width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.sheet .row2{width:100%;max-width:330px;margin:0}
+.toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 90px);transform:translateX(-50%);z-index:95;background:rgba(31,26,21,.92);color:#fff;font-size:13.5px;padding:10px 16px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+.hsh,.hgl{display:none}
+
+/* 케이스 모서리에 매달린 용도 장식 — 액막이는 실로 엮은 굴비 + 소금 종지 */
+.charm{position:absolute;right:-34px;top:-6px;z-index:8;width:44px;height:82px;transform-origin:50% 0;animation:swing 3.4s ease-in-out infinite;pointer-events:none;filter:drop-shadow(0 6px 8px rgba(60,40,20,.25))}
+.charm svg{width:100%;height:100%}
+@keyframes swing{50%{transform:rotate(-7deg)}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>OBANG · 부적 카드</b></div>
+  <div class="scr"><div class="wrap">
+    <div class="hd"><div class="k">NEW · 하루 한 장</div><h1>오늘의 부적 카드</h1><p>내 사주에 모자란 기운이, 부적 속에 산다</p></div>
+    <div class="cardW"><div class="charm" id="charm"></div><div class="slab"><div class="label"><i class="mo" id="cMo"></i><div class="lt"><small id="cK"></small><b id="cT"></b><span id="cB"></span></div><div class="lr"><em id="cR"></em><span id="cN"></span></div></div><div class="card" id="card"><div class="face" id="face"></div><div class="foil" id="foil"></div><div class="seal" id="cS"></div></div></div></div>
+    <div class="rar"><span id="rar"></span><small id="rarS"></small></div>
+    <p class="tilt">폰을 기울이면 부적이 반짝여요</p>
+
+    <div class="lab">누구의 부적으로 받을까 <small id="elHint"></small></div>
+    <div class="els" id="els"><button data-k="wood" type="button"><i style="background-image:url('img/mini/wood.jpg')"></i><span>하람</span></button><button data-k="fire" type="button"><i style="background-image:url('img/mini/fire.jpg')"></i><span>이안</span></button><button data-k="earth" type="button"><i style="background-image:url('img/mini/earth.jpg')"></i><span>도준</span></button><button data-k="metal" type="button"><i style="background-image:url('img/mini/metal.jpg')"></i><span>시온</span></button><button data-k="water" type="button"><i style="background-image:url('img/mini/water.jpg')"></i><span>재이</span></button></div>
+    <div class="lab">무엇을 빌어 볼까</div>
+    <div class="uses" id="uses"><button data-k="money" type="button">재물</button><button class="on" data-k="love" type="button">인연</button><button data-k="pass" type="button">합격</button><button data-k="health" type="button">건강</button><button data-k="guard" type="button">액막이</button></div>
+    <div class="bless"><small id="bK"></small><p id="bT"></p></div>
+
+    <div class="why"><h3>이 부적은 이렇게 그렸어요</h3><div id="whyM"></div><ul id="whyL"></ul><div class="luck" id="whyK"></div></div>
+
+    <div class="row2"><button class="btn pr" id="save" type="button">카드 저장</button><button class="btn" id="wall" type="button">배경화면으로 받기</button></div>
+
+    <div class="col"><h3>모은 부적 <small id="colN"></small></h3><div class="grid" id="grid"></div></div>
+    <p class="price">정식 오픈 때 <b>990원</b> · 체험판에서는 무료로 모을 수 있어요</p>
+  </div></div>
+  <div class="sheet" id="sheet"><img id="shImg" alt="부적 카드 이미지"><div class="row2"><button class="btn pr" id="shDl" type="button">이미지 받기</button><button class="btn" id="shX" type="button">닫기</button></div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const EL={
+  wood:{k:'木',r:'목',n:'하람',god:'청룡',godH:'靑龍',dirH:'東',dir:'동쪽',num:'3 · 8',color:'초록',c:'#3f9f6e',p:'#e2f1e7',hold:'새싹',line:'붉은 선',top:['북두칠성','예부터 부적에 넣던 수명과 복의 별'],sang:'물이 나무를 키워요. 물 가까이, 파란 소품이 힘이 돼요',seal:[86.5,8.3],ink:'#b0231a',blend:'multiply'},
+  fire:{k:'火',r:'화',n:'이안',god:'주작',godH:'朱雀',dirH:'南',dir:'남쪽',num:'2 · 7',color:'빨강',c:'#c8432f',p:'#f7e0d8',hold:'불씨',line:'금빛 선',top:['해','불의 기운이 가장 센 한낮의 해'],sang:'나무가 불을 살려요. 초록 식물이 이안의 불씨가 돼요',seal:[84.9,10],ink:'#f0c865',blend:'normal'},
+  earth:{k:'土',r:'토',n:'도준',god:'황룡',godH:'黃龍',dirH:'中',dir:'가운데',num:'5 · 10',color:'노랑',c:'#b8862f',p:'#f4ead0',hold:'엽전 항아리',line:'붉은 선',top:['산','흙이 쌓여 이룬 든든한 산'],sang:'불이 타고 남은 재가 흙이 돼요. 따뜻한 빛, 붉은 소품이 힘이 돼요',seal:[87,8.4],ink:'#b0231a',blend:'multiply'},
+  metal:{k:'金',r:'금',n:'시온',god:'백호',godH:'白虎',dirH:'西',dir:'서쪽',num:'4 · 9',color:'흰색',c:'#7d8591',p:'#eceef1',hold:'방울',line:'붉은 선',top:['방울','맑은 소리로 삿된 기운을 쫓는 방울'],sang:'흙 속에서 쇠가 나와요. 노란빛, 도자기가 힘이 돼요',seal:[88.6,7.9],ink:'#b0231a',blend:'multiply'},
+  water:{k:'水',r:'수',n:'재이',god:'현무',godH:'玄武',dirH:'北',dir:'북쪽',num:'1 · 6',color:'남색',c:'#2f4a7a',p:'#dfe5ef',hold:'물방울 구슬',line:'은빛 선',top:['달과 비','물의 기운을 모으는 밤의 달과 빗방울'],sang:'쇠에 맺힌 이슬이 물이 돼요. 은빛, 흰 소품이 힘이 돼요',seal:[86.5,8.9],ink:'#e6ecf5',blend:'normal'}};
+Object.keys(EL).forEach(k=>EL[k].img=`img/card/${k}.jpg`);
+const ELK=['wood','fire','earth','metal','water'], ELN={wood:'木',fire:'火',earth:'土',metal:'金',water:'水'};
+/* 받침 있으면 이/은/을, 없으면 가/는/를 */
+const bt=w=>{ const c=w.charCodeAt(w.length-1)-0xac00; return c>=0&&c<11172&&c%28!==0; };
+const jo=(w,a,b)=>w+(bt(w)?a:b);
+/* 용도: [이름, 문양 이름, 문양 뜻] + 기운마다 다른 한마디 */
+const USE={money:['재물','엽전','재물이 드나드는 둥근 돈'],love:['인연','붉은 실','인연과 인연을 묶어 잇는다는 실'],pass:['합격','엿','붙으라고 건네던 엿 한 가락'],health:['건강','인삼','기운을 북돋는 약초 뿌리'],guard:['액막이','실로 엮은 굴비와 소금','문 위에 걸고 문 앞에 뿌려 나쁜 기운을 막던 것']};
+const BLESS={
+  wood:{money:'작게 심은 게 크게 자라. 새는 돈부터 막자',love:'먼저 건넨 안부 한 줄이 싹이 돼',pass:'매일 조금씩. 뿌리가 끝까지 버텨 줄 거야',health:'창문 열고 숨 크게. 초록을 가까이 둬',guard:'문 위엔 굴비 한 두름, 문 앞엔 소금 한 줌. 나쁜 건 내가 막을게'},
+  fire:{money:'망설이면 놓쳐. 기회 오면 내가 먼저 불 붙일게',love:'좋으면 좋다고 말해. 그 온도, 상대도 느껴',pass:'마지막 한 달이 제일 뜨거워야 해. 끝까지 태워 보자',health:'햇볕 쬐고 땀 한 번 쭉 빼. 몸이 먼저 살아나',guard:'굴비는 문 위에, 소금은 문 앞에. 남은 건 내 불로 태울게'},
+  earth:{money:'차곡차곡 쌓는 게 제일 빨라. 항아리는 내가 지킬게',love:'서두르지 않아도 돼. 곁에 오래 있는 사람이 남아',pass:'엉덩이 무거운 사람이 이겨. 오늘 분량만 채우자',health:'밥 제때, 잠 제때. 기본이 제일 든든해',guard:'문 위엔 굴비 한 두름, 문 앞엔 소금 한 줌. 집터는 내가 단단히 지킬게'},
+  metal:{money:'필요 없는 건 끊고 남길 것만 남겨. 그게 돈이 돼',love:'애매하게 굴지 말고 딱 한 마디만. 그게 더 설레',pass:'틀린 문제만 다시 봐. 날은 그렇게 서',health:'숨 고르고 자세 펴. 몸도 정리가 필요해',guard:'굴비 걸고 소금 뿌리고 방울 한 번. 나쁜 기운은 여기서 끊어'},
+  water:{money:'돈도 물길 따라 흘러. 새는 틈부터 조용히 막자',love:'말보다 들어 주는 게 먼저야. 마음은 천천히 스며',pass:'조급하면 흐려져. 맑게 가라앉히고 한 문제씩',health:'물 자주 마시고 일찍 자. 푹 쉬어야 다시 흘러',guard:'문 위엔 굴비, 문 앞엔 소금. 나쁜 건 물살에 실어 보낼게'}};
+const MO={money:'<circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="2.6"/><rect x="12.3" y="12.3" width="7.4" height="7.4" fill="none" stroke="currentColor" stroke-width="2.4"/>',
+  love:'<path d="M16 12.5c-2.6-5-10-3.2-8.4 2 1 3.2 5.2 5.2 8.4 7.6 3.2-2.4 7.4-4.4 8.4-7.6 1.6-5.2-5.8-7-8.4-2z" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/><path d="M16 22.2c-1 2.6-3.6 3.6-5.8 5.3M16 22.2c1.3 2.4 3.4 3.8 6 5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>',
+  pass:'<g transform="rotate(-38 16 16)"><rect x="12.6" y="3" width="6.8" height="26" rx="3.4" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M12.8 9l6.4 3M12.8 15l6.4 3M12.8 21l6.4 3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></g>',
+  health:'<path d="M16 12V5M16 7l-4-3M16 7l4-3M16 9l-5 0M16 9l5 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 12c-3.4 2.6-3.6 7.6-1.6 10.4l-3.4 5.2M16 12c3.4 2.6 3.6 7.6 1.6 10.4l3.4 5.2M14.4 22.4l1.6 5M17.6 22.4l-1.6 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+  guard:'<path d="M4 14.5c5-5.6 13.5-5.6 18.5 0-5 5.6-13.5 5.6-18.5 0z" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/><path d="M22.5 14.5l5-4v8z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/><circle cx="8.4" cy="13.6" r="1.2" fill="currentColor"/><path d="M12 9.8v9.4M14.6 9.4v10.2M17.2 9.8v9.4" stroke="currentColor" stroke-width="1.7"/><circle cx="7" cy="25" r="1.3" fill="currentColor"/><circle cx="11.5" cy="27" r="1.3" fill="currentColor"/><circle cx="16" cy="25.4" r="1.3" fill="currentColor"/><circle cx="20.5" cy="27.2" r="1.3" fill="currentColor"/><circle cx="25" cy="25.2" r="1.3" fill="currentColor"/>'};
+const CHARM={
+  money:'<path d="M32 0v22" stroke="#c8372d" stroke-width="2.4"/>'+[30,52,74].map(y=>`<circle cx="32" cy="${y}" r="10" fill="#d9ab4f" stroke="#8a6320" stroke-width="2"/><rect x="28.5" y="${y-3.5}" width="7" height="7" fill="#fbf5e8" stroke="#8a6320" stroke-width="1.6"/>`).join('')+'<path d="M26 86l6 8 6-8" fill="#c8372d"/><path d="M28 92l-3 22M32 94v22M36 92l3 22" stroke="#c8372d" stroke-width="2.2" stroke-linecap="round"/>',
+  love:'<path d="M32 0v30" stroke="#c8372d" stroke-width="2.4"/><path d="M32 40c-5-10-19-6-16 4 2 6 10 10 16 14 6-4 14-8 16-14 3-10-11-14-16-4z" fill="#e0493b" stroke="#a42a20" stroke-width="2"/><path d="M32 58c-3 12-12 20-20 40M32 58c4 12 12 22 18 42" fill="none" stroke="#c8372d" stroke-width="2.2" stroke-linecap="round"/>',
+  pass:'<path d="M32 0v16" stroke="#c8372d" stroke-width="2.4"/><g transform="rotate(-10 32 60)"><rect x="24" y="16" width="16" height="84" rx="8" fill="#e7b561" stroke="#8a6320" stroke-width="2"/><path d="M24 30l16 6M24 46l16 6M24 62l16 6M24 78l16 6" stroke="#b07c2a" stroke-width="2"/></g>',
+  health:'<path d="M32 0v22" stroke="#c8372d" stroke-width="2.4"/><path d="M32 22v14M32 28l-9-8M32 28l9-8M32 32l-10 2M32 32l10 2" stroke="#3f9f6e" stroke-width="2.6" stroke-linecap="round"/><path d="M32 36c-9 6-9 22-4 32l-8 26M32 36c9 6 9 22 4 32l8 26M28 68l3 26M36 68l-3 26" fill="#f1dfb6" stroke="#9a7a45" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>',
+  guard:'<path d="M32 0v10" stroke="#c8372d" stroke-width="2.4"/>'+[0,1,2].map(i=>{ const y=14+i*30; return `<path d="M32 ${y}c9 3 11 12 9 22-2 6-5 8-9 8s-7-2-9-8c-2-10 0-19 9-22z" fill="#d9a04a" stroke="#8a5a1c" stroke-width="2"/><path d="M28 ${y+28}l4 5 4-5" fill="#b77d33" stroke="#8a5a1c" stroke-width="1.6"/><circle cx="29" cy="${y+8}" r="1.6" fill="#3a2508"/><path d="M24 ${y+14}h16M24 ${y+19}h16" stroke="#c8372d" stroke-width="2.2"/>`; }).join('')+'<path d="M14 104h36l-4 12H18z" fill="#fbf5e8" stroke="#8a8178" stroke-width="2"/><path d="M18 104c2-6 8-9 14-9s12 3 14 9" fill="#fff" stroke="#b9b1a6" stroke-width="1.6"/><circle cx="26" cy="100" r="1.2" fill="#d8d2c8"/><circle cx="34" cy="98" r="1.2" fill="#d8d2c8"/><circle cx="40" cy="101" r="1.2" fill="#d8d2c8"/>'
+};
+const moSvg=(k,col)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style="color:${col}">${MO[k]}</svg>`;
+const RAR=[['일반','','매일 나오는 부적'],['레어','r2','금빛이 도는 부적'],['홀로','r3','무지개로 빛나는 부적 · 드물게 나와요']];
+let use='love', el='wood', lo=null;
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1800); }
+function me(){ try{ return JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){ return null; } }
+const today=new Date(), dstr=`${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
+function hash(s){ let h=2166136261; for(const ch of s){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; }
+function rarity(){ const m=me(), r=hash(dstr+'|'+el+'|'+use+'|'+((m&&m.name)||'')+'|'+((m&&m.y)||''))%100; return r<10?2:r<40?1:0; }
+/* 내 사주에서 가장 모자란 기운 */
+function lowEl(){ /* 홈에서 계산한 '채울 기운'과 맞춘다 */ try{ const o=JSON.parse(sessionStorage.getItem('obLow')||'null'); if(o&&o.k&&o.cnt) return {k:o.k,cnt:o.cnt}; }catch(e){}
+  const m=me(), S=window.Saju; if(!m||!m.y||!S) return null; try{ let s={y:m.y,m:m.m,d:m.d}; if(m.cal==='l'){ s=S.lunarToSolar(m.y,m.m,m.d,false)||s; } const P=S.pillars(s.y,s.m,s.d,m.h==null?null:+m.h), c=S.elCount(P); let lo=0; c.forEach((v,i)=>{ if(v<c[lo]) lo=i; }); return {k:ELK[lo],cnt:c}; }catch(e){ return null; } }
+function render(){ const e=EL[el], m=me(), u=USE[use], r=rarity(), R=RAR[r];
+  document.documentElement.style.setProperty('--c',e.c); document.documentElement.style.setProperty('--cp',e.p);
+  $('face').style.background=`url('${e.img}') center/cover no-repeat`;
+  const sl=$('cS').style; sl.top=e.seal[0]+'%'; sl.height=e.seal[1]+'%'; sl.color=e.ink; sl.mixBlendMode=e.blend;
+  $('cMo').innerHTML=moSvg(use,'#fbf1dc'); $('charm').innerHTML=`<svg viewBox="0 0 64 118">${CHARM[use]}</svg>`;
+  $('cK').textContent=`${e.k} · ${e.godH} · ${e.dirH}`;
+  $('cT').textContent=`${e.n}의 ${u[0]} 부적`;
+  $('cB').textContent=`${m&&m.name?m.name+' · ':''}${dstr}`;
+  $('cR').className=R[1]; $('cR').textContent=R[0]; $('cN').textContent=`No.${String(hash(dstr+el+use)%900+100)}`;
+  $('cS').textContent=(m&&m.name?m.name:'오방').slice(0,3);
+  $('card').className='card '+R[1]; $('rar').className=R[1]; $('rar').textContent=R[0]; $('rarS').textContent=R[2];
+  $('bK').textContent=`${e.k} · ${e.n} · ${u[0]} 부적`; $('bT').textContent=BLESS[el][use];
+  $('els').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===el));
+  $('whyM').innerHTML=lo?`<div class="wm">${ELK.map((k,i)=>`<div class="${k===lo.k?'lo':''}"><b>${ELN[k]}</b><span>${lo.cnt[i]}</span></div>`).join('')}</div><p class="wmT">내 사주 여덟 글자에서 가장 모자란 기운은 <b>${ELN[lo.k]}</b>${lo.k===el?' · 그래서 '+jo(EL[lo.k].n,'이가','가')+' 나왔어요':' · 추천은 '+EL[lo.k].n+' 부적'}</p>`:'';
+  $('whyL').innerHTML=[['주인공',`${e.k} 기운의 미니 ${e.n}, 손에 ${e.hold}`],['신수',`${jo(e.god,'이','가')} ${e.line}으로 감싸요`],['용도 문양',`${u[1]} · ${u[2]}`],[e.top[0],e.top[1]],['상생',e.sang.split('.')[0]]].map(x=>`<li><small>${x[0]}</small><span>${x[1]}</span></li>`).join('');
+  $('whyK').innerHTML=`<div><small>행운 색</small><b>${e.color}</b></div><div><small>방위</small><b>${e.dir}</b></div><div><small>숫자</small><b>${e.num}</b></div>`;
+  collect(r); }
+/* 도감: 오늘 · 용도별로 한 장씩 */
+function readCol(){ try{ return JSON.parse(localStorage.getItem('obCards')||'[]'); }catch(e){ return []; } }
+function collect(r){ const a=readCol(), id=dstr+'|'+el+'|'+use; if(!a.find(x=>x.id===id)){ a.unshift({id,el,use,r,d:dstr}); try{ localStorage.setItem('obCards',JSON.stringify(a.slice(0,60))); }catch(e){} } drawCol(); }
+function drawCol(){ const a=readCol(); $('colN').textContent=`${a.length}장 · 홀로 ${a.filter(x=>x.r===2).length}장`;
+  const cells=[]; for(let i=0;i<10;i++){ const x=a[i]; cells.push(x?`<div class="has ${RAR[x.r][1]}" style="background-image:url('${(EL[x.el]||EL.wood).img}')"><i>${(EL[x.el]||EL.wood).n} · ${USE[x.use][0]}</i></div>`:'<div class="lock"></div>'); } $('grid').innerHTML=cells.join(''); }
+$('uses').querySelectorAll('button').forEach(b=>b.onclick=()=>{ $('uses').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); use=b.dataset.k; render(); const c=$('card'); c.animate([{transform:'rotateY(0)'},{transform:'rotateY(180deg)'},{transform:'rotateY(360deg)'}],{duration:700,easing:'cubic-bezier(.3,.7,.2,1)'}); });
+
+/* 이미지: 카드 · 배경화면 */
+function loadImg(src){ return new Promise((ok,no)=>{ const i=new Image(); i.onload=()=>ok(i); i.onerror=no; i.src=src; }); }
+async function drawCard(x,X,Y,W,H){ const e=EL[el], m=me(), u=USE[use], r=rarity(); const im=await loadImg(e.img); x.save(); x.beginPath(); x.rect(X,Y,W,H); x.clip(); x.drawImage(im,X,Y,W,H);
+  if(r>0){ const g=x.createLinearGradient(X,Y,X+W,Y+H); if(r===2){ ['rgba(255,150,180,.28)','rgba(255,240,150,.28)','rgba(150,255,210,.28)','rgba(150,190,255,.28)','rgba(220,160,255,.28)'].forEach((c,i)=>g.addColorStop(i/4,c)); } else { g.addColorStop(0,'rgba(255,220,140,0)'); g.addColorStop(.5,'rgba(255,225,150,.32)'); g.addColorStop(1,'rgba(255,220,140,0)'); } x.globalCompositeOperation='screen'; x.fillStyle=g; x.fillRect(X,Y,W,H); x.globalCompositeOperation='source-over'; }
+  x.restore();
+  /* 도장 속 이름(세로) */
+  const nm=(m&&m.name?m.name:'오방').slice(0,3), sx=X+W*.5, sy=Y+H*e.seal[0]/100, sh=H*e.seal[1]/100, fs=Math.round(W*.04); x.globalAlpha=.92; x.fillStyle=e.ink; x.globalCompositeOperation=e.blend==='multiply'?'multiply':'source-over'; x.textAlign='center'; x.font=`900 ${fs}px "Noto Serif KR"`;
+  nm.split('').forEach((ch,i)=>x.fillText(ch,sx,sy+sh/2-(nm.length*fs*1.02)/2+fs*.88+i*fs*1.02)); x.globalAlpha=1; x.globalCompositeOperation='source-over'; }
+async function drawLabel(x,X,Y,W,H){ const e=EL[el], m=me(), u=USE[use], r=rarity(), R=RAR[r];
+  x.fillStyle='#1f1a15'; x.fillRect(X,Y,W,H); x.strokeStyle='rgba(214,176,98,.4)'; x.lineWidth=2; x.strokeRect(X+7,Y+7,W-14,H-14);
+  const ms=H*.62, mx=X+H*.19, my=Y+(H-ms)/2; x.fillStyle='#c8372d'; x.fillRect(mx,my,ms,ms);
+  try{ const im=await loadImg('data:image/svg+xml;charset=utf-8,'+encodeURIComponent(moSvg(use,'#fbf1dc'))); x.drawImage(im,mx+ms*.17,my+ms*.17,ms*.66,ms*.66); }catch(err){}
+  const tx=mx+ms+H*.2; x.textAlign='left';
+  x.fillStyle='#d6b062'; x.font=`700 ${Math.round(H*.13)}px "Noto Sans KR"`; x.fillText(`${e.k} · ${e.godH} · ${e.dirH}`.split('').join(' '),tx,Y+H*.32);
+  x.fillStyle='#fbf5e8'; x.font=`900 ${Math.round(H*.24)}px "Noto Serif KR"`; x.fillText(`${e.n}의 ${u[0]} 부적`,tx,Y+H*.6);
+  x.fillStyle='rgba(244,236,220,.6)'; x.font=`500 ${Math.round(H*.14)}px "Noto Sans KR"`; x.fillText(`${m&&m.name?m.name+' · ':''}${dstr}`,tx,Y+H*.82);
+  const pw=H*.62, ph=H*.24, px=X+W-H*.2-pw, py=Y+H*.2;
+  if(r===2){ const g=x.createLinearGradient(px,py,px+pw,py); ['#ffc6d9','#fff0a8','#b8f5dc','#bcd6ff','#e6c4ff'].forEach((c,i)=>g.addColorStop(i/4,c)); x.fillStyle=g; x.fillRect(px,py,pw,ph); x.fillStyle='#2b2230'; }
+  else if(r===1){ const g=x.createLinearGradient(px,py,px+pw,py+ph); g.addColorStop(0,'#f6e3a8'); g.addColorStop(1,'#d9ab4f'); x.fillStyle=g; x.fillRect(px,py,pw,ph); x.fillStyle='#2a1c05'; }
+  else { x.strokeStyle='rgba(244,236,220,.5)'; x.lineWidth=2; x.strokeRect(px,py,pw,ph); x.fillStyle='#f4ecdc'; }
+  x.textAlign='center'; x.font=`800 ${Math.round(H*.13)}px "Noto Sans KR"`; x.fillText(R[0].split('').join(' '),px+pw/2,py+ph*.72);
+  x.textAlign='right'; x.fillStyle='rgba(244,236,220,.55)'; x.font=`500 ${Math.round(H*.13)}px monospace`; x.fillText(`No.${hash(dstr+el+use)%900+100}`,X+W-H*.2,Y+H*.8); }
+async function cardPng(){ const W=860, H=Math.round(W*1046/648), L=150, pad=18, cv=document.createElement('canvas'); cv.width=W+80; cv.height=H+L+110; const x=cv.getContext('2d'); x.fillStyle='#fbf8f3'; x.fillRect(0,0,cv.width,cv.height);
+  x.fillStyle='rgba(236,230,220,.9)'; x.fillRect(40-pad,40-pad,W+pad*2,H+L+pad*2); x.strokeStyle='#fff'; x.lineWidth=3; x.strokeRect(40-pad,40-pad,W+pad*2,H+L+pad*2);
+  await drawLabel(x,40,40,W,L-16); await drawCard(x,40,40+L,W,H); return cv.toDataURL('image/png'); }
+async function wallPng(){ const e=EL[el], cv=document.createElement('canvas'); cv.width=1080; cv.height=1920; const x=cv.getContext('2d');
+  const g=x.createLinearGradient(0,0,0,1920); g.addColorStop(0,'#fbf8f3'); g.addColorStop(1,e.p); x.fillStyle=g; x.fillRect(0,0,1080,1920);
+  const W=700, H=Math.round(700*1046/648), X=190, Y=1920-H-230; x.save(); x.shadowColor='rgba(60,40,20,.28)'; x.shadowBlur=60; x.shadowOffsetY=24; x.fillStyle='#e9dfb8'; x.fillRect(X,Y,W,H); x.restore();
+  await drawCard(x,X,Y,W,H); x.fillStyle='#8a8178'; x.textAlign='center'; x.font='500 28px "Noto Sans KR"'; x.fillText(`오방사주 · ${e.k} ${e.n}의 ${USE[use][0]} 부적`,540,1920-140); return cv.toDataURL('image/png'); }
+function sheet(u,name){ $('shImg').src=u; $('sheet').classList.add('on'); $('shDl').onclick=()=>{ const a=document.createElement('a'); a.href=u; a.download=name; a.click(); }; }
+$('save').onclick=async()=>{ try{ sheet(await cardPng(),'obang-bujeok-card.png'); }catch(e){ toast('이미지를 만들지 못했어요'); } };
+$('wall').onclick=async()=>{ try{ sheet(await wallPng(),'obang-bujeok-wallpaper.png'); }catch(e){ toast('이미지를 만들지 못했어요'); } };
+$('shX').onclick=()=>$('sheet').classList.remove('on');
+$('els').querySelectorAll('button').forEach(b=>b.onclick=()=>{ if(el===b.dataset.k) return; el=b.dataset.k; render(); const c=$('card'); c.animate([{transform:'rotateY(0)'},{transform:'rotateY(180deg)'},{transform:'rotateY(360deg)'}],{duration:700,easing:'cubic-bezier(.3,.7,.2,1)'}); });
+$('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+lo=lowEl(); try{ const q=new URLSearchParams(location.search).get('el'); if(q&&EL[q]) el=q; else if(lo) el=lo.k; }catch(e){ if(lo) el=lo.k; }
+if(lo){ const b=$('els').querySelector(`[data-k="${lo.k}"]`); if(b) b.classList.add('low'); $('elHint').textContent=`내 사주엔 ${ELN[lo.k]} 기운이 제일 적어요`; }
+render();
+</script>
+<script src="archive.js"></script>
+<script src="depth3d.js"></script>
+<script>
+/* 기울이면 카드가 3D로 기울고 광택이 흐른다 */
+(function(){ const c=$('card'), f=$('foil'); if(window.Depth3D&&Depth3D.holo){ Depth3D.holo(c,{face:$('face'),max:14}); }
+  function loop(){ const t=window.Depth3D&&Depth3D.tilt?Depth3D.tilt():{x:0,y:0}; f.style.setProperty('--sx',(50+t.x*45)+'%'); f.style.setProperty('--sy',(50+t.y*45)+'%'); requestAnimationFrame(loop); } loop(); })();
+</script>
+</body>
+</html>

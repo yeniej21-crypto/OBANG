@@ -1,0 +1,373 @@
+[
+ {
+  "job_id": "c048520b-1390-4ebd-ba0a-75d5ce520ca2",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:05:04.694Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "Adorable original character illustration of a tiny orange tabby kitten (ginger cat, soft cream belly, chubby round cheeks, big round amber eyes with sparkly starlight highlights, small pink nose, tiny fangs peeking in a happy open-mouth smile), sitting upright facing the viewer, hugging a small red Korean silk lucky pouch (bokjumeoni) with a gold knot in its front paws. Soft pastel watercolor and colored-pencil style on textured Korean hanji paper, visible paper grain, gentle hand-drawn outlines, matte finish, no gloss, no 3D render, no plastic look. Warm off-white background with a few loose watercolor splashes in coral red and warm gold, tiny hand-drawn flame and star doodles floating around. Head slightly large for body, extremely cute, trendy Korean character-goods aesthetic like a premium sticker or postcard illustration. Face fully visible, head upright, nothing covering the face. Centered composition with generous empty space above and below. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "99344077-c471-492a-be52-7cb37fc2061a",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:05:04.694Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "Photorealistic high-end editorial studio photograph of a real fluffy orange tabby kitten about 3 months old, chubby cheeks, huge round amber eyes looking straight into the camera with a curious sweet expression, sitting upright and proud. The kitten wears a miniature traditional Korean black horsehair gat hat (tiny, delicate, tied with a thin ribbon under the chin) and a small red-and-gold norigae tassel ornament hanging from a thin silk collar. It sits on an unrolled sheet of warm ivory hanji paper next to a few antique brass coins and a small red lacquer box. Soft diffused key light, warm cream seamless backdrop with a subtle warm gradient, shallow depth of field, crisp fur detail, catchlights in the eyes, 85mm lens, magazine cover quality, clean and elegant, not a meme. Face fully visible, head upright, eyes not covered. Vertical composition with space above the hat. ABSOLUTELY NO TEXT, no letters, no calligraphy characters on the paper, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "20b3e168-a7dd-4cac-ae4a-c4b99df671a1",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:05:04.694Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "2.5D semi-realistic Korean webtoon style illustration, painterly digital art with realistic fur texture. A small cute orange tabby cat fortune teller, chubby cheeks, big round glowing amber eyes, fluffy fur, wearing a tiny deep-red silk hanbok vest with gold embroidery, sitting upright behind a small low wooden Korean table (soban). With one front paw it playfully nudges three antique brass Korean coins (yeopjeon, round with square holes) across the table, looking up at the viewer with a confident cute little smile. Warm candlelight from two short candles, soft glow on the fur, dark cozy wooden room with blurred warm bokeh and a folded Korean paper screen in the background, subtle floating embers. Cinematic lighting, high detail, matte, not glossy, not 3D plastic. Face fully visible, head upright, nothing covering the face. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "5fd8081f-b659-4965-9a0b-a9dd95ed425b",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:08:35.087Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "2.5D semi-realistic Korean webtoon style illustration, painterly digital art with realistic fur texture. A small cute Scottish Fold kitten fortune teller: silver-grey and white fur, tiny folded-down ears, perfectly round owl-like face, huge round copper eyes, chubby cheeks, wearing a tiny jade-green silk hanbok vest with gold embroidery, sitting upright behind a small low wooden Korean table (soban). With one front paw it playfully nudges three antique brass Korean coins (yeopjeon, round with square holes) across the table, looking up at the viewer with a sweet little smile. Warm candlelight from two short candles, soft glow on the fur, dark cozy wooden room with blurred warm bokeh and a folded Korean paper screen in the background. Cinematic lighting, high detail, matte, not glossy, not 3D plastic. Face fully visible, head upright, nothing covering the face. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "75cae981-ff55-4e9a-8b95-f9ac53a466ba",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:08:35.087Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "2.5D semi-realistic Korean webtoon style illustration, painterly digital art with realistic fur texture. A small cute British Shorthair kitten fortune teller: plush dense blue-grey fur, very round chubby face with big puffy cheeks, huge round golden-orange eyes, small ears, stocky round body, wearing a tiny mustard-gold silk hanbok vest with red embroidery, sitting upright behind a small low wooden Korean table (soban). With one front paw it playfully nudges three antique brass Korean coins (yeopjeon, round with square holes) across the table, looking up at the viewer with a smug cute little smile. Warm candlelight from two short candles, soft glow on the fur, dark cozy wooden room with blurred warm bokeh and a folded Korean paper screen in the background. Cinematic lighting, high detail, matte, not glossy, not 3D plastic. Face fully visible, head upright, nothing covering the face. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "82b0f978-9f22-4367-84f3-c21907ff1fc8",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:08:35.087Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "2.5D semi-realistic Korean webtoon style illustration, painterly digital art with realistic fur texture. A small cute Ragdoll kitten fortune teller: long silky cream-white fur with soft seal-brown points on the ears and face mask, fluffy ruff, huge round sapphire-blue eyes, gentle sweet face, wearing a tiny navy-blue silk hanbok vest with silver embroidery, sitting upright behind a small low wooden Korean table (soban). With one front paw it playfully nudges three antique brass Korean coins (yeopjeon, round with square holes) across the table, looking up at the viewer with a dreamy cute little smile. Warm candlelight from two short candles, soft glow on the fur, dark cozy wooden room with blurred warm bokeh and a folded Korean paper screen in the background. Cinematic lighting, high detail, matte, not glossy, not 3D plastic. Face fully visible, head upright, nothing covering the face. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "512e7eef-f1a4-434b-a07b-7a08e1db64c3",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:08:35.087Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "2.5D semi-realistic Korean webtoon style illustration, painterly digital art with realistic fur texture. A small cute white Persian chinchilla kitten fortune teller: long fluffy pure white fur with a silvery shimmer, round flat sweet face, huge round emerald-green eyes lined like eyeliner, tiny pink nose, wearing a tiny pale ivory silk hanbok vest with gold embroidery, sitting upright behind a small low wooden Korean table (soban). With one front paw it playfully nudges three antique brass Korean coins (yeopjeon, round with square holes) across the table, looking up at the viewer with a slightly aloof but adorable expression. Warm candlelight from two short candles, soft glow on the fur, dark cozy wooden room with blurred warm bokeh and a folded Korean paper screen in the background. Cinematic lighting, high detail, matte, not glossy, not 3D plastic. Face fully visible, head upright, nothing covering the face. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "bc0fc4bb-cdb9-45ee-90cf-019bfb3b7602",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:08:35.087Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "2.5D semi-realistic Korean webtoon style illustration, painterly digital art with realistic fur texture. A small cute Munchkin kitten fortune teller with very short little legs: black-and-white tuxedo fur with a white chest and white mittens, round face, huge round yellow-green eyes, chubby cheeks, wearing a tiny black silk hanbok vest with silver embroidery, standing on its short hind legs behind a small low wooden Korean table (soban), just tall enough to reach it, with both tiny front paws resting on three antique brass Korean coins (yeopjeon, round with square holes), looking up at the viewer with a proud cute little smile. Warm candlelight from two short candles, soft glow on the fur, dark cozy wooden room with blurred warm bokeh and a folded Korean paper screen in the background. Cinematic lighting, high detail, matte, not glossy, not 3D plastic. Face fully visible, head upright, nothing covering the face. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "774b0916-af1b-4396-859c-4bbc3e87a688",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:08:51.446Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "Hyper-detailed semi-realistic painterly illustration, 2.5D Korean webtoon cover quality, fur rendered almost photographically: individual soft hairs, fluffy baby fuzz, whiskers catching the light. An impossibly cute tiny 8-week-old Scottish Fold kitten, silver-grey and white, ears folded flat so the head looks perfectly round like a little ball, oversized round glossy copper eyes filling much of the face with big wet catchlights and a soft reflection of candle flames, tiny pink nose, little pink mouth slightly open in a happy 'mew', puffy chubby cheeks, short stubby body, fluffy round tummy, tiny pink toe beans visible. It sits upright on a silk cushion behind a small low wooden Korean table (soban), wearing a tiny jade-green silk hanbok vest slightly too big for it, and has just batted one antique brass coin (yeopjeon) with its tiny paw, looking up at the viewer with pure delighted innocence. Warm candlelight, soft rim light glowing through the fluffy fur outline, dreamy warm bokeh, cozy dark wooden room, folded Korean paper screen softly blurred behind. Emotional, heart-melting, the kind of image people screenshot and send to friends. Matte painterly finish, not glossy, not plastic 3D, not a real photo, not a meme. Face fully visible, head upright, nothing covering the face. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "634d56a9-d7b9-4981-ae77-e654a8b7befd",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:12:34.817Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "2.5D semi-realistic Korean webtoon style illustration, painterly digital art with realistic fur texture. A small cute Russian Blue cat fortune teller with a haughty, aloof personality: sleek short silver-blue fur, elegant slim face, large almond-shaped vivid emerald-green eyes looking at the viewer with a cool half-lidded 'unimpressed' gaze, chin slightly raised, tiny smug closed-mouth smile, ears perked. Wearing a tiny white silk hanbok vest with silver embroidery and a small silver bell on a thin ribbon. It sits very upright and poised behind a small low wooden Korean table (soban), and with one front paw it is casually pushing an antique brass Korean coin (yeopjeon, round with square hole) toward the edge of the table as if it doesn't care, the other coins neatly stacked. Warm candlelight from two short candles, soft glow on the fur, dark cozy wooden room with blurred warm bokeh and a folded Korean paper screen in the background. Cinematic lighting, high detail, matte, not glossy, not 3D plastic. Cute but proud and elegant. Face fully visible, head upright, nothing covering the face. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "479787c5-a24d-483f-a79a-64c45c8e3cf4",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:12:34.817Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "2.5D semi-realistic Korean webtoon style illustration, painterly digital art with realistic fur texture. A small cute black cat fortune teller with a mysterious, coy personality: glossy jet-black fluffy fur, round face, huge round luminous golden-yellow eyes with a sly knowing look, one eye in a playful slow wink, little closed-mouth smirk. Wearing a tiny deep navy-blue silk hanbok vest with silver wave embroidery. It sits upright behind a small low wooden Korean table (soban), long tail curled elegantly around a small glowing glass water bowl on the table in which a tiny moon is reflected, one front paw lightly touching the rim. Warm candlelight from two short candles plus a faint cool blue glow from the bowl lighting its face, dark cozy wooden room with blurred warm bokeh and a folded Korean paper screen in the background. Cinematic lighting, high detail, matte, not glossy, not 3D plastic. Cute and enchanting, a little mischievous. Face fully visible, head upright, nothing covering the face. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "de235936-f9fb-45e2-babf-2ed7df388171",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:12:34.817Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "2.5D semi-realistic Korean webtoon style illustration, painterly digital art with realistic fur texture. A small cute cream-colored Exotic Shorthair cat fortune teller with a grumpy-but-lovable, laid-back personality: plush thick cream and pale gold fur, round flat squishy face, big round copper eyes with a slightly sulky pouting expression, tiny downturned mouth, very chubby round body. Wearing a tiny mustard-yellow silk hanbok vest with brown embroidery. It sits heavily and comfortably on a thick silk cushion behind a small low wooden Korean table (soban), both front paws protectively hugging a small earthenware pot overflowing with antique brass coins (yeopjeon), looking straight at the viewer as if saying 'these are mine'. Warm candlelight from two short candles, soft glow on the fur, dark cozy wooden room with blurred warm bokeh and a folded Korean paper screen in the background. Cinematic lighting, high detail, matte, not glossy, not 3D plastic. Funny, grumpy, adorable. Face fully visible, head upright, nothing covering the face. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "78bbd370-15a8-42e4-b83f-0b190da522bd",
+  "tool": "generate_image_batch",
+  "time": "2026-09-30T23:15:29.018Z",
+  "params": {
+   "model": "gpt_image_2_5",
+   "quality": "medium",
+   "aspect_ratio": "9:16",
+   "prompt": "2.5D semi-realistic Korean webtoon style illustration, painterly digital art with realistic fur texture. A breathtakingly beautiful young white Turkish Angora cat fortune teller, the most gorgeous cat you have ever seen: long silky pure white fur flowing like silk, elegant slender neck and fine-boned delicate face, striking odd eyes (one clear ice-blue eye, one warm honey-gold eye) large and luminous with long white lashes, soft pink nose, a calm alluring half-smile, graceful and enchanting like a celebrity. Wearing a tiny pale peach-pink silk hanbok jeogori-style vest with delicate peach blossom embroidery and a thin gold norigae tassel. It sits gracefully upright behind a small low wooden Korean table (soban), tail wrapped elegantly around its front paws, one peach blossom sprig lying on the table beside three antique brass coins (yeopjeon), a few pink petals drifting in the air. Warm candlelight from two short candles with a soft pink rim light on the white fur, dark cozy wooden room with blurred warm bokeh and a folded Korean paper screen in the background. Cinematic beauty lighting, high detail, matte, not glossy, not 3D plastic. Elegant, captivating, glamorous yet cute. Looking directly at the viewer, face fully visible, head upright, nothing covering the face. ABSOLUTELY NO TEXT, no letters, no watermark, no logo."
+  }
+ },
+ {
+  "job_id": "7981c300-59e7-4f07-a27d-d1f13eb91326",
+  "tool": "generate_video_batch",
+  "time": "2026-09-30T23:27:29.628Z",
+  "params": {
+   "model": "kling3_0",
+   "mode": "pro",
+   "sound": true,
+   "duration": 5,
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "start_image",
+     "value": "78bbd370-15a8-42e4-b83f-0b190da522bd"
+    }
+   ],
+   "prompt": "The beautiful white Turkish Angora cat with odd eyes sits behind the small wooden table and looks straight into the camera. She slowly blinks once, her tail sways gently, a few pink peach blossom petals drift down, the candle flames flicker softly. Then she speaks to the viewer in Korean, her small mouth and jaw clearly moving in sync with each syllable like a talking animated cat character, whiskers twitching, ears slightly turning. She says in Korean: \"이번 달, 너한테 끌리는 사람이 있어. 누군지 궁금하지?\" VOICE: one young Korean woman in her mid 20s, native Seoul Korean, elegant, languid, softly alluring whisper-close voice at a quiet intimate volume, a faint smile audible, smooth clean texture, not greasy, not theatrical, not childish, not loud. Camera: very slow gentle push-in, stays on her face. Keep her face fully visible, head upright. Quiet room tone only, soft candle crackle, no background music. No text on screen."
+  }
+ },
+ {
+  "job_id": "fc1d65ee-bfa5-4859-9286-e75563a4b431",
+  "tool": "generate_video_batch",
+  "time": "2026-10-01T00:00:56.695Z",
+  "params": {
+   "model": "kling3_0",
+   "mode": "pro",
+   "sound": true,
+   "duration": 6,
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "start_image",
+     "value": "479787c5-a24d-483f-a79a-64c45c8e3cf4"
+    }
+   ],
+   "prompt": "The black cat in the navy hanbok vest sits behind the small wooden table looking straight at the camera with a sly knowing look; the glowing moon water bowl ripples softly and its cool blue light flickers on her face, the candle flames flicker, her tail curls slowly. She speaks to the viewer in Korean, her small mouth and jaw clearly moving in sync with each syllable like a talking animated cat character, whiskers twitching, one eye narrowing in a teasing half-wink at the end. She says in Korean: \"로또 당첨 꿈이라도 꾼 거야? 아마 개꿈일 확률이 높아. 그래도 봐 줄게.\" VOICE: one young Korean woman in her mid 20s, native Seoul Korean, coy, teasing, slightly mysterious soft voice at a quiet close volume, a smirk audible, smooth clean texture, not greasy, not theatrical, not childish, not loud. Camera: slow gentle push-in, stays on her face. Keep her face fully visible, head upright. Quiet room tone only, soft candle crackle, no background music. No text on screen."
+  }
+ },
+ {
+  "job_id": "2950e705-0a3b-4777-9a97-b6a89b1e0eea",
+  "tool": "generate_video_batch",
+  "time": "2026-10-01T00:00:56.695Z",
+  "params": {
+   "model": "kling3_0",
+   "mode": "pro",
+   "sound": true,
+   "duration": 5,
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "start_image",
+     "value": "20b3e168-a7dd-4cac-ae4a-c4b99df671a1"
+    }
+   ],
+   "prompt": "The orange tabby cat in the red hanbok vest sits behind the small wooden table, ears perk up, looks straight at the camera with a cheeky confident grin, then playfully taps one brass coin on the table with its front paw. It speaks to the viewer in Korean, its small mouth and jaw clearly moving in sync with each syllable like a talking animated cat character, whiskers twitching, eyebrows raised mischievously. It says in Korean: \"그 사람 속마음 궁금해? 궁금하면 엽전 줘.\" VOICE: one young Korean man in his early 20s, native Seoul Korean, bright, cheeky, playful teasing voice, light and charming, smooth clean texture, not greasy, not theatrical, not childish, not loud. Camera: slow gentle push-in, stays on its face. Keep the face fully visible, head upright. Quiet room tone only, soft candle crackle, a tiny coin clink, no background music. No text on screen."
+  }
+ },
+ {
+  "job_id": "0df9ecc0-dd0e-4f06-ae4f-c930c19af965",
+  "tool": "generate_video_batch",
+  "time": "2026-10-01T00:00:56.695Z",
+  "params": {
+   "model": "kling3_0",
+   "mode": "pro",
+   "sound": true,
+   "duration": 5,
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "start_image",
+     "value": "de235936-f9fb-45e2-babf-2ed7df388171"
+    }
+   ],
+   "prompt": "The chubby cream Exotic Shorthair cat in the mustard hanbok vest sits heavily behind the small wooden table, hugging the pot of brass coins tightly with both paws, looking straight at the camera with a grumpy sulky pout, its puffy cheeks twitch. It speaks to the viewer in Korean, its small mouth and jaw clearly moving in sync with each syllable like a talking animated cat character, whiskers twitching, eyes half-lidded and unimpressed, then it squeezes the pot a little tighter. It says in Korean: \"금전운 보러 온 거지? 츄르 하나 주면 알려 줄게.\" VOICE: one young Korean man in his early 20s, native Seoul Korean, lazy, low, slightly grumbling but cute sleepy voice, deadpan, smooth clean texture, not greasy, not theatrical, not childish, not loud. Camera: slow gentle push-in, stays on its face. Keep the face fully visible, head upright. Quiet room tone only, soft candle crackle, no background music. No text on screen."
+  }
+ },
+ {
+  "job_id": "b10e1941-b797-4f7b-a6ae-9e0c0c90e8ae",
+  "tool": "generate_video_batch",
+  "time": "2026-10-01T00:00:56.695Z",
+  "params": {
+   "model": "kling3_0",
+   "mode": "pro",
+   "sound": true,
+   "duration": 5,
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "start_image",
+     "value": "634d56a9-d7b9-4981-ae77-e654a8b7befd"
+    }
+   ],
+   "prompt": "The elegant Russian Blue cat in the white hanbok vest sits very upright behind the small wooden table, chin raised, looking at the camera with a cool half-lidded unimpressed gaze, and casually pushes one brass coin toward the table edge with its paw as if it doesn't care. It speaks to the viewer in Korean, its small mouth and jaw clearly moving in sync with each syllable like a talking animated cat character, whiskers twitching, ears flicking once impatiently. It says in Korean: \"고민 딱 하나만 말해. 두 개는 안 들어. 시간 없거든.\" VOICE: one young Korean woman in her mid 20s, native Seoul Korean, cool, aloof, dry and a little bored, crisp quick delivery, chic, smooth clean texture, not greasy, not theatrical, not childish, not loud. Camera: slow gentle push-in, stays on her face. Keep her face fully visible, head upright. Quiet room tone only, soft candle crackle, a tiny bell tinkle, no background music. No text on screen."
+  }
+ },
+ {
+  "job_id": "cca4013b-3952-41ce-8208-30aef06f5924",
+  "tool": "generate_video_batch",
+  "time": "2026-10-01T00:00:56.695Z",
+  "params": {
+   "model": "kling3_0",
+   "mode": "pro",
+   "sound": true,
+   "duration": 6,
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "start_image",
+     "value": "5fd8081f-b659-4965-9a0b-a9dd95ed425b"
+    }
+   ],
+   "prompt": "The small Scottish Fold kitten in the green hanbok vest sits behind the small wooden table, tilts its round head slightly to one side, looks straight at the camera with big sweet copper eyes and a gentle shy smile, its paws resting near the brass coins. It speaks to the viewer in Korean, its small mouth and jaw clearly moving in sync with each syllable like a talking animated cat character, whiskers twitching, blinking softly. It says in Korean: \"쿠키 하나 깨 볼래? 불안해하지 마. 이건 그냥 재미로 하는 거야.\" VOICE: one young Korean boy-like soft voice of a gentle young man around 20, native Seoul Korean, sweet, warm, reassuring and a little shy, smooth clean texture, not greasy, not theatrical, not babyish, not loud. Camera: slow gentle push-in, stays on its face. Keep the face fully visible, head upright. Quiet room tone only, soft candle crackle, no background music. No text on screen."
+  }
+ },
+ {
+  "job_id": "5b428207-19c5-47a7-939f-061d3ad4c490",
+  "tool": "generate_image_batch",
+  "time": "2026-10-01T15:11:27.923Z",
+  "params": {
+   "model": "soul_2",
+   "aspect_ratio": "9:16",
+   "use_unlim": false,
+   "quality": "2k",
+   "prompt": "Ultra-realistic photograph, shot on a full-frame camera with an 85mm lens at f/2, natural skin texture with pores and fine wrinkles, real fabric texture, true-to-life color, editorial portrait photography, indistinguishable from a real photo. A Korean master of saju (Four Pillars of Destiny) in his early 70s, a dignified scholar: silver-white hair neatly combed back, a short well-kept white beard, kind but piercing deep-set eyes with fine wrinkles, thin round tortoiseshell glasses. He wears a charcoal-gray linen durumagi (traditional Korean overcoat) over an ivory hanbok jeogori. He sits at a low dark-walnut desk in a traditional hanok study (sarangbang): an old manseryeok almanac book lies open, an ink stone, a calligraphy brush, a brass geomantic compass (yundo); behind him wooden shelves of stitched old books recede into soft shadow, paper-lattice window on one side letting in warm late-afternoon light. Strong sense of depth and perspective: foreground desk objects slightly out of focus, the master in sharp focus, background shelves falling off into soft bokeh; directional window light sculpting his face with clear light and shadow planes. Waist-up, three-quarter view, looking calmly at the viewer, one hand resting on the open almanac. He must not resemble any real person. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "job_id": "7a8c38ba-bde9-4fba-a804-35b4fc7ac530",
+  "tool": "generate_image_batch",
+  "time": "2026-10-01T15:11:27.923Z",
+  "params": {
+   "model": "soul_2",
+   "aspect_ratio": "9:16",
+   "use_unlim": false,
+   "quality": "2k",
+   "prompt": "Ultra-realistic photograph, shot on a full-frame camera with an 85mm lens at f/2, natural skin texture with pores and fine wrinkles, real fabric texture, true-to-life color, editorial portrait photography, indistinguishable from a real photo. A Korean master of saju (Four Pillars of Destiny) in his early 70s, a dignified scholar: silver-white hair neatly combed back, a short well-kept white beard, kind but piercing deep-set eyes with fine wrinkles, thin round tortoiseshell glasses. He wears a charcoal-gray linen durumagi (traditional Korean overcoat) over an ivory hanbok jeogori. He sits at a low dark-walnut desk in a traditional hanok study (sarangbang): an old manseryeok almanac book lies open, an ink stone, a calligraphy brush, a brass geomantic compass (yundo); behind him wooden shelves of stitched old books recede into soft shadow, paper-lattice window on one side letting in warm late-afternoon light. Strong sense of depth and perspective: foreground desk objects slightly out of focus, the master in sharp focus, background shelves falling off into soft bokeh; directional window light sculpting his face with clear light and shadow planes. Waist-up, three-quarter view, looking calmly at the viewer, one hand resting on the open almanac. He must not resemble any real person. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "job_id": "ef85588b-9447-475e-b1ad-d303a55e2c9e",
+  "tool": "generate_image_batch",
+  "time": "2026-10-01T15:11:27.923Z",
+  "params": {
+   "model": "nano_banana_pro",
+   "aspect_ratio": "9:16",
+   "use_unlim": false,
+   "resolution": "2k",
+   "prompt": "Ultra-realistic photograph, shot on a full-frame camera with an 85mm lens at f/2, natural skin texture with pores and fine wrinkles, real fabric texture, true-to-life color, editorial portrait photography, indistinguishable from a real photo. A Korean master of saju (Four Pillars of Destiny) in his early 70s, a dignified scholar: silver-white hair neatly combed back, a short well-kept white beard, kind but piercing deep-set eyes with fine wrinkles, thin round tortoiseshell glasses. He wears a charcoal-gray linen durumagi (traditional Korean overcoat) over an ivory hanbok jeogori. He sits at a low dark-walnut desk in a traditional hanok study (sarangbang): an old manseryeok almanac book lies open, an ink stone, a calligraphy brush, a brass geomantic compass (yundo); behind him wooden shelves of stitched old books recede into soft shadow, paper-lattice window on one side letting in warm late-afternoon light. Strong sense of depth and perspective: foreground desk objects slightly out of focus, the master in sharp focus, background shelves falling off into soft bokeh; directional window light sculpting his face with clear light and shadow planes. Waist-up, three-quarter view, looking calmly at the viewer, one hand resting on the open almanac. He must not resemble any real person. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "job_id": "41a96089-fd6a-4c2a-abd4-3f29ade786ea",
+  "tool": "generate_image_batch",
+  "time": "2026-10-01T15:11:27.923Z",
+  "params": {
+   "model": "nano_banana_pro",
+   "aspect_ratio": "9:16",
+   "use_unlim": false,
+   "resolution": "2k",
+   "prompt": "Ultra-realistic photograph, shot on a full-frame camera with an 85mm lens at f/2, natural skin texture with pores and fine wrinkles, real fabric texture, true-to-life color, editorial portrait photography, indistinguishable from a real photo. A Korean master of saju (Four Pillars of Destiny) in his early 70s, a dignified scholar: silver-white hair neatly combed back, a short well-kept white beard, kind but piercing deep-set eyes with fine wrinkles, thin round tortoiseshell glasses. He wears a charcoal-gray linen durumagi (traditional Korean overcoat) over an ivory hanbok jeogori. He sits at a low dark-walnut desk in a traditional hanok study (sarangbang): an old manseryeok almanac book lies open, an ink stone, a calligraphy brush, a brass geomantic compass (yundo); behind him wooden shelves of stitched old books recede into soft shadow, paper-lattice window on one side letting in warm late-afternoon light. Strong sense of depth and perspective: foreground desk objects slightly out of focus, the master in sharp focus, background shelves falling off into soft bokeh; directional window light sculpting his face with clear light and shadow planes. Waist-up, three-quarter view, looking calmly at the viewer, one hand resting on the open almanac. He must not resemble any real person. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "job_id": "7199c6d4-08b0-4301-969e-78f948e36ccc",
+  "tool": "generate_image_batch",
+  "time": "2026-10-01T15:11:27.923Z",
+  "params": {
+   "model": "seedream_v4_5",
+   "aspect_ratio": "9:16",
+   "use_unlim": false,
+   "quality": "high",
+   "prompt": "Ultra-realistic photograph, shot on a full-frame camera with an 85mm lens at f/2, natural skin texture with pores and fine wrinkles, real fabric texture, true-to-life color, editorial portrait photography, indistinguishable from a real photo. A Korean master of saju (Four Pillars of Destiny) in his early 70s, a dignified scholar: silver-white hair neatly combed back, a short well-kept white beard, kind but piercing deep-set eyes with fine wrinkles, thin round tortoiseshell glasses. He wears a charcoal-gray linen durumagi (traditional Korean overcoat) over an ivory hanbok jeogori. He sits at a low dark-walnut desk in a traditional hanok study (sarangbang): an old manseryeok almanac book lies open, an ink stone, a calligraphy brush, a brass geomantic compass (yundo); behind him wooden shelves of stitched old books recede into soft shadow, paper-lattice window on one side letting in warm late-afternoon light. Strong sense of depth and perspective: foreground desk objects slightly out of focus, the master in sharp focus, background shelves falling off into soft bokeh; directional window light sculpting his face with clear light and shadow planes. Waist-up, three-quarter view, looking calmly at the viewer, one hand resting on the open almanac. He must not resemble any real person. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "job_id": "bac5f83e-4be5-43b8-9192-5a01732492b2",
+  "tool": "generate_image_batch",
+  "time": "2026-10-01T15:11:27.923Z",
+  "params": {
+   "model": "seedream_v4_5",
+   "aspect_ratio": "9:16",
+   "use_unlim": false,
+   "quality": "high",
+   "prompt": "Semi-realistic 2.5D Korean webtoon illustration, painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle texture, refined line work, cinematic rim light, strong three-dimensional volume. A Korean master of saju (Four Pillars of Destiny) in his early 70s, a dignified scholar: silver-white hair neatly combed back, a short well-kept white beard, kind but piercing deep-set eyes with fine wrinkles, thin round tortoiseshell glasses. He wears a charcoal-gray linen durumagi (traditional Korean overcoat) over an ivory hanbok jeogori. He sits at a low dark-walnut desk in a traditional hanok study (sarangbang): an old manseryeok almanac book lies open, an ink stone, a calligraphy brush, a brass geomantic compass (yundo); behind him wooden shelves of stitched old books recede into soft shadow, paper-lattice window on one side letting in warm late-afternoon light. Strong sense of depth and perspective: foreground desk objects slightly out of focus, the master in sharp focus, background shelves falling off into soft bokeh; directional window light sculpting his face with clear light and shadow planes. Waist-up, three-quarter view, looking calmly at the viewer, one hand resting on the open almanac. He must not resemble any real person. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "job_id": "aecabdd2-f21c-40fd-8fef-6648965add9e",
+  "tool": "generate_image_batch",
+  "time": "2026-10-01T15:11:27.923Z",
+  "params": {
+   "model": "seedream_v4_5",
+   "aspect_ratio": "9:16",
+   "use_unlim": false,
+   "quality": "high",
+   "prompt": "Semi-realistic 2.5D Korean webtoon illustration, painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle texture, refined line work, cinematic rim light, strong three-dimensional volume. A Korean master of saju (Four Pillars of Destiny) in his early 70s, a dignified scholar: silver-white hair neatly combed back, a short well-kept white beard, kind but piercing deep-set eyes with fine wrinkles, thin round tortoiseshell glasses. He wears a charcoal-gray linen durumagi (traditional Korean overcoat) over an ivory hanbok jeogori. He sits at a low dark-walnut desk in a traditional hanok study (sarangbang): an old manseryeok almanac book lies open, an ink stone, a calligraphy brush, a brass geomantic compass (yundo); behind him wooden shelves of stitched old books recede into soft shadow, paper-lattice window on one side letting in warm late-afternoon light. Strong sense of depth and perspective: foreground desk objects slightly out of focus, the master in sharp focus, background shelves falling off into soft bokeh; directional window light sculpting his face with clear light and shadow planes. Waist-up, three-quarter view, looking calmly at the viewer, one hand resting on the open almanac. He must not resemble any real person. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "job_id": "0a29bdf1-ffbe-4175-b238-2520ee50eca8",
+  "tool": "generate_image_batch",
+  "time": "2026-10-01T15:11:27.923Z",
+  "params": {
+   "model": "seedream_v5_pro",
+   "aspect_ratio": "9:16",
+   "use_unlim": false,
+   "resolution": "2k",
+   "prompt": "Semi-realistic 2.5D Korean webtoon illustration, painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle texture, refined line work, cinematic rim light, strong three-dimensional volume. A Korean master of saju (Four Pillars of Destiny) in his early 70s, a dignified scholar: silver-white hair neatly combed back, a short well-kept white beard, kind but piercing deep-set eyes with fine wrinkles, thin round tortoiseshell glasses. He wears a charcoal-gray linen durumagi (traditional Korean overcoat) over an ivory hanbok jeogori. He sits at a low dark-walnut desk in a traditional hanok study (sarangbang): an old manseryeok almanac book lies open, an ink stone, a calligraphy brush, a brass geomantic compass (yundo); behind him wooden shelves of stitched old books recede into soft shadow, paper-lattice window on one side letting in warm late-afternoon light. Strong sense of depth and perspective: foreground desk objects slightly out of focus, the master in sharp focus, background shelves falling off into soft bokeh; directional window light sculpting his face with clear light and shadow planes. Waist-up, three-quarter view, looking calmly at the viewer, one hand resting on the open almanac. He must not resemble any real person. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ },
+ {
+  "job_id": "10901d69-7780-4e65-9552-567484d7ff07",
+  "tool": "generate_image_batch",
+  "time": "2026-10-01T15:11:27.923Z",
+  "params": {
+   "model": "seedream_v5_pro",
+   "aspect_ratio": "9:16",
+   "use_unlim": false,
+   "resolution": "2k",
+   "prompt": "Semi-realistic 2.5D Korean webtoon illustration, painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle texture, refined line work, cinematic rim light, strong three-dimensional volume. A Korean master of saju (Four Pillars of Destiny) in his early 70s, a dignified scholar: silver-white hair neatly combed back, a short well-kept white beard, kind but piercing deep-set eyes with fine wrinkles, thin round tortoiseshell glasses. He wears a charcoal-gray linen durumagi (traditional Korean overcoat) over an ivory hanbok jeogori. He sits at a low dark-walnut desk in a traditional hanok study (sarangbang): an old manseryeok almanac book lies open, an ink stone, a calligraphy brush, a brass geomantic compass (yundo); behind him wooden shelves of stitched old books recede into soft shadow, paper-lattice window on one side letting in warm late-afternoon light. Strong sense of depth and perspective: foreground desk objects slightly out of focus, the master in sharp focus, background shelves falling off into soft bokeh; directional window light sculpting his face with clear light and shadow planes. Waist-up, three-quarter view, looking calmly at the viewer, one hand resting on the open almanac. He must not resemble any real person. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark."
+  }
+ }
+]

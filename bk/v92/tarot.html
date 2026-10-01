@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>무진의 타로 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Song+Myung&display=swap">
+<link rel="stylesheet" href="premkit.css">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 무진의 타로 — 골동품 카드방 톤: 먹색·버건디·남색 벨벳·금박. 카드 섞기/펼치기/뒤집기는 전부 코드 애니메이션, 무진은 공통 영상 5컷. */
+:root{
+  --brush:'OBrush','Noto Serif KR',serif; --bmj:'Song Myung','Noto Serif KR',serif; --cg:'Cormorant Garamond',Georgia,serif;
+  --bg:#07060a; --stage:#16121a; --card:#221c25; --line:rgba(255,236,210,.1); --line-2:rgba(227,184,102,.3);
+  --ink:#f6f1ea; --ink-2:#d2c8bb; --ink-3:#8f867b; --gold:#e3b866; --gold-2:#f3d79b; --wine:#6d1f2e; --indigo:#2a2350;
+  --wood:#46b47f; --fire:#ec5a43; --earth:#d3a13a; --metal:#c9d1dc; --water:#5b8ce6;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif; --serif:'Noto Serif KR',serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button,input,select{font-family:inherit}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--stage);overflow:hidden}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
+.scr{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .5s;overflow:hidden}
+.scr.on{opacity:1;pointer-events:auto}
+.scroll{overflow-y:auto;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+.top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 14px 10px}
+.ib{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(10,8,12,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;place-items:center;cursor:pointer;color:#fff}
+.ib svg{width:18px;height:18px}
+.top b{font-size:13px;font-weight:700;letter-spacing:.14em;color:rgba(255,236,200,.9);text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.top .snd{margin-left:auto}
+.top.solid{background:linear-gradient(180deg,rgba(12,10,14,.96) 60%,rgba(12,10,14,0))}
+.toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 90px);transform:translateX(-50%);z-index:95;background:rgba(0,0,0,.85);color:#fff;font-size:13.5px;padding:10px 16px;border-radius:999px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+
+/* ---------- 1. 질문 (위: 무진, 아래: 선택 — 얼굴을 가리지 않게 스크롤) ---------- */
+#s1{overflow-y:auto;scrollbar-width:none}#s1::-webkit-scrollbar{display:none}
+#s1 .hero{position:relative;height:58vh;max-height:540px;min-height:380px;background:#000 url('img/tarot/mujin.jpg') center 12%/cover no-repeat}
+#s1 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,6,10,.35) 0%,rgba(7,6,10,0) 20%,rgba(7,6,10,0) 55%,rgba(12,10,14,.92) 88%,#0c0a0e 100%)}
+#s1 .ht{position:absolute;left:18px;right:18px;bottom:6px;z-index:2}
+#s1 .body{padding:4px 18px calc(env(safe-area-inset-bottom,0px) + 24px)}
+.kick{font:700 11px/1 var(--sans);letter-spacing:.3em;color:var(--gold-2);opacity:.85}
+.h1{font-family:var(--brush);font-size:46px;line-height:1.1;margin:8px 0 4px;text-shadow:0 3px 20px rgba(0,0,0,.8)}
+.sub1{font-family:var(--bmj);font-size:16px;color:var(--ink-2);margin:0}
+.lab{font-size:12px;font-weight:700;color:var(--ink-3);letter-spacing:.06em;margin:16px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1px solid var(--line-2);background:rgba(20,16,22,.72);color:var(--ink);font-size:13.5px;font-weight:700;padding:9px 13px;border-radius:999px;cursor:pointer;transition:all .2s}
+.chip.on{background:var(--gold);color:#1a120a;border-color:var(--gold)}
+.qin{width:100%;height:46px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);font-size:14.5px;padding:0 14px;outline:none}
+.qin:focus{border-color:var(--line-2)}
+.spread{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sp{border:1px solid var(--line);background:rgba(20,16,22,.72);border-radius:14px;padding:12px;text-align:left;color:var(--ink);cursor:pointer}
+.sp b{display:block;font-size:14.5px}.sp small{display:block;font-size:12px;color:var(--ink-3);margin-top:3px}
+.sp.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.sp .fr{float:right;font-size:11px;font-weight:800;color:#1a120a;background:var(--gold-2);border-radius:999px;padding:2px 7px}
+.go{width:100%;height:54px;margin-top:18px;border:0;border-radius:16px;background:linear-gradient(180deg,#f0cf85,#d6a64f);color:#1a120a;font-size:16px;font-weight:900;cursor:pointer;box-shadow:0 8px 28px rgba(227,184,102,.25)}
+.go:disabled{opacity:.35}
+
+/* 떠다니는 금가루 */
+.dust{position:absolute;inset:0;pointer-events:none;z-index:25;overflow:hidden}
+.dust i{position:absolute;bottom:-8px;width:3px;height:3px;border-radius:50%;background:#ffd98a;box-shadow:0 0 6px 2px rgba(255,200,110,.55);opacity:0;animation:dust linear infinite}
+@keyframes dust{0%{transform:translate(0,0);opacity:0}12%{opacity:.8}80%{opacity:.5}100%{transform:translate(var(--dx),-105vh);opacity:0}}
+.veil{position:absolute;inset:0;background:#000;z-index:70;opacity:0;pointer-events:none;transition:opacity .28s}
+.veil.on{opacity:1}
+
+/* ---------- 2. 섞기·고르기 ---------- */
+#s2{background:#050407}
+#s2 .vbox{position:absolute;left:0;right:0;top:0;height:42%;overflow:hidden;background:#000 url('img/tarot/shuffle.jpg') center 30%/cover no-repeat}
+#s2 .vbox video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;transform-origin:50% 40%;transition:opacity .6s}
+#s2 .vbox #vL{opacity:0}
+#s2 .vbox.loop #vL{opacity:1}#s2 .vbox.loop #vS{opacity:0}
+#s2 .vbox.still video{animation:kb 14s ease-in-out infinite alternate}
+@keyframes kb{to{transform:scale(1.06)}}
+#s2 .vbox:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,4,7,.3),rgba(5,4,7,0) 30%,rgba(5,4,7,0) 70%,#050407)}
+#s2 .sub{position:absolute;left:16px;right:16px;top:calc(42% - 64px);z-index:5;text-align:center;font-family:var(--bmj);font-size:19px;color:#fff;text-shadow:0 2px 12px #000;opacity:0;transition:opacity .3s}
+#s2 .sub.on{opacity:1}
+#s2 .table{position:absolute;left:0;right:0;bottom:0;top:40%;background:#120a0e url('img/tarot/table.jpg') center/cover no-repeat}
+#s2 .table:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 100%)}
+.guide{position:absolute;left:0;right:0;top:14px;z-index:6;text-align:center;font-size:13.5px;font-weight:700;color:var(--gold-2);text-shadow:0 1px 8px #000}
+.guide small{display:block;font-weight:500;color:var(--ink-2);font-size:12px;margin-top:4px}
+.slots{position:absolute;left:0;right:0;top:48px;display:flex;justify-content:center;gap:34px;z-index:4}
+.slot{width:62px;aspect-ratio:9/16;border:1.5px dashed rgba(243,215,155,.45);border-radius:8px;position:relative}
+.slot i{position:absolute;left:50%;top:100%;width:92px;margin:6px 0 0 -46px;text-align:center;font-style:normal;font-size:10.5px;line-height:1.3;color:var(--ink-2)}
+.deckArea{position:absolute;left:0;right:0;top:0;bottom:0;touch-action:none;user-select:none;-webkit-user-select:none}
+.cd{position:absolute;width:74px;aspect-ratio:9/16;border-radius:7px;background:#111 url('img/tarot/back.jpg') center/cover no-repeat;box-shadow:0 6px 18px rgba(0,0,0,.6),0 0 0 1px rgba(227,184,102,.35) inset;transition:transform .35s cubic-bezier(.2,.8,.2,1),left .45s cubic-bezier(.2,.8,.2,1),top .45s cubic-bezier(.2,.8,.2,1),width .45s,opacity .3s;will-change:transform}
+.cd.fast{transition:transform .09s linear}
+.cd.hov{filter:brightness(1.25);box-shadow:0 0 22px rgba(243,215,155,.75),0 0 0 1.5px rgba(243,215,155,.9) inset}
+.cd.fly{box-shadow:0 0 30px 6px rgba(243,215,155,.7),0 0 0 1.5px rgba(243,215,155,.9) inset;transition:left .7s cubic-bezier(.3,.8,.2,1),top .7s cubic-bezier(.3,.8,.2,1),width .7s,transform .7s cubic-bezier(.3,.8,.2,1)}
+.ring{position:absolute;left:50%;top:58%;width:170px;height:170px;margin:-85px 0 0 -85px;pointer-events:none;z-index:1}
+.ring circle{fill:none;stroke-width:3}
+.ring .bgc{stroke:rgba(243,215,155,.15)}.ring .fg{stroke:var(--gold);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset .1s linear;filter:drop-shadow(0 0 8px rgba(227,184,102,.8))}
+
+/* ---------- 3. 공개 ---------- */
+#s3{background:#0a0709 url('img/tarot/table.jpg') center/cover no-repeat}
+#s3:before{content:"";position:absolute;inset:0;background:rgba(5,3,6,.55)}
+#s3 .guide{top:calc(env(safe-area-inset-top,0px) + 64px)}
+.row{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;justify-content:center;gap:12px;padding:0 12px}
+.fc{position:relative;width:30%;max-width:130px;aspect-ratio:9/16;perspective:900px;cursor:pointer}
+.fc.one{width:56%;max-width:230px}
+.fc .in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,.7,.2,1)}
+.fc.flip .in{transform:rotateY(180deg)}
+.fc .f,.fc .b{position:absolute;inset:0;border-radius:9px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.6)}
+.fc .b{background:#111 url('img/tarot/back.jpg') center/cover}
+.fc .f{transform:rotateY(180deg);background:#111}
+.fc.rv .f .art{transform:rotate(180deg)}
+.fc .f .art{position:absolute;inset:0;background:#111 center/cover no-repeat}
+.fc .cap{position:absolute;left:-12px;right:-12px;top:calc(100% + 8px);text-align:center;font-family:var(--serif);font-weight:700;font-size:13px;color:var(--gold-2);opacity:0;transition:opacity .4s .5s;line-height:1.3}
+.fc .cap small{display:block;font-family:var(--cg);font-style:italic;font-weight:600;font-size:11px;color:rgba(243,215,155,.75)}
+.fc.flip .cap{opacity:1}
+.fc .f .no{position:absolute;left:0;right:0;top:6.3%;text-align:center;font-family:var(--cg);font-weight:700;font-size:clamp(11px,3.2vw,15px);color:var(--gold-2);letter-spacing:.1em;z-index:2;text-shadow:0 1px 4px #000}
+.fc .glow{position:absolute;inset:-18%;border-radius:50%;background:radial-gradient(circle,rgba(243,215,155,.55),rgba(243,215,155,0) 60%);opacity:0;pointer-events:none;z-index:-1}
+.fc.flip .glow{animation:glw 1.4s ease-out}
+@keyframes glw{0%{opacity:0;transform:scale(.6)}30%{opacity:1}100%{opacity:0;transform:scale(1.25)}}
+.fc .pl{position:absolute;left:-10px;right:-10px;bottom:calc(100% + 8px);text-align:center;font-size:11.5px;line-height:1.3;font-weight:700;color:var(--gold-2)}
+.fc .rvTag{position:absolute;left:50%;bottom:-62px;transform:translateX(-50%);font-size:11px;font-weight:800;color:#ffb3a7;opacity:0;transition:opacity .4s .6s;white-space:nowrap}
+.fc.flip.rv .rvTag{opacity:1}
+
+/* 한 장씩 크게 뒤집는 스포트라이트 */
+.spot{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(3,2,4,0);pointer-events:none;transition:background .4s}
+.spot.on{background:rgba(3,2,4,.72);pointer-events:auto}
+.spot .fc{width:60%;max-width:250px;transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .4s}
+.spot .fc .in{transition:transform 1s cubic-bezier(.3,.7,.2,1)}
+.spot .cap{font-size:18px}.spot .cap small{font-size:13px}
+.spot .mean{margin-top:78px;max-width:300px;text-align:center;font-family:var(--bmj);font-size:16px;line-height:1.6;color:var(--ink-2);opacity:0;transition:opacity .5s .9s;padding:0 18px}
+.spot.shown .mean{opacity:1}
+.spot .tapn{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 26px);font-size:12px;color:var(--ink-3);opacity:0;transition:opacity .4s 1.4s}
+.spot.shown .tapn{opacity:1}
+.spark{position:absolute;left:50%;top:50%;width:4px;height:4px;border-radius:50%;background:#ffe3a8;box-shadow:0 0 8px 3px rgba(255,210,130,.8);pointer-events:none;animation:spark .9s ease-out forwards}
+@keyframes spark{0%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.3);opacity:0}}
+.zoom{position:absolute;inset:0;z-index:85;background:rgba(3,2,4,.95);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px}
+.zoom.on{display:flex}
+.zoom .zc{position:relative;width:64%;max-width:280px;aspect-ratio:9/16;border-radius:10px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.7)}
+.zoom .zc .zi{position:absolute;inset:0;background:#111 center/cover no-repeat}.zoom .zc.rv .zi{transform:rotate(180deg)}
+.zoom b{font-family:var(--serif);font-size:20px}.zoom small{color:var(--ink-3);font-size:12.5px}
+.say p+p{margin-top:10px}
+.say p.combo{font-size:15px;color:var(--ink-2);border-left:2px solid rgba(227,184,102,.6);padding-left:10px}
+.qhint{min-height:18px;margin-top:7px;font-size:12px;color:var(--gold-2);opacity:.85;transition:opacity .3s}
+.verd{border-color:rgba(227,184,102,.35);background:linear-gradient(180deg,rgba(227,184,102,.08),rgba(21,17,24,1) 60%)}
+.verd .big{font-family:var(--brush);font-size:31px;line-height:1.25;color:var(--gold-2);margin:2px 0 10px}
+.verd .big.sm{font-size:23px}
+.verd p{margin:0;font-size:15px;line-height:1.7;color:var(--ink)}.verd p b{color:var(--gold-2);font-weight:700}
+.verd .tm{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+.verd .tm b{color:var(--ink);font-weight:800;margin-right:6px}.verd .tm small{display:block;color:var(--ink-3);font-size:11.5px;margin-top:2px}
+details.how summary{cursor:pointer;list-style:none;font-size:12px;letter-spacing:.14em;color:var(--gold);font-weight:800;display:flex;justify-content:space-between}
+details.how summary::-webkit-details-marker{display:none}
+details.how summary:after{content:"펼치기";letter-spacing:0;font-weight:500;color:var(--ink-3)}details.how[open] summary:after{content:"접기"}
+details.how ul{margin:12px 0 0;padding-left:18px;font-size:13.5px;line-height:1.7;color:var(--ink-2)}details.how li+li{margin-top:4px}details.how li b{color:var(--ink)}
+details.how .nb{margin:12px 0 0;font-size:12px;color:var(--ink-3);line-height:1.6}
+.say .close{color:var(--gold-2)}
+
+/* ---------- 반응 영상 ---------- */
+.rx{position:absolute;inset:0;z-index:80;background:#000;opacity:0;pointer-events:none;transition:opacity .5s}
+.rx.on{opacity:1;pointer-events:auto}
+.rx video,.rx .po{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;background:#000 center 20%/cover no-repeat}
+.rx .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,0) 25%,rgba(0,0,0,0) 55%,rgba(0,0,0,.8) 90%)}
+.rx .sub{position:absolute;left:22px;right:22px;bottom:calc(env(safe-area-inset-bottom,0px) + 120px);text-align:center;font-family:var(--bmj);font-size:22px;line-height:1.5;color:#fff;text-shadow:0 2px 14px #000;opacity:0;transition:opacity .3s}
+.rx .sub.on{opacity:1}
+.rx .x{position:absolute;right:14px;top:calc(env(safe-area-inset-top,0px) + 14px);border:0;background:none;color:rgba(255,255,255,.7);font-size:12.5px;cursor:pointer;padding:6px}
+
+/* ---------- 4. 풀이 ---------- */
+#s4{background:var(--stage)}
+#s4 .scroll{position:absolute;inset:0}
+.rhero{position:relative;height:260px;background:#000 url('img/tarot/good.jpg') center 22%/cover no-repeat}
+.rhero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,10,14,.2),rgba(12,10,14,.1) 40%,var(--stage))}
+.rhero .t{position:absolute;left:18px;right:18px;bottom:6px;z-index:2}
+.rhero .t .h1{font-size:38px;margin:6px 0 0}
+.rhero .t p{margin:6px 0 0;font-family:var(--bmj);font-size:15px;color:var(--ink-2)}
+.wrap{padding:6px 16px calc(env(safe-area-inset-bottom,0px) + 34px)}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}
+.box h3{margin:0 0 10px;font-size:12px;letter-spacing:.14em;color:var(--gold);font-weight:800}
+.cr{display:grid;grid-template-columns:78px 1fr;gap:14px;align-items:start}
+.cr+.cr{margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.cr .th{width:78px;aspect-ratio:9/16;border-radius:7px;background:#111 center/cover no-repeat;box-shadow:0 6px 16px rgba(0,0,0,.5)}
+.cr .th.rv{transform:rotate(180deg)}
+.cr .p{font-size:11.5px;font-weight:800;color:var(--gold);letter-spacing:.06em}
+.cr .n{font-family:var(--serif);font-weight:900;font-size:18px;margin:3px 0 2px}
+.cr .n small{font-family:var(--cg);font-style:italic;font-weight:600;font-size:13px;color:var(--ink-3);margin-left:6px}
+.cr .ud{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;margin-right:4px}
+.ud.up{background:rgba(127,214,166,.15);color:#8fe0b3}.ud.rv{background:rgba(255,138,122,.15);color:#ffab9f}
+.el{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.06);color:var(--c)}
+.kws{margin:7px 0 6px;display:flex;flex-wrap:wrap;gap:5px}
+.kws span{font-size:11.5px;color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+.cr .m{font-size:14.5px;line-height:1.65;color:var(--ink);margin:0}
+.say{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+.say .av{width:44px;height:44px;border-radius:50%;background:#222 url('img/tarot/avatar.jpg') center/cover;border:1px solid var(--line-2)}
+.say p{margin:0;font-family:var(--bmj);font-size:16.5px;line-height:1.7;color:var(--ink)}
+.say p b{color:var(--gold-2);font-weight:400}
+.oh p{margin:0;font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+.oh p b{color:var(--ink)}
+.oh .mini{display:flex;gap:8px;margin-top:10px}
+.oh .mini input,.oh .mini select{flex:1;height:42px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);padding:0 10px;font-size:14px}
+.oh .mini button{height:42px;border:0;border-radius:12px;background:var(--gold);color:#1a120a;font-weight:800;padding:0 14px;cursor:pointer}
+.lock{position:relative;overflow:hidden}
+.lock .blur{filter:blur(5px);opacity:.55;pointer-events:none;user-select:none}
+.lock .cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;background:linear-gradient(180deg,rgba(21,17,24,.2),rgba(21,17,24,.85))}
+.lock .cta b{font-size:15px}.lock .cta small{font-size:12.5px;color:var(--ink-2)}
+.btn2{height:48px;border-radius:14px;border:1px solid var(--line-2);background:rgba(255,255,255,.04);color:var(--ink);font-weight:800;font-size:14.5px;cursor:pointer;width:100%;margin-top:10px}
+.pay{height:48px;border:0;border-radius:14px;background:linear-gradient(180deg,#f0cf85,#d6a64f);color:#1a120a;font-weight:900;font-size:15px;padding:0 22px;cursor:pointer}
+.foot{margin-top:14px;text-align:center;font-size:11.5px;color:var(--ink-3);line-height:1.6}
+
+/* ===== 2026-09-30 22시 비주얼 고도화 ===== */
+/* 라운딩 걷기(홈과 통일) — 원형 요소만 유지 */
+.stage *:not(.dust i):not(.fc .glow):not(.ib):not(.say .av):not(.spark):not(.rays){border-radius:0!important}
+.fc .in,.fc .f,.fc .b{border-radius:4px!important}
+/* 섞기: 더 큰 덱 + 반으로 갈라 엇갈려 섞는 리플 */
+.deckArea .cd{transition:transform .22s cubic-bezier(.3,.7,.3,1)}
+.deckArea.riff .cd{transition:transform .16s ease-out}
+/* 공개: 카드 뒤로 번지는 빛줄기 — 좋음 금빛, 고민 보랏빛, 조심 붉은빛 */
+.spot .rays{position:absolute;left:50%;top:44%;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;pointer-events:none;opacity:0;transform:scale(.6) rotate(0deg);transition:opacity .7s,transform 1.2s cubic-bezier(.2,.8,.2,1);
+  background:repeating-conic-gradient(from 0deg,var(--rc) 0deg 4deg,transparent 4deg 16deg);-webkit-mask:radial-gradient(circle,#000 8%,rgba(0,0,0,.5) 34%,transparent 66%);mask:radial-gradient(circle,#000 8%,rgba(0,0,0,.5) 34%,transparent 66%)}
+.spot.shown .rays{opacity:.55;transform:scale(1) rotate(0deg);animation:raySpin 26s linear infinite}
+@keyframes raySpin{to{transform:scale(1) rotate(360deg)}}
+.spot .halo{position:absolute;left:50%;top:44%;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,var(--rc),transparent 65%);opacity:0;transition:opacity .8s}
+.spot.shown .halo{opacity:.5}
+.spot.shown .fc{animation:pushIn 3.2s ease-out forwards}
+@keyframes pushIn{to{transform:scale(1.04)}}
+.spot .fc,.spot .mean,.spot .tapn{position:relative;z-index:1}
+/* 결과: 뽑은 카드 줄 */
+.drawn{display:flex;justify-content:center;gap:12px;margin:-6px 16px 4px;position:relative;z-index:3}
+.drawn button{flex:0 1 96px;border:0;padding:0;background:none;cursor:pointer;color:var(--ink);text-align:center;animation:dIn .7s both}
+@keyframes dIn{from{opacity:0;transform:translateY(16px) rotateX(30deg)}}
+.drawn .im{display:block;aspect-ratio:9/16;background:#111 center/cover no-repeat;box-shadow:0 0 0 1px rgba(227,184,102,.55),0 12px 26px rgba(0,0,0,.55),0 0 22px rgba(227,184,102,.18)}
+.drawn .im.rv{transform:rotate(180deg)}
+.drawn small{display:block;margin-top:7px;font-size:10.5px;letter-spacing:.06em;color:var(--gold-2)}
+.drawn b{display:block;font-size:13px;margin-top:2px}
+.verd{position:relative;border:1px solid rgba(227,184,102,.45)!important;background:linear-gradient(180deg,rgba(227,184,102,.1),rgba(227,184,102,.02))!important}
+.verd::after{content:"卜";position:absolute;right:14px;top:12px;width:30px;height:30px;display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:16px;color:#fff4ea;background:#a8322a;transform:rotate(-6deg);box-shadow:inset 0 0 0 2px rgba(255,240,230,.3)}
+
+/* ===== 카드방 — 섞기·고르기·공개가 손님 자리에서 본 한 장면 안에서 (2026-09-30 밤) =====
+   먼 층: 살아 있는 방(영상) + 깊이 지도 입체 / 중간 층: 향 연기·금가루 / 앞 층: 초점 밖 촛불빛. 폰을 기울이면 층마다 다르게 움직인다. */
+.room{position:absolute;inset:0;z-index:0;opacity:0;transition:opacity .9s;pointer-events:none;overflow:hidden;background:#0a0709;--px:0;--py:0}
+.room.on{opacity:1}
+.room .rbg{position:absolute;inset:0;background:#0a0709 url('img/tarot/room.jpg') center 30%/cover no-repeat;transform-origin:50% 62%;transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.room .rbg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0;transition:opacity .8s}
+.room .rbg.vok video{opacity:1}
+.room .rbg.d3on video{opacity:0!important}
+.room.lean .rbg{transform:scale(1.05)}
+.room.dim .rbg{transform:scale(1.09)}
+.room .fog{position:absolute;inset:-12%;pointer-events:none;mix-blend-mode:screen;transform:translate(calc(var(--px)*-10px),calc(var(--py)*-6px))}
+.room .fog i{position:absolute;inset:0;opacity:.32;background:radial-gradient(38% 16% at 30% 30%,rgba(150,170,220,.5),transparent 70%),radial-gradient(34% 12% at 72% 44%,rgba(170,150,200,.4),transparent 70%),radial-gradient(50% 14% at 50% 58%,rgba(210,170,140,.28),transparent 72%);animation:fogA 26s ease-in-out infinite alternate}
+.room .fog i+i{opacity:.22;animation:fogB 34s ease-in-out infinite alternate;background:radial-gradient(30% 12% at 65% 22%,rgba(140,160,215,.5),transparent 70%),radial-gradient(40% 14% at 25% 50%,rgba(200,160,150,.3),transparent 70%)}
+@keyframes fogA{from{transform:translate(-4%,2%) scale(1)}to{transform:translate(5%,-3%) scale(1.12)}}
+@keyframes fogB{from{transform:translate(4%,-2%) scale(1.1)}to{transform:translate(-5%,3%) scale(1)}}
+.room .mote{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
+.room .flick{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;background:radial-gradient(30% 18% at 3% 60%,rgba(255,160,70,.34),transparent 70%),radial-gradient(30% 18% at 97% 60%,rgba(255,160,70,.32),transparent 70%),radial-gradient(60% 20% at 50% 68%,rgba(255,185,110,.16),transparent 72%);animation:flk 2.7s linear infinite}
+@keyframes flk{0%{opacity:.8}6%{opacity:.95}11%{opacity:.72}19%{opacity:1}27%{opacity:.84}34%{opacity:.9}42%{opacity:.7}51%{opacity:.96}60%{opacity:.82}68%{opacity:1}77%{opacity:.76}86%{opacity:.92}93%{opacity:.8}100%{opacity:.8}}
+.room .shade{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 50% 55%,rgba(0,0,0,0) 45%,rgba(4,2,5,.72) 100%),linear-gradient(180deg,rgba(5,4,7,.55),rgba(5,4,7,0) 18%,rgba(5,4,7,0) 80%,rgba(5,4,7,.5));transition:background-color .8s}
+.room.dim .shade{background-color:rgba(5,3,6,.5)}
+/* 앞 층: 카드보다 앞에 있는 초점 밖 촛불빛 — 가장 크게 움직여서 깊이가 생긴다 */
+.roomFg{position:absolute;inset:-6%;z-index:20;pointer-events:none;opacity:0;transition:opacity .9s;transform:translate(calc(var(--px)*-26px),calc(var(--py)*-16px))}
+.roomFg.on{opacity:1}.roomFg.dim{opacity:.45}
+.roomFg i{position:absolute;border-radius:50%;mix-blend-mode:screen;background:radial-gradient(circle,rgba(255,196,120,.34),rgba(255,160,80,.12) 45%,rgba(255,150,70,0) 70%);animation:bk 7s ease-in-out infinite alternate}
+@keyframes bk{from{transform:translate(0,0) scale(1);opacity:.75}to{transform:translate(8px,-12px) scale(1.08);opacity:1}}
+/* 섞기 영상도 네모 박스가 아니라 방 안에 스며들게 */
+#s2{background:transparent}
+#s2 .vbox{height:auto;bottom:0;background:none;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 50%,rgba(0,0,0,0) 74%);mask-image:linear-gradient(180deg,#000 0,#000 50%,rgba(0,0,0,0) 74%);transition:opacity 1s}
+#s2 .vbox:after{display:none}
+#s2 .vbox.gone{opacity:0}
+#s2 .sub{top:50%}
+#s2 .table{background:none}
+#s2 .table:before{display:none}
+#s3{background:transparent}
+#s3:before{background:rgba(5,3,6,.18)}
+
+/* ===== v59 수정: 섞기 영상은 다시 보이게(은주: 입 모양·손이 없으면 더 어색) — 아래만 방 탁자로 스며들게, 자막과 안내 문구 겹침·잠금 박스 글자 겹침 ===== */
+#s2 .vbox:not(.gone){opacity:1}
+#s2 .vbox{-webkit-mask-image:linear-gradient(180deg,#000 0,#000 64%,rgba(0,0,0,0) 86%);mask-image:linear-gradient(180deg,#000 0,#000 64%,rgba(0,0,0,0) 86%)}
+#s2 .sub{top:calc(40% + 12px)}
+#s2.talk .guide{opacity:0}
+#s2 .guide{transition:opacity .4s}
+.slots{top:66px}
+.lock{min-height:196px}
+.lock .cta{top:38px}
+#rprem{margin:14px 0}
+#rprem .pk-sec{margin-top:12px}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>MUJIN · TAROT</b></div>
+
+  <div class="room" id="room"><div class="rbg" id="rbg"><video id="rmV" playsinline muted loop preload="none" src="v/tarot/room.mp4"></video></div><div class="fog"><i></i><i></i></div><canvas class="mote" id="mote"></canvas><div class="flick"></div><div class="shade"></div></div>
+
+  <!-- 1 질문 -->
+  <section class="scr on" id="s1">
+    <div class="hero"><div class="ht"><div class="kick">오방사주 · 한밤의 카드방</div><div class="h1">무진의 타로</div><p class="sub1">질문 하나만 떠올리면, 카드가 먼저 알아요.</p></div></div>
+    <div class="body">
+      <div class="lab">무엇이 궁금해요?</div>
+      <div class="chips" id="topics"></div>
+      <div class="lab">마음속 질문 <span style="font-weight:500">(적지 않아도 돼요)</span></div>
+      <input class="qin" id="qin" maxlength="40" placeholder="예) 그 사람이 먼저 연락할까?"><div class="qhint" id="qhint"></div>
+      <div class="lab">카드 수</div>
+      <div class="spread" id="spreads">
+        <button class="sp" data-n="1" type="button"><span class="fr">무료</span><b>한 장</b><small>빠르고 선명한 답</small></button>
+        <button class="sp on" data-n="3" type="button"><b>세 장</b><small id="sp3">내 마음 · 그 사람 · 흐름</small></button>
+      </div>
+      <button class="go" id="go1" type="button">카드 섞으러 가기</button>
+    </div>
+  </section>
+
+  <!-- 2 섞기·고르기 -->
+  <section class="scr" id="s2">
+    <div class="vbox"><video id="vS" playsinline preload="auto" src="v/tarot/shuffle.mp4" poster="img/tarot/shuffle.jpg"></video></div>
+    <div class="sub" id="sSub"></div>
+    <div class="table">
+      <div class="guide" id="guide">카드를 꾹 누른 채 문질러서 섞어요<small>질문을 마음속으로 한 번 더 떠올리면서</small></div>
+      <div class="slots" id="slots"></div>
+      <svg class="ring" viewBox="0 0 170 170" aria-hidden="true"><circle class="bgc" cx="85" cy="85" r="80"/><circle class="fg" id="ringFg" cx="85" cy="85" r="80" stroke-dasharray="503" stroke-dashoffset="503"/></svg>
+      <div class="deckArea" id="deckArea"></div>
+    </div>
+  </section>
+
+  <!-- 3 공개 -->
+  <section class="scr" id="s3">
+    <div class="guide" id="g3">한 장씩 눌러서 뒤집어요</div>
+    <div class="row" id="row"></div>
+    <div class="spot" id="spot"></div>
+  </section>
+
+  <!-- 4 풀이 -->
+  <section class="scr" id="s4"><div class="scroll" id="s4s">
+    <div class="rhero" id="rhero"><div class="t"><div class="kick" id="rKick">무진의 풀이</div><div class="h1" id="rTitle">카드가 말하길</div><p id="rQ"></p></div></div>
+      <div class="drawn" id="drawn"></div>
+    <div class="wrap">
+      <div class="box verd" id="verd"><h3 id="vH">무진의 답</h3><div class="big" id="vBig"></div><p id="vLine"></p><div class="tm" id="vTime"></div></div>
+      <div class="box"><h3>무진의 한마디</h3><div class="say"><div class="av"></div><p id="rSay"></p></div></div>
+      <div class="box"><h3>뽑은 카드</h3><div id="rCards"></div></div>
+      <div class="box oh"><h3>사주 × 타로 · 오행 연결</h3><div id="rOh"></div></div>
+      <details class="box how" id="how"><summary>무진은 이렇게 읽었어요</summary><ul id="howL"></ul><p class="nb">타로는 정해진 미래를 맞히는 게 아니라, 지금의 흐름을 비춰 보는 도구예요.</p></details>
+      <div class="box lock" id="lockR"><h3>켈틱 크로스 10장 · 3개월 흐름</h3>
+        <div class="blur"><p style="margin:0;font-size:14px;line-height:1.7;color:var(--ink-2)">현재 · 장애물 · 목표 · 과거 · 가까운 미래 · 나 · 주변 · 희망과 두려움 · 결과까지 열 장으로 펼쳐, 앞으로 석 달의 흐름을 월별로 읽어 드려요. 무진이 짚어 주는 결정적인 날짜와 행동 한 가지까지.</p></div>
+        <div class="cta"><b>열 장으로 끝까지 볼래요?</b><small>무진이 한 장 한 장 직접 풀어 줘요</small><button class="pay" id="payBtn" type="button">9,900원 · 전체 풀이 열기</button></div>
+      </div>
+      <div id="rprem" hidden></div>
+      <button class="btn2" id="again" type="button">다른 질문으로 다시 뽑기</button>
+      <button class="btn2" id="toHome" type="button">홈으로</button>
+      <p class="foot">카드는 매번 무작위로 섞이고, 정·역방향도 무작위로 정해져요.<br>타로 풀이는 재미와 참고를 위한 것이며, 중요한 결정은 스스로 판단해 주세요.</p>
+    </div>
+  </div></section>
+
+  <!-- 반응 영상 -->
+  <div class="rx" id="rx"><div class="po" id="rxPo"></div><video id="rxV" playsinline preload="auto"></video><div class="sh"></div><div class="sub" id="rxSub"></div><button class="x" id="rxX" type="button">건너뛰기</button></div>
+  <div class="zoom" id="zoom"><div class="zc" id="zc"><i class="zi" id="zi"></i></div><b id="zn"></b><small id="zk"></small><small>눌러서 닫기</small></div>
+  <div class="roomFg" id="roomFg"><i style="left:-4%;bottom:6%;width:150px;height:150px"></i><i style="right:-2%;bottom:10%;width:120px;height:120px;animation-delay:-3s"></i><i style="left:14%;bottom:-2%;width:90px;height:90px;animation-delay:-5s;opacity:.6"></i><i style="right:18%;bottom:-4%;width:70px;height:70px;animation-delay:-1.5s"></i></div>
+  <div class="dust" id="dust"></div>
+  <div class="veil" id="veil"></div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script src="saju.js"></script>
+<script src="tarot_data.js"></script>
+<script src="tarot_read.js"></script>
+<script src="premai.js"></script>
+<script src="premkit.js"></script>
+<script src="tarot_prem.js"></script>
+<script src="menuintro.js"></script>
+<script src="archive.js"></script>
+<script src="depth3d.js"></script>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const toast=(t,ms=1800)=>{ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),ms); };
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* ---------- 카드방 장면 (s2·s3 공통 배경) ---------- */
+const ROOM=window.ROOM=(()=>{ const el=$('room'), bg=$('rbg'), v=$('rmV'), fg=$('roomFg'), mc=$('mote'), mx=mc.getContext('2d');
+  let on=false, raf=0, d3=false, P=[], W=0, H=0, dpr=1, px=0, py=0;
+  v.addEventListener('playing',()=>bg.classList.add('vok')); v.addEventListener('error',()=>v.remove());
+  const spr=document.createElement('canvas'); spr.width=spr.height=32; { const g=spr.getContext('2d'), r=g.createRadialGradient(16,16,0,16,16,16); r.addColorStop(0,'rgba(255,236,190,1)'); r.addColorStop(.25,'rgba(255,205,130,.75)'); r.addColorStop(1,'rgba(255,180,90,0)'); g.fillStyle=r; g.fillRect(0,0,32,32); }
+  function seed(){ dpr=Math.min(2,devicePixelRatio||1); W=mc.width=Math.round(el.clientWidth*dpr); H=mc.height=Math.round(el.clientHeight*dpr);
+    P=Array.from({length:54},(_,i)=>{ const z=i%3===0?1:i%3===1?.62:.34; return {x:Math.random(),y:Math.random(),z,vx:(Math.random()-.5)*.006,vy:-(.004+Math.random()*.01)*z,ph:Math.random()*6.28,s:(3+Math.random()*5)*z}; }); }
+  function frame(t){ if(!on) return; const tl=window.Depth3D&&Depth3D.tilt?Depth3D.tilt():{x:0,y:0}; px+=(tl.x-px)*.12; py+=(tl.y-py)*.12;
+    el.style.setProperty('--px',px.toFixed(3)); el.style.setProperty('--py',py.toFixed(3)); fg.style.setProperty('--px',px.toFixed(3)); fg.style.setProperty('--py',py.toFixed(3));
+    mx.clearRect(0,0,W,H); const dt=1/60, ts=t/1000;
+    P.forEach(p=>{ p.x+=p.vx*dt+Math.sin(ts*.4+p.ph)*.00025; p.y+=p.vy*dt; if(p.y<-.05){ p.y=1.05; p.x=Math.random(); } if(p.x<-.05) p.x=1.05; if(p.x>1.05) p.x=-.05;
+      const a=(.35+.65*Math.max(0,Math.sin(ts*1.3+p.ph)))*(.35+.65*p.z), sz=p.s*dpr*2.2, X=p.x*W-px*p.z*18*dpr, Y=p.y*H-py*p.z*12*dpr;
+      mx.globalAlpha=a; mx.drawImage(spr,X-sz/2,Y-sz/2,sz,sz); }); mx.globalAlpha=1;
+    raf=requestAnimationFrame(frame); }
+  function start(){ el.classList.add('on'); fg.classList.add('on'); if(on) return; on=true; seed(); raf=requestAnimationFrame(frame);
+    try{ v.preload='auto'; const pr=v.play(); if(pr) pr.catch(()=>{}); }catch(e){}
+    if(window.Depth3D){ if(!d3){ d3=true; Depth3D.mount(bg,{src:'img/tarot/room.jpg',video:v,pos:[.5,.3],str:1.2,focus:.5,zoom:1.07}); } else Depth3D.replay(); } }
+  function stop(){ on=false; cancelAnimationFrame(raf); el.classList.remove('on','dim','lean'); fg.classList.remove('on','dim'); try{ v.pause(); }catch(e){} }
+  function mode(m){ el.classList.toggle('lean',m==='pick'||m==='reveal'); el.classList.toggle('dim',m==='reveal'); fg.classList.toggle('dim',m==='reveal'); }
+  function at(id){ if(id==='s2'||id==='s3'){ start(); if(id==='s3') mode('reveal'); } else stop(); }
+  addEventListener('resize',()=>{ if(on) seed(); });
+  return {at,mode,start,stop}; })();
+const show=id=>{ document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id===id)); document.querySelector('.top').classList.toggle('solid',id==='s4'); $('dust').style.opacity=id==='s1'?1:0; if(window.ROOM) ROOM.at(id); };
+/* 화면 전환: 짧게 어두워졌다가 열린다 */
+const go=async id=>{ const v=$('veil'); v.classList.add('on'); await wait(300); show(id); await wait(60); v.classList.remove('on'); };
+const ROMAN=['0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI'];
+const EL_COLOR={'木':'var(--wood)','火':'var(--fire)','土':'var(--earth)','金':'var(--metal)','水':'var(--water)'};
+const EL_KO={'木':'나무','火':'불','土':'흙','金':'쇠','水':'물'};
+const EL_PLANET={'木':'목성','火':'화성','土':'토성','金':'금성','水':'수성'};
+const EL_IDX={'木':0,'火':1,'土':2,'金':3,'水':4};
+const GUARD=['하람','이안','도준','시온','재이'];
+const jong=w=>{ const c=w.charCodeAt(w.length-1)-0xAC00; return c>=0&&c<11172&&c%28>0; };
+const ro=(w,a,b)=>w+(jong(w)?a:b);
+
+/* 금가루 */
+(()=>{ const d=$('dust'); let h=''; for(let i=0;i<18;i++){ const l=Math.random()*100, dx=(Math.random()-.5)*80, du=9+Math.random()*10, de=-Math.random()*18, s=1.5+Math.random()*2.5;
+  h+=`<i style="left:${l}%;--dx:${dx}px;width:${s}px;height:${s}px;animation-duration:${du}s;animation-delay:${de}s"></i>`; } d.innerHTML=h; })();
+
+/* ---------- 소리 (합성) ---------- */
+let AC=null, FX=null;
+const ctx=()=>{ if(!AC){ AC=new (window.AudioContext||window.webkitAudioContext)(); FX=AC.createGain(); FX.gain.value=1; FX.connect(AC.destination); } AC.resume(); return AC; };
+function tick(vol=.12){ try{ const A=ctx(), t=A.currentTime, n=A.sampleRate*.05, b=A.createBuffer(1,n,A.sampleRate), d=b.getChannelData(0); for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3);
+  const s=A.createBufferSource(), f=A.createBiquadFilter(), g=A.createGain(); s.buffer=b; f.type='bandpass'; f.frequency.value=2200+Math.random()*1800; f.Q.value=.9; g.gain.value=vol; s.connect(f).connect(g).connect(FX); s.start(t); }catch(e){} }
+function riffle(){ for(let i=0;i<10;i++) setTimeout(()=>tick(.08+Math.random()*.06),i*22); }
+function chime(f=660,vol=.18){ try{ const A=ctx(), t=A.currentTime; [[1,vol,2.2],[2.01,vol*.4,1.4],[3.02,vol*.22,1]].forEach(([r,a,d])=>{ const o=A.createOscillator(), g=A.createGain(); o.frequency.value=f*r; g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(a,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+d); o.connect(g).connect(FX); o.start(t); o.stop(t+d+.1); }); }catch(e){} }
+function whoosh(vol=.12){ try{ const A=ctx(), t=A.currentTime, n=A.sampleRate*.6, b=A.createBuffer(1,n,A.sampleRate), d=b.getChannelData(0); for(let i=0;i<n;i++) d[i]=Math.random()*2-1;
+  const s=A.createBufferSource(), f=A.createBiquadFilter(), g=A.createGain(); s.buffer=b; f.type='bandpass'; f.Q.value=1.2; f.frequency.setValueAtTime(400,t); f.frequency.exponentialRampToValueAtTime(2400,t+.3); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+.12); g.gain.exponentialRampToValueAtTime(.0001,t+.55); s.connect(f).connect(g).connect(FX); s.start(t); }catch(e){} }
+/* 카드방 공기: 낮은 패드 + 촛불 타닥임. 무진이 말할 땐 작아진다 */
+const AMB={g:null,lv:.035,
+  start(){ if(this.g) return; try{ const A=ctx(), t=A.currentTime; const g=A.createGain(); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(this.lv,t+3); g.connect(A.destination); this.g=g;
+    const lp=A.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=600; lp.Q.value=.6; lp.connect(g);
+    const lfo=A.createOscillator(), lg=A.createGain(); lfo.frequency.value=.07; lg.gain.value=220; lfo.connect(lg).connect(lp.frequency); lfo.start();
+    [110,164.8,261.6,220.4].forEach((f,i)=>{ const o=A.createOscillator(), og=A.createGain(); o.type=i===3?'sine':'triangle'; o.frequency.value=f; o.detune.value=(Math.random()-.5)*10; og.gain.value=i===3?.25:.33; o.connect(og).connect(lp); o.start(); });
+    const cr=A.createGain(); cr.gain.value=.5; cr.connect(g);
+    const crackle=()=>{ if(!this.g) return; try{ const t2=A.currentTime, n=A.sampleRate*.012, b=A.createBuffer(1,n,A.sampleRate), d=b.getChannelData(0); for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/n,4);
+      const s=A.createBufferSource(), f=A.createBiquadFilter(), sg=A.createGain(); s.buffer=b; f.type='highpass'; f.frequency.value=1800+Math.random()*2500; sg.gain.value=.25+Math.random()*.6; s.connect(f).connect(sg).connect(cr); s.start(t2); }catch(e){}
+      setTimeout(crackle,70+Math.random()*(Math.random()<.2?60:520)); }; crackle();
+  }catch(e){} },
+  duck(on){ if(!this.g) return; const A=ctx(), t=A.currentTime; this.g.gain.cancelScheduledValues(t); this.g.gain.setValueAtTime(Math.max(.0001,this.g.gain.value),t); this.g.gain.exponentialRampToValueAtTime(on?.01:this.lv,t+(on?.4:1.6)); }};
+
+/* ---------- 1. 질문 ---------- */
+const TOPICS=[['flow','전체 흐름'],['love','연애'],['heart','그 사람 속마음'],['work','일 · 커리어'],['money','돈'],['pick','고민 · 선택'],['today','오늘의 카드']];
+const PH={flow:'예) 요즘 나, 잘 가고 있는 걸까?',love:'예) 이 사람이랑 잘 될까?',heart:'예) 그 사람이 먼저 연락할까?',work:'예) 지금 이직해도 될까?',money:'예) 이번 달 지출, 괜찮을까?',pick:'예) A랑 B 중에 뭘 고를까?',today:'예) 오늘 조심할 건?'};
+let S={topic:'flow',n:3,userTopic:false,q:'',deck:[],picked:[],rv:[],A:{},k:'love',kinds:[]};
+const R=window.TarotRead;
+const setTopic=k=>{ S.topic=k; document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x.dataset.k===k)); };
+/* 질문이 주제를 정한다: 사용자가 주제를 직접 누르지 않았으면 질문 내용(연애·일·돈)에 맞춰 주제·배치를 자동으로 바꾼다 */
+const topicOf=a=>{ if(a.type==='which'&&a.ab) return 'pick'; if(a.domain==='love') return (/연락|속마음|마음|짝사랑|생각/.test(a.q)&&/그\s*사람|걔|그\s*애|상대|그분|오빠|남친|여친/.test(a.q))?'heart':'love'; return a.domain||null; };
+$('qin').addEventListener('input',()=>{ const a=R.analyze($('qin').value); let h=R.hint(a);
+  if(S.topic!=='today'){ const t=topicOf(a);
+    if(!S.userTopic){ const nt=t||'flow'; if(nt!==S.topic){ setTopic(nt); syncSpread(); } } }
+  $('qhint').textContent=h; });
+$('topics').innerHTML=TOPICS.map(([k,t])=>`<button class="chip" data-k="${k}" type="button">${t}</button>`).join(''); setTopic(S.topic);
+const syncSpread=()=>{ const sp=TAROT_SPREAD[S.topic]; $('sp3').textContent=(sp.pos.length===3?sp.pos:TAROT_SPREAD.flow.pos).join(' · '); $('qin').placeholder=PH[S.topic];
+  const three=document.querySelector('.sp[data-n="3"]'); three.disabled=S.topic==='today'; three.style.opacity=S.topic==='today'?.35:1; if(S.topic==='today'){ S.n=1; } document.querySelectorAll('.sp').forEach(b=>b.classList.toggle('on',+b.dataset.n===S.n)); };
+$('topics').onclick=e=>{ const b=e.target.closest('.chip'); if(!b) return; tick(.06); S.topic=b.dataset.k; S.userTopic=true; document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b)); if(S.topic!=='today'&&S.n===1&&!S._n1) S.n=3; syncSpread(); };
+$('spreads').onclick=e=>{ const b=e.target.closest('.sp'); if(!b||b.disabled) return; tick(.06); S.n=+b.dataset.n; S._n1=S.n===1; syncSpread(); };
+syncSpread();
+$('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+$('toHome').onclick=$('back').onclick;
+
+/* 무작위 섞기 (crypto) */
+const rnd=n=>{ const a=new Uint32Array(1); crypto.getRandomValues(a); return a[0]%n; };
+function shuffleDeck(){ const d=TAROT.map(c=>c.n); for(let i=d.length-1;i>0;i--){ const j=rnd(i+1); [d[i],d[j]]=[d[j],d[i]]; } return d; }
+
+/* ---------- 2. 섞기 ---------- */
+let POS=[];
+const area=$('deckArea'); let cards=[], held=0, holding=false, holdT=null, phase='shuffle';
+const NEED=2200; /* 섞는 시간(ms) */
+function layoutStack(){ area.innerHTML=''; cards=[]; const W=area.clientWidth, H=area.clientHeight;
+  for(let i=0;i<22;i++){ const c=document.createElement('div'); c.className='cd'; c.style.left=(W/2-37)+'px'; c.style.top=(H*.58-66)+'px'; c.style.transform=`translate(${(i-11)*.4}px,${-i*.6}px) rotate(${(Math.random()-.5)*3}deg) scale(1.28)`; area.appendChild(c); cards.push(c); } }
+let rph=0; function jiggle(){ rph++; const split=rph%2===1; area.classList.add('riff'); cards.forEach((c,i)=>{ c.classList.add('fast'); const L=i%2===0; if(split){ const dx=(L?-1:1)*(46+Math.random()*10), r=(L?-1:1)*(9+Math.random()*4); c.style.transform=`translate(${dx}px,${-i*.55-6}px) rotate(${r}deg) scale(1.28)`; } else { c.style.transform=`translate(${(Math.random()-.5)*8}px,${-i*.6}px) rotate(${(Math.random()-.5)*4}deg) scale(1.28)`; } }); }
+function settle(){ area.classList.remove('riff'); cards.forEach((c,i)=>{ c.classList.remove('fast'); c.style.transform=`translate(${(i-11)*.4}px,${-i*.6}px) rotate(${(Math.random()-.5)*3}deg) scale(1.28)`; }); }
+const ringFg=$('ringFg'); const setRing=p=>ringFg.style.strokeDashoffset=String(503*(1-Math.min(1,p)));
+function startHold(e){ if(phase!=='shuffle') return; e.preventDefault(); ctx(); holding=true; const t0=performance.now()-held;
+  const loop=()=>{ if(!holding) return; held=performance.now()-t0; setRing(held/NEED); jiggle(); riffle(); if(held>=NEED){ holding=false; settle(); doneShuffle(); return; } holdT=setTimeout(loop,130); }; loop(); }
+function endHold(){ if(!holding) return; holding=false; clearTimeout(holdT); settle(); if(held<NEED) $('guide').innerHTML='조금만 더 섞어요<small>꾹 누르고 있으면 카드가 섞여요</small>'; }
+
+/* 부채꼴: 손가락을 대고 좌우로 훑으면 카드가 하나씩 떠오르고, 손을 떼면 그 카드를 뽑는다 */
+let fan={cx:0,R:0,top:0,cw:0}, hov=null;
+function baseT(c){ return `rotate(${c.dataset.a}deg)`; }
+function setHov(c){ if(c===hov) return; if(hov&&!hov._picked){ hov.classList.remove('hov'); hov.style.transform=baseT(hov); hov.style.zIndex=hov.dataset.z; }
+  hov=c; if(c){ c.classList.add('hov'); c.style.transform=baseT(c)+' translateY(-24px) scale(1.08)'; c.style.zIndex=40; tick(.05); } }
+function cardAt(e){ const r=area.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top; if(y<fan.top-fan.cw*1.2) return null;
+  let best=null, bd=1e9; cards.forEach(c=>{ if(c._picked) return; const d=Math.abs(+c.dataset.x-x); if(d<bd){ bd=d; best=c; } }); return bd<fan.cw*1.2?best:null; }
+area.addEventListener('pointerdown',e=>{ if(phase==='shuffle') return startHold(e); if(phase!=='pick') return; e.preventDefault(); ctx(); area._down=true; try{ area.setPointerCapture(e.pointerId); }catch(_){} setHov(cardAt(e)); });
+area.addEventListener('pointermove',e=>{ if(phase!=='pick') return; if(area._down||e.pointerType==='mouse') setHov(cardAt(e)); });
+area.addEventListener('pointerleave',e=>{ if(phase==='pick'&&!area._down) setHov(null); });
+area.addEventListener('pointerup',e=>{ if(phase!=='pick'||!area._down) return; area._down=false; const c=hov; setHov(null); if(c) pickCard(c); });
+window.addEventListener('pointerup',endHold); window.addEventListener('pointercancel',()=>{ endHold(); area._down=false; setHov(null); });
+
+async function doneShuffle(){ phase='spread'; if(window.ROOM) ROOM.mode('pick'); setRing(1); chime(523); S.deck=shuffleDeck(); await wait(350); $('ringFg').parentNode.style.opacity=0;
+  $('slots').innerHTML=POS.map(p=>`<div class="slot"><i>${p}</i></div>`).join('');
+  $('guide').innerHTML=`끌리는 카드 ${S.n}장을 골라요<small>손가락으로 훑다가, 멈추고 싶은 곳에서 떼요</small>`;
+  const W=area.clientWidth, H=area.clientHeight, n=cards.length, cw=Math.min(56,W/7.2), ch=cw*16/9, R=W*.92, cx=W/2, top=Math.max(H*.5,$('slots').offsetTop+ch+44)+ch/2;
+  fan={cx,R,top,cw};
+  cards.forEach((c,i)=>{ c.classList.remove('fast'); const deg=-27+54*i/(n-1), a=deg*Math.PI/180, xc=cx+R*Math.sin(a), yc=top+R*(1-Math.cos(a));
+    c.dataset.a=deg.toFixed(2); c.dataset.x=xc; c.dataset.z=i+1; c.style.zIndex=i+1;
+    setTimeout(()=>{ c.style.width=cw+'px'; c.style.left=(xc-cw/2)+'px'; c.style.top=(yc-ch/2)+'px'; c.style.transform=baseT(c); tick(.07); },i*28);
+    c.dataset.i=i; c.classList.add('pick'); });
+  await wait(n*28+500); phase='pick'; }
+function pickCard(c){ if(phase!=='pick'||c._picked) return; const k=S.picked.length; if(k>=S.n) return; c._picked=true;
+  const slot=$('slots').children[k], ar=area.getBoundingClientRect(), sr=slot.getBoundingClientRect();
+  c.classList.remove('hov'); c.classList.add('fly'); c.style.zIndex=50+k; c.style.width=sr.width+'px'; c.style.left=(sr.left-ar.left)+'px'; c.style.top=(sr.top-ar.top)+'px'; c.style.transform='rotate(0deg)'; whoosh();
+  setTimeout(()=>{ c.classList.remove('fly'); chime(784,.07); },720);
+  S.picked.push(S.deck[+c.dataset.i]); S.rv.push(rnd(100)<35);
+  if(S.picked.length===S.n){ phase='done'; setTimeout(toReveal,1100); } }
+
+/* 셔플 영상: 첫 대사는 목소리와 함께 한 번만, 그 뒤엔 말없이 카드를 만지는 루프 영상으로 넘어간다 */
+const SUBS={shuffle:[[0.5,'질문 하나만 떠올려요.'],[2.95,'…그리고 천천히, 카드 섞어요.']],
+  good:[[1.55,'…좋은 카드네요.'],[4.5,'기다려도 돼요.']],
+  think:[[0.25,'흐음…'],[1.6,'이건 아직 그 사람도 모르는 마음이에요.']],
+  think2:[[1.1,'흐음…'],[2.5,'이 카드는,'],[4.3,'아직 답을 정하지 않았어요.']],
+  warn:[[0.55,'…이 카드는 조심하라는 뜻이에요.'],[4.6,'끝까지 들어요.']]};
+function subsOn(v,cues,el){ let last=-1; const f=()=>{ if(v.paused&&v.ended) return; let i=-1; cues.forEach((c,j)=>{ if(v.currentTime>=c[0]) i=j; }); if(i!==last){ last=i; el.classList.remove('on'); if(i>=0) setTimeout(()=>{ el.textContent=cues[i][1]; el.classList.add('on'); },90); } if(!v.ended) requestAnimationFrame(f); else el.classList.remove('on'); }; requestAnimationFrame(f); }
+/* 첫 대사가 끝나면 섞기 영상이 방 안으로 스르륵 사라지고, 손님 자리에서 본 카드방(살아 있는 방)만 남는다 */
+function toLoop(){ const box=$('s2').querySelector('.vbox'), v=$('vS'); try{ v.pause(); }catch(e){} box.classList.add('gone'); $('s2').classList.remove('talk'); $('sSub').classList.remove('on'); }
+$('go1').onclick=async()=>{ S.q=$('qin').value.trim(); S.picked=[]; S.rv=[]; S.A=R.analyze(S.q);
+  if(S.A.type==='which'&&S.A.ab&&S.n===3&&S.topic!=='pick'){ setTopic('pick'); syncSpread(); }
+  else if(S.topic!=='today'&&S.topic!=='pick'){ const t=topicOf(S.A); /* 질문 내용과 주제가 어긋나면 질문 쪽 배치로 (일 질문에 '그 사람 마음' 자리가 나오지 않게) */
+    if(t&&t!=='pick'&&t!==S.topic&&!(['love','heart'].includes(t)&&['love','heart'].includes(S.topic))){ setTopic(t); syncSpread(); } }
+  const baseK=TAROT_SPREAD[S.topic].k; S.k=S.A.domain||baseK; S.kOver=!!S.A.domain&&S.A.domain!==baseK;
+  const sp0=TAROT_SPREAD[S.topic]; POS=S.n===1?[sp0.pos.length===1?sp0.pos[0]:'답']:(S.topic==='pick'&&S.A.ab?[S.A.ab[0]+' 쪽',S.A.ab[1]+' 쪽','무진의 조언']:sp0.pos.slice());
+  S.kinds=S.n===1?[S.topic==='today'?'today':'answer']:R.KINDS[S.topic]; window._tS={pos:POS.slice(),k:S.k,topic:S.topic}; held=0; phase='shuffle'; ctx(); AMB.start();
+  const box=$('s2').querySelector('.vbox'); box.classList.remove('still','loop','gone'); if(window.ROOM) ROOM.mode('shuffle');
+  await go('s2'); $('ringFg').parentNode.style.opacity=1; setRing(0); $('slots').innerHTML='';
+  $('guide').innerHTML='카드를 꾹 누른 채 문질러서 섞어요<small>질문을 마음속으로 한 번 더 떠올리면서</small>';
+  layoutStack();
+  const v=$('vS'); v.muted=false; v.loop=false; v.currentTime=0; AMB.duck(true);
+  v.play().then(()=>{ $('s2').classList.add('talk'); subsOn(v,SUBS.shuffle,$('sSub')); }).catch(()=>{ AMB.duck(false); toLoop(); });
+  v.onended=()=>{ AMB.duck(false); toLoop(); }; };
+
+/* ---------- 3. 공개: 한 장씩 가운데로 불러와 크게 뒤집는다 ---------- */
+const cardHTML=(n,i,cls)=>{ const c=TAROT[n]; return `<div class="fc${cls}${S.rv[i]?' rv':''}" data-i="${i}"><div class="pl">${POS[i]}</div><div class="glow"></div><div class="in"><div class="b"></div><div class="f"><div class="art" style="background-image:url('${c.img}')"></div><div class="no">${ROMAN[n]}</div></div></div><div class="cap">${c.ko}<small>${c.en}</small></div><div class="rvTag">역방향</div></div>`; };
+function toReveal(){ try{ $('vS').pause(); }catch(e){}
+  $('row').innerHTML=S.picked.map((n,i)=>cardHTML(n,i,S.n===1?' one':'')).join('');
+  $('g3').textContent=S.n===1?'카드를 눌러서 뒤집어요':'한 장씩 눌러서 뒤집어요'; go('s3'); let opened=0, busy=false;
+  document.querySelectorAll('#row .fc').forEach(el=>el.onclick=async()=>{ if(busy||el.classList.contains('flip')) return; busy=true; const i=+el.dataset.i;
+    await spotlight(i); el.classList.add('flip'); opened++; busy=false;
+    if(opened===S.n){ $('g3').textContent='무진이 카드를 읽고 있어요…'; setTimeout(react,1200); }
+    else $('g3').textContent=`${S.n-opened}장 남았어요`; }); }
+function sparks(host){ for(let k=0;k<26;k++){ const s=document.createElement('i'); s.className='spark'; const a=Math.random()*Math.PI*2, d=90+Math.random()*120; s.style.setProperty('--x',Math.cos(a)*d+'px'); s.style.setProperty('--y',Math.sin(a)*d*1.3+'px'); s.style.animationDelay=(Math.random()*.15)+'s'; host.appendChild(s); setTimeout(()=>s.remove(),1300); } }
+function spotlight(i){ return new Promise(res=>{ const sp=$('spot'), n=S.picked[i], c=TAROT[n], rv=S.rv[i];
+  const kw=(rv?c.kwR:c.kw).join(' · ');
+  const tone=rv?(c.tone===1?'think':c.tone===-1?'think':'think'):(c.tone===1?'good':c.tone===-1?'warn':'think'); sp.style.setProperty('--rc',{good:'rgba(255,214,140,.55)',think:'rgba(176,150,255,.45)',warn:'rgba(255,110,90,.45)'}[tone]);
+  sp.innerHTML='<div class="halo"></div><div class="rays"></div>'+cardHTML(n,i,'')+`<div class="mean"><b style="color:var(--gold-2);font-weight:400">${POS[i]}</b><br>${kw}</div><div class="tapn">눌러서 계속</div>`;
+  const fc=sp.querySelector('.fc'); fc.style.transform='scale(.55) translateY(40px)'; fc.style.opacity='0';
+  sp.classList.add('on'); whoosh(.1);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{ fc.style.transform='none'; fc.style.opacity='1'; }));
+  setTimeout(()=>{ fc.classList.add('flip'); whoosh(.14); },650);
+  setTimeout(()=>{ chime(rv?392:660,.2); if(!rv) setTimeout(()=>chime(990,.08),160); sparks(sp); sp.classList.add('shown'); if(window.Depth3D){ fc.style.transition='opacity .4s'; Depth3D.holo(fc,{face:fc.querySelector('.f'),max:12}); } },1050);
+  let can=false; setTimeout(()=>{ can=true; },1500);
+  sp.onclick=()=>{ if(!can) return; sp.onclick=null; if(window.Depth3D) Depth3D.unholo(fc); fc.style.transition=''; void fc.offsetWidth; fc.style.transform='scale(.6)'; fc.style.opacity='0'; sp.classList.remove('shown','on'); setTimeout(()=>{ sp.innerHTML=''; res(); },380); }; }); }
+
+/* 전체 기운: 정방향은 카드 성향 그대로, 역방향은 반대로 약하게 */
+/* 자리마다 무게가 다르다: 결과·행동·열쇠 자리가 더 크게, 걸림돌 자리의 나쁜 카드는 덜 무겁게 */
+const cv=i=>R.val(TAROT[S.picked[i]],S.rv[i]);
+function score(){ return S.picked.reduce((s,n,i)=>s+cv(i)*(S.n===1?1:R.WEIGHT[S.kinds[i]]),0); }
+function mood(){ const sc=score(); if(S.n===1) return sc>=1?'good':sc<=-1?'warn':'think'; return sc>=1.6?'good':sc<=-1?'warn':'think'; }
+async function react(){ const m=mood(); S.mood=m; const clip=(m==='think'&&!['love','heart'].includes(S.topic))?'think2':m; const rx=$('rx'), v=$('rxV'); $('rxPo').style.backgroundImage=`url('img/tarot/${m}.jpg')`; v.src=`v/tarot/${clip}.mp4`; rx.classList.add('on'); AMB.duck(true);
+  const done=()=>{ if(rx._done) return; rx._done=true; try{ v.pause(); }catch(e){} AMB.duck(false); render(); rx.classList.remove('on'); setTimeout(()=>{ rx._done=false; },600); };
+  rx._done=false; $('rxX').onclick=done; v.onended=done; v.muted=false;
+  try{ await v.play(); subsOn(v,SUBS[clip],$('rxSub')); }catch(e){ setTimeout(done,1600); }
+  setTimeout(()=>{ if(!rx._done&&v.readyState<2) done(); },5000); }
+
+/* ---------- 4. 풀이 ---------- */
+const TITLE={good:'바람이 당신 쪽으로',think:'아직 열려 있는 판',warn:'한 템포 쉬어 갈 때'};
+const CLOSE={
+  flow:{good:'지금 가는 길, 맞아요. 속도만 조금 믿어 줘요.',think:'흐름이 바뀌는 문턱이에요. 크게 벌이기보다 하나만 정리해요.',warn:'지금은 멈춰 서서 숨 고를 때예요. 무리한 결정은 다음 달로.'},
+  love:{good:'마음이 가는 쪽으로 한 발만 더 가요. 이번엔 타이밍이 당신 편이에요.',think:'아직 서로 온도를 재는 중이에요. 먼저 확인하려 들기보다, 편하게 한 번 웃어 줘요.',warn:'지금 밀어붙이면 서로 지쳐요. 한 주만 거리를 두고 나를 먼저 챙겨요.'},
+  heart:{good:'그 사람, 생각보다 당신을 자주 떠올려요. 신호가 오면 모른 척하지 마요.',think:'그 사람도 자기 마음을 정리하는 중이에요. 답을 재촉하면 한 발 물러나요.',warn:'그 사람 마음보다 당신 마음이 먼저예요. 기다리다 지치기 전에 기한을 정해요.'},
+  work:{good:'지금 움직여도 돼요. 제안이든 이직이든, 문이 열려 있어요.',think:'큰 결정은 한 달만 미뤄요. 정보를 더 모으면 답이 선명해져요.',warn:'무리한 확장은 멈춤. 지금은 지키는 게 이기는 거예요.'},
+  money:{good:'들어오는 흐름이에요. 다만 들어온 만큼 한 번에 쓰지는 말고요.',think:'사고팔 타이밍은 아직이에요. 지출부터 한 번 정리해요.',warn:'충동적인 결제와 투자는 오늘부터 일주일 금지.'},
+  pick:{good:'마음이 먼저 기운 쪽을 골라요. 카드도 그쪽 손을 들어 줘요.',think:'둘 다 반반이에요. 결정을 미룰 수 있다면 하루만 더 자고 정해요.',warn:'지금 고르면 후회할 수 있어요. 선택지를 하나 더 만들어 봐요.'},
+  today:{good:'오늘은 먼저 연락하고, 먼저 웃어요. 좋은 일이 먼저 와요.',think:'오늘은 크게 벌이지 말고, 흐름을 지켜보는 날.',warn:'오늘은 말 한마디를 조심해요. 한 템포 늦게 답해도 괜찮아요.'}};
+function meaning(c,rv){ const k=S.k; if(k&&c[k]) return rv?c[k].rv:c[k].up; return rv?c.rv:c.up; }
+function loadMe(){ try{ return JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){ return null; } }
+function elOfMe(me){ try{ let y=+me.y,m=+me.m,d=+me.d; if(me.cal==='l'){ const s=Saju.lunarToSolar(y,m,d,false); y=s[0]; m=s[1]; d=s[2]; } const h=(me.h==null||me.h===''||+me.h<0)?null:+me.h; const P=Saju.pillars(y,m,d,h); return Saju.elCount(P); }catch(e){ return null; } }
+function ohHTML(){ const els=S.picked.map(n=>TAROT[n].el); const cnt={}; els.forEach(e=>cnt[e]=(cnt[e]||0)+1); const top=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0];
+  const chips=els.map((e,i)=>`<span class="el" style="--c:${EL_COLOR[e]}">${TAROT[S.picked[i]].ko} · ${e} ${EL_PLANET[e]}</span>`).join(' ');
+  let h=`<p>서양 점성술의 행성을 동양에서는 <b>목성·화성·토성·금성·수성</b>, 오행의 이름으로 불러요. 그래서 타로 카드마다 오행이 하나씩 붙어 있어요.</p><div style="margin:10px 0;display:flex;flex-wrap:wrap;gap:6px">${chips}</div>`;
+  const me=loadMe(), ec=me&&elOfMe(me);
+  if(ec){ const mn=Math.min(...ec), lack=[0,1,2,3,4].filter(i=>ec[i]===mn), mx=Math.max(...ec), over=[0,1,2,3,4].filter(i=>ec[i]===mx);
+    const hitLack=els.filter(e=>lack.includes(EL_IDX[e])), hitOver=els.filter(e=>over.includes(EL_IDX[e]));
+    if(hitLack.length){ const e=hitLack[0], g=GUARD[EL_IDX[e]]; h+=`<p style="margin-top:8px">${me.name?esc(me.name)+'님':'당신'} 사주에 가장 부족한 <b>${EL_KO[e]}(${e})</b> 기운이 카드로 들어왔어요. 비어 있던 칸을 채우는 신호예요. ${ro(g,'이','가')} 문을 두드리는 중.</p>`; }
+    else if(hitOver.length){ const e=hitOver[0]; h+=`<p style="margin-top:8px">사주에 이미 넘치는 <b>${EL_KO[e]}(${e})</b> 기운이 또 나왔어요. 좋은 카드여도 과하면 탈이에요. 한 템포 쉬어 가요.</p>`; }
+    else h+=`<p style="margin-top:8px">이번 카드의 중심 기운은 <b>${EL_KO[top]}(${top})</b>. 사주의 균형을 크게 흔들지 않는 무난한 흐름이에요.</p>`;
+  } else h+=`<p style="margin-top:8px">생년월일을 넣으면 뽑은 카드의 기운이 <b>내 사주의 빈칸</b>을 채우는지 알려 드려요.</p><div class="mini"><input type="date" id="bd" min="1950-01-01" max="2010-12-31" aria-label="생년월일"><button type="button" id="bdGo">연결하기</button></div>`;
+  return h; }
+/* 무진이 이어서 읽어 주는 문장: 질문 → 자리별 카드 → 마무리 조언 */
+function narrative(){ const m=S.mood; let p=[];
+  if(S.q) p.push(`<p>"${esc(S.q)}"<br>이 질문에 카드 ${S.n}장이 답했어요.</p>`);
+  if(S.n===1){ const c=TAROT[S.picked[0]], rv=S.rv[0]; p.push(`<p><b>${c.ko}</b>${rv?' 역방향':''}${rv?'이':(jong(c.ko)?'이':'가')} 나왔어요. ${meaning(c,rv)}</p>`); }
+  else S.picked.forEach((n,i)=>{ const c=TAROT[n], rv=S.rv[i]; p.push(`<p>${POS[i]}에는 <b>${c.ko}</b>${rv?'(역방향)':''}. ${R.frame(S.kinds[i],c,rv,meaning(c,rv),POS[i])}</p>`); });
+  S.combos=R.combos(TAROT,S.picked,S.rv); S.pattern=R.pattern(TAROT,S.picked,S.rv);
+  S.combos.forEach(x=>p.push(`<p class="combo"><b>${x.a}</b> × <b>${x.b}</b> — ${x.text}</p>`));
+  if(S.pattern) p.push(`<p class="combo">${S.pattern}</p>`);
+  let close=CLOSE[S.kOver&&S.topic!=='pick'?S.k:S.topic][m];
+  if(S.topic==='pick'&&S.n===3){ const [x,y]=(S.A&&S.A.ab)||['이쪽','저쪽'], va=cv(0), vb=cv(1);
+    if(Math.abs(va-vb)>=.5){ const w=va>vb?x:y; close=m==='warn'?`${w} 쪽이 조금 낫지만, 지금 고르면 후회할 수 있어요. 선택지를 하나 더 만들어 봐요.`:`카드는 ${w} 쪽 손을 들어 줘요. `+(m==='good'?'마음도 그쪽이면 망설이지 마요.':'다만 서두르진 말고, 조언 카드대로 한 걸음씩.'); } }
+  p.push(`<p class="close">${close}</p>`); return p.join(''); }
+const VBIG={good:'예, 그쪽으로 기울어요',think:'아직 반반이에요',warn:'지금은 아니에요'};
+function verdict(){ const A=S.A||{}, m=S.mood, last=S.picked.length-1, K=A.kw?R.KW_LINE[A.kw][m]:'';
+  let d=0, dv=-1; S.picked.forEach((n,i)=>{ const w=Math.abs(cv(i))*(S.n===1?1:R.WEIGHT[S.kinds[i]]); if(w>dv){ dv=w; d=i; } });
+  const dc=TAROT[S.picked[d]], decisive=S.n>1?` 결정적인 카드는 ${POS[d]} 자리의 <b>${dc.ko}</b>${S.rv[d]?'(역방향)':''}.`:'';
+  const tm=R.timing(S.picked[last],S.rv[last]); S.tm=tm; let big, line;
+  if(S.topic==='pick'&&S.n===3){ const [a,b]=A.ab||['이쪽','저쪽'], va=cv(0), vb=cv(1), ca=TAROT[S.picked[0]], cb=TAROT[S.picked[1]];
+    big=Math.abs(va-vb)<.5?`${a}, ${b} — 거의 반반`:`${va>vb?a:b} 쪽이 더 밝아요`;
+    line=`${a} 쪽엔 <b>${ca.ko}</b>${S.rv[0]?'(역방향)':''}, ${b} 쪽엔 <b>${cb.ko}</b>${S.rv[1]?'(역방향)':''}. `+(Math.abs(va-vb)<.5?'카드도 망설여요. 조언 카드 쪽으로 기울어 봐요.':(K||(m==='warn'?'밝은 쪽이 있긴 한데, 어느 쪽이든 지금은 서두르지 마요.':'밝은 쪽 카드가 더 힘이 있어요. 조언 카드까지 같이 봐요.'))); }
+  else if(A.type==='when'){ big=tm.t.split('. ')[0].replace(/\.$/,''); line=(K?K+' ':'')+`시기는 ${POS[last]} 자리의 <b>${TAROT[S.picked[last]].ko}</b>로 봤어요.`; }
+  else if(A.type==='how'){ const c=TAROT[S.picked[last]], rv=S.rv[last]; big=rv?`열쇠는 ‘${c.kw[0]}’ 되찾기`:`열쇠는 ‘${c.kw[0]}’`; line=(K?K+' ':'')+meaning(c,rv); }
+  else if(A.type==='why'){ let lo=0; S.picked.forEach((n,i)=>{ if(cv(i)<cv(lo)) lo=i; }); const c=TAROT[S.picked[lo]], rv=S.rv[lo]; big=`이유는 ‘${(rv?c.kwR:c.kw)[0]}’`; line=(K?K+' ':'')+`${POS[lo]} 자리의 <b>${c.ko}</b>${rv?'(역방향)':''}${jong(c.ko)?'이':'가'} 가리키는 이유예요.`; }
+  else if(A.type==='yesno'){ big=VBIG[m]; line=(K||CLOSE[S.kOver&&S.topic!=='pick'?S.k:S.topic][m])+decisive; }
+  else { big=TITLE[m]; line=(K||'')+decisive; if(!line) line=CLOSE[S.kOver&&S.topic!=='pick'?S.k:S.topic][m]; }
+  $('vH').textContent='무진의 답'+(A.type?' · '+R.TYPE_NAME[A.type]:'')+(A.kw?' · '+A.kw:'');
+  $('vBig').textContent=big; $('vBig').classList.toggle('sm',big.length>14); $('vLine').innerHTML=line.trim();
+  $('vTime').innerHTML=`<b>시기 힌트</b>${tm.t}<small>${POS[last]} 카드 · ${TAROT[S.picked[last]].ko} · ${tm.basis} (골든 던 체계)</small>`; }
+const KNAME={love:'연애',work:'일',money:'돈'};
+function howList(){ const A=S.A||{}, L=[];
+  L.push('<b>카드 뜻</b> 라이더-웨이트 표준 해석 기준, 정·역방향 구분');
+  L.push('<b>질문</b> '+(A.q?[A.kw?`‘${A.kw}’`:'',A.type?(A.type==='which'&&A.ab?`‘${A.ab[0]}’ vs ‘${A.ab[1]}’ 비교`:R.TYPE_NAME[A.type]):'열린 질문'].filter(Boolean).join(' · ')+(S.kOver?` → ${KNAME[S.k]} 해석으로 읽음`:''):'질문 없이 주제로만 읽었어요'));
+  if(S.n>1){ const fl=S.picked.map((n,i)=>R.frame(S.kinds[i],TAROT[n],S.rv[i],'',POS[i])?POS[i]:null).filter(Boolean); L.push(`<b>자리</b> ${POS.join(' · ')}. 같은 카드도 자리에 따라 다르게 읽어요`+(fl.length?` (이번엔 ${fl.join(', ')} 자리에서 뒤집어 읽었어요)`:'')); }
+  L.push('<b>조합</b> '+(S.combos&&S.combos.length?S.combos.map(x=>`${x.a} × ${x.b}`).join(', '):(S.n>1?'특별히 짚을 조합은 없었어요':'한 장이라 조합 없이 읽었어요')));
+  if(S.pattern) L.push('<b>흐름</b> '+S.pattern);
+  L.push(`<b>시기</b> ${TAROT[S.picked[S.picked.length-1]].ko} · ${S.tm.basis}`);
+  L.push('<b>섞기</b> 22장을 암호학 난수로 섞고, 정·역방향도 무작위');
+  $('howL').innerHTML=L.map(x=>`<li>${x}</li>`).join(''); $('how').open=false; }
+function render(){ const sp=TAROT_SPREAD[S.topic]; const m=S.mood;
+  $('rhero').style.backgroundImage=`url('img/tarot/${m}.jpg')`; if(window.Depth3D){ Depth3D.unmount($('rhero')); Depth3D.mount($('rhero'),{src:`img/tarot/${m}.jpg`,pos:[.5,.22]}); } $('rTitle').textContent=TITLE[m]; $('rKick').textContent=`무진의 풀이 · ${sp.t}`;
+  $('rQ').textContent=S.q?`"${S.q}"`:(S.n===1?'한 장으로 본 답':'세 장으로 본 흐름');
+  $('rCards').innerHTML=S.picked.map((n,i)=>{ const c=TAROT[n], rv=S.rv[i]; return `<div class="cr"><div class="th${rv?' rv':''}" data-i="${i}" style="background-image:url('${c.img}')"></div><div><div class="p">${POS[i]}</div><div class="n">${c.ko}<small>${c.en}</small></div><span class="ud ${rv?'rv':'up'}">${rv?'역방향':'정방향'}</span><span class="el" style="--c:${EL_COLOR[c.el]}">${c.el} · ${EL_PLANET[c.el]}</span><div class="kws">${(rv?c.kwR:c.kw).map(k=>`<span>#${k}</span>`).join('')}</div><p class="m">${meaning(c,rv)}</p></div></div>`; }).join('');
+  $('rCards').querySelectorAll('.th').forEach(t=>t.onclick=()=>zoom(+t.dataset.i));
+  $('drawn').innerHTML=S.picked.map((n,i)=>{ const c=TAROT[n]; return `<button type="button" data-i="${i}" style="animation-delay:${.25+i*.15}s"><span class="im${S.rv[i]?' rv':''}" style="background-image:url('${c.img}')"></span><small>${POS[i]}</small><b>${c.ko}</b></button>`; }).join('');
+  $('drawn').querySelectorAll('button').forEach(b=>b.onclick=()=>zoom(+b.dataset.i));
+  $('rSay').outerHTML=`<div id="rSay">${narrative()}</div>`; verdict(); howList();
+  $('rOh').innerHTML=ohHTML(); const bg=$('bdGo'); if(bg) bg.onclick=()=>{ const v=$('bd').value; if(!v) return; const [y,mo,d]=v.split('-').map(Number); try{ sessionStorage.setItem('me',JSON.stringify({name:'',g:'f',cal:'s',y,m:mo,d,h:null})); }catch(e){} $('rOh').innerHTML=ohHTML(); };
+  $('lockR').hidden=false; $('rprem').hidden=true; S.cc=null;
+  $('s4s').scrollTop=0; show('s4'); }
+function zoom(i){ const n=S.picked[i], c=TAROT[n], rv=S.rv[i]; $('zi').style.backgroundImage=`url('${c.img}')`; $('zc').classList.toggle('rv',rv);
+  $('zn').textContent=`${c.ko} · ${c.en}${rv?' (역방향)':''}`; $('zk').textContent=(rv?c.kwR:c.kw).map(k=>'#'+k).join('  '); $('zoom').classList.add('on'); tick(.06); if(window.Depth3D) Depth3D.holo($('zc'),{max:16}); }
+$('zoom').onclick=()=>{ $('zoom').classList.remove('on'); if(window.Depth3D) Depth3D.unholo($('zc')); };
+$('payBtn').onclick=()=>{ if(window.TarotPrem&&TarotPrem.open($('rprem'),S)){ $('lockR').hidden=true; setTimeout(()=>$('rprem').scrollIntoView({behavior:'smooth',block:'start'}),60); } else toast('체험판이라 결제는 여기까지예요'); };
+$('again').onclick=()=>{ go('s1'); $('s1').scrollTop=0; };
+
+/* 살아 있는 일러스트: 첫 화면 무진 */
+if(window.Depth3D) Depth3D.mount($('s1').querySelector('.hero'),{src:'img/tarot/mujin.jpg',pos:[.5,.12],str:1.1});
+/* 첫 화면 캐릭터 인트로 */
+if(window.MenuIntro) MenuIntro.play({src:'v/tarot/intro.mp4',poster:'img/tarot/mujin.jpg',who:'무진 · 한밤의 카드방',title:'무진의 타로',subs:[[0.3,'앉아요.'],[2.3,'…카드한테 물어보고 싶은 거,'],[5.1,'하나 있죠?']]});
+/* 검수용 훅 */ window.TarotDev={S,render,R,setPos:p=>{ POS=p; }};
+})();
+</script>
+</body>
+</html>

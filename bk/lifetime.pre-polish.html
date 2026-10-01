@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>평생 사주 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700;900&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+
+/* 평생 사주 — 정통 풀이(신년운세와 같은 한지 톤). 인생 그래프 + 대운 열 마디 + 평생 분야. 밝은 한지 바탕 + 먹색 명조 + 붉은 인장. 모든 풀이 문장에 근거 글자 칩. */
+:root{
+  --brush:'OBrush','Noto Serif KR',serif; --bmj:'Song Myung','Noto Serif KR',serif;
+  --paper:#f3ede2; --paper-2:#ebe3d5; --card:#fbf8f2; --ink:#1f1b16; --ink-2:#4a433a; --ink-3:#877d70; --line:#d9cfbf;
+  --seal:#b3322a; --seal-2:#d9564b;
+  --wood:#3f7d5a; --fire:#c0392b; --earth:#a7792c; --metal:#6f7884; --water:#2f5d8a;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --serif:'Noto Serif KR',"Nanum Myeongjo",serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#d8cfbf;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button,select,input{font-family:inherit}
+.stage{position:relative;width:100%;max-width:460px;height:100%;overflow:hidden;overflow:clip;background:var(--paper);background-image:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.7),transparent 55%),radial-gradient(ellipse at 100% 100%,rgba(200,184,160,.35),transparent 60%)}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;border-radius:22px;box-shadow:0 30px 80px rgba(60,40,20,.35)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;opacity:0;pointer-events:none;transition:opacity .6s}
+.scr::-webkit-scrollbar{display:none}
+.scr.on{opacity:1;pointer-events:auto}
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px;background:linear-gradient(180deg,var(--paper) 70%,rgba(243,237,226,0))}
+.back{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.back svg{width:18px;height:18px}
+.top b{font-family:var(--serif);font-size:14px;font-weight:700;letter-spacing:.08em}
+.seal{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:6px;background:var(--seal);color:#fff4ea;font-family:var(--serif);font-weight:900;font-size:15px;line-height:1.05;text-align:center;transform:rotate(-4deg);box-shadow:inset 0 0 0 2px rgba(255,240,230,.35)}
+.top .seal{margin-left:auto;width:34px;height:34px;font-size:11px}
+
+/* intro */
+.intro{padding:0 22px calc(env(safe-area-inset-bottom,0px) + 28px)}
+.arch{position:relative;margin:4px auto 0;width:66%;max-width:260px;aspect-ratio:3/4;border-radius:999px 999px 14px 14px;overflow:hidden;background:#2a2320 center 22%/cover no-repeat;box-shadow:0 18px 40px rgba(60,40,20,.28),0 0 0 6px var(--card),0 0 0 7px var(--line)}
+.arch .seal{position:absolute;right:10px;bottom:10px}
+.kick{text-align:center;font-size:12px;letter-spacing:.3em;color:var(--seal);margin:26px 0 8px;font-weight:700}
+h1{margin:0;text-align:center;font-family:var(--serif);font-weight:900;font-size:28px;line-height:1.35;letter-spacing:-.01em}
+.lead{text-align:center;color:var(--ink-2);font-size:14px;line-height:1.7;margin:10px 0 22px}
+.form{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+.form label{display:block;font-size:12px;color:var(--ink-3);margin:12px 0 6px;font-weight:700;letter-spacing:.04em}
+.form label:first-child{margin-top:0}
+.field{width:100%;height:46px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:0 12px;font-size:16px;outline:none}
+.field:focus{border-color:var(--ink-2)}
+.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.seg button{flex:1;height:42px;border:0;background:none;color:var(--ink-2);font-size:14px;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--paper);font-weight:700}
+.grid3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:6px}
+.grid3 select,.form select{height:46px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:15px;padding:0 8px;width:100%}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.leap{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);margin-top:8px}
+.leap input{width:18px;height:18px;accent-color:var(--seal)}
+.leap.off{opacity:.4}
+.go{width:100%;height:54px;margin-top:16px;border:0;border-radius:14px;background:var(--ink);color:var(--paper);font-size:16px;font-weight:700;cursor:pointer;letter-spacing:.02em}
+.go:active{transform:scale(.985)}
+.fine{font-size:11.5px;color:var(--ink-3);text-align:center;margin-top:12px;line-height:1.6}
+
+/* loading */
+.load{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 30px;text-align:center}
+.ink{position:relative;width:120px;height:120px;margin-bottom:28px}
+.ink svg{width:100%;height:100%}
+.ink circle{fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round;stroke-dasharray:340;stroke-dashoffset:340;animation:brush 2.6s ease-in-out forwards;opacity:.88}
+@keyframes brush{to{stroke-dashoffset:24}}
+.ink .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-4deg)}
+.load h2{font-family:var(--serif);font-size:20px;margin:0 0 8px}
+.load p{margin:0;color:var(--ink-3);font-size:13.5px;min-height:20px}
+
+/* report */
+.rep{padding:0 16px calc(env(safe-area-inset-bottom,0px) + 110px)}
+.hd{padding:6px 4px 4px}
+.hd small{display:block;font-size:12px;color:var(--seal);letter-spacing:.2em;font-weight:700}
+.hd h2{margin:8px 0 0;font-family:var(--serif);font-size:25px;font-weight:900;line-height:1.35}
+.hd p{margin:6px 0 0;font-size:13px;color:var(--ink-3)}
+.quote{display:flex;gap:12px;align-items:flex-start;margin:16px 0 4px;padding:14px;border-radius:16px;background:#2a2320;color:#f3ede2}
+.quote .av{flex:none;width:46px;height:46px;border-radius:50%;background:#000 center 20%/cover;box-shadow:0 0 0 2px #c9a86a}
+.quote b{display:block;font-size:11px;letter-spacing:.2em;color:#c9a86a;margin-bottom:4px}
+.quote p{margin:0;font-family:var(--serif);font-size:15.5px;line-height:1.6;font-weight:700}
+.sec{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+.sec h3{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-family:var(--serif);font-size:16px;font-weight:900}
+.sec h3 i{font-style:normal;font-family:var(--sans);font-size:11px;color:var(--ink-3);font-weight:500;margin-left:auto}
+.sec h3:before{content:"";width:4px;height:15px;background:var(--seal);border-radius:1px}
+table.ms{width:100%;border-collapse:collapse;text-align:center;table-layout:fixed}
+.ms th{font-size:11.5px;color:var(--ink-3);font-weight:500;padding:0 0 6px}
+.ms td{border-top:1px solid var(--line);padding:6px 0}
+.ms .tg{font-size:11.5px;color:var(--ink-2)}
+.ms .ch{font-family:var(--serif);font-weight:900;font-size:28px;line-height:1.1}
+.ms .ch small{display:block;font-family:var(--sans);font-size:10px;font-weight:500;color:var(--ink-3);margin-top:2px}
+.ms .me{position:relative}
+.ms .me:after{content:"나";position:absolute;top:2px;right:6px;font-size:9.5px;font-weight:700;color:#fff;background:var(--seal);border-radius:4px;padding:1px 4px;font-family:var(--sans)}
+.ms .hid{font-size:12px;color:var(--ink-3);font-family:var(--serif)}
+.els{display:grid;gap:8px}
+.el{display:grid;grid-template-columns:34px 1fr 22px;gap:10px;align-items:center;font-size:13px}
+.el b{font-family:var(--serif);font-size:16px;color:var(--c)}
+.el .t{height:9px;border-radius:5px;background:var(--paper-2);overflow:hidden}
+.el .t i{display:block;height:100%;width:0;background:var(--c);border-radius:5px;transition:width 1s ease}
+.el span{text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.verdict{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:14px;line-height:1.7;color:var(--ink-2)}
+.verdict b{color:var(--ink)}
+.du{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.du::-webkit-scrollbar{display:none}
+.du div{flex:none;width:54px;border:1px solid var(--line);border-radius:10px;padding:7px 0;text-align:center;background:#fff}
+.du div small{display:block;font-size:10.5px;color:var(--ink-3)}
+.du div b{display:block;font-family:var(--serif);font-size:17px;line-height:1.25;margin-top:3px}
+.du div.now{border-color:var(--seal);background:#fff4f0;box-shadow:0 0 0 1px var(--seal)}
+.du div.now small{color:var(--seal);font-weight:700}
+.big{display:flex;align-items:flex-end;gap:14px;margin-bottom:12px}
+.big .sc{font-family:var(--serif);font-size:54px;font-weight:900;line-height:.9;color:var(--seal)}
+.big .sc small{font-size:16px;color:var(--ink-3);font-weight:500;margin-left:2px}
+.big .lbl{font-size:13px;color:var(--ink-2);line-height:1.5;padding-bottom:4px}
+.big .lbl b{display:block;font-family:var(--serif);font-size:18px;color:var(--ink)}
+.p{margin:0 0 12px;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.p:last-child{margin-bottom:0}
+.why{display:inline-flex;flex-wrap:wrap;gap:4px;margin-left:4px;vertical-align:1px}
+.why button{border:1px solid rgba(179,50,42,.35);background:#fff6f2;color:var(--seal);font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;cursor:pointer;font-family:var(--serif);line-height:1.6}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fd{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}
+.fd b{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.fd b em{font-style:normal;color:var(--seal);letter-spacing:1px;font-size:12px}
+.fd p{margin:8px 0 0;font-size:12.5px;line-height:1.6;color:var(--ink-2)}
+.chart{width:100%;height:170px;display:block}
+.months{display:grid;gap:0;margin-top:8px}
+.mo{display:grid;grid-template-columns:40px 52px 1fr 30px;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--line);font-size:13px}
+.mo:first-child{border-top:0}
+.mo .m{font-weight:700}
+.mo .gz{font-family:var(--serif);font-weight:900;font-size:15px}
+.mo .tx{color:var(--ink-2);line-height:1.45}
+.mo .sc{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.mo.best .m,.mo.best .sc{color:var(--seal)}
+.mo.warn .sc{color:var(--ink-3)}
+.mo .tag{display:inline-block;font-size:10px;font-weight:700;padding:0 5px;border-radius:4px;margin-left:4px;vertical-align:1px}
+.mo.best .tag{background:var(--seal);color:#fff}
+.mo.warn .tag{background:var(--ink-3);color:#fff}
+.lockS{position:relative;overflow:hidden}
+.lockS .blur{filter:blur(5px);user-select:none;pointer-events:none}
+.lockS .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:linear-gradient(180deg,rgba(251,248,242,.3),rgba(251,248,242,.92) 45%);text-align:center;padding:16px}
+.lockS .ov b{font-family:var(--serif);font-size:16px}
+.lockS .ov small{font-size:12.5px;color:var(--ink-2)}
+.pay{position:absolute;left:0;right:0;bottom:0;z-index:20;padding:12px 16px calc(env(safe-area-inset-bottom,0px) + 14px);background:linear-gradient(180deg,rgba(243,237,226,0),var(--paper) 30%);transform:translateY(110%);transition:transform .6s cubic-bezier(.2,.8,.2,1);visibility:hidden}
+.pay.on{transform:none;visibility:visible}
+.pay .go{margin-top:0}
+.pay .pr{text-align:center;font-size:12.5px;color:var(--ink-2);margin-bottom:8px}
+.pay .pr s{color:var(--ink-3)}
+.pay .pr b{color:var(--seal);font-size:14px}
+.sheet{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(31,27,22,.35);opacity:0;pointer-events:none;transition:opacity .25s}
+.sheet.on{opacity:1;pointer-events:auto}
+.sheet .box{background:var(--card);border-radius:20px 20px 0 0;padding:20px 20px calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateY(20px);transition:transform .25s}
+.sheet.on .box{transform:none}
+.sheet .box b{display:block;font-family:var(--serif);font-size:19px;margin-bottom:8px}
+.sheet .box p{margin:0 0 14px;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.toast{position:absolute;left:50%;bottom:120px;transform:translate(-50%,8px);z-index:60;background:var(--ink);color:var(--paper);font-size:13.5px;padding:10px 16px;border-radius:999px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.askS{margin-top:14px;border-radius:18px;padding:16px;background:#2a2320;color:#f3ede2}
+.askS h3{margin:0 0 4px;font-family:var(--serif);font-size:17px}
+.askS p{margin:0 0 12px;font-size:13px;color:#cfc3b3;line-height:1.6}
+.askS .qs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.askS .qs button{border:1px solid rgba(201,168,106,.5);background:none;color:#e9d9b8;font-size:13px;padding:7px 11px;border-radius:999px;cursor:pointer}
+.askS .go{background:#c9a86a;color:#2a2320;margin-top:0}
+.note{font-size:11.5px;color:var(--ink-3);line-height:1.6;margin:16px 4px 0}
+/* 붓글씨 헤드라인 (East Sea Dokdo) + 붓 명조 보조 (Song Myung) */
+h1{font-family:var(--brush)!important;font-weight:400!important;letter-spacing:0!important}
+/* 평생 사주 추가 */
+.lifeC{width:100%;height:190px;display:block}
+.pk{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.pk div{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff}
+.pk small{display:block;font-size:11px;color:var(--ink-3);font-weight:700;letter-spacing:.06em}
+.pk b{display:block;font-family:var(--serif);font-size:16px;margin-top:3px}
+.pk span{display:block;font-size:12px;color:var(--ink-2);margin-top:2px;line-height:1.45}
+.pk .hi{border-color:var(--seal);background:#fff4f0}.pk .hi small{color:var(--seal)}
+.dl{display:grid;gap:0;margin-top:6px}
+.dr{display:grid;grid-template-columns:74px 40px 1fr;gap:10px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
+.dr:first-child{border-top:0}
+.dr .ag{font-size:12.5px;font-weight:700;color:var(--ink-2)}
+.dr .ag small{display:block;white-space:nowrap;font-size:10px;font-weight:500;color:var(--ink-3)}
+.dr .gz{font-family:var(--serif);font-weight:900;font-size:19px;line-height:1.1;text-align:center}
+.dr .tx{font-size:13px;line-height:1.55;color:var(--ink-2)}
+.dr .tx b{display:block;color:var(--ink);font-size:13.5px;margin-bottom:2px}
+.dr .bar{height:5px;border-radius:3px;background:var(--paper-2);margin-top:6px;overflow:hidden}
+.dr .bar i{display:block;height:100%;background:var(--c,var(--ink));border-radius:3px}
+.dr.now{background:linear-gradient(90deg,#fff4f0,rgba(255,244,240,0));margin:0 -16px;padding:11px 16px}
+.dr.now .ag{color:var(--seal)}
+.gi p{margin:0 0 10px;font-size:14.5px;line-height:1.75}.gi p:last-child{margin:0}
+.gi .kw{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.gi .kw span{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 10px;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="scr on" id="sIntro">
+    <div class="top"><button class="back" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>평생 사주</b><span class="seal">一生</span></div>
+    <div class="intro">
+      <div class="arch hero" style="background-image:url('img/jeongtong.jpg')"><span class="seal">一生</span></div>
+      <div class="kick">평생 사주 · 정통 풀이</div>
+      <h1>현암이 읽는<br>너의 한평생</h1>
+      <p class="lead">타고난 그릇, 10년마다 바뀌는 큰 흐름(대운),<br>재물·일·인연의 평생 결을 근거와 함께 풀어준다.</p>
+      <div class="form">
+        <label for="nm">이름</label>
+        <input class="field" id="nm" maxlength="10" value="" placeholder="이름 (예: 김은주)">
+        <div class="row2" style="margin-top:12px">
+          <div><label style="margin-top:0">성별</label><div class="seg" id="gSeg"><button class="on" data-v="f">여성</button><button data-v="m">남성</button></div></div>
+          <div><label style="margin-top:0">달력</label><div class="seg" id="cSeg"><button class="on" data-v="s">양력</button><button data-v="l">음력</button></div></div>
+        </div>
+        <label>생년월일</label>
+        <div class="grid3"><select id="by" aria-label="년"></select><select id="bm" aria-label="월"></select><select id="bd" aria-label="일"></select></div>
+        <label class="leap off" id="leapL"><input type="checkbox" id="leap" disabled> 윤달이에요</label>
+        <label>태어난 시</label>
+        <select id="bh" aria-label="태어난 시"></select>
+        <button class="go" id="goBtn">평생 풀이 받기</button>
+      </div>
+      <p class="fine">대운은 태어난 순간과 절기 사이의 시간으로 계산합니다.<br>태어난 시를 알면 더 정확해져요.</p>
+    </div>
+  </div>
+
+  <div class="scr load" id="sLoad">
+    <div class="ink"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" transform="rotate(-100 60 60)"/></svg><span class="seal">一生</span></div>
+    <h2>현암이 한평생을 펼치는 중</h2>
+    <p id="lTx">만세력 찾는 중…</p>
+  </div>
+
+  <div class="scr" id="sRep">
+    <div class="top"><button class="back" id="back2" aria-label="다시 입력"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>평생 사주</b><span class="seal">一生</span></div>
+    <div class="rep">
+      <div class="hd"><small>평생 사주 · 一生</small><h2 id="rTitle"></h2><p id="rSub"></p></div>
+      <div class="quote"><div class="av" style="background-image:url('img/jeongtong.jpg')"></div><div><b>명리 대가 · 현암</b><p id="qTop"></p></div></div>
+      <div class="sec"><h3>사주 원국<i>근거 칩을 누르면 설명이 나와요</i></h3><table class="ms" id="msT"></table></div>
+      <div class="sec gi"><h3>타고난 그릇</h3><div class="kw" id="giK"></div><div id="giT"></div></div>
+      <div class="sec"><h3>오행과 힘</h3><div class="els" id="els"></div><div class="verdict" id="verd"></div></div>
+      <div class="sec"><h3>인생 그래프<i id="duDir"></i></h3>
+        <svg class="lifeC" id="life" viewBox="0 0 340 190" role="img" aria-label="대운별 인생 흐름"></svg>
+        <div class="pk" id="pk"></div>
+      </div>
+      <div class="sec"><h3>대운 열 마디<i>10년마다 바뀌는 큰 흐름</i></h3><div class="dl" id="dl"></div></div>
+      <div class="sec"><h3>평생 분야별 결</h3><div class="fields" id="flds"></div></div>
+      <div class="sec lockS"><h3>현암의 평생 상세 풀이</h3>
+        <div class="blur"><p class="p">서른넷에서 서른여섯 사이, 문서로 들어오는 인연을 놓치지 말 것. 마흔 초반의 이동은 길하나 동업은 피할 것. 재물은 쉰 전후로 크게 모이니 그 전에 그릇을 넓혀 둘 것. 결혼의 인연은 두 번 문을 두드린다…</p></div>
+        <div class="ov"><b>대운별 상세 · 결혼·재물 시기 달력</b><small>10년마다 할 일과 피할 일, 인생의 결정적인 해 세 번</small></div>
+      </div>
+      <p class="note">체험판입니다. 만세력(절기·음력)과 대운은 실제 계산값이며, 풀이 문장은 명리 규칙에 따라 자동 구성됩니다. 정식 서비스 전 명리 전문가 검수를 거칠 예정입니다.</p>
+    </div>
+  </div>
+
+  <div class="pay" id="pay"><div class="pr"><s>59,000원</s> <b>39,000원</b> · 평생 소장</div><button class="go" id="payBtn">현암의 평생 상세 풀이 열기</button></div>
+  <div class="sheet" id="sheet"><div class="box"><b id="shT"></b><p id="shP"></p><button class="go" id="shX" style="margin-top:0">알겠어요</button></div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const S_=window.Saju;
+const {GAN,JI,GAN_K,JI_K,EL,EL_K,BR_EL,HID,stEl}=S_;
+const ELC=['var(--wood)','var(--fire)','var(--earth)','var(--metal)','var(--water)'];
+const HOURS=['자시 (23:30~01:29)','축시 (01:30~03:29)','인시 (03:30~05:29)','묘시 (05:30~07:29)','진시 (07:30~09:29)','사시 (09:30~11:29)','오시 (11:30~13:29)','미시 (13:30~15:29)','신시 (15:30~17:29)','유시 (17:30~19:29)','술시 (19:30~21:29)','해시 (21:30~23:29)'];
+let gender='f', cal='s';
+/* ---------- form ---------- */
+(function(){
+  const by=$('by'),bm=$('bm'),bd=$('bd'),bh=$('bh');
+  for(let y=2008;y>=1955;y--) by.add(new Option(y+'년',y,false,y===1996));
+  for(let m=1;m<=12;m++) bm.add(new Option(m+'월',m,false,m===5));
+  const fill=()=>{ const n=cal==='s'?new Date(+by.value,+bm.value,0).getDate():30, cur=+bd.value||14; bd.innerHTML=''; for(let d=1;d<=n;d++) bd.add(new Option(d+'일',d,false,d===Math.min(cur,n)));
+    const can=cal==='l'&&S_.hasLeap(+by.value,+bm.value); $('leap').disabled=!can; if(!can) $('leap').checked=false; $('leapL').classList.toggle('off',!can); };
+  fill(); by.onchange=fill; bm.onchange=fill;
+  bh.add(new Option('모름','x')); HOURS.forEach((h,i)=>bh.add(new Option(h,i,false,i===6)));
+  const seg=(id,cb)=>$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{ $(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); cb(b.dataset.v); });
+  seg('gSeg',v=>gender=v); seg('cSeg',v=>{ cal=v; fill(); });
+})();
+/* 내 정보 한 번만: 저장된 정보로 채우고, 풀이를 누르면 저장 */
+(function(){ let me=null; try{ me=JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){} const $$=id=>document.getElementById(id);
+  if(me&&me.y){ const seg=(id,v)=>{ const s=$$(id); if(!s||v==null) return; const b=s.querySelector(`[data-v="${v}"]`); if(b) b.click(); };
+    const set=(id,v)=>{ const e=$$(id); if(e&&v!=null){ e.value=v; if(e.onchange) e.onchange(); } };
+    seg('gSeg',me.g); seg('cSeg',me.cal); set('by',me.y); set('bm',me.m); set('bd',me.d); set('bh',me.h==null?'x':me.h); const n=$$('nm'); if(n&&me.name) n.value=me.name; }
+  const go=$$('goBtn'); if(go) go.addEventListener('click',()=>{ try{ const old=JSON.parse(sessionStorage.getItem('me')||'null')||{}, on=id=>{ const b=$$(id)&&$$(id).querySelector('.on'); return b?b.dataset.v:undefined; };
+    const o={y:+$$('by').value,m:+$$('bm').value,d:+$$('bd').value,h:$$('bh').value==='x'?null:+$$('bh').value}; const g=on('gSeg'), c=on('cSeg'); if(g) o.g=g; if(c) o.cal=c; const n=$$('nm'); if(n&&n.value.trim()) o.name=n.value.trim();
+    sessionStorage.setItem('me',JSON.stringify(Object.assign(old,o))); }catch(e){} },true);
+})();
+function show(id){ ['sIntro','sLoad','sRep'].forEach(s=>$(s).classList.toggle('on',s===id)); $('pay').classList.toggle('on',id==='sRep'); }
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2000); }
+
+/* ---------- glossary for 근거 chips ---------- */
+const GL={
+ '비견':'나와 같은 오행·같은 음양. 동료, 친구, 경쟁자, 나를 지탱하는 힘.','겁재':'나와 같은 오행·다른 음양. 경쟁, 승부욕, 나눠야 하는 돈.',
+ '식신':'내가 낳는 오행·같은 음양. 재능, 먹고 사는 일, 여유와 표현.','상관':'내가 낳는 오행·다른 음양. 말솜씨, 창의, 기존 질서와의 부딪힘.',
+ '편재':'내가 이기는 오행·같은 음양. 큰돈, 사업, 활동 범위, 유동적인 재물.','정재':'내가 이기는 오행·다른 음양. 월급, 저축, 성실하게 모으는 재물.',
+ '편관':'나를 이기는 오행·같은 음양. 압박, 책임, 권위, 돌파해야 할 과제.','정관':'나를 이기는 오행·다른 음양. 명예, 직장, 규칙, 인정받는 자리.',
+ '편인':'나를 낳는 오행·같은 음양. 직관, 특수한 공부, 혼자 파고드는 힘.','정인':'나를 낳는 오행·다른 음양. 학업, 문서, 어른의 도움, 안정.',
+ '신강':'나(일간)를 돕는 기운이 사주에 많은 상태. 밖으로 쓰는 기운(식상·재성·관성)이 들어올 때 좋다.',
+ '신약':'나(일간)를 돕는 기운이 적은 상태. 나를 돕는 기운(인성·비겁)이 들어올 때 힘을 얻는다.',
+ '합':'두 글자가 서로 끌어당겨 묶이는 관계. 결속, 인연, 협력이 생긴다.','충':'두 글자가 정면으로 부딪히는 관계. 변동, 이동, 갈등, 새 출발.',
+ '형':'丑·戌·未 / 寅·巳·申처럼 서로 견제하는 관계. 문서·법·건강에서 조심할 일.',
+ '대운':'10년 단위로 바뀌는 큰 흐름. 태어난 달의 기둥에서 순서대로 이어진다.','용신':'사주의 균형을 맞춰 주는 기운. 이 기운이 들어오는 대운에 일이 잘 풀린다.','배우자궁':'일지. 배우자와 가장 가까운 관계를 보는 자리.',
+ '월지':'태어난 달의 지지. 사주에서 가장 힘이 센 자리이자 사회·부모의 자리.','일지':'태어난 날의 지지. 배우자와 가장 가까운 관계의 자리.',
+ '일간':'태어난 날의 천간. 사주에서 "나" 자신.'};
+function why(tags){ return `<span class="why">${tags.map(t=>`<button data-k="${t.k}" data-t="${t.t||''}">${t.l}</button>`).join('')}</span>`; }
+document.addEventListener('click',e=>{ const b=e.target.closest('.why button'); if(!b) return; $('shT').textContent=b.textContent; $('shP').textContent=(b.dataset.t?b.dataset.t+' ':'')+(GL[b.dataset.k]||''); $('sheet').classList.add('on'); });
+$('shX').onclick=()=>$('sheet').classList.remove('on'); $('sheet').onclick=e=>{ if(e.target.id==='sheet') $('sheet').classList.remove('on'); };
+
+/* ---------- interpretation tables ---------- */
+const GROUP=['비겁','식상','재성','관성','인성'];
+const YEAR_TX={
+ 0:['내 편이 늘어나는 해입니다. 동료·친구와 힘을 합치면 혼자일 때보다 멀리 갑니다.','경쟁자가 늘어나는 해입니다. 돈 거래·동업은 문서로 선을 그어두십시오.'],
+ 1:['말과 재주가 밖으로 드러나는 해입니다. 기획·창작·표현하는 일에서 좋은 평가를 받습니다.','말이 앞서기 쉬운 해입니다. 윗사람과의 마찰, 과로를 조심하십시오.'],
+ 2:['움직인 만큼 돈이 붙는 해입니다. 판을 넓히는 일에 기회가 들어옵니다.','들어오는 돈만큼 나가는 돈도 커지는 해입니다. 큰 지출·보증·투자는 한 번 더 따지십시오.'],
+ 3:['자리와 이름이 생기는 해입니다. 승진·합격·계약처럼 인정받는 일이 따릅니다.','책임이 무거워지는 해입니다. 맡은 일이 늘어나니 몸과 마음의 여유부터 챙기십시오.'],
+ 4:['배우고 채우는 해입니다. 자격·공부·문서운이 좋고, 도와주는 어른이 나타납니다.','생각이 많아 실행이 늦어지는 해입니다. 계획은 줄이고 한 가지를 끝까지 하십시오.']};
+const MON_TX={0:['사람을 만나 힘을 얻는 달','경쟁·지출이 느는 달'],1:['아이디어가 빛나는 달','말조심, 과로 주의'],2:['돈의 흐름이 좋은 달','지출 관리가 필요한 달'],3:['인정받고 자리 잡는 달','책임이 무거운 달'],4:['배움·문서운이 좋은 달','생각만 많아지는 달']};
+const DU_TX={0:'나를 세우고 사람을 모으는 10년',1:'재능을 밖으로 펼치는 10년',2:'재물과 활동 무대를 넓히는 10년',3:'자리와 책임이 커지는 10년',4:'배우고 실력을 쌓는 10년'};
+const ORGAN=['간·담, 근육과 눈의 피로','심장·혈압, 열과 수면','위장·소화, 식습관','폐·호흡기, 피부 건조','신장·방광, 허리와 냉증'];
+
+/* ---------- compute & render ---------- */
+
+$('shX').onclick=()=>$('sheet').classList.remove('on'); $('sheet').onclick=e=>{ if(e.target.id==='sheet') $('sheet').classList.remove('on'); };
+const DM_TX=['큰 나무처럼 곧게 위로 뻗는 사람입니다. 한번 정한 길은 끝까지 가고, 남 밑에 있기보다 앞에 서는 것이 편합니다. 꺾이지 않으려다 부러질 수 있으니 휘는 법도 익히십시오.',
+ '넝쿨과 꽃처럼 부드럽게 뻗어 가는 사람입니다. 환경에 맞춰 모양을 바꾸는 적응력이 뛰어나고, 사람 사이에서 길을 찾습니다. 기댈 곳을 잘 고르는 것이 평생의 복입니다.',
+ '한낮의 태양처럼 밝고 숨김이 없는 사람입니다. 있는 자리를 환하게 만들고 사람이 모입니다. 한꺼번에 다 태우는 기질이니 속도를 조절해야 오래 빛납니다.',
+ '촛불과 등불처럼 가까운 곳을 따뜻하게 비추는 사람입니다. 섬세하고 집중력이 깊어 한 분야를 오래 파고듭니다. 겉은 조용해도 속의 불은 쉽게 꺼지지 않습니다.',
+ '큰 산처럼 묵직하고 믿음직한 사람입니다. 쉽게 흔들리지 않아 사람들이 기댑니다. 변화에 느린 편이니 때가 왔을 때는 스스로 움직이는 결단이 필요합니다.',
+ '논밭과 정원처럼 사람과 일을 길러 내는 사람입니다. 현실 감각과 살림 솜씨가 좋고, 남을 키워 주는 데서 보람을 찾습니다. 나를 위한 몫도 챙겨야 지치지 않습니다.',
+ '원석과 쇠처럼 단단하고 결단이 빠른 사람입니다. 의리를 중시하고 옳고 그름이 분명합니다. 다듬어질수록 빛나는 기질이라 시련이 곧 성장이 됩니다.',
+ '보석처럼 섬세하고 기준이 높은 사람입니다. 안목과 감각이 뛰어나 좋은 것을 알아봅니다. 상처를 오래 기억하는 편이니 스스로에게 너그러워지는 것이 숙제입니다.',
+ '큰 바다와 강처럼 넓게 품고 멀리 보는 사람입니다. 머리가 빠르고 판이 큽니다. 흐름을 잃으면 방황하기 쉬우니 목표라는 둑을 세워야 힘이 모입니다.',
+ '비와 이슬처럼 조용히 스며드는 사람입니다. 직관이 뛰어나고 남의 마음을 잘 읽습니다. 드러나지 않게 큰일을 해내는 타입이니 자신의 공을 스스로 알아주십시오.'];
+const DM_KW=[['곧음','개척','리더'],['유연함','사교','생명력'],['열정','솔직','존재감'],['섬세함','집중','따뜻함'],['신뢰','포용','뚝심'],['살림','현실감','돌봄'],['결단','의리','강단'],['안목','완벽','세련'],['지혜','스케일','자유'],['직관','공감','인내']];
+const TG_TX={'비견':'독립심과 자존심으로 일어섭니다. 동업보다 내 이름을 건 일이 맞습니다.','겁재':'승부욕과 추진력이 강합니다. 경쟁이 있는 판에서 오히려 힘을 냅니다.',
+ '식신':'재능과 손끝으로 먹고삽니다. 좋아하는 일을 오래 하는 것이 곧 재물이 됩니다.','상관':'말과 아이디어로 판을 흔듭니다. 틀을 깨는 일, 표현하는 일에서 빛납니다.',
+ '편재':'큰돈의 흐름을 읽습니다. 사업·영업·투자처럼 활동 범위가 넓은 일이 맞습니다.','정재':'성실하게 쌓아 올립니다. 월급과 저축, 관리하는 일에서 안정을 얻습니다.',
+ '편관':'압박 속에서 강해집니다. 책임이 무거운 자리, 위기를 해결하는 일이 맞습니다.','정관':'규칙과 신뢰로 인정받습니다. 조직 안에서 직함을 얻으며 올라가는 길입니다.',
+ '편인':'남다른 직관과 전문성으로 섭니다. 특수한 기술, 연구, 상담 같은 일이 맞습니다.','정인':'배움과 문서의 복이 있습니다. 공부, 자격, 가르치는 일에서 자리를 잡습니다.'};
+const JOB=['창업·프리랜서·스포츠·영업 현장','콘텐츠·기획·요리·교육·디자인','사업·금융·유통·영업·부동산','공공기관·대기업·법·관리직','연구·교육·의료·상담·출판'];
+const LIFE_TX=[['내 힘이 차오르는 10년. 독립·창업·새 판을 여는 때.','경쟁과 지출이 느는 10년. 동업·보증은 피하고 내 것을 지키는 때.'],
+ ['재능이 꽃피는 10년. 표현·창작·기술로 이름을 알리는 때.','말과 행동이 앞서는 10년. 윗사람과 부딪히지 않게 조율하는 때.'],
+ ['재물이 모이는 10년. 벌이를 넓히고 자산을 키우는 때.','돈 기회는 많지만 새기도 쉬운 10년. 지키는 힘을 기르는 때.'],
+ ['자리와 명예가 오는 10년. 승진·직함·혼인의 인연이 닿는 때.','책임과 압박이 커지는 10년. 몸을 아끼고 규칙을 지키는 때.'],
+ ['배움과 도움이 들어오는 10년. 자격·문서·어른의 덕을 보는 때.','생각이 많아지는 10년. 공부는 좋지만 실행이 늦지 않게.']];
+const LIFE_T=[['독립의 10년','지키는 10년'],['재능의 10년','조율의 10년'],['재물의 10년','다지는 10년'],['명예의 10년','버티는 10년'],['배움의 10년','숙성의 10년']];
+const SPOUSE={'비견':'친구 같은 동반자. 대등하게 의지하되 고집 싸움은 조심.','겁재':'열정적이지만 주도권 다툼이 생기기 쉬운 자리. 서로의 영역을 존중할 것.','식신':'편안하고 다정한 인연. 함께 먹고 웃는 일상이 복입니다.','상관':'재치 있고 감각 있는 인연. 말로 상처 주지 않는 것이 관건.',
+ '편재':'활동적이고 통 큰 인연. 함께 넓은 세상을 보는 관계.','정재':'성실하고 살림을 아는 인연. 안정된 가정을 꾸리는 자리.','편관':'강하고 책임감 있는 인연. 끌림이 크지만 긴장도 있는 관계.','정관':'반듯하고 믿음직한 인연. 서로를 지켜 주는 정석 같은 관계.',
+ '편인':'생각이 깊고 독특한 인연. 혼자만의 시간을 존중해야 오래 갑니다.','정인':'나를 챙기고 품어 주는 인연. 기댈 수 있는 관계.'};
+$('goBtn').onclick=async()=>{
+  let y=+$('by').value,m=+$('bm').value,d=+$('bd').value; const h=$('bh').value==='x'?null:+$('bh').value;
+  let solar={y,m,d}; if(cal==='l'){ solar=S_.lunarToSolar(y,m,d,$('leap').checked); if(!solar){ toast('그 음력 날짜는 없는 날이에요'); return; } }
+  const name=($('nm').value.trim()||'은주');
+  show('sLoad'); for(const t of ['만세력 찾는 중…','절기 시각 맞추는 중…','대운 열 마디 세우는 중…','한평생을 펼치는 중…']){ $('lTx').textContent=t; await wait(650); }
+  render(name,solar,h,{y,m,d}); show('sRep'); $('sRep').scrollTop=0;
+  requestAnimationFrame(()=>document.querySelectorAll('#els .t i').forEach(i=>i.style.width=i.dataset.w+'%'));
+};
+function render(name,sol,h,orig){
+  const P=S_.pillars(sol.y,sol.m,sol.d,h), dm=P.d[0], st=S_.strength(P), male=gender==='m';
+  const tgS=s=>S_.tgStem(dm,s), tgB=b=>S_.tgBranch(dm,b), nick=/^[가-힣]{3}$/.test(name)?name.slice(1):name;
+  const nowY=new Date().getFullYear(), age=nowY-sol.y+1;
+  $('rTitle').textContent=`${name}님의 한평생`;
+  $('rSub').textContent=`${cal==='l'?`음력 ${orig.y}.${orig.m}.${orig.d}${$('leap').checked?'(윤)':''} → `:''}양력 ${sol.y}.${sol.m}.${sol.d} · ${h==null?'시 모름':HOURS[h].split(' ')[0]} · ${male?'남':'여'} · 일간 ${GAN[dm]}${EL[stEl(dm)]}`;
+  const cols=[['시주',P.h],['일주',P.d],['월주',P.m],['년주',P.y]];
+  const cell=(p,i,k)=>{ if(!p) return k==='ch'?'<div class="ch" style="color:var(--ink-3);font-size:14px">모름</div>':'';
+    if(k==='tgs') return i===1?'일간':tgS(p[0]); if(k==='tgb') return tgB(p[1]);
+    if(k==='s') return `<div class="ch" style="color:${ELC[stEl(p[0])]}">${GAN[p[0]]}<small>${GAN_K[p[0]]}${EL_K[stEl(p[0])]}</small></div>`;
+    if(k==='b') return `<div class="ch" style="color:${ELC[BR_EL[p[1]]]}">${JI[p[1]]}<small>${JI_K[p[1]]}${EL_K[BR_EL[p[1]]]}</small></div>`;
+    if(k==='hid') return HID[p[1]].map(x=>GAN[x]).join(' '); };
+  $('msT').innerHTML=`<tr>${cols.map(c=>`<th>${c[0]}</th>`).join('')}</tr>
+   <tr>${cols.map((c,i)=>`<td class="tg">${cell(c[1],i,'tgs')||'-'}</td>`).join('')}</tr>
+   <tr>${cols.map((c,i)=>`<td class="${i===1?'me':''}">${c[1]?cell(c[1],i,'s'):cell(null,i,'ch')}</td>`).join('')}</tr>
+   <tr>${cols.map((c,i)=>`<td>${c[1]?cell(c[1],i,'b'):cell(null,i,'ch')}</td>`).join('')}</tr>
+   <tr>${cols.map((c,i)=>`<td class="tg">${cell(c[1],i,'tgb')||'-'}</td>`).join('')}</tr>
+   <tr>${cols.map((c,i)=>`<td class="hid">${cell(c[1],i,'hid')||'-'}</td>`).join('')}</tr>`;
+  // 타고난 그릇
+  const mTG=tgB(P.m[1]);
+  $('giK').innerHTML=DM_KW[dm].concat([mTG+' 격']).map(k=>`<span>#${k}</span>`).join('');
+  $('giT').innerHTML=`<p class="p"><b>${GAN[dm]}${EL[stEl(dm)]} 일간.</b> ${DM_TX[dm]}${why([{l:'일간 '+GAN[dm],k:'일간'}])}</p><p class="p"><b>사회에서 쓰는 힘 · ${mTG}.</b> 태어난 달(월지 ${JI[P.m[1]]})의 기운이 ${mTG}입니다. ${TG_TX[mTG]}${why([{l:'월지 '+JI[P.m[1]],k:'월지'},{l:mTG,k:mTG}])}</p>`;
+  // 오행
+  const cnt=S_.elCount(P), mx=Math.max(...cnt,1);
+  $('els').innerHTML=cnt.map((c,i)=>`<div class="el" style="--c:${ELC[i]}"><b>${EL[i]}</b><div class="t"><i data-w="${Math.max(c/mx*100,3)}"></i></div><span>${c}</span></div>`).join('');
+  const weak=cnt.indexOf(Math.min(...cnt)), strongEl=cnt.indexOf(Math.max(...cnt));
+  const favG=st.strong?'식상·재성·관성':'인성·비겁';
+  $('verd').innerHTML=`${EL[strongEl]} 기운이 가장 많고 ${EL[weak]} 기운이 가장 적습니다. 나를 돕는 기운의 비율로 보면 <b>${st.label}</b>한 사주라, 평생 <b>${favG}</b>의 기운(용신)이 들어오는 때에 일이 풀립니다.${why([{l:st.strong?'신강':'신약',k:st.strong?'신강':'신약',t:`나를 돕는 기운 ${Math.round(st.ratio*100)}%.`},{l:'용신 '+favG,k:'용신'}])}`;
+  // 대운 점수
+  const DU=S_.daeun(P,male), db=P.d[1], mb=P.m[1];
+  $('duDir').textContent=`${DU.fwd?'순행':'역행'} · ${DU.start}세 시작`;
+  const L=DU.list.map(x=>{ const r1=S_.rel(dm,stEl(x.s)), r2=S_.relBranch(dm,x.b), f1=S_.favorable(st,r1), f2=S_.favorable(st,r2);
+    let sc=55+(f1?11:-6)+(f2?14:-7); const tags=[];
+    if(S_.isHap(x.b,db)){ sc+=6; tags.push(`${JI[x.b]}${JI[db]} 합`); } if(S_.isChung(x.b,db)){ sc-=9; tags.push(`${JI[x.b]}${JI[db]} 충`); } if(S_.isChung(x.b,mb)){ sc-=5; tags.push('월지 충'); }
+    sc=Math.max(30,Math.min(95,Math.round(sc))); return Object.assign({},x,{r1,r2,f2,sc,tags,now:age>=x.age&&age<x.age+10}); });
+  const best=[...L].sort((a,b)=>b.sc-a.sc)[0], low=[...L].sort((a,b)=>a.sc-b.sc)[0], cur=L.find(x=>x.now)||L[0];
+  drawLife(L,age,best,low);
+  $('pk').innerHTML=[['인생의 전성기',best,'hi'],['지금의 10년',cur,''],['쉬어 갈 10년',low,'']].map(([k,x,c])=>`<div class="${c}"><small>${k}</small><b>${x.age}~${x.age+9}세 · ${GAN[x.s]}${JI[x.b]}</b><span>${LIFE_T[x.r2][x.f2?0:1]}</span></div>`).join('')+`<div><small>대운이 바뀌는 해</small><b>${sol.y+ (L.find(x=>x.age>age)||L[L.length-1]).age-1}년</b><span>${(L.find(x=>x.age>age)||L[L.length-1]).age}세부터 새 10년</span></div>`;
+  $('dl').innerHTML=L.map(x=>`<div class="dr ${x.now?'now':''}" style="--c:${x.sc>=70?'var(--seal)':x.sc>=55?'var(--ink)':'var(--ink-3)'}"><div class="ag">${x.age}~${x.age+9}세<small>${sol.y+x.age-1}~${sol.y+x.age+8}${x.now?' · 지금':''}</small></div><div class="gz" style="color:${ELC[BR_EL[x.b]]}">${GAN[x.s]}<br>${JI[x.b]}</div><div class="tx"><b>${LIFE_T[x.r2][x.f2?0:1]} · ${GROUP[x.r2]}${x.tags.length?' · '+x.tags.join(', '):''}</b>${LIFE_TX[x.r2][x.f2?0:1]}<div class="bar"><i style="width:${x.sc}%"></i></div></div></div>`).join('');
+  // 평생 분야
+  const rels=[[P.y[0],'s'],[P.m[0],'s'],[P.h&&P.h[0],'s'],[P.y[1],'b'],[P.m[1],'b'],[P.d[1],'b'],[P.h&&P.h[1],'b']].filter(v=>v[0]!=null).map(([v,k])=>k==='s'?S_.rel(dm,stEl(v)):S_.relBranch(dm,v));
+  const n=g=>rels.filter(r=>r===g).length; const star=k=>'★'.repeat(k)+'☆'.repeat(5-k), cl=v=>Math.max(1,Math.min(5,Math.round(v)));
+  const moneyDU=L.find(x=>(x.r2===2||x.r1===2)&&x.f2&&x.age>=18);
+  let money=3+(n(2)?(st.strong?1.2:0.3):-0.3)+(n(1)?0.5:0);
+  const spG=male?2:3, spDU=L.find(x=>x.age>=20&&(x.r2===spG||x.r1===spG||S_.isHap(x.b,db)));
+  const love=3+(n(spG)?0.8:-0.3)+(L.some(x=>S_.isHap(x.b,db))?0.6:0);
+  const work=3+(n(3)?(st.strong?1:0.2):0)+(n(1)?0.5:0)+(n(4)?0.4:0);
+  const health=4-(cnt[weak]===0?1:0)-(cnt[strongEl]>=4?0.6:0);
+  const jobG=[0,1,2,3,4].sort((a,b)=>n(b)-n(a)).find(g=>n(g)>0&&(st.strong?g!==0&&g!==4:true))??1;
+  const F=[
+   ['재물',cl(money),(n(2)?(st.strong?'재성을 쥘 힘이 있는 사주. 스스로 크게 벌어 모으는 그릇입니다.':'돈은 보이나 쥐는 힘이 약한 사주. 욕심보다 모으는 습관이 재산이 됩니다.'):'재성이 드러나지 않아 기술과 전문성으로 버는 사주입니다.')+(moneyDU?` 재물이 가장 크게 모이는 때는 <b>${moneyDU.age}~${moneyDU.age+9}세</b>.`:''),[{l:'재성 '+n(2)+'개',k:'편재'}]],
+   ['일·직업',cl(work),`월지의 ${mTG} 기운으로 사회에 섭니다. 잘 맞는 분야: <b>${JOB[jobG]}</b>.`,[{l:mTG,k:mTG},{l:'월지 '+JI[mb],k:'월지'}]],
+   ['인연·결혼',cl(love),`배우자궁(일지 ${JI[db]})에 ${tgB(db)}. ${SPOUSE[tgB(db)]}${spDU?` 인연의 문이 크게 열리는 때는 <b>${spDU.age}~${spDU.age+9}세</b>.`:''}`,[{l:'일지 '+JI[db],k:'배우자궁'},{l:tgB(db),k:tgB(db)}]],
+   ['건강',cl(health),`${EL[weak]} 기운이 약하니 평생 ${ORGAN[weak]}을(를) 살피십시오.${cnt[strongEl]>=4?` ${EL[strongEl]} 기운이 넘쳐 과로하기 쉽습니다.`:''}`,[{l:EL[weak]+' '+cnt[weak]+'개',k:'신약',t:`오행 ${EL[weak]} ${cnt[weak]}개.`}]]];
+  $('flds').innerHTML=F.map(f=>`<div class="fd"><b>${f[0]}<em>${star(f[1])}</em></b><p>${f[2]}${why(f[3])}</p></div>`).join('');
+  const Q=[`${nick}의 전성기는 ${best.age}세에 온다. 그 전의 시간은 그릇을 키우는 때다.`,`${nick}는 ${DM_KW[dm][0]}의 그릇이다. ${best.age}세 무렵 크게 쓰일 것이다.`];
+  $('qTop').textContent=Q[best.age>age?0:1];
+}
+function drawLife(L,age,best,low){
+  const W=340,H=190,l=26,r=10,t=18,b=30; const maxA=L[L.length-1].age+10, minA=Math.max(0,L[0].age-2);
+  const x=a=>l+(a-minA)/(maxA-minA)*(W-l-r), y=v=>t+(1-(v-30)/65)*(H-t-b);
+  let s=''; [40,60,80].forEach(v=>{ s+=`<line x1="${l}" x2="${W-r}" y1="${y(v)}" y2="${y(v)}" stroke="#e2d8c8" stroke-width="1"/><text x="${l-6}" y="${y(v)+3}" font-size="9" fill="#877d70" text-anchor="end">${v}</text>`; });
+  const pts=L.map(o=>[x(o.age+5),y(o.sc)]);
+  // 부드러운 곡선 (Catmull-Rom → Bezier)
+  let d=`M${pts[0][0]},${pts[0][1]}`; for(let i=0;i<pts.length-1;i++){ const p0=pts[i-1]||pts[i], p1=pts[i], p2=pts[i+1], p3=pts[i+2]||p2; d+=` C${p1[0]+(p2[0]-p0[0])/6},${p1[1]+(p2[1]-p0[1])/6} ${p2[0]-(p3[0]-p1[0])/6},${p2[1]-(p3[1]-p1[1])/6} ${p2[0]},${p2[1]}`; }
+  s+=`<defs><linearGradient id="lg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b3322a" stop-opacity=".22"/><stop offset="1" stop-color="#b3322a" stop-opacity="0"/></linearGradient></defs>`;
+  s+=`<path d="${d} L${pts[pts.length-1][0]},${H-b} L${pts[0][0]},${H-b} Z" fill="url(#lg)"/><path d="${d}" fill="none" stroke="#1f1b16" stroke-width="2.2" stroke-linecap="round"/>`;
+  if(age>=minA&&age<=maxA){ s+=`<line x1="${x(age)}" x2="${x(age)}" y1="${t-6}" y2="${H-b}" stroke="#b3322a" stroke-width="1.2" stroke-dasharray="3 3"/><text x="${x(age)}" y="${t-8}" font-size="10" fill="#b3322a" text-anchor="middle" font-weight="700">지금 ${age}세</text>`; }
+  L.forEach((o,i)=>{ const bb=o===best, lw=o===low; s+=`<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="${bb?5.5:3.2}" fill="${bb?'#b3322a':lw?'#877d70':'#1f1b16'}" stroke="#fbf8f2" stroke-width="1.5"/>`;
+    s+=`<text x="${pts[i][0]}" y="${H-12}" font-size="9.5" fill="${bb?'#b3322a':'#4a433a'}" text-anchor="middle" font-weight="${bb?700:400}">${o.age}</text>`;
+    if(bb) s+=`<text x="${pts[i][0]}" y="${pts[i][1]-10}" font-size="10" fill="#b3322a" text-anchor="middle" font-weight="700">전성기</text>`; });
+  s+=`<text x="${W-r}" y="${H-1}" font-size="9" fill="#877d70" text-anchor="end">나이(대운 시작)</text>`;
+  $('life').innerHTML=s;
+}
+$('payBtn').onclick=()=>toast('체험판이라 결제는 여기까지예요');
+$('back2').onclick=()=>{ show('sIntro'); };
+$('back1').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+</script>
+<script src="depth3d.js"></script>
+<script>window.Depth3D&&setTimeout(()=>Depth3D.watch('.hero'),200);</script>
+</body>
+</html>

@@ -30,14 +30,21 @@ const LS='obPrem:';
 function load(id){ try{ return JSON.parse(localStorage.getItem(LS+id)||'null'); }catch(e){ return null; } }
 function save(id,v){ try{ localStorage.setItem(LS+id,JSON.stringify(v)); }catch(e){} }
 /* parts: [{id, prompt, check(data)->bool}] · onPart(id,data) · onDone(okCount) */
+/* 서버 함수(/api/premai) — 넷리파이 공개 사이트에서 쓰는 길 */
+async function viaServer(prompt){ const r=await fetch('/api/premai',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt})});
+  let j=null; try{ j=await r.json(); }catch(e){} if(!r.ok||!j||!j.data) throw {code:(j&&j.error)||('http'+r.status)}; return j.data; }
+/* parts: [{id, prompt, check(data)->bool}] · onPart(id,data,fromCache) · onDone(okCount,allCached,failCount) · onFail(code) */
 async function run({key,ver,parts,onStart,onPart,onDone,onFail}){ const sid=key+':'+ver;
   const cached=load(sid)||{}; const todo=[];
   parts.forEach(p=>{ if(cached[p.id]) onPart(p.id,cached[p.id],true); else todo.push(p); });
-  if(!todo.length){ onDone(parts.length,true); return; }
-  const sample=await getSample(); if(!sample){ onFail('unavailable'); return; }
-  onStart(todo.length); let ok=0, fail=0;
-  await Promise.all(todo.map(async p=>{ try{ const d=await sample.json(p.prompt,{modelTier:'default',cache:{gcTime:86400000}}); if(p.check&&!p.check(d)) throw {code:'shape'}; cached[p.id]=d; save(sid,cached); ok++; onPart(p.id,d,false); }
-    catch(e){ fail++; if(e&&(e.code==='not_granted'||e.code==='sampling_disabled')) onFail(e.code); } }));
+  if(!todo.length){ onDone(parts.length,true,0); return; }
+  const sample=await getSample(); const local=/^(localhost|127\.)/.test(location.hostname)||location.protocol==='file:';
+  if(!sample&&local){ onFail('unavailable'); return; }
+  const ask=sample?(p=>sample.json(p,{modelTier:'default',cache:{gcTime:86400000}})):viaServer;
+  onStart(todo.length); let ok=0, fail=0, stop=false; const q=[...todo];
+  const worker=async()=>{ while(q.length&&!stop){ const p=q.shift(); try{ const d=await ask(p.prompt); if(p.check&&!p.check(d)) throw {code:'shape'}; cached[p.id]=d; save(sid,cached); ok++; onPart(p.id,d,false); }
+    catch(e){ fail++; const c=e&&e.code; if(['not_granted','sampling_disabled','nokey','http404','limit','origin'].includes(c)){ stop=true; onFail(c==='nokey'||c==='http404'?'unavailable':c); } } } };
+  await Promise.all(Array.from({length:sample?todo.length:4},worker));
   onDone(ok,false,fail); }
 window.PremAI={STYLE,COMMON,run,hash};
 })();

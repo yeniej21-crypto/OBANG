@@ -155,7 +155,7 @@ function card(ids){ const P=F.P, gzs=p=>p?GAN[p[0]]+JI[p[1]]:'모름', dm=F.dm;
 function prompts(){ const A=window.PremAI, ST=A.STYLE.halmae+'\n'+A.COMMON;
   const ex=JSON.stringify(Object.assign({i:6},window.PREM2_SAMPLE['1996-5-14-6-f'].months[6]));
   const year=`${ST}\n\n[할 일] 2027 丁未년 신년운세 프리미엄의 '한 해' 부분을 쓴다. 열두 달은 입춘 기준 절월이다.
-출력 JSON 형식: {"cover":{"words":["올해를 요약하는 두세 글자 단어 세 개"],"line":"{N}, 로 시작하는 할매 한마디 1~2문장"},"pan":["올해 간지가 원국에 들어오는 법. 4~5단락, 단락마다 150~220자. 천간 십성, 지지 십성, 원국과의 관계, 신살을 차례로"],"threshold":"대운과 겹쳐 본 올해 250~350자. 올해가대운마지막해가 true면 문턱의 해로 쓴다","blank":"빈칸 이야기 200~280자. 빈칸채움이 있는 달을 짚는다","areas":{"love":{"sum":"연애 한 해 총론 250~350자, 좋은 달과 조심할 달을 근거와 함께","tip":"할매 한마디 한 문장"},"money":{"sum":"","tip":""},"work":{"sum":"","tip":""},"people":{"sum":"가족 · 친구 · 일터 사람","tip":""},"body":{"sum":"몸과 마음","tip":""}},"best":{"${F.bestI.join('":"이유 1~2문장","')}":"이유 1~2문장"},"warn":{"${F.warnI.join('":"이유 1~2문장","')}":"이유 1~2문장"},"letter":["{N}.","편지 4~5단락, 단락마다 60~120자","마지막 단락은 할미가 지켜본다는 말"]}
+출력 JSON 형식: {"cover":{"words":["올해를 요약하는 두세 글자 단어 세 개"],"line":"{N}, 로 시작하는 할매 한마디 1~2문장"},"pan":["올해 간지가 원국에 들어오는 법. 4~5단락, 단락마다 150~220자. 천간 십성, 지지 십성, 원국과의 관계, 신살을 차례로"],"threshold":"대운과 겹쳐 본 올해 250~350자. 올해가대운마지막해가 true면 문턱의 해로 쓴다","blank":"빈칸 이야기 200~280자. 빈칸채움이 있는 달을 짚는다","best":{"${F.bestI.join('":"이유 1~2문장","')}":"이유 1~2문장"},"warn":{"${F.warnI.join('":"이유 1~2문장","')}":"이유 1~2문장"},"letter":["{N}.","편지 4~5단락, 단락마다 60~120자","마지막 단락은 할미가 지켜본다는 말"]}
 best와 warn의 키는 달 번호이며 위 번호로 고정이다.
 
 [사실 카드]
@@ -169,19 +169,24 @@ ${ex}
 
 [사실 카드]
 ${card(ids)}`;
+  const areas=`${ST}\n\n[할 일] 2027 丁未년 신년운세 프리미엄의 '항목별 한 해 총론'을 쓴다.
+출력 JSON 형식: {"areas":{"love":{"sum":"연애 한 해 총론 250~350자. 좋은 달과 조심할 달을 근거와 함께 짚는다","tip":"할매 한마디 한 문장"},"money":{"sum":"돈","tip":""},"work":{"sum":"일","tip":""},"people":{"sum":"가족 · 친구 · 일터 사람","tip":""},"body":{"sum":"몸과 마음","tip":""}}}
+
+[사실 카드]
+${card()}`;
   const isArr=d=>Array.isArray(d)&&d.every(x=>x&&typeof x.total==='string');
-  return [{id:'year',prompt:year,check:d=>d&&d.cover&&Array.isArray(d.pan)&&d.areas&&Array.isArray(d.letter)},{id:'m0',prompt:mon([0,1,2,3]),check:isArr},{id:'m1',prompt:mon([4,5,6,7]),check:isArr},{id:'m2',prompt:mon([8,9,10,11]),check:isArr}]; }
+  return [{id:'year',prompt:year,check:d=>d&&d.cover&&Array.isArray(d.pan)&&Array.isArray(d.letter)},{id:'areas',prompt:areas,check:d=>d&&d.areas&&d.areas.love}].concat([0,2,4,6,8,10].map(i=>({id:'m'+i,prompt:mon([i,i+1]),check:isArr}))); }
 function rerender(){ const host=$('prem'); const open=[...host.querySelectorAll('.mrow.open')].map(e=>e.dataset.i); const y=host.closest('.scr')?host.closest('.scr').scrollTop:0;
   host.innerHTML=build(); open.forEach(i=>{ const r=host.querySelector(`.mrow[data-i="${i}"]`); if(r) r.classList.add('open'); }); if(host.closest('.scr')) host.closest('.scr').scrollTop=y; status(); }
 let AIS={n:0,done:0,state:''};
-function status(){ const e=$('aist'); if(!e) return; if(AIS.state==='run'){ e.hidden=false; e.innerHTML=`<i></i><span>할매가 네 상세 풀이를 쓰는 중이다 · ${AIS.done}/${AIS.n} 완성</span><small>다 쓰기 전까지는 초안이 먼저 보여요. 1~2분 걸려요</small>`; } else if(AIS.state==='fail'){ e.hidden=false; e.innerHTML='<span>지금은 AI 풀이를 쓸 수 없어 초안으로 보여 드려요</span>'; } else if(AIS.state==='off'){ e.hidden=false; e.innerHTML='<span>이 화면에서는 초안만 보여요</span><small>claude.ai 체험판이나 정식 서비스에서는 이 근거로 할매가 상세 풀이를 길게 써 드려요</small>'; } else e.hidden=true; }
+function status(){ const e=$('aist'); if(!e) return; if(AIS.state==='run'){ e.hidden=false; e.innerHTML=`<i></i><span>할매가 네 상세 풀이를 쓰는 중이다 · ${AIS.done}/${AIS.n} 완성</span><small>다 쓰기 전까지는 초안이 먼저 보여요. 1분 안팎 걸려요</small>`; } else if(AIS.state==='fail'){ e.hidden=false; e.innerHTML='<span>지금은 AI 풀이를 쓸 수 없어 초안으로 보여 드려요</span>'; } else if(AIS.state==='limit'){ e.hidden=false; e.innerHTML='<span>오늘 체험판 풀이 횟수를 다 썼어요</span><small>내일 다시 열면 이어서 써 드려요. 지금은 초안으로 보여 드려요</small>'; } else if(AIS.state==='off'){ e.hidden=false; e.innerHTML='<span>이 화면에서는 초안만 보여요</span><small>claude.ai 체험판이나 정식 서비스에서는 이 근거로 할매가 상세 풀이를 길게 써 드려요</small>'; } else e.hidden=true; }
 function startAI(){ if(!window.PremAI||C.fixed) return; const P=prompts();
-  window.PremAI.run({key:F.key+'-2027',ver:'v2a',parts:P,
+  window.PremAI.run({key:F.key+'-2027',ver:'v2b',parts:P,
    onStart:n=>{ AIS={n,done:0,state:'run'}; status(); },
-   onPart:(id,d,fromCache)=>{ if(id==='year'){ ['cover','pan','threshold','blank','areas','letter'].forEach(k=>{ if(d[k]) C[k]=d[k]; }); if(d.best) C.best=Object.fromEntries(Object.entries(d.best).map(([k,v])=>[+k,v])); if(d.warn) C.warn=Object.fromEntries(Object.entries(d.warn).map(([k,v])=>[+k,v])); }
+   onPart:(id,d,fromCache)=>{ if(id==='year'||id==='areas'){ ['cover','pan','threshold','blank','areas','letter'].forEach(k=>{ if(d[k]) C[k]=d[k]; }); if(d.best) C.best=Object.fromEntries(Object.entries(d.best).map(([k,v])=>[+k,v])); if(d.warn) C.warn=Object.fromEntries(Object.entries(d.warn).map(([k,v])=>[+k,v])); }
      else d.forEach(m=>{ const i=+m.i; if(i>=0&&i<12) C.months[i]=Object.assign({},C.months[i],m); });
      C.got=(C.got||0)+1; if(C.got>=P.length){ C.draft=false; C.ai=true; } AIS.done++; if(!fromCache) rerender(); },
    onDone:(ok,allCached)=>{ if(allCached){ C.draft=false; C.ai=true; AIS.state=''; rerender(); return; } AIS.state=C.ai?'':(ok?'':'fail'); rerender(); },
-   onFail:code=>{ AIS.state=code==='unavailable'?'off':'fail'; status(); }}); }
+   onFail:code=>{ AIS.state=code==='unavailable'?'off':code==='limit'?'limit':'fail'; status(); }}); }
 window.SNPrem={open(){ const host=$('prem'); if(!host||!prep()) return; VIEW='month'; AREA='love'; AIS={n:0,done:0,state:''}; host.innerHTML=build(); host.hidden=false; const lk=document.querySelector('.lockS'); if(lk) lk.hidden=true; if(!host._b){ bind(host); host._b=1; } openFirst(); startAI(); }};
 })();

@@ -102,12 +102,16 @@ function areaView(DY){ const a=C.areas[AREA];
    <div class="aline">${F.months.map((o,i)=>`<div class="al ${C.best[i]?'best':C.warn[i]?'warn':''}"><b>${o.start.m}월</b><span class="ab"><i style="width:${o.sc}%"></i></span><p>${N(C.months[i][AREA])}</p></div>`).join('')}</div>`; }
 function viewHtml(DY){ return VIEW==='month'?`<div class="mlist">${F.months.map((o,i)=>monthCard(o,i,DY)).join('')}</div>`:areaView(DY); }
 
-function build(){ const X0=window.SNF; if(!X0) return '';
-  const inp=X0.inp; F=window.Prem2Core.build(S_,X,inp); F.nick=X0.nick; F.male=inp.g==='m';
-  C=(window.PREM2_SAMPLE||{})[F.key]||ruleCopy();
-  if(C.draft){ const s=[...F.months.map((o,i)=>({o,i}))].sort((a,b)=>b.o.sc-a.o.sc); s.slice(0,3).forEach(x=>C.best[x.i]=`${SS[x.o.t1].good.split('. ')[0]}.`); s.slice(-2).forEach(x=>C.warn[x.i]=`${SS[x.o.t1].bad.split('. ')[0]}.`); }
+function prep(){ const X0=window.SNF; if(!X0) return false;
+  const inp=X0.inp; F=window.Prem2Core.build(S_,X,inp); F.nick=X0.nick; F.male=inp.g==='m'; F.ysc=X0.ys;
+  const st=(window.PREM2_SAMPLE||{})[F.key]; C=st?Object.assign({fixed:true},st):ruleCopy();
+  const s=[...F.months.map((o,i)=>({o,i}))].sort((a,b)=>b.o.sc-a.o.sc); F.bestI=s.slice(0,3).map(x=>x.i).sort((a,b)=>a-b); F.warnI=s.slice(-2).map(x=>x.i);
+  if(C.draft){ F.bestI.forEach(i=>C.best[i]=`${SS[F.months[i].t1].good.split('. ')[0]}.`); F.warnI.forEach(i=>C.warn[i]=`${SS[F.months[i].t1].bad.split('. ')[0]}.`); }
+  return true; }
+function build(){ const X0=window.SNF; if(!F||!C) return '';
   const DY=goodDays(); const fg=F.st.strong?[1,2,3]:[0,4], favEls=fg.map(g=>(stEl(F.dm)+g)%5), needI=favEls.reduce((a,e)=>F.cnt[e]<F.cnt[a]?e:a,favEls[0]), need=ELX[needI]; const jh=F.johu;
   const H=[];
+  H.push(`<div class="aist" id="aist" hidden></div>`);
   H.push(`<div class="pv"><small>삼신 할매의 열두 달 상세 풀이</small><h3>${F.nick}의 2027</h3><p class="pvl">丁未년 · 입춘(2월 4일)부터 다음 해 입춘 전날까지 · ${X0.ys}점</p><div class="pvk"><span>올해의 세 단어</span><b>${C.cover.words.join(' · ')}</b></div><p class="pvq">“${N(C.cover.line)}”</p></div>`);
   H.push(`<div class="sec"><h3>올해의 판 · 丁未가 네 사주에 들어오는 법</h3>${panSvg()}${C.pan.map(p=>`<p class="p">${N(p)}</p>`).join('')}</div>`);
   H.push(`<div class="sec"><h3>${F.nxt&&F.age===F.cur.age+9?'문턱의 해 · 대운이 바뀌기 전':'대운 속의 2027'}</h3><div class="du2">${[F.cur,F.nxt].filter(Boolean).map((d,i)=>`<div class="${i===0?'now':'next'}"><small>${i===0?'지금':'다음'} · ${d.age}~${d.age+9}세</small><b>${GAN[d.s]}${JI[d.b]}</b><em>${S_.tgStem(F.dm,d.s)} · ${S_.tgBranch(F.dm,d.b)}</em></div>`).join('<span class="arr">→</span>')}</div><p class="p">${N(C.threshold)}</p></div>`);
@@ -122,7 +126,7 @@ function build(){ const X0=window.SNF; if(!X0) return '';
   const crow=(t,a,n)=>`<div class="dr"><b>${t}</b><div>${a.length?a.map(x=>`<span>${dstr(x)}<em>${GAN[x.s]}${JI[x.b]}일</em></span>`).join(''):'<span>올해는 따로 고른 날이 없어요</span>'}</div><p>${n}</p></div>`;
   H.push(`<div class="sec"><h3>丁未년 길일 달력<i>네 사주와 부딪히지 않는 날</i></h3>${crow('이사 · 집',DY.move,'일지 · 월지 · 년지와 충이 없고 사주가 반기는 날, 주말 위주')}${crow('계약 · 문서',DY.deal,'재물 · 자리 · 문서의 기운이 반기는 평일')}${crow('고백 · 소개팅',DY.love,'배우자 자리와 합이 들거나 인연의 별이 뜨는 날')}${crow('시험 · 면접',DY.exam,'자리와 배움의 기운이 반기는 날')}<p class="fine2">손 없는 날 같은 민속 택일은 따로 보지 않았어요. 더 정밀하게 고르려면 택일 메뉴를 이용하세요</p></div>`);
   H.push(`<div class="sec letter"><h3>할매의 편지</h3><div id="ltx">${C.letter.map(p=>`<p>${N(p)}</p>`).join('')}</div><p class="sign">삼신 할매 <span class="seal">三神</span></p></div>`);
-  H.push(`<p class="note">${C.draft?'이 풀이는 해석 사전으로 조립한 초안이에요. 정식 서비스에서는 같은 근거로 AI가 할매 말투로 길게 써 드려요':'이 풀이는 만세력 계산 근거만 재료로 AI가 할매 말투로 쓴 완성본 샘플이에요. 명리 전문가 감수 전 원고예요'}</p>`);
+  H.push(`<p class="note">${C.ai?'이 풀이는 만세력 계산 근거만 재료로 AI가 할매 말투로 쓴 글이에요. 명리 전문가 감수 전 원고예요':C.draft?'이 풀이는 해석 사전으로 조립한 초안이에요. 정식 서비스에서는 같은 근거로 AI가 할매 말투로 길게 써 드려요':'이 풀이는 만세력 계산 근거만 재료로 AI가 할매 말투로 쓴 완성본 샘플이에요. 명리 전문가 감수 전 원고예요'}</p>`);
   return H.join(''); }
 
 function panSvg(){ const P=F.P, pil=[['시주',P.h],['일주',P.d],['월주',P.m],['년주',P.y]], W=340, cx=[44,108,172,236], sx=302;
@@ -139,5 +143,45 @@ function bind(host){ host.addEventListener('click',e=>{ const h=e.target.closest
   const v=e.target.closest('.vt button'); if(v){ VIEW=v.dataset.v; host.querySelectorAll('.vt button').forEach(b=>b.classList.toggle('on',b===v)); $('pview').innerHTML=viewHtml(goodDays()); openFirst(); return; }
   const a=e.target.closest('.atabs button'); if(a){ AREA=a.dataset.a; $('pview').innerHTML=viewHtml(goodDays()); } }); }
 function openFirst(){ const f=document.querySelector('#pview .mrow.best'); if(f) f.classList.add('open'); }
-window.SNPrem={open(){ const host=$('prem'); if(!host) return; VIEW='month'; AREA='love'; host.innerHTML=build(); host.hidden=false; const lk=document.querySelector('.lockS'); if(lk) lk.hidden=true; if(!host._b){ bind(host); host._b=1; } openFirst(); }};
+/* ---------- AI 원고 ---------- */
+function card(ids){ const P=F.P, gzs=p=>p?GAN[p[0]]+JI[p[1]]:'모름', dm=F.dm;
+  const pil=[['년주',P.y],['월주',P.m],['일주',P.d],['시주',P.h]].map(([n,p])=>p?{자리:n,간지:gzs(p),천간십성:n==='일주'?'나(일간)':S_.tgStem(dm,p[0]),지지십성:S_.tgBranch(dm,p[1]),운성:X.unseong(dm,p[1])}:{자리:n,간지:'모름'});
+  const rel=o=>o.br.map(r=>`${r.at} ${JI[natalAt(r.at)]}와 ${r.k}`).concat(o.sr.map(r=>`${r.at}과 ${r.k}`));
+  const c={호칭:'{N}',성별:F.male?'남':'여',한국나이:F.age,일간:GAN[dm]+EL[stEl(dm)],강약:F.st.label,오행:Object.fromEntries(F.cnt.map((v,i)=>[EL[i],v])),빈칸:EL[F.blank],원국:pil,원국신살:F.natal.map(o=>o.at+' '+o.k),공망:F.gong.map(b=>JI[b]),조후:F.johu.why,
+    대운:{지금:{나이:`${F.cur.age}~${F.cur.age+9}세`,간지:GAN[F.cur.s]+JI[F.cur.b],십성:S_.tgStem(dm,F.cur.s)+'/'+S_.tgBranch(dm,F.cur.b)},다음:F.nxt?{나이:`${F.nxt.age}~${F.nxt.age+9}세`,간지:GAN[F.nxt.s]+JI[F.nxt.b],십성:S_.tgStem(dm,F.nxt.s)+'/'+S_.tgBranch(dm,F.nxt.b)}:null,올해가대운마지막해:!!(F.nxt&&F.age===F.cur.age+9)},
+    올해:{간지:'丁未',천간십성:F.ys.t1,지지십성:F.ys.t2,운성:F.ys.us,관계:rel(F.ys),신살:F.ys.ss,점수:F.ysc}};
+  c.달=(ids||F.months.map((o,i)=>i)).map(i=>{ const o=F.months[i]; return {번호:i,달:o.start.m+'월',기간:range(o),절기:o.term,간지:o.gz,천간십성:o.t1,지지십성:o.t2,운성:o.us,점수:o.sc,빈칸채움:o.fill,당번신:GOD[o.dutyEl].n,관계:rel(o),신살:o.ss}; });
+  return JSON.stringify(c); }
+function prompts(){ const A=window.PremAI, ST=A.STYLE.halmae+'\n'+A.COMMON;
+  const ex=JSON.stringify(Object.assign({i:6},window.PREM2_SAMPLE['1996-5-14-6-f'].months[6]));
+  const year=`${ST}\n\n[할 일] 2027 丁未년 신년운세 프리미엄의 '한 해' 부분을 쓴다. 열두 달은 입춘 기준 절월이다.
+출력 JSON 형식: {"cover":{"words":["올해를 요약하는 두세 글자 단어 세 개"],"line":"{N}, 로 시작하는 할매 한마디 1~2문장"},"pan":["올해 간지가 원국에 들어오는 법. 4~5단락, 단락마다 150~220자. 천간 십성, 지지 십성, 원국과의 관계, 신살을 차례로"],"threshold":"대운과 겹쳐 본 올해 250~350자. 올해가대운마지막해가 true면 문턱의 해로 쓴다","blank":"빈칸 이야기 200~280자. 빈칸채움이 있는 달을 짚는다","areas":{"love":{"sum":"연애 한 해 총론 250~350자, 좋은 달과 조심할 달을 근거와 함께","tip":"할매 한마디 한 문장"},"money":{"sum":"","tip":""},"work":{"sum":"","tip":""},"people":{"sum":"가족 · 친구 · 일터 사람","tip":""},"body":{"sum":"몸과 마음","tip":""}},"best":{"${F.bestI.join('":"이유 1~2문장","')}":"이유 1~2문장"},"warn":{"${F.warnI.join('":"이유 1~2문장","')}":"이유 1~2문장"},"letter":["{N}.","편지 4~5단락, 단락마다 60~120자","마지막 단락은 할미가 지켜본다는 말"]}
+best와 warn의 키는 달 번호이며 위 번호로 고정이다.
+
+[사실 카드]
+${card()}`;
+  const mon=ids=>`${ST}\n\n[할 일] 아래 대상 달들의 상세를 쓴다.
+출력 JSON 형식: 배열. 달마다 {"i":달 번호,"tag":"할매 장부 한 줄 제목 8~16자","god":"그달 당번 신이 자기 말투로 하는 한 줄 20~45자","total":"그달 총운 300~380자. 절기 이름과 간지로 시작해 십성 · 운성 · 관계 · 신살 · 빈칸채움을 근거로 풀고, 할매의 당부로 끝낸다","love":"연애 60~110자","money":"돈 60~110자","work":"일 60~110자","people":"사람 관계 60~110자","body":"몸과 마음 60~110자","do":"할 일, ~하기로 끝나는 8~18자","avoid":"멀리할 것 8~18자"}
+대상 달 번호: ${ids.join(', ')}
+
+[문체 예시 · 다른 사람 사주의 한 달]
+${ex}
+
+[사실 카드]
+${card(ids)}`;
+  const isArr=d=>Array.isArray(d)&&d.every(x=>x&&typeof x.total==='string');
+  return [{id:'year',prompt:year,check:d=>d&&d.cover&&Array.isArray(d.pan)&&d.areas&&Array.isArray(d.letter)},{id:'m0',prompt:mon([0,1,2,3]),check:isArr},{id:'m1',prompt:mon([4,5,6,7]),check:isArr},{id:'m2',prompt:mon([8,9,10,11]),check:isArr}]; }
+function rerender(){ const host=$('prem'); const open=[...host.querySelectorAll('.mrow.open')].map(e=>e.dataset.i); const y=host.closest('.scr')?host.closest('.scr').scrollTop:0;
+  host.innerHTML=build(); open.forEach(i=>{ const r=host.querySelector(`.mrow[data-i="${i}"]`); if(r) r.classList.add('open'); }); if(host.closest('.scr')) host.closest('.scr').scrollTop=y; status(); }
+let AIS={n:0,done:0,state:''};
+function status(){ const e=$('aist'); if(!e) return; if(AIS.state==='run'){ e.hidden=false; e.innerHTML=`<i></i><span>할매가 네 상세 풀이를 쓰는 중이다 · ${AIS.done}/${AIS.n} 완성</span><small>다 쓰기 전까지는 초안이 먼저 보여요. 1~2분 걸려요</small>`; } else if(AIS.state==='fail'){ e.hidden=false; e.innerHTML='<span>지금은 AI 풀이를 쓸 수 없어 초안으로 보여 드려요</span>'; } else if(AIS.state==='off'){ e.hidden=false; e.innerHTML='<span>이 화면에서는 초안만 보여요</span><small>claude.ai 체험판이나 정식 서비스에서는 이 근거로 할매가 상세 풀이를 길게 써 드려요</small>'; } else e.hidden=true; }
+function startAI(){ if(!window.PremAI||C.fixed) return; const P=prompts();
+  window.PremAI.run({key:F.key+'-2027',ver:'v2a',parts:P,
+   onStart:n=>{ AIS={n,done:0,state:'run'}; status(); },
+   onPart:(id,d,fromCache)=>{ if(id==='year'){ ['cover','pan','threshold','blank','areas','letter'].forEach(k=>{ if(d[k]) C[k]=d[k]; }); if(d.best) C.best=Object.fromEntries(Object.entries(d.best).map(([k,v])=>[+k,v])); if(d.warn) C.warn=Object.fromEntries(Object.entries(d.warn).map(([k,v])=>[+k,v])); }
+     else d.forEach(m=>{ const i=+m.i; if(i>=0&&i<12) C.months[i]=Object.assign({},C.months[i],m); });
+     C.got=(C.got||0)+1; if(C.got>=P.length){ C.draft=false; C.ai=true; } AIS.done++; if(!fromCache) rerender(); },
+   onDone:(ok,allCached)=>{ if(allCached){ C.draft=false; C.ai=true; AIS.state=''; rerender(); return; } AIS.state=C.ai?'':(ok?'':'fail'); rerender(); },
+   onFail:code=>{ AIS.state=code==='unavailable'?'off':'fail'; status(); }}); }
+window.SNPrem={open(){ const host=$('prem'); if(!host||!prep()) return; VIEW='month'; AREA='love'; AIS={n:0,done:0,state:''}; host.innerHTML=build(); host.hidden=false; const lk=document.querySelector('.lockS'); if(lk) lk.hidden=true; if(!host._b){ bind(host); host._b=1; } openFirst(); startAI(); }};
 })();

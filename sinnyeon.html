@@ -232,6 +232,51 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 12px}
 .letter .sign .seal{width:38px;height:38px;font-size:11px}
 .aiL{width:100%;height:46px;margin-top:14px;border:1px solid var(--ink);background:none;color:var(--ink);font-size:14px;font-weight:700;cursor:pointer}
 .ainote{margin:8px 0 0;font-size:12px;color:var(--ink-3)}
+
+/* ---------- 프리미엄 v2 ---------- */
+.mh{grid-template-columns:62px 46px 1fr 30px}
+.mh .mm small{display:block;font-size:10.5px;font-weight:500;color:var(--ink-3);margin-top:1px}
+.duty{display:flex;gap:10px;align-items:flex-start;margin:2px 0 10px;padding:10px 12px;background:#2a2320;color:#f3ede2}
+.duty i{flex:none;width:40px;height:40px;border-radius:50%;background:#fff 50% 15%/170% no-repeat;box-shadow:0 0 0 2px #c9a86a}
+.duty small{display:block;font-size:11px;color:#c9a86a;font-weight:700;letter-spacing:.04em}
+.duty p{margin:3px 0 0;font-family:var(--serif);font-size:14px;font-weight:700;line-height:1.55}
+.m5{display:grid;grid-template-columns:1fr;gap:0;margin:2px 0 12px;border-top:1px solid var(--line)}
+.m5 div{display:grid;grid-template-columns:64px 1fr;gap:8px;padding:9px 0;border-bottom:1px solid var(--line)}
+.m5 small{font-size:12px;font-weight:700;color:var(--seal);padding-top:1px}
+.m5 p{margin:0;font-size:13.5px;line-height:1.6;color:var(--ink)}
+.evid{margin:10px 0 0;font-size:11.5px;line-height:1.6;color:var(--ink-3)}
+.fdots{display:inline-flex;gap:3px;vertical-align:-1px}
+.fdots i{width:8px;height:8px;border-radius:50%;border:1px solid var(--earth);background:transparent}
+.fdots i.on{background:var(--earth)}
+.fstrip{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin:4px 0 0}
+.fstrip div{text-align:center;padding:7px 0 6px;background:#fff;border:1px solid var(--line)}
+.fstrip div.on{border-color:var(--earth);background:#fbf3e4}
+.fstrip b{display:block;font-size:11.5px;margin-bottom:4px}
+.fstrip .fdots{flex-direction:column;gap:2px}
+.fstrip .fdots i{width:6px;height:6px}
+.vt{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink);margin-bottom:12px}
+.vt button{height:42px;border:0;background:none;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
+.vt button.on{background:var(--ink);color:var(--paper)}
+.atabs{display:flex;gap:4px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none}
+.atabs button{flex:none;height:34px;padding:0 12px;border:1px solid var(--line);background:#fff;font-size:13px;font-weight:700;color:var(--ink-2);cursor:pointer}
+.atabs button.on{border-color:var(--seal);color:var(--seal)}
+.asum{margin-bottom:6px}
+.aline{margin-top:12px;border-top:1px solid var(--line)}
+.al{display:grid;grid-template-columns:38px 1fr;gap:4px 10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.al b{font-size:13.5px}
+.al.best b{color:var(--seal)}
+.al .ab{align-self:center;height:5px;background:var(--paper-2)}
+.al .ab i{display:block;height:100%;background:var(--ink-2)}
+.al.best .ab i{background:var(--seal)}
+.al p{grid-column:2;margin:0;font-size:13.5px;line-height:1.6;color:var(--ink)}
+.du2{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.du2 div{flex:1;padding:10px 12px;border:1px solid var(--line);background:#fff}
+.du2 div.next{border-color:var(--earth);background:#fbf3e4}
+.du2 small{display:block;font-size:11.5px;color:var(--ink-3);font-weight:700}
+.du2 b{display:block;margin-top:2px;font-family:var(--serif);font-size:22px;font-weight:900}
+.du2 em{display:block;font-style:normal;font-size:12px;color:var(--ink-2)}
+.du2 .arr{color:var(--ink-3);font-size:16px}
+#prem .note{margin:14px 4px 0}
 </style>
 </head>
 <body>
@@ -320,7 +365,10 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 12px}
 <script src="saju.js"></script>
 <script src="menuintro.js"></script>
 <script src="ask.js"></script>
-<script src="sinnyeon_prem.js"></script>
+<script src="saju_x.js"></script>
+<script src="prem2_core.js"></script>
+<script src="prem2_sample.js"></script>
+<script src="prem2.js"></script>
 <script>
 const $=id=>document.getElementById(id);
 const S_=window.Saju;
@@ -470,7 +518,7 @@ function render(name,sol,h,orig){
   const sorted=[...MO].sort((a,b)=>b.sc-a.sc); const best=sorted.slice(0,2).map(x=>x.m), warn=sorted.slice(-2).map(x=>x.m);
   $('mos').innerHTML=MO.map(o=>`<div class="mo ${best.includes(o.m)?'best':warn.includes(o.m)?'warn':''}"><span class="m">${o.m}월${best.includes(o.m)?'<span class="tag">길</span>':warn.includes(o.m)?'<span class="tag">주의</span>':''}</span><span class="gz">${GAN[o.mp[0]]}${JI[o.mp[1]]}</span><span class="tx">${o.tx}${o.notes.length?' · '+o.notes.join(', '):''}</span><span class="sc">${o.sc}</span></div>`).join('');
   drawChart(MO,best,warn);
-  window.SNF={name,nick,male,P,dm,st,cnt,ys,tier,cur,curFav,MO};
+  window.SNF={name,nick,male,P,dm,st,cnt,ys,tier,cur,curFav,MO,inp:{y:sol.y,m:sol.m,d:sol.d,h,g:gender}};
   const pr=$('prem'); if(pr){ pr.hidden=true; pr.innerHTML=''; } const lk=document.querySelector('.lockS'); if(lk) lk.hidden=false; $('pay').classList.remove('done'); $('payBtn').textContent='할매의 열두 달 상세 풀이 열기';
 }
 function drawChart(MO,best,warn){

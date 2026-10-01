@@ -24,7 +24,7 @@ function prep(){ O=window.OGF; if(!O||!O.me||!O.W) return false; const me=O.me, 
     if(S_.isHap(o.b,W.d[1])){ c+=8; why.push(`${W.n}의 일지 ${JI[W.d[1]]}와 합`); } if(S_.isChung(o.b,W.d[1])){ c-=8; why.push(`${W.n}의 일지 ${JI[W.d[1]]}와 충`); }
     if(o.fill) why.push('빈칸이 채워짐');
     return {i,o,c:Math.max(30,Math.min(97,Math.round(c))),why}; });
-  C=draft(); ST={}; return true; }
+  C=K.gl(draft()); ST={}; return true; }
 function draft(){ const W=O.W, jd=V.jd, top=[...M].sort((a,b)=>b.c-a.c), lo=[...M].sort((a,b)=>a.c-b.c)[0], L=LUCK[W.el], T=V.tok;
   const e=(a,b)=>jd?a:b;
   return {draft:true,
@@ -72,5 +72,5 @@ function build(){ const W=O.W, ps=a=>(a||[]).map(p=>`<p class="pk-p">${tk(p)}</p
 function render(){ const host=$('oprem'); K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status($('ogst'),Object.assign({who:O.W.n+'의 편지'},ST)); }
 window.OgPrem={open(){ const host=$('oprem'); if(!host||!prep()) return false; host.className='pkx dark'; host.style.setProperty('--pk-acc',O.W.c); host.hidden=false; K.bind(host); render();
   const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
-  K.runAI({key:F.key+'-og-'+O.W.k,ver:'v1',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
+  K.runAI({key:F.key+'-og-'+O.W.k,ver:'v2',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
 })();

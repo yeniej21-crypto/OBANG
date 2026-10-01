@@ -16,7 +16,7 @@ function prep(){ const D=window.DHF&&window.DHF(); if(!D) return false; HON=D.br
   F=window.Prem2Core.build(S_,X,D.inp); F.nick=D.nick; F.male=D.inp.g==='m'; F.T=D.T; F.score=D.score;
   const loveG=F.male?2:3; F.months.forEach(o=>o.love=loveScore(o,loveG)); F.days=loveDays(); F.loveG=loveG;
   const P=F.P; F.stars=[['년간',P.y[0],1],['월간',P.m[0],1],['시간',P.h&&P.h[0],1],['년지',P.y[1],0],['월지',P.m[1],0],['일지',P.d[1],0],['시지',P.h&&P.h[1],0]].filter(x=>x[1]!=null).filter(([n,v,st])=>(st?S_.rel(F.dm,stEl(v)):S_.relBranch(F.dm,v))===loveG).map(x=>x[0]);
-  C=draft(); ST={}; return true; }
+  C=K.gl(draft()); ST={}; return true; }
 const h=t=>t.replace(/\{S\}/g,HON);
 function draft(){ const top=[...F.months].sort((a,b)=>b.love-a.love), d=F.P.d[1];
   return {draft:true,nature:[`{S} 도화 유형은 ${F.T.n}이야. ${F.T.d}`,`{S} 사주에서 인연의 별은 ${F.male?'재성':'관성'}인데, ${F.stars.length?F.stars.join(' · ')+'에 있어':'원국엔 드러나 있지 않아서 운에서 들어올 때 피는 타입이야'}.`],
@@ -60,5 +60,5 @@ function build(){ const n=F.nick, ps=a=>K.ps((a||[]).map(h),n);
 function render(){ const host=$('dprem'); K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status($('dhst'),Object.assign({who:'태오가 깊은 편지'},ST)); }
 window.DohwaPrem={open(){ const host=$('dprem'); if(!host||!prep()) return; host.className='pkx dark'; host.hidden=false; K.bind(host); render();
   const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
-  K.runAI({key:F.key+'-dohwa-'+HON,ver:'v1',parts:prompts(),apply,rerender:render,S:ST}); }};
+  K.runAI({key:F.key+'-dohwa-'+HON,ver:'v2',parts:prompts(),apply,rerender:render,S:ST}); }};
 })();

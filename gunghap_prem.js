@@ -35,7 +35,7 @@ function prep(){ D=window.GHF; if(!D) return false; HON=D.a.g==='m'?'형':'누�
   M=FA.months.map((oa,i)=>{ const ob=FB.months[i]; const la=loveScore(oa,gA), lb=loveScore(ob,gB);
     let t=Math.round((la+lb)/2); const both=la>=62&&lb>=62, clash=chungD(oa)||chungD(ob); if(both) t+=5; if(clash) t-=6; if(hapD(oa)&&hapD(ob)) t+=4;
     return {i,oa,ob,la,lb,t:Math.max(30,Math.min(96,t)),both,clash,gz:oa.gz,start:oa.start,term:oa.term}; });
-  D.cross=cross(); D.days=togetherDays(); C=draft(); ST={}; return true; }
+  D.cross=cross(); D.days=togetherDays(); C=K.gl(draft()); ST={}; return true; }
 const h=t=>String(t==null?'':t).replace(/\{S\}/g,HON);
 function relTxt(o,who){ return o.br.filter(r=>r.at==='일지').map(r=>`${who} 일지와 ${r.k}`).concat(o.ss.filter(k=>['도화','홍염','천을귀인'].includes(k)).map(k=>`${who}에게 ${k}`)); }
 function draft(){ const R=D.R, A=FA.P, B=FB.P, top=[...M].sort((a,b)=>b.t-a.t), lo=[...M].sort((a,b)=>a.t-b.t)[0];
@@ -95,5 +95,5 @@ function build(){ const n='', ps=a=>K.ps((a||[]).map(h),n), a=D.a, b=D.b;
 function render(){ const host=$('gprem'); K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status($('ghst'),Object.assign({who:'태오가 궁합 노트'},ST)); }
 window.GunghapPrem={open(){ const host=$('gprem'); if(!host||!prep()) return false; host.className='pkx dark'; host.hidden=false; K.bind(host); render();
   const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
-  K.runAI({key:FA.key+'_'+FB.key+'-gh-'+HON,ver:'v1',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
+  K.runAI({key:FA.key+'_'+FB.key+'-gh-'+HON,ver:'v2',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
 })();

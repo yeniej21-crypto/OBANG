@@ -17,7 +17,7 @@ function prep(){ const P=O.P, dm=P.d[0], db=P.d[1], f=O.g!=='m', loveG=f?3:2, dh
   const cand=days.filter(x=>x.v>=3&&!x.why.includes('일지 충')).sort((p,q)=>q.v-p.v||p.d-q.d).slice(0,3).sort((p,q)=>p.d-q.d);
   O.call=cand.map(x=>{ let bh=-1,bv=-9; for(let hb=6;hb<=11;hb++){ if(S_.isChung(hb,db)||S_.isChung(hb,x.b)) continue; const v=(S_.isHap(hb,db)?2:0)+(S_.isHap(hb,x.b)?1:0)+(X.shinsal(hb,P).includes('도화')?1.5:0); if(v>bv){ bv=v; bh=hb; } } return Object.assign({},x,{bh}); });
   const mp=S_.pillars(y,m,15,null).m; O.mp=mp; O.mt=S_.tgStem(dm,mp[0]); O.dm=dm; O.f=f; O.y=y; O.mo=m;
-  C=draft(); ST={}; return true; }
+  C=K.gl(draft()); ST={}; return true; }
 function draft(){ const top=[...W].sort((a,b)=>b.sc-a.sc)[0];
   return {draft:true,
    weeks:W.map(w=>({title:w.sc>=72?'시선이 모이는 주':w.bad.length?'말 조심할 주':w.sc>=60?'은근히 데워지는 주':'나를 챙기는 주',text:`${w.best?`${w.best.d}일 ${GAN[w.best.s]}${JI[w.best.b]}일이 이 주의 꽃이야. ${w.best.why.filter(k=>k!=='일지 충').join(', ')||'조용한 날'}.`:''}${w.bad.length?` ${w.bad.map(x=>x.d+'일').join(', ')}은 일지와 부딪혀. 다툼은 다음 날로.`:''}`,tip:w.sc>=70?'먼저 웃어 주기':'서두르지 않기'})),
@@ -58,5 +58,5 @@ function render(){ K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status(ho
 window.MadamPrem={open(el,o){ if(!el||!o||!o.P) return false; host=el; O=Object.assign({},o); nick=o.name||''; prep(); host.className='pkx dark'; host.style.setProperty('--pk-acc','var(--c)'); host.hidden=false; K.bind(host); render();
   const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
   const P=O.P, k=[P.y,P.m,P.d,P.h].map(p=>p?p.join('.'):'x').join('-')+'-madam-'+O.g+'-'+O.y+'.'+O.mo;
-  K.runAI({key:k,ver:'v1',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
+  K.runAI({key:k,ver:'v2',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
 })();

@@ -274,6 +274,23 @@ details.how .nb{margin:12px 0 0;font-size:12px;color:var(--ink-3);line-height:1.
 .slots{top:66px}
 .lock{min-height:196px}
 .lock .cta{top:38px}
+#rprem .tp-slots{display:grid;grid-template-columns:repeat(5,1fr);gap:10px 8px;margin:6px 0 16px}
+#rprem .tp-slots div{text-align:center;min-width:0}
+#rprem .tp-slots span{display:block;aspect-ratio:9/16;border:1px dashed rgba(227,184,102,.35);transition:all .3s}
+#rprem .tp-slots div.now span{border:1px solid var(--gold);box-shadow:0 0 14px rgba(227,184,102,.35)}
+#rprem .tp-slots div.on span{border:0;background:#111 url('img/tarot/back.jpg') center/cover;box-shadow:0 0 0 1px rgba(227,184,102,.55);animation:tpin .35s ease both}
+#rprem .tp-slots small{display:block;margin-top:5px;font-size:10px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#rprem .tp-fan{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+#rprem .tp-fan button{aspect-ratio:9/16;border:0;padding:0;background:#111 url('img/tarot/back.jpg') center/cover;box-shadow:0 0 0 1px rgba(227,184,102,.35);cursor:pointer;transition:transform .2s,opacity .3s}
+#rprem .tp-fan button:hover{transform:translateY(-4px)}
+#rprem .tp-fan button.used{opacity:.1;pointer-events:none}
+#rprem .tp-go{display:block;width:100%;height:50px;margin-top:16px;border:0;background:var(--gold);color:#16110c;font-weight:800;font-size:15px;font-family:inherit;cursor:pointer}
+#rprem .tp-go:disabled{opacity:.4;cursor:default}
+#rprem .tp-flip{animation:tpflip .7s ease both}
+@keyframes tpin{from{transform:translateY(-16px);opacity:0}to{transform:none;opacity:1}}
+@keyframes tpflip{0%{transform:rotateY(90deg);filter:brightness(2)}100%{filter:none}}
+#rprem .pk-deck span.rv.tp-flip{animation-name:tpflipr}
+@keyframes tpflipr{0%{transform:rotate(180deg) rotateY(90deg);filter:brightness(2)}100%{transform:rotate(180deg);filter:none}}
 #rprem{margin:14px 0}
 #rprem .pk-sec{margin-top:12px}
 </style>
@@ -332,7 +349,7 @@ details.how .nb{margin:12px 0 0;font-size:12px;color:var(--ink-3);line-height:1.
       <details class="box how" id="how"><summary>무진은 이렇게 읽었어요</summary><ul id="howL"></ul><p class="nb">타로는 정해진 미래를 맞히는 게 아니라, 지금의 흐름을 비춰 보는 도구예요.</p></details>
       <div class="box lock" id="lockR"><h3>켈틱 크로스 10장 · 3개월 흐름</h3>
         <div class="blur"><p style="margin:0;font-size:14px;line-height:1.7;color:var(--ink-2)">현재 · 장애물 · 목표 · 과거 · 가까운 미래 · 나 · 주변 · 희망과 두려움 · 결과까지 열 장으로 펼쳐, 앞으로 석 달의 흐름을 월별로 읽어 드려요. 무진이 짚어 주는 결정적인 날짜와 행동 한 가지까지.</p></div>
-        <div class="cta"><b>열 장으로 끝까지 볼래요?</b><small>무진이 한 장 한 장 직접 풀어 줘요</small><button class="pay" id="payBtn" type="button">9,900원 · 전체 풀이 열기</button></div>
+        <div class="cta"><b>열 장으로 끝까지 볼래요?</b><small>스물두 장 중 열 장을 직접 고르면 무진이 한 장씩 풀어 줘요</small><button class="pay" id="payBtn" type="button">9,900원 · 전체 풀이 열기</button></div>
       </div>
       <div id="rprem" hidden></div>
       <button class="btn2" id="again" type="button">다른 질문으로 다시 뽑기</button>
@@ -636,5 +653,6 @@ if(window.MenuIntro) MenuIntro.play({src:'v/tarot/intro.mp4',poster:'img/tarot/m
 /* 검수용 훅 */ window.TarotDev={S,render,R,setPos:p=>{ POS=p; }};
 })();
 </script>
+<script src="hanja.js"></script>
 </body>
 </html>

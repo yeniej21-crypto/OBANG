@@ -315,5 +315,6 @@ $('toc').onclick=e=>{ const b=e.target.closest('[data-i]'); if(b) go(+b.dataset.
 $('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
 (()=>{ let s=0; try{ s=+(sessionStorage.getItem('obBookPg')||0); }catch(e){} if(s>0&&s<N){ go(s,false); } else activate(); })();
 </script>
+<script src="hanja.js"></script>
 </body>
 </html>

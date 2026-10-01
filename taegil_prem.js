@@ -21,7 +21,7 @@ function detail(x){ const P=O.P, dm=O.dm, b=x.p[1], s=x.p[0], [h0,h1]=RANGE[O.pu
   return {good,badH,dir:EDIR[FAV],badDir:BDIR[(b+6)%12],mate:[...new Set(mate)],badZ:(b+6)%12,col:ECOL[FAV],rel:X.branchRel(b,P).map(r=>r.at+' '+r.k).concat(X.stemRel(s,P).map(r=>r.at+' '+r.k)),ss:X.shinsal(b,P,s)}; }
 function prep(){ O=window.TGF; if(!O||!O.top||!O.top.length) return false; nick=O.name||'';
   const dm=O.dm, cnt=S_.elCount(O.P); const favs=[0,1,2,3,4].filter(e=>S_.favorable(O.st,S_.rel(dm,e))); FAV=(favs.length?favs:[0,1,2,3,4]).sort((a,b)=>cnt[a]-cnt[b])[0];
-  DS=O.top.map(x=>Object.assign({},x,detail(x))); C=draft(); ST={}; return true; }
+  DS=O.top.map(x=>Object.assign({},x,detail(x))); C=K.gl(draft()); ST={}; return true; }
 const lab=hb=>HR[hb].split(' ')[0], tim=hb=>HR[hb].split(' ')[1];
 function draft(){ const U=O.U, t=DS[0];
   return {draft:true,
@@ -67,5 +67,5 @@ function render(){ const host=$('tprem'); K.keepOpen(host,()=>{ host.innerHTML=b
 window.TaegilPrem={open(){ const host=$('tprem'); if(!host||!prep()) return false; host.className='pkx'; host.hidden=false; K.bind(host); render();
   const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
   const k=[O.P.y,O.P.m,O.P.d,O.P.h].map(p=>p?p.join('.'):'x').join('-')+'-tg-'+O.purpose+'-'+DS.map(x=>x.dd.m+'.'+x.dd.d).join('_');
-  K.runAI({key:k,ver:'v1',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
+  K.runAI({key:k,ver:'v2',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
 })();

@@ -6,11 +6,12 @@ const esc=t=>String(t==null?'':t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','
 function tok(t,nick){ if(!nick) return esc(t).replace(/\{N\}/g,'너').replace(/\{P\}/g,'당신').replace(/\{S\}/g,'누나'); return esc(t).replace(/\{N\}/g,nick+(bt(nick)?'아':'야')).replace(/\{P\}/g,nick+'님').replace(/\{S\}/g,'누나'); }
 const K={
  tok,esc,bt,
+ gl:x=>window.HJ?HJ.glAll(x):x,
  cover:o=>`<div class="pk-cv"><small>${o.kick}</small><h3>${o.title}</h3>${o.sub?`<p class="pk-sub">${o.sub}</p>`:''}${o.words?`<div class="pk-kw"><span>${o.wlabel||'세 단어'}</span><b>${o.words.map(esc).join(' · ')}</b></div>`:''}${o.line?`<p class="pk-q">“${o.line}”</p>`:''}${o.who?`<div class="pk-who"><i style="background-image:url('${o.img}')"></i><em>${o.who}</em></div>`:''}</div>`,
  sec:(t,body,hint)=>`<div class="pk-sec"><h3>${t}${hint?`<i>${hint}</i>`:''}</h3>${body}</div>`,
  ps:(arr,nick)=>(arr||[]).map(p=>`<p class="pk-p">${tok(p,nick)}</p>`).join(''),
  items:(o,labels,nick)=>`<div class="pk-items">${labels.filter(([k])=>o[k]).map(([k,l])=>`<div><small>${l}</small><p>${tok(o[k],nick)}</p></div>`).join('')}</div>`,
- ev:list=>list&&list.length?`<p class="pk-ev">근거 · ${list.map(esc).join(' · ')}</p>`:'',
+ ev:list=>list&&list.length?`<p class="pk-ev">근거 · ${list.map(x=>esc(window.HJ?HJ.evItem(x):x)).join(' · ')}</p>`:'',
  row:(o)=>`<div class="pk-row ${o.cls||''}" data-k="${o.k}"><button class="pk-h" type="button"><span class="pk-a">${o.a}${o.asub?`<small>${o.asub}</small>`:''}</span><span class="pk-b2">${o.b}</span><span class="pk-c">${o.c==null?'':o.c}</span></button><div class="pk-b">${o.body}</div></div>`,
  letter:(paras,sign,seal,nick)=>`<div class="pk-sec pk-letter"><h3>${sign.title}</h3><div class="pk-lt">${paras.map(p=>`<p>${tok(p,nick)}</p>`).join('')}</div><p class="pk-sg">${sign.name} <i>${seal}</i></p></div>`,
  bind(host){ if(host._pk) return; host._pk=1; host.addEventListener('click',e=>{ const h=e.target.closest('.pk-h'); if(h){ h.parentNode.classList.toggle('open'); } }); },

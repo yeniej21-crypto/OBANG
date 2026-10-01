@@ -26,7 +26,7 @@ function prep(){ O=window.CRF; if(!O||!O.A) return false; const A=O.A, me=A.me; 
   F=window.Prem2Core.build(S_,X,{y:A.sol.y,m:A.sol.m,d:A.sol.d,h:me.h==null?null:+me.h,g:me.g||'f'});
   ROWS=O.sit==='job'||O.sit==='study'?[['promo','합격 · 입사'],['move','새 출발'],['money','첫 연봉']]:O.sit==='free'?[['money','수입'],['move','새 판'],['promo','인정 · 계약']]:[['move','이직'],['promo','승진 · 인정'],['money','연봉 · 성과']];
   M=F.months.map((o,i)=>{ const s=score(o,F.P); const best=Math.max(s[ROWS[0][0]],s[ROWS[1][0]],s[ROWS[2][0]]); return Object.assign({i,o,best},s); });
-  F.days=pickDays(); C=draft(); ST={}; return true; }
+  F.days=pickDays(); C=K.gl(draft()); ST={}; return true; }
 function draft(){ const A=O.A, T=TYPEN[A.main], k0=ROWS[0][0], top=[...M].sort((a,b)=>b[k0]-a[k0]), mon=[...M].sort((a,b)=>b.money-a.money).find(x=>x!==top[0]), lo=[...M].filter(x=>x!==top[0]&&x!==mon).sort((a,b)=>a.best-b.best)[0], prepI=Math.max(0,top[0].i-2);
   const cur=F.cur, cg=S_.rel(F.dm,stEl(cur.s));
   return {draft:true,
@@ -79,5 +79,5 @@ function build(){ const ps=a=>K.ps(a,nick), t=x=>K.tok(x,nick), k0=ROWS[0][0];
 function render(){ const host=$('cprem'); K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status($('crst'),Object.assign({who:'도준이 커리어 로드맵'},ST)); }
 window.CareerPrem={open(){ const host=$('cprem'); if(!host||!prep()) return false; host.className='pkx dark'; host.style.setProperty('--pk-acc','#f0c96a'); host.hidden=false; K.bind(host); render();
   const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
-  K.runAI({key:F.key+'-career-'+O.sit,ver:'v1',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
+  K.runAI({key:F.key+'-career-'+O.sit,ver:'v2',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
 })();

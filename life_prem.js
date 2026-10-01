@@ -31,7 +31,7 @@ const SEAT={년지:'집안과 어린 시절',월지:'일터와 부모',일지:'�
 let L=null,C=null,ST={};
 const nick=()=>L.nick;
 function prep(){ const X0=window.LFF; if(!X0) return false; L=window.LifeCore.build(S_,X,X0.inp); L.nick=X0.nick;
-  const sm=(window.LIFE_SAMPLE||{})[L.key]; C=sm?Object.assign({fixed:true},JSON.parse(JSON.stringify(sm))):draft(); ST={}; return true; }
+  const sm=(window.LIFE_SAMPLE||{})[L.key]; C=K.gl(sm?JSON.parse(JSON.stringify(sm)):draft()); ST={}; return true; }
 function draft(){ const P=L.P, dm=L.dm, mb=P.m[1], t2m=S_.tgBranch(dm,mb);
   const dmTx=typeof DM_TX!=='undefined'?DM_TX[dm]:'', kw=typeof DM_KW!=='undefined'?DM_KW[dm]:[SS[t2m].w];
   const relS=r=>`${r.at} ${r.gz} ${r.k} — ${RELM[r.k]||''}`;
@@ -53,7 +53,7 @@ function card(ids){ const P=L.P, dm=L.dm, gz=p=>p?GAN[p[0]]+JI[p[1]]:'모름';
   c.대운=(ids||L.dl.map((d,i)=>i)).map(i=>{ const d=L.dl[i]; return {번호:i,나이:`${d.age}~${d.age+9}세`,연도:`${d.from}~${d.to}`,간지:d.gz,천간십성:d.t1,지지십성:d.t2,운성:d.us,점수:d.sc,빈칸채움:d.fill,지금:d.now,관계:d.br.map(r=>r.at+' '+r.k).concat(d.sr.map(r=>r.at+' '+r.k)),신살:d.ss}; });
   return JSON.stringify(c); }
 function prompts(){ const A=window.PremAI, ST0=A.STYLE.hyeonam+'\n'+A.COMMON.replace(/\{N\}/g,'{P}').replace('이름과 호격으로','이름과 님으로');
-  const ex=JSON.stringify(Object.assign({i:3},window.LIFE_SAMPLE['1996-5-14-6-f'].daeun[3]));
+  const ex="{\"i\": 3, \"title\": \"빈칸이 채워지는 전성기\", \"total\": \"서른세 살부터 마흔두 살까지는 기축(己丑) 대운(10년마다 바뀌는 큰 운)입니다. 한마디로 {P} 인생 그래프에서 가장 높은 봉우리입니다. 기(己)와 축(丑)이 모두 흙이라, 사주에 비어 있던 흙 기운이 처음으로 꽉 채워집니다. {P}에게 흙은 편인(전문성 · 문서 · 이끌어 주는 어른)이라, 혼자 버티던 자리에 기댈 언덕이 생기고 공부한 것이 자격과 직함으로 굳습니다. 축(丑)은 년지(집안 자리) 자(子)와 합(서로 끌어당김)을 맺어 가족과 가까워지고, 월지(일터 자리) 사(巳)와 삼합(한 팀으로 뭉침)을 이뤄 일터에서 목소리가 커집니다. 다만 축(丑)과 시지(꿈 · 자녀 자리) 오(午)는 원진(괜히 서운하고 꺼려지는 사이)이라, 오래 품은 꿈 하나를 두고 서운한 일이 생길 수 있습니다.\", \"love\": \"안정된 관계가 자리를 잡습니다. 결혼이나 함께 사는 일을 정하기 좋은 10년입니다.\", \"money\": \"모으는 힘이 생깁니다. 집, 계약, 자격처럼 문서로 남는 재산이 늘어납니다.\", \"work\": \"전문가로 이름이 서는 시기입니다. 공부와 자격이 직함이 됩니다.\", \"people\": \"스승이나 윗사람이 길을 열어 줍니다. 집안과의 거리도 가까워집니다.\", \"body\": \"처음으로 쉬는 법을 배우는 10년입니다. 잠과 끼니가 규칙적으로 자리 잡습니다.\", \"key\": \"기대고 쌓는 10년\"}";
   const core=`${ST0}\n\n[할 일] 평생 사주 프리미엄의 '타고난 그릇 · 원국의 짜임 · 결정적인 해 · 마지막 글'을 쓴다. 이미 지나온 나이는 과거형으로 쓴다.
 출력 JSON 형식: {"cover":{"words":["이 사람을 요약하는 두세 글자 단어 세 개"],"line":"{P}의 로 시작하는 현암의 한마디 1~2문장"},"nature":["타고난 그릇 5단락. 일간의 본성, 태어난 달(월지)의 십성과 사회에서의 모습, 십성 분포가 만드는 마음의 구조, 빈칸, 조후 순서. 단락마다 150~230자"],"frame":["원국 안의 합 · 충과 신살 · 공망 이야기 2~3단락, 단락마다 120~200자"],"turns":{"${L.keys.turn.map(o=>o.y).join('":"그해가 결정적인 이유 2문장","')}":"그해가 결정적인 이유 2문장"},"letter":["{P}께.","현암의 글 4~5단락, 단락마다 60~130자","현암 드림"]}
 turns의 키는 위 해로 고정이다.
@@ -101,5 +101,5 @@ function build(){ const n=nick(), P=L.P, dm=L.dm;
 function render(){ const host=$('prem'); K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status($('lfst'),Object.assign({who:'현암이 평생 풀이'},ST)); }
 window.LifePrem={open(){ const host=$('prem'); if(!host||!prep()) return; host.classList.add('pkx'); host.hidden=false; const lk=document.querySelector('.lockS'); if(lk) lk.hidden=true; K.bind(host); render();
   const cur=host.querySelector(`.pk-row[data-k="d${L.dl.indexOf(L.cur)}"]`); if(cur) cur.classList.add('open');
-  if(!C.fixed) K.runAI({key:L.key+'-life',ver:'v1',parts:prompts(),apply,rerender:render,S:ST}); }};
+  if(!C.fixed) K.runAI({key:L.key+'-life',ver:'v2',parts:prompts(),apply,rerender:render,S:ST}); }};
 })();

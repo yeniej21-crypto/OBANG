@@ -196,14 +196,30 @@ const css=`
 `;
 const st=document.createElement('style'); st.textContent=css; document.head.appendChild(st);
 
+
+/* ---------- 입력 화면 미리보기(아래 빈 공간을 채우는 결과 맛보기) ---------- */
+const PV={
+ color:()=>`<h4>다섯 가지 사주 톤 중 하나가 나와요</h4><div class="pv-tone">${PAL.map(p=>`<div><span>${p.best.slice(0,3).map(c=>`<i style="background:${c[1]}"></i>`).join('')}</span><b>${p.tone}</b><small>${p.season} · ${p.temp}</small></div>`).join('')}</div>`,
+ food:()=>`<h4>다섯 맛 · 다섯 색, 내 사주는 어디</h4><div class="pv-food">${FOOD.map((f,i)=>`<div><b>${f.taste}</b><small>${f.col} · ${EN[i]}</small><span>${f.soul[0]}</span></div>`).join('')}</div>`,
+ pastus:()=>`<h4>이런 사이가 나와요</h4><div class="pv-chips">${['혼례 올린 부부','몰래 연서 주고받던 사이','원수 집안의 두 사람','숙명의 라이벌','등을 맡긴 한 패','의형제를 맺은 사이','스승과 제자','주막 주인과 외상 단골'].map(t=>`<span>${t}</span>`).join('')}</div>`,
+ mbti:()=>`<h4>열여섯 유형, 조선 직업으로</h4><div class="pv-mb">${Object.entries(MB).map(([k,v])=>`<div><b>${k}</b><small>${v[0]}</small></div>`).join('')}</div>`};
+const css2=`.pv{margin:18px 0 0;padding:16px 0 4px;border-top:1px solid var(--line)}.pv h4{margin:0 0 12px;font-size:13px;letter-spacing:.06em;color:var(--gold-2,#f3d79b)}
+.pv-tone{display:grid;gap:8px}.pv-tone div{display:grid;grid-template-columns:70px 1fr auto;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+.pv-tone span{display:flex;gap:4px}.pv-tone i{width:18px;height:18px;border-radius:50%}.pv-tone b{font-size:14px}.pv-tone small{font-size:11.5px;color:var(--ink-3)}
+.pv-food{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.pv-food div{padding:12px 4px;text-align:center;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+.pv-food b{display:block;font-family:var(--bmj);font-size:17px}.pv-food small{display:block;font-size:10.5px;color:var(--ink-3);margin:2px 0 6px}.pv-food span{font-size:11.5px;color:var(--ink-2);line-height:1.35}
+.pv-chips{display:flex;flex-wrap:wrap;gap:6px}.pv-chips span{padding:8px 12px;border:1px solid rgba(200,55,45,.45);background:rgba(200,55,45,.08);font-size:13px}
+.pv-mb{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.pv-mb div{padding:9px 4px;text-align:center;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+.pv-mb b{display:block;font-family:var(--serif);font-size:15px;color:#ff9b80}.pv-mb small{font-size:10.5px;color:var(--ink-2)}`;
+const st2=document.createElement('style'); st2.textContent=css2; document.head.appendChild(st2);
 window.FREE_PLUS={
- color:{cat:'saju',t:'사주 퍼스널 컬러',tt:'타고난 색은<br>따로 있다',teaser:'오행으로 찾는 내 컬러 팔레트 · 셀카로 대 보기',host:'sion',input:'birth',ld:['오행 섞는 중…','물감 개는 중…','팔레트 짜는 중…'],run:runColor,
+ color:{preview:()=>PV.color(),cat:'saju',t:'사주 퍼스널 컬러',tt:'타고난 색은<br>따로 있다',teaser:'오행으로 찾는 내 컬러 팔레트 · 셀카로 대 보기',host:'sion',input:'birth',ld:['오행 섞는 중…','물감 개는 중…','팔레트 짜는 중…'],run:runColor,
    up:{k:'사주가 그린 나',t:'이 색을 입은 내 캐릭터는?',s:'여덟 글자로 그린 2.5D 캐릭터',go:'avatar.html',img:'img/avatar/wood_f.jpg'}},
- food:{cat:'saju',t:'사주 소울푸드',tt:'네 사주가<br>당기는 맛',teaser:'빈칸을 채우는 소울푸드와 오늘의 정식',host:'doj',input:'birth',ld:['주막 차림표 펼치는 중…','오미 맞춰 보는 중…','오늘 일진 간 보는 중…'],run:runFood,
+ food:{preview:()=>PV.food(),cat:'saju',t:'사주 소울푸드',tt:'네 사주가<br>당기는 맛',teaser:'빈칸을 채우는 소울푸드와 오늘의 정식',host:'doj',input:'birth',ld:['주막 차림표 펼치는 중…','오미 맞춰 보는 중…','오늘 일진 간 보는 중…'],run:runFood,
    up:{k:'오늘의 운세 · 서하',t:'오늘 하루, 전부 펼쳐 볼래?',s:'총운·연애·재물·시간대별 흐름',go:'today.html',img:'img/seoha.jpg'}},
- pastus:{cat:'love',t:'전생에 우리는',tt:'전생에 우리,<br>무슨 사이였게',teaser:'두 사람 생일로 보는 전생 인연 한 장면',host:'taeo',input:'pair',ld:['두 사람 호패 찾는 중…','조선 팔도 수소문하는 중…','붉은 실 따라가는 중…'],run:runPair,
+ pastus:{preview:()=>PV.pastus(),cat:'love',t:'전생에 우리는',tt:'전생에 우리,<br>무슨 사이였게',teaser:'두 사람 생일로 보는 전생 인연 한 장면',host:'taeo',input:'pair',ld:['두 사람 호패 찾는 중…','조선 팔도 수소문하는 중…','붉은 실 따라가는 중…'],run:runPair,
    up:{k:'도화 궁합 · 태오',t:'이번 생 궁합은 몇 점?',s:'끌림·오래 감 점수, 2027 인연 타이밍',go:'gunghap.html',img:'img/taeo/wink.jpg'}},
- mbti:{cat:'psy',t:'팔자 MBTI',tt:'사주로 보면<br>너는 이 유형',teaser:'여덟 글자로 보는 타고난 MBTI, 지금 나와 비교',host:'ian',input:'birth',ld:['여덟 글자 펼치는 중…','십성 세는 중…','네 글자 맞추는 중…'],run:runMbti,
+ mbti:{preview:()=>PV.mbti(),cat:'psy',t:'팔자 MBTI',tt:'사주로 보면<br>너는 이 유형',teaser:'여덟 글자로 보는 타고난 MBTI, 지금 나와 비교',host:'ian',input:'birth',ld:['여덟 글자 펼치는 중…','십성 세는 중…','네 글자 맞추는 중…'],run:runMbti,
    up:{k:'평생 사주 · 현암',t:'타고난 그릇, 한평생으로 보면?',s:'대운 아홉 마디와 결정적인 해',go:'lifetime.html',img:'img/jeongtong.jpg'}}
 };
 window.FREE_PLUS_ORDER=['color','food','pastus','mbti'];

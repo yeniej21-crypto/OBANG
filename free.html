@@ -220,11 +220,13 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
 .go,.btn2.pr{box-shadow:0 10px 26px rgba(227,184,102,.18)}
 .rh h1,.hero h1{letter-spacing:-.01em}
 .top b{transition:opacity .3s}
+.meQ[hidden],.other[hidden],#form[hidden],.pv[hidden]{display:none!important}
+.fc{background-position:center 45%}
 </style>
 </head>
 <body>
 <div class="stage" id="stage">
-  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="topT">FREE ZONE</b><span class="free">FREE · 30초</span></div>
+  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="topT">FREE ZONE</b></div>
 
   <section class="scr" id="sHub">
     <div class="hubH"><small>OBANG SAJU · FREE</small><h1>결제 말고,<br>생일만 줘.</h1><p>로그인도 크레딧도 필요 없어. 30초면 끝나.</p></div>
@@ -257,6 +259,7 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
       <button class="go" id="goBtn" type="button">결과 보기</button>
       <p class="fine" id="inFine">입력한 정보는 결과 계산에만 쓰여요.</p>
     </div>
+    <div class="pv" id="inPrev" hidden></div>
   </div></section>
 
   <section class="scr" id="sQz"><div class="qz">
@@ -475,7 +478,7 @@ let CUR=null, RES=null, PAIR=null;
 const enc=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 const dec=v=>{ try{ v=v.replace(/-/g,'+').replace(/_/g,'/'); return JSON.parse(decodeURIComponent(escape(atob(v)))); }catch(e){ return null; } };
 const INV=Q.get('f')?dec(Q.get('f')):null;
-function cardHTML(k,i){ const X=T[k]; return `<button class="fc" type="button" data-t="${k}" style="background-image:url('${HOST[X.host].img}');animation-delay:${i*50}ms"><span class="tg">${(window.FREE_PLUS_ORDER||[]).includes(k)?'NEW':'FREE'}</span><span class="tm">${X.input==='quiz'?'1분':'30초'}</span><span class="ct"><b>${X.t}</b><span>${X.teaser}</span></span></button>`; }
+function cardHTML(k,i){ const X=T[k]; return `<button class="fc" type="button" data-t="${k}" style="background-image:url('img/free/${k}.jpg'),url('${HOST[X.host].img}');animation-delay:${i*50}ms">${(window.FREE_PLUS_ORDER||[]).includes(k)?'<span class="tg">NEW</span>':''}<span class="ct"><b>${X.t}</b><span>${X.teaser}</span></span></button>`; }
 function hub(f='all'){ $('hubG').innerHTML=ORDER.filter(k=>f==='all'||T[k].cat===f).map(cardHTML).join(''); }
 $('hubF').onclick=e=>{ const b=e.target.closest('[data-f]'); if(!b) return; $('hubF').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); hub(b.dataset.f); };
 document.addEventListener('click',e=>{ const c=e.target.closest('.fc[data-t]'); if(!c) return; openTest(c.dataset.t); });
@@ -496,8 +499,8 @@ const readForm=()=>({name:$('nm').value.trim(),g:gender,cal,y:+$('by').value,m:+
 
 function openTest(k){ KEY=k; CUR=T[k]; history.replaceState(null,'','?t='+k); WANT_BIRTH_FOR_MIND=false;
   $('topT').textContent=CUR.t;
-  const H=HOST[CUR.host]; $('inHero').style.backgroundImage=`url('${H.img}')`; $('inK').textContent=`FREE · ${H.h} ${H.n}`; $('inT').innerHTML=CUR.tt; $('inP').textContent=CUR.teaser;
-  if(window.Depth3D){ Depth3D.unmount($('inHero')); Depth3D.mount($('inHero'),{src:H.img,pos:[.5,.2]}); }
+  const H=HOST[CUR.host]; $('inHero').style.backgroundImage=`url('img/free/${k}_h.jpg'),url('img/free/${k}.jpg'),url('${H.img}')`; $('inK').textContent=`무료 · ${H.h} ${H.n}`; $('inPrev').hidden=!CUR.preview; $('inPrev').innerHTML=CUR.preview?CUR.preview():''; $('inT').innerHTML=CUR.tt; $('inP').textContent=CUR.teaser;
+  if(window.Depth3D) Depth3D.unmount($('inHero'));
   if(CUR.input==='quiz'){ $('meQ').hidden=true; $('other').hidden=true; $('form').hidden=false; $('fBirth').hidden=true; $('fTti').hidden=true; $('goBtn').textContent='테스트 시작 (8문항)'; $('inFine').textContent='정답은 없어요. 가장 먼저 떠오르는 걸 골라요.'; show('sIn'); return; }
   openInput(); }
 function openInput(){ const me=loadMe(); $('fBirth').hidden=CUR.input==='tti'; $('fTti').hidden=CUR.input!=='tti'; $('fPair').hidden=CUR.input!=='pair'; if(CUR.input==='pair'&&INV){ $('pNm').value=INV.name||''; $('py').value=INV.y; $('pm').value=INV.m; $('pd').value=INV.d; } $('inFine').textContent='입력한 정보는 결과 계산에만 쓰여요.';
@@ -518,14 +521,14 @@ async function finish(me){ if(KEY==='mind'&&!me){ await loading(); me=loadMe(); 
   RES=T[KEY].run?T[KEY].run(A,{Sj,tgCount,esc,jo,bat,hash,PAST,build,B:PAIR?build(PAIR):null}):KEY==='past'?runPast(A):KEY==='animal'?runAnimal(A):KEY==='bok'?runBok(A):KEY==='mind'?runMind(A):KEY==='bujeok'?runBujeok(A):runTti(+$('ty1').value,+$('ty2').value);
   render(); }
 function render(){ const H=HOST[RES.host||CUR.host];
-  $('rH').style.backgroundImage=`url('${H.img}')`; $('rK').textContent=RES.k; $('rT').textContent=RES.t; $('rP').textContent=RES.p;
+  $('rH').style.backgroundImage=`url('img/free/${KEY}_h.jpg'),url('img/free/${KEY}.jpg'),url('${H.img}')`; $('rK').textContent=RES.k; $('rT').textContent=RES.t; $('rP').textContent=RES.p;
   $('rV').innerHTML=RES.vis; $('rB').innerHTML=RES.body; $('sayAv').style.backgroundImage=`url('${H.img}')`; $('sayN').textContent=`${H.h} · ${H.n}`; $('sayT').textContent=RES.say;
   const U=CUR.up; $('upTh').style.backgroundImage=`url('${U.img}')`; $('upK').textContent=U.k; $('upT').textContent=U.t; $('upS').textContent=U.s; $('up').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} location.href=U.go; };
   $('more').innerHTML=ORDER.filter(k=>k!==KEY).map(cardHTML).join('');
   document.body.dataset.menu=CUR.t;
   if(RES.hold){ $('rT').style.opacity=.25; $('rP').style.opacity=.25; setTimeout(()=>document.querySelectorAll('#rB .box,#rB .dd,.say').forEach(x=>{ x.style.transition='opacity .6s'; x.style.opacity=.25; }),0); }
   else { $('rT').style.opacity=1; $('rP').style.opacity=1; }
-  show('sRs'); if(window.Depth3D){ Depth3D.unmount($('rH')); Depth3D.mount($('rH'),{src:H.img,pos:[.5,.18]}); }
+  show('sRs'); if(window.Depth3D) Depth3D.unmount($('rH'));
   $('invRow').style.display=CUR.input==='pair'?'':'none';
   if(RES.after) RES.after(); ding(); }
 $('again').onclick=()=>openTest(KEY);

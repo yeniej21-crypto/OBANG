@@ -170,7 +170,7 @@ const CSS=`.ak{position:absolute;inset:0;z-index:80;display:flex;flex-direction:
 let sampleFn=null, ready=null;
 function avail(){ if(!ready) ready=(async()=>{ try{ if(!window.claude||!window.claude.use) return null; sampleFn=await window.claude.use('sample'); return sampleFn; }catch(e){ return null; } })(); return ready; }
 avail();
-const FREE=3;
+const FREE=3; let SRV_OFF=false;
 function open(opts){
   const root=opts.root, per=PERSONA[opts.persona], u=opts.user;
   if(!document.getElementById('akCss')){ const st=document.createElement('style'); st.id='akCss'; st.textContent=CSS; document.head.appendChild(st); }
@@ -190,10 +190,29 @@ function open(opts){
   inp.oninput=()=>btn.disabled=!inp.value.trim(); btn.disabled=true;
   inp.onkeydown=e=>{ if(e.key==='Enter'&&!e.isComposing) send(inp.value); }; btn.onclick=()=>send(inp.value);
   function paywall(){ const w=document.createElement('div'); w.className='ak-paw'; w.innerHTML=`<b>${per.name}${josa(per.name,'과','와')} 더 이야기하기</b><small>대화권 10회 3,900원 · 무제한 월 9,900원</small><button>대화권 받기</button>`; w.querySelector('button').onclick=()=>{ w.querySelector('small').textContent='체험판이라 결제는 여기까지예요'; }; el.insertBefore(w,el.querySelector('.ak-in')); inp.disabled=true; btn.disabled=true; sug.innerHTML=''; }
+  const show=t=>{ const i=t.indexOf('[['); return (i>=0?t.slice(0,i):t).trim(); };
+  function done(b,raw){ const ans=show(raw)||raw; b.textContent=ans; turns.push({role:'assistant',content:raw});
+      const ev=(raw.match(/\[\[근거:([^\]]*)\]\]/)||[])[1]; const sg=(raw.match(/\[\[추천:([^\]]*)\]\]/)||[])[1];
+      const ids=(ev||'').split(/[,\s]+/).map(s=>s.trim().toUpperCase()).filter(id=>byId[id]);
+      if(ids.length){ const box=document.createElement('div'); box.className='ak-ev'; ids.slice(0,3).forEach(id=>{ const f=byId[id]; const c=document.createElement('button'); c.textContent=f.label; c.onclick=()=>{ let x=b.querySelector('.ak-evx'); if(!x){ x=document.createElement('div'); x.className='ak-evx'; b.appendChild(x); } x.textContent=f.text; scroll(); }; box.appendChild(c); }); b.appendChild(box); }
+      used++; setLim(); setSug(sg?sg.split('|').map(s=>s.trim()).filter(Boolean):[]); if(used>=FREE) paywall(); }
+  async function viaServer(){ if(SRV_OFF||/^(localhost|127\.)/.test(location.hostname)||location.protocol==='file:') return 'skip';
+    busy=true; const b=bubble('b',''); b.innerHTML='<span class="ak-think">사주 펼쳐보는 중…</span>';
+    try{ const r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:rulesText(per,u,F)},...turns.slice(-8)]})});
+      let j=null; try{ j=await r.json(); }catch(e){}
+      if(r.ok&&j&&j.text){ done(b,j.text); return 'ok'; }
+      const c=(j&&j.error)||('http'+r.status);
+      if(c==='limit'){ turns.pop(); b.className='ak-m sys'; b.textContent='오늘 체험 상담 질문을 다 썼어요. 내일 다시 이야기해요.'; return 'ok'; }
+      if(['nokey','http404','origin','http405'].includes(c)) SRV_OFF=true;
+      if(SRV_OFF){ b.remove(); return 'skip'; }
+      turns.pop(); b.className='ak-m sys'; b.textContent='연결이 잠깐 끊겼어요. 다시 보내 주세요.'; return 'ok';
+    }catch(e){ SRV_OFF=true; b.remove(); return 'skip'; }
+    finally{ busy=false; btn.disabled=!inp.value.trim(); } }
   async function send(q){
     q=String(q||'').trim(); if(!q||busy) return; if(used>=FREE){ paywall(); return; }
     inp.value=''; btn.disabled=true; setSug([]); bubble('u',q); turns.push({role:'user',content:q});
     const fn=await avail();
+    if(!fn&&(await viaServer())==='ok') return;
     if(!fn){ turns.pop(); const b0=bubble('b',''); b0.innerHTML='<span class="ak-think">사주 펼쳐보는 중…</span>'; await new Promise(r=>setTimeout(r,900));
       const d=demoAnswer(opts.persona,q,CTX,u);
       if(!d){ b0.className='ak-m sys'; b0.textContent='체험판 예시 모드에서는 추천 질문에만 답해요. 정식 버전에서는 무엇이든 물어볼 수 있어요.'; setSug(opts.starters||per.chips); return; }
@@ -205,14 +224,9 @@ function open(opts){
     const input=[{role:'user',content:rulesText(per,u,F)},...turns.slice(-8)];
     const tools=[{name:'calcOther',description:'다른 사람의 생년월일로 사주를 계산해 사용자와의 궁합 근거(일간 관계, 일지 합충, 도화)를 돌려준다. 사용자가 상대의 생년월일을 말했을 때만 쓴다.',inputSchema:{type:'object',properties:{year:{type:'integer'},month:{type:'integer'},day:{type:'integer'},lunar:{type:'boolean'},leap:{type:'boolean'},hour:{type:'integer',description:'0=자시…11=해시, 모르면 생략'}},required:['year','month','day']},execute:(inp)=>calcOther({P},inp)}];
     let lim2=null; try{ lim2=await fn.limits(); }catch(e){}
-    const show=t=>{ const i=t.indexOf('[['); return (i>=0?t.slice(0,i):t).trim(); };
     try{
       const res=await fn(input,{cache:false,signal:ctl.signal,modelTier:opts.tier||'default',tools:lim2&&lim2.tools?tools:undefined,onText:({text})=>{ const s=show(text); if(s) b.textContent=s; scroll(); }});
-      const raw=res.text; const ans=show(raw)||raw; b.textContent=ans; turns.push({role:'assistant',content:raw});
-      const ev=(raw.match(/\[\[근거:([^\]]*)\]\]/)||[])[1]; const sg=(raw.match(/\[\[추천:([^\]]*)\]\]/)||[])[1];
-      const ids=(ev||'').split(/[,\s]+/).map(s=>s.trim().toUpperCase()).filter(id=>byId[id]);
-      if(ids.length){ const box=document.createElement('div'); box.className='ak-ev'; ids.slice(0,3).forEach(id=>{ const f=byId[id]; const c=document.createElement('button'); c.textContent=f.label; c.onclick=()=>{ let x=b.querySelector('.ak-evx'); if(!x){ x=document.createElement('div'); x.className='ak-evx'; b.appendChild(x); } x.textContent=f.text; scroll(); }; box.appendChild(c); }); b.appendChild(box); }
-      used++; setLim(); setSug(sg?sg.split('|').map(s=>s.trim()).filter(Boolean):[]); if(used>=FREE) paywall();
+      done(b,res.text);
     }catch(e){
       const code=e&&e.code; turns.pop();
       if(code==='cancelled'){ b.remove(); }

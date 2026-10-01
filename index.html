@@ -943,7 +943,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="hRow">
         <div class="pc" data-kv="halmae" data-vid="v/poster/halmae.mp4" role="button" tabindex="0" style="background-image:url('img/halmae.jpg')"><div class="ct"><span class="yr">2027</span><span class="tt">신년 운세</span><span class="st">삼신 할매가 열두 달을 읽는다</span></div></div>
         <div class="pc" id="cTaegil" data-vid="v/poster/taegil.mp4" role="button" tabindex="0" style="background-image:url('img/taegil.jpg')"><div class="ct"><span class="tt">택일</span><span class="st">이사·계약·고백, 그날이 길한지</span></div></div>
-        <div class="pc" id="cLife" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><div class="ct"><span class="tt">평생 사주</span><span class="st">대운 10년 흐름과 타고난 그릇</span></div></div>
+        <div class="pc" id="cLife" data-vid="v/poster/lifetime.mp4" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><div class="ct"><span class="tt">평생 사주</span><span class="st">대운 10년 흐름과 타고난 그릇</span></div></div>
         <div class="pc lockc" role="button" tabindex="0" style="background-image:url('img/tojeong.jpg')"><span class="chip">준비 중</span><div class="ct"><span class="tt">토정비결</span><span class="st">144괘로 읽는 한 해</span></div></div>
       </div>
     </section>
@@ -1002,14 +1002,14 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="sh"><small>속마음 · 재회</small><b>그 사람, 지금 무슨 생각할까</b></div>
       <div class="hRow">
         <div class="pc" id="cPartner" role="button" tabindex="0" style="background-image:url('img/w1.jpg')"><div class="ct"><span class="tt">그 사람 속마음</span><span class="st">은거울에 비친, 그의 요즘</span></div></div>
-        <div class="pc lockc" role="button" tabindex="0" style="background-image:url('img/w2.jpg')"><span class="chip">준비 중</span><div class="ct"><span class="yr">2027</span><span class="tt">재회 사주</span><span class="st">우리, 다시 닿을 수 있을까</span></div></div>
+        <div class="pc" id="cRe" role="button" tabindex="0" style="background-image:url('img/w2.jpg')"><span class="chip new">NEW</span><div class="ct"><span class="yr">2027</span><span class="tt">재회 사주</span><span class="st">우리, 다시 닿을 수 있을까</span></div></div>
       </div>
     </section>
 
     <section class="hSec" id="secLove" data-cats="all love match">
       <div class="sh"><small>연애 · 궁합</small><b>다음 사람은 언제 올까</b></div>
       <div class="hRow">
-        <div class="pc lockc" role="button" tabindex="0" style="background-image:url('img/seoha.jpg')"><span class="chip">준비 중</span><div class="ct"><span class="tt">다음 연애</span><span class="st">언제, 어디서, 어떤 사람과</span></div></div>
+        <div class="pc" id="cNext" role="button" tabindex="0" style="background-image:url('img/seoha.jpg')"><span class="chip new">NEW</span><div class="ct"><span class="tt">다음 연애</span><span class="st">언제, 어디서, 어떤 사람과</span></div></div>
         <div class="pc" id="cObgh" role="button" tabindex="0" style="background-image:url('img/fire.jpg')"><div class="ct"><span class="tt">오방 궁합</span><span class="st">다섯 신 중, 나랑 맞는 단 한 명</span></div></div>
       </div>
     </section>
@@ -1045,7 +1045,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="rank">
         <div class="rk" data-go="partner"><span class="th" style="background-image:url('img/w3.jpg')"></span><em>1</em><div><b>그 사람 속마음</b><small>연락 안 오는 진짜 이유</small></div></div>
         <div class="rk" id="rkObgh"><span class="th" style="background-image:url('img/kv_house.jpg')"></span><em>2</em><div><b>오방 궁합 순위</b><small>다섯 신과 나의 궁합 점수</small></div></div>
-        <div class="rk lockc"><span class="th" style="background-image:url('img/kv_drama.jpg')"></span><em>3</em><div><b>재회 사주</b><small>다시 연락이 닿는 달</small></div></div>
+        <div class="rk" id="rkRe"><span class="th" style="background-image:url('img/w2.jpg')"></span><em>3</em><div><b>재회 사주</b><small>다시 연락이 닿는 달</small></div></div>
       </div>
     </section>
 
@@ -1497,7 +1497,7 @@ document.querySelectorAll('.lockc').forEach(e=>e.onclick=()=>toast('정식 오�
 $('hBell').onclick=()=>toast('내일 아침 8시, 수호신 미션이 예약돼 있어요'); const toIntro=()=>{ try{ sessionStorage.removeItem('toHome'); }catch(e){} location.reload(); };
 $('hMenu').onclick=()=>$('hMenuS').classList.add('on');
 $('hMenuS').onclick=e=>{ if(e.target.id==='hMenuS') $('hMenuS').classList.remove('on'); const b=e.target.closest('[data-m]'); if(!b) return; $('hMenuS').classList.remove('on'); if(b.dataset.m==='intro') toIntro(); else if(b.dataset.m==='arch') archOpen(); else goPage(b.dataset.m); };
-$('hSalon').onclick=toIntro; $('cObgh').onclick=$('rkObgh').onclick=()=>goPage('obgh.html'); $('hMyChar').onclick=()=>goPage('avatar.html'); $('cLife').onclick=()=>goPage('lifetime.html'); document.querySelector('.hBar .logo').onclick=toIntro;
+$('hSalon').onclick=toIntro; $('cObgh').onclick=$('rkObgh').onclick=()=>goPage('obgh.html'); $('hMyChar').onclick=()=>goPage('avatar.html'); $('cLife').onclick=()=>goPage('lifetime.html'); $('cRe').onclick=$('rkRe').onclick=()=>goPage('love2.html?m=re'); $('cNext').onclick=()=>goPage('love2.html?m=next'); document.querySelector('.hBar .logo').onclick=toIntro;
 $('hSalonT').textContent=HOST.name+'의 살롱으로 돌아가기'; $('hMenuHost').textContent=HOST.name+'의 살롱'; $('hSalonAv').style.backgroundImage=`url('${HOST.poster||'img/seoha.jpg'}')`;
 $('pills').querySelectorAll('button').forEach(b=>b.onclick=()=>{
   /* 상단 분류 = 해당 섹션으로 바로 이동 (예전: 섹션 숨기기) */

@@ -120,7 +120,7 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
 .gq small{display:block;font-family:var(--sans);font-size:11.5px;color:var(--ink-3);margin-top:4px}
 .btn2{height:48px;border-radius:0;border:1px solid var(--line-2);background:rgba(255,255,255,.04);color:var(--ink);font-weight:800;font-size:14.5px;cursor:pointer;width:100%;margin-top:10px}
 .lock{position:relative;overflow:hidden}
-.lock .bl{filter:blur(6px);opacity:.6;height:120px;border-radius:0;background:#000 center 20%/cover no-repeat}
+.lock .bl{filter:blur(1.5px) brightness(.7);opacity:.85;height:120px;border-radius:0;background:#000 center 20%/cover no-repeat}
 .lock .cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;background:linear-gradient(180deg,rgba(21,18,24,.2),rgba(21,18,24,.85))}
 .lock .cta b{font-size:15px}.lock .cta small{font-size:12.5px;color:var(--ink-2)}
 .pay{height:46px;border:0;border-radius:0;background:linear-gradient(180deg,#f0cf85,#d6a64f);color:#1a120a;font-weight:900;font-size:14.5px;padding:0 20px;cursor:pointer}
@@ -181,13 +181,13 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
       <button class="btn2" id="toGod" type="button">수호신 만나러 가기</button></div>
     <button class="btn2" id="shareBtn" type="button" style="border-color:var(--gold);color:var(--gold-2)">내 캐릭터 카드 저장 · 공유</button>
     <div class="box lock"><h3>움직이고 말하는 내 캐릭터</h3><div class="bl" id="lockBl"></div>
-      <div class="cta"><b>내 캐릭터가 나에게 한마디</b><small>2027년의 나를 영상으로 만나 보기</small><button class="pay" id="payBtn" type="button">▶ 미리보기 · 9,900원</button></div></div>
+      <div class="cta"><b>내 캐릭터가 나에게 한마디</b><small>2027년의 나를 영상으로 만나 보기</small><button class="pay" id="payBtn" type="button">▶ 영상 보기 · 무료</button></div></div>
     <button class="btn2" id="again" type="button">다른 생일로 다시 그리기</button>
     <button class="btn2" id="toHome" type="button">홈으로</button>
     <p class="foot">그림은 사주의 오행 규칙으로 정해져요. 같은 사주라면 언제 봐도 같은 모습이에요.<br>체험판에서는 오행·성별별 기본 그림에 빛·꽃·수호신을 조합해 보여 줘요.</p>
   </div></section>
 
-  <div class="tv" id="tv"><video id="tvV" playsinline preload="none"></video><div class="sh"></div><div class="k">2027년의 나 · 미리보기</div><div class="sub" id="tvS"></div><div class="end" id="tvE"><button class="pay" id="tvPay" type="button">9,900원 · 내 캐릭터 영상 받기</button><button class="btn2" id="tvX2" type="button" style="margin:0">닫기</button></div><button class="x" id="tvX" type="button">닫기</button></div>
+  <div class="tv" id="tv"><video id="tvV" playsinline preload="none"></video><div class="sh"></div><div class="k">2027년의 나</div><div class="sub" id="tvS"></div><div class="end" id="tvE"><button class="pay" id="tvPay" type="button">다시 보기</button><button class="btn2" id="tvX2" type="button" style="margin:0">닫기</button></div><button class="x" id="tvX" type="button">닫기</button></div>
   <div class="sheet" id="sheet"><img id="shImg" alt="내 사주 캐릭터 카드"><div class="row"><button class="btn2" id="shSave" type="button">저장</button><button class="btn2" id="shSend" type="button">공유</button></div><button class="btn2" id="shX" type="button" style="max-width:330px">닫기</button></div>
   <div class="toast" id="toast"></div>
 </div>
@@ -346,7 +346,7 @@ function talk(){ const key=`${K[A.dm]}_${A.g}`, T=TALK[key]; if(!T){ toast('미�
   v.onended=()=>{ sub.classList.remove('on'); $('tvE').classList.add('on'); };
   v.play().then(()=>requestAnimationFrame(tick)).catch(()=>{ v.muted=true; v.play().catch(()=>{}); requestAnimationFrame(tick); }); }
 const tvClose=()=>{ const v=$('tvV'); try{ v.pause(); }catch(e){} $('tv').classList.remove('on'); };
-$('tvX').onclick=$('tvX2').onclick=tvClose; $('tvPay').onclick=()=>toast('체험판이라 결제는 여기까지예요');
+$('tvX').onclick=$('tvX2').onclick=tvClose; $('tvPay').onclick=talk;
 $('payBtn').onclick=talk;
 $('again').onclick=()=>{ prefill(A&&A.me); show('sIn'); };
 $('goBtn').onclick=()=>{ const me={name:$('nm').value.trim(),g:gender,cal,y:+$('by').value,m:+$('bm').value,d:+$('bd').value,h:$('bh').value==='x'?null:+$('bh').value}; saveMe(me); reveal(me); };

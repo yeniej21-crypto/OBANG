@@ -716,6 +716,10 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .home .bMis small{font-size:11px}
 .home .bMis p{margin-top:2px;font-size:13px;line-height:1.45}
 .home .tday+.band{margin-top:18px}
+
+/* 세로가 짧은 노트북 화면 */
+@media (min-width:700px) and (max-height:800px){.opEnd{padding-top:calc(env(safe-area-inset-top,0px) + 17vh)}}
+@media (min-width:700px) and (max-height:680px){.opEnd{padding-top:calc(env(safe-area-inset-top,0px) + 9vh)}.opEnd h2{font-size:38px!important}.opEnd p{font-size:18px}.opRes{margin-top:10px}}
 </style>
 
 <div class="stage" id="stage">
@@ -1747,4 +1751,4 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.con
 <script src="hscroll.js"></script>
 <script src="menuintro.js"></script>
 
-<script src="hanja.js"></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script>

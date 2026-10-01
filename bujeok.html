@@ -270,6 +270,6 @@ render();
 (function(){ const c=$('card'), f=$('foil'); if(window.Depth3D&&Depth3D.holo){ Depth3D.holo(c,{face:$('face'),max:14}); }
   function loop(){ const t=window.Depth3D&&Depth3D.tilt?Depth3D.tilt():{x:0,y:0}; f.style.setProperty('--sx',(50+t.x*45)+'%'); f.style.setProperty('--sy',(50+t.y*45)+'%'); requestAnimationFrame(loop); } loop(); })();
 </script>
-<script src="hanja.js"></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script>
 </body>
 </html>

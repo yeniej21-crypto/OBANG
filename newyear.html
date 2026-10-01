@@ -124,6 +124,7 @@ button{font-family:inherit}
 .trust b{display:block;font-size:14px;font-weight:900}
 .trust p{margin:8px 0 0;font-size:12.5px;line-height:1.7;color:var(--ink-2)}
 .trust small{display:block;margin-top:10px;font-size:11.5px;color:var(--ink-3);line-height:1.6}
+.ai{margin:34px 16px 0;font-size:11.5px;color:var(--ink-3);text-align:center}
 .toast{position:absolute;left:50%;bottom:40px;transform:translate(-50%,8px);z-index:60;background:var(--ink);color:#1b1513;font-size:13.5px;padding:10px 16px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 </style>
@@ -134,21 +135,19 @@ button{font-family:inherit}
   <div class="top" id="top"><button class="back" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>2027 신년 기획전</b></div>
   <section class="hero"><div class="cast" id="cast"></div>
    <div class="hx"><span class="yr"><span class="sl" data-hj="0">丁<br>未</span>2027 정미년 · 신년 기획전</span>
-    <h1>새해를 묻는<br><em>열 가지</em> 길</h1>
-    <p>정통 다섯, 가볍게 넷, 무료 하나. 같은 사주를 진행자마다 다른 눈으로 읽습니다.</p>
-    <div class="cnt" id="cnt"></div></div>
+    <h1>새해를 묻는<br><em>열 가지</em> 길</h1></div>
   </section>
   <nav class="tabs" id="tabs"><button class="on" data-t="sFeat">대표</button><button data-t="sJt">정통</button><button data-t="sPick">고르기</button><button data-t="sF990">990원</button><button data-t="sFree">무료</button><button data-t="sMore">함께</button></nav>
 
-  <section class="sec" id="sFeat"><div class="sh"><small>대표 · 정통 신년운세의 기준</small><b>한 해 전체를 보려면, 할매부터</b><p>열두 달 총운과 분야별 운을 가장 길고 꼼꼼하게 풉니다. 다른 정통 신년은 이 위에 한 갈래씩 더 깊이 들어갑니다.</p></div><div id="feat"></div></section>
-  <section class="sec" id="sJt"><div class="sh"><small>정통 신년 · 한 갈래 더 깊게</small><b>근거, 큰 흐름, 고전, 날짜</b><p>보는 자리가 겹치지 않게 나눴습니다. 함께 보아도 같은 이야기를 두 번 듣지 않아요.</p></div><div class="jt" id="jt"></div></section>
-  <section class="sec" id="sPick"><div class="sh"><small>나에게 맞는 신년</small><b>무엇이 궁금한지 고르면 짚어 드려요</b></div>
+  <section class="sec" id="sFeat"><div class="sh"><b>대표</b></div><div id="feat"></div></section>
+  <section class="sec" id="sJt"><div class="sh"><b>정통 신년</b></div><div class="jt" id="jt"></div></section>
+  <section class="sec" id="sPick"><div class="sh"><b>나에게 맞는 신년</b></div>
    <div class="pickr" id="pickr"></div>
-   <div class="sh" style="margin-top:26px"><small>한눈에 비교</small><b>다섯 정통 신년, 이렇게 다르다</b></div><div class="cmp" id="cmp"></div></section>
-  <section class="sec" id="sF990"><div class="sh"><small>990원 · 가볍게 한 장</small><b>분야 하나만 콕 집어서</b><p>짧지만 완성된 한 편. 캐릭터 한마디와 저장해서 공유하고 싶은 카드 한 장.</p></div><div class="g2" id="f990"></div></section>
-  <section class="sec" id="sFree"><div class="sh"><small>무료로 먼저</small><b>로그인 없이, 새해 첫 걸음</b></div><div id="free"></div></section>
-  <section class="sec" id="sMore"><div class="sh"><small>함께 보면 좋은</small><b>새해 계획에 날짜와 큰 그림을 더해서</b></div><div class="g2" id="more"></div></section>
-  <div class="trust"><b>열 가지 모두, 같은 만세력으로 계산합니다</b><p>계산은 검증된 만세력 엔진이, 해석은 명리 규칙이, AI는 문장만 씁니다. 같은 생년월일시는 어느 메뉴에서 보아도 같은 원국과 같은 점수가 나와요.</p><small>진행자는 모두 AI로 만든 가상의 캐릭터입니다. 가격은 오픈 전 체험판 기준이에요.</small></div>
+   <div class="sh" style="margin-top:28px"><b>한눈에 비교</b></div><div class="cmp" id="cmp"></div></section>
+  <section class="sec" id="sF990"><div class="sh"><b>990원</b></div><div class="g2" id="f990"></div></section>
+  <section class="sec" id="sFree"><div class="sh"><b>무료</b></div><div id="free"></div></section>
+  <section class="sec" id="sMore"><div class="sh"><b>함께 보면 좋은</b></div><div class="g2" id="more"></div></section>
+  <p class="ai">진행자는 AI로 만든 가상의 캐릭터입니다</p>
  </div>
  <div class="toast" id="toast"></div>
 </div>
@@ -160,11 +159,9 @@ const D=window.NY27, IT=D.items, by=c=>IT.filter(x=>x.cat===c), get=id=>IT.find(
 function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2000); }
 /* 히어로 진행자 줄 */
 ['halmae','soheon','hyeonam','wolha','seoha','taeo'].forEach((id,i)=>{ const x=get(id); const e=document.createElement('i'); e.style.backgroundImage=`url('${x.img}')`; e.style.animationDelay=(i*.09)+'s'; $('cast').appendChild(e); });
-const nJt=by('hero').length+by('jt').length, nF=by('f990').length, nFree=IT.filter(x=>x.cat==='free'&&x.status==='soon').length+1;
-$('cnt').innerHTML=`<div><b>${nJt}</b><small>정통</small></div><div><b>${nF}</b><small>990원</small></div><div><b>${IT.filter(x=>x.status==='open'&&x.cat!=='more').length}</b><small>지금 열림</small></div>`;
 /* 대표 */
 const h=by('hero')[0];
-$('feat').innerHTML=`<button class="feat" data-id="${h.id}" style="background-image:url('${h.img}')">${h.vid?`<video muted loop playsinline preload="none" src="${h.vid}"></video>`:''}<div class="ft"><span class="badge">대표</span><b>${h.name}</b><p>${h.line}</p><div class="row"><span>${h.get}</span><strong>${h.price}</strong></div></div></button>`;
+$('feat').innerHTML=`<button class="feat" data-id="${h.id}" style="background-image:url('${h.img}')">${h.vid?`<video muted loop playsinline preload="none" src="${h.vid}"></video>`:''}<div class="ft"><b>${h.name}</b><p>${h.line}</p><div class="row"><span>${h.who}</span><strong>${h.price}</strong></div></div></button>`;
 (()=>{ const f=document.querySelector('.feat'), v=f.querySelector('video'); if(!v) return; v.addEventListener('playing',()=>f.classList.add('vOn')); v.addEventListener('error',()=>v.remove());
   if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const p=v.play(); if(p) p.catch(()=>{}); } else v.pause(); }),{threshold:.3}).observe(f); })();
 /* 정통 */

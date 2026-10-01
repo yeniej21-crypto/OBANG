@@ -335,6 +335,8 @@ function go(n,sound=true){ n=Math.max(0,Math.min(N-1,n)); if(n===cur) return;
   cur=n; if(sound) rustle(); try{ navigator.vibrate&&navigator.vibrate(8); }catch(e){} activate(); }
 $('next').onclick=()=>go(cur+1); $('prev').onclick=()=>go(cur-1);
 document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(cur+1); if(e.key==='ArrowLeft') go(cur-1); });
+/* book.html#p=9 로 들어오면 그 쪽부터 */
+setTimeout(()=>{ try{ const m=location.hash.match(/p=(\d+)/); if(m) go(+m[1],false); }catch(e){} },300);
 
 function toastS(t){ const e=$('snd'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1600); }
 function wake(l){ const P=PAGES[+l.dataset.i], pop=l.querySelector('.pop');

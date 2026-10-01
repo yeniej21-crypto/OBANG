@@ -40,7 +40,9 @@ button{font-family:inherit}
 .stage.subm .brand{display:none}
 .stage.subm .backB{display:inline-flex}
 .stage.subm .top{z-index:60}
-.brand{font-family:var(--serif);font-weight:900;letter-spacing:.18em;font-size:13px;color:var(--gold-2);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.brand{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:4px 2px;cursor:pointer;font-family:var(--brush);font-weight:400;letter-spacing:.02em;font-size:18px;line-height:1;color:var(--gold-2);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.brand i{display:inline-grid;width:15px;height:15px;opacity:.75}
+.brand i svg{width:15px;height:15px}
 .tbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--glass-line);background:var(--glass);backdrop-filter:blur(8px);color:var(--ink);display:grid;place-items:center;cursor:pointer}
 .tbtn svg{width:18px;height:18px}
 .tgroup{display:flex;gap:8px}
@@ -72,6 +74,9 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{border:1px solid var(--glass-line);background:rgba(0,0,0,.3);color:var(--ink);border-radius:999px;padding:11px 16px;font-size:15px;cursor:pointer}
 .chip[aria-pressed=true]{background:rgba(227,184,102,.25);border-color:var(--gold);color:var(--gold-2);font-weight:700}
+.gseg{margin-top:8px}
+.gseg.need{border-color:var(--gold);animation:gNeed .5s 2}
+@keyframes gNeed{50%{border-color:rgba(227,184,102,.2)}}
 .hint{font-size:12px;color:var(--ink-3);margin-top:8px;line-height:1.5}
 
 
@@ -439,6 +444,10 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .card .hero .nm b{font-family:var(--serif);font-size:30px;font-weight:900}
 .card .body{padding:6px 18px 20px}
 .sec{margin-top:18px}
+.gwhy>div{display:grid;grid-template-columns:108px 1fr;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.08);font-size:13.5px;line-height:1.55}
+.gwhy>div:last-child{border-bottom:1px solid rgba(255,255,255,.08)}
+.gwhy b{font-weight:700;color:var(--gold-2);font-size:13px}
+.gwhy span{color:var(--ink-2)}
 .sec h4{margin:0 0 10px;font-size:12px;letter-spacing:.2em;color:var(--ink-3);font-weight:700}
 .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
 .pillars div{border-radius:12px;background:rgba(255,255,255,.04);padding:8px 0 6px}
@@ -722,6 +731,26 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 /* 세로가 짧은 노트북 화면 */
 @media (min-width:700px) and (max-height:800px){.opEnd{padding-top:calc(env(safe-area-inset-top,0px) + 17vh)}}
 @media (min-width:700px) and (max-height:680px){.opEnd{padding-top:calc(env(safe-area-inset-top,0px) + 9vh)}.opEnd h2{font-size:38px!important}.opEnd p{font-size:18px}.opRes{margin-top:10px}}
+
+/* 서하 소개 시트 */
+.hxw{position:absolute;inset:0;z-index:120;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;pointer-events:none;transition:opacity .25s}
+.hxw.on{opacity:1;pointer-events:auto}
+.hxb{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+.hxp{position:relative;background:#141117;border-top:1px solid rgba(227,184,102,.35);padding:20px 20px calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateY(20px);transition:transform .3s;color:var(--ink)}
+.hxw.on .hxp{transform:none}
+.hxh{display:grid;grid-template-columns:84px 1fr;gap:14px;align-items:start}
+.hxh i{display:block;width:84px;height:106px;background:#000 center 18%/cover no-repeat}
+.hxh small{display:block;font-size:11.5px;letter-spacing:.06em;color:var(--gold-2)}
+.hxh b{display:block;margin-top:4px;font-family:var(--brush);font-weight:400;font-size:30px;line-height:1.1;color:#fff}
+.hxh p{margin:8px 0 0;font-size:14px;line-height:1.6;color:var(--ink-2)}
+.hxd{margin:16px 0 0}
+.hxd div{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.08);font-size:13.5px;line-height:1.55}
+.hxd div:last-child{border-bottom:1px solid rgba(255,255,255,.08)}
+.hxd dt{font-weight:700;color:var(--gold-2);font-size:13px}
+.hxd dd{margin:0;color:var(--ink-2)}
+.hxa{display:flex;gap:8px;margin-top:16px}
+.hxa button{flex:1;height:48px;border:1px solid rgba(255,255,255,.18);background:transparent;color:var(--ink);font-size:14.5px;font-weight:700;cursor:pointer}
+.hxa .hxbook{border-color:var(--gold);color:var(--gold-2)}
 </style>
 
 <div class="stage" id="stage">
@@ -731,7 +760,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   <div class="shade"></div>
 
   <div class="top">
-    <div class="brand">SEOHA · SALON</div>
+    <button class="brand" id="hostInfo" type="button" aria-label="서하 소개 보기"><span id="brandT">서하의 살롱</span><i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="6.6"/><path d="M8 7.2v4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".6" fill="currentColor" stroke="none"/></svg></i></button>
     <button class="backB" id="backBtn" aria-label="홈으로 돌아가기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>홈</button>
     <div class="tgroup">
       <button class="tbtn" id="muteBtn" aria-label="소리 끄기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path id="waves" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
@@ -739,6 +768,17 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     </div>
   </div>
 
+  <div class="hxw" id="hostSheet" aria-hidden="true"><div class="hxb" data-x></div>
+    <div class="hxp" role="dialog" aria-label="서하 소개">
+      <div class="hxh"><i id="hsImg"></i><div><small>한남동 · 이름 없는 살롱의 주인</small><b>윤서하</b><p>신의 말을 사람의 말로 옮기는 사람. 빈칸이 있는 사람만 이 문을 찾아온다.</p></div></div>
+      <dl class="hxd">
+        <div><dt>하는 일</dt><dd>사주 여덟 글자에서 비어 있는 기운을 찾아, 그 자리를 채울 수호신을 붙여 준다.</dd></div>
+        <div><dt>말투</dt><dd>돌려 말하지 않는다. 반말이지만 끝까지 네 편이다.</dd></div>
+        <div><dt>다시 만나는 곳</dt><dd>오늘의 운세 · 다음 연애 · 서하의 상담</dd></div>
+      </dl>
+      <div class="hxa"><button type="button" class="hxbook" id="hsBook">세계관 책에서 더 읽기</button><button type="button" data-x>닫기</button></div>
+    </div>
+  </div>
   <div class="sub" id="sub" aria-live="polite"><span class="who" id="who">서하</span><div id="subLines"></div></div>
 
   <!-- choices after line 1 -->
@@ -760,6 +800,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
         <select id="bh" aria-label="태어난 시간"></select>
         <div class="seg" role="group" aria-label="양력 음력"><button id="solar" aria-pressed="true">양력</button><button id="lunar" aria-pressed="false">음력</button></div>
       </div>
+      <div class="seg gseg" id="gSeg" role="group" aria-label="성별"><button id="gF" type="button" aria-pressed="false">여성</button><button id="gM" type="button" aria-pressed="false">남성</button></div>
       <p class="hint">체험판은 입력값으로 간이 명식을 계산합니다. 음력 변환은 정식 버전에서 지원합니다.</p>
     </div>
     <button class="choice primary" id="birthGo">알려주기</button>
@@ -768,12 +809,18 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   <!-- worry -->
   <div class="panel" id="pWorry">
     <div class="sheet">
-      <h3>누구 때문에 왔어?</h3>
+      <h3>오늘은 뭐가 궁금해서 왔어?</h3>
       <div class="chips" id="chips">
         <button class="chip" aria-pressed="false">그 사람 마음</button>
         <button class="chip" aria-pressed="false">재회</button>
         <button class="chip" aria-pressed="false">새 인연</button>
+        <button class="chip" aria-pressed="false">결혼</button>
         <button class="chip" aria-pressed="false">일 · 이직</button>
+        <button class="chip" aria-pressed="false">돈 · 재물</button>
+        <button class="chip" aria-pressed="false">시험 · 합격</button>
+        <button class="chip" aria-pressed="false">건강</button>
+        <button class="chip" aria-pressed="false">올해 운</button>
+        <button class="chip" aria-pressed="false">그냥 내 사주</button>
       </div>
       <input type="text" id="worryText" placeholder="직접 말하기 (선택)" style="margin-top:10px" maxlength="60">
     </div>
@@ -789,6 +836,11 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <div class="card">
       <div class="hero" id="rHero"><span class="tag">나의 수호신 카드</span><div class="nm"><small id="rGod"></small><b id="rName"></b></div></div>
       <div class="body">
+        <div class="sec gwhy"><h4>수호신 카드</h4>
+          <div><b>빈칸을 채우는 신</b><span>내 사주 여덟 글자 가운데 비어 있는 기운을 맡은 신이에요.</span></div>
+          <div><b>매일 아침 미션</b><span>그 기운을 채우는 색 · 방향 · 행동을 하루 하나씩 보내 줘요.</span></div>
+          <div><b>언제든 다시</b><span>카드는 홈 맨 위에 남아서 오늘의 운세와 함께 다시 볼 수 있어요.</span></div>
+        </div>
         <div class="sec"><h4>나의 명식</h4><div class="pillars" id="rPillars"></div></div>
         <div class="sec"><h4>오행 밸런스</h4><div class="bars" id="rBars"></div></div>
         <div class="sec"><div class="mission"><div class="k">내일 08:00 · 첫 개운 미션</div><p id="rMission"></p><div class="lock">알림을 켜면 아침에 열립니다</div></div></div>
@@ -1088,8 +1140,8 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 <script>
 (()=>{
 const $=id=>document.getElementById(id);
-const HOST=/*HOST*/{id:'seoha',name:'서하',intro:'v/intro.mp4',introPoster:'img/intro0.jpg',kicker:'한남동 · 이름 없는 살롱',lead:'문 너머에서 누군가 기다리고 있다.',title:'오방사주 · 서하의 살롱',brand:'SEOHA · SALON',clips:'v/',poster:'img/seoha.jpg',
-  c1a:'(여기 어디지…?)',c1b:'네… (조심스럽게 앉는다)',worry:'누구 때문에 왔어?',pay:'서하의 상담 이어서 보기 · 29,000원',
+const HOST=/*HOST*/{id:'seoha',name:'서하',intro:'v/intro.mp4',introPoster:'img/intro0.jpg',kicker:'한남동 · 이름 없는 살롱',lead:'문 너머에서 누군가 기다리고 있다.',title:'오방사주 · 서하의 살롱',brand:'서하의 살롱',clips:'v/',poster:'img/seoha.jpg',
+  c1a:'(여기 어디지…?)',c1b:'네… (조심스럽게 앉는다)',worry:'오늘은 뭐가 궁금해서 왔어?',pay:'서하의 상담 이어서 보기 · 29,000원',
   lines:{t1:['왔네.','문 닫고, 이리 와 앉아.'],t1a:['사주 보는 데야.','긴장 풀어. 안 잡아먹어.'],t1b:['말 잘 듣네.','그런 애가 운도 잘 풀려.'],
     t2:['생년월일이랑 태어난 시간.','모르면 모른다고 해.'],t3:['흠…','너 요즘 혼자 참는 거 많지.','얼굴에 다 써 있어.'],t4:['그래서.','누구 때문에 왔어?'],
     t5:['네 사주에 빠진 기운이 하나 있네.','그걸 채워줄 애를 붙여줄게.'],t6:['내일 아침 여덟 시,','그 아이가 첫 개운 미션을 보낼 거야.','알림 켜 둬.']},
@@ -1101,7 +1153,16 @@ const LINES=HOST.lines;
 const FALLBACK_DUR=Object.assign({intro:6,idle:5,rv:5},HOST.dur);
 const POSTER={host:HOST.poster};
 // host-specific copy
-document.title=HOST.title; document.querySelector('.brand').textContent=HOST.brand; $('who').textContent=HOST.name;
+document.title=HOST.title; $('brandT').textContent=HOST.brand; $('who').textContent=HOST.name;
+
+/* 서하 소개: 왼쪽 위 이름표를 누르면 아래에서 시트 */
+(function(){ const sh=$('hostSheet'); if(!sh) return; const open=()=>{ $('hsImg').style.backgroundImage=`url('${HOST.poster||'img/seoha.jpg'}')`; sh.classList.add('on'); sh.setAttribute('aria-hidden','false'); };
+  const close=()=>{ sh.classList.remove('on'); sh.setAttribute('aria-hidden','true'); };
+  $('hostInfo').addEventListener('click',e=>{ e.stopPropagation(); open(); });
+  sh.addEventListener('click',e=>e.stopPropagation()); sh.addEventListener('pointerdown',e=>e.stopPropagation());
+  sh.querySelectorAll('[data-x]').forEach(x=>x.addEventListener('click',close));
+  $('hsBook').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} location.href='book.html#p=9'; };
+  window.openHostInfo=open; })();
 $('c1a').textContent=HOST.c1a; $('c1b').textContent=HOST.c1b; document.querySelector('#pWorry h3').textContent=HOST.worry; $('ctaPay').textContent=HOST.pay; document.querySelector('.start .kicker').textContent=HOST.kicker; document.querySelector('.start p').textContent=HOST.lead;
 const GODS={
   wood:{h:'靑龍',n:'하람',el:'木',dir:'동쪽',c:'var(--wood)',label:'목(木)',desc:'동쪽을 지키는 청룡 · 새 시작과 다음 인연',mission:'초록색 하나 걸치고, 동쪽으로 딱 10분만 걸어.'},
@@ -1224,6 +1285,8 @@ function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTi
   HN.forEach((h,i)=>bh.add(new Option(h,i)));
   $('solar').onclick=()=>{$('solar').setAttribute('aria-pressed','true');$('lunar').setAttribute('aria-pressed','false');};
   $('lunar').onclick=()=>{$('lunar').setAttribute('aria-pressed','true');$('solar').setAttribute('aria-pressed','false');};
+  ['gF','gM'].forEach(id=>$(id).onclick=()=>{ $('gF').setAttribute('aria-pressed',id==='gF'?'true':'false'); $('gM').setAttribute('aria-pressed',id==='gM'?'true':'false'); $('gSeg').classList.remove('need'); });
+  { const m0=loadMe(); if(m0&&(m0.g==='f'||m0.g==='m')) $(m0.g==='f'?'gF':'gM').setAttribute('aria-pressed','true'); }
   $('chips').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{$('chips').querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed','false'));c.setAttribute('aria-pressed','true');});
 })();
 
@@ -1255,9 +1318,11 @@ async function sceneOne(){ await play('t1',{next:'idle'}); await idle(); panel('
 async function afterChoice(k){ panel(null); await play(k,{next:'t2'}); await askBirth(); }
 async function askBirth(){ await play('t2',{next:'idle'}); await idle('t3'); panel('pBirth'); }
 async function afterBirth(){
+  const gv=$('gF').getAttribute('aria-pressed')==='true'?'f':$('gM').getAttribute('aria-pressed')==='true'?'m':null;
+  if(!gv){ const g=$('gSeg'); g.classList.remove('need'); void g.offsetWidth; g.classList.add('need'); g.scrollIntoView({block:'center',behavior:'smooth'}); return; }
   panel(null);
   const y=+$('by').value,m=+$('bm').value,d=+$('bd').value,h=$('bh').value; S=calc(y,m,d,h==='x'?null:+h);
-  saveMe({y,m,d,h:h==='x'?null:+h,cal:'s'});
+  saveMe({y,m,d,h:h==='x'?null:+h,cal:'s',g:gv});
   fetchClip('rv_'+S.low);
   await play('t3',{next:'t4'}); await play('t4',{next:'idle'}); await idle('t5'); panel('pWorry');
 }

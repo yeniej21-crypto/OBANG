@@ -20,9 +20,10 @@
 .mi .x{position:absolute;right:14px;top:calc(env(safe-area-inset-top,0px) + 14px);border:0;background:none;color:rgba(255,255,255,.7);font:500 12.5px/1 'Noto Sans KR',sans-serif;cursor:pointer;padding:6px}`;
   let pageDone=false;
   const abs=u=>{ try{ return new URL(u,location.href).href; }catch(e){ return u; } };
+  const unpre=()=>document.documentElement.classList.remove('mi-pre');
   function play(o){
-    if(!o.onDone){ if(pageDone) return; pageDone=true; try{ if(location.hash==='#re'||sessionStorage.getItem('obRe')) return; }catch(e){} try{ if(sessionStorage.getItem('skipMI')===abs(o.src)){ sessionStorage.removeItem('skipMI'); return; } }catch(e){} }
-    if(document.querySelector('.mi')) return;
+    if(!o.onDone){ if(pageDone) return; pageDone=true; try{ if(location.hash==='#re'||sessionStorage.getItem('obRe')){ unpre(); return; } }catch(e){} try{ if(sessionStorage.getItem('skipMI')===abs(o.src)){ sessionStorage.removeItem('skipMI'); unpre(); return; } }catch(e){} }
+    if(document.querySelector('.mi')){ unpre(); return; }
     const root=o.root||document.querySelector('.stage')||document.body;
     if(!document.getElementById('miCss')){ const s=document.createElement('style'); s.id='miCss'; s.textContent=css; document.head.appendChild(s); }
     const el=document.createElement('div'); el.className='mi';
@@ -32,7 +33,7 @@
     let closed=false, last=-1, playing=false, ticking=false;
     const close=()=>{ if(closed) return; closed=true; el.classList.add('end'); try{ v.pause(); }catch(e){}
       if(o.onDone){ setTimeout(o.onDone,o.titleHold||900); return; }
-      setTimeout(()=>{ el.classList.add('bye'); if(window.Depth3D) Depth3D.replay(); setTimeout(()=>el.remove(),650); },o.titleHold||900); };
+      setTimeout(()=>{ unpre(); el.classList.add('bye'); if(window.Depth3D) Depth3D.replay(); setTimeout(()=>el.remove(),650); },o.titleHold||900); };
     const tick=()=>{ if(closed) return; let i=-1; (o.subs||[]).forEach((c,j)=>{ if(v.currentTime>=c[0]) i=j; }); if(i!==last){ last=i; sub.classList.remove('on'); if(i>=0) setTimeout(()=>{ sub.textContent=o.subs[i][1]; sub.classList.add('on'); },110); } requestAnimationFrame(tick); };
     v.addEventListener('ended',close); v.addEventListener('timeupdate',()=>{ if(o.end&&v.currentTime>=o.end) close(); });
     v.addEventListener('playing',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(tick); } });

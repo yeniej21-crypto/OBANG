@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>오늘의 당번 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 오늘의 당번 — 그날 일진의 기운을 맡은 미니가 당번. 하루 한 번 출석 도장을 쾅 찍어 주고, 표정 도장 스티커 20장을 모은다.
+   밝은 귀여운 라인(오방 뽑기 · 부적 카드와 같은 한지빛 흰 바탕). 각진 면, 동그라미만 예외. 문장 끝 부호 없음. */
+:root{
+  --brush:'OBrush','Song Myung',serif; --bmj:'Song Myung','Noto Serif KR',serif; --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --paper:#fbf8f3; --paper2:#f4eee4; --ink:#1f1a15; --ink2:#5d544a; --ink3:#8a8178; --red:#c8372d; --gold:#b8862f; --line:rgba(60,40,20,.1);
+  --c:#c8372d; --cp:#f7e0d8; color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#efe9df;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button{font-family:inherit;cursor:pointer}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--paper);overflow:hidden}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;box-shadow:0 30px 80px rgba(60,40,20,.18)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}
+.scr::-webkit-scrollbar{display:none}
+.top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 14px 10px;pointer-events:none}
+.top>*{pointer-events:auto}
+.ib{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.7);display:grid;place-items:center;color:var(--ink)}
+.ib svg{width:18px;height:18px}
+.top b{font-size:12.5px;font-weight:800;letter-spacing:.16em;color:var(--ink2)}
+.stage>.top.tsd b{color:var(--ink2)}
+.wrap{padding:calc(env(safe-area-inset-top,0px) + 64px) 18px calc(env(safe-area-inset-bottom,0px) + 30px);background:radial-gradient(90% 34% at 50% 26%,var(--cp),rgba(251,248,243,0) 70%)}
+.hd .k{font-size:11.5px;font-weight:800;letter-spacing:.2em;color:var(--red)}
+.hd h1{margin:8px 0 4px;font-family:var(--brush);font-weight:400;font-size:46px;line-height:1.08}
+.hd p{margin:0;font-family:var(--bmj);font-size:16px;color:var(--ink2)}
+
+/* 오늘 당번 */
+.duty{display:flex;align-items:center;gap:14px;margin-top:20px;padding:14px 16px 14px 14px;background:#fff}
+.duty .av{flex:none;width:64px;height:64px;border-radius:50%;background:#f3ede3 50% 16%/170% no-repeat;box-shadow:0 0 0 3px #fff,0 0 0 4px var(--c)}
+.duty small{display:block;font-size:11.5px;color:var(--ink3);letter-spacing:.02em}
+.duty b{display:block;margin-top:3px;font-family:var(--serif);font-weight:900;font-size:19px}
+.duty b em{font-style:normal;color:var(--c)}
+.duty span{display:block;margin-top:3px;font-size:12.5px;color:var(--ink2)}
+
+/* 도장판 */
+.board{margin-top:10px;padding:14px 14px 16px;background:#fff}
+.board h3{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px;font-size:13px;font-weight:700;color:var(--ink2)}
+.board h3 small{font-weight:500;font-size:11.5px;color:var(--ink3)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.days div{position:relative;aspect-ratio:1;background:#f6f1e8;display:flex;align-items:flex-end;justify-content:center}
+.days div i{position:absolute;inset:2px;background:center/contain no-repeat;filter:drop-shadow(0 1px 2px rgba(60,40,20,.25));transform:rotate(-4deg)}
+.days div span{position:relative;z-index:2;font-size:10.5px;font-weight:700;color:#b5ab9d;padding-bottom:3px}
+.days div.has span{color:transparent}
+.days div.to{box-shadow:inset 0 0 0 1.5px var(--c)}
+.days div.to:not(.has) span{color:var(--c)}
+.days div.fut span{color:#d3cabc}
+.board .rw{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:var(--ink3)}
+.board .rw b{color:var(--ink);font-weight:700}
+.board .rw i{flex:none;width:18px;height:28px;background:url('img/card/wood.jpg') center/cover;box-shadow:0 2px 5px rgba(60,40,20,.2)}
+
+/* 도장 받기 */
+.cta{display:block;width:100%;height:54px;margin-top:14px;border:0;background:var(--ink);color:#fff;font-size:16px;font-weight:800;letter-spacing:.02em}
+.cta:disabled{background:#e7e0d5;color:var(--ink3);cursor:default}
+.demo{display:block;margin:10px auto 0;border:0;background:none;color:var(--ink3);font-size:12px;text-decoration:underline;text-underline-offset:3px}
+
+/* 받은 도장 */
+.got{display:none;margin-top:18px;text-align:center}
+.got.on{display:block}
+.stamp{position:relative;width:min(62vw,236px);aspect-ratio:1;margin:0 auto;background:center/contain no-repeat;filter:drop-shadow(0 10px 16px rgba(60,40,20,.22))}
+.stamp.hit{animation:hit .62s cubic-bezier(.2,.8,.2,1) both}
+@keyframes hit{0%{transform:scale(1.9) rotate(-14deg);opacity:0}55%{transform:scale(.9) rotate(-3deg);opacity:1}75%{transform:scale(1.04) rotate(-5deg)}100%{transform:scale(1) rotate(-4deg)}}
+.shake{animation:shk .28s .3s linear}
+@keyframes shk{25%{transform:translate(2px,-1px)}50%{transform:translate(-2px,1px)}75%{transform:translate(1px,1px)}}
+.ex{display:inline-block;margin-top:12px;font-size:11.5px;font-weight:800;letter-spacing:.14em;padding:5px 10px;background:var(--c);color:#fff}
+.say{position:relative;margin:12px 6px 0;padding:14px 16px;background:#fff;font-family:var(--bmj);font-size:18.5px;line-height:1.5}
+.say small{display:block;margin-top:6px;font-family:var(--sans);font-size:12px;color:var(--ink3)}
+.row2{display:flex;gap:8px;margin-top:12px}
+.btn{flex:1;height:48px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:800;font-size:14.5px}
+.btn.pr{border:0;background:var(--ink);color:#fff}
+
+/* 도감 */
+.dex{margin-top:24px}
+.dex h3{display:flex;justify-content:space-between;align-items:baseline;margin:0 2px 10px;font-size:13px;font-weight:700;color:var(--ink2)}
+.dex h3 small{font-weight:500;color:var(--ink3)}
+.dx{display:grid;grid-template-columns:44px repeat(4,1fr);gap:5px;align-items:center}
+.dx .nm{font-size:11.5px;font-weight:700;color:var(--ink2);line-height:1.3}
+.dx .nm small{display:block;font-family:var(--serif);font-weight:900;font-size:14px;color:var(--cc)}
+.dx .cl{position:relative;aspect-ratio:1;background:#fff}
+.dx .cl i{position:absolute;inset:4px;background:center/contain no-repeat;filter:drop-shadow(0 1px 2px rgba(60,40,20,.2))}
+.dx .cl.lock i{filter:grayscale(1) brightness(1.6) contrast(.3);opacity:.4}
+.dx .cl.new::after{content:"NEW";position:absolute;top:3px;right:3px;font-size:8.5px;font-weight:800;padding:1px 3px;background:var(--red);color:#fff}
+.dxh{display:grid;grid-template-columns:44px repeat(4,1fr);gap:5px;margin-bottom:5px;font-size:10.5px;font-weight:700;color:var(--ink3);text-align:center}
+.nb{margin:16px 2px 0;font-size:11.5px;line-height:1.65;color:var(--ink3)}
+
+.sheet{position:absolute;inset:0;z-index:90;background:rgba(20,16,12,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px}
+.sheet.on{display:flex}
+.sheet img{max-height:70vh;max-width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.sheet .row2{width:100%;max-width:330px;margin:0}
+.toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 90px);transform:translateX(-50%);z-index:95;background:rgba(31,26,21,.92);color:#fff;font-size:13.5px;padding:10px 16px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>OBANG · 오늘의 당번</b></div>
+  <div class="scr" id="scr"><div class="wrap" id="wrap">
+    <div class="hd"><div class="k">NEW · 매일 출석 도장</div><h1>오늘의 당번</h1><p>하루 한 번, 당번 미니가 도장을 쾅</p></div>
+
+    <div class="duty"><div class="av" id="dAv"></div><div><small id="dK"></small><b id="dT"></b><span id="dS"></span></div></div>
+
+    <div class="board"><h3>이번 주 도장판 <small id="bN"></small></h3><div class="days" id="days"></div>
+      <div class="rw"><i id="rwI"></i><span>일주일을 다 채우면 <b>홀로 부적 카드</b> 한 장</span></div></div>
+
+    <button class="cta" id="go" type="button">도장 받기</button>
+
+    <div class="got" id="got">
+      <div class="stamp" id="stamp"></div>
+      <span class="ex" id="ex"></span>
+      <div class="say"><span id="say"></span><small id="why"></small></div>
+      <div class="row2"><button class="btn pr" id="save" type="button">스티커 저장</button><button class="btn" id="toDex" type="button">도감 보기</button></div>
+    </div>
+    <button class="demo" id="next" type="button" hidden>체험판 · 다음 날로 넘겨 보기</button>
+
+    <div class="dex" id="dex"><h3>도장 스티커 도감 <small id="dxN"></small></h3>
+      <div class="dxh"><span></span><span>신남</span><span>파이팅</span><span>꾸벅</span><span>삐짐</span></div>
+      <div class="dx" id="dx"></div></div>
+    <p class="nb">당번은 그날 일진(日辰)의 천간 기운을 맡은 미니가 서요. 표정은 그날의 흐름으로 정해지고, 내 사주에 모자란 기운이 당번인 날엔 꼭 웃는 얼굴이 나와요</p>
+  </div></div>
+  <div class="sheet" id="sheet"><img id="shImg" alt="도장 스티커 이미지"><div class="row2"><button class="btn pr" id="shDl" type="button">이미지 받기</button><button class="btn" id="shX" type="button">닫기</button></div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const ELK=['wood','fire','earth','metal','water'];
+const EL={wood:{k:'木',n:'하람',c:'#3f9f6e',p:'#e2f1e7',w:'나무'},fire:{k:'火',n:'이안',c:'#c8432f',p:'#f7e0d8',w:'불'},earth:{k:'土',n:'도준',c:'#b8862f',p:'#f4ead0',w:'흙'},metal:{k:'金',n:'시온',c:'#7d8591',p:'#eceef1',w:'쇠'},water:{k:'水',n:'재이',c:'#2f4a7a',p:'#dfe5ef',w:'물'}};
+const EXK=['joy','cheer','sleepy','pout'], EXN={joy:'신남',cheer:'파이팅',sleepy:'꾸벅',pout:'삐짐'};
+const SAY={
+  wood:{joy:'오늘 너 보자마자 싹이 났어',cheer:'좋아, 오늘도 한 뼘 자랐어',sleepy:'조금 쉬어도 돼. 뿌리는 쉬면서 자라',pout:'어제 물 안 마셨지. 오늘은 꼭'},
+  fire:{joy:'왔네. 오늘 좀 뜨겁겠는데',cheer:'이 기세 그대로 가자',sleepy:'불씨는 안 꺼졌어. 잠깐 숨 고르는 중',pout:'늦었잖아. 그래도 도장은 찍어 줄게'},
+  earth:{joy:'오늘도 와 줬네. 든든하다',cheer:'차곡차곡, 벌써 이만큼',sleepy:'천천히 해도 돼. 나는 여기 있어',pout:'밥은 먹고 다니는 거지'},
+  metal:{joy:'딱 맞춰 왔네. 오늘 좋다',cheer:'깔끔해. 이대로만 가',sleepy:'오늘은 비워 두는 날로 하자',pout:'어제 그 일, 아직 정리 안 했지'},
+  water:{joy:'기다렸어. 오늘은 물 흐르듯',cheer:'잘하고 있어. 조용히 멀리 가자',sleepy:'졸리면 자. 꿈에서 봐',pout:'또 혼자 삼켰지. 오늘은 말해 봐'}};
+const img=(el,ex)=>`img/stamp/${el}_${ex}.webp`;
+const WD='일월화수목금토';
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1800); }
+function me(){ try{ return JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){ return null; } }
+function hash(s){ let h=2166136261; for(const ch of s){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; }
+function load(){ try{ return JSON.parse(localStorage.getItem('obStamp')||'null')||{days:{},dex:{},off:0}; }catch(e){ return {days:{},dex:{},off:0}; } }
+function saveSt(){ try{ localStorage.setItem('obStamp',JSON.stringify(ST)); }catch(e){} }
+let ST=load(); ST.days=ST.days||{}; ST.dex=ST.dex||{}; ST.off=ST.off||0;
+const key=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+function today(){ const d=new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate()+ST.off); return d; }
+/* 당번: 그날 일진 천간의 기운 */
+function duty(d){ const S=window.Saju; try{ const p=S.dayPillar(d.getFullYear(),d.getMonth()+1,d.getDate()); return {el:ELK[S.stEl(p[0])],gz:S.GAN[p[0]]+S.JI[p[1]],gzK:S.GAN_K[p[0]]+S.JI_K[p[1]]}; }catch(e){ return {el:ELK[d.getDate()%5],gz:'',gzK:''}; } }
+/* 내 사주에서 가장 모자란 기운 */
+function lowEl(){ /* 홈에서 계산한 '채울 기운'과 맞춘다 */ try{ const o=JSON.parse(sessionStorage.getItem('obLow')||'null'); if(o&&o.k&&o.cnt) return o.k; }catch(e){}
+  const m=me(), S=window.Saju; if(!m||!m.y||!S) return null; try{ let s={y:m.y,m:m.m,d:m.d}; if(m.cal==='l'){ s=S.lunarToSolar(m.y,m.m,m.d,false)||s; } const P=S.pillars(s.y,s.m,s.d,m.h==null?null:+m.h), c=S.elCount(P); let lo=0; c.forEach((v,i)=>{ if(v<c[lo]) lo=i; }); return ELK[lo]; }catch(e){ return null; } }
+/* 표정: 모자란 기운이 당번인 날은 신남, 나머지는 그날 흐름(날짜 · 이름으로 고정) */
+function pickEx(d,el){ const lo=lowEl(); if(lo===el) return {ex:'joy',low:true}; const m=me(), r=hash(key(d)+'|'+((m&&m.name)||'')+'|'+((m&&m.y)||''))%100; return {ex:r<25?'joy':r<65?'cheer':r<85?'sleepy':'pout',low:false}; }
+function weekOf(d){ const s=new Date(d); const w=(s.getDay()+6)%7; s.setDate(s.getDate()-w); return [...Array(7)].map((_,i)=>{ const x=new Date(s); x.setDate(s.getDate()+i); return x; }); }
+
+function render(){
+  const d=today(), k=key(d), du=duty(d), e=EL[du.el], got=ST.days[k];
+  document.documentElement.style.setProperty('--c',e.c); document.documentElement.style.setProperty('--cp',e.p);
+  $('dAv').style.backgroundImage=`url('img/mini/${du.el}.jpg')`;
+  $('dK').textContent=`${d.getMonth()+1}월 ${d.getDate()}일 ${WD[d.getDay()]}요일${du.gz?' · 일진 '+du.gz:''}`;
+  $('dT').innerHTML=`오늘 당번은 <em>${e.k} ${e.n}</em>`;
+  $('dS').textContent=du.gz?`일진 첫 글자 ${du.gzK[0]}(${du.gz[0]})${'병정경신임'.includes(du.gzK[0])||'갑을'.includes(du.gzK[0])?'이':'가'} ${e.w}의 기운이라서`:`오늘은 ${e.w}의 기운`;
+  const wk=weekOf(d); let n=0;
+  $('days').innerHTML=wk.map(x=>{ const kk=key(x), s=ST.days[kk], to=kk===k, fut=x>d&&!to; if(s) n++; return `<div class="${s?'has':''} ${to?'to':''} ${fut?'fut':''}">${s?`<i style="background-image:url('${img(s.el,s.ex)}')"></i>`:''}<span>${to&&!s?'오늘':WD[x.getDay()]}</span></div>`; }).join('');
+  $('bN').textContent=`${n} / 7`;
+  const lo=lowEl(); $('rwI').style.backgroundImage=`url('img/card/${lo||'wood'}.jpg')`;
+  $('go').disabled=!!got; $('go').textContent=got?'오늘 도장 완료 · 내일 또 만나요':`${e.n}에게 도장 받기`;
+  $('next').hidden=!got;
+  if(got) showGot(got,false); else $('got').classList.remove('on');
+  drawDex();
+}
+function showGot(s,anim){ const e=EL[s.el]; $('got').classList.add('on');
+  const st=$('stamp'); st.style.backgroundImage=`url('${img(s.el,s.ex)}')`; st.classList.remove('hit'); if(anim){ void st.offsetWidth; st.classList.add('hit'); $('wrap').classList.remove('shake'); void $('wrap').offsetWidth; $('wrap').classList.add('shake'); } else st.style.transform='rotate(-4deg)';
+  $('ex').textContent=`${e.n} · ${EXN[s.ex]}`; $('say').textContent=SAY[s.el][s.ex];
+  $('why').textContent=s.low?`내 사주에 모자란 ${e.k} 기운이 당번인 날`:`${EXN[s.ex]} 도장 · ${s.first?'도감에 새로 추가':'이미 모은 도장'}`; }
+function drawDex(){ const c=Object.keys(ST.dex).length; $('dxN').textContent=`${c} / 20`;
+  const last=(()=>{ const v=ST.days[key(today())]; return v?v.el+'_'+v.ex:''; })();
+  $('dx').innerHTML=ELK.map(el=>`<div class="nm" style="--cc:${EL[el].c}"><small>${EL[el].k}</small>${EL[el].n}</div>`+EXK.map(ex=>{ const id=el+'_'+ex, has=ST.dex[id]; return `<div class="cl ${has?'':'lock'} ${has&&id===last&&ST.days[key(today())].first?'new':''}"><i style="background-image:url('${img(el,ex)}')"></i></div>`; }).join('')).join(''); }
+
+$('go').onclick=()=>{ const d=today(), k=key(d); if(ST.days[k]) return; const du=duty(d), p=pickEx(d,du.el), id=du.el+'_'+p.ex, first=!ST.dex[id];
+  const s={el:du.el,ex:p.ex,low:p.low,first}; ST.days[k]=s; if(first) ST.dex[id]=k; saveSt();
+  try{ navigator.vibrate&&navigator.vibrate(35); }catch(e){}
+  render(); showGot(s,true); setTimeout(()=>{ const g=$('got'); $('scr').scrollTo({top:g.offsetTop-90,behavior:'smooth'}); },120); };
+$('next').onclick=()=>{ ST.off++; saveSt(); render(); $('scr').scrollTo({top:0,behavior:'smooth'}); toast('하루가 지났어요 · 새 당번이 왔어요'); };
+$('toDex').onclick=()=>$('scr').scrollTo({top:$('dex').offsetTop-70,behavior:'smooth'});
+
+/* 스티커 이미지: 한지 바탕에 도장 + 이름 · 날짜 */
+function loadImg(src){ return new Promise((ok,no)=>{ const i=new Image(); i.onload=()=>ok(i); i.onerror=no; i.src=src; }); }
+async function stickerPng(){ const d=today(), s=ST.days[key(d)]; if(!s) throw 0; const e=EL[s.el], cv=document.createElement('canvas'); cv.width=1080; cv.height=1350; const x=cv.getContext('2d');
+  x.fillStyle='#fbf8f3'; x.fillRect(0,0,1080,1350); const g=x.createRadialGradient(540,560,40,540,560,620); g.addColorStop(0,e.p); g.addColorStop(1,'rgba(251,248,243,0)'); x.fillStyle=g; x.fillRect(0,0,1080,1350);
+  const im=await loadImg(img(s.el,s.ex)); x.save(); x.translate(540,600); x.rotate(-4*Math.PI/180); x.shadowColor='rgba(60,40,20,.25)'; x.shadowBlur=36; x.shadowOffsetY=16; x.drawImage(im,-340,-340,680,680); x.restore();
+  x.textAlign='center'; x.fillStyle=e.c; x.font='800 30px "Noto Sans KR"'; x.fillText(`${e.k} ${e.n} · ${EXN[s.ex]}`.split('').join(' '),540,1030);
+  x.fillStyle='#1f1a15'; x.font='400 50px "Song Myung"'; x.fillText(SAY[s.el][s.ex],540,1110);
+  x.fillStyle='#8a8178'; x.font='500 28px "Noto Sans KR"'; x.fillText(`오방사주 · 오늘의 당번 · ${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}`,540,1250);
+  return cv.toDataURL('image/png'); }
+function sheet(u,name){ $('shImg').src=u; $('sheet').classList.add('on'); $('shDl').onclick=()=>{ const a=document.createElement('a'); a.href=u; a.download=name; a.click(); }; }
+$('save').onclick=async()=>{ try{ sheet(await stickerPng(),'obang-stamp.png'); }catch(e){ toast('이미지를 만들지 못했어요'); } };
+$('shX').onclick=()=>$('sheet').classList.remove('on');
+$('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+render();
+</script>
+<script src="archive.js"></script>
+<script src="depth3d.js"></script>
+</body>
+</html>

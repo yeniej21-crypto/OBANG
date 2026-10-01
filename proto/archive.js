@@ -33,6 +33,8 @@
       get:()=>({h:tx('#mT'),s:tx('#sc'),sub:`${tx('#dT')} · ${tx('#dGz')}일`,lines:[tx('#sayT'),tx('#kw')]}),re:true,auto:true},
     sinnyeon:{menu:'2027 신년운세',img:'img/halmae.jpg',form:'#sIntro',ready:()=>vis('#sRep')&&tx('#ySc'),
       get:()=>({h:T(($('#yLbl')||{}).firstChild?.textContent)||'2027년 총운',s:tx('#ySc').split('/')[0],sub:tx('#rTitle'),lines:[tx('#qTop'),tx('#yTx').slice(0,90)]}),re:true},
+    myeongri:{menu:'2027 명리 감정서',img:'img/soheon.jpg',form:'#sIntro',ready:()=>vis('#sRep')&&tx('#d4'),
+      get:()=>({h:T(($('#d4 .yr .lb b')||{}).textContent)||'2027 명리 감정서',s:tx('#d4 .yr .sc').split('/')[0],sub:'소헌 선생의 감정서',lines:[tx('#dHead .first p'),tx('#d4 .p').slice(0,90)]}),re:true},
     lifetime:{menu:'평생 사주',img:'img/jeongtong.jpg',form:'#sIntro',ready:()=>vis('#sRep')&&tx('#qTop'),
       get:()=>({h:tx('#qTop').split('.')[0],s:'',sub:tx('#rTitle'),lines:[tx('#qTop'),tx('#giT').slice(0,90)]}),re:true},
     taegil:{menu:'택일',img:'img/taegil.jpg',form:'#sIn',ready:()=>vis('#sOut')&&tx('#oT'),

@@ -239,6 +239,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .subPrice b{font-size:28px;font-weight:900}.subPrice span{color:var(--ink-3);font-size:14px}
 /* main home (poster-led, black) */
 .stage.homeMode .top{display:none}
+.home:not(.on):not(.vis){display:none}
 .home{position:absolute;inset:0;z-index:44;overflow-y:auto;background:#000;opacity:0;pointer-events:none;transition:opacity .5s;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 110px);scrollbar-width:none}
 .home::-webkit-scrollbar{display:none}
 .home.on{opacity:1;pointer-events:auto}
@@ -819,7 +820,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <div class="det" id="archD"><div class="pn"><div class="hv" id="adHv"><div class="t"><small id="adK"></small><h3 id="adH"></h3></div></div><div class="bd"><div class="sb" id="adS"></div><div id="adP"></div></div><div class="bt"><button id="adDel" type="button">지우기</button><button class="pr" id="adGo" type="button">결과 다시 열기</button></div></div></div>
   </div>
   <div class="op" id="op" aria-label="오방사주 오프닝">
-    <video class="opTake" id="opTake" muted playsinline preload="auto" src="v/op_take.mp4"></video><div id="opSls"></div><div class="opVig"></div><div class="opSmoke"></div><div class="opFl" id="opFl"></div><div class="opRing" id="opRing"></div>
+    <video class="opTake" id="opTake" muted playsinline preload="auto" poster="img/op_take_0.jpg" src="v/op_take.mp4"></video><div id="opSls"></div><div class="opVig"></div><div class="opSmoke"></div><div class="opFl" id="opFl"></div><div class="opRing" id="opRing"></div>
     <svg class="opMark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" stroke-width="2.4"/><path d="M28 29 H72" stroke-width="5.2"/><path d="M47 29 L41 71" stroke-width="5.2"/><path d="M33 49 H64 L61 71" stroke-width="5.2"/><path d="M22 71 H78" stroke-width="5.2"/></svg>
     <div class="opGate"><b>문을 두드려</b><small>🔊 소리를 켜고 화면을 눌러줘</small></div><div class="opCap" id="opCap">다섯 신이 깨어난다</div>
     <div class="opEnd"><div class="bgS"></div><div class="bgF"></div><div class="bgG"></div><div class="emb" id="opEmb"></div><div class="opDots" id="opDots"></div><h2>네 사주,<br>한 칸이 비어 있어.</h2><p>그 빈자리, 신이 채워줄게.</p><div class="opRes" id="opRes"></div></div>
@@ -1140,16 +1141,16 @@ function fetchClip(k){
 }
 const srcOf=k=>SRC[k]||V[k];
 // verify this browser can play blob: media; otherwise fall back to (now cached) file URLs
-const blobCheck=fetchClip('idle').then(()=>new Promise(res=>{
+let _bc=null; const blobCheck=()=>_bc||(_bc=fetchClip('idle').then(()=>new Promise(res=>{
   if(!String(SRC.idle).startsWith('blob:')) return res();
   const t=document.createElement('video'); t.muted=true; t.preload='auto'; let fin=false;
   const end=ok=>{ if(fin) return; fin=true; if(!ok){ useBlob=false; for(const k in SRC) if(String(SRC[k]).startsWith('blob:')) SRC[k]=V[k]; } t.removeAttribute('src'); res(); };
   t.onloadedmetadata=()=>end(true); t.onerror=()=>end(false); t.src=SRC.idle; setTimeout(()=>end(false),3000);
-}));
+})));
 function prep(v,key){
   const gen=(v._gen||0)+1; v._gen=gen; v._key=key; v._ready=false;
   return (async()=>{
-    await fetchClip(key); await blobCheck; if(v._gen!==gen) return;
+    await fetchClip(key); await blobCheck(); if(v._gen!==gen) return;
     await new Promise(res=>{
       let ok=false; const done=()=>{ if(ok) return; ok=true; v.oncanplay=null; v.onerror=null; res(); };
       v._err=false; v.onerror=()=>{ v._err=true; done(); }; v.oncanplay=done;
@@ -1225,7 +1226,7 @@ let S=null;
 /* background music: one seamless loop, level follows the scene (loud in intro, ducked under speech) */
 const BGM_LV={intro:.14,talk:.03,idle:.07,reveal:.12,result:.06};
 let AC=null,bgmGain=null,bgmLevel=BGM_LV.intro,bgmBytes=null;
-fetch('a/bgm.mp3').then(r=>r.ok?r.arrayBuffer():null).then(b=>{bgmBytes=b;}).catch(()=>{});
+setTimeout(()=>afterOpening.then(()=>{ if(!bgmBytes) fetch('a/bgm.mp3').then(r=>r.ok?r.arrayBuffer():null).then(b=>{bgmBytes=b;}).catch(()=>{}); }),0);
 function bgm(lv,sec=.8){ bgmLevel=lv; if(!bgmGain) return; const g=bgmGain.gain,t=AC.currentTime; g.cancelScheduledValues(t); g.setValueAtTime(g.value,t); g.linearRampToValueAtTime(muted?0:lv,t+sec); }
 function startBgm(){
   try{
@@ -1442,10 +1443,10 @@ function myChar(){ const el=$('hMyChar'); let me=null; try{ me=JSON.parse(sessio
     if(el.dataset.d3!==src){ if(window.Depth3D) Depth3D.unmount(el); el.dataset.d3=src; el.style.backgroundImage=`url('${src}')`; }
     $('hMyT').innerHTML=`${me.name?me.name+'의':'나의'}<br>사주 캐릭터`; }catch(e){} }
 function showHome(){
-  renderHome(); ov(null); panel(null); clearSubs();
+  renderHome(); if(window.fzLoad){ const f=window.fzLoad; window.fzLoad=null; f(); } ov(null); panel(null); clearSubs();
   ['result','report'].forEach(x=>$(x).classList.remove('on')); $('start').classList.add('off');
   if(hostName){ $('who').textContent=hostName; }
-  subMode(false); $('stage').classList.add('homeMode'); $('home').classList.add('on'); $('tabs').classList.add('on'); $('home').scrollTop=0;
+  subMode(false); $('stage').classList.add('homeMode'); $('home').classList.add('vis'); void $('home').offsetWidth; $('home').classList.add('on'); $('tabs').classList.add('on'); $('home').scrollTop=0;
   $('tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.t==='home'));
   bgm(BGM_LV.idle,1);
   myChar();
@@ -1532,7 +1533,7 @@ const FZI={
 const FZ=[['past','전생 직업','뭐 하고 살았게','#e8b64f'],['animal','일주 동물','무슨 동물이게','#5fcf95'],['bok','타고난 복','복 게이지 5종','#e8b64f'],['mind','마음의 오행','심리테스트','#ff7a5c'],['bujeok','오늘의 부적','하루 한 장','#dfe5ee'],['tti','띠 궁합','10초 궁합','#ff8fa6']];
 $('fzRow').innerHTML=FZ.map(([k,t,d,c],i)=>`<button class="fzc" type="button" data-f="${k}" style="--ec:${c};--d:${i*.45}s"><span class="fr"><svg class="ic" viewBox="0 0 48 48" fill="none" stroke="url(#fzG)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${FZI[k]}</svg><span class="nm">${t}</span></span><span class="ds">${d}</span></button>`).join('')+'<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="fzG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7e3b4"/><stop offset="1" stop-color="#c9994b"/></linearGradient></defs></svg>';
 /* 소품 그림(img/free/키.jpg)이 있으면 그림 카드로, 없으면 금선 그림 그대로 */
-$('fzRow').querySelectorAll('.fzc').forEach(c=>{ const src=`img/free/${c.dataset.f}.jpg`, im=new Image(); im.onload=()=>{ const fr=c.querySelector('.fr'); fr.style.backgroundImage=`url('${src}')`; fr.classList.add('hasImg'); }; im.src=src; });
+window.fzLoad=()=>$('fzRow').querySelectorAll('.fzc').forEach(c=>{ const src=`img/free/${c.dataset.f}.jpg`, im=new Image(); im.onload=()=>{ const fr=c.querySelector('.fr'); fr.style.backgroundImage=`url('${src}')`; fr.classList.add('hasImg'); }; im.src=src; });
 $('fzRow').onclick=e=>{ const b=e.target.closest('[data-f]'); if(b) goPage('free.html?t='+b.dataset.f); };
 $('fzAll').onclick=()=>goPage('free.html');
 $('ppgGo').onclick=()=>goPage('ppopgi.html');
@@ -1621,9 +1622,9 @@ enter.disabled=skip.disabled=true; enter.textContent='준비 중…';
    예전엔 처음부터 영상 10개를 한꺼번에 받아서 오프닝이 끊기고 느렸음 */
 const afterOpening=new Promise(res=>{ const ot=$('opTake'); let done=false; const go=()=>{ if(!done){ done=true; res(); } };
   let th=null; try{ th=sessionStorage.getItem('toHome'); }catch(e){} if(th==='1') return; /* 메뉴에서 홈으로 돌아올 땐 오프닝·살롱 영상을 받지 않는다 */ if(!ot||!ot.getAttribute('src')) return go();
-  if(ot.readyState>=4) return go(); ot.addEventListener('canplaythrough',go,{once:true}); ot.addEventListener('error',go,{once:true}); setTimeout(go,5000); });
+  if(ot.readyState>=4) return go(); ot.addEventListener('canplaythrough',go,{once:true}); ot.addEventListener('error',go,{once:true}); setTimeout(go,15000); });
 afterOpening.then(async()=>{ for(const k of NEED){ await fetchClip(k); nDone++; upd(); }
-  await blobCheck; back._p=prep(back,'intro'); await back._p; enter.disabled=skip.disabled=false; enter.textContent=lab;
+  await blobCheck(); back._p=prep(back,'intro'); await back._p; enter.disabled=skip.disabled=false; enter.textContent=lab;
   const q=CORE.filter(k=>!NEED.includes(k)); const worker=async()=>{ while(q.length){ const k=q.shift(); await fetchClip(k); nDone++; upd(); } }; await Promise.all([worker(),worker()]); });
 
 /* ---------- 오프닝 v3: 문을 두드리면 다섯 수호신이 차례로 눈을 뜬다 ---------- */
@@ -1673,11 +1674,13 @@ function opHush(sec=1.2){ opDone=true; try{ if(!opOut) return; const t=opAC.curr
   setTimeout(()=>{ opNodes.forEach(n=>{ try{ n.stop(); n.disconnect(); }catch(e){} }); opNodes=[]; try{ opOut.disconnect(); }catch(e){} try{ opAC.suspend(); }catch(e){} },sec*1000+150); }catch(e){} }
 function opStart(){
   const op=$('op');
-  $('opSls').innerHTML=OP_COL.map(([h,e,c,img,src])=>`<div class="opSl" style="--c:${c};background-image:url('${img}')"><video muted playsinline preload="auto" src="${src}"></video><span><b>${e}</b><em>${h}</em></span></div>`).join('');
+  $('opSls').innerHTML=OP_COL.map(([h,e,c,img,src])=>`<div class="opSl" style="--c:${c};background-image:url('${img}')"><video muted playsinline preload="none" data-src="${src}"></video><span><b>${e}</b><em>${h}</em></span></div>`).join('');
   $('opEmb').innerHTML=Array.from({length:16},()=>`<i style="left:${Math.random()*100}%;--dx:${(Math.random()*80-40).toFixed(0)}px;animation-duration:${(6+Math.random()*6).toFixed(1)}s;animation-delay:${(-Math.random()*10).toFixed(1)}s;transform:scale(${(.5+Math.random()).toFixed(2)})"></i>`).join('');
   $('opDots').innerHTML=OP_COL.map(([h,e,c])=>`<i style="--c:${c}">${e}</i>`).join('');
   const sel=$('opYr'); sel.innerHTML='<option value="" selected disabled>태어난 해를 골라줘</option>'; for(let y=2008;y>=1975;y--) sel.add(new Option(y+'년생',y));
   const sls=[...$('opSls').children], vids=sls.map(x=>x.querySelector('video'));
+  /* 신당 영상이 먼저 다 받아진 뒤에 수호신 영상을 받는다 */
+  const slLoad=()=>vids.forEach(v=>{ if(!v.getAttribute('src')){ v.preload='auto'; v.src=v.dataset.src; } }); { const ot=$('opTake'); if(ot.readyState>=4) slLoad(); else { ot.addEventListener('canplaythrough',slLoad,{once:true}); ot.addEventListener('error',slLoad,{once:true}); setTimeout(slLoad,6000); } }
   /* 영상은 미리 컷 시작 지점에 세워 둔다(무음이라 자동 로딩 허용) */
   vids.forEach((v,i)=>{ const at=OP_COL[i][5]; const seek=()=>{ try{ v.currentTime=at; }catch(e){} }; if(v.readyState>=1) seek(); else v.addEventListener('loadedmetadata',seek,{once:true}); });
   const T=[]; const at=(fn,t)=>T.push(setTimeout(()=>{ if(!op._skip) fn(); },t)); const add=(c,t)=>at(()=>op.classList.add(c),t);

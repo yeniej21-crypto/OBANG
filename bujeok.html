@@ -190,6 +190,8 @@ const EL={
   metal:{k:'金',r:'금',n:'시온',god:'백호',godH:'白虎',dirH:'西',dir:'서쪽',num:'4 · 9',color:'흰색',c:'#7d8591',p:'#eceef1',hold:'방울',line:'붉은 선',top:['방울','맑은 소리로 삿된 기운을 쫓는 방울'],sang:'흙 속에서 쇠가 나와요. 노란빛, 도자기가 힘이 돼요',seal:[88.6,7.9],ink:'#b0231a',blend:'multiply'},
   water:{k:'水',r:'수',n:'재이',god:'현무',godH:'玄武',dirH:'北',dir:'북쪽',num:'1 · 6',color:'남색',c:'#2f4a7a',p:'#dfe5ef',hold:'물방울 구슬',line:'은빛 선',top:['달과 비','물의 기운을 모으는 밤의 달과 빗방울'],sang:'쇠에 맺힌 이슬이 물이 돼요. 은빛, 흰 소품이 힘이 돼요',seal:[86.5,8.9],ink:'#e6ecf5',blend:'normal'}};
 Object.keys(EL).forEach(k=>EL[k].img=`img/card/${k}.jpg`);
+/* 기운 × 용도 25장: 미니가 용도 물건(엽전 · 붉은 실 · 엿 · 인삼 · 굴비와 소금)을 들고 있다. 도준 재물은 원래 그림(엽전 항아리) */
+const cimg=(e,u)=>e==='earth'&&u==='money'?'img/card/earth.jpg':`img/card/${e}_${u}.jpg`;
 const ELK=['wood','fire','earth','metal','water'], ELN={wood:'木',fire:'火',earth:'土',metal:'金',water:'水'};
 /* 받침 있으면 이/은/을, 없으면 가/는/를 */
 const bt=w=>{ const c=w.charCodeAt(w.length-1)-0xac00; return c>=0&&c<11172&&c%28!==0; };
@@ -230,7 +232,7 @@ function lowEl(){ /* 홈에서 계산한 '채울 기운'과 맞춘다 */ try{ co
   const m=me(), S=window.Saju; if(!m||!m.y||!S) return null; try{ let s={y:m.y,m:m.m,d:m.d}; if(m.cal==='l'){ s=S.lunarToSolar(m.y,m.m,m.d,false)||s; } const P=S.pillars(s.y,s.m,s.d,m.h==null?null:+m.h), c=S.elCount(P); let lo=0; c.forEach((v,i)=>{ if(v<c[lo]) lo=i; }); return {k:ELK[lo],cnt:c}; }catch(e){ return null; } }
 function render(){ const e=EL[el], m=me(), u=USE[use], r=rarity(), pre=R==null, RR=pre?['등급 미정','q','받는 순간 일반 · 레어 · 홀로가 정해져요']:RAR[r];
   document.documentElement.style.setProperty('--c',e.c); document.documentElement.style.setProperty('--cp',e.p);
-  $('face').style.background=`url('${e.img}') center/cover no-repeat`;
+  $('face').style.background=`url('${cimg(el,use)}') center/cover no-repeat`;
   const sl=$('cS').style; sl.top=e.seal[0]+'%'; sl.height=e.seal[1]+'%'; sl.color=e.ink; sl.mixBlendMode=e.blend;
   $('cMo').innerHTML=moSvg(use,'#fbf1dc'); $('charm').innerHTML=`<svg viewBox="0 0 64 118">${CHARM[use]}</svg>`;
   $('cK').textContent=`${e.k} · ${e.godH} · ${e.dirH}`;
@@ -262,8 +264,8 @@ function drawCol(){ const x=readDex(), ks=Object.keys(x), h=ks.filter(k=>x[k].r=
   $('colN').textContent=`${ks.length} / 25 · 홀로 ${h}장`;
   const H=USEK.map(u=>`<div class="gh">${moSvg(u,'currentColor')}${USE[u][0]}</div>`).join('');
   const C=ELK.map(ek=>USEK.map(uk=>{ const k=ek+'|'+uk, o=x[k], E=EL[ek];
-    return o?`<button type="button" class="c has ${RAR[o.r][1]}${k===fresh?' new':''}" data-k="${k}" style="background-image:url('${E.img}')" aria-label="${E.n}의 ${USE[uk][0]} 부적 · ${RAR[o.r][0]}"><span class="m">${moSvg(uk,'#fbf1dc')}</span>${o.n>1?`<span class="n">×${o.n}</span>`:''}<i>${E.n}</i></button>`
-      :`<div class="c lock" style="--im:url('${E.img}')" aria-label="${E.n}의 ${USE[uk][0]} 부적 · 아직 없음"></div>`; }).join('')).join('');
+    return o?`<button type="button" class="c has ${RAR[o.r][1]}${k===fresh?' new':''}" data-k="${k}" style="background-image:url('${cimg(ek,uk)}')" aria-label="${E.n}의 ${USE[uk][0]} 부적 · ${RAR[o.r][0]}"><span class="m">${moSvg(uk,'#fbf1dc')}</span>${o.n>1?`<span class="n">×${o.n}</span>`:''}<i>${E.n}</i></button>`
+      :`<div class="c lock" style="--im:url('${cimg(ek,uk)}')" aria-label="${E.n}의 ${USE[uk][0]} 부적 · 아직 없음"></div>`; }).join('')).join('');
   $('grid').innerHTML=H+C; fresh=null;
   $('grid').querySelectorAll('.c.has').forEach(b=>b.onclick=()=>viewDex(b.dataset.k,x[b.dataset.k])); }
 function flip(){ $('card').animate([{transform:'rotateY(0)'},{transform:'rotateY(180deg)'},{transform:'rotateY(360deg)'}],{duration:700,easing:'cubic-bezier(.3,.7,.2,1)'}); }
@@ -275,7 +277,7 @@ function draw(){ const D=readDraw(); if(D.n>0&&!D.pend){ more(); return; }
   setTimeout(()=>toast(R===2?'홀로가 나왔어요 · 도감에 담았어요':R===1?'레어가 나왔어요 · 도감에 담았어요':'도감에 담았어요'),720);
   const s=document.querySelector('.scr'); if(s) s.scrollTo({top:0,behavior:'smooth'}); }
 function more(){ const go=()=>{ const D=readDraw(); D.pend=true; saveDraw(D); mode='pick'; R=null; render(); flip(); setTimeout(()=>{ const t=$('pickA'); if(t) t.scrollIntoView({behavior:'smooth',block:'center'}); },300); };
-  if(window.ObPay) ObPay.open({btn:'bjMore',name:'부적 카드 한 장 더',who:'오방',desc:'기운과 용도를 골라 한 장 더 · 등급은 받는 순간 정해져요',price:990,img:EL[el].img,okTitle:'결제가 완료됐어요',okText:'기운과 용도를 고르고 받아 보세요',after:go});
+  if(window.ObPay) ObPay.open({btn:'bjMore',name:'부적 카드 한 장 더',who:'오방',desc:'기운과 용도를 골라 한 장 더 · 등급은 받는 순간 정해져요',price:990,img:cimg(el,use),okTitle:'결제가 완료됐어요',okText:'기운과 용도를 고르고 받아 보세요',after:go});
   else go(); }
 /* 도감 칸을 누르면 그 카드를 이미지로 */
 async function viewDex(k,o){ const s={el,use,R}; const [a,b]=k.split('|'); el=a; use=b; R=o.r; let png=null; try{ png=await cardPng(); }catch(e){} el=s.el; use=s.use; R=s.R;
@@ -285,7 +287,7 @@ $('draw').onclick=draw; $('bjMore').onclick=more;
 
 /* 이미지: 카드 · 배경화면 */
 function loadImg(src){ return new Promise((ok,no)=>{ const i=new Image(); i.onload=()=>ok(i); i.onerror=no; i.src=src; }); }
-async function drawCard(x,X,Y,W,H){ const e=EL[el], m=me(), u=USE[use], r=rarity(); const im=await loadImg(e.img); x.save(); x.beginPath(); x.rect(X,Y,W,H); x.clip(); x.drawImage(im,X,Y,W,H);
+async function drawCard(x,X,Y,W,H){ const e=EL[el], m=me(), u=USE[use], r=rarity(); const im=await loadImg(cimg(el,use)); x.save(); x.beginPath(); x.rect(X,Y,W,H); x.clip(); x.drawImage(im,X,Y,W,H);
   if(r>0){ const g=x.createLinearGradient(X,Y,X+W,Y+H); if(r===2){ ['rgba(255,150,180,.28)','rgba(255,240,150,.28)','rgba(150,255,210,.28)','rgba(150,190,255,.28)','rgba(220,160,255,.28)'].forEach((c,i)=>g.addColorStop(i/4,c)); } else { g.addColorStop(0,'rgba(255,220,140,0)'); g.addColorStop(.5,'rgba(255,225,150,.32)'); g.addColorStop(1,'rgba(255,220,140,0)'); } x.globalCompositeOperation='screen'; x.fillStyle=g; x.fillRect(X,Y,W,H); x.globalCompositeOperation='source-over'; }
   x.restore();
   /* 도장 속 이름(세로) */

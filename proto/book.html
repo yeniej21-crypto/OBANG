@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>팔자에 신이 들었다 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 오방사주 세계관 책 제1권 《팔자에 신이 들었다》 — v4 '살아 있는 팝업북'
+   인물을 배경에서 오려 낸 그림(img/pop/*.webp)이 장을 펼치면 종이에서 일어서고, 액자 위로 머리가 튀어나온다.
+   폰 기울기·마우스에 따라 책 전체와 배경·인물이 다른 깊이로 움직이고, 장마다 기운의 입자가 책 밖으로 흘러나온다.
+   인물을 누르면 그 인물의 영상(눈 뜨는 수호신 · 말하는 고양이)이 액자 속에서 깨어난다. 흰 종이, 글자는 진한 색, 폰트는 홈과 같은 Noto Sans KR. */
+:root{--kr:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--ink:#111;--ink2:#2b2b2b;--ink3:#666;--red:#c8372d;--c:#c8372d;--tx:0;--ty:0;--brush:'OBrush','Noto Sans KR',serif;color-scheme:light}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#0a0908;color:var(--ink);font-family:var(--kr);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word;user-select:none;-webkit-user-select:none;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer}
+.stage{position:relative;width:100%;max-width:460px;height:100%;overflow:hidden;background:radial-gradient(90% 60% at 50% 45%,#2b231c,#0a0908 70%)}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0}}
+.top{position:absolute;left:0;right:0;top:0;z-index:60;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 8px;pointer-events:none}
+.top>*{pointer-events:auto}
+.ib{width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.12);display:grid;place-items:center;color:#fff}
+.ib svg{width:18px;height:18px}
+.top b{flex:1;min-width:0;font-size:13.5px;font-weight:700;color:rgba(255,255,255,.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* 책: 책상 위에 놓인 물건처럼 기울기에 따라 3D로 */
+.desk{position:absolute;left:12px;right:12px;top:calc(env(safe-area-inset-top,0px) + 58px);bottom:calc(env(safe-area-inset-bottom,0px) + 62px);perspective:1400px}
+.book{position:absolute;inset:0;transform-style:preserve-3d;perspective:2400px}
+.book::before{content:"";position:absolute;inset:0;background:#fff;box-shadow:1px 1px 0 #ddd,2px 2px 0 #f5f5f5,3px 3px 0 #d6d6d6,4px 4px 0 #f2f2f2,5px 5px 0 #cfcfcf,0 30px 60px rgba(0,0,0,.6)}
+.leaf{position:absolute;inset:0;transform-origin:0 50%;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,.7,.2,1)}
+.leaf.turned{transform:rotateY(-178deg)}
+.leaf.drag{transition:none}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;background:#fff}
+.back{transform:rotateY(180deg);background:#f3f3f3}
+.shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.22));opacity:0;transition:opacity .9s;z-index:30}
+.leaf.moving .shade{opacity:1}
+
+/* 팝업 액자: 배경은 액자 안에, 인물은 액자 밖으로 */
+.pop{position:absolute;left:16px;right:16px;top:58px;height:44%;z-index:3}
+.win{position:absolute;inset:0;overflow:hidden;background:#111}
+.win .bg{position:absolute;left:-4%;width:108%;top:0;transform:translate(calc(var(--tx)*-9px),calc(var(--sy,-8%) + var(--ty)*-6px)) scale(1.02);filter:blur(var(--bl,2.5px)) brightness(.78) saturate(1.1)}
+.win video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;opacity:0;transition:opacity .5s;z-index:2}
+.win video.on{opacity:1}
+.win video.tk{z-index:3}
+.ib.mu{position:relative}
+.ib.mu.off::after{content:"";position:absolute;left:8px;right:8px;top:50%;height:2px;background:#fff;transform:rotate(-45deg)}
+.fgc{position:absolute;left:-16px;right:-16px;top:-120px;bottom:0;overflow:hidden;perspective:700px;pointer-events:none;z-index:4}
+.fgi{position:absolute;left:16px;right:16px;top:120px;height:calc(100% - 120px);transform-origin:50% 100%;transform:rotateX(60deg) translateY(20px);opacity:0;transition:transform 1s cubic-bezier(.22,.9,.3,1) .3s,opacity .5s .3s}
+.cur .fgi{transform:none;opacity:1}
+.fg{position:absolute;left:0;width:100%;top:0;transform:translate(calc(var(--tx)*14px),calc(var(--sy,-8%) + var(--ty)*8px));filter:drop-shadow(0 16px 18px rgba(0,0,0,.45))}
+.pop.awake .fgi{opacity:0;transition:opacity .4s}
+.fgv{opacity:0;transition:opacity .35s}
+.fgv.on{opacity:1}
+.fgi img.off{opacity:0}
+.tap{position:absolute;right:0;bottom:-26px;font-size:12px;font-weight:700;color:var(--ink3);display:flex;align-items:center;gap:5px;z-index:5}
+.tap i{width:7px;height:7px;border-radius:50%;background:var(--c);}
+@keyframes tp{50%{opacity:.25}}
+.hit{position:absolute;inset:-60px 0 0 0;z-index:6;cursor:pointer}
+.pop.scene .bg{--bl:0px;filter:none}
+/* 여럿이 서 있는 액자 */
+.crowd .fg{width:auto;height:150%;top:auto;bottom:0;left:var(--x);transform:translate(calc(var(--tx)*var(--d,12px)),calc(var(--ty)*6px)) scale(var(--s,1));transform-origin:50% 100%}
+.crowd .fgi .p{position:absolute;inset:0;transform-origin:50% 100%;transform:rotateX(60deg);opacity:0;transition:transform 1s cubic-bezier(.22,.9,.3,1) var(--dl),opacity .5s var(--dl)}
+.cur .crowd .fgi .p{transform:none;opacity:1}
+
+/* 글 */
+.txt{position:absolute;left:22px;right:22px;top:calc(58px + 44% + 32px);bottom:40px;overflow:hidden}
+.ch{font-size:13px;font-weight:900;color:var(--c);letter-spacing:.02em}
+.hd{margin:5px 0 8px;font-weight:900;font-size:26px;line-height:1.25;letter-spacing:-.04em;color:var(--ink);text-wrap:balance}
+.bd{font-size:15px;line-height:1.7;color:var(--ink2);letter-spacing:-.01em}
+.bd p{margin:0 0 8px;opacity:0;transform:translateY(10px);transition:opacity .6s,transform .6s}
+.cur .bd p{opacity:1;transform:none;transition-delay:.55s}
+.cur .bd p:nth-child(2){transition-delay:.7s}.cur .bd p:nth-child(3){transition-delay:.85s}
+.bd b{font-weight:900;color:var(--ink)}
+.hd,.ch{opacity:0;transform:translateY(12px);transition:opacity .6s .35s,transform .6s .35s}
+.cur .hd,.cur .ch{opacity:1;transform:none}
+.q{margin-top:4px;font-weight:900;font-size:17px;line-height:1.45;letter-spacing:-.03em;color:var(--ink);text-wrap:balance}
+.q::before{content:"";display:inline-block;width:18px;height:3px;background:var(--c);vertical-align:middle;margin-right:8px}
+.ft{position:absolute;left:22px;right:22px;bottom:14px;display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:#777;z-index:5}
+.ft b{font-weight:900;color:#111}
+.nm{display:flex;align-items:baseline;gap:10px}
+.nm b{font-weight:900;font-size:34px;letter-spacing:-.05em;line-height:1}
+.nm span{font-size:14px;font-weight:700;color:var(--c)}
+.spec{margin:6px 0 8px;font-size:13.5px;font-weight:500;color:var(--ink3)}
+
+/* 표지 */
+.t-cover .face{background:#000}
+.cbg{position:absolute;inset:0;background:#000 center 30%/cover no-repeat;filter:brightness(.42)}
+.ctl{position:absolute;left:20px;right:20px;top:58px;z-index:2;color:#fff;transform:translate(calc(var(--tx)*-4px),0)}
+.ctl small{display:block;font-size:12.5px;font-weight:900;letter-spacing:.14em;color:#e8b04a}
+.ctl h1{margin:10px 0 0;font-weight:900;font-size:clamp(56px,17vw,78px);line-height:.98;letter-spacing:-.07em}
+.ctl h1 span{display:block;opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
+.cur .ctl h1 span{opacity:1;transform:none;filter:none}
+.cur .ctl h1 span:nth-child(2){transition-delay:.15s}.cur .ctl h1 span:nth-child(3){transition-delay:.3s}
+.cfg{position:absolute;left:-2%;width:104%;bottom:-10%;z-index:3;transform-origin:50% 100%;transform:translateY(60px) rotateX(40deg);opacity:0;transition:transform 1.2s cubic-bezier(.2,1.1,.3,1) .5s,opacity .6s .5s}
+.cur .cfg{transform:translate(calc(var(--tx)*12px),calc(var(--ty)*6px));opacity:1}
+.cfg img{display:block;width:100%;filter:drop-shadow(0 -6px 30px rgba(0,0,0,.6))}
+.cbt{position:absolute;left:0;right:0;bottom:0;height:34%;z-index:4;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.92) 70%)}
+.cft{position:absolute;left:20px;right:20px;bottom:20px;z-index:5;color:#fff}
+.cft p{margin:0 0 12px;font-size:16px;font-weight:700;line-height:1.5}
+.cft div{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:700;color:rgba(255,255,255,.75)}
+.cft b{background:var(--red);color:#fff;font-weight:900;padding:6px 10px}
+
+/* 프롤로그: 영상이 한 장을 가득 */
+.t-film .face{background:#000}
+.flm{position:absolute;inset:0;background:#000 center/cover no-repeat}
+.flm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s}
+.flm video.on{opacity:1}
+.flg{position:absolute;left:0;right:0;bottom:0;height:58%;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.6) 35%,rgba(0,0,0,.92));pointer-events:none}
+.flt{position:absolute;left:22px;right:22px;bottom:30px;color:#fff}
+.flt .ch{color:#e8b04a}
+.flt .hd{color:#fff;font-size:34px;margin:6px 0 12px}
+.flt .bd{color:rgba(255,255,255,.88)}
+.flt .bd b{color:#fff}
+.t-film .ft{display:none}
+/* 제1장: 여덟 글자, 빈칸 하나 */
+.t-grid8 .face{background:#0e0c0b}
+.g8w{position:absolute;inset:0;padding:54px 22px 0;color:#fff}
+.g8w .ch{color:#ff5a46}
+.g8h{margin:8px 0 0;font-weight:900;font-size:40px;line-height:1.08;letter-spacing:-.06em;opacity:0;transform:translateY(14px);transition:opacity .7s .2s,transform .7s .2s}
+.g8h em{font-style:normal;color:#ff5a46}
+.cur .g8h{opacity:1;transform:none}
+.g8t{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:26px}
+.g8t small{text-align:center;font-size:11.5px;font-weight:700;color:rgba(255,255,255,.45);padding-bottom:2px}
+.g8t i{height:64px;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:32px;color:var(--gc);background:#1a1716;opacity:0;transform:translateY(-14px);transition:opacity .5s var(--d),transform .5s var(--d)}
+.cur .g8t i{opacity:1;transform:none}
+.g8t i.emp{background:transparent;box-shadow:inset 0 0 0 2px #ff5a46;color:#ff5a46;font-size:26px}
+.cur .g8t i.emp{animation:emp 2.4s ease-in-out 1.6s 2}
+@keyframes emp{50%{background:rgba(255,90,70,.22)}}
+.g8e{display:grid;grid-template-columns:repeat(5,1fr);margin-top:16px;border-top:1px solid rgba(255,255,255,.14);opacity:0;transition:opacity .7s 1.3s}
+.cur .g8e{opacity:1}
+.g8e div{padding:9px 0 0;text-align:center;font-size:13px;font-weight:700;color:rgba(255,255,255,.55)}
+.g8e b{display:block;font-size:22px;font-weight:900;color:#fff;margin-top:1px}
+.g8e .z,.g8e .z b{color:#ff5a46}
+.g8b{margin-top:20px}
+.g8b .bd{color:rgba(255,255,255,.82)}
+.g8b .bd b{color:#fff}
+.g8b .q{color:#fff}
+.t-grid8 .ft{color:rgba(255,255,255,.45)}.t-grid8 .ft b{color:#fff}
+/* 작은 신 */
+.mini{position:absolute;left:16px;right:16px;top:58px;height:44%;display:flex;align-items:flex-end;justify-content:center;gap:2%;padding-bottom:12%;background:linear-gradient(180deg,#fff 0%,#f1f1f1 100%);perspective:500px}
+.mini i{width:18%;aspect-ratio:1;border-radius:50%;background:#fff 50% 14%/185% no-repeat;box-shadow:0 14px 18px -8px rgba(0,0,0,.35);transform-origin:50% 100%;transform:rotateX(60deg);opacity:0;transition:transform .9s cubic-bezier(.22,.9,.3,1) var(--d),opacity .5s var(--d)}
+.cur .mini i{transform:none;opacity:1}
+@keyframes hop{50%{translate:0 -8px}}
+/* 사용법 */
+.how{list-style:none;margin:0;padding:0}
+.how li{display:grid;grid-template-columns:24px 1fr;gap:8px;padding:8px 0;border-top:1px solid #eee;font-size:14px;color:var(--ink3);line-height:1.45}
+.how li em{font-style:normal;font-weight:900;font-size:16px;color:var(--c)}
+.how li b{display:block;font-size:15px;font-weight:900;color:var(--ink)}
+.cta{display:flex;gap:6px;margin-top:12px}
+.cta button{flex:1;height:48px;border:0;background:#111;color:#fff;font-size:14.5px;font-weight:900}
+.cta button.gh{background:#fff;color:#111;box-shadow:inset 0 0 0 1.5px #111}
+.t-how .pop{height:30%}
+.t-how .txt{top:calc(58px + 30% + 22px);bottom:16px}
+/* 2권 */
+.t-next .face{background:#000}
+.nx{position:absolute;inset:0;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:0 22px 60px}
+.nx small{font-size:13px;font-weight:900;color:#e8b04a}
+.nx h2{margin:8px 0 12px;font-weight:900;font-size:34px;line-height:1.18;letter-spacing:-.05em}
+.nx p{margin:0;font-size:15.5px;line-height:1.7;color:rgba(255,255,255,.88)}
+
+#fx{position:absolute;inset:0;z-index:40;pointer-events:none}
+.bar{position:absolute;left:0;right:0;bottom:0;z-index:60;height:calc(env(safe-area-inset-bottom,0px) + 58px);padding:0 14px env(safe-area-inset-bottom,0px);display:flex;align-items:center;gap:12px;color:#fff;font-size:13px;font-weight:700}
+.bar .nv{width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center}
+.bar .nv:disabled{opacity:.3}
+.bar .nv svg{width:18px;height:18px}
+.prog{flex:1;height:3px;background:rgba(255,255,255,.18);position:relative}
+.prog i{position:absolute;left:0;top:0;bottom:0;background:#fff;transition:width .6s}
+.toc{position:absolute;inset:0;z-index:80;background:#fff;display:none;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 64px) 22px 30px;color:#111;overflow-y:auto}
+.toc.on{display:flex}
+.toc .x{position:absolute;right:14px;top:calc(env(safe-area-inset-top,0px) + 12px);width:38px;height:38px;border:0;border-radius:50%;background:#f1f1f1;font-size:20px}
+.toc small{font-size:13px;font-weight:900;color:var(--red)}
+.toc h3{margin:6px 0 16px;font-weight:900;font-size:28px;letter-spacing:-.05em}
+.toc button.it{display:flex;justify-content:space-between;gap:12px;width:100%;padding:14px 0;border:0;border-top:1px solid #eee;background:none;color:#111;font-size:15.5px;font-weight:700;text-align:left}
+.toc button.it span{color:#888;font-weight:500;font-size:13px}
+.toc button.it.on{color:var(--red)}
+.snd{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 70px);transform:translateX(-50%);z-index:70;background:rgba(255,255,255,.95);color:#111;font-size:13px;font-weight:700;padding:9px 14px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.snd.on{opacity:1}
+.hd,.g8h,.nm b,.ctl h1,.nx h2,.toc h3{font-family:var(--brush);font-weight:400;letter-spacing:0}
+.hd{font-size:30px;line-height:1.2}
+.flt .hd{font-size:38px}
+.g8h{font-size:44px;line-height:1.12}
+.nm b{font-size:40px}
+.ctl h1{font-size:clamp(60px,18vw,82px);line-height:1.02}
+.nx h2{font-size:36px;line-height:1.22}
+.toc h3{font-size:32px}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="runT">팔자에 신이 들었다</b><button class="ib mu" id="muB" aria-label="배경음악"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></button><button class="ib" id="tocB" aria-label="목차"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h9"/></svg></button></div>
+  <div class="desk"><div class="book" id="book"></div></div>
+  <div class="bar"><button class="nv" id="prev" aria-label="이전 장"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="prog"><i id="prog"></i></div><span id="pgN">1 / 15</span><button class="nv" id="next" aria-label="다음 장"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></div>
+  <div class="toc" id="toc"><button class="x" type="button" aria-label="닫기">×</button><small>목차</small><h3>팔자에 신이 들었다</h3><div id="tocL"></div></div>
+  <div class="snd" id="snd"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const GOD=(k,n,h,el,dir,col,job,c,fx,body,q)=>({t:'god',k,n,h,el,dir,col,job,c,fx,body,q,bg:`img/${k}.jpg`,...(['wood','fire','earth'].includes(k)?{once:`v/rv_${k}.mp4`}:{fg:`img/pop/${k}.webp`}),vid:`v/ms/${k}.mp4`,talk:1,sy:'-9%',toc:`${n} · ${h}`});
+const PAGES=[
+  {t:'cover',fx:'gold',toc:'표지'},
+  {t:'film',ch:'프롤로그',hd:'지도에 없는 문',bg:'img/intro0.jpg',once:'v/op_take.mp4',fx:'dust',body:[
+    '서울 어딘가, 지도에 없는 골목 끝에 문이 하나 있다.',
+    '아무에게나 보이지 않는다. 사주에 <b>한 칸이 비어 있는 사람</b>에게만 보인다.',
+    '그리고 오늘 밤, 당신 눈에 그 문이 보였다.']},
+  {t:'grid8',ch:'제1장',hd:'여덟 글자, 빈칸 하나',fx:'dust',body:[
+    '사람은 태어나는 순간 여덟 글자를 받는다. 글자마다 나무, 불, 흙, 쇠, 물 중 하나의 기운이 들어 있다.',
+    '다섯 기운을 고르게 받는 사람은 거의 없다. 누구에게나 <b>텅 빈 칸</b>이 하나쯤 있다. 운은 바로 그 틈으로 샌다.']},
+  {t:'crowd',ch:'제2장',hd:'다섯 방위의 신들',bg:'img/op_take_end.jpg',sy:'-30%',fx:'five',people:[['wood','-26%','.68','6px',.25],['water','66%','.68','6px',.45],['fire','-3%','.7','9px',.6],['metal','43%','.7','9px',.75],['earth','20%','.72','13px',.95]],body:[
+    '동쪽의 청룡, 남쪽의 주작, 가운데의 황룡, 서쪽의 백호, 북쪽의 현무. 사람들은 이들을 <b>오방신</b>이라 불렀다.',
+    '사람들이 이름을 잊자, 신들은 사라지는 대신 사람의 얼굴을 하고 도시로 내려왔다. 빈칸이 있는 사람을 찾아서.']},
+  GOD('wood','하람','靑龍','木','동쪽','초록','새 시작과 다음 인연','#1f9d61','leaf',['동쪽 문을 지키는 나무의 신. 봄보다 먼저 깨어나 새싹이 올라올 자리를 고른다. 말수는 적지만, 망설이는 발끝을 꼭 한 번 밀어 준다.'],'늦게 피는 꽃도 봄은 봄이야'),
+  GOD('fire','이안','朱雀','火','남쪽','빨강','고백과 결단','#e0362a','ember',['남쪽 하늘을 나는 불의 신. 꺼져 가는 마음속 불씨를 귀신같이 알아챈다. 무심한 척하지만, 고백과 결단의 순간엔 누구보다 뜨겁다.'],'망설이면 불 꺼진다. 오늘은 네가 먼저 가'),
+  GOD('earth','도준','黃龍','土','가운데','노랑','안정과 관계','#c98a12','gold',['다섯 방위의 한가운데를 지키는 흙의 신. 흔들리는 것들을 붙잡아 제자리에 앉힌다. 무뚝뚝해도, 가장 오래 곁에 남는 쪽은 언제나 도준이다.'],'흔들려도 돼. 발밑은 내가 잡고 있을게'),
+  GOD('metal','시온','白虎','金','서쪽','흰색','정리와 결단','#6b7280','frost',['서쪽 문을 지키는 쇠의 신. 끊어야 할 것과 남길 것을 한눈에 가른다. 말은 차갑지만, 그 칼끝은 언제나 사람을 살리는 쪽을 향한다.'],'안 맞는 건 끊어. 비워야 들어와'),
+  GOD('water','재이','玄武','水','북쪽','남색','속마음과 지혜','#2b5cc4','rain',['북쪽 깊은 물을 지키는 물의 신. 사람이 말하지 못한 속마음이 흘러드는 곳에 산다. 조용히 듣고, 오래 기억하고, 필요할 때만 입을 연다.'],'말 안 해도 알아. 그래도 한 번은 말해 줘'),
+  {t:'pop',ch:'제3장',hd:'살롱의 주인',bg:'img/pop/seoha_bg.jpg',loop:'v/idle.mp4',vid:'v/t1.mp4',talk:1,sy:'-9%',fx:'gold',body:[
+    '신은 사람에게 직접 말을 걸 수 없다. 그래서 문 안쪽엔 신의 말을 옮기는 사람이 있다. 한남동 살롱의 주인, <b>서하</b>.'],q:'네 사주, 한 칸이 비어 있어. 그 빈자리, 신이 채워 줄게'},
+  {t:'crowd',ch:'제4장',hd:'문 너머의 방들',bg:'img/kv_drama.jpg',sy:'-20%',fx:'dust',people:[['mujin','-14%','.76','8px',.3,'img/pop/mujin.webp'],['halmae','50%','.76','8px',.5,'img/pop/halmae.webp'],['taeo','18%','.8','13px',.7,'img/pop/taeo.webp']],body:[
+    '문 너머엔 불 켜진 방이 몇 개 더 있다. 한밤의 카드방엔 <b>무진</b>, 도화 향 나는 펜트하우스엔 <b>태오</b>, 오래된 한옥엔 <b>할매</b>.',
+    '어느 방부터 들를지는 당신 마음이다.']},
+  {t:'mini',ch:'제5장',hd:'작아진 신들',fx:'spark',body:[
+    '사람 곁에 오래 머무는 건 신에게도 힘든 일. 그래서 신들은 낮이 되면 손바닥만 하게 작아진다.',
+    '점괘통을 흔들고, 부적 속에 살고, 하루씩 당번을 서서 도장을 찍어 준다. 크게 보면 신, 작게 보면 친구.']},
+  {t:'pop',ch:'제6장',hd:'뒷골목의 묘당',bg:'img/cat/madam.jpg',fg:'img/pop/madam.webp',vid:'v/cat/madam.mp4',talk:1,sy:'-8%',c:'#e0679a',fx:'petal',body:[
+    '신당 뒷골목, 촛불이 녹아내리는 가게엔 고양이 여섯 마리가 산다. 신들의 심부름을 하다 그대로 눌러앉았다.',
+    '고양이들은 큰 운명 대신 작은 점을 본다. 이번 달 연애, 간밤의 꿈, 그 사람의 속마음.']},
+  {t:'how',ch:'에필로그',hd:'빈칸을 채우는 법',bg:'img/op_take_end.jpg',sy:'-40%',fx:'gold'},
+  {t:'next',fx:'dust',toc:'제2권 예고'}];
+const N=PAGES.length;
+const bdy=b=>`<div class="bd">${b.map(t=>`<p>${t}</p>`).join('')}</div>`;
+const head=p=>`<div class="ch">${p.ch}</div><div class="hd">${p.hd}</div>`;
+const ft=(p,i)=>`<div class="ft"><span>${p.t==='god'?p.n+' · '+p.h:p.hd}</span><b>${String(i).padStart(2,'0')}</b></div>`;
+function popBox(p,cls){ const sy=`--sy:${p.sy||'-8%'}`;
+  const lp=p.loop||p.once||(p.auto?p.vid:null), tk=p.auto?null:p.vid;
+  const fgs=p.t==='crowd'?`<div class="fgi">${p.people.map(([k,x,s,d,dl,src])=>`<div class="p" style="--dl:${dl}s"><img class="fg" src="${src||`img/pop/${k}.webp`}" alt="" style="--x:${x};--s:${s};--d:${d}"></div>`).join('')}</div>`
+    : p.fg?`<div class="fgi"><img class="fg" src="${p.fg}" alt=""></div>`:'';
+  return `<div class="pop ${lp?'scene':''} ${cls||''} ${p.t==='crowd'?'crowd':''}" style="${sy}"><div class="win"><img class="bg" src="${p.bg}" alt="">${lp?`<video class="lp" playsinline muted ${p.once?'':'loop'} preload="none" data-src="${lp}"></video>`:''}${tk?`<video class="tk" playsinline preload="none" data-src="${tk}"></video>`:''}</div>${fgs?`<div class="fgc">${fgs}</div>`:''}${tk?`<div class="hit" data-wake="1"></div><div class="tap"><i></i>${p.t==='god'?'눌러서 목소리 듣기':'눌러서 말 걸기'}</div>`:''}</div>`; }
+function front(p,i){
+  if(p.t==='cover') return `<div class="cbg" style="background-image:url('img/intro0.jpg');background-position:center 40%"></div>
+    <div class="ctl"><small>OBANG SAJU ORIGINAL · VOL. 1</small><h1><span>팔자에</span><span>신이</span><span>들었다</span></h1></div>
+    <div class="cfg"><img src="img/pop/house.webp" alt=""></div><div class="cbt"></div>
+    <div class="cft"><p>빈칸 하나에, 신 다섯이 줄을 섰다</p><div><span>넘겨서 읽기 →</span><b>무료</b></div></div>`;
+  if(p.t==='god') return `${popBox(p)}<div class="txt"><div class="ch">오방의 신 · ${p.dir}</div><div class="nm"><b>${p.n}</b><span>${p.h} · ${p.el}</span></div><div class="spec">${p.col} · ${p.job}</div>${bdy(p.body)}<div class="q">${p.q}</div></div>${ft(p,i)}`;
+  if(p.t==='film') return `<div class="flm" style="background-image:url('${p.bg}')"><video class="lp" playsinline muted preload="auto" data-src="${p.once}"></video></div><div class="flg"></div><div class="flt">${head(p)}${bdy(p.body)}</div>`;
+  if(p.t==='grid8'){ const G=[['甲','#3fbf7f'],['丙','#ff5a46'],['庚','#c9d1db'],['壬','#5b8cff'],['子','#5b8cff'],['午','#ff5a46'],['',''],['申','#c9d1db']];
+    return `<div class="g8w"><div class="ch">${p.ch}</div><div class="g8h">여덟 글자,<br><em>빈칸</em> 하나</div>
+      <div class="g8t">${['시','일','월','년'].map(t=>`<small>${t}</small>`).join('')}${G.map(([c,col],j)=>c?`<i style="--gc:${col};--d:${.45+j*.1}s">${c}</i>`:`<i class="emp" style="--d:${.45+j*.1}s">?</i>`).join('')}</div>
+      <div class="g8e">${[['木',1],['火',2],['土',0],['金',2],['水',2]].map(([k,n])=>`<div class="${n?'':'z'}">${k}<b>${n}</b></div>`).join('')}</div>
+      <div class="g8b">${bdy(p.body)}<div class="q">그 틈으로, 신이 들어온다</div></div></div>${ft(p,i)}`; }
+  if(p.t==='mini') return `<div class="mini">${['wood','fire','earth','metal','water'].map((k,j)=>`<i style="background-image:url('img/mini/${k}.jpg');--d:${.25+j*.12}s"></i>`).join('')}</div><div class="txt">${head(p)}${bdy(p.body)}</div>${ft(p,i)}`;
+  if(p.t==='how') return `${popBox(p,'scene')}<div class="txt">${head(p)}<ul class="how">
+    <li><em>1</em><span><b>문을 두드린다</b>생일을 알려 주면 내 빈칸이 보인다</span></li>
+    <li><em>2</em><span><b>내 신을 만난다</b>빈칸을 채워 줄 수호신이 곁에 온다</span></li>
+    <li><em>3</em><span><b>매일 조금씩 채운다</b>개운 미션, 당번 도장</span></li>
+    <li><em>4</em><span><b>가끔은 가볍게 논다</b>오방 뽑기, 부적 카드, 묘당</span></li></ul>
+    <div class="cta"><button type="button" data-go="home">내 빈칸 찾으러 가기</button><button class="gh" type="button" data-go="restart">처음부터</button></div></div>`;
+  if(p.t==='next') return `<div class="cbg" style="background-image:url('img/kv_house.jpg');filter:brightness(.42);background-position:center 85%"></div><div class="nx"><small>제2권 · 곧 열림</small><h2>오행 하우스<br>다섯 신, 빈 의자 하나</h2><p>빈칸을 채우러 온 신들이 한집에 모여 산다. 여섯 번째 의자는 아직 비어 있다. 그 주인은 당신의 여덟 글자가 알고 있다</p><div class="cta" style="margin-top:22px"><button type="button" data-go="home" style="background:#fff;color:#111">오방사주로 돌아가기</button></div></div>`;
+  return `${popBox(p,p.t==='scene'?'scene':'')}<div class="txt">${head(p)}${bdy(p.body)}${p.q?`<div class="q">${p.q}</div>`:''}</div>${ft(p,i)}`; }
+$('book').innerHTML=PAGES.map((p,i)=>`<div class="leaf t-${p.t}" data-i="${i}" style="z-index:${N-i}${p.c?`;--c:${p.c}`:''}"><div class="face front">${front(p,i)}</div><div class="face back"></div><div class="shade"></div></div>`).join('');
+const leaves=[...document.querySelectorAll('.leaf')];
+$('tocL').innerHTML=PAGES.map((p,i)=>`<button class="it" type="button" data-i="${i}">${p.toc||`${p.ch} · ${p.hd}`}<span>${String(i).padStart(2,'0')}</span></button>`).join('');
+
+let AC=null; const ac=()=>{ try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); return AC; }catch(e){ return null; } };
+function rustle(){ const A=ac(); if(!A) return; const d=.45, n=A.createBuffer(1,A.sampleRate*d,A.sampleRate), a=n.getChannelData(0); for(let i=0;i<a.length;i++){ const t=i/a.length; a[i]=(Math.random()*2-1)*Math.pow(1-t,2.2)*(t<.08?t/.08:1)*(.6+.4*Math.sin(t*38)); }
+  const s=A.createBufferSource(); s.buffer=n; const f=A.createBiquadFilter(); f.type='bandpass'; f.frequency.value=2600; f.Q.value=.7; const g=A.createGain(); g.gain.value=.08; s.connect(f); f.connect(g); g.connect(A.destination); s.start(); }
+function chime(){ const A=ac(); if(!A) return; [880,1320,1760].forEach((fq,i)=>{ const o=A.createOscillator(), g=A.createGain(); o.type='sine'; o.frequency.value=fq; g.gain.setValueAtTime(0,A.currentTime+i*.06); g.gain.linearRampToValueAtTime(.08,A.currentTime+i*.06+.01); g.gain.exponentialRampToValueAtTime(.0001,A.currentTime+i*.06+1.6); o.connect(g); g.connect(A.destination); o.start(A.currentTime+i*.06); o.stop(A.currentTime+i*.06+1.7); }); }
+
+/* 배경음악: 첫 터치에 잔잔하게 시작, 목소리가 나올 땐 낮춘다 */
+const BG_LV=.14, BG_DUCK=.025; let bgG=null, bgOn=true, bgLv=BG_LV;
+try{ bgOn=localStorage.getItem('obBookBgm')!=='0'; }catch(e){}
+function bgSet(lv,sec=.8){ bgLv=lv; if(!bgG) return; const g=bgG.gain,t=AC.currentTime; g.cancelScheduledValues(t); g.setValueAtTime(g.value,t); g.linearRampToValueAtTime(bgOn?lv:0,t+sec); }
+function bgStart(){ const A=ac(); if(!A||bgG) return; if(A.state==='suspended') A.resume();
+  bgG=A.createGain(); bgG.gain.value=0; bgG.connect(A.destination);
+  fetch('a/book_bgm.mp3').then(r=>r.arrayBuffer()).then(b=>A.decodeAudioData(b)).then(buf=>{ const s=A.createBufferSource(); s.buffer=buf; s.loop=true; s.connect(bgG); s.start(); bgSet(bgLv,2); }).catch(()=>{}); }
+document.addEventListener('pointerdown',bgStart,{once:true});
+function muUi(){ $('muB').classList.toggle('off',!bgOn); }
+$('muB').onclick=e=>{ e.stopPropagation(); bgStart(); bgOn=!bgOn; try{ localStorage.setItem('obBookBgm',bgOn?'1':'0'); }catch(_){} muUi(); bgSet(bgLv,.4); toastS(bgOn?'배경음악 켜짐':'배경음악 꺼짐'); };
+muUi();
+
+let cur=0;
+function stopVids(l){ l.querySelectorAll('video').forEach(v=>{ try{ v.pause(); }catch(e){} v.classList.remove('on'); }); const p=l.querySelector('.pop'); if(p) p.classList.remove('awake'); }
+function startLoop(l){ const v=l.querySelector('video.lp'); if(!v) return; setTimeout(()=>{ if(leaves[cur]!==l) return; if(!v.getAttribute('src')) v.src=v.dataset.src; v.muted=true; try{ v.currentTime=0; }catch(e){} v.onplaying=()=>v.classList.add('on'); v.play().catch(()=>{}); },500); }
+function activate(){ leaves.forEach((l,i)=>{ const on=i===cur; l.classList.toggle('cur',on); if(!on) stopVids(l); else startLoop(l); });
+  const p=PAGES[cur]; bgSet(BG_LV);
+  $('prev').disabled=cur===0; $('next').disabled=cur===N-1; $('pgN').textContent=`${cur+1} / ${N}`; $('prog').style.width=(cur/(N-1)*100)+'%';
+  $('runT').textContent=p.t==='cover'?'팔자에 신이 들었다':(p.toc||`${p.ch} · ${p.hd}`);
+  $('tocL').querySelectorAll('button').forEach((b,i)=>b.classList.toggle('on',i===cur)); try{ sessionStorage.setItem('obBookPg',cur); }catch(e){} }
+function go(n,sound=true){ n=Math.max(0,Math.min(N-1,n)); if(n===cur) return;
+  leaves.forEach((l,i)=>{ const t=i<n; if(l.classList.contains('turned')!==t){ l.classList.add('moving'); setTimeout(()=>l.classList.remove('moving'),950); } l.classList.toggle('turned',t); });
+  cur=n; if(sound) rustle(); try{ navigator.vibrate&&navigator.vibrate(8); }catch(e){} activate(); }
+$('next').onclick=()=>go(cur+1); $('prev').onclick=()=>go(cur-1);
+document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(cur+1); if(e.key==='ArrowLeft') go(cur-1); });
+
+function toastS(t){ const e=$('snd'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1600); }
+function wake(l){ const P=PAGES[+l.dataset.i], pop=l.querySelector('.pop');
+  const v=pop&&pop.querySelector('video.tk'); if(!v) return;
+  if(!v.getAttribute('src')) v.src=v.dataset.src; v.muted=!P.talk; try{ v.currentTime=0; }catch(e){} pop.classList.add('awake');
+  const done=()=>{ v.classList.remove('on'); pop.classList.remove('awake'); bgSet(BG_LV,1.2); };
+  v.onplaying=()=>{ v.classList.add('on'); bgSet(BG_DUCK,.4); }; v.onended=done; v.onerror=done; v.onpause=()=>{ if(!v.ended) bgSet(BG_LV,1.2); };
+  v.play().catch(()=>{ v.muted=true; v.play().catch(done); toastS('소리를 켜면 목소리가 들려요'); }); }
+
+let drag=null;
+$('book').addEventListener('pointerdown',e=>{ if(e.target.closest('button,[data-wake]')) return; const r=$('book').getBoundingClientRect(); drag={x:e.clientX,w:r.width,left:e.clientX-r.left<r.width*.3,moved:false,leaf:null,dir:0,k:0}; });
+addEventListener('pointermove',e=>{ if(!drag) return; const dx=e.clientX-drag.x; if(!drag.moved&&Math.abs(dx)<8) return;
+  if(!drag.moved){ drag.moved=true; drag.dir=dx<0?1:-1; drag.leaf=drag.dir>0?leaves[cur]:leaves[cur-1]; if(!drag.leaf||(drag.dir>0&&cur===N-1)){ drag.leaf=null; return; } drag.leaf.classList.add('drag','moving'); }
+  if(!drag.leaf) return; const k=Math.max(0,Math.min(1,drag.dir>0?-dx/drag.w:1-dx/drag.w)); drag.k=k; drag.leaf.style.transform=`rotateY(${-178*k}deg)`; });
+addEventListener('pointerup',e=>{ if(!drag) return; const d=drag; drag=null;
+  if(d.leaf){ d.leaf.classList.remove('drag'); d.leaf.style.transform=''; setTimeout(()=>d.leaf.classList.remove('moving'),950); if(d.dir>0){ if(d.k>.25) go(cur+1); } else { if(d.k<.75) go(cur-1); } return; }
+  if(!d.moved&&!e.target.closest('button,[data-wake]')){ if(d.left) go(cur-1); else go(cur+1); } });
+$('book').addEventListener('click',e=>{ const w=e.target.closest('[data-wake]'); if(w){ wake(w.closest('.leaf')); return; } const b=e.target.closest('[data-go]'); if(!b) return; if(b.dataset.go==='restart'){ go(0); return; } try{ sessionStorage.setItem('toHome','1'); }catch(_){} location.href='./'; });
+$('tocB').onclick=()=>$('toc').classList.add('on');
+$('toc').onclick=e=>{ const b=e.target.closest('[data-i]'); if(b) go(+b.dataset.i); if(b||e.target.closest('.x')) $('toc').classList.remove('on'); };
+$('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+(()=>{ let s=0; try{ s=+(sessionStorage.getItem('obBookPg')||0); }catch(e){} if(s>0&&s<N){ go(s,false); } else activate(); })();
+</script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+</body>
+</html>

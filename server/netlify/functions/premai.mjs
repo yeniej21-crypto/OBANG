@@ -1,0 +1,40 @@
+/* 오방사주 상세 풀이 — Claude API 서버 함수
+   - API 키는 넷리파이 환경 변수 ANTHROPIC_API_KEY 에만 둔다(화면 코드에 넣지 않는다)
+   - 같은 프롬프트(= 같은 사주 · 같은 상품)는 저장해 둔 결과를 돌려준다(비용 0, 같은 사주 같은 풀이)
+   - 사용 제한(보수적): IP당 1분 10회(넷리파이 rateLimit) · IP당 하루 16회(상세 풀이 약 2건) · 사이트 전체 하루 120회(약 15건) · 사이트 전체 한 달 1,500회(약 190건)
+   - 프롬프트 길이 2만 4천 자 이하, 답 길이 max_tokens 3500, 모델 고정 */
+import { getStore } from "@netlify/blobs";
+const MODEL = "claude-sonnet-5-5";
+const IP_DAY = 16, ALL_DAY = 120, ALL_MONTH = 1500;
+const ORIGINS = [/^https:\/\/obangsaju\.netlify\.app$/, /^https:\/\/[a-z0-9-]+--obangsaju\.netlify\.app$/, /^http:\/\/localhost(:\d+)?$/];
+function sse(body, onEnd) { const enc = new TextEncoder(), dec = new TextDecoder(); let all = "";
+  return new ReadableStream({ async start(ctrl) { const rd = body.getReader(); let buf = "";
+    try { for (;;) { const { done, value } = await rd.read(); if (done) break; buf += dec.decode(value, { stream: true }); let k;
+      while ((k = buf.indexOf("\n\n")) >= 0) { const ev = buf.slice(0, k); buf = buf.slice(k + 2); const line = ev.split("\n").find(l => l.startsWith("data:")); if (!line) continue;
+        try { const j = JSON.parse(line.slice(5)); if (j.type === "content_block_delta" && j.delta && j.delta.text) { all += j.delta.text; ctrl.enqueue(enc.encode(j.delta.text)); } } catch {} } } }
+    catch {} if (onEnd) { try { await onEnd(all); } catch {} } ctrl.close(); } }); }
+const out = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
+async function sha(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("").slice(0, 40); }
+function parse(t) { t = String(t || "").trim(); try { return JSON.parse(t); } catch {} const m = t.match(/```(?:json)?\s*([\s\S]*?)```/); if (m) { try { return JSON.parse(m[1]); } catch {} }
+  const a = Math.min(...["{", "["].map(c => { const i = t.indexOf(c); return i < 0 ? 1e9 : i; })), z = Math.max(t.lastIndexOf("}"), t.lastIndexOf("]")); if (a < z) { try { return JSON.parse(t.slice(a, z + 1)); } catch {} } return null; }
+export default async (req, context) => {
+  if (req.method === "GET") return out({ ok: true, key: !!process.env.ANTHROPIC_API_KEY, model: MODEL });
+  if (req.method !== "POST") return out({ error: "method" }, 405);
+  const origin = req.headers.get("origin") || "";
+  if (origin && !ORIGINS.some(r => r.test(origin))) return out({ error: "origin" }, 403);
+  const key = process.env.ANTHROPIC_API_KEY; if (!key) return out({ error: "nokey" }, 503);
+  let body; try { body = await req.json(); } catch { return out({ error: "bad" }, 400); }
+  const prompt = String(body.prompt || ""); if (prompt.length < 50 || prompt.length > 24000) return out({ error: "size" }, 400);
+  const store = getStore("premai"); const h = await sha(prompt);
+  const hit = await store.get("c/" + h, { type: "json" }).catch(() => null); if (hit) return out({ data: hit, cached: true });
+  const ip = context.ip || "x", day = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+  const ipK = `n/${day}/${ip}`, allK = `n/${day}/all`, monK = `m/${day.slice(0, 7)}`;
+  const [ipN, allN, monN] = await Promise.all([ipK, allK, monK].map(k => store.get(k, { type: "json" }).catch(() => 0)));
+  if ((ipN || 0) >= IP_DAY || (allN || 0) >= ALL_DAY || (monN || 0) >= ALL_MONTH) return out({ error: "limit" }, 429);
+  await Promise.all([store.setJSON(ipK, (ipN || 0) + 1), store.setJSON(allK, (allN || 0) + 1), store.setJSON(monK, (monN || 0) + 1)]);
+  const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+    body: JSON.stringify({ model: MODEL, max_tokens: 3500, stream: true, messages: [{ role: "user", content: prompt + "\n\n출력은 JSON 값 하나만. 앞뒤 설명이나 코드펜스 없이." }] }) });
+  if (!r.ok || !r.body) { const t = await r.text().catch(() => ""); return out({ error: "upstream", status: r.status, detail: t.slice(0, 300) }, 502); }
+  return new Response(sse(r.body, async all => { const data = parse(all); if (data) await store.setJSON("c/" + h, data); }), { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" } });
+};
+export const config = { path: "/api/premai", rateLimit: { windowLimit: 10, windowSize: 60, aggregateBy: ["ip", "domain"] } };

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>재회 사주 · 다음 연애</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=Song+Myung&display=swap">
+<link rel="stylesheet" href="premkit.css">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 재회 사주(시온) · 다음 연애(서하) — 한 페이지에서 ?m=re | ?m=next 로 나뉜다. 무료 결과 + 결제 뒤 상세(premkit) */
+:root{
+  --brush:'OBrush','Noto Serif KR',serif; --bmj:'Song Myung','Noto Serif KR',serif; --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --stage:#141219; --card:#1b1821; --ink:#f4f0ea; --ink-2:#cdc6bf; --ink-3:#8f8892; --line:rgba(240,230,255,.12);
+  --a:#b9d4e6; --a2:#e6f0f7; --aInk:#101820; color-scheme:dark;
+}
+body.next{--stage:#191317; --card:#221a1f; --line:rgba(255,226,214,.13); --a:#f2b4a8; --a2:#ffe1d8; --aInk:#2a1014}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#07060a;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button,select,input{font-family:inherit}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--stage);overflow:hidden}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;opacity:0;pointer-events:none;transition:opacity .45s}
+.scr::-webkit-scrollbar{display:none}.scr.on{opacity:1;pointer-events:auto}
+.top{position:absolute;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 14px 10px;pointer-events:none}
+.top>*{pointer-events:auto}
+.top b{font-size:13px;letter-spacing:.18em;color:var(--a2)}
+.ib{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(10,8,12,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.ib svg{width:20px;height:20px}
+.hero{position:relative;height:50vh;min-height:330px;max-height:440px;background:#000 center 16%/cover no-repeat}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,8,12,.35),transparent 28%,rgba(10,8,12,.15) 55%,var(--stage) 98%)}
+.hero .t{position:absolute;left:20px;right:20px;bottom:8px;z-index:2}
+.hero small{font-size:12px;letter-spacing:.22em;color:var(--a2);font-weight:700}
+.hero h1{margin:8px 0 6px;font-family:var(--brush);font-weight:400;font-size:38px;line-height:1.15}
+.hero p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.6}
+.card{margin:14px 16px 0;padding:16px;background:var(--card);border:1px solid var(--line)}
+.card h3{margin:0 0 10px;font-size:13px;color:var(--a2);letter-spacing:.06em}
+.field{width:100%;height:46px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);padding:0 14px;font-size:16px;outline:none}
+.seg{display:flex;background:rgba(255,255,255,.06);padding:3px;margin-top:8px}
+.seg button{flex:1;height:36px;border:0;background:none;color:var(--ink-2);font-weight:700;font-size:13.5px;cursor:pointer}
+.seg button.on{background:var(--a);color:var(--aInk)}
+.g3{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:6px;margin-top:8px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+select{height:46px;border:1px solid var(--line);background:#1d1a22;color:var(--ink);font-size:15px;padding:0 8px;width:100%}
+.opt{font-size:12px;color:var(--ink-3);font-weight:500;margin-left:6px;letter-spacing:0}
+.go{display:block;width:calc(100% - 32px);margin:16px 16px 0;height:56px;border:0;background:var(--a);color:var(--aInk);font-size:16.5px;font-weight:900;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.fine{text-align:center;font-size:12px;color:var(--ink-3);margin:12px 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
+.ld{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 30px}
+.ld .av{width:120px;height:120px;border-radius:50%;background:center 15%/cover;box-shadow:0 0 0 2px var(--a),0 0 40px rgba(185,212,230,.25);margin-bottom:22px;animation:br 2.2s ease-in-out infinite}
+@keyframes br{50%{transform:scale(1.04)}}
+.ld h2{font-family:var(--serif);font-size:20px;margin:0 0 6px}.ld p{margin:0;color:var(--ink-3);font-size:13.5px;min-height:20px}
+.rhero{height:260px;background:#000 center 14%/cover no-repeat;position:relative}.rhero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,8,12,.35),transparent 40%,var(--stage))}
+.rs{position:relative;margin-top:-80px;padding:0 16px calc(env(safe-area-inset-bottom,0px) + 30px)}
+.big{text-align:center;padding:10px 0 4px}
+.big small{display:block;font-size:12px;letter-spacing:.2em;color:var(--a2)}
+.big .n{display:block;font-family:var(--serif);font-weight:900;font-size:76px;line-height:1.05;color:var(--a)}
+.big .n i{font-style:normal;font-size:28px;margin-left:2px}
+.big h2{margin:6px 0 0;font-family:var(--brush);font-weight:400;font-size:30px}
+.big p{margin:8px auto 0;max-width:330px;color:var(--ink-2);font-size:14px;line-height:1.65}
+.box{margin-top:14px;background:var(--card);border:1px solid var(--line);padding:18px}
+.box h3{margin:0 0 12px;font-size:13px;letter-spacing:.06em;color:var(--a2)}
+.mm{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mm div{padding:14px 12px;background:rgba(255,255,255,.035);border:1px solid var(--line)}
+.mm div.bad{opacity:.85}
+.mm small{display:block;font-size:11.5px;color:var(--ink-3);font-weight:700}
+.mm b{display:block;margin-top:4px;font-family:var(--serif);font-size:24px;color:var(--a)}
+.mm div.bad b{color:var(--ink-2)}
+.mm span{display:block;margin-top:4px;font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.say{display:flex;gap:12px;align-items:flex-start}.say .av2{flex:none;width:46px;height:46px;border-radius:50%;background:center 15%/cover;box-shadow:0 0 0 1.5px var(--a)}
+.say small{display:block;font-size:11.5px;color:var(--a2);font-weight:700;letter-spacing:.06em}
+.say p{margin:3px 0 0;font-size:15px;line-height:1.7}
+.ev{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.ev span{font-size:11.5px;padding:3px 8px;border:1px solid var(--line);color:var(--ink-2)}
+.tl{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;align-items:end;height:110px;margin-top:6px}
+.tl div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
+.tl i{display:block;width:100%;background:linear-gradient(180deg,var(--a),rgba(255,255,255,.1));transition:height 1s cubic-bezier(.2,.8,.2,1)}
+.tl div.hi i{box-shadow:0 0 12px var(--a)}
+.tl small{font-size:10px;color:var(--ink-3)}
+.lockb{position:relative;overflow:hidden}
+.lockb .bl{filter:blur(5px);user-select:none;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.lockb .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(15,12,18,.2),rgba(15,12,18,.92) 45%);text-align:center;gap:4px}
+.lockb .ov b{font-family:var(--serif);font-size:16px}.lockb .ov small{font-size:12.5px;color:var(--ink-2)}
+.pay{display:block;width:100%;height:54px;margin-top:14px;border:0;background:var(--a);color:var(--aInk);font-size:16px;font-weight:900;cursor:pointer}
+.btn2{display:block;width:100%;height:50px;margin-top:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--ink);font-size:14.5px;font-weight:700;cursor:pointer}
+#lprem .pk-sec{margin-top:12px}
+.note{font-size:11.5px;color:var(--ink-3);line-height:1.6;margin:16px 2px 0}
+.toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translate(-50%,20px);background:rgba(20,18,24,.95);color:#fff;padding:12px 18px;font-size:13.5px;opacity:0;pointer-events:none;transition:all .3s;z-index:60;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="topT"></b></div>
+
+  <section class="scr on" id="sIn">
+    <div class="hero" id="hero"><div class="t"><small id="hK"></small><h1 id="hT"></h1><p id="hP"></p></div></div>
+    <div class="card"><h3>나</h3><input class="field" id="nm" maxlength="8" placeholder="이름 (선택)">
+      <div class="seg" id="gSeg"><button class="on" data-v="f" type="button">여자</button><button data-v="m" type="button">남자</button></div>
+      <div class="seg" id="cSeg"><button class="on" data-v="s" type="button">양력</button><button data-v="l" type="button">음력</button></div>
+      <div class="g3"><select id="by"></select><select id="bm"></select><select id="bd"></select></div>
+      <select id="bh" style="margin-top:6px"></select></div>
+    <div class="card" id="fRe"><h3>그 사람<span class="opt">알면 더 정확해요</span></h3><input class="field" id="pNm" maxlength="8" placeholder="그 사람 이름 (선택)">
+      <div class="g3"><select id="py"></select><select id="pm"></select><select id="pd"></select></div>
+      <h3 style="margin-top:14px">헤어진 때</h3><div class="g2"><select id="xy"></select><select id="xm"></select></div></div>
+    <div class="card" id="fNext"><h3>지금 나는</h3><div class="seg" id="sSeg"><button class="on" data-v="solo" type="button">솔로</button><button data-v="some" type="button">썸 타는 중</button><button data-v="end" type="button">정리하는 중</button></div></div>
+    <button class="go" id="goBtn" type="button"></button>
+    <p class="fine">입력한 정보는 결과 계산에만 쓰여요.</p>
+  </section>
+
+  <section class="scr ld" id="sLd"><div class="av" id="ldAv"></div><h2 id="ldT"></h2><p id="ldP"></p></section>
+
+  <section class="scr" id="sRs"><div class="rhero" id="rHero"></div><div class="rs">
+    <div class="big"><small id="rK"></small><span class="n" id="rN"></span><h2 id="rT"></h2><p id="rP"></p></div>
+    <div class="box"><h3 id="mmH"></h3><div class="mm" id="mm"></div></div>
+    <div class="box"><h3 id="tlH"></h3><div class="tl" id="tl"></div></div>
+    <div class="box"><div class="say"><div class="av2" id="sayAv"></div><div><small id="sayN"></small><p id="sayT"></p></div></div><div class="ev" id="ev"></div></div>
+    <div class="box lockb" id="lockL"><h3 id="lkH"></h3><div class="bl" id="lkBl"></div><div class="ov"><b id="lkT"></b><small id="lkS"></small></div></div>
+    <div id="lprem" hidden></div>
+    <button class="pay" id="payBtn" type="button"></button>
+    <button class="btn2" id="again" type="button">다시 보기</button>
+    <button class="btn2" id="toOther" type="button"></button>
+    <p class="note" id="note"></p>
+  </div></section>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script src="saju_x.js"></script>
+<script src="prem2_core.js"></script>
+<script src="premai.js"></script>
+<script src="premkit.js"></script>
+<script>
+(()=>{
+const $=id=>document.getElementById(id), wait=ms=>new Promise(r=>setTimeout(r,ms));
+const S_=window.Saju, X=window.SajuX, K=window.PK, {GAN,JI,EL,stEl,BR_EL}=S_;
+const toast=t=>{ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1900); };
+const show=id=>{ ['sIn','sLd','sRs'].forEach(s=>$(s).classList.toggle('on',s===id)); $(id).scrollTop=0; };
+const MODE=new URLSearchParams(location.search).get('m')==='next'?'next':'re';
+const DOW=['일','월','화','수','목','금','토'], ANI=['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
+const HOURS=['자시 (23:30~01:29)','축시 (01:30~03:29)','인시 (03:30~05:29)','묘시 (05:30~07:29)','진시 (07:30~09:29)','사시 (09:30~11:29)','오시 (11:30~13:29)','미시 (13:30~15:29)','신시 (15:30~17:29)','유시 (17:30~19:29)','술시 (19:30~21:29)','해시 (21:30~23:29)'];
+const CFG={
+ re:{top:'REUNION',img:'img/sion.jpg',who:'시온',seal:'白虎',k:'재회 사주 · 白虎 시온',t:'우리, 다시<br>닿을 수 있을까',p:'두 사람 사주와 앞으로 열두 달로 보는 재회의 흐름',go:'재회 흐름 보기',ld:['헤어진 달 다시 펼치는 중…','두 사람 일지 맞대 보는 중…','다시 닿는 달 찾는 중…'],
+   pay:'14,900원 · 시온의 재회 노트 열기',lk:'시온의 재회 노트',lkT:'다시 닿는 달 · 먼저 연락해도 되는 날',lkS:'열두 달 재회 달력 · 놓아야 할 신호 · 시온의 편지',other:'다음 연애도 보기',otherGo:'love2.html?m=next',
+   style:'화자는 백호 시온(金). 차갑고 정중한 존댓말(~습니다, ~십시오). 위로보다 정확한 판단을 주되 무례하지 않다. 비유는 칼 · 서리 · 가을 · 정리.'},
+ next:{top:'NEXT LOVE',img:'img/seoha.jpg',who:'서하',seal:'書荷',k:'다음 연애 · 서하',t:'다음 사람은<br>언제 올까',p:'앞으로 열두 달, 인연이 오는 때와 그 사람의 결',go:'다음 인연 보기',ld:['인연의 별 찾는 중…','열두 달 펼쳐 보는 중…','그 사람 그려 보는 중…'],
+   pay:'9,900원 · 서하의 인연 노트 열기',lk:'서하의 인연 노트',lkT:'인연이 오는 달 · 그 사람 · 만나는 장면',lkS:'열두 달 인연 달력 · 고백하기 좋은 날 · 서하의 편지',other:'재회 사주도 보기',otherGo:'love2.html?m=re',
+   style:'화자는 오늘의 운세를 봐 주는 서하. 다정하고 차분한 반말, 친한 누나 · 언니나 친구처럼 솔직하게(남성 이용자에게는 누나처럼, 여성 이용자에게는 언니처럼). 상대의 성별을 단정하지 않고 '그 사람'이라고 부른다. 설레게 하되 과장하지 않는다.'}}[MODE];
+document.body.classList.toggle('next',MODE==='next'); document.title=MODE==='re'?'재회 사주 · 오방사주':'다음 연애 · 오방사주';
+$('topT').textContent=CFG.top; $('hero').style.backgroundImage=`url('${CFG.img}')`; $('hK').textContent=CFG.k; $('hT').innerHTML=CFG.t; $('hP').textContent=CFG.p; $('goBtn').textContent=CFG.go;
+$('fRe').hidden=MODE!=='re'; $('fNext').hidden=MODE!=='next';
+
+/* 입력 */
+let cal='s', gender='f', status='solo';
+(function(){ const now=new Date().getFullYear();
+  for(let y=2010;y>=1950;y--){ $('by').add(new Option(y+'년',y,false,y===1996)); $('py').add(new Option(y+'년',y,false,y===1994)); }
+  $('py').insertBefore(new Option('그 사람 생일 모름','x',true,true),$('py').firstChild); $('py').value='x';
+  for(let m=1;m<=12;m++){ $('bm').add(new Option(m+'월',m,false,m===5)); $('pm').add(new Option(m+'월',m)); $('xm').add(new Option(m+'월',m,false,m===new Date().getMonth()+1)); }
+  for(let d=1;d<=31;d++) $('pd').add(new Option(d+'일',d));
+  for(let y=now;y>=now-10;y--) $('xy').add(new Option(y+'년에 헤어짐',y,false,y===now));
+  const fillD=()=>{ const n=cal==='s'?new Date(+$('by').value,+$('bm').value,0).getDate():30, cur=+$('bd').value||14; $('bd').innerHTML=''; for(let d=1;d<=n;d++) $('bd').add(new Option(d+'일',d,false,d===Math.min(cur,n))); };
+  fillD(); $('by').onchange=fillD; $('bm').onchange=fillD; $('bh').add(new Option('태어난 시 모름','x',true,true)); HOURS.forEach((h,i)=>$('bh').add(new Option(h,i)));
+  const seg=(id,cb)=>$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{ $(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); cb(b.dataset.v); });
+  seg('cSeg',v=>{ cal=v; fillD(); }); seg('gSeg',v=>gender=v); seg('sSeg',v=>status=v);
+  try{ const me=JSON.parse(sessionStorage.getItem('me')||'null'); if(me&&me.y){ cal=me.cal||'s'; gender=me.g||'f'; ['cSeg','gSeg'].forEach((id,i)=>$(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.v===[cal,gender][i])));
+    $('nm').value=me.name||''; $('by').value=me.y; $('bm').value=me.m; fillD(); $('bd').value=me.d; $('bh').value=me.h==null?'x':me.h; } }catch(e){}
+})();
+
+/* 계산 */
+function loveScore(o,loveG){ let s=50; if(o.ss.includes('도화')) s+=15; if(o.ss.includes('홍염')) s+=6;
+  if(o.br.some(r=>r.at==='일지'&&(r.k==='육합'||r.k==='삼합'))) s+=12; if(o.sr.some(r=>r.at==='일간'&&r.k==='천간합')) s+=10;
+  if(o.g1===loveG||o.g2===loveG) s+=o.f1||o.f2?8:4; if(o.br.some(r=>r.at==='일지'&&r.k==='충')) s-=15; if(o.br.some(r=>r.at==='일지'&&r.k==='원진')) s-=6; if(o.ss.includes('공망')) s-=4;
+  return s; }
+const WJ=[[0,7],[1,6],[2,9],[3,8],[4,11],[5,10]], wonjin=(a,b)=>WJ.some(([x,y])=>(a===x&&b===y)||(a===y&&b===x));
+let D=null;
+function compute(me,pt,xy,xm){ let s={y:me.y,m:me.m,d:me.d}; if(me.cal==='l'){ const c=S_.lunarToSolar(me.y,me.m,me.d,false); if(!c) return null; s=c; }
+  const inp={y:s.y,m:s.m,d:s.d,h:me.h,g:me.g}; const F26=window.Prem2Core.build(S_,X,Object.assign({year:new Date().getFullYear()},inp)), F27=window.Prem2Core.build(S_,X,Object.assign({year:new Date().getFullYear()+1},inp));
+  const today=new Date(), tk=today.getFullYear()*10000+(today.getMonth()+1)*100+today.getDate();
+  const all=F26.months.concat(F27.months).filter(o=>o.end.y*10000+o.end.m*100+o.end.d>=tk).slice(0,12);
+  const F=F27, P=F.P, male=me.g==='m', loveG=male?2:3, de=stEl(P.d[0]);
+  const Q=pt?S_.pillars(pt.y,pt.m,pt.d,null):null;
+  const xb=xy?S_.monthPillarAt(xy,xm,15)[1]:null;
+  const M=all.map((o,i)=>{ let sc=loveScore(o,loveG); const why=[];
+    if(o.ss.includes('도화')) why.push('도화'); if(o.br.some(r=>r.at==='일지'&&(r.k==='육합'||r.k==='삼합'))) why.push('일지와 합'); if(o.g1===loveG||o.g2===loveG) why.push(male?'재성(인연의 별)':'관성(인연의 별)');
+    if(o.br.some(r=>r.at==='일지'&&r.k==='충')) why.push('일지 충');
+    if(MODE==='re'){ if(Q){ if(S_.isHap(o.b,Q.d[1])){ sc+=10; why.push('그 사람 일지와 합'); } if(S_.isChung(o.b,Q.d[1])){ sc-=8; why.push('그 사람 일지와 충'); } }
+      if(xb!=null&&o.b===xb){ sc+=6; why.push('헤어진 달의 기운이 돌아옴'); } }
+    else { if(o.ss.includes('홍염')) why.push('홍염'); if(o.ss.includes('역마')){ sc+=3; why.push('역마'); } }
+    return {i,o,sc:Math.max(28,Math.min(96,Math.round(sc))),why}; });
+  let idx=60; const pts=[];
+  if(MODE==='re'){
+    if(Q){ if(S_.isHap(P.d[1],Q.d[1])){ idx+=16; pts.push(['두 사람 일지 합','한번 묶이면 잘 안 풀리는 사이']); }
+      if(Math.abs(P.d[0]-Q.d[0])===5){ idx+=10; pts.push(['일간 천간합','말 안 해도 마음이 통하는 사이']); }
+      if(S_.isChung(P.d[1],Q.d[1])){ idx-=4; pts.push(['일지 충','부딪혀 멀어지고 부딪혀 다시 만나는 사이']); }
+      if(wonjin(P.d[1],Q.d[1])){ idx-=8; pts.push(['일지 원진','괜히 서운함이 쌓이는 사이']); }
+      const eq=stEl(Q.d[0]); if((de+1)%5===eq||(eq+1)%5===de){ idx+=6; pts.push(['일간 상생','서로 살려 주는 오행']); } }
+    else pts.push(['그 사람 생일 없음','내 사주와 앞으로 열두 달만으로 본 흐름']);
+    const top=[...M].sort((a,b)=>b.sc-a.sc); idx+=Math.round((top[0].sc-60)/3);
+  } else { const top=[...M].sort((a,b)=>b.sc-a.sc); idx=Math.round((top[0].sc+top[1].sc)/2); }
+  idx=Math.max(32,Math.min(94,idx));
+  /* 그 사람의 결(다음 연애): 인연의 별 오행 */
+  const starEl=male?(de+2)%5:(de+3)%5;
+  return {me,pt,P,Q,F,M,idx,pts,male,loveG,starEl,xy,xm,xb,key:F.key+'-'+MODE+(Q?'-'+Q.d.join('.'):'')+(xy?'-'+xy+'.'+xm:'')}; }
+const TYPE=[{n:'곧게 자라는 나무 같은 사람',look:'키가 크고 선이 곧은 인상, 셔츠가 잘 어울림',job:'교육 · 기획 · 출판 · 디자인',place:'서점, 조용한 카페, 스터디나 강연'},
+ {n:'환하게 타오르는 불 같은 사람',look:'웃는 얼굴이 먼저 기억나는 밝은 인상',job:'미디어 · 서비스 · 마케팅 · 공연',place:'공연장, 파티, SNS나 사진 찍는 자리'},
+ {n:'든든한 땅 같은 사람',look:'어깨가 넓고 편안한 인상, 목소리가 낮고 차분함',job:'금융 · 부동산 · 공무 · 운영',place:'지인 소개, 동네 단골집, 가족 모임'},
+ {n:'단정하게 벼린 쇠 같은 사람',look:'깔끔한 옷차림, 눈매가 또렷한 인상',job:'IT · 법 · 의료 · 엔지니어',place:'회사, 업무 미팅, 운동하는 곳'},
+ {n:'깊고 조용한 물 같은 사람',look:'말수는 적은데 눈빛이 깊은 인상',job:'연구 · 예술 · 해외 · 콘텐츠',place:'여행지, 밤 산책, 앱이나 온라인'}];
+
+/* 무료 결과 */
+function render(){ const top=[...D.M].sort((a,b)=>b.sc-a.sc), lo=[...D.M].sort((a,b)=>a.sc-b.sc)[0], nm=D.me.name||'너';
+  $('rK').textContent=MODE==='re'?'재회 가능성':'다음 인연 지수'; $('rN').innerHTML=`${D.idx}<i>%</i>`;
+  if(MODE==='re'){ const t=D.idx>=78?'다시 닿을 문이 열려 있습니다':D.idx>=62?'기다릴 이유가 있는 사이입니다':'붙잡기보다 정리가 맞는 흐름입니다';
+    $('rT').textContent=t; $('rP').textContent=`가장 가까워지는 달은 ${top[0].o.start.m}월, 그다음은 ${top[1].o.start.m}월입니다. ${D.pts[0][0]} · ${D.pts[0][1]}.`; }
+  else { const T=TYPE[D.starEl], now=new Date(), cur=top[0].o.start.y*100+top[0].o.start.m<=now.getFullYear()*100+now.getMonth()+1; $('rT').textContent=cur?'지금, 인연이 와':`${top[0].o.start.m}월, 인연이 와`; $('rP').textContent=`다음 사람은 ${T.n}. ${T.place}에서 만날 가능성이 커.`; }
+  $('mmH').textContent=MODE==='re'?'다시 닿는 달 · 조심할 달':'인연이 오는 달 · 쉬어 갈 달';
+  $('mm').innerHTML=top.slice(0,2).map(x=>`<div><small>${x.o.start.y}년</small><b>${x.o.start.m}월</b><span>${x.why.filter(w=>!/충/.test(w)).slice(0,2).join(' · ')||'흐름이 순한 달'}</span></div>`).join('')+`<div class="bad" style="grid-column:1/-1"><small>${MODE==='re'?'연락을 아낄 달':'마음을 쉬어 갈 달'}</small><b>${lo.o.start.m}월</b><span>${lo.why.filter(w=>/충/.test(w)).join(' · ')||'인연의 기운이 가장 약한 달'}</span></div>`;
+  $('tlH').textContent='앞으로 열두 달 흐름'; const mx=Math.max(...D.M.map(x=>x.sc));
+  $('tl').innerHTML=D.M.map(x=>`<div class="${top.slice(0,2).includes(x)?'hi':''}"><i data-h="${Math.round(x.sc/mx*86)}" style="height:2px"></i><small>${x.o.start.m}</small></div>`).join('');
+  setTimeout(()=>$('tl').querySelectorAll('i').forEach(i=>i.style.height=i.dataset.h+'px'),300);
+  $('sayAv').style.backgroundImage=`url('${CFG.img}')`; $('sayN').textContent=CFG.who;
+  $('sayT').textContent=MODE==='re'?(D.idx>=78?`문은 열려 있습니다. ${top[0].o.start.m}월에 움직이십시오. 그 전에 서두르면 같은 이유로 또 멀어집니다.`:D.idx>=62?`${top[0].o.start.m}월까지 기다리십시오. 그때 짧은 안부 한 줄이면 충분합니다.`:'미련과 인연은 다릅니다. 정리하는 쪽이 결국 이깁니다.'):(status==='end'?`정리 중이구나. ${top[0].o.start.m}월쯤엔 다른 사람이 눈에 들어올 거야.`:status==='some'?`썸이면 ${top[0].o.start.m}월에 확실해져. 그때까진 너무 재지 마.`:`${top[0].o.start.m}월엔 약속 거절하지 마. 그날 그 사람이 있을 수도 있어.`);
+  $('ev').innerHTML=(D.pts.map(p=>p[0]).concat(top[0].why)).slice(0,5).map(t=>`<span>${t}</span>`).join('');
+  $('lkH').textContent=CFG.lk; $('lkBl').textContent=MODE==='re'?`${nm}, 두 사람이 다시 닿는 날은 ○월 ○일입니다. 그날 먼저 연락해도 됩니다. 다만 ○월에는 연락을 아끼십시오. 그 사람은 지금…`:`${nm}, 그 사람은 ○월에 ○○에서 만나. 처음엔 별로라고 생각할 수도 있는데, 세 번째 만남에서…`;
+  $('lkT').textContent=CFG.lkT; $('lkS').textContent=CFG.lkS; $('payBtn').textContent=CFG.pay; $('payBtn').hidden=false; $('lockL').hidden=false; $('lprem').hidden=true;
+  $('toOther').textContent=CFG.other; $('note').textContent='체험판입니다. 원국과 월운은 실제 만세력(절기 시각)으로 계산하고, 점수는 합 · 충 · 원진 · 도화 · 인연의 별로 자동 산출합니다. 재회와 연애는 두 사람의 선택이 가장 큰 변수예요.';
+  $('rHero').style.backgroundImage=`url('${CFG.img}')`; show('sRs'); }
+
+/* 상세(결제 뒤) */
+let C=null, ST={};
+function days(){ const P=D.P, Q=D.Q, out=[], st=new Date(); st.setHours(12,0,0,0);
+  for(let i=1;i<=365;i++){ const d=new Date(st.getTime()+i*864e5), y=d.getFullYear(), m=d.getMonth()+1, dd=d.getDate(), w=d.getDay(); const [s,b]=S_.dayPillar(y,m,dd);
+    if(S_.isChung(b,P.d[1])||(Q&&S_.isChung(b,Q.d[1]))) continue;
+    const v=(S_.isHap(b,P.d[1])?2.5:0)+(Q&&S_.isHap(b,Q.d[1])?2.5:0)+(X.ganHap(s,P.d[0])?1.5:0)+(X.shinsal(b,P,s).includes('도화')?1.5:0)+(S_.rel(P.d[0],stEl(s))===D.loveG?1:0)+(w===5||w===6?.8:0);
+    if(v>=(Q?4:3.5)) out.push({y,m,d:dd,w,s,b,v,why:[S_.isHap(b,P.d[1])?'내 일지와 합':'',Q&&S_.isHap(b,Q.d[1])?'그 사람 일지와 합':'',X.ganHap(s,P.d[0])?'일간과 천간합':'',X.shinsal(b,P,s).includes('도화')?'도화':''].filter(Boolean)}); }
+  const r=[],used=new Set(); out.sort((a,b)=>b.v-a.v||a.y-b.y||a.m-b.m).forEach(o=>{ const k=o.y*100+o.m; if(r.length<4&&!used.has(k)){ used.add(k); r.push(o); } }); return r.sort((a,b)=>a.y-b.y||a.m-b.m||a.d-b.d); }
+function draft(){ const top=[...D.M].sort((a,b)=>b.sc-a.sc), T=TYPE[D.starEl], P=D.P;
+  if(MODE==='re') return {why:[D.Q?`두 사람 사이의 근거는 ${D.pts.map(p=>p[0]).join(', ')}입니다. 한마디로 ${D.pts[0][1]}입니다.`:'그 사람 생일 없이, 내 사주와 앞으로의 열두 달로 보았습니다.',D.xb!=null?`헤어진 ${D.xy}년 ${D.xm}월은 ${JI[D.xb]}의 달이었습니다. 이 기운이 다시 도는 달에 마음이 흔들립니다.`:''].filter(Boolean),
+     months:D.M.map(x=>({title:x.sc>=70?'다시 닿는 달':x.why.some(w=>/충/.test(w))?'연락을 아낄 달':'지켜보는 달',text:`${x.o.term} 달 ${x.o.gz}. ${x.why.join(', ')||'조용히 지나가는 달입니다.'}`,tip:x.sc>=70?'짧게 안부 한 줄':'먼저 연락하지 않기'})),
+     keep:[{t:'같은 이유로 싸우지 않기',d:'헤어진 이유를 먼저 짚고 다시 시작하십시오.'},{t:`${top[0].o.start.m}월에 움직이기`,d:'가장 가까워지는 달입니다.'},{t:'답이 없으면 한 번만',d:'두 번째 연락부터는 마음이 아니라 미련입니다.'}],
+     sign:['연락이 와도 사과 없이 예전 이야기만 한다면, 그건 재회가 아니라 반복입니다.','내가 혼자 애쓰고 있다는 느낌이 석 달 넘게 이어지면 놓으십시오.'],letter:['정리와 재회는 같은 용기에서 나옵니다.',`${top[0].o.start.m}월, 그때 판단하십시오.`]};
+  return {who:[`다음 사람은 ${T.n}이야. ${T.look}.`,`일은 ${T.job} 쪽일 가능성이 커.`],
+    months:D.M.map(x=>({title:x.sc>=70?'인연이 오는 달':x.why.some(w=>/충/.test(w))?'마음을 쉬는 달':'천천히 데워지는 달',text:`${x.o.term} 달 ${x.o.gz}. ${x.why.join(', ')||'조용한 달이야.'}`,tip:x.sc>=70?'약속 거절하지 않기':'나부터 챙기기'})),
+    scene:[`${top[0].o.start.m}월, ${T.place.split(', ')[0]}에서. 처음엔 그냥 스쳐 가는데 두 번째 마주칠 때 말이 트여.`],
+    mine:[`네 일지 ${JI[P.d[1]]}는 ${S_.tgBranch(P.d[0],P.d[1])}이라, 가까워질수록 그 성향이 연애에 드러나.`],letter:['다음 사람은 생각보다 가까이 있어.',`${top[0].o.start.m}월, 기억해 둬.`]}; }
+function card(ids){ const P=D.P, gz=p=>p?GAN[p[0]]+JI[p[1]]:'모름';
+  const c={화자:CFG.who,성별:D.male?'남':'여',지금상태:MODE==='next'?{solo:'솔로',some:'썸 타는 중',end:'정리하는 중'}[status]:'헤어진 뒤',일간:GAN[P.d[0]]+EL[stEl(P.d[0])],일지:JI[P.d[1]]+' '+S_.tgBranch(P.d[0],P.d[1]),원국:[['년주',P.y],['월주',P.m],['일주',P.d],['시주',P.h]].map(([n,p])=>n+' '+gz(p)),원국신살:D.F.natal.map(o=>o.at+' '+o.k),
+    인연의별:D.male?'재성':'관성',지수:D.idx,근거:D.pts.map(p=>p[0]+' · '+p[1])};
+  if(MODE==='re'){ c.그사람=D.Q?{원국:[D.Q.y,D.Q.m,D.Q.d].map(gz).join(' '),일간:GAN[D.Q.d[0]]+EL[stEl(D.Q.d[0])],일지:JI[D.Q.d[1]]}:'생일 모름'; c.헤어진때=D.xy?`${D.xy}년 ${D.xm}월(${JI[D.xb]}의 달)`:'모름'; }
+  else { const T=TYPE[D.starEl]; c.그사람의결={오행:EL[D.starEl],인상:T.n,분위기:T.look,일:T.job,만나는곳:T.place}; }
+  c.먼저연락하기좋은날=D.days.map(o=>`${o.y}.${o.m}.${o.d}(${DOW[o.w]}) ${GAN[o.s]}${JI[o.b]}일 · ${o.why.join(', ')}`);
+  if(ids&&!ids.length) c.달요약=D.M.map(x=>`${x.o.start.y}.${x.o.start.m}월 ${x.o.gz} ${x.sc}점 ${x.why.join(',')}`);
+  else c.달=(ids||[]).map(i=>{ const x=D.M[i], o=x.o; return {번호:i,달:`${o.start.y}년 ${o.start.m}월`,절기:o.term,간지:o.gz,점수:x.sc,근거:x.why,천간십성:o.t1,지지십성:o.t2,관계:o.br.map(r=>r.at+' '+r.k),신살:o.ss}; });
+  return JSON.stringify(c); }
+function prompts(){ const A=window.PremAI, ST0=`[문체 규칙 · 오방사주 ${CFG.style}]\n`+A.COMMON;
+  const core=MODE==='re'?`${ST0}\n\n[할 일] 재회 사주 프리미엄 '시온의 재회 노트' 본문을 쓴다. 헤어진 사람과 다시 닿을 수 있을지, 사주 근거로 냉정하고 정확하게.
+출력 JSON 형식: {"why":["두 사람의 관계와 헤어진 흐름 2~3단락. 근거(두 사람 일지 · 일간 관계, 헤어진 달)로. 단락마다 120~180자"],"keep":[{"t":"다시 만난다면 지킬 것 제목 8~16자","d":"구체적인 행동 40~80자"}],"sign":["놓아야 할 신호 2개, 각 60~100자"],"letter":["시온의 편지 4~5단락, 단락마다 40~90자"]}
+keep은 정확히 3개.
+
+[사실 카드]
+${card([])}`:`${ST0}\n\n[할 일] 다음 연애 프리미엄 '서하의 인연 노트' 본문을 쓴다. 다음 사람이 언제, 어디서, 어떤 결로 오는지.
+출력 JSON 형식: {"who":["그 사람의 결 2~3단락. 인연의 별 오행으로 본 성격 · 분위기 · 하는 일. 외모는 분위기 수준으로만. 단락마다 110~170자"],"scene":["만나는 장면 2단락. 가장 점수 높은 달과 만나는 곳으로 구체적인 장면처럼. 단락마다 110~170자"],"mine":["연애할 때 내 패턴과 조심할 것 2단락. 일지 · 원국 신살 근거. 단락마다 100~150자"],"letter":["서하의 편지 4~5단락, 단락마다 40~90자"]}
+
+[사실 카드]
+${card([])}`;
+  const cal=ids=>`${ST0}\n\n[할 일] 앞으로 열두 달 ${MODE==='re'?'재회':'인연'} 달력의 달별 풀이를 쓴다. 입춘 기준 절월이다. 점수 · 근거 · 관계 · 신살을 근거로.
+출력 JSON 형식: 배열. 달마다 {"i":달 번호,"title":"그달 제목 6~12자","text":"그달 이야기 130~200자","tip":"한 줄 당부 10~20자"}
+대상 달 번호: ${ids.join(', ')}
+
+[사실 카드]
+${card(ids)}`;
+  const isArr=d=>Array.isArray(d)&&d.every(x=>x&&typeof x.text==='string');
+  return [{id:'core',prompt:core,check:d=>d&&Array.isArray(d.letter)},{id:'c0',prompt:cal([0,1,2,3,4,5]),check:isArr},{id:'c1',prompt:cal([6,7,8,9,10,11]),check:isArr}]; }
+function apply(id,d){ if(id==='core') Object.keys(d).forEach(k=>{ if(d[k]&&d[k].length) C[k]=d[k]; }); else d.forEach(x=>{ const i=+x.i; if(i>=0&&i<12) C.months[i]=Object.assign({},C.months[i],x); }); }
+function build(){ const nk=D.me.name||'', ps=a=>K.ps(a,nk), t=x=>K.tok(x,nk), top=[...D.M].sort((a,b)=>b.sc-a.sc), hi=top.slice(0,2), lo=[...D.M].sort((a,b)=>a.sc-b.sc).slice(0,1);
+  const H=[`<div class="pk-st" id="lvst" hidden></div>`];
+  if(MODE==='re') H.push(K.sec('시온의 재회 노트 · 두 사람 사이',ps(C.why)+K.ev(D.pts.map(p=>p[0]))));
+  else H.push(K.sec('서하의 인연 노트 · 그 사람의 결',`<div class="pk-vs"><div><small>인연의 별</small><b>${EL[D.starEl]}</b><em>${TYPE[D.starEl].n}</em></div><div><small>만나는 곳</small><b style="font-size:15px">${TYPE[D.starEl].place.split(', ')[0]}</b><em>${TYPE[D.starEl].job}</em></div></div>`+ps(C.who)));
+  H.push(K.sec(MODE==='re'?'열두 달 재회 달력':'열두 달 인연 달력',`<div class="pk-acc">${D.M.map((x,i)=>{ const c=C.months[i]||{}, o=x.o, tag=hi.includes(x)?(MODE==='re'?'다시 닿음':'인연'):lo.includes(x)?'조심':'';
+    return K.row({k:'v'+i,cls:hi.includes(x)?'pk-hi':lo.includes(x)?'pk-lo':'',a:`${o.start.m}월`,asub:`${o.start.y}`,b:`<em>${o.gz}</em>${t(c.title||'')}${tag?`<span class="pk-tag">${tag}</span>`:''}`,c:x.sc,body:ps([c.text])+(c.tip?`<p class="pk-key"><b>이달 한 줄</b>${t(c.tip)}</p>`:'')+K.ev([...new Set(x.why.concat(o.ss.filter(k=>!x.why.includes(k))))])}); }).join('')}</div>`,'입춘 기준 · 숫자는 점수'));
+  H.push(K.sec(MODE==='re'?'먼저 연락해도 되는 날':'고백하기 좋은 날',D.days.length?`<div class="pk-cards">${D.days.map(o=>`<div class="pk-card"><b>${o.m}.${o.d}<small>${o.y} · ${DOW[o.w]}요일</small></b><div><p class="pk-ct">${GAN[o.s]}${JI[o.b]}일</p><p>${o.why.join(' · ')}</p></div></div>`).join('')}</div>`:'<p class="pk-p">따로 고른 날이 없어요. 점수가 높은 달을 노리세요.</p>',MODE==='re'?'두 사람 모두 충이 없는 날':'내 일지 충이 없는 날'));
+  if(MODE==='re'){ H.push(K.sec('다시 만난다면 지킬 것',`<div class="pk-cards">${(C.keep||[]).slice(0,3).map((k,i)=>`<div class="pk-card"><b>${i+1}</b><div><p class="pk-ct">${t(k.t)}</p><p>${t(k.d)}</p></div></div>`).join('')}</div>`)); H.push(K.sec('놓아야 할 신호',ps(C.sign))); }
+  else { H.push(K.sec('만나는 장면',ps(C.scene))); H.push(K.sec('연애할 때 내 패턴',ps(C.mine))); }
+  H.push(K.letter(C.letter||[],{title:CFG.who+'의 편지',name:CFG.who},CFG.seal,nk));
+  H.push(`<p class="pk-note" style="margin:14px 0 0">${ST.ai?`이 노트는 만세력 계산 근거만 재료로 AI가 ${CFG.who}의 말투로 쓴 글이에요. 명리 전문가 감수 전 원고예요`:`이 부분은 해석 사전으로 조립한 초안이에요. 정식 서비스에서는 같은 근거로 ${CFG.who}가 길게 써 줘요`}</p>`);
+  return H.join(''); }
+function renderPrem(){ const host=$('lprem'); K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status($('lvst'),Object.assign({who:CFG.who+'가 노트'},ST)); }
+function openPrem(){ const host=$('lprem'); D.days=days(); C=K.gl(draft()); ST={}; host.className='pkx dark'; host.style.setProperty('--pk-acc','var(--a)'); host.hidden=false; K.bind(host); renderPrem();
+  const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
+  K.runAI({key:D.key,ver:'v1',parts:prompts(),apply,rerender:renderPrem,S:ST}); }
+
+/* 흐름 */
+$('goBtn').onclick=async()=>{ const me={name:$('nm').value.trim(),g:gender,cal,y:+$('by').value,m:+$('bm').value,d:+$('bd').value,h:$('bh').value==='x'?null:+$('bh').value};
+  const pt=MODE==='re'&&$('py').value!=='x'?{name:$('pNm').value.trim(),y:+$('py').value,m:+$('pm').value,d:+$('pd').value}:null;
+  D=compute(me,pt,MODE==='re'?+$('xy').value:null,MODE==='re'?+$('xm').value:null); if(!D){ toast('없는 음력 날짜예요'); return; }
+  try{ const old=JSON.parse(sessionStorage.getItem('me')||'{}'); sessionStorage.setItem('me',JSON.stringify(Object.assign(old,me))); }catch(e){}
+  $('ldAv').style.backgroundImage=`url('${CFG.img}')`; $('ldT').textContent=`${CFG.who}${K.bt(CFG.who)?'이':'가'} 보는 중`; show('sLd');
+  for(const t of CFG.ld){ $('ldP').textContent=t; await wait(620); } render(); };
+$('payBtn').onclick=()=>{ $('lockL').hidden=true; $('payBtn').hidden=true; openPrem(); setTimeout(()=>$('lprem').scrollIntoView({behavior:'smooth',block:'start'}),60); };
+$('again').onclick=()=>show('sIn');
+$('toOther').onclick=()=>{ location.href=CFG.otherGo; };
+$('back').onclick=()=>{ if($('sRs').classList.contains('on')){ show('sIn'); return; } try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+window._love2={get D(){ return D; }};
+})();
+</script>
+<script src="hscroll.js"></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+import asyncio, subprocess, time
+PRE='<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
+open('proto/_home.html','w',encoding='utf-8').write(PRE+open('proto/seoha-salon.html',encoding='utf-8').read())
+srv=subprocess.Popen(['python3','-m','http.server','8805','-d','proto'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL); time.sleep(1)
+U='http://localhost:8805/'
+ME="sessionStorage.setItem('me',JSON.stringify({name:'은주',g:'f',cal:'s',y:1993,m:12,d:3,h:10}))"
+async def main():
+    from playwright.async_api import async_playwright
+    async with async_playwright() as p:
+        b=await p.chromium.launch(args=['--use-gl=swiftshader','--enable-webgl']); pg=await b.new_page(viewport={"width":390,"height":844}); errs=[]
+        pg.on("pageerror",lambda e: errs.append(str(e)))
+        await pg.goto(U+'today.html'); await pg.evaluate(ME)
+        await pg.evaluate("sessionStorage.setItem('toHome','1')"); await pg.goto(U+'_home.html'); await pg.wait_for_timeout(2600)
+        for i,y in enumerate([0,700,1400,2100]):
+            await pg.evaluate(f"document.getElementById('home').scrollTop={y}"); await pg.wait_for_timeout(700); await pg.screenshot(path=f'audit_sh/sq_{i}.png')
+        print(errs); await b.close()
+asyncio.run(main()); srv.terminate()
+from PIL import Image
+ims=[Image.open(f'audit_sh/sq_{i}.png').convert('RGB') for i in range(4)]
+S=Image.new('RGB',(390*4+30,844),(40,40,40))
+for i,im in enumerate(ims): S.paste(im,(i*400,0))
+S.save('홈_각진카드_v56.png')

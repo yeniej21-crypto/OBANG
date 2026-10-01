@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>묘당 · 고양이 점집</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&family=Song+Myung&display=swap">
+<link rel="stylesheet" href="premkit.css">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 묘당(猫堂) — 한밤에만 여는 고양이 점집. 고양이 여섯 마리가 전문 분야별로 가벼운 점을 봐 준다.
+   고양이가 영상으로 말을 걸고(v/cat/{k}.mp4, 없으면 그림), 결과도 고양이 말투로. 촛불 톤 어두운 바탕 · 각진 면(동그라미만 예외) · 문장 끝 부호 없음. */
+:root{
+  --brush:'OBrush','Song Myung',serif; --bmj:'Song Myung','Noto Serif KR',serif; --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --bg:#130f0d; --bg2:#1c1714; --card:#211b17; --ink:#f4ece0; --ink2:#c9bba8; --ink3:#8d8071; --gold:#e3b866; --line:rgba(255,236,210,.1);
+  --c:#e3b866; color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#0a0807;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button,input,textarea{font-family:inherit}
+button{cursor:pointer}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--bg);overflow:hidden}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
+.scr{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;opacity:0;pointer-events:none;transition:opacity .4s}
+.scr::-webkit-scrollbar{display:none}
+.scr.on{opacity:1;pointer-events:auto}
+.top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 14px 10px;pointer-events:none}
+.top>*{pointer-events:auto}
+.ib{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(20,16,14,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;place-items:center;color:var(--ink)}
+.ib svg{width:18px;height:18px}
+.top b{font-size:12.5px;font-weight:800;letter-spacing:.16em;color:var(--ink2)}
+
+/* 로비 */
+.hero{position:relative;height:min(64vh,560px);background:#000 center 28%/cover no-repeat;overflow:hidden}
+.hero video,.pt video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;opacity:0;transition:opacity .6s}
+.hero video.on,.pt video.on{opacity:1}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(19,15,13,.55) 0%,rgba(19,15,13,0) 22%,rgba(19,15,13,0) 58%,var(--bg) 100%);pointer-events:none}
+.hero .ttl{position:absolute;left:20px;right:20px;bottom:18px;z-index:2}
+.hero .ttl small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.22em;color:var(--gold)}
+.hero .ttl h1{margin:6px 0 2px;font-family:var(--brush);font-weight:400;font-size:58px;line-height:1}
+.hero .ttl p{margin:0;font-family:var(--bmj);font-size:16px;color:var(--ink2)}
+.say0{margin:0 18px;padding:13px 15px;background:var(--bg2);font-family:var(--bmj);font-size:17px;line-height:1.5;border-left:2px solid var(--gold)}
+.say0 small{display:block;margin-bottom:3px;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--gold)}
+.lh{display:flex;justify-content:space-between;align-items:baseline;margin:26px 18px 10px}
+.lh b{font-size:17px;font-weight:800}
+.lh small{font-size:12px;color:var(--ink3)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 18px}
+.cat{position:relative;aspect-ratio:3/4;border:0;padding:0;background:#000 center 30%/cover no-repeat;color:#fff;text-align:left;overflow:hidden}
+.cat.wide{grid-column:1/-1;aspect-ratio:16/10;background-position:center 26%}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(10,8,7,.9) 100%)}
+.cat .tx{position:absolute;left:12px;right:12px;bottom:11px;z-index:2}
+.cat .tx small{display:block;font-size:11px;font-weight:700;color:var(--c)}
+.cat .tx b{display:block;margin-top:2px;font-family:var(--brush);font-weight:400;font-size:24px;line-height:1.15}
+.cat.wide .tx b{font-size:30px}
+.cat .tag{position:absolute;top:9px;left:9px;z-index:2;font-size:10px;font-weight:800;letter-spacing:.08em;padding:3px 6px 2px;background:rgba(10,8,7,.62);color:var(--ink2)}
+.cat .tag.pay{background:var(--gold);color:#1a1208}
+.foot{margin:22px 18px 0;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 28px);font-size:11.5px;line-height:1.7;color:var(--ink3)}
+
+/* 점 보는 화면 */
+.pt{position:relative;height:min(58vh,520px);background:#000 center 28%/cover no-repeat;overflow:hidden}
+.pt::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(19,15,13,.5) 0%,rgba(19,15,13,0) 20%,rgba(19,15,13,0) 55%,var(--bg) 100%);pointer-events:none}
+.pt .nm{position:absolute;left:18px;bottom:16px;z-index:2}
+.pt .nm small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.12em;color:var(--c)}
+.pt .nm b{display:block;margin-top:3px;font-family:var(--brush);font-weight:400;font-size:40px;line-height:1.05}
+.pt .snd{position:absolute;right:14px;bottom:18px;z-index:3;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(20,16,14,.55);color:var(--ink);display:grid;place-items:center}
+.pt .snd svg{width:17px;height:17px}
+.bub{position:relative;margin:0 18px;padding:14px 16px;background:var(--bg2);border-left:2px solid var(--c);font-family:var(--bmj);font-size:18px;line-height:1.55;min-height:58px}
+.bub i{display:inline-block;width:7px;height:16px;margin-left:2px;vertical-align:-2px;background:var(--c);animation:blink .8s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.pn{margin:14px 18px 0}
+.lab{margin:18px 0 8px;font-size:12.5px;font-weight:700;color:var(--ink2)}
+.lab:first-child{margin-top:0}
+.btn{display:block;width:100%;height:52px;border:0;background:var(--c);color:#16110c;font-size:15.5px;font-weight:800}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.4;cursor:default}
+.row2{display:flex;gap:8px;margin-top:10px}
+.row2 .btn{flex:1}
+.in,.ta{width:100%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:15px;padding:13px 14px;outline:none}
+.in:focus,.ta:focus{border-color:var(--c)}
+.ta{min-height:88px;resize:none;line-height:1.55}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{height:34px;padding:0 12px;border:1px solid var(--line);background:var(--card);color:var(--ink2);font-size:13px}
+.chips button.on{border-color:var(--c);color:var(--ink);background:color-mix(in srgb,var(--c) 18%,var(--card))}
+.bd{display:grid;grid-template-columns:1.3fr 1fr 1fr .9fr;gap:6px}
+.bd select{width:100%;height:46px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:14.5px;padding:0 8px}
+
+/* 결과 */
+.res{margin:16px 18px 0;display:none}
+.res.on{display:block;animation:up .5s ease both}
+@keyframes up{from{opacity:0;transform:translateY(10px)}}
+.rh{padding:18px 16px;background:var(--card)}
+.rh small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.1em;color:var(--c)}
+.rh b{display:block;margin-top:6px;font-family:var(--brush);font-weight:400;font-size:30px;line-height:1.2}
+.rh p{margin:8px 0 0;font-size:14px;line-height:1.65;color:var(--ink2)}
+.sc{display:flex;align-items:center;gap:12px;margin-top:12px}
+.sc .ring{position:relative;flex:none;width:58px;height:58px;border-radius:50%;background:conic-gradient(var(--c) calc(var(--p)*1%),rgba(255,255,255,.08) 0);display:grid;place-items:center}
+.sc .ring::before{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--card)}
+.sc .ring em{position:relative;font-style:normal;font-family:var(--serif);font-weight:900;font-size:20px;color:var(--c)}
+.sc span{font-size:13px;line-height:1.55;color:var(--ink2)}
+.li{margin-top:8px;display:grid;gap:6px}
+.li div{display:grid;grid-template-columns:78px 1fr;gap:10px;padding:12px 14px;background:var(--card);font-size:14px;line-height:1.55}
+.li div b{color:var(--c);font-weight:700;font-size:13px}
+.li div span{color:var(--ink)}
+.days{display:flex;flex-wrap:wrap;gap:5px}
+.days i{font-style:normal;font-size:12.5px;font-weight:700;padding:3px 7px;background:rgba(255,255,255,.06);color:var(--ink)}
+.days i.bad{color:#f0a08c}
+.note{margin:12px 2px 0;font-size:11.5px;line-height:1.6;color:var(--ink3)}
+.note b{color:var(--gold)}
+
+/* 엽전 */
+.coins{display:flex;justify-content:center;gap:16px;padding:18px 0 8px;perspective:600px}
+.coin{width:74px;height:74px;border-radius:50%;position:relative;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.coin .f{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#f1d28c,#b8862f 70%,#7d5a1d);box-shadow:inset 0 0 0 3px rgba(90,60,15,.6),0 6px 14px rgba(0,0,0,.4)}
+.coin .f::before{content:"";width:18px;height:18px;background:var(--bg);box-shadow:0 0 0 2px rgba(90,60,15,.8)}
+.coin .f em{position:absolute;font-style:normal;font-family:var(--serif);font-weight:900;font-size:13px;color:#5a3d0c}
+.coin .f em:nth-child(1){top:8px}.coin .f em:nth-child(2){bottom:8px}.coin .f em:nth-child(3){left:10px}.coin .f em:nth-child(4){right:10px}
+.coin .bk{transform:rotateY(180deg);background:radial-gradient(circle at 35% 30%,#d9bd7c,#9b7026 70%,#634515)}
+.coin.toss{animation:toss .9s cubic-bezier(.3,.6,.3,1)}
+@keyframes toss{0%{translate:0 0}40%{translate:0 -90px}100%{translate:0 0}}
+.cnt{text-align:center;font-size:12.5px;color:var(--ink3);margin-bottom:10px}
+
+/* 포춘쿠키 */
+.ck{position:relative;height:230px;display:grid;place-items:center;cursor:pointer;user-select:none}
+.ck svg{width:210px;height:150px;overflow:visible;filter:drop-shadow(0 12px 18px rgba(0,0,0,.45))}
+.ck .L,.ck .R{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.ck.open .L{transform:translate(-34px,8px) rotate(-18deg)}
+.ck.open .R{transform:translate(34px,8px) rotate(18deg)}
+.ck.hit svg{animation:wob .25s}
+@keyframes wob{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
+.ck .tap{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:12.5px;color:var(--ink3)}
+.paper{margin:0 auto;max-width:320px;padding:18px 18px 16px;background:#f6efe2;color:#2a2017;text-align:center;transform-origin:50% 0;animation:unroll .7s .25s cubic-bezier(.2,.8,.2,1) both;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+@keyframes unroll{from{transform:scaleY(.05);opacity:0}}
+.paper p{margin:0;font-family:var(--bmj);font-size:19px;line-height:1.55}
+.paper small{display:block;margin-top:10px;font-size:12px;color:#7a6a58}
+
+/* 할까 말까 */
+.ans{margin-top:4px;text-align:center;padding:26px 16px 22px;background:var(--card)}
+.ans b{display:block;font-family:var(--brush);font-weight:400;font-size:56px;line-height:1;color:var(--c)}
+.ans p{margin:12px 0 0;font-family:var(--bmj);font-size:17px;line-height:1.55}
+.ans small{display:block;margin-top:8px;font-size:12.5px;color:var(--ink3)}
+
+.toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(-50%);z-index:95;background:rgba(244,236,224,.95);color:#1a1410;font-size:13.5px;font-weight:600;padding:10px 16px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+.sp{height:calc(env(safe-area-inset-bottom,0px) + 36px)}
+#mprem{margin-top:16px}
+#mprem .pk-sec{margin-top:12px}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="topT">MYODANG · 묘당</b></div>
+
+  <!-- 로비 -->
+  <div class="scr on" id="sLobby">
+    <div class="hero" id="hero"><video id="heroV" muted playsinline loop preload="none"></video><div class="ttl"><small>한밤에만 여는 고양이 점집</small><h1>묘당</h1><p>여섯 고양이가 네 이야기를 기다려</p></div></div>
+    <div class="say0"><small>마담 도화</small>어서 와. 오늘은 누구한테 물어볼래</div>
+    <div class="lh"><b>누구에게 물어볼까</b><small>고양이마다 보는 점이 달라요</small></div>
+    <div class="grid" id="grid"></div>
+    <p class="foot">묘당은 사주의 기본 원리(태어난 날의 기운과 그달 · 그날의 기운)를 가볍게 풀어 주는 재미용 점이에요. 꿈해몽은 전해 내려오는 풀이를, 엽전점은 동전을 던지는 옛 점법을 빌려 왔어요</p>
+  </div>
+
+  <!-- 점 보는 화면 -->
+  <div class="scr" id="sRead">
+    <div class="pt" id="pt"><video id="ptV" playsinline preload="auto"></video><div class="nm"><small id="ptK"></small><b id="ptN"></b></div><button class="snd" id="snd" type="button" aria-label="다시 듣기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></button></div>
+    <div class="bub" id="bub"></div>
+    <div class="pn" id="pn"></div>
+    <div class="res" id="res"></div>
+    <div class="sp"></div>
+  </div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script src="saju_x.js"></script>
+<script src="premai.js"></script>
+<script src="premkit.js"></script>
+<script src="madam_prem.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const S=window.Saju;
+/* 고양이 여섯 · 전문 분야 */
+const CATS={
+  madam:{n:'마담 도화',who:'흰 앙고라 · 묘당 마담',menu:'이달의 연애운',c:'#f2a7b8',tag:'990원',pay:1,
+    hi:'이번 달, 너한테 끌리는 사람이 있어. 누군지 궁금하지'},
+  water:{n:'먹물',who:'검은 고양이 · 꿈 담당',menu:'꿈해몽',c:'#8fb3ff',tag:'무료',
+    hi:'로또 당첨 꿈이라도 꾼 거야. 아마 개꿈일 확률이 높아. 그래도 봐 줄게'},
+  fire:{n:'홍시',who:'치즈냥 · 속마음 담당',menu:'그 사람 속마음',c:'#ff9a5c',tag:'무료',
+    hi:'그 사람 속마음 궁금해. 궁금하면 엽전 줘'},
+  earth:{n:'인절미',who:'크림 엑조틱 · 돈 담당',menu:'이달의 금전운',c:'#e8c46a',tag:'무료',
+    hi:'금전운 보러 온 거지. 츄르 하나 주면 알려 줄게'},
+  metal:{n:'서리',who:'러시안 블루 · 결단 담당',menu:'할까 말까',c:'#b9d4e6',tag:'무료',
+    hi:'고민 딱 하나만 말해. 두 개는 안 들어. 시간 없거든'},
+  wood:{n:'솔이',who:'스코티시폴드 · 오늘 담당',menu:'포춘쿠키',c:'#8fd19e',tag:'하루 한 번',
+    hi:'쿠키 하나 깨 볼래. 불안해하지 마. 이건 그냥 재미로 하는 거야'}};
+const ORDER=['madam','water','fire','earth','metal','wood'];
+const img=k=>`img/cat/${k}.jpg`, vid=k=>`v/cat/${k}.mp4`;
+
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1800); }
+function me(){ try{ return JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){ return null; } }
+function setMe(o){ try{ sessionStorage.setItem('me',JSON.stringify(Object.assign(me()||{},o))); }catch(e){} }
+function hash(s){ let h=2166136261; for(const ch of s){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; }
+const bt=w=>{ const c=w.charCodeAt(w.length-1)-0xac00; return c>=0&&c<11172&&c%28!==0; };
+const jo=(w,a,b)=>w+(bt(w)?a:b);
+const today=new Date(); today.setHours(12,0,0,0);
+const dkey=d=>`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* 내 사주 기둥 */
+function myP(){ const m=me(); if(!m||!m.y) return null; try{ let s={y:+m.y,m:+m.m,d:+m.d}; if(m.cal==='l'){ s=S.lunarToSolar(s.y,s.m,s.d,false)||s; } return S.pillars(s.y,s.m,s.d,m.h==null||m.h===''?null:+m.h); }catch(e){ return null; } }
+function dayP(d){ return S.dayPillar(d.getFullYear(),d.getMonth()+1,d.getDate()); }
+function monthDays(){ const y=today.getFullYear(), m=today.getMonth(), n=new Date(y,m+1,0).getDate(); return [...Array(n)].map((_,i)=>{ const d=new Date(y,m,i+1,12); return {d,p:dayP(d)}; }); }
+const md=d=>`${d.getMonth()+1}월 ${d.getDate()}일`;
+
+/* 로비 */
+$('hero').style.backgroundImage=`url('${img('madam')}')`;
+$('grid').innerHTML=ORDER.map(k=>{ const c=CATS[k]; return `<button class="cat ${k==='madam'?'wide':''}" data-k="${k}" type="button" style="--c:${c.c};background-image:url('${img(k)}')"><span class="tag ${c.pay?'pay':''}">${c.tag}</span><span class="tx"><small>${c.n}</small><b>${c.menu}</b></span></button>`; }).join('');
+$('grid').onclick=e=>{ const b=e.target.closest('[data-k]'); if(b) open(b.dataset.k); };
+/* 로비 영상: 있으면 소리 없이 반복 */
+(()=>{ const v=$('heroV'); v.src=vid('madam')+'#t=0.1'; v.addEventListener('loadeddata',()=>{ v.classList.add('on'); v.play().catch(()=>{}); },{once:true}); v.addEventListener('error',()=>v.remove(),{once:true}); v.preload='auto'; v.load(); })();
+
+/* 점 보는 화면 */
+let cur=null, tw=0;
+function say(t){ const b=$('bub'); clearInterval(tw); b.innerHTML='<span></span><i></i>'; const sp=b.firstChild; let i=0; tw=setInterval(()=>{ sp.textContent=t.slice(0,++i); if(i>=t.length){ clearInterval(tw); setTimeout(()=>{ const c=b.querySelector('i'); if(c) c.remove(); },900); } },45); }
+function playCat(k){ const v=$('ptV'); v.classList.remove('on'); v.muted=false; v.src=vid(k); v.onloadeddata=()=>{ v.classList.add('on'); v.play().catch(()=>{ v.muted=true; v.play().catch(()=>{}); }); }; v.onended=()=>{ v.pause(); }; v.onerror=()=>{ v.classList.remove('on'); }; v.load(); }
+function open(k){ cur=k; const c=CATS[k]; document.documentElement.style.setProperty('--c',c.c);
+  $('pt').style.backgroundImage=`url('${img(k)}')`; $('ptK').textContent=c.who; $('ptN').textContent=c.menu; $('topT').textContent='MYODANG · '+c.n;
+  $('res').className='res'; $('res').innerHTML=''; $('pn').innerHTML='';
+  $('sLobby').classList.remove('on'); $('sRead').classList.add('on'); $('sRead').scrollTop=0;
+  say(c.hi); playCat(k); PANEL[k](); try{ history.pushState({k},'',location.pathname+location.search+'#'+k); }catch(e){} }
+function lobby(){ cur=null; clearInterval(tw); const v=$('ptV'); v.pause(); $('sRead').classList.remove('on'); $('sLobby').classList.add('on'); $('topT').textContent='MYODANG · 묘당'; document.documentElement.style.setProperty('--c','#e3b866'); }
+$('snd').onclick=()=>{ const v=$('ptV'); if(v.classList.contains('on')){ v.currentTime=0; v.muted=false; v.play().catch(()=>{}); } say(CATS[cur].hi); };
+$('back').onclick=()=>{ if(cur){ if(location.hash) history.back(); else lobby(); return; } try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+window.addEventListener('popstate',()=>{ if(!location.hash&&cur) lobby(); });
+function showRes(h,catLine){ const r=$('res'); r.innerHTML=h; r.className='res on'; if(catLine) say(catLine); setTimeout(()=>$('sRead').scrollTo({top:r.offsetTop-$('bub').offsetHeight-90,behavior:'smooth'}),80); }
+
+/* 생일 입력(없을 때만) */
+function birthForm(needG){ const m=me()||{}; const ys=[]; for(let y=today.getFullYear()-12;y>=1950;y--) ys.push(y);
+  return `<div class="lab">생일을 알려 줘 <small style="color:var(--ink3);font-weight:500">양력</small></div><div class="bd">
+  <select id="bY">${ys.map(y=>`<option ${+m.y===y||(!m.y&&y===1995)?'selected':''}>${y}</option>`).join('')}</select>
+  <select id="bM">${[...Array(12)].map((_,i)=>`<option value="${i+1}" ${+m.m===i+1?'selected':''}>${i+1}월</option>`).join('')}</select>
+  <select id="bD">${[...Array(31)].map((_,i)=>`<option value="${i+1}" ${+m.d===i+1?'selected':''}>${i+1}일</option>`).join('')}</select>
+  <select id="bG"><option value="f" ${m.g!=='m'?'selected':''}>여</option><option value="m" ${m.g==='m'?'selected':''}>남</option></select></div>`; }
+function readBirth(){ const y=$('bY'); if(!y) return; setMe({y:+y.value,m:+$('bM').value,d:+$('bD').value,g:$('bG').value,cal:'s',h:null}); }
+const hasMe=()=>!!myP();
+
+/* ───── 마담 도화 · 이달의 연애운 ───── */
+const DOHWA={2:3,6:3,10:3, 8:9,0:9,4:9, 5:6,9:6,1:6, 11:0,3:0,7:0}; // 寅午戌→卯 申子辰→酉 巳酉丑→午 亥卯未→子
+const DH_LUCK={3:['초록','나무 많은 공원 산책'],6:['빨강','전시회나 공연장'],9:['흰색','높은 곳 카페 · 루프탑'],0:['남색','밤 산책 · 물 가까운 곳']};
+const PANEL={};
+PANEL.madam=()=>{ $('pn').innerHTML=(hasMe()?'':birthForm(true))+`<button class="btn" id="go" type="button" style="margin-top:14px">마담에게 이번 달 묻기</button><p class="note">정식 오픈 때 <b>990원</b> · 체험판에서는 무료</p>`;
+  $('go').onclick=()=>{ readBirth(); const P=myP(); if(!P) return toast('생일을 확인해 줘'); const m=me(), f=m.g!=='m', dm=P.d[0], db=P.d[1];
+    const dh=[DOHWA[P.y[1]],DOHWA[db]], mp=S.pillars(today.getFullYear(),today.getMonth()+1,15,null).m;
+    const loveG=f?3:2; /* 여자는 관성, 남자는 재성이 인연의 기운 */
+    let sc=62; if(dh.includes(mp[1])) sc+=16; if(S.rel(dm,S.stEl(mp[0]))===loveG) sc+=12; if(S.isHap(mp[1],db)) sc+=8; if(S.isChung(mp[1],db)) sc-=10; sc+=hash(dkey(today).slice(0,7)+m.y+m.m+m.d)%7; sc=Math.max(48,Math.min(96,sc));
+    const days=monthDays(), from=today.getDate()-1;
+    const pull=days.filter(x=>dh.includes(x.p[1])||S.rel(dm,S.stEl(x.p[0]))===loveG).map(x=>x.d); const care=days.filter(x=>S.isChung(x.p[1],db)).map(x=>x.d);
+    const up=a=>{ const u=a.filter(d=>d.getDate()-1>=from); return (u.length?u:a).slice(0,3); };
+    const third=(()=>{ const c=[0,0,0]; pull.forEach(d=>c[Math.min(2,Math.floor((d.getDate()-1)/10))]++); return ['초순','중순','하순'][c.indexOf(Math.max(...c))]; })();
+    const L=DH_LUCK[dh[1]]||DH_LUCK[dh[0]];
+    const H=sc>=85?['이번 달, 끌림이 쏟아지는 달','가만히 있어도 시선이 모여. 고르는 건 너야']:sc>=72?['은근히 시선이 모이는 달','먼저 웃어 주는 쪽이 이기는 달이야']:sc>=60?['천천히 데워지는 달','급하게 굴면 식어. 한 번에 한 걸음만']:['나를 먼저 챙기는 달','이번 달은 나한테 반하는 게 먼저야'];
+    const hasDH=[P.y[1],P.m[1],db,P.h?P.h[1]:-1].some(b=>b===3||b===6||b===9||b===0);
+    showRes(`<div class="rh"><small>${today.getMonth()+1}월의 연애운</small><b>${H[0]}</b><div class="sc"><div class="ring" style="--p:${sc}"><em>${sc}</em></div><span>끌림이 가장 많은 때는 <em style="font-style:normal;font-weight:800;color:var(--c)">${third}</em>이야. ${hasDH?'네 사주엔 도화가 앉아 있어서 한 번 눈에 띄면 오래 기억돼':'도화는 없지만, 오래 볼수록 빠지는 타입이야'}</span></div></div>
+      <div class="li"><div><b>끌림 날</b><span class="days">${up(pull).map(d=>`<i>${md(d)}</i>`).join('')||'<i>이번 달은 조용히</i>'}</span></div>
+      <div><b>조심할 날</b><span class="days">${up(care).slice(0,2).map(d=>`<i class="bad">${md(d)}</i>`).join('')||'<i>없어</i>'}</span></div>
+      <div><b>행운 색</b><span>${L[0]}</span></div><div><b>만남 장소</b><span>${L[1]}</span></div>
+      <div><b>마담 한마디</b><span>${H[1]}</span></div></div>
+      <p class="note">끌림 날은 네 도화 글자(${S.JI[dh[1]]})가 들어오거나 ${f?'인연을 뜻하는 관성':'인연을 뜻하는 재성'}의 기운이 드는 날, 조심할 날은 네 일지(${S.JI[db]})와 부딪히는 날이야</p><div id="mprem" hidden></div>`,H[1]); if(window.MadamPrem) MadamPrem.open($('mprem'),{P,g:m.g,name:m.name,today}); }; };
+
+/* ───── 먹물 · 꿈해몽 ───── */
+const DREAM=[
+  [['뱀','구렁이'],'길몽','재물과 좋은 인연이 들어오는 꿈. 태몽으로도 많이 꿔','들어오는 제안은 일단 들어 봐'],
+  [['돼지'],'길몽','대표적인 재물 꿈. 뜻밖의 돈이 생길 수 있어','오늘 복권 한 장 정도는 괜찮아'],
+  [['똥','변'],'길몽','더러울수록 좋은 꿈. 돈과 행운이 쌓여','지갑 정리부터 해 둬'],
+  [['돈','지폐','금','동전'],'길몽','손에 쥐었다면 기회가 들어오는 꿈','미뤄 둔 연락 하나를 해 봐'],
+  [['불','화재'],'길몽','일이 크게 번지고 잘 풀리는 꿈','오늘 시작하는 일은 크게 가도 돼'],
+  [['죽','장례'],'길몽','거꾸로 풀리는 꿈. 묵은 게 끝나고 새로 시작돼','끝낼 건 오늘 깔끔하게'],
+  [['울','눈물'],'길몽','막혔던 게 풀리는 꿈. 속이 시원해질 일이 생겨','참지 말고 한 번 털어놔'],
+  [['날','하늘'],'길몽','자유와 상승의 꿈. 한 단계 올라설 때야','작은 도전 하나 해 봐'],
+  [['물','바다','강','비'],'보통','맑았다면 마음이 정리되는 꿈, 흐렸다면 걱정이 쌓였다는 신호','물 한 잔 마시고 할 일 하나만 정리해'],
+  [['아기','임신'],'보통','새 일이 시작되는 꿈. 계획이 자라날 때야','메모장에 아이디어 하나 적어 둬'],
+  [['전 애인','전애인','전남친','전여친','헤어진'],'보통','그 사람보다 그때의 내 마음을 정리하라는 꿈','연락은 하지 마. 진짜야'],
+  [['시험','지각','늦'],'보통','마음이 쫓기고 있다는 꿈. 실제로는 잘하고 있어','오늘은 일찍 자'],
+  [['이빨','이가','치아'],'주의','가까운 사람이나 내 몸을 챙기라는 신호','가족한테 안부 문자 하나'],
+  [['쫓','도망'],'주의','피하고 싶은 일이 있다는 꿈','미룬 일 하나를 오늘 10분만'],
+  [['떨어','추락'],'주의','불안이 커졌다는 신호. 실제 일과는 달라','발 닿는 곳부터 하나씩'],
+  [['고양이'],'보통','눈치 빠른 사람이 곁에 있다는 꿈. 좋은 쪽이면 귀인이야','나한테 친절한 사람을 잘 봐 둬']];
+const DCHIP=['뱀','돼지','돈','똥','불','물','이빨','전 애인','날다','쫓기다','아기','시험'];
+const FEEL={좋았어:['길몽 쪽','기분 좋게 깼다면 대부분 좋은 꿈이야'],무서웠어:['주의','무서운 꿈은 마음이 지쳤다는 신호일 때가 많아'],찜찜했어:['보통','찜찜한 꿈은 정리 못 한 일이 남았다는 뜻이야']};
+PANEL.water=()=>{ $('pn').innerHTML=`<div class="lab">어떤 꿈이었어</div><textarea class="ta" id="dT" maxlength="120" placeholder="예) 커다란 뱀이 집으로 들어왔어"></textarea>
+  <div class="lab">꿈에 나온 것</div><div class="chips" id="dC">${DCHIP.map(w=>`<button type="button">${w}</button>`).join('')}</div>
+  <div class="lab">깼을 때 기분</div><div class="chips" id="dF">${Object.keys(FEEL).map(w=>`<button type="button">${w}</button>`).join('')}</div>
+  <button class="btn" id="go" type="button" style="margin-top:16px">먹물에게 풀어 달라기</button>`;
+  $('dC').onclick=e=>{ const b=e.target.closest('button'); if(!b) return; b.classList.toggle('on'); const t=$('dT'); const w=b.textContent.replace(/다$/,''); if(b.classList.contains('on')&&!t.value.includes(w)) t.value=(t.value?t.value+' ':'')+w; };
+  $('dF').onclick=e=>{ const b=e.target.closest('button'); if(!b) return; $('dF').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); };
+  $('go').onclick=()=>{ const t=$('dT').value.trim(); const fb=$('dF').querySelector('.on'); if(!t&&!fb) return toast('꿈을 한 줄 적거나 골라 줘');
+    const hit=DREAM.filter(d=>d[0].some(w=>t.includes(w))).slice(0,3);
+    let top, lines;
+    if(hit.length){ const rank={길몽:2,보통:1,주의:0}; const best=hit.slice().sort((a,b)=>rank[b[1]]-rank[a[1]])[0]; top=best[1];
+      lines=hit.map(d=>`<div><b>${esc(d[0][0])}</b><span>${d[2]}</span></div>`).join('')+`<div><b>오늘 할 일</b><span>${best[3]}</span></div>`; }
+    else { const f=FEEL[fb?fb.textContent:'찜찜했어']; top=f[0]; lines=`<div><b>풀이</b><span>${f[1]}. 꿈에서 제일 크게 남은 장면 하나만 떠올려 봐</span></div><div><b>오늘 할 일</b><span>자기 전에 오늘 좋았던 일 하나 적기</span></div>`; }
+    const line={길몽:'좋은 꿈이야. 이런 건 남한테 먼저 말하지 마',보통:'나쁜 꿈 아니야. 네 마음이 정리 중인 거야',주의:'겁먹을 꿈은 아니야. 그냥 조금 쉬라는 거야','길몽 쪽':'좋은 꿈이야. 이런 건 남한테 먼저 말하지 마'}[top];
+    showRes(`<div class="rh"><small>먹물의 꿈풀이</small><b>${top==='주의'?'쉬어 가라는 꿈':top==='보통'?'마음이 정리되는 꿈':'좋은 일이 오는 꿈'}</b><p>"${esc(t||'꿈 내용 없이 기분만')}"</p></div><div class="li">${lines}</div><p class="note">전해 내려오는 꿈풀이를 바탕으로 한 재미용 해몽이야</p>`,line); }; };
+
+/* ───── 홍시 · 그 사람 속마음 (엽전점) ───── */
+const COIN_F='<div class="f"><em>常</em><em>寶</em><em>平</em><em>通</em></div><div class="f bk"></div>';
+PANEL.fire=()=>{ $('pn').innerHTML=`<div class="lab">그 사람 이름 <small style="color:var(--ink3);font-weight:500">안 적어도 돼</small></div><input class="in" id="hN" maxlength="10" placeholder="이니셜도 좋아">
+  <div class="coins" id="coins">${[0,1,2].map(()=>`<div class="coin">${COIN_F}</div>`).join('')}</div><div class="cnt" id="cnt">그 사람을 떠올리면서 던져</div>
+  <button class="btn" id="go" type="button">엽전 던지기</button>`;
+  $('go').onclick=()=>{ const cs=[...$('coins').children]; const r=cs.map(()=>Math.random()<.5); $('go').disabled=true;
+    cs.forEach((c,i)=>{ c.classList.remove('toss'); void c.offsetWidth; c.classList.add('toss'); const o=+(c.dataset.a||0); const n=Math.ceil(o/360)*360+1440+(r[i]?0:180)+i*360; c.dataset.a=n; c.style.transform=`rotateY(${n}deg)`; });
+    try{ navigator.vibrate&&navigator.vibrate(20); }catch(e){}
+    setTimeout(()=>{ const n=r.filter(Boolean).length, who=$('hN').value.trim(); const W=who?esc(who):'그 사람';
+      const A=[['아니오','지금은 딴 데 정신이 팔려 있어','기다리는 동안 네 일에 집중해. 그게 제일 매력적이야','지금은 아니래. 근데 영원히 아니란 건 아니야'],
+               ['반반','아직 저울질 중이야','가볍게 먼저 한 번 웃어 줘. 그걸로 기울어','반반이야. 저울 한쪽에 네가 살짝 올라가 봐'],
+               ['거의 예','마음은 있는데 표현이 서툴러','답장이 느려도 마음은 있어. 너무 몰아붙이지만 마','있어, 마음. 그 사람이 좀 느린 거야'],
+               ['예','요즘 너 생각 자주 해','오늘 먼저 짧게 안부 한 줄. 딱 그 정도가 좋아','있지. 요즘 네 생각 꽤 해']][n];
+      $('cnt').textContent=`앞면 ${n}개 · 뒷면 ${3-n}개`; $('go').disabled=false; $('go').textContent='다시 던지기';
+      showRes(`<div class="rh"><small>${W}의 속마음</small><b>${A[0]}</b><p>${jo(W,'은','는')} ${A[1]}</p></div><div class="li"><div><b>홍시 팁</b><span>${A[2]}</span></div></div><p class="note">엽전 세 개를 던져 앞면 수로 보는 옛 동전점을 가볍게 빌려 왔어. 같은 걸 계속 던지면 홍시가 삐쳐</p>`,A[3]); },1000); }; };
+
+/* ───── 인절미 · 이달의 금전운 ───── */
+const NOBUY=['세일한다고 산 옷','배달 야식 3연속','구독 서비스 하나 더','친구 따라 산 주식','한정판 굿즈','새벽 두 시 장바구니','비싼 헬스 회원권','충동 여행 예약'];
+PANEL.earth=()=>{ $('pn').innerHTML=(hasMe()?'':birthForm(false))+`<button class="btn" id="go" type="button" style="margin-top:14px">인절미 항아리 열어 보기</button>`;
+  $('go').onclick=()=>{ readBirth(); const P=myP(); if(!P) return toast('생일을 확인해 줘'); const dm=P.d[0], db=P.d[1], days=monthDays(), from=today.getDate()-1;
+    const inD=days.filter(x=>S.rel(dm,S.stEl(x.p[0]))===2).map(x=>x.d); /* 내가 다스리는 기운 = 재성 */
+    const outD=days.filter(x=>(S.rel(dm,S.stEl(x.p[0]))===0&&x.p[0]!==dm&&x.p[0]%2!==dm%2)||S.isChung(x.p[1],db)).filter(x=>S.rel(dm,S.stEl(x.p[0]))!==2).map(x=>x.d); /* 겁재 · 충 (돈 들어오는 날과 겹치면 뺌) */
+    const up=a=>{ const u=a.filter(d=>d.getDate()-1>=from); return (u.length?u:a).slice(0,3); };
+    const mp=S.pillars(today.getFullYear(),today.getMonth()+1,15,null).m; let sc=58+inD.length*2-outD.length; if(S.rel(dm,S.stEl(mp[0]))===2) sc+=12; if(S.rel(dm,S.stEl(mp[0]))===0) sc-=6; sc=Math.max(42,Math.min(94,sc+hash(String(P.d)+today.getMonth())%6));
+    const nb=[0,1].map(i=>NOBUY[(hash(dkey(today).slice(0,7)+db)+i*3)%NOBUY.length]);
+    const H=sc>=80?['항아리가 차오르는 달','들어오는 날엔 움직이고, 새는 날엔 앉아 있어. 그럼 끝']:sc>=65?['조금씩 쌓이는 달','큰돈은 아니어도 새는 것만 막으면 남아']:['지키는 게 버는 달','이번 달은 쓰는 것만 줄여도 이긴 거야'];
+    showRes(`<div class="rh"><small>${today.getMonth()+1}월의 금전운</small><b>${H[0]}</b><div class="sc"><div class="ring" style="--p:${sc}"><em>${sc}</em></div><span>돈이 들어오는 날 ${inD.length}번, 새기 쉬운 날 ${outD.length}번</span></div></div>
+      <div class="li"><div><b>들어오는 날</b><span class="days">${up(inD).map(d=>`<i>${md(d)}</i>`).join('')}</span></div>
+      <div><b>새는 날</b><span class="days">${up(outD).map(d=>`<i class="bad">${md(d)}</i>`).join('')}</span></div>
+      <div><b>사면 안 돼</b><span>${nb.join(' · ')}</span></div><div><b>인절미 한마디</b><span>${H[1]}</span></div></div>
+      <p class="note">들어오는 날은 네 일간이 다스리는 기운(재성)이 드는 날, 새는 날은 같은 기운이 돈을 나눠 가는 날(겁재)이나 네 일지와 부딪히는 날이야</p>`,H[1]); }; };
+
+/* ───── 서리 · 할까 말까 ───── */
+const DAYMOOD=['오늘은 네 고집이 센 날','말과 행동이 잘 먹히는 날','결과가 손에 잡히는 날','눈치 볼 게 많은 날','생각이 깊어지는 날'];
+const QS=['연락할까','살까','지원할까','고백할까','그만둘까','이사할까'];
+PANEL.metal=()=>{ $('pn').innerHTML=`<div class="lab">고민 한 줄</div><input class="in" id="qT" maxlength="40" placeholder="예) 그 사람한테 먼저 연락할까">
+  <div class="chips" id="qC" style="margin-top:8px">${QS.map(w=>`<button type="button">${w}</button>`).join('')}</div><button class="btn" id="go" type="button" style="margin-top:16px">서리에게 묻기</button>`;
+  $('qC').onclick=e=>{ const b=e.target.closest('button'); if(b) $('qT').value=b.textContent; };
+  let last='';
+  $('go').onclick=()=>{ const q=$('qT').value.trim(); if(!q) return toast('고민을 한 줄 적어 줘'); const m=me()||{}, P=myP();
+    const k=hash(q.replace(/\s/g,'')+dkey(today)+(m.name||'')+(m.y||''))%3; const A=[['해','망설인 시간이 아까워. 오늘 해'],['하지 마','이유는 네가 제일 잘 알잖아'],['기다려','지금은 타이밍이 아니야. 사흘만']][k];
+    const r=P?S.rel(P.d[0],S.stEl(dayP(today)[0])):hash(dkey(today))%5; const again=last===q; last=q;
+    showRes(`<div class="ans"><b>${A[0]}</b><p>${again?'같은 거 또 물어봐도 답은 같아':A[1]}</p><small>"${esc(q)}" · ${DAYMOOD[r]}</small></div><p class="note">서리의 답은 고민과 오늘 날짜로 정해져서, 오늘 같은 걸 다시 물어도 같아</p>`,again?'같은 거 또 물어봐도 답은 같아':A[0]+'. '+A[1]); }; };
+
+/* ───── 솔이 · 포춘쿠키 ───── */
+const FORT=['오늘 먼저 건넨 인사가 좋은 일로 돌아와','미뤄 둔 답장, 오늘 보내면 딱 좋아','점심 메뉴는 처음 떠오른 걸로','오늘 들은 칭찬 하나를 오래 기억해','생각지 못한 곳에서 작은 선물이 와','오늘은 서두르지 않아도 다 제시간에 돼','잃어버린 줄 알았던 게 다시 나타나','누군가 너를 떠올리며 웃고 있어','오늘 걷는 길에 좋은 기운이 깔려 있어','거절해도 괜찮아. 오늘은 너부터','작게 시작한 일이 생각보다 커져','오랜만에 연락 온 사람, 반갑게 받아 줘','오늘의 실수는 내일의 이야깃거리','물 한 잔 더 마시면 운이 한 칸 올라가','망설이던 그 버튼, 오늘은 눌러도 돼','퇴근길 하늘을 한 번 올려다봐','오늘 네 말 한마디가 누군가를 살려','정리한 서랍만큼 머리도 맑아져','기다리던 소식이 곧 도착해','오늘은 운보다 네 감이 더 정확해','사진 한 장 찍어 둬. 좋은 날이 될 거야','오늘은 계획보다 즉흥이 잘 풀려','네가 참은 만큼 누군가 알아주고 있어','오늘 받은 친절은 두 배로 돌려줘','일찍 자면 내일 운이 먼저 와 있어','오늘 너는 생각보다 훨씬 괜찮아'];
+const FCOL=['초록','빨강','노랑','흰색','남색'];
+const COOKIE='<svg viewBox="0 0 210 150"><g class="L"><path d="M105 30C70 30 30 55 22 100c-3 16 10 26 26 20 22-8 40-30 57-62z" fill="#e3a94f" stroke="#a8701f" stroke-width="3"/><path d="M40 98c14-6 32-22 46-44" fill="none" stroke="#c88b35" stroke-width="3" stroke-linecap="round"/></g><g class="R"><path d="M105 30c35 0 75 25 83 70 3 16-10 26-26 20-22-8-40-30-57-62z" fill="#eab25a" stroke="#a8701f" stroke-width="3"/><path d="M170 98c-14-6-32-22-46-44" fill="none" stroke="#c88b35" stroke-width="3" stroke-linecap="round"/></g></svg>';
+PANEL.wood=()=>{ const m=me()||{}, k=dkey(today); let got=null; try{ got=JSON.parse(localStorage.getItem('obCookie')||'null'); }catch(e){} const done=got&&got.d===k;
+  $('pn').innerHTML=`<div class="ck ${done?'open':''}" id="ck">${COOKIE}<div class="tap" id="ckT">${done?'오늘 쿠키는 이미 깼어':'쿠키를 톡톡 세 번 두드려 봐'}</div></div><div id="ckP"></div>`;
+  const pick=()=>{ const i=hash(k+(m.name||'')+(m.y||'')+(m.d||''))%FORT.length; return {i,num:hash(k+'n'+(m.y||''))%9+1,col:FCOL[S?S.stEl(dayP(today)[0]):0]}; };
+  const reveal=(o,anim)=>{ $('ckP').innerHTML=`<div class="paper" ${anim?'':'style="animation:none"'}><p>${FORT[o.i]}</p><small>행운 숫자 ${o.num} · 행운 색 ${o.col}</small></div>`; };
+  if(done){ reveal(got,false); return; }
+  let hits=0; $('ck').onclick=()=>{ if($('ck').classList.contains('open')) return; hits++; const c=$('ck'); c.classList.remove('hit'); void c.offsetWidth; c.classList.add('hit'); try{ navigator.vibrate&&navigator.vibrate(15); }catch(e){}
+    if(hits<3){ $('ckT').textContent=hits===1?'한 번 더':'마지막 한 번'; return; }
+    c.classList.add('open'); $('ckT').textContent='내일 또 하나 깨 줄게'; const o=Object.assign({d:k},pick()); try{ localStorage.setItem('obCookie',JSON.stringify(o)); }catch(e){}
+    reveal(o,true); setTimeout(()=>say('오늘 이거 나왔어. '+FORT[o.i]),500); }; };
+
+/* 주소 #k 로 바로 열기 */
+if(location.hash&&CATS[location.hash.slice(1)]) open(location.hash.slice(1));
+</script>
+<script src="archive.js"></script>
+<script src="depth3d.js"></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script>
+</body>
+</html>

@@ -120,7 +120,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .opYr{display:block;width:100%;height:54px;border-radius:16px;border:1px solid rgba(233,211,164,.35);background:rgba(255,255,255,.04);color:var(--ink);font-size:16.5px;font-weight:700;text-align:center;text-align-last:center;font-family:var(--sans);appearance:none;-webkit-appearance:none;cursor:pointer}
 .opGo{width:100%;height:54px;margin-top:10px;border:0;border-radius:16px;background:#D9B46A;color:#15110a;font-size:16px;font-weight:800;cursor:pointer;font-family:var(--sans);transition:opacity .3s}
 .opGo:disabled{opacity:.3}
-.opHome{display:block;margin:12px auto 0;border:0;background:none;color:var(--ink-3);font-size:12.5px;cursor:pointer;font-family:var(--sans)}
+.opHome{display:block;margin:14px auto 0;padding:6px 10px;border:0;background:none;color:rgba(255,255,255,.82);font-size:15px;font-weight:600;cursor:pointer;font-family:var(--sans)}
 .opX{position:absolute;right:14px;top:calc(env(safe-area-inset-top,0px) + 14px);z-index:8;border:0;background:none;color:rgba(255,255,255,.55);font-size:12.5px;cursor:pointer;font-family:var(--sans);transition:opacity .3s}
 .op.s6 .opX{opacity:0;pointer-events:none}
 
@@ -654,14 +654,17 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .home .ppg .mm i{width:26px;height:26px;margin-left:-8px;border-radius:50%!important;background:#fff 50% 14%/190% no-repeat;box-shadow:0 0 0 2px #f5efe5}
 
 .home .bjg{margin-top:-6px}
-.home #secBook{margin-top:22px}
-.home .bookC{display:flex;align-items:center;gap:14px;width:calc(100% - 36px);margin:0 18px;padding:12px 14px 12px 12px;border:0;background:linear-gradient(100deg,#2a2119,#1a1511);color:#f1e6d2;text-align:left;cursor:pointer}
-.home .bookC .cv{position:relative;flex:none;width:58px;height:82px;background:#000 center 30%/cover no-repeat;box-shadow:3px 4px 0 #cdbf9f,0 10px 20px rgba(0,0,0,.5)}
-.home .bookC .cv em{position:absolute;right:4px;top:4px;width:16px;height:16px;border-radius:50%!important;border:1px solid rgba(227,184,102,.8);display:grid;place-items:center;font-style:normal;font-family:var(--serif);font-size:9px;font-weight:900;color:#e3b866}
-.home .bookC .tx{flex:1;min-width:0}
-.home .bookC small{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:#c9ad7a}
-.home .bookC b{display:block;margin-top:4px;font-family:var(--brush);font-weight:400;font-size:25px;line-height:1.2}
-.home .bookC .tx>em{display:block;margin-top:5px;font-style:normal;font-size:12px;color:#9d958b}
+.home #secBook{margin-top:10px}
+.home .bookC{position:relative;display:block;width:calc(100% - 36px);height:218px;margin:58px 18px 0;padding:0;border:0;background:#120e0b;color:#fff;text-align:left;cursor:pointer;overflow:visible}
+.home .bookC .bg{position:absolute;inset:0;background:#000 center 38%/cover no-repeat;overflow:hidden}
+.home .bookC .bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,7,5,.92) 0%,rgba(10,7,5,.72) 48%,rgba(10,7,5,.1) 100%)}
+.home .bookC .pp{position:absolute;right:0;bottom:0;height:120%;max-width:68%;object-fit:contain;object-position:100% 100%;width:auto;pointer-events:none;filter:drop-shadow(0 14px 18px rgba(0,0,0,.55));transform-origin:50% 100%;animation:bkPop 4.6s ease-in-out infinite}
+@keyframes bkPop{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-7px) rotate(-1deg)}}
+.home .bookC .tx{position:absolute;left:20px;top:22px;bottom:20px;width:52%;z-index:2;display:flex;flex-direction:column}
+.home .bookC small{font-size:12px;font-weight:700;letter-spacing:.06em;color:#e3b866}
+.home .bookC b{margin-top:8px;font-family:var(--brush);font-weight:400;font-size:34px;line-height:1.12;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+.home .bookC .tx>em{margin-top:8px;font-style:normal;font-size:13.5px;line-height:1.45;color:#d8cfc2}
+.home .bookC .go{margin-top:auto;align-self:flex-start;padding:9px 14px;background:#e3b866;color:#1a130c;font-style:normal;font-size:13.5px;font-weight:800}
 .home .myoC{position:relative;display:block;width:calc(100% - 36px);margin:4px 18px 0;aspect-ratio:16/12;border:0;padding:0;background:#000 center 22%/cover no-repeat;overflow:hidden;cursor:pointer;text-align:left;color:#fff}
 .home .myoC video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;opacity:0;transition:opacity .6s}
 .home .myoC video.on{opacity:1}
@@ -830,7 +833,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <p>문 너머에서 누군가 기다리고 있다.</p>
     <button class="choice primary" id="enter">안으로 들어가기</button>
     <button class="link" id="skipStory">스토리 건너뛰기</button>
-    <button class="link" id="goHome" style="font-size:12.5px;color:var(--ink-3)">이미 수호신이 있어요 · 홈으로</button>
+    <button class="link" id="goHome" style="font-size:15px;font-weight:600;color:var(--ink-2)">이미 수호신이 있어요 · 홈으로</button>
     <div class="snd">🔊 소리를 켜고 들어가세요</div>
     <div class="load"><div class="lb"><i id="loadbar"></i></div><span id="loadtxt">영상 준비 중 0%</span></div>
   </div>
@@ -931,7 +934,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     </section>
 
     <section class="hSec" id="secBook" data-cats="all">
-      <button class="bookC" id="bookGo" type="button"><span class="cv" style="background-image:url('img/kv_house.jpg')"><em>五</em></span><span class="tx"><small>오방사주 세계관 · 제1권 무료</small><b>팔자에 신이 들었다</b><em>빈칸 하나에, 신 다섯이 줄을 섰다 · 넘겨 읽는 책</em></span></button>
+      <button class="bookC" id="bookGo" type="button"><span class="bg" style="background-image:url('img/intro0.jpg')"></span><img class="pp" src="img/pop/house.webp" alt="" loading="lazy"><span class="tx"><small>세계관 · 제1권 무료</small><b>팔자에<br>신이 들었다</b><em>빈칸 하나에,<br>신 다섯이 줄을 섰다</em><i class="go">책 펼쳐 보기 →</i></span></button>
     </section>
 
     <section class="hSec" id="secJt" data-cats="all jt tg">

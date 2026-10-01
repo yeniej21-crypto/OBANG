@@ -82,12 +82,25 @@ button{font-family:inherit;cursor:pointer}
 .bless small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--c)}
 .bless p{margin:6px 0 0;font-family:var(--bmj);font-size:18px;line-height:1.55}
 /* 근거 */
-.why{margin-top:10px;background:var(--paper2);padding:15px 16px}
-.why h3{margin:0 0 10px;font-size:12px;letter-spacing:.14em;color:var(--gold);font-weight:800}
-.why ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
-.why li{display:grid;grid-template-columns:62px 1fr;gap:8px;font-size:13.5px;line-height:1.55;color:var(--ink2)}
-.why li b{color:var(--ink);font-weight:700}
-.why .nb{margin:10px 0 0;font-size:11.5px;line-height:1.6;color:var(--ink3)}
+.why{margin-top:26px;padding:22px 2px 4px;border-top:1px solid var(--line)}
+.why h3{margin:0 0 16px;font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.wm{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.wm div{padding:10px 0 9px;text-align:center;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.wm b{display:block;font-family:var(--serif);font-size:20px;font-weight:900;color:var(--ink);line-height:1.1}
+.wm span{display:block;margin-top:4px;font-size:12px;font-weight:700;color:var(--ink3)}
+.wm .lo{background:var(--c);box-shadow:none}
+.wm .lo b,.wm .lo span{color:#fff}
+.wmT{margin:12px 0 0;font-size:15px;line-height:1.6;color:var(--ink);font-weight:500}
+.wmT b{color:var(--c);font-weight:800}
+.why ul{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:18px 16px}
+.why li:last-child{grid-column:1/-1}
+.why li small{display:block;font-size:12px;font-weight:800;color:var(--c);letter-spacing:.02em}
+.why li span{display:block;margin-top:4px;font-size:14px;line-height:1.55;color:var(--ink2)}
+.luck{display:grid;grid-template-columns:repeat(3,1fr);margin-top:20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.luck div{padding:13px 4px;text-align:center}
+.luck div+div{border-left:1px solid var(--line)}
+.luck small{display:block;font-size:12px;color:var(--ink3);font-weight:700}
+.luck b{display:block;margin-top:3px;font-size:16px;font-weight:800;color:var(--ink)}
 .row2{display:flex;gap:8px;margin-top:16px}
 .btn{flex:1;height:50px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:800;font-size:14.5px}
 .btn.pr{border:0;background:var(--ink);color:#fff}
@@ -132,7 +145,7 @@ button{font-family:inherit;cursor:pointer}
     <div class="uses" id="uses"><button data-k="money" type="button">재물</button><button class="on" data-k="love" type="button">인연</button><button data-k="pass" type="button">합격</button><button data-k="health" type="button">건강</button><button data-k="guard" type="button">액막이</button></div>
     <div class="bless"><small id="bK"></small><p id="bT"></p></div>
 
-    <div class="why"><h3>이 부적은 이렇게 그렸어요</h3><ul id="whyL"></ul><p class="nb">부적 형식(부적 종이 · 획 · 도장)은 전통을 따르되 종이와 먹 색은 기운마다 달리했고, 그 안의 미니 · 사신 · 문양 · 색 · 방위 · 숫자는 내 사주에서 나와요. 마음을 다잡는 부적이에요</p></div>
+    <div class="why"><h3>이 부적은 이렇게 그렸어요</h3><div id="whyM"></div><ul id="whyL"></ul><div class="luck" id="whyK"></div></div>
 
     <div class="row2"><button class="btn pr" id="save" type="button">카드 저장</button><button class="btn" id="wall" type="button">배경화면으로 받기</button></div>
 
@@ -200,10 +213,9 @@ function render(){ const e=EL[el], m=me(), u=USE[use], r=rarity(), R=RAR[r];
   $('card').className='card '+R[1]; $('rar').className=R[1]; $('rar').textContent=R[0]; $('rarS').textContent=R[2];
   $('bK').textContent=`${e.k} · ${e.n} · ${u[0]} 부적`; $('bT').textContent=BLESS[el][use];
   $('els').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===el));
-  const li=[];
-  if(lo){ li.push(`<li><b>내 사주</b><span>여덟 글자 중 ${ELK.map((k,i)=>ELN[k]+' '+lo.cnt[i]).join(' · ')} · 가장 모자란 기운은 <b>${ELN[lo.k]}</b>${lo.k===el?'. 그래서 '+jo(EL[lo.k].n,'이가','가')+' 나왔어요':'. 추천은 '+EL[lo.k].n+' 부적'}</span></li>`); }
-  li.push(`<li><b>주인공</b><span>${e.k} 기운을 맡은 미니 수호신 ${e.n} · 손에 ${e.hold}</span></li>`,`<li><b>신수</b><span>${e.k}의 수호신 ${jo(e.god,'이','가')} ${e.line}으로 감싸요</span></li>`,`<li><b>용도 문양</b><span>${u[1]} · ${u[2]}</span></li>`,`<li><b>${e.top[0]}</b><span>${e.top[1]}</span></li>`,`<li><b>상생</b><span>${e.sang}</span></li>`,`<li><b>행운</b><span>색 ${e.color} · 방위 ${e.dir} · 숫자 ${e.num}</span></li>`);
-  $('whyL').innerHTML=li.join('');
+  $('whyM').innerHTML=lo?`<div class="wm">${ELK.map((k,i)=>`<div class="${k===lo.k?'lo':''}"><b>${ELN[k]}</b><span>${lo.cnt[i]}</span></div>`).join('')}</div><p class="wmT">내 사주 여덟 글자에서 가장 모자란 기운은 <b>${ELN[lo.k]}</b>${lo.k===el?' · 그래서 '+jo(EL[lo.k].n,'이가','가')+' 나왔어요':' · 추천은 '+EL[lo.k].n+' 부적'}</p>`:'';
+  $('whyL').innerHTML=[['주인공',`${e.k} 기운의 미니 ${e.n}, 손에 ${e.hold}`],['신수',`${jo(e.god,'이','가')} ${e.line}으로 감싸요`],['용도 문양',`${u[1]} · ${u[2]}`],[e.top[0],e.top[1]],['상생',e.sang.split('.')[0]]].map(x=>`<li><small>${x[0]}</small><span>${x[1]}</span></li>`).join('');
+  $('whyK').innerHTML=`<div><small>행운 색</small><b>${e.color}</b></div><div><small>방위</small><b>${e.dir}</b></div><div><small>숫자</small><b>${e.num}</b></div>`;
   collect(r); }
 /* 도감: 오늘 · 용도별로 한 장씩 */
 function readCol(){ try{ return JSON.parse(localStorage.getItem('obCards')||'[]'); }catch(e){ return []; } }

@@ -6,6 +6,7 @@
 <title>무진의 타로 · 오방사주</title>
 <link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Song+Myung&display=swap">
+<link rel="stylesheet" href="premkit.css">
 <style>
 @font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
 /* 무진의 타로 — 골동품 카드방 톤: 먹색·버건디·남색 벨벳·금박. 카드 섞기/펼치기/뒤집기는 전부 코드 애니메이션, 무진은 공통 영상 5컷. */
@@ -273,6 +274,8 @@ details.how .nb{margin:12px 0 0;font-size:12px;color:var(--ink-3);line-height:1.
 .slots{top:66px}
 .lock{min-height:196px}
 .lock .cta{top:38px}
+#rprem{margin:14px 0}
+#rprem .pk-sec{margin-top:12px}
 </style>
 </head>
 <body>
@@ -327,10 +330,11 @@ details.how .nb{margin:12px 0 0;font-size:12px;color:var(--ink-3);line-height:1.
       <div class="box"><h3>뽑은 카드</h3><div id="rCards"></div></div>
       <div class="box oh"><h3>사주 × 타로 · 오행 연결</h3><div id="rOh"></div></div>
       <details class="box how" id="how"><summary>무진은 이렇게 읽었어요</summary><ul id="howL"></ul><p class="nb">타로는 정해진 미래를 맞히는 게 아니라, 지금의 흐름을 비춰 보는 도구예요.</p></details>
-      <div class="box lock"><h3>켈틱 크로스 10장 · 3개월 흐름</h3>
+      <div class="box lock" id="lockR"><h3>켈틱 크로스 10장 · 3개월 흐름</h3>
         <div class="blur"><p style="margin:0;font-size:14px;line-height:1.7;color:var(--ink-2)">현재 · 장애물 · 목표 · 과거 · 가까운 미래 · 나 · 주변 · 희망과 두려움 · 결과까지 열 장으로 펼쳐, 앞으로 석 달의 흐름을 월별로 읽어 드려요. 무진이 짚어 주는 결정적인 날짜와 행동 한 가지까지.</p></div>
         <div class="cta"><b>열 장으로 끝까지 볼래요?</b><small>무진이 한 장 한 장 직접 풀어 줘요</small><button class="pay" id="payBtn" type="button">9,900원 · 전체 풀이 열기</button></div>
       </div>
+      <div id="rprem" hidden></div>
       <button class="btn2" id="again" type="button">다른 질문으로 다시 뽑기</button>
       <button class="btn2" id="toHome" type="button">홈으로</button>
       <p class="foot">카드는 매번 무작위로 섞이고, 정·역방향도 무작위로 정해져요.<br>타로 풀이는 재미와 참고를 위한 것이며, 중요한 결정은 스스로 판단해 주세요.</p>
@@ -349,6 +353,9 @@ details.how .nb{margin:12px 0 0;font-size:12px;color:var(--ink-3);line-height:1.
 <script src="saju.js"></script>
 <script src="tarot_data.js"></script>
 <script src="tarot_read.js"></script>
+<script src="premai.js"></script>
+<script src="premkit.js"></script>
+<script src="tarot_prem.js"></script>
 <script src="menuintro.js"></script>
 <script src="archive.js"></script>
 <script src="depth3d.js"></script>
@@ -614,17 +621,19 @@ function render(){ const sp=TAROT_SPREAD[S.topic]; const m=S.mood;
   $('drawn').querySelectorAll('button').forEach(b=>b.onclick=()=>zoom(+b.dataset.i));
   $('rSay').outerHTML=`<div id="rSay">${narrative()}</div>`; verdict(); howList();
   $('rOh').innerHTML=ohHTML(); const bg=$('bdGo'); if(bg) bg.onclick=()=>{ const v=$('bd').value; if(!v) return; const [y,mo,d]=v.split('-').map(Number); try{ sessionStorage.setItem('me',JSON.stringify({name:'',g:'f',cal:'s',y,m:mo,d,h:null})); }catch(e){} $('rOh').innerHTML=ohHTML(); };
+  $('lockR').hidden=false; $('rprem').hidden=true; S.cc=null;
   $('s4s').scrollTop=0; show('s4'); }
 function zoom(i){ const n=S.picked[i], c=TAROT[n], rv=S.rv[i]; $('zi').style.backgroundImage=`url('${c.img}')`; $('zc').classList.toggle('rv',rv);
   $('zn').textContent=`${c.ko} · ${c.en}${rv?' (역방향)':''}`; $('zk').textContent=(rv?c.kwR:c.kw).map(k=>'#'+k).join('  '); $('zoom').classList.add('on'); tick(.06); if(window.Depth3D) Depth3D.holo($('zc'),{max:16}); }
 $('zoom').onclick=()=>{ $('zoom').classList.remove('on'); if(window.Depth3D) Depth3D.unholo($('zc')); };
-$('payBtn').onclick=()=>toast('체험판이라 결제는 여기까지예요');
+$('payBtn').onclick=()=>{ if(window.TarotPrem&&TarotPrem.open($('rprem'),S)){ $('lockR').hidden=true; setTimeout(()=>$('rprem').scrollIntoView({behavior:'smooth',block:'start'}),60); } else toast('체험판이라 결제는 여기까지예요'); };
 $('again').onclick=()=>{ go('s1'); $('s1').scrollTop=0; };
 
 /* 살아 있는 일러스트: 첫 화면 무진 */
 if(window.Depth3D) Depth3D.mount($('s1').querySelector('.hero'),{src:'img/tarot/mujin.jpg',pos:[.5,.12],str:1.1});
 /* 첫 화면 캐릭터 인트로 */
 if(window.MenuIntro) MenuIntro.play({src:'v/tarot/intro.mp4',poster:'img/tarot/mujin.jpg',who:'무진 · 한밤의 카드방',title:'무진의 타로',subs:[[0.3,'앉아요.'],[2.3,'…카드한테 물어보고 싶은 거,'],[5.1,'하나 있죠?']]});
+/* 검수용 훅 */ window.TarotDev={S,render,R,setPos:p=>{ POS=p; }};
 })();
 </script>
 </body>

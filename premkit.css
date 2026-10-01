@@ -1,0 +1,113 @@
+/* 오방사주 상세 풀이 공통 화면 (평생 · 도화 · 궁합 · 커리어 · 택일 · 묘당 · 타로)
+   각 페이지의 색 변수(--ink, --line, --seal, --card …)를 그대로 따른다. 둥근 모서리 없음(원형만). */
+.pkx[hidden]{display:none}
+.pkx{--pk-ink:var(--ink,#1f1b16);--pk-ink2:var(--ink-2,#4a433a);--pk-ink3:var(--ink-3,#877d70);--pk-line:var(--line,#d9cfbf);--pk-acc:var(--seal,#b3322a);--pk-card:var(--card,#fbf8f2);--pk-serif:var(--serif,'Noto Serif KR',serif);--pk-brush:var(--brush,'OBrush','Noto Serif KR',serif);color:var(--pk-ink)}
+.pkx .pk-st{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;margin-top:14px;padding:12px 14px;background:#fff;border:1px solid var(--pk-acc)}
+.pkx .pk-st[hidden]{display:none}
+.pkx .pk-st i{width:14px;height:14px;border:2px solid var(--pk-acc);border-right-color:transparent;border-radius:50%;animation:pkspin 1s linear infinite}
+.pkx .pk-st span{font-size:13.5px;font-weight:700}
+.pkx .pk-st small{flex-basis:100%;font-size:12px;line-height:1.5;color:var(--pk-ink3)}
+@keyframes pkspin{to{transform:rotate(360deg)}}
+.pkx .pk-cv{margin-top:14px;padding:22px 18px 20px;background:#2a2320;color:#f3ede2}
+.pkx .pk-cv small{display:block;font-size:11.5px;letter-spacing:.2em;color:#c9a86a;font-weight:700}
+.pkx .pk-cv h3{margin:10px 0 0;font-family:var(--pk-brush);font-weight:400;font-size:38px;line-height:1.12;color:#fff}
+.pkx .pk-cv .pk-sub{margin:8px 0 0;font-size:13.5px;color:rgba(243,237,226,.75)}
+.pkx .pk-cv .pk-kw{margin-top:16px;padding-top:14px;border-top:1px solid rgba(201,168,106,.35)}
+.pkx .pk-cv .pk-kw span{display:block;font-size:11.5px;color:#c9a86a;font-weight:700;letter-spacing:.06em}
+.pkx .pk-cv .pk-kw b{display:block;margin-top:4px;font-family:var(--pk-serif);font-size:19px;font-weight:900}
+.pkx .pk-cv .pk-q{margin:16px 0 0;font-family:var(--pk-serif);font-size:15px;line-height:1.7;font-weight:700}
+.pkx .pk-who{display:flex;align-items:center;gap:10px;margin-top:14px}
+.pkx .pk-who i{width:38px;height:38px;border-radius:50%;background:#000 center 20%/cover;box-shadow:0 0 0 2px #c9a86a}
+.pkx .pk-who em{font-style:normal;font-size:12px;color:#c9a86a;font-weight:700;letter-spacing:.06em}
+.pkx .pk-sec{margin-top:14px;background:var(--pk-card);border:1px solid var(--pk-line);padding:16px}
+.pkx .pk-sec>h3{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-family:var(--pk-serif);font-size:16px;font-weight:900}
+.pkx .pk-sec>h3:before{content:"";width:4px;height:15px;background:var(--pk-acc)}
+.pkx .pk-sec>h3 i{font-style:normal;font-family:inherit;font-size:11px;color:var(--pk-ink3);font-weight:500;margin-left:auto}
+.pkx .pk-p{margin:0 0 12px;font-size:14.5px;line-height:1.78;color:var(--pk-ink)}
+.pkx .pk-p:last-child{margin-bottom:0}
+.pkx .pk-tip{margin:8px 0 0;font-family:var(--pk-serif);font-size:14px;font-weight:700;line-height:1.6}
+.pkx .pk-acc{border-top:1px solid var(--pk-line)}
+.pkx .pk-row{border-bottom:1px solid var(--pk-line)}
+.pkx .pk-h{width:100%;display:grid;grid-template-columns:70px 1fr 34px;align-items:center;gap:8px;padding:12px 2px;border:0;background:none;text-align:left;cursor:pointer;color:var(--pk-ink);font-family:inherit}
+.pkx .pk-h .pk-a{font-weight:700;font-size:14px;line-height:1.25}
+.pkx .pk-h .pk-a small{display:block;font-size:10.5px;font-weight:500;color:var(--pk-ink3);margin-top:2px}
+.pkx .pk-h .pk-b2{font-size:13.5px;color:var(--pk-ink2);line-height:1.4}
+.pkx .pk-h .pk-b2 em{font-style:normal;font-family:var(--pk-serif);font-weight:900;color:var(--pk-ink);margin-right:6px}
+.pkx .pk-h .pk-c{text-align:right;font-family:var(--pk-serif);font-weight:900;font-size:16px}
+.pkx .pk-row.pk-hi .a,.pk .pk-row.pk-hi .c{color:var(--pk-acc)}
+.pkx .pk-row.pk-lo .pk-c{color:var(--pk-ink3)}
+.pkx .pk-row .pk-tag{display:inline-block;margin-left:4px;padding:0 5px;font-size:10px;font-weight:700;color:#fff;background:var(--pk-acc);vertical-align:1px}
+.pkx .pk-row.pk-lo .pk-tag{background:var(--pk-ink3)}
+.pkx .pk-b{display:none;padding:0 2px 16px}
+.pkx .pk-row.open .pk-b{display:block}
+.pkx .pk-items{margin:4px 0 12px;border-top:1px solid var(--pk-line)}
+.pkx .pk-items div{display:grid;grid-template-columns:70px 1fr;gap:8px;padding:9px 0;border-bottom:1px solid var(--pk-line)}
+.pkx .pk-items small{font-size:12px;font-weight:700;color:var(--pk-acc);padding-top:1px}
+.pkx .pk-items p{margin:0;font-size:13.5px;line-height:1.6}
+.pkx .pk-key{margin:0 0 6px;font-size:13.5px;line-height:1.6}
+.pkx .pk-key b{display:inline-block;min-width:84px;font-size:12px;color:var(--pk-ink3);font-weight:700;margin-right:8px}
+.pkx .pk-ev{margin:10px 0 0;font-size:11.5px;line-height:1.6;color:var(--pk-ink3)}
+.pkx .pk-cards{display:grid;gap:8px}
+.pkx .pk-card{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:12px;background:#fff;border:1px solid var(--pk-line)}
+.pkx .pk-card>b{font-family:var(--pk-serif);font-size:19px;font-weight:900;line-height:1.2;color:var(--pk-acc)}
+.pkx .pk-card>b small{display:block;font-family:inherit;font-size:11px;font-weight:500;color:var(--pk-ink3);margin-top:3px}
+.pkx .pk-card p{margin:0;font-size:13.5px;line-height:1.6;color:var(--pk-ink2)}
+.pkx .pk-card .pk-ct{font-weight:700;color:var(--pk-ink);margin-bottom:3px}
+.pkx .pk-tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.pkx .pk-tbl th{text-align:left;font-size:12px;color:var(--pk-ink3);font-weight:700;padding:0 0 6px}
+.pkx .pk-tbl td{padding:9px 0;border-top:1px solid var(--pk-line);vertical-align:top}
+.pkx .pk-tbl td:first-child{font-weight:700;width:76px}
+.pkx .pk-tbl em{font-style:normal;font-family:var(--pk-serif);color:var(--pk-ink3);font-size:12.5px}
+.pkx .pk-ar{padding:14px 0;border-top:1px solid var(--pk-line)}
+.pkx .pk-ar:first-of-type{border-top:0;padding-top:2px}
+.pkx .pk-ar>b{display:block;font-family:var(--pk-serif);font-size:16px;font-weight:900;margin-bottom:8px}
+.pkx .pk-bars{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:4px 0 14px}
+.pkx .pk-bars div{text-align:center}
+.pkx .pk-bars .pk-t{height:64px;display:flex;align-items:flex-end;justify-content:center;background:#fff;border:1px solid var(--pk-line)}
+.pkx .pk-bars .pk-t i{display:block;width:60%;background:var(--pk-acc)}
+.pkx .pk-bars .pk-t i.pk-z{height:2px!important;background:var(--pk-ink3)}
+.pkx .pk-bars b{display:block;margin-top:5px;font-size:12.5px}
+.pkx .pk-bars small{display:block;font-size:11px;color:var(--pk-ink3)}
+.pkx .pk-rx3{display:grid;grid-template-columns:repeat(3,1fr);margin:6px 0 14px;border-top:1px solid var(--pk-line);border-bottom:1px solid var(--pk-line)}
+.pkx .pk-rx3 div{padding:12px 4px;text-align:center}
+.pkx .pk-rx3 div+div{border-left:1px solid var(--pk-line)}
+.pkx .pk-rx3 small{display:block;font-size:12px;color:var(--pk-ink3);font-weight:700}
+.pkx .pk-rx3 b{display:block;margin-top:3px;font-size:16px;font-weight:900}
+.pkx .pk-ol{margin:0 0 14px;padding-left:20px;font-size:14px;line-height:1.9}
+.pkx .pk-mini{display:flex;align-items:center;gap:12px;padding:10px 12px;background:#fff;border:1px solid var(--pk-line);text-decoration:none;color:var(--pk-ink)}
+.pkx .pk-mini i{flex:none;width:44px;height:44px;border-radius:50%;background:#fff 50% 15%/170% no-repeat}
+.pkx .pk-mini b{display:block;font-size:14px}
+.pkx .pk-mini small{display:block;margin-top:2px;font-size:12.5px;color:var(--pk-acc);font-weight:700}
+.pkx .pk-letter{background:#fff}
+.pkx .pk-letter .pk-lt p{margin:0 0 10px;font-family:var(--pk-serif);font-size:15.5px;line-height:1.85}
+.pkx .pk-letter .pk-sg{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:14px 0 0;font-family:var(--pk-serif);font-weight:700;font-size:14px}
+.pkx .pk-letter .pk-sg i{display:inline-grid;place-items:center;width:38px;height:38px;background:var(--pk-acc);color:#fff4ea;font-style:normal;font-family:var(--pk-serif);font-weight:900;font-size:11px;transform:rotate(-4deg)}
+.pkx .pk-note{font-size:11.5px;color:var(--pk-ink3);line-height:1.6;margin:14px 4px 0}
+.pkx .pk-tabs{display:flex;gap:4px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none}
+.pkx .pk-tabs button{flex:none;height:34px;padding:0 12px;border:1px solid var(--pk-line);background:#fff;font-size:13px;font-weight:700;color:var(--pk-ink2);cursor:pointer;font-family:inherit}
+.pkx .pk-tabs button.on{border-color:var(--pk-acc);color:var(--pk-acc)}
+.pkx .pk-vs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.pkx .pk-vs div{padding:12px;background:#fff;border:1px solid var(--pk-line);text-align:center}
+.pkx .pk-vs small{display:block;font-size:11.5px;color:var(--pk-ink3);font-weight:700}
+.pkx .pk-vs b{display:block;margin-top:4px;font-family:var(--pk-serif);font-size:20px;font-weight:900}
+.pkx .pk-vs em{display:block;font-style:normal;font-size:12px;color:var(--pk-ink2);margin-top:2px}
+.pkx .pk-big{display:flex;align-items:flex-end;gap:12px;margin-bottom:12px}
+.pkx .pk-big b{font-family:var(--pk-serif);font-size:52px;font-weight:900;line-height:.9;color:var(--pk-acc)}
+.pkx .pk-big span{font-size:13px;color:var(--pk-ink2);line-height:1.5;padding-bottom:4px}
+.pkx .pk-big span strong{display:block;font-family:var(--pk-serif);font-size:18px;color:var(--pk-ink)}
+/* 어두운 페이지(도화 · 궁합 · 타로 · 묘당) */
+.pkx.dark{--pk-ink:var(--ink,#f7f1ec);--pk-ink2:var(--ink-2,#d6cbc4);--pk-ink3:var(--ink-3,#9a8f89);--pk-line:rgba(255,220,208,.12);--pk-acc:var(--peach,#ffb9a6);--pk-card:#151016}
+.pkx.dark .pk-sec{margin:14px 16px 0}
+.pkx.dark .pk-st{margin:14px 16px 0}
+.pkx.dark .pk-st,.pkx.dark .pk-card,.pkx.dark .pk-bars .pk-t,.pkx.dark .pk-mini,.pkx.dark .pk-letter,.pkx.dark .pk-tabs button,.pkx.dark .pk-vs div{background:rgba(255,255,255,.03)}
+.pkx.dark .pk-cv{margin:14px 16px 0;background:#1d151c}
+.pkx.dark .pk-letter .pk-sg i{color:#2a0d14}
+.pkx.dark .pk-h{color:var(--pk-ink)}
+.pkx .pk-quote{margin:4px 0 12px;font-family:var(--pk-serif);font-size:19px;line-height:1.5;font-weight:900;color:var(--pk-acc)}
+.pkx.dark .pk-row .pk-tag{color:#16110c}
+.pkx .pk-deck{display:grid;grid-template-columns:repeat(5,1fr);gap:10px 8px;margin-bottom:14px}
+.pkx .pk-deck button{border:0;background:none;padding:0;color:inherit;font-family:inherit;text-align:center;cursor:pointer;min-width:0}
+.pkx .pk-deck span{display:block;aspect-ratio:9/16;background:#111 center/cover no-repeat;box-shadow:0 0 0 1px var(--pk-line)}
+.pkx .pk-deck span.rv{transform:rotate(180deg)}
+.pkx .pk-deck small{display:block;margin-top:5px;font-size:10px;color:var(--pk-ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pkx .pk-deck b{display:block;margin-top:1px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

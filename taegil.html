@@ -6,6 +6,7 @@
 <title>택일 · 오방사주</title>
 <link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700;900&family=Song+Myung&display=swap">
+<link rel="stylesheet" href="premkit.css">
 <style>
 @font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
 
@@ -113,6 +114,8 @@ select{height:44px;border-radius:0;border:1px solid var(--line);background:#fff;
 /* 붓글씨 헤드라인 (East Sea Dokdo) + 붓 명조 보조 (Song Myung) */
 .hero h1{font-family:var(--brush)!important;font-weight:400!important;font-size:34px!important;line-height:1.2!important}
 .hd h2{font-family:var(--bmj)!important;font-weight:400!important}
+#tprem{margin-top:12px}
+#tprem .pk-sec{margin-top:12px}
 </style>
 </head>
 <body>
@@ -152,13 +155,18 @@ select{height:44px;border-radius:0;border:1px solid var(--line);background:#fff;
       <div class="best" id="best"></div>
       <div class="quote"><div class="av" style="background-image:url('img/taegil.jpg');background-position:center 12%"></div><div><b>택일 명인 월하</b><p id="qT"></p></div></div>
       <div class="card cal" id="cal"></div>
-      <div class="lock"><b>시간까지 맞춘 정밀 택일</b><small>그날 가장 좋은 시간대 · 방향 · 함께할 사람의 사주까지</small><button class="go" id="payBtn">9,900원 · 정밀 택일 받기</button></div>
+      <div class="lock" id="lockT"><b>시간까지 맞춘 정밀 택일</b><small>그날 가장 좋은 시간대 · 방향 · 함께할 사람의 사주까지</small><button class="go" id="payBtn">9,900원 · 정밀 택일 받기</button></div>
+      <div id="tprem" hidden></div>
       <p class="note">체험판입니다. 일진은 실제 만세력 계산값이며, 점수는 명리 규칙(일지·년지 합충형, 목적별 십성, 신강·신약, 손 없는 날)으로 자동 산출합니다. 중요한 일정은 개인 사정을 함께 고려하세요.</p>
     </div>
   </div>
   <div class="toast" id="toast"></div>
 </div>
 <script src="saju.js"></script>
+<script src="saju_x.js"></script>
+<script src="premai.js"></script>
+<script src="premkit.js"></script>
+<script src="taegil_prem.js"></script>
 <script src="menuintro.js"></script>
 <script>
 const $=id=>document.getElementById(id);
@@ -229,11 +237,12 @@ $('goBtn').onclick=()=>{
     for(let d=1;d<=n;d++){ const x=map[d]; if(!x){ html+=`<div class="d out">${d}</div>`; continue; } const cls=topSet.has(yy*10000+mm*100+d)?'top':x.chung?'bad':x.sc>=70?'good':''; html+=`<div class="d ${cls} ${purpose==='move'&&x.son?'sonx':''}">${d}<small>${GAN[x.p[0]]}${JI[x.p[1]]}</small></div>`; }
     html+='</div>'; });
   $('cal').innerHTML=html+`<div class="lg"><span><i style="background:var(--seal)"></i>추천 다섯 날</span><span><i style="border:1.5px solid var(--good)"></i>좋은 날</span><span><i style="background:#e6ddd0"></i>일지와 충(피할 날)</span>${purpose==='move'?'<span><i style="background:#c9a86a;border-radius:50%"></i>손 없는 날</span>':''}</div>`;
+  window.TGF={P,dm,st,purpose,U,range,top,worst}; $('lockT').hidden=false; $('tprem').hidden=true;
   show('sOut');
 };
 $('back2').onclick=()=>show('sIn');
 $('back1').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
-$('payBtn').onclick=()=>toast('체험판이라 결제는 여기까지예요');
+$('payBtn').onclick=()=>{ if(window.TaegilPrem&&TaegilPrem.open()){ $('lockT').hidden=true; setTimeout(()=>$('tprem').scrollIntoView({behavior:'smooth',block:'start'}),60); } else toast('체험판이라 결제는 여기까지예요'); };
 
 /* 첫 화면 캐릭터 인트로 */
 MenuIntro.play({src:'v/menu/taegil.mp4',poster:'img/taegil.jpg',who:'월하 · 擇日',title:'택일',subs:[[0.9,'그날…'],[2.2,'해도 되는 날일까.'],[4.6,'날은 내가 골라줄게.']]});

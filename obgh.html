@@ -6,6 +6,7 @@
 <title>오방 궁합 · 오방사주</title>
 <link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=Song+Myung&display=swap">
+<link rel="stylesheet" href="premkit.css">
 <style>
 @font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
 /* 오방 궁합 — 다섯 수호신과 내 사주의 궁합 순위. 신마다 정해 둔 일주(甲寅·丙午·戊辰·庚申·壬子)와 내 사주를 맞대 본다. */
@@ -121,6 +122,8 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
 .go,.btn2.pr{box-shadow:0 10px 26px rgba(227,184,102,.18)}
 .rh h1,.hero h1{letter-spacing:-.01em}
 .top b{transition:opacity .3s}
+#oprem{margin:14px 0}
+#oprem .pk-sec{margin-top:12px}
 </style>
 </head>
 <body>
@@ -151,10 +154,11 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
     <div class="box"><h3 id="whyH"></h3><div id="why"></div></div>
     <div class="say"><div class="av" id="sayAv"></div><div><small id="sayN"></small><p id="sayT"></p></div></div>
     <button class="btn2 pr" id="talk" type="button"></button>
-    <div class="box lock"><h3 id="lockH"></h3><div class="bl" id="lockBl"></div>
+    <div class="box lock" id="lockO"><h3 id="lockH"></h3><div class="bl" id="lockBl"></div>
       <div class="cta"><b id="lockT"></b><small>2027년 둘이 가장 가까워지는 달과 개운 미션</small><button class="pay" id="pay" type="button">편지 열기 · 9,900원</button></div></div>
+    <div id="oprem" hidden></div>
     <button class="btn2" id="shareBtn" type="button">궁합 카드 저장 · 공유</button>
-    <button class="btn2" id="toGh" type="button">진짜 그 사람이랑은? 도화 궁합 보기</button>
+    <button class="btn2" id="toGh" type="button">진짜 그 사람과는 · 도화 궁합 보기</button>
     <button class="btn2" id="again" type="button">다른 생일로 다시 보기</button>
   </div></section>
 
@@ -162,6 +166,11 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
   <div class="toast" id="toast"></div>
 </div>
 <script src="saju.js"></script>
+<script src="saju_x.js"></script>
+<script src="prem2_core.js"></script>
+<script src="premai.js"></script>
+<script src="premkit.js"></script>
+<script src="obgh_prem.js"></script>
 <script>
 (()=>{
 const $=id=>document.getElementById(id), wait=ms=>new Promise(r=>setTimeout(r,ms));
@@ -236,9 +245,10 @@ function render(P){ const W=RES[0], nm=ME.name||'너', tier=s=>s>=85?0:s>=72?1:2
   $('talk').textContent=`1위 ${W.n}${bat(W.n)?'과':'와'} 바로 대화하기`; $('talk').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} location.href='chat.html?h='+W.k+'&from=obgh'; };
   $('lockH').textContent=`${W.n}의 편지`; $('lockT').textContent=`${jo(W.n,'이','가')} 너에게 쓴 2027년 편지`;
   $('lockBl').textContent=`${nm}에게. 너랑 내가 제일 가까워지는 달은 ○월이야. 그때는 사람 많은 곳에 한 번 더 나가 봐. 그리고 네가 요즘 미뤄 둔 그 일, ○월 전에는 꼭 시작해. 내가 옆에서…`;
+  window.OGF={me:ME,W,RES}; $('lockO').hidden=false; $('oprem').hidden=true;
   show('sOut'); if(window.Depth3D){ Depth3D.unmount($('win')); Depth3D.mount($('win'),{src:W.img,pos:[.5,.18]}); }
   setTimeout(()=>document.querySelectorAll('.ri .bar u').forEach(u=>u.style.width=u.dataset.w+'%'),500); }
-$('pay').onclick=()=>toast('체험판이라 결제는 여기까지예요');
+$('pay').onclick=()=>{ if(window.OgPrem&&OgPrem.open()){ $('lockO').hidden=true; setTimeout(()=>$('oprem').scrollIntoView({behavior:'smooth',block:'start'}),60); } else toast('체험판이라 결제는 여기까지예요'); };
 $('toGh').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} location.href='gunghap.html'; };
 $('again').onclick=()=>{ $('form').hidden=false; $('other').hidden=true; $('meQ').hidden=true; show('sIn'); };
 $('back').onclick=()=>{ if($('sOut').classList.contains('on')){ show('sIn'); return; } try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };

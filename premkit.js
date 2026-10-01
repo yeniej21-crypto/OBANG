@@ -3,7 +3,7 @@
 (function(){
 const bt=w=>{ const c=w.charCodeAt(w.length-1)-0xAC00; return c>=0&&c<11172&&c%28>0; };
 const esc=t=>String(t==null?'':t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-function tok(t,nick){ return esc(t).replace(/\{N\}/g,nick+(bt(nick)?'아':'야')).replace(/\{P\}/g,nick+'님').replace(/\{S\}/g,'누나'); }
+function tok(t,nick){ if(!nick) return esc(t).replace(/\{N\}/g,'너').replace(/\{P\}/g,'당신').replace(/\{S\}/g,'누나'); return esc(t).replace(/\{N\}/g,nick+(bt(nick)?'아':'야')).replace(/\{P\}/g,nick+'님').replace(/\{S\}/g,'누나'); }
 const K={
  tok,esc,bt,
  cover:o=>`<div class="pk-cv"><small>${o.kick}</small><h3>${o.title}</h3>${o.sub?`<p class="pk-sub">${o.sub}</p>`:''}${o.words?`<div class="pk-kw"><span>${o.wlabel||'세 단어'}</span><b>${o.words.map(esc).join(' · ')}</b></div>`:''}${o.line?`<p class="pk-q">“${o.line}”</p>`:''}${o.who?`<div class="pk-who"><i style="background-image:url('${o.img}')"></i><em>${o.who}</em></div>`:''}</div>`,

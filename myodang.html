@@ -6,6 +6,7 @@
 <title>묘당 · 고양이 점집</title>
 <link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&family=Song+Myung&display=swap">
+<link rel="stylesheet" href="premkit.css">
 <style>
 @font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
 /* 묘당(猫堂) — 한밤에만 여는 고양이 점집. 고양이 여섯 마리가 전문 분야별로 가벼운 점을 봐 준다.
@@ -144,6 +145,8 @@ button{cursor:pointer}
 .toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(-50%);z-index:95;background:rgba(244,236,224,.95);color:#1a1410;font-size:13.5px;font-weight:600;padding:10px 16px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1}
 .sp{height:calc(env(safe-area-inset-bottom,0px) + 36px)}
+#mprem{margin-top:16px}
+#mprem .pk-sec{margin-top:12px}
 </style>
 </head>
 <body>
@@ -170,6 +173,10 @@ button{cursor:pointer}
   <div class="toast" id="toast"></div>
 </div>
 <script src="saju.js"></script>
+<script src="saju_x.js"></script>
+<script src="premai.js"></script>
+<script src="premkit.js"></script>
+<script src="madam_prem.js"></script>
 <script>
 const $=id=>document.getElementById(id);
 const S=window.Saju;
@@ -258,7 +265,7 @@ PANEL.madam=()=>{ $('pn').innerHTML=(hasMe()?'':birthForm(true))+`<button class=
       <div><b>조심할 날</b><span class="days">${up(care).slice(0,2).map(d=>`<i class="bad">${md(d)}</i>`).join('')||'<i>없어</i>'}</span></div>
       <div><b>행운 색</b><span>${L[0]}</span></div><div><b>만남 장소</b><span>${L[1]}</span></div>
       <div><b>마담 한마디</b><span>${H[1]}</span></div></div>
-      <p class="note">끌림 날은 네 도화 글자(${S.JI[dh[1]]})가 들어오거나 ${f?'인연을 뜻하는 관성':'인연을 뜻하는 재성'}의 기운이 드는 날, 조심할 날은 네 일지(${S.JI[db]})와 부딪히는 날이야</p>`,H[1]); }; };
+      <p class="note">끌림 날은 네 도화 글자(${S.JI[dh[1]]})가 들어오거나 ${f?'인연을 뜻하는 관성':'인연을 뜻하는 재성'}의 기운이 드는 날, 조심할 날은 네 일지(${S.JI[db]})와 부딪히는 날이야</p><div id="mprem" hidden></div>`,H[1]); if(window.MadamPrem) MadamPrem.open($('mprem'),{P,g:m.g,name:m.name,today}); }; };
 
 /* ───── 먹물 · 꿈해몽 ───── */
 const DREAM=[

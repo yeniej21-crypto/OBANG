@@ -6,6 +6,7 @@
 <title>도화 궁합 · 오방사주</title>
 <link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Song+Myung&display=swap">
+<link rel="stylesheet" href="premkit.css">
 <style>
 @font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
 
@@ -118,6 +119,8 @@ select{height:46px;border-radius:0;border:1px solid var(--line);background:#1b14
 .toast.on{opacity:1;transform:translate(-50%,0)}
 /* 붓글씨 헤드라인 (East Sea Dokdo) + 붓 명조 보조 (Song Myung) */
 .hero h1,#hT{font-family:var(--brush)!important;font-weight:400!important;font-size:33px!important;line-height:1.2!important}
+#gprem{margin-top:14px}
+#gprem .pk-sec{margin-top:12px}
 </style>
 </head>
 <body>
@@ -146,12 +149,18 @@ select{height:46px;border-radius:0;border:1px solid var(--line);background:#1b14
     <div class="box"><h3>오행 겹쳐 보기</h3><div class="el5" id="el5"></div><div class="lgd"><span><i style="background:#ff8fa6"></i><span id="lgA"></span></span><span><i style="background:#7ea6ff"></i><span id="lgB"></span></span></div><p class="elTx" id="elTx"></p></div>
     <div class="box"><h3>이렇게 봤어</h3><div id="pts"></div></div>
     <div class="box"><h3>태오가</h3><div class="say"><div class="av2" style="background-image:url('img/taeo/base.jpg')"></div><p id="say"></p></div></div>
-    <div class="box lockb"><h3>둘의 2027 인연 타이밍</h3><div class="bl">둘의 도화가 동시에 열리는 달은 ○월과 ○월이야. 이 두 달에 먼저 연락하는 쪽이 관계를 끌고 가게 돼. 싸우기 쉬운 달은 ○월, 그땐 말보다 만남이 먼저야.</div><div class="ov"><b>둘이 가까워지는 달 · 멀어지는 달</b><small>월별 타이밍 · 먼저 연락해도 되는 날</small></div></div>
+    <div class="box lockb" id="lockG"><h3>둘의 2027 인연 타이밍</h3><div class="bl">둘의 도화가 동시에 열리는 달은 ○월과 ○월이야. 이 두 달에 먼저 연락하는 쪽이 관계를 끌고 가게 돼. 싸우기 쉬운 달은 ○월, 그땐 말보다 만남이 먼저야.</div><div class="ov"><b>둘이 가까워지는 달 · 멀어지는 달</b><small>월별 타이밍 · 먼저 연락해도 되는 날</small></div></div>
+    <div id="gprem" hidden></div>
     <div class="btns"><button class="pri" id="payBtn">14,900원 · 둘의 인연 타이밍 열기</button><button id="invBtn">다른 사람에게 궁합 신청하기</button><button id="myBtn">나도 내 도화 보러 가기</button></div>
   </div></div>
   <div class="toast" id="toast"></div>
 </div>
 <script src="saju.js"></script>
+<script src="saju_x.js"></script>
+<script src="prem2_core.js"></script>
+<script src="premai.js"></script>
+<script src="premkit.js"></script>
+<script src="gunghap_prem.js"></script>
 <script src="menuintro.js"></script>
 <script>
 const $=id=>document.getElementById(id);
@@ -241,13 +250,13 @@ $('goBtn').onclick=async()=>{
   setTimeout(()=>$('el5').querySelectorAll('i').forEach(x=>x.style.height=x.dataset.h+'px'),500);
   ['sIn','sLd','sRs'].forEach(s=>$(s).classList.toggle('on',s==='sRs')); $('sRs').scrollTop=0;
   setTimeout(()=>{ $('b1').style.width=R.pull+'%'; $('b2').style.width=R.stay+'%'; const t0=performance.now(); (function f(t){ const p=Math.min(1,(t-t0)/1500); $('sc').textContent=Math.round(R.total*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(f); })(t0); },200);
-  window._me=a;
+  window._me=a; window.GHF={a,b,R}; $('lockG').hidden=false; $('payBtn').hidden=false; $('gprem').hidden=true;
 };
 $('invBtn').onclick=async()=>{ const me=window._me||read($('wA')); const url=new URL('gunghap.html?f='+enc(me),location.href).href;
   try{ if(navigator.share){ await navigator.share({title:'도화 궁합',text:`${me.n}님이 너랑 도화 궁합을 보고 싶대`,url}); return; } }catch(e){ if(e&&e.name==='AbortError') return; }
   try{ await navigator.clipboard.writeText(url); toast('궁합 신청 링크를 복사했어요'); }catch(e){ prompt('이 링크를 보내세요',url); } };
 $('myBtn').onclick=()=>{ location.href='dohwa.html'; };
-$('payBtn').onclick=()=>toast('체험판이라 결제는 여기까지예요');
+$('payBtn').onclick=()=>{ if(window.GunghapPrem&&GunghapPrem.open()){ $('lockG').hidden=true; $('payBtn').hidden=true; setTimeout(()=>$('gprem').scrollIntoView({behavior:'smooth',block:'start'}),60); } else toast('체험판이라 결제는 여기까지예요'); };
 $('back').onclick=()=>{ if($('sRs').classList.contains('on')&&!FROM){ ['sIn','sLd','sRs'].forEach(s=>$(s).classList.toggle('on',s==='sIn')); return; } if(history.length>1) history.back(); else location.href='./'; };
 
 /* 첫 화면 캐릭터 인트로 */

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="early.js"></script>
+<title>2027 신년 기획전 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@500;700;900&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 2027 정미년 신년 기획전 — 붉은 양의 해. 옻칠 먹색 바탕 + 주홍 + 금. 라운딩 없음, 원형만. */
+:root{--brush:'OBrush','Noto Serif KR',serif;--serif:'Noto Serif KR',serif;--sans:'Noto Sans KR',"Apple SD Gothic Neo",system-ui,sans-serif;
+  --bg:#120e0d;--bg2:#1b1513;--card:#211a17;--ink:#f4ece1;--ink-2:#cbbfaf;--ink-3:#8f8478;--line:rgba(244,236,225,.12);--red:#c0392b;--red-2:#8e211a;--gold:#d2ad6a;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#0b0908;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button{font-family:inherit}
+.stage{position:relative;width:100%;max-width:460px;height:100%;overflow:hidden;overflow:clip;background:var(--bg)}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 40px)}
+.scr::-webkit-scrollbar{display:none}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;background:transparent;transition:background .3s,box-shadow .3s}
+.top.sc{background:rgba(18,14,13,.94);box-shadow:0 1px 0 var(--line)}
+.back{width:36px;height:36px;border-radius:50%;border:1px solid rgba(244,236,225,.25);background:rgba(0,0,0,.35);display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.back svg{width:18px;height:18px}
+.top b{font-size:14px;font-weight:700;letter-spacing:.04em;opacity:0;transition:opacity .3s}
+.top.sc b{opacity:1}
+
+/* 히어로: 진행자 여섯이 한 줄로 */
+.hero{position:relative;margin-top:calc(-56px - env(safe-area-inset-top,0px));height:min(78vh,620px);overflow:hidden}
+.cast{position:absolute;inset:0;display:flex}
+.cast i{flex:1;background:#000 center 18%/cover no-repeat;filter:saturate(.85) brightness(.82);transform:scale(1.04);animation:castIn 1.4s cubic-bezier(.2,.7,.2,1) both}
+.cast i+i{box-shadow:-1px 0 0 rgba(0,0,0,.6)}
+@keyframes castIn{from{opacity:0;transform:translateY(18px) scale(1.08)}}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,14,13,.55) 0%,rgba(18,14,13,0) 26%,rgba(18,14,13,.15) 48%,rgba(18,14,13,.92) 80%,var(--bg) 100%)}
+.hx{position:absolute;left:0;right:0;bottom:22px;z-index:2;padding:0 22px;text-align:center}
+.yr{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.32em;color:var(--gold);font-weight:700}
+.yr .sl{display:inline-grid;place-items:center;width:30px;height:30px;background:var(--red);color:#fff3e6;font-family:var(--serif);font-weight:900;font-size:10.5px;line-height:1.05;letter-spacing:0;text-align:center;transform:rotate(-4deg)}
+.hx h1{margin:12px 0 0;font-family:var(--brush);font-weight:400;font-size:46px;line-height:1.08;letter-spacing:0;text-shadow:0 4px 26px rgba(0,0,0,.7)}
+.hx h1 em{font-style:normal;color:#ef6a55}
+.hx p{margin:12px auto 0;max-width:330px;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.cnt{display:flex;justify-content:center;gap:0;margin:16px auto 0;max-width:320px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cnt div{flex:1;padding:9px 0;text-align:center}
+.cnt div+div{border-left:1px solid var(--line)}
+.cnt b{display:block;font-family:var(--serif);font-size:19px;font-weight:900;color:var(--ink)}
+.cnt small{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+
+/* 탭 */
+.tabs{position:sticky;top:calc(env(safe-area-inset-top,0px) + 56px);z-index:15;display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;padding:0 18px;background:var(--bg);box-shadow:0 1px 0 var(--line)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;height:44px;border:0;background:none;color:var(--ink-3);font-size:14px;font-weight:700;cursor:pointer;position:relative}
+.tabs button.on{color:var(--ink)}
+.tabs button.on:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--red)}
+
+.sec{padding:30px 16px 0}
+.sh small{display:block;font-size:11px;letter-spacing:.14em;color:var(--gold);font-weight:700}
+.sh b{display:block;margin-top:6px;font-size:19px;font-weight:900;letter-spacing:-.02em}
+.sh p{margin:6px 0 0;font-size:13px;color:var(--ink-3);line-height:1.6}
+.sh{margin-bottom:14px}
+
+/* 대표 */
+.feat{position:relative;display:block;width:100%;aspect-ratio:4/5;border:0;padding:0;cursor:pointer;overflow:hidden;background:#000 center 20%/cover no-repeat;color:var(--ink);text-align:left}
+.feat video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:0;transition:opacity .8s}
+.feat.vOn video{opacity:1}
+.feat:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(10,8,7,.94) 92%)}
+.feat .ft{position:absolute;left:18px;right:18px;bottom:18px;z-index:2}
+.badge{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:.12em;padding:4px 8px 3px;background:var(--red);color:#fff3e6}
+.badge.g{background:none;border:1px solid rgba(244,236,225,.4);color:var(--ink-2)}
+.feat .ft b{display:block;margin-top:10px;font-family:var(--brush);font-weight:400;font-size:38px;line-height:1.1}
+.feat .ft p{margin:8px 0 0;font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+.feat .row{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid rgba(244,236,225,.18)}
+.feat .row span{font-size:12.5px;color:var(--ink-2)}
+.feat .row strong{font-size:15px;font-weight:900;color:var(--gold)}
+.feat .row em{font-style:normal;font-size:13.5px;font-weight:700}
+
+/* 정통 목록 */
+.jt{display:grid;gap:10px}
+.it{display:grid;grid-template-columns:96px 1fr;gap:14px;width:100%;padding:0;border:0;background:var(--card);color:var(--ink);text-align:left;cursor:pointer;position:relative}
+.it .ph{aspect-ratio:3/4;background:#000 center 18%/cover no-repeat}
+.it .tx{padding:12px 14px 12px 0;display:flex;flex-direction:column}
+.it .tx small{font-size:11px;color:var(--ink-3);letter-spacing:.04em}
+.it .tx b{display:block;margin-top:4px;font-size:16px;font-weight:900;line-height:1.35;letter-spacing:-.02em}
+.it .tx p{margin:6px 0 0;font-size:12.5px;line-height:1.55;color:var(--ink-2)}
+.it .tx .ft{margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.it .tx .ft strong{font-size:13.5px;font-weight:900;color:var(--gold)}
+.it .tx .ft em{font-style:normal;font-size:11.5px;font-weight:700;color:var(--ink-3)}
+.it.soon .ph{filter:grayscale(.55) brightness(.7)}
+.it.pick{box-shadow:0 0 0 2px var(--gold)}
+.it .pk{position:absolute;right:0;top:0;font-size:10.5px;font-weight:900;padding:4px 8px;background:var(--gold);color:#1b1513;display:none}
+.it.pick .pk{display:block}
+
+/* 고르기 */
+.pickr{display:grid;gap:6px}
+.pickr button{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;min-height:48px;padding:10px 14px;border:1px solid var(--line);background:none;color:var(--ink);font-size:14px;text-align:left;cursor:pointer}
+.pickr button span{color:var(--ink-3);font-size:12.5px;flex:none}
+.pickr button.on{border-color:var(--gold);background:rgba(210,173,106,.08)}
+.pickr button.on span{color:var(--gold);font-weight:700}
+
+/* 비교 */
+.cmp{border-top:1px solid var(--ink-3)}
+.cr{display:grid;grid-template-columns:70px 1fr;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.cr b{font-size:14px;font-weight:900;grid-row:span 3}
+.cr b small{display:block;margin-top:3px;font-size:11px;font-weight:500;color:var(--ink-3)}
+.cr p{margin:0;font-size:12.5px;line-height:1.55;color:var(--ink-2)}
+.cr p i{font-style:normal;display:inline-block;min-width:52px;color:var(--gold);font-weight:700}
+
+/* 990 · 무료 */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mc{position:relative;display:block;width:100%;aspect-ratio:3/4;padding:0;border:0;cursor:pointer;overflow:hidden;background:#000 center 18%/cover no-repeat;color:var(--ink);text-align:left}
+.mc:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(10,8,7,.95) 90%)}
+.mc.soon{filter:grayscale(.35)}
+.mc .t{position:absolute;left:12px;right:12px;bottom:12px;z-index:2}
+.mc .t small{display:block;font-size:10.5px;color:var(--gold);font-weight:700;letter-spacing:.06em}
+.mc .t b{display:block;margin-top:4px;font-size:15px;font-weight:900;line-height:1.3}
+.mc .t p{margin:4px 0 0;font-size:11.5px;color:var(--ink-2);line-height:1.45}
+.mc .badge{position:absolute;left:10px;top:10px;z-index:2}
+.wide{display:grid;grid-template-columns:110px 1fr;width:100%;padding:0;border:1px solid rgba(210,173,106,.45);background:linear-gradient(90deg,rgba(192,57,43,.16),rgba(0,0,0,0));color:var(--ink);text-align:left;cursor:pointer;margin-bottom:10px}
+.wide .ph{aspect-ratio:1;background:#000 center 18%/cover no-repeat}
+.wide .tx{padding:12px 14px}
+.wide .tx b{display:block;font-size:16px;font-weight:900;margin-top:6px}
+.wide .tx p{margin:5px 0 0;font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.trust{margin:34px 16px 0;padding:18px 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.trust b{display:block;font-size:14px;font-weight:900}
+.trust p{margin:8px 0 0;font-size:12.5px;line-height:1.7;color:var(--ink-2)}
+.trust small{display:block;margin-top:10px;font-size:11.5px;color:var(--ink-3);line-height:1.6}
+.toast{position:absolute;left:50%;bottom:40px;transform:translate(-50%,8px);z-index:60;background:var(--ink);color:#1b1513;font-size:13.5px;padding:10px 16px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+ <div class="scr" id="scr">
+  <div class="top" id="top"><button class="back" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>2027 신년 기획전</b></div>
+  <section class="hero"><div class="cast" id="cast"></div>
+   <div class="hx"><span class="yr"><span class="sl" data-hj="0">丁<br>未</span>2027 정미년 · 신년 기획전</span>
+    <h1>새해를 묻는<br><em>열 가지</em> 길</h1>
+    <p>정통 다섯, 가볍게 넷, 무료 하나. 같은 사주를 진행자마다 다른 눈으로 읽습니다.</p>
+    <div class="cnt" id="cnt"></div></div>
+  </section>
+  <nav class="tabs" id="tabs"><button class="on" data-t="sFeat">대표</button><button data-t="sJt">정통</button><button data-t="sPick">고르기</button><button data-t="sF990">990원</button><button data-t="sFree">무료</button><button data-t="sMore">함께</button></nav>
+
+  <section class="sec" id="sFeat"><div class="sh"><small>대표 · 정통 신년운세의 기준</small><b>한 해 전체를 보려면, 할매부터</b><p>열두 달 총운과 분야별 운을 가장 길고 꼼꼼하게 풉니다. 다른 정통 신년은 이 위에 한 갈래씩 더 깊이 들어갑니다.</p></div><div id="feat"></div></section>
+  <section class="sec" id="sJt"><div class="sh"><small>정통 신년 · 한 갈래 더 깊게</small><b>근거, 큰 흐름, 고전, 날짜</b><p>보는 자리가 겹치지 않게 나눴습니다. 함께 보아도 같은 이야기를 두 번 듣지 않아요.</p></div><div class="jt" id="jt"></div></section>
+  <section class="sec" id="sPick"><div class="sh"><small>나에게 맞는 신년</small><b>무엇이 궁금한지 고르면 짚어 드려요</b></div>
+   <div class="pickr" id="pickr"></div>
+   <div class="sh" style="margin-top:26px"><small>한눈에 비교</small><b>다섯 정통 신년, 이렇게 다르다</b></div><div class="cmp" id="cmp"></div></section>
+  <section class="sec" id="sF990"><div class="sh"><small>990원 · 가볍게 한 장</small><b>분야 하나만 콕 집어서</b><p>짧지만 완성된 한 편. 캐릭터 한마디와 저장해서 공유하고 싶은 카드 한 장.</p></div><div class="g2" id="f990"></div></section>
+  <section class="sec" id="sFree"><div class="sh"><small>무료로 먼저</small><b>로그인 없이, 새해 첫 걸음</b></div><div id="free"></div></section>
+  <section class="sec" id="sMore"><div class="sh"><small>함께 보면 좋은</small><b>새해 계획에 날짜와 큰 그림을 더해서</b></div><div class="g2" id="more"></div></section>
+  <div class="trust"><b>열 가지 모두, 같은 만세력으로 계산합니다</b><p>계산은 검증된 만세력 엔진이, 해석은 명리 규칙이, AI는 문장만 씁니다. 같은 생년월일시는 어느 메뉴에서 보아도 같은 원국과 같은 점수가 나와요.</p><small>진행자는 모두 AI로 만든 가상의 캐릭터입니다. 가격은 오픈 전 체험판 기준이에요.</small></div>
+ </div>
+ <div class="toast" id="toast"></div>
+</div>
+<script src="newyear_data.js"></script>
+<script src="menuintro.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const D=window.NY27, IT=D.items, by=c=>IT.filter(x=>x.cat===c), get=id=>IT.find(x=>x.id===id);
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2000); }
+/* 히어로 진행자 줄 */
+['halmae','soheon','hyeonam','wolha','seoha','taeo'].forEach((id,i)=>{ const x=get(id); const e=document.createElement('i'); e.style.backgroundImage=`url('${x.img}')`; e.style.animationDelay=(i*.09)+'s'; $('cast').appendChild(e); });
+const nJt=by('hero').length+by('jt').length, nF=by('f990').length, nFree=IT.filter(x=>x.cat==='free'&&x.status==='soon').length+1;
+$('cnt').innerHTML=`<div><b>${nJt}</b><small>정통</small></div><div><b>${nF}</b><small>990원</small></div><div><b>${IT.filter(x=>x.status==='open'&&x.cat!=='more').length}</b><small>지금 열림</small></div>`;
+/* 대표 */
+const h=by('hero')[0];
+$('feat').innerHTML=`<button class="feat" data-id="${h.id}" style="background-image:url('${h.img}')">${h.vid?`<video muted loop playsinline preload="none" src="${h.vid}"></video>`:''}<div class="ft"><span class="badge">대표</span><b>${h.name}</b><p>${h.line}</p><div class="row"><span>${h.get}</span><strong>${h.price}</strong></div></div></button>`;
+(()=>{ const f=document.querySelector('.feat'), v=f.querySelector('video'); if(!v) return; v.addEventListener('playing',()=>f.classList.add('vOn')); v.addEventListener('error',()=>v.remove());
+  if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const p=v.play(); if(p) p.catch(()=>{}); } else v.pause(); }),{threshold:.3}).observe(f); })();
+/* 정통 */
+$('jt').innerHTML=by('jt').map(x=>`<button class="it ${x.status}" data-id="${x.id}"><span class="ph" style="background-image:url('${x.img}')"></span><span class="tx"><small>${x.who}</small><b>${x.name}</b><p>${x.line}</p><span class="ft"><strong>${x.price}</strong><em>${x.status==='open'?'지금 보기':x.open+' · 알림 받기'}</em></span></span><span class="pk">추천</span></button>`).join('');
+/* 고르기 · 비교 */
+const PICK=[['처음 제대로 보는 신년운세라면','halmae'],['왜 그렇게 나왔는지 근거까지','soheon'],['올해보다 앞으로 몇 년의 큰 그림','hyeonam'],['좋은 날짜를 미리 받아 두고 싶다면','wolha'],['옛 방식 그대로의 신년 점','tojeong']];
+$('pickr').innerHTML=PICK.map(([q,id])=>`<button data-p="${id}">${q}<span>${get(id).short}</span></button>`).join('');
+$('pickr').onclick=e=>{ const b=e.target.closest('button'); if(!b) return; $('pickr').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); document.querySelectorAll('.it,.feat').forEach(x=>x.classList.toggle('pick',x.dataset.id===b.dataset.p));
+  const t=document.querySelector(`[data-id="${b.dataset.p}"]`); if(t) $('scr').scrollTo({top:t.getBoundingClientRect().top-$('scr').getBoundingClientRect().top+$('scr').scrollTop-110,behavior:'smooth'}); };
+$('cmp').innerHTML=[h].concat(by('jt')).map(x=>`<div class="cr"><b>${x.short}<small>${x.price}</small></b><p><i>보는 것</i>${x.what}</p><p><i>이런 분께</i>${x.for}</p><p><i>받는 것</i>${x.get}</p></div>`).join('');
+/* 990 · 무료 · 함께 */
+const mc=x=>`<button class="mc ${x.status}" data-id="${x.id}" style="background-image:url('${x.img}')">${x.status==='soon'?`<span class="badge g">${x.open}</span>`:''}<span class="t"><small>${x.who} · ${x.price||'바로 보기'}</small><b>${x.short}</b><p>${x.line}</p></span></button>`;
+$('f990').innerHTML=by('f990').map(mc).join('');
+const fr=by('free'); const tp=fr.find(x=>x.id==='seoha_f');
+$('free').innerHTML=(tp?`<button class="wide" data-id="${tp.id}"><span class="ph" style="background-image:url('${tp.img}')"></span><span class="tx"><span class="badge">무료 · ${tp.open}</span><b>${tp.name}</b><p>${tp.line}</p></span></button>`:'')+`<div class="g2">${fr.filter(x=>x!==tp).map(mc).join('')}</div>`;
+$('more').innerHTML=by('more').map(mc).join('');
+/* 이동 */
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-id]'); if(!b||b.closest('#pickr')) return; const x=get(b.dataset.id); if(!x) return;
+  if(x.status!=='open'||!x.url){ if(window.ObNotify) ObNotify.ask({title:'오픈 알림 받기',img:x.img,head:x.name,sub:`${x.open||'곧'} · 열리면 바로 알려 드릴게요`}); else toast(`${x.open||'곧'} 열려요`); return; }
+  try{ sessionStorage.setItem('toHome','1'); }catch(_){}
+  if(window.MenuIntro&&MenuIntro.MAP&&MenuIntro.MAP[x.url]) MenuIntro.go(x.url,$('stage')); else location.href=x.url; });
+/* 탭 · 위 막대 */
+const scr=$('scr'), tabs=$('tabs');
+tabs.onclick=e=>{ const b=e.target.closest('button'); if(!b) return; const t=$(b.dataset.t); scr._lock=Date.now(); tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); scr.scrollTo({top:t.offsetTop-100,behavior:'smooth'}); };
+scr.addEventListener('scroll',()=>{ $('top').classList.toggle('sc',scr.scrollTop>40); if(scr._lock&&Date.now()-scr._lock<900) return; let cur='sFeat'; ['sFeat','sJt','sPick','sF990','sFree','sMore'].forEach(id=>{ if($(id).offsetTop-120<=scr.scrollTop) cur=id; });
+  tabs.querySelectorAll('button').forEach(x=>{ const on=x.dataset.t===cur; if(on&&!x.classList.contains('on')){ x.classList.add('on'); tabs.scrollTo({left:x.offsetLeft-18,behavior:'smooth'}); } else if(!on) x.classList.remove('on'); }); },{passive:true});
+$('back').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
+if(location.hash){ const t=$(location.hash.slice(1)); if(t) setTimeout(()=>scr.scrollTo({top:t.offsetTop-100}),60); }
+</script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obpay.js" defer></script>
+</body>
+</html>

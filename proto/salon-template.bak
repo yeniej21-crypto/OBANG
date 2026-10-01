@@ -1,0 +1,411 @@
+<title>서하의 살롱 체험판</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&display=swap">
+<style>
+/* Layout: one full-height vertical stage (phone frame on desktop). Two stacked <video> layers crossfade; subtitles in large serif at mid-height; interaction sheets rise from the bottom. Single dark look by design. */
+:root{
+  --bg:#07060a; --stage:#0d0b10; --ink:#f6f1ea; --ink-2:#cfc6ba; --ink-3:#8e867c;
+  --glass:rgba(18,14,20,.55); --glass-line:rgba(255,240,220,.22);
+  --gold:#e3b866; --gold-2:#f3d79b;
+  --wood:#46b47f; --fire:#ec5a43; --earth:#d3a13a; --metal:#c9d1dc; --water:#5b8ce6;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --serif:'Noto Serif KR',"Nanum Myeongjo",serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button{font-family:inherit}
+.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--stage);overflow:hidden}
+@media (min-width:700px){.stage{height:min(100%,920px);margin-top:auto;margin-bottom:auto;border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
+
+/* media layers */
+.layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .28s ease;will-change:opacity;transform:translateZ(0)}
+.layer.on{opacity:1}
+.poster{position:absolute;inset:0;background:#000 center/cover no-repeat;opacity:0;transition:opacity .6s ease}
+.poster.on{opacity:1}
+.poster.kb{animation:kb 9s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.05)}}
+.shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 18%,rgba(0,0,0,0) 45%,rgba(0,0,0,.55) 72%,rgba(0,0,0,.88) 100%)}
+
+/* top bar */
+.top{position:absolute;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 0;display:flex;justify-content:space-between;align-items:center;z-index:30}
+.brand{font-family:var(--serif);font-weight:900;letter-spacing:.18em;font-size:13px;color:var(--gold-2);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.tbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--glass-line);background:var(--glass);backdrop-filter:blur(8px);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.tbtn svg{width:18px;height:18px}
+.tgroup{display:flex;gap:8px}
+
+/* subtitles */
+.sub{position:absolute;left:18px;right:18px;top:56%;transform:translateY(-50%);text-align:center;z-index:20;pointer-events:none}
+.sub p{margin:0;font-family:var(--serif);font-weight:900;font-size:clamp(26px,7.6vw,34px);line-height:1.32;letter-spacing:-.01em;color:#fff;text-shadow:0 2px 3px rgba(0,0,0,.7),0 0 22px rgba(0,0,0,.65);text-wrap:balance;opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
+.sub p.on{opacity:1;transform:none}
+.sub .who{display:block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--gold-2);margin-bottom:10px;text-shadow:0 1px 6px rgba(0,0,0,.8);opacity:0;transition:opacity .3s}
+.sub .who.on{opacity:1}
+
+/* bottom panels */
+.panel{position:absolute;left:0;right:0;bottom:0;padding:0 16px calc(env(safe-area-inset-bottom,0px) + 22px);z-index:25;display:flex;flex-direction:column;gap:10px;transform:translateY(30px);opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
+.panel.on{transform:none;opacity:1;pointer-events:auto}
+.choice{width:100%;min-height:58px;border-radius:18px;border:1px solid var(--glass-line);background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ink);font-size:17px;font-weight:500;cursor:pointer;padding:14px 18px}
+.choice:active{transform:scale(.985)}
+.choice.primary{background:linear-gradient(180deg,rgba(227,184,102,.95),rgba(196,146,64,.95));color:#1a1206;border-color:transparent;font-weight:900}
+.link{background:none;border:0;color:var(--ink-2);font-size:14px;padding:8px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.sheet{border-radius:22px;border:1px solid var(--glass-line);background:rgba(16,12,18,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:18px 16px 16px}
+.sheet h3{margin:0 0 12px;font-size:15px;font-weight:700;color:var(--gold-2);letter-spacing:.04em}
+.row{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px}
+.row2{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:8px}
+select,input[type=text]{width:100%;height:50px;border-radius:12px;border:1px solid var(--glass-line);background:rgba(0,0,0,.35);color:var(--ink);font-size:16px;font-family:var(--sans);padding:0 12px;appearance:none;-webkit-appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--ink-2) 50%),linear-gradient(135deg,var(--ink-2) 50%,transparent 50%);background-position:calc(100% - 16px) 22px,calc(100% - 11px) 22px;background-size:5px 5px;background-repeat:no-repeat;padding-right:26px}
+select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.seg{display:flex;border:1px solid var(--glass-line);border-radius:12px;overflow:hidden;height:50px}
+.seg button{flex:1;border:0;background:transparent;color:var(--ink-2);font-size:15px;padding:0 14px;cursor:pointer}
+.seg button[aria-pressed=true]{background:rgba(227,184,102,.22);color:var(--gold-2);font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--glass-line);background:rgba(0,0,0,.3);color:var(--ink);border-radius:999px;padding:11px 16px;font-size:15px;cursor:pointer}
+.chip[aria-pressed=true]{background:rgba(227,184,102,.25);border-color:var(--gold);color:var(--gold-2);font-weight:700}
+.hint{font-size:12px;color:var(--ink-3);margin-top:8px;line-height:1.5}
+
+/* start screen */
+.start{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;justify-content:flex-end;padding:0 16px calc(env(safe-area-inset-bottom,0px) + 26px);background:linear-gradient(180deg,rgba(7,6,10,.2),rgba(7,6,10,.15) 40%,rgba(7,6,10,.92) 78%);transition:opacity .6s}
+.start.off{opacity:0;pointer-events:none}
+.start .kicker{font-size:12px;letter-spacing:.3em;color:var(--gold-2);font-weight:700}
+.start h1{font-family:var(--serif);font-weight:900;font-size:clamp(26px,7.6vw,34px);line-height:1.18;margin:10px 0 10px;letter-spacing:-.01em}
+.start p{margin:0 0 22px;color:var(--ink-2);font-size:15px;line-height:1.6}
+.load{margin-top:14px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;color:var(--ink-3);letter-spacing:.04em}.load .lb{width:120px;height:2px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}.load .lb i{display:block;height:100%;width:0;background:var(--gold-2);transition:width .3s}
+.choice:disabled{opacity:.55}
+.start .snd{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-3);margin-top:12px;justify-content:center}
+
+/* reveal */
+.reveal{position:absolute;inset:0;z-index:28;pointer-events:none}
+.flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(255,236,190,.95),rgba(255,236,190,0) 60%);opacity:0}
+.flash.go{animation:flash 1.1s ease-out forwards}
+@keyframes flash{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+.namecard{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 26px);border-radius:22px;padding:18px 18px 16px;background:rgba(10,8,12,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--glass-line);transform:translateY(30px);opacity:0;transition:all .6s ease;pointer-events:none}
+.namecard.on{transform:none;opacity:1}
+.namecard .k{font-size:12px;letter-spacing:.25em;color:var(--gold-2);font-weight:700}
+.namecard .n{display:flex;align-items:baseline;gap:10px;margin-top:8px}
+.namecard .n b{font-family:var(--serif);font-size:34px;font-weight:900;color:var(--c)}
+.namecard .n span{font-size:22px;font-weight:900}
+.namecard .d{font-size:14px;color:var(--ink-2);margin-top:4px}
+
+/* result */
+.result{position:absolute;inset:0;z-index:35;overflow-y:auto;background:linear-gradient(180deg,#120e14,#09070b);opacity:0;pointer-events:none;transition:opacity .6s;padding:calc(env(safe-area-inset-top,0px) + 64px) 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
+.result.on{opacity:1;pointer-events:auto}
+.card{border-radius:24px;overflow:hidden;border:1px solid rgba(227,184,102,.35);background:#141016;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.card .hero{position:relative;aspect-ratio:4/5;background:#000 center 18%/cover no-repeat}
+.card .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(20,16,22,1) 100%)}
+.card .hero .tag{position:absolute;left:16px;top:16px;z-index:1;font-size:11px;letter-spacing:.24em;font-weight:700;color:#1a1206;background:var(--gold);padding:5px 10px;border-radius:999px}
+.card .hero .nm{position:absolute;left:18px;bottom:14px;z-index:1}
+.card .hero .nm small{display:block;font-size:12px;color:var(--gold-2);letter-spacing:.2em;font-weight:700}
+.card .hero .nm b{font-family:var(--serif);font-size:30px;font-weight:900}
+.card .body{padding:6px 18px 20px}
+.sec{margin-top:18px}
+.sec h4{margin:0 0 10px;font-size:12px;letter-spacing:.2em;color:var(--ink-3);font-weight:700}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
+.pillars div{border-radius:12px;background:rgba(255,255,255,.04);padding:8px 0 6px}
+.pillars .l{font-size:11px;color:var(--ink-3)}
+.pillars .c{font-family:var(--serif);font-size:24px;font-weight:900;line-height:1.25}
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:44px 1fr 22px;gap:10px;align-items:center;font-size:13px}
+.bar .t{height:10px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden}
+.bar .t i{display:block;height:100%;border-radius:6px;background:var(--c);width:0;transition:width 1s ease .3s}
+.bar .v{text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.bar.low .lbl{color:var(--c);font-weight:900}
+.mission{border-radius:16px;padding:14px 16px;background:rgba(227,184,102,.1);border:1px solid rgba(227,184,102,.3)}
+.mission .k{font-size:12px;color:var(--gold-2);font-weight:700;letter-spacing:.06em}
+.mission p{margin:6px 0 0;font-family:var(--serif);font-size:18px;font-weight:700;line-height:1.5;filter:blur(4px);user-select:none}
+.mission .lock{font-size:12px;color:var(--ink-3);margin-top:8px}
+.actions{display:grid;gap:10px;margin-top:18px}
+.note{font-size:11.5px;color:var(--ink-3);text-align:center;margin-top:14px;line-height:1.5}
+.toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 90px);transform:translateX(-50%);z-index:60;background:rgba(0,0,0,.8);color:#fff;font-size:14px;padding:10px 16px;border-radius:999px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){.poster.kb{animation:none}.layer,.poster,.panel,.sub p{transition:none}}
+</style>
+
+<div class="stage" id="stage">
+  <div class="poster kb" id="poster"></div>
+  <video class="layer" id="vA" playsinline webkit-playsinline preload="auto"></video>
+  <video class="layer" id="vB" playsinline webkit-playsinline preload="auto"></video>
+  <div class="shade"></div>
+
+  <div class="top">
+    <div class="brand">SEOHA · SALON</div>
+    <div class="tgroup">
+      <button class="tbtn" id="muteBtn" aria-label="소리 끄기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path id="waves" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
+      <button class="tbtn" id="restartBtn" aria-label="처음부터"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+    </div>
+  </div>
+
+  <div class="sub" id="sub" aria-live="polite"><span class="who" id="who">서하</span><div id="subLines"></div></div>
+
+  <!-- choices after line 1 -->
+  <div class="panel" id="pChoice">
+    <button class="choice" id="c1a">(여기 어디지…?)</button>
+    <button class="choice" id="c1b">네… (조심스럽게 앉는다)</button>
+  </div>
+
+  <!-- birth form -->
+  <div class="panel" id="pBirth">
+    <div class="sheet">
+      <h3>생년월일 · 태어난 시간</h3>
+      <div class="row">
+        <select id="by" aria-label="태어난 해"></select>
+        <select id="bm" aria-label="태어난 달"></select>
+        <select id="bd" aria-label="태어난 날"></select>
+      </div>
+      <div class="row2">
+        <select id="bh" aria-label="태어난 시간"></select>
+        <div class="seg" role="group" aria-label="양력 음력"><button id="solar" aria-pressed="true">양력</button><button id="lunar" aria-pressed="false">음력</button></div>
+      </div>
+      <p class="hint">체험판은 입력값으로 간이 명식을 계산합니다. 음력 변환은 정식 버전에서 지원합니다.</p>
+    </div>
+    <button class="choice primary" id="birthGo">알려주기</button>
+  </div>
+
+  <!-- worry -->
+  <div class="panel" id="pWorry">
+    <div class="sheet">
+      <h3>누구 때문에 왔어?</h3>
+      <div class="chips" id="chips">
+        <button class="chip" aria-pressed="false">그 사람 마음</button>
+        <button class="chip" aria-pressed="false">재회</button>
+        <button class="chip" aria-pressed="false">새 인연</button>
+        <button class="chip" aria-pressed="false">일 · 이직</button>
+      </div>
+      <input type="text" id="worryText" placeholder="직접 말하기 (선택)" style="margin-top:10px" maxlength="60">
+    </div>
+    <button class="choice primary" id="worryGo">말하기</button>
+    <button class="link" id="worrySkip">아니, 그냥 (건너뛰기)</button>
+  </div>
+
+  <div class="reveal" id="reveal"><div class="flash" id="flash"></div>
+    <div class="namecard" id="namecard"><div class="k">나의 수호신</div><div class="n"><b id="ncHanja"></b><span id="ncName"></span></div><div class="d" id="ncDesc"></div></div>
+  </div>
+
+  <div class="result" id="result">
+    <div class="card">
+      <div class="hero" id="rHero"><span class="tag">입사 카드</span><div class="nm"><small id="rGod"></small><b id="rName"></b></div></div>
+      <div class="body">
+        <div class="sec"><h4>나의 명식</h4><div class="pillars" id="rPillars"></div></div>
+        <div class="sec"><h4>오행 밸런스</h4><div class="bars" id="rBars"></div></div>
+        <div class="sec"><div class="mission"><div class="k">내일 07:00 · 첫 개운 미션</div><p id="rMission"></p><div class="lock">알림을 켜면 아침에 열립니다</div></div></div>
+        <div class="actions">
+          <button class="choice primary" id="ctaPay">서하의 상담 이어서 보기 · 29,000원</button>
+          <button class="choice" id="ctaPush">아침 알림 켜기</button>
+          <button class="choice" id="ctaShare">입사 카드 공유하기</button>
+        </div>
+        <p class="note">체험판입니다. 결제·알림·공유는 동작하지 않습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="start" id="start">
+    <div class="kicker">한남동 · 이름 없는 살롱</div>
+    <h1>네 사주에 없는 기운,<br>신이 채워줄게.</h1>
+    <p>문 너머에서 누군가 기다리고 있다.</p>
+    <button class="choice primary" id="enter">안으로 들어가기</button>
+    <button class="link" id="skipStory">스토리 건너뛰기</button>
+    <div class="snd">🔊 소리를 켜고 들어가세요</div>
+    <div class="load"><div class="lb"><i id="loadbar"></i></div><span id="loadtxt">영상 준비 중 0%</span></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const V={intro:'v/intro.mp4',t1:'v/t1.mp4',t1a:'v/t1a.mp4',t1b:'v/t1b.mp4',t2:'v/t2.mp4',t3:'v/t3.mp4',t4:'v/t4.mp4',t5:'v/t5.mp4',t6:'v/t6.mp4',idle:'v/idle.mp4',
+  rv_wood:'v/rv_wood.mp4',rv_fire:'v/rv_fire.mp4',rv_earth:'v/rv_earth.mp4',rv_metal:'v/rv_metal.mp4',rv_water:'v/rv_water.mp4'};
+const LINES={
+  t1:['왔네.','문 닫고, 이리 와 앉아.'],
+  t1a:['사주 보는 데야.','긴장 풀어. 안 잡아먹어.'],
+  t1b:['말 잘 듣네.','그런 애가 운도 잘 풀려.'],
+  t2:['생년월일이랑 태어난 시간.','모르면 모른다고 해.'],
+  t3:['흠…','너 요즘 혼자 참는 거 많지.','얼굴에 다 써 있어.'],
+  t4:['그래서.','누구 때문에 왔어?'],
+  t5:['네 사주에 빠진 기운이 하나 있네.','그걸 채워줄 애를 붙여줄게.'],
+  t6:['내일 아침 일곱 시,','그 아이가 첫 개운 미션을 보낼 거야.','알림 켜 둬.']};
+const FALLBACK_DUR={intro:6,t1:3.6,t1a:4.9,t1b:4.4,t2:4.6,t3:5.6,t4:3.2,t5:6.3,t6:6.5,idle:5,rv:5};
+const POSTER={seoha:'img/seoha.jpg'};
+const GODS={
+  wood:{h:'靑龍',n:'하람',el:'木',dir:'동쪽',c:'var(--wood)',label:'목(木)',desc:'동쪽을 지키는 청룡 · 새 시작과 다음 인연',mission:'초록색 하나 걸치고, 동쪽으로 10분만 걸어.'},
+  fire:{h:'朱雀',n:'이안',el:'火',dir:'남쪽',c:'var(--fire)',label:'화(火)',desc:'남쪽을 지키는 주작 · 고백과 결단',mission:'오늘은 네가 먼저 연락해. 망설이면 불 꺼진다.'},
+  earth:{h:'黃龍',n:'도준',el:'土',dir:'중앙',c:'var(--earth)',label:'토(土)',desc:'중앙을 지키는 황룡 · 안정과 관계',mission:'책상 위 하나만 정리해. 네 자리가 단단해야 운이 앉아.'},
+  metal:{h:'白虎',n:'시온',el:'金',dir:'서쪽',c:'var(--metal)',label:'금(金)',desc:'서쪽을 지키는 백호 · 정리와 결단',mission:'오늘 안 맞는 약속 하나, 끊어.'},
+  water:{h:'玄武',n:'재이',el:'水',dir:'북쪽',c:'var(--water)',label:'수(水)',desc:'북쪽을 지키는 현무 · 속마음과 지혜',mission:'자기 전에 물 한 잔, 오늘 하루 세 줄만 적어.'}};
+const ORDER=['wood','fire','earth','metal','water'];
+
+/* ---------- saju (simplified solar calc) ---------- */
+const STEM='甲乙丙丁戊己庚辛壬癸', BR='子丑寅卯辰巳午未申酉戌亥';
+const STEM_EL=[0,0,1,1,2,2,3,3,4,4], BR_EL=[4,2,0,0,2,1,1,2,3,3,2,4];
+const EL_KEYS=ORDER, EL_COL=['var(--wood)','var(--fire)','var(--earth)','var(--metal)','var(--water)'];
+function jdn(y,m,d){const a=Math.floor((14-m)/12),yy=y+4800-a,mm=m+12*a-3;return d+Math.floor((153*mm+2)/5)+365*yy+Math.floor(yy/4)-Math.floor(yy/100)+Math.floor(yy/400)-32045}
+const TERMS=[[2,4],[3,6],[4,5],[5,6],[6,6],[7,7],[8,8],[9,8],[10,8],[11,7],[12,7],[1,6]];
+function calc(y,m,d,hBr){
+  let sy=y; if(m<2||(m===2&&d<4)) sy=y-1;
+  const ys=((sy-4)%10+10)%10, yb=((sy-4)%12+12)%12;
+  const n=m*100+d; let mi;
+  if(n>=1207||n<106) mi=10; else if(n<204) mi=11;
+  else { mi=0; for(let i=0;i<10;i++){ const [tm,td]=TERMS[i]; if(n>=tm*100+td) mi=i; } }
+  const ms=((ys%5)*2+2+mi)%10, mb=(2+mi)%12;
+  const di=((jdn(y,m,d)-2415021+10)%60+60)%60, ds=di%10, db=di%12;
+  const P=[{l:'년주',s:ys,b:yb},{l:'월주',s:ms,b:mb},{l:'일주',s:ds,b:db}];
+  if(hBr!==null){const hs=((ds%5)*2+hBr)%10;P.push({l:'시주',s:hs,b:hBr});} else P.push({l:'시주',s:null,b:null});
+  const cnt=[0,0,0,0,0]; P.forEach(p=>{if(p.s!==null){cnt[STEM_EL[p.s]]++;cnt[BR_EL[p.b]]++;}});
+  let low=0; for(let i=1;i<5;i++){ if(cnt[i]<cnt[low]) low=i; else if(cnt[i]===cnt[low] && ((di+i)%2===0)) low=i; }
+  return {P,cnt,low:EL_KEYS[low]};
+}
+
+/* ---------- media engine ----------
+   All clips are fetched into memory up front (blob URLs), the next clip is decoded on the hidden layer
+   while the current one plays, and each clip hands off ~0.14s before its end with a short crossfade. */
+const vA=$('vA'), vB=$('vB'), poster=$('poster');
+let front=vA, back=vB, muted=false, cancelTok=0, useBlob=true;
+const SRC={}, LOAD={}, LEAD=0.14, FADE=280;
+function fetchClip(k){
+  if(LOAD[k]) return LOAD[k];
+  LOAD[k]=fetch(V[k]).then(r=>{ if(!r.ok) throw new Error(r.status); return r.blob(); })
+    .then(b=>{ SRC[k]=useBlob?URL.createObjectURL(b):V[k]; })
+    .catch(()=>{ SRC[k]=V[k]; });
+  return LOAD[k];
+}
+const srcOf=k=>SRC[k]||V[k];
+// verify this browser can play blob: media; otherwise fall back to (now cached) file URLs
+const blobCheck=fetchClip('idle').then(()=>new Promise(res=>{
+  if(!String(SRC.idle).startsWith('blob:')) return res();
+  const t=document.createElement('video'); t.muted=true; t.preload='auto'; let fin=false;
+  const end=ok=>{ if(fin) return; fin=true; if(!ok){ useBlob=false; for(const k in SRC) if(String(SRC[k]).startsWith('blob:')) SRC[k]=V[k]; } t.removeAttribute('src'); res(); };
+  t.onloadedmetadata=()=>end(true); t.onerror=()=>end(false); t.src=SRC.idle; setTimeout(()=>end(false),3000);
+}));
+function prep(v,key){
+  const gen=(v._gen||0)+1; v._gen=gen; v._key=key; v._ready=false;
+  return (async()=>{
+    await fetchClip(key); await blobCheck; if(v._gen!==gen) return;
+    await new Promise(res=>{
+      let ok=false; const done=()=>{ if(ok) return; ok=true; v.oncanplay=null; v.onerror=null; res(); };
+      v._err=false; v.onerror=()=>{ v._err=true; done(); }; v.oncanplay=done;
+      v.src=srcOf(key); v.load(); setTimeout(done,5000);
+    });
+    if(v._gen!==gen) return;
+    if(!v._err){ try{ v.muted=true; await v.play(); v.pause(); v.currentTime=0; }catch(e){} } // warm decoder (iOS won't buffer otherwise)
+    if(v._gen!==gen) return;
+    v.muted=muted; v._ready=!v._err;
+  })();
+}
+function setPoster(src){ if(src){poster.style.backgroundImage=`url("${src}")`;poster.classList.add('on');} else poster.classList.remove('on'); }
+function subs(key){
+  const box=$('subLines'); box.innerHTML=''; const lines=LINES[key]||[];
+  $('who').classList.toggle('on',lines.length>0);
+  return lines.map(t=>{const p=document.createElement('p');p.textContent=t;box.appendChild(p);return p;});
+}
+function clearSubs(){ $('subLines').innerHTML=''; $('who').classList.remove('on'); }
+function schedule(els,dur,tok){
+  if(!els.length) return;
+  const total=els.reduce((a,e)=>a+e.textContent.length,0), span=Math.max(dur-0.45,1.2);
+  let t=0.08; els.forEach((e,i)=>{ const at=t; setTimeout(()=>{ if(tok!==cancelTok) return; if(i>0) els[i-1].style.display='none'; e.classList.add('on'); },at*1000); t+=span*(e.textContent.length/total); });
+}
+function play(key,{loop=false,posterKey='seoha',showSubs=true,next=null}={}){
+  const tok=++cancelTok;
+  return new Promise(async resolve=>{
+    let done=false; const finish=()=>{ if(done) return; done=true; resolve(); };
+    const v=back;
+    if(v._key!==key || !v._p) v._p=prep(v,key);
+    await v._p;
+    if(tok!==cancelTok) return;
+    const els=showSubs?subs(key):(clearSubs(),[]);
+    const fallback=()=>{ // clip unavailable: still + timed subs
+      setPoster(POSTER[posterKey]||null); front.classList.remove('on'); back.classList.remove('on');
+      const d=FALLBACK_DUR[key.startsWith('rv_')?'rv':key]||5; schedule(els,d,tok);
+      if(!loop) setTimeout(()=>{ if(tok===cancelTok) finish(); },d*1000); else finish();
+    };
+    if(!v._ready) return fallback();
+    v.loop=loop; v.muted=muted;
+    try{ if(v.currentTime>0.04) v.currentTime=0; await v.play(); }catch(e){ return fallback(); }
+    v.classList.add('on'); front.classList.remove('on'); setPoster(null);
+    const old=front; front=v; back=old;
+    setTimeout(()=>{ if(back!==old) return; old.pause(); if(next && tok===cancelTok) old._p=prep(old,next); },FADE+60);
+    schedule(els,v.duration||5,tok);
+    if(loop) return finish();
+    v.onended=()=>{ if(front===v) finish(); };
+    const tick=()=>{ if(done) return; if(v.ended||(v.duration&&v.currentTime>=v.duration-LEAD)) return finish(); requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  });
+}
+function idle(next=null){ clearSubs(); return play('idle',{loop:true,showSubs:false,next}); }
+function panel(id){ ['pChoice','pBirth','pWorry'].forEach(p=>$(p).classList.toggle('on',p===id)); }
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),1800);}
+
+/* ---------- form setup ---------- */
+(function(){
+  const by=$('by'),bm=$('bm'),bd=$('bd'),bh=$('bh');
+  for(let y=2008;y>=1960;y--) by.add(new Option(y+'년',y,false,y===1996));
+  for(let m=1;m<=12;m++) bm.add(new Option(m+'월',m,false,m===5));
+  const fillD=()=>{const n=new Date(+by.value,+bm.value,0).getDate(),cur=+bd.value||14;bd.innerHTML='';for(let d=1;d<=n;d++) bd.add(new Option(d+'일',d,false,d===Math.min(cur,n)));};
+  fillD(); by.onchange=fillD; bm.onchange=fillD;
+  const HN=['자시 (23~01시)','축시 (01~03시)','인시 (03~05시)','묘시 (05~07시)','진시 (07~09시)','사시 (09~11시)','오시 (11~13시)','미시 (13~15시)','신시 (15~17시)','유시 (17~19시)','술시 (19~21시)','해시 (21~23시)'];
+  bh.add(new Option('시간 모름','x'));
+  HN.forEach((h,i)=>bh.add(new Option(h,i)));
+  $('solar').onclick=()=>{$('solar').setAttribute('aria-pressed','true');$('lunar').setAttribute('aria-pressed','false');};
+  $('lunar').onclick=()=>{$('lunar').setAttribute('aria-pressed','true');$('solar').setAttribute('aria-pressed','false');};
+  $('chips').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{$('chips').querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed','false'));c.setAttribute('aria-pressed','true');});
+})();
+
+/* ---------- flow ---------- */
+let S=null;
+function unlock(){ return Promise.all([vA,vB].map(v=>{ try{ if(!v.getAttribute('src')){ v.src=srcOf('idle'); v._key='idle'; v._p=null; } v.muted=muted; const p=v.play(); return (p&&p.then?p:Promise.resolve()).then(()=>v.pause()).catch(()=>{}); }catch(e){ return Promise.resolve(); } })); }
+async function startStory(){
+  $('start').classList.add('off'); await play('intro',{posterKey:null,showSubs:false,next:'t1'}); await sceneOne();
+}
+async function sceneOne(){ await play('t1',{next:'idle'}); await idle(); panel('pChoice'); }
+async function afterChoice(k){ panel(null); await play(k,{next:'t2'}); await askBirth(); }
+async function askBirth(){ await play('t2',{next:'idle'}); await idle('t3'); panel('pBirth'); }
+async function afterBirth(){
+  panel(null);
+  const y=+$('by').value,m=+$('bm').value,d=+$('bd').value,h=$('bh').value; S=calc(y,m,d,h==='x'?null:+h);
+  fetchClip('rv_'+S.low);
+  await play('t3',{next:'t4'}); await play('t4',{next:'idle'}); await idle('t5'); panel('pWorry');
+}
+async function afterWorry(){
+  panel(null); await play('t5',{next:'rv_'+S.low});
+  const g=GODS[S.low]; clearSubs();
+  const f=$('flash'); f.classList.remove('go'); void f.offsetWidth; f.classList.add('go');
+  POSTER['rv_'+S.low]='img/'+S.low+'.jpg';
+  $('ncHanja').textContent=g.h; $('ncHanja').style.setProperty('--c',g.c); $('namecard').style.setProperty('--c',g.c);
+  $('ncName').textContent=g.n; $('ncDesc').textContent=`네 사주에 모자란 기운 ${g.label} · ${g.desc}`;
+  setTimeout(()=>$('namecard').classList.add('on'),700);
+  await play('rv_'+S.low,{posterKey:'rv_'+S.low,showSubs:false,next:'t6'});
+  $('namecard').classList.remove('on');
+  await play('t6'); showResult();
+}
+function showResult(){
+  const g=GODS[S.low];
+  $('rHero').style.backgroundImage=`url("img/${S.low}.jpg")`;
+  $('rGod').textContent=`${g.h} · ${g.el} · ${g.dir}`; $('rName').textContent=`나의 수호신, ${g.n}`;
+  $('rPillars').innerHTML=S.P.map(p=>`<div><div class="l">${p.l}</div><div class="c">${p.s===null?'<span style="color:var(--ink-3)">?</span>':`<span style="color:${EL_COL[STEM_EL[p.s]]}">${STEM[p.s]}</span><br><span style="color:${EL_COL[BR_EL[p.b]]}">${BR[p.b]}</span>`}</div></div>`).join('');
+  const max=Math.max(...S.cnt,1), names=['목(木)','화(火)','토(土)','금(金)','수(水)'];
+  $('rBars').innerHTML=S.cnt.map((c,i)=>`<div class="bar ${EL_KEYS[i]===S.low?'low':''}" style="--c:${EL_COL[i]}"><span class="lbl">${names[i]}</span><div class="t"><i data-w="${Math.max(c/max*100,4)}"></i></div><span class="v">${c}</span></div>`).join('');
+  $('rMission').textContent=g.mission;
+  $('result').classList.add('on');
+  setTimeout(()=>$('rBars').querySelectorAll('i').forEach(i=>i.style.width=i.dataset.w+'%'),60);
+}
+$('enter').onclick=async()=>{ await unlock(); startStory(); };
+$('skipStory').onclick=async()=>{ await unlock(); $('start').classList.add('off'); askBirth(); };
+$('c1a').onclick=()=>afterChoice('t1a');
+$('c1b').onclick=()=>afterChoice('t1b');
+$('birthGo').onclick=afterBirth;
+$('worryGo').onclick=afterWorry;
+$('worrySkip').onclick=afterWorry;
+$('ctaPay').onclick=()=>toast('체험판: 결제 화면으로 이동합니다');
+$('ctaPush').onclick=()=>toast('체험판: 내일 07:00 알림 예약됨');
+$('ctaShare').onclick=()=>toast('체험판: 공유 카드 생성');
+$('muteBtn').onclick=()=>{ muted=!muted; [vA,vB].forEach(v=>v.muted=muted); $('waves').style.display=muted?'none':''; $('muteBtn').setAttribute('aria-label',muted?'소리 켜기':'소리 끄기'); };
+$('restartBtn').onclick=()=>{ location.reload(); };
+// initial: intro still as backdrop, load everything in background, pre-decode intro on the hidden layer
+setPoster('img/intro0.jpg');
+const CORE=['intro','idle','t1','t1a','t1b','t2','t3','t4','t5','t6'], NEED=['intro','idle','t1'];
+let nDone=0; const enter=$('enter'), skip=$('skipStory'), lab=enter.textContent;
+const upd=()=>{ const pct=Math.round(nDone/CORE.length*100); $('loadbar').style.width=pct+'%'; $('loadtxt').textContent=pct<100?`영상 준비 중 ${pct}%`:'준비 완료'; };
+enter.disabled=skip.disabled=true; enter.textContent='준비 중…';
+(async()=>{ const q=CORE.slice(); const worker=async()=>{ while(q.length){ const k=q.shift(); await fetchClip(k); nDone++; upd(); } }; await Promise.all([worker(),worker(),worker()]); })();
+Promise.all(NEED.map(fetchClip)).then(()=>blobCheck).then(()=>{ back._p=prep(back,'intro'); return back._p; }).then(()=>{ enter.disabled=skip.disabled=false; enter.textContent=lab; });
+})();
+</script>

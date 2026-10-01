@@ -26,7 +26,8 @@ button{font-family:inherit;cursor:pointer}
 @media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;box-shadow:0 30px 80px rgba(60,40,20,.18)}}
 .scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}
 .scr::-webkit-scrollbar{display:none}
-.top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 14px 10px;pointer-events:none}
+.top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 14px 10px;pointer-events:none;transition:background .2s,box-shadow .2s}
+.top.sc{background:rgba(251,248,243,.95);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
 .top>*{pointer-events:auto}
 .ib{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.7);display:grid;place-items:center;color:var(--ink)}
 .ib svg{width:18px;height:18px}
@@ -64,6 +65,14 @@ button{font-family:inherit;cursor:pointer}
 .rar span.r2{background:linear-gradient(135deg,#f6e3a8,#d9ab4f);color:#3a2708;box-shadow:none}
 .rar span.r3{background:linear-gradient(120deg,#ffc6d9,#fff0a8,#b8f5dc,#bcd6ff,#e6c4ff);color:#2b2230;box-shadow:none}
 .rar small{font-size:12px;color:var(--ink3)}
+.rar span.q,.label .lr em.q{background:transparent;color:var(--ink3);box-shadow:inset 0 0 0 1px var(--line)}
+.label .lr em.q{color:rgba(244,236,220,.7);box-shadow:inset 0 0 0 1px rgba(244,236,220,.35)}
+.card.pre .face{filter:saturate(.9)}
+.pickA[hidden],.gotA[hidden]{display:none!important}
+.got1{margin:22px 2px 0;font-size:14px;line-height:1.6;color:var(--ink2);text-align:center}
+.got1 b{color:var(--ink)}
+.more{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:48px;margin-top:8px;border:1px dashed rgba(60,40,20,.28);background:transparent;color:var(--ink);font-size:14px;font-weight:700}
+.more em{font-style:normal;font-weight:800;color:var(--red)}
 .tilt{margin:8px 0 0;text-align:center;font-size:12px;color:var(--ink3)}
 
 /* 용도 */
@@ -109,11 +118,22 @@ button{font-family:inherit;cursor:pointer}
 .col h3{display:flex;justify-content:space-between;margin:0 2px 10px;font-size:13px;font-weight:700;color:var(--ink2)}
 .col h3 small{font-weight:500;color:var(--ink3)}
 .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-.grid div{position:relative;aspect-ratio:648/1046;background:#ebe4d8;overflow:hidden}
-.grid div.has{background:#e9dfb8 center/cover no-repeat}
-.grid div.lock::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--bmj);font-size:22px;color:#c2b8a8}
-.grid div i{position:absolute;left:0;right:0;bottom:0;padding:3px 0;text-align:center;font-style:normal;font-size:10px;font-weight:700;color:#fff;background:rgba(31,26,21,.72)}
-.grid div.r3::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,198,217,.35),rgba(255,240,168,.35),rgba(184,245,220,.35),rgba(188,214,255,.35));mix-blend-mode:color-dodge}
+.grid .gh{display:flex;flex-direction:column;align-items:center;gap:3px;padding-bottom:2px;font-size:11px;font-weight:700;color:var(--ink2)}
+.grid .gh svg{width:18px;height:18px;color:var(--red)}
+.grid .c{position:relative;aspect-ratio:648/1046;background:#ebe4d8 center/cover no-repeat;overflow:hidden;border:2px solid transparent;padding:0;font:inherit}
+.grid .c.has{cursor:pointer}
+.grid .c.lock{background-image:none!important}
+.grid .c.lock::before{content:"";position:absolute;inset:0;background:var(--im) center/cover no-repeat;filter:grayscale(1);opacity:.16}
+.grid .c.lock::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--bmj);font-size:20px;color:#b9ae9c}
+.grid .c.r2{border-color:#d9ab4f}
+.grid .c.r3{border-image:linear-gradient(135deg,#ff9fbf,#ffe680,#8ff0c8,#93bbff,#d6a6ff) 1}
+.grid .c.r3::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,198,217,.35),rgba(255,240,168,.35),rgba(184,245,220,.35),rgba(188,214,255,.35));mix-blend-mode:color-dodge}
+.grid .c .m{position:absolute;left:3px;top:3px;width:17px;height:17px;display:grid;place-items:center;background:#c8372d;color:#fbf1dc}
+.grid .c .m svg{width:12px;height:12px}
+.grid .c .n{position:absolute;right:3px;top:3px;padding:1px 4px;font-size:9.5px;font-weight:800;color:#fff;background:rgba(31,26,21,.72)}
+.grid .c i{position:absolute;left:0;right:0;bottom:0;padding:3px 0;text-align:center;font-style:normal;font-size:10px;font-weight:700;color:#fff;background:rgba(31,26,21,.72)}
+.grid .c.new{animation:newC 1.2s ease-out}
+@keyframes newC{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
 .price{margin:18px 0 0;text-align:center;font-size:12px;line-height:1.6;color:var(--ink3)}
 .price b{color:var(--red)}
 .sheet{position:absolute;inset:0;z-index:90;background:rgba(20,16,12,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px}
@@ -139,18 +159,23 @@ button{font-family:inherit;cursor:pointer}
     <div class="rar"><span id="rar"></span><small id="rarS"></small></div>
     <p class="tilt">폰을 기울이면 부적이 반짝여요</p>
 
+    <p class="got1 gotA" id="got1" hidden></p>
+    <div class="pickA" id="pickA">
     <div class="lab">누구의 부적으로 받을까 <small id="elHint"></small></div>
     <div class="els" id="els"><button data-k="wood" type="button"><i style="background-image:url('img/mini/wood.jpg')"></i><span>하람</span></button><button data-k="fire" type="button"><i style="background-image:url('img/mini/fire.jpg')"></i><span>이안</span></button><button data-k="earth" type="button"><i style="background-image:url('img/mini/earth.jpg')"></i><span>도준</span></button><button data-k="metal" type="button"><i style="background-image:url('img/mini/metal.jpg')"></i><span>시온</span></button><button data-k="water" type="button"><i style="background-image:url('img/mini/water.jpg')"></i><span>재이</span></button></div>
     <div class="lab">무엇을 빌어 볼까</div>
     <div class="uses" id="uses"><button data-k="money" type="button">재물</button><button class="on" data-k="love" type="button">인연</button><button data-k="pass" type="button">합격</button><button data-k="health" type="button">건강</button><button data-k="guard" type="button">액막이</button></div>
+    </div>
     <div class="bless"><small id="bK"></small><p id="bT"></p></div>
 
     <div class="why"><h3>이 부적은 이렇게 그렸어요</h3><div id="whyM"></div><ul id="whyL"></ul><div class="luck" id="whyK"></div></div>
 
-    <div class="row2"><button class="btn pr" id="save" type="button">카드 저장</button><button class="btn" id="wall" type="button">배경화면으로 받기</button></div>
+    <div class="row2 pickA" id="pickB"><button class="btn pr" id="draw" type="button">오늘의 부적 받기</button></div>
+    <div class="gotA" id="gotB" hidden><div class="row2"><button class="btn pr" id="save" type="button">카드 저장</button><button class="btn" id="wall" type="button">배경화면으로 받기</button></div>
+      <button class="more" id="bjMore" type="button">한 장 더 받기 <em>990원</em></button></div>
 
-    <div class="col"><h3>모은 부적 <small id="colN"></small></h3><div class="grid" id="grid"></div></div>
-    <p class="price">정식 오픈 때 <b>990원</b> · 체험판에서는 무료로 모을 수 있어요</p>
+    <div class="col"><h3>부적 도감 <small id="colN"></small></h3><div class="grid" id="grid"></div></div>
+    <p class="price">하루 한 장은 무료예요 · 한 장 더 받으면 <b>990원</b> · 체험판에서는 실제로 결제되지 않아요</p>
   </div></div>
   <div class="sheet" id="sheet"><img id="shImg" alt="부적 카드 이미지"><div class="row2"><button class="btn pr" id="shDl" type="button">이미지 받기</button><button class="btn" id="shX" type="button">닫기</button></div></div>
   <div class="toast" id="toast"></div>
@@ -165,6 +190,8 @@ const EL={
   metal:{k:'金',r:'금',n:'시온',god:'백호',godH:'白虎',dirH:'西',dir:'서쪽',num:'4 · 9',color:'흰색',c:'#7d8591',p:'#eceef1',hold:'방울',line:'붉은 선',top:['방울','맑은 소리로 삿된 기운을 쫓는 방울'],sang:'흙 속에서 쇠가 나와요. 노란빛, 도자기가 힘이 돼요',seal:[88.6,7.9],ink:'#b0231a',blend:'multiply'},
   water:{k:'水',r:'수',n:'재이',god:'현무',godH:'玄武',dirH:'北',dir:'북쪽',num:'1 · 6',color:'남색',c:'#2f4a7a',p:'#dfe5ef',hold:'물방울 구슬',line:'은빛 선',top:['달과 비','물의 기운을 모으는 밤의 달과 빗방울'],sang:'쇠에 맺힌 이슬이 물이 돼요. 은빛, 흰 소품이 힘이 돼요',seal:[86.5,8.9],ink:'#e6ecf5',blend:'normal'}};
 Object.keys(EL).forEach(k=>EL[k].img=`img/card/${k}.jpg`);
+/* 기운 × 용도 25장: 미니가 용도 물건(엽전 · 붉은 실 · 엿 · 인삼 · 굴비와 소금)을 들고 있다. 도준 재물은 원래 그림(엽전 항아리) */
+const cimg=(e,u)=>e==='earth'&&u==='money'?'img/card/earth.jpg':`img/card/${e}_${u}.jpg`;
 const ELK=['wood','fire','earth','metal','water'], ELN={wood:'木',fire:'火',earth:'土',metal:'金',water:'水'};
 /* 받침 있으면 이/은/을, 없으면 가/는/를 */
 const bt=w=>{ const c=w.charCodeAt(w.length-1)-0xac00; return c>=0&&c<11172&&c%28!==0; };
@@ -191,42 +218,76 @@ const CHARM={
 };
 const moSvg=(k,col)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style="color:${col}">${MO[k]}</svg>`;
 const RAR=[['일반','','매일 나오는 부적'],['레어','r2','금빛이 도는 부적'],['홀로','r3','무지개로 빛나는 부적 · 드물게 나와요']];
-let use='love', el='wood', lo=null;
+let use='love', el='wood', lo=null, R=null, mode='pick';
+const USEK=['money','love','pass','health','guard'];
 function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1800); }
 function me(){ try{ return JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){ return null; } }
 const today=new Date(), dstr=`${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
 function hash(s){ let h=2166136261; for(const ch of s){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; }
-function rarity(){ const m=me(), r=hash(dstr+'|'+el+'|'+use+'|'+((m&&m.name)||'')+'|'+((m&&m.y)||''))%100; return r<10?2:r<40?1:0; }
+/* 등급은 받는 순간 정해진다(날짜 · 이름 · 오늘 몇 번째 장). 기운 · 용도를 바꿔 가며 고를 수 없다 */
+function rollRarity(i){ const m=me(), r=hash(dstr+'|'+((m&&m.name)||'')+'|'+((m&&m.y)||'')+'|'+i)%100; return r<10?2:r<40?1:0; }
+const rarity=()=>R==null?0:R;
 /* 내 사주에서 가장 모자란 기운 */
 function lowEl(){ /* 홈에서 계산한 '채울 기운'과 맞춘다 */ try{ const o=JSON.parse(sessionStorage.getItem('obLow')||'null'); if(o&&o.k&&o.cnt) return {k:o.k,cnt:o.cnt}; }catch(e){}
   const m=me(), S=window.Saju; if(!m||!m.y||!S) return null; try{ let s={y:m.y,m:m.m,d:m.d}; if(m.cal==='l'){ s=S.lunarToSolar(m.y,m.m,m.d,false)||s; } const P=S.pillars(s.y,s.m,s.d,m.h==null?null:+m.h), c=S.elCount(P); let lo=0; c.forEach((v,i)=>{ if(v<c[lo]) lo=i; }); return {k:ELK[lo],cnt:c}; }catch(e){ return null; } }
-function render(){ const e=EL[el], m=me(), u=USE[use], r=rarity(), R=RAR[r];
+function render(){ const e=EL[el], m=me(), u=USE[use], r=rarity(), pre=R==null, RR=pre?['등급 미정','q','받는 순간 일반 · 레어 · 홀로가 정해져요']:RAR[r];
   document.documentElement.style.setProperty('--c',e.c); document.documentElement.style.setProperty('--cp',e.p);
-  $('face').style.background=`url('${e.img}') center/cover no-repeat`;
+  $('face').style.background=`url('${cimg(el,use)}') center/cover no-repeat`;
   const sl=$('cS').style; sl.top=e.seal[0]+'%'; sl.height=e.seal[1]+'%'; sl.color=e.ink; sl.mixBlendMode=e.blend;
   $('cMo').innerHTML=moSvg(use,'#fbf1dc'); $('charm').innerHTML=`<svg viewBox="0 0 64 118">${CHARM[use]}</svg>`;
   $('cK').textContent=`${e.k} · ${e.godH} · ${e.dirH}`;
   $('cT').textContent=`${e.n}의 ${u[0]} 부적`;
   $('cB').textContent=`${m&&m.name?m.name+' · ':''}${dstr}`;
-  $('cR').className=R[1]; $('cR').textContent=R[0]; $('cN').textContent=`No.${String(hash(dstr+el+use)%900+100)}`;
+  $('cR').className=RR[1]; $('cR').textContent=pre?'?':RR[0]; $('cN').textContent=pre?'No.---':`No.${String(hash(dstr+el+use)%900+100)}`;
   $('cS').textContent=(m&&m.name?m.name:'오방').slice(0,3);
-  $('card').className='card '+R[1]; $('rar').className=R[1]; $('rar').textContent=R[0]; $('rarS').textContent=R[2];
+  $('card').className='card '+(pre?'pre':RR[1]); $('rar').className=RR[1]; $('rar').textContent=RR[0]; $('rarS').textContent=RR[2];
   $('bK').textContent=`${e.k} · ${e.n} · ${u[0]} 부적`; $('bT').textContent=BLESS[el][use];
   $('els').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===el));
   $('whyM').innerHTML=lo?`<div class="wm">${ELK.map((k,i)=>`<div class="${k===lo.k?'lo':''}"><b>${ELN[k]}</b><span>${lo.cnt[i]}</span></div>`).join('')}</div><p class="wmT">내 사주 여덟 글자에서 가장 모자란 기운은 <b>${ELN[lo.k]}</b>${lo.k===el?' · 그래서 '+jo(EL[lo.k].n,'이가','가')+' 나왔어요':' · 추천은 '+EL[lo.k].n+' 부적'}</p>`:'';
   $('whyL').innerHTML=[['주인공',`${e.k} 기운의 미니 ${e.n}, 손에 ${e.hold}`],['신수',`${jo(e.god,'이','가')} ${e.line}으로 감싸요`],['용도 문양',`${u[1]} · ${u[2]}`],[e.top[0],e.top[1]],['상생',e.sang.split('.')[0]]].map(x=>`<li><small>${x[0]}</small><span>${x[1]}</span></li>`).join('');
   $('whyK').innerHTML=`<div><small>행운 색</small><b>${e.color}</b></div><div><small>방위</small><b>${e.dir}</b></div><div><small>숫자</small><b>${e.num}</b></div>`;
-  collect(r); }
-/* 도감: 오늘 · 용도별로 한 장씩 */
-function readCol(){ try{ return JSON.parse(localStorage.getItem('obCards')||'[]'); }catch(e){ return []; } }
-function collect(r){ const a=readCol(), id=dstr+'|'+el+'|'+use; if(!a.find(x=>x.id===id)){ a.unshift({id,el,use,r,d:dstr}); try{ localStorage.setItem('obCards',JSON.stringify(a.slice(0,60))); }catch(e){} } drawCol(); }
-function drawCol(){ const a=readCol(); $('colN').textContent=`${a.length}장 · 홀로 ${a.filter(x=>x.r===2).length}장`;
-  const cells=[]; for(let i=0;i<10;i++){ const x=a[i]; cells.push(x?`<div class="has ${RAR[x.r][1]}" style="background-image:url('${(EL[x.el]||EL.wood).img}')"><i>${(EL[x.el]||EL.wood).n} · ${USE[x.use][0]}</i></div>`:'<div class="lock"></div>'); } $('grid').innerHTML=cells.join(''); }
-$('uses').querySelectorAll('button').forEach(b=>b.onclick=()=>{ $('uses').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); use=b.dataset.k; render(); const c=$('card'); c.animate([{transform:'rotateY(0)'},{transform:'rotateY(180deg)'},{transform:'rotateY(360deg)'}],{duration:700,easing:'cubic-bezier(.3,.7,.2,1)'}); });
+  $('uses').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===use));
+  const got=mode==='got'; document.body.dataset.bjGot=got?'1':'';
+  $('pickA').hidden=got; $('pickB').hidden=got; $('got1').hidden=!got; $('gotB').hidden=!got;
+  const D=readDraw(); $('draw').textContent=D.n>0?'한 장 더 받기':'오늘의 부적 받기';
+  if(got) $('got1').innerHTML=`오늘의 부적을 받았어요 · <b>${e.n}의 ${u[0]} 부적</b><br>내일 또 한 장 받을 수 있어요`;
+  drawCol(); }
+/* 받은 기록: obDraw = 오늘 받은 수 · 결제한 한 장 · 마지막 카드, obDex = 기운 × 용도 25칸 도감(장수 · 가장 높은 등급) */
+function readDraw(){ try{ const o=JSON.parse(localStorage.getItem('obDraw')||'null'); if(o&&o.d===dstr) return o; }catch(e){} return {d:dstr,n:0,pend:false,last:null}; }
+function saveDraw(o){ try{ localStorage.setItem('obDraw',JSON.stringify(o)); }catch(e){} }
+function readDex(){ let x={}; try{ x=JSON.parse(localStorage.getItem('obDex')||'{}')||{}; }catch(e){}
+  /* 예전 기록(obCards: 기운 · 용도를 누를 때마다 자동으로 쌓이던 것)을 한 번만 도감으로 옮긴다 */
+  try{ if(!localStorage.getItem('obDexV')){ JSON.parse(localStorage.getItem('obCards')||'[]').forEach(c=>{ if(!EL[c.el]||!USE[c.use]) return; const k=c.el+'|'+c.use, o=x[k]||{n:0,r:0,d:c.d}; o.n++; o.r=Math.max(o.r,c.r||0); x[k]=o; }); localStorage.setItem('obDex',JSON.stringify(x)); localStorage.setItem('obDexV','1'); } }catch(e){}
+  return x; }
+let fresh=null;
+function drawCol(){ const x=readDex(), ks=Object.keys(x), h=ks.filter(k=>x[k].r===2).length;
+  $('colN').textContent=`${ks.length} / 25 · 홀로 ${h}장`;
+  const H=USEK.map(u=>`<div class="gh">${moSvg(u,'currentColor')}${USE[u][0]}</div>`).join('');
+  const C=ELK.map(ek=>USEK.map(uk=>{ const k=ek+'|'+uk, o=x[k], E=EL[ek];
+    return o?`<button type="button" class="c has ${RAR[o.r][1]}${k===fresh?' new':''}" data-k="${k}" style="background-image:url('${cimg(ek,uk)}')" aria-label="${E.n}의 ${USE[uk][0]} 부적 · ${RAR[o.r][0]}"><span class="m">${moSvg(uk,'#fbf1dc')}</span>${o.n>1?`<span class="n">×${o.n}</span>`:''}<i>${E.n}</i></button>`
+      :`<div class="c lock" style="--im:url('${cimg(ek,uk)}')" aria-label="${E.n}의 ${USE[uk][0]} 부적 · 아직 없음"></div>`; }).join('')).join('');
+  $('grid').innerHTML=H+C; fresh=null;
+  $('grid').querySelectorAll('.c.has').forEach(b=>b.onclick=()=>viewDex(b.dataset.k,x[b.dataset.k])); }
+function flip(){ $('card').animate([{transform:'rotateY(0)'},{transform:'rotateY(180deg)'},{transform:'rotateY(360deg)'}],{duration:700,easing:'cubic-bezier(.3,.7,.2,1)'}); }
+/* 받기: 오늘 첫 장은 무료, 그다음은 결제한 만큼 */
+function draw(){ const D=readDraw(); if(D.n>0&&!D.pend){ more(); return; }
+  R=rollRarity(D.n); const x=readDex(), k=el+'|'+use, o=x[k]||{n:0,r:0,d:dstr}; o.n++; o.r=Math.max(o.r,R); o.d=dstr; x[k]=o;
+  try{ localStorage.setItem('obDex',JSON.stringify(x)); localStorage.setItem('obDexV','1'); }catch(e){}
+  saveDraw({d:dstr,n:D.n+1,pend:false,last:{el,use,r:R}}); mode='got'; fresh=k; render(); flip();
+  setTimeout(()=>toast(R===2?'홀로가 나왔어요 · 도감에 담았어요':R===1?'레어가 나왔어요 · 도감에 담았어요':'도감에 담았어요'),720);
+  const s=document.querySelector('.scr'); if(s) s.scrollTo({top:0,behavior:'smooth'}); }
+function more(){ const go=()=>{ const D=readDraw(); D.pend=true; saveDraw(D); mode='pick'; R=null; render(); flip(); setTimeout(()=>{ const t=$('pickA'); if(t) t.scrollIntoView({behavior:'smooth',block:'center'}); },300); };
+  if(window.ObPay) ObPay.open({btn:'bjMore',name:'부적 카드 한 장 더',who:'오방',desc:'기운과 용도를 골라 한 장 더 · 등급은 받는 순간 정해져요',price:990,img:cimg(el,use),okTitle:'결제가 완료됐어요',okText:'기운과 용도를 고르고 받아 보세요',after:go});
+  else go(); }
+/* 도감 칸을 누르면 그 카드를 이미지로 */
+async function viewDex(k,o){ const s={el,use,R}; const [a,b]=k.split('|'); el=a; use=b; R=o.r; let png=null; try{ png=await cardPng(); }catch(e){} el=s.el; use=s.use; R=s.R;
+  if(png) sheet(png,`obang-bujeok-${a}-${b}.png`); else toast('이미지를 만들지 못했어요'); }
+$('uses').querySelectorAll('button').forEach(b=>b.onclick=()=>{ if(use===b.dataset.k) return; use=b.dataset.k; render(); flip(); });
+$('draw').onclick=draw; $('bjMore').onclick=more;
 
 /* 이미지: 카드 · 배경화면 */
 function loadImg(src){ return new Promise((ok,no)=>{ const i=new Image(); i.onload=()=>ok(i); i.onerror=no; i.src=src; }); }
-async function drawCard(x,X,Y,W,H){ const e=EL[el], m=me(), u=USE[use], r=rarity(); const im=await loadImg(e.img); x.save(); x.beginPath(); x.rect(X,Y,W,H); x.clip(); x.drawImage(im,X,Y,W,H);
+async function drawCard(x,X,Y,W,H){ const e=EL[el], m=me(), u=USE[use], r=rarity(); const im=await loadImg(cimg(el,use)); x.save(); x.beginPath(); x.rect(X,Y,W,H); x.clip(); x.drawImage(im,X,Y,W,H);
   if(r>0){ const g=x.createLinearGradient(X,Y,X+W,Y+H); if(r===2){ ['rgba(255,150,180,.28)','rgba(255,240,150,.28)','rgba(150,255,210,.28)','rgba(150,190,255,.28)','rgba(220,160,255,.28)'].forEach((c,i)=>g.addColorStop(i/4,c)); } else { g.addColorStop(0,'rgba(255,220,140,0)'); g.addColorStop(.5,'rgba(255,225,150,.32)'); g.addColorStop(1,'rgba(255,220,140,0)'); } x.globalCompositeOperation='screen'; x.fillStyle=g; x.fillRect(X,Y,W,H); x.globalCompositeOperation='source-over'; }
   x.restore();
   /* 도장 속 이름(세로) */
@@ -261,7 +322,10 @@ $('els').querySelectorAll('button').forEach(b=>b.onclick=()=>{ if(el===b.dataset
 $('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
 lo=lowEl(); try{ const q=new URLSearchParams(location.search).get('el'); if(q&&EL[q]) el=q; else if(lo) el=lo.k; }catch(e){ if(lo) el=lo.k; }
 if(lo){ const b=$('els').querySelector(`[data-k="${lo.k}"]`); if(b) b.classList.add('low'); $('elHint').textContent=`내 사주엔 ${ELN[lo.k]} 기운이 제일 적어요`; }
+(()=>{ const D=readDraw(); if(D.n>0&&!D.pend&&D.last&&EL[D.last.el]&&USE[D.last.use]){ el=D.last.el; use=D.last.use; R=D.last.r; mode='got'; } })();
 render();
+/* 내리면 위 막대에 바탕을 깔아 글자와 겹치지 않게 */
+(()=>{ const s=document.querySelector('.scr'), t=document.querySelector('.top'); if(s&&t) s.addEventListener('scroll',()=>t.classList.toggle('sc',s.scrollTop>8),{passive:true}); })();
 </script>
 <script src="archive.js"></script>
 <script src="depth3d.js"></script>

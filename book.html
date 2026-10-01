@@ -241,7 +241,7 @@ function front(p,i){
   if(p.t==='cover') return `<div class="cbg" style="background-image:url('img/intro0.jpg');background-position:center 40%"></div>
     <div class="ctl"><small>OBANG SAJU ORIGINAL · VOL. 1</small><h1><span>팔자에</span><span>신이</span><span>들었다</span></h1></div>
     <div class="cfg"><img src="img/pop/house.webp" alt=""></div><div class="cbt"></div>
-    <div class="cft"><p>빈칸 하나에, 신 다섯이 줄을 섰다</p><div><span>넘겨서 읽기 →</span><b>제1권 무료</b></div></div>`;
+    <div class="cft"><p>빈칸 하나에, 신 다섯이 줄을 섰다</p><div><span>넘겨서 읽기 →</span><b>무료</b></div></div>`;
   if(p.t==='god') return `${popBox(p)}<div class="txt"><div class="ch">오방의 신 · ${p.dir}</div><div class="nm"><b>${p.n}</b><span>${p.h} · ${p.el}</span></div><div class="spec">${p.col} · ${p.job}</div>${bdy(p.body)}<div class="q">${p.q}</div></div>${ft(p,i)}`;
   if(p.t==='film') return `<div class="flm" style="background-image:url('${p.bg}')"><video class="lp" playsinline muted preload="auto" data-src="${p.once}"></video></div><div class="flg"></div><div class="flt">${head(p)}${bdy(p.body)}</div>`;
   if(p.t==='grid8'){ const G=[['甲','#3fbf7f'],['丙','#ff5a46'],['庚','#c9d1db'],['壬','#5b8cff'],['子','#5b8cff'],['午','#ff5a46'],['',''],['申','#c9d1db']];

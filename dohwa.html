@@ -263,6 +263,7 @@ video.layer.on{opacity:1}
 .splash h1 em{font-size:.42em!important}
 .htitle h2{font-family:var(--brush)!important;font-weight:400!important;font-size:42px!important}
 </style>
+<link rel="stylesheet" href="premkit.css">
 </head>
 <body>
 <div class="stage" id="stage">
@@ -353,6 +354,7 @@ video.layer.on{opacity:1}
     <div class="lb"><h3>누나 도화 살리는 법</h3><div class="sub2" id="kitSub"></div><div class="kit" id="kit"></div></div>
     <div class="lb"><h3>조심해야 할 인연</h3><div class="sub2" id="warnSub"></div><p id="warnTx"></p></div>
     <div class="lb"><h3>태오가</h3><p id="bye"></p></div>
+    <div id="dprem" hidden></div>
     <div class="lend"><button class="cta" id="lAsk">태오에게 더 물어보기</button><button class="ghost2" id="lShare">도화 카드 공유하기</button><button class="ghost2" id="lHome">처음으로</button></div>
   </div>
   <div class="toast" id="toast"></div>
@@ -691,7 +693,8 @@ $('payBtn').onclick=()=>{ $('ck').classList.remove('ok'); $('ck').classList.add(
 $('ck').onclick=e=>{ if(e.target.id==='ck') $('ck').classList.remove('on'); };
 $('payNow').onclick=async()=>{ const b=$('payNow'); b.textContent='결제 중…'; b.disabled=true; await wait(1100); $('ck').classList.add('ok'); await wait(1100);
   $('ck').classList.remove('on'); b.textContent='14,900원 결제하기'; b.disabled=false;
-  buildLetter(); $('letter').scrollTop=0; $('letter').classList.add('on'); $('pay').classList.remove('on'); playLetter(); };
+  buildLetter(); if(window.DohwaPrem) DohwaPrem.open(); $('letter').scrollTop=0; $('letter').classList.add('on'); $('pay').classList.remove('on'); playLetter(); };
+window.DHF=()=>{ if(!R||!RES) return null; const u=askUser(); const hh=(S.hour==null||S.hour<0)?null:S.hour; return {inp:{y:u.solar.y,m:u.solar.m,d:u.solar.d,h:hh,g:S.bro?'m':'f'},nick:S.nick,bro:S.bro,T:RES.T,score:RES.score}; };
 $('lShare').onclick=()=>$('shareBtn').click();
 $('lAsk').onclick=()=>openAsk();
 $('lHome').onclick=()=>{ if(history.length>1) history.back(); else location.reload(); };
@@ -702,5 +705,10 @@ $('startBtn').onclick=()=>{ unlock(); startBgm(); $('splash').classList.add('off
 <script src="archive.js"></script>
 <script src="depth3d.js"></script>
 <script>window.Depth3D&&setTimeout(()=>Depth3D.watch('.hero,#heroP,.ch,#sLoad'),200);</script>
+<script src="saju_x.js"></script>
+<script src="prem2_core.js"></script>
+<script src="premai.js"></script>
+<script src="premkit.js"></script>
+<script src="dohwa_prem.js"></script>
 </body>
 </html>

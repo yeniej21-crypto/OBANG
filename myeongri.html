@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="early.js"></script>
+<title>소헌 선생의 2027 명리 감정서 · 오방사주</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;700;900&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 명리관 · 소헌 선생의 2027 명리 감정서 — 문서형 감정서. 흰 종이 + 먹 + 주사 관인. 근거는 각주로. */
+:root{
+  --brush:'OBrush','Noto Serif KR',serif; --serif:'Noto Serif KR',"Nanum Myeongjo",serif;
+  --sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --desk:#2b2620; --paper:#f4f1ea; --sheet:#fffdf8; --ink:#171512; --ink-2:#46413a; --ink-3:#857e74; --rule:#dcd5c8; --rule-2:#ebe6dc;
+  --seal:#a3261f; --seal-bg:#fbf1ee; --wood:#3f7d5a; --fire:#b8392b; --earth:#9a7128; --metal:#66707c; --water:#2c5680;
+  color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#cfc7b8;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button,select,input{font-family:inherit}
+.stage{position:relative;width:100%;max-width:460px;height:100%;overflow:hidden;overflow:clip;background:var(--paper)}
+@media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;box-shadow:0 30px 80px rgba(40,30,20,.35)}}
+.scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;opacity:0;pointer-events:none;transition:opacity .6s}
+.scr::-webkit-scrollbar{display:none}
+.scr.on{opacity:1;pointer-events:auto}
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px;background:var(--paper);box-shadow:0 1px 0 var(--rule)}
+.back{width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);background:var(--sheet);display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.back svg{width:18px;height:18px}
+.top b{font-family:var(--serif);font-size:14px;font-weight:700;letter-spacing:.06em}
+.top .gw{margin-left:auto}
+.gwan{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:44px;height:44px;background:var(--seal);color:#fff6ef;font-family:var(--serif);font-weight:900;font-size:15px;line-height:1.04;transform:rotate(-3deg);box-shadow:inset 0 0 0 2px rgba(255,240,230,.45)}
+.gwan i{display:block;font-style:normal}
+.gw{width:30px;height:30px;font-size:11px}
+
+/* intro */
+.intro{padding:0 20px calc(env(safe-area-inset-bottom,0px) + 28px)}
+.por{position:relative;margin:14px auto 0;width:72%;max-width:290px;aspect-ratio:4/5;background:#2b2620 center 18%/cover no-repeat;box-shadow:0 18px 40px rgba(40,30,20,.28)}
+.por .gwan{position:absolute;right:-10px;bottom:-12px;width:46px;height:46px}
+.plate{margin:22px 0 0;text-align:center}
+.plate small{display:block;font-size:11.5px;letter-spacing:.32em;color:var(--seal);font-weight:700}
+.plate b{display:block;margin-top:8px;font-family:var(--serif);font-size:15px;color:var(--ink-2);letter-spacing:.12em}
+h1{margin:10px 0 0;text-align:center;font-family:var(--brush);font-weight:400;font-size:36px;line-height:1.2;letter-spacing:0}
+.lead{text-align:center;color:var(--ink-2);font-size:14px;line-height:1.75;margin:12px 0 0}
+.say{margin:18px 0 0;padding:14px 16px 4px;border-top:1px solid var(--ink);font-family:var(--serif);font-size:15.5px;font-weight:700;line-height:1.7;text-align:center}
+.say i{display:block;margin-top:6px;font-style:normal;font-family:var(--sans);font-size:11.5px;font-weight:500;color:var(--ink-3)}
+.how{display:grid;grid-template-columns:repeat(3,1fr);margin:18px 0 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.how div{padding:12px 6px;text-align:center}
+.how div+div{border-left:1px solid var(--rule)}
+.how b{display:block;font-family:var(--serif);font-size:13.5px;font-weight:900}
+.how small{display:block;margin-top:3px;font-size:11.5px;color:var(--ink-3);line-height:1.45}
+.form{margin-top:18px;background:var(--sheet);border:1px solid var(--rule);padding:16px}
+.form label{display:block;font-size:12px;color:var(--ink-3);margin:12px 0 6px;font-weight:700;letter-spacing:.04em}
+.form label:first-child{margin-top:0}
+.field{width:100%;height:46px;border:1px solid var(--rule);background:#fff;color:var(--ink);padding:0 12px;font-size:16px;outline:none;border-radius:0}
+.field:focus{border-color:var(--ink-2)}
+.seg{display:flex;border:1px solid var(--rule);overflow:hidden;background:#fff}
+.seg button{flex:1;height:42px;border:0;background:none;color:var(--ink-2);font-size:14px;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--paper);font-weight:700}
+.grid3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:6px}
+.grid3 select,.form select{height:46px;border:1px solid var(--rule);background:#fff;color:var(--ink);font-size:15px;padding:0 8px;width:100%;border-radius:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.leap{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);margin-top:8px}
+.leap input{width:18px;height:18px;accent-color:var(--seal)}
+.leap.off{opacity:.4}
+.go{width:100%;height:54px;margin-top:16px;border:0;background:var(--ink);color:var(--paper);font-size:16px;font-weight:700;cursor:pointer;letter-spacing:.02em;border-radius:0}
+.go:active{transform:scale(.985)}
+.fine{font-size:11.5px;color:var(--ink-3);text-align:center;margin-top:12px;line-height:1.6}
+.ailbl{font-size:11px;color:var(--ink-3);text-align:center;margin-top:8px}
+
+/* 원국을 세우는 의식 */
+.write{display:flex;flex-direction:column;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 30px) 20px 30px;background:var(--desk)}
+.wsh{position:relative;background:var(--sheet);padding:22px 18px 20px;box-shadow:0 24px 50px rgba(0,0,0,.45)}
+.wsh h2{margin:0;font-family:var(--serif);font-size:13px;font-weight:700;letter-spacing:.3em;color:var(--seal);text-align:center}
+.wsh .who{margin:8px 0 0;text-align:center;font-size:12px;color:var(--ink-3)}
+.wg{display:grid;grid-template-columns:repeat(4,1fr);margin-top:16px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.wg div{padding:10px 0 12px;text-align:center}
+.wg div+div{border-left:1px solid var(--rule)}
+.wg small{display:block;font-size:11px;color:var(--ink-3)}
+.wg b{display:block;font-family:var(--serif);font-weight:900;font-size:34px;line-height:1.15;margin-top:6px;color:var(--ink);clip-path:inset(0 0 100% 0);filter:blur(1.5px);transition:clip-path .9s cubic-bezier(.5,0,.3,1),filter .9s}
+.wg b.on{clip-path:inset(0 0 0 0);filter:none}
+.wg b.x{font-size:14px;color:var(--ink-3);font-weight:500}
+.wcap{min-height:78px;margin:16px 2px 0;font-family:var(--serif);font-size:15px;font-weight:700;line-height:1.65;color:var(--ink)}
+.wcap span{display:block;opacity:0;transform:translateY(4px);transition:all .5s}
+.wcap span.on{opacity:1;transform:none}
+.wcap em{display:block;font-style:normal;font-family:var(--sans);font-size:11.5px;font-weight:500;color:var(--ink-3);margin-top:2px}
+.wsh .gwan{position:absolute;right:14px;bottom:14px;width:52px;height:52px;font-size:17px;opacity:0;transform:scale(2.2) rotate(-12deg)}
+.wsh .gwan.on{animation:stamp .5s cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes stamp{to{opacity:.92;transform:scale(1) rotate(-3deg)}}
+.wfoot{margin-top:14px;text-align:center;font-size:11.5px;color:rgba(244,241,234,.55)}
+
+/* 감정서 */
+.rep{padding:0 14px calc(env(safe-area-inset-bottom,0px) + 110px)}
+.doc{margin-top:14px;background:var(--sheet);border:1px solid var(--rule);padding:22px 18px 20px;position:relative}
+.doc+.doc{margin-top:10px}
+.dh{text-align:center;border-bottom:1px solid var(--ink);padding-bottom:14px}
+.dh small{display:block;font-size:11px;letter-spacing:.34em;color:var(--seal);font-weight:700}
+.dh h2{margin:10px 0 0;font-family:var(--serif);font-size:27px;font-weight:900;letter-spacing:.32em;padding-left:.32em}
+.dh p{margin:6px 0 0;font-size:11.5px;color:var(--ink-3);letter-spacing:.06em}
+.meta{display:grid;grid-template-columns:72px 1fr;margin:0;font-size:13px}
+.meta dt{padding:9px 0;color:var(--ink-3);border-bottom:1px solid var(--rule-2)}
+.meta dd{margin:0;padding:9px 0;border-bottom:1px solid var(--rule-2);color:var(--ink);font-weight:500}
+.meta dd small{color:var(--ink-3);font-weight:400}
+.meta dd.sg{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0}
+.meta dd.sg .gwan{flex:none;width:40px;height:40px;font-size:13.5px;opacity:.92}
+.first{display:flex;gap:12px;align-items:flex-start;margin-top:16px;padding-top:14px;border-top:1px solid var(--rule)}
+.first i{flex:none;width:48px;height:48px;border-radius:50%;background:#000 center/cover}
+.first b{display:block;font-size:11px;color:var(--seal);letter-spacing:.14em;font-weight:700}
+.first p{margin:4px 0 0;font-family:var(--serif);font-size:15.5px;font-weight:700;line-height:1.65}
+.ch{display:flex;align-items:baseline;gap:10px;margin:0 0 14px}
+.ch b{white-space:nowrap}
+.ch em{font-style:normal;font-family:var(--serif);font-size:12px;font-weight:700;color:var(--seal);letter-spacing:.1em;flex:none}
+.ch b{font-family:var(--serif);font-size:18px;font-weight:900}
+.ch span{margin-left:auto;font-size:11px;color:var(--ink-3);text-align:right;line-height:1.45}
+.p{margin:0 0 12px;font-family:var(--serif);font-size:15px;line-height:1.85;color:var(--ink)}
+.p:last-child{margin-bottom:0}
+.p b{font-weight:900}
+sup.fn{line-height:0}
+sup.fn button{border:0;background:none;padding:0 1px;font-family:var(--sans);font-size:10.5px;font-weight:700;color:var(--seal);cursor:pointer}
+ol.notes{margin:14px 0 0;padding:10px 0 0 0;border-top:1px dashed var(--rule);list-style:none;counter-reset:n}
+ol.notes li{position:relative;padding-left:22px;font-size:12px;line-height:1.6;color:var(--ink-3);margin-bottom:4px}
+ol.notes li b{color:var(--ink-2);font-weight:700}
+ol.notes li:before{position:absolute;left:0;top:0;content:attr(data-n);font-weight:700;color:var(--seal)}
+table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixed;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.wk th{font-size:11px;color:var(--ink-3);font-weight:500;padding:8px 0 4px}
+.wk td{border-top:1px solid var(--rule-2);padding:6px 0}
+.wk td+td,.wk th+th{border-left:1px solid var(--rule-2)}
+.wk .tg{font-size:11.5px;color:var(--ink-2)}
+.wk .gz{font-family:var(--serif);font-weight:900;font-size:27px;line-height:1.1}
+.wk .gz small{display:block;font-family:var(--sans);font-size:10px;font-weight:500;color:var(--ink-3);margin-top:2px}
+.wk .me{background:var(--seal-bg)}
+.wk .sm{font-size:11.5px;color:var(--ink-3);font-family:var(--serif)}
+.wk .na{color:var(--ink-3);font-size:13px}
+.capt{margin:8px 0 0;font-size:11.5px;color:var(--ink-3);line-height:1.6}
+.els{display:grid;gap:8px;margin-bottom:14px}
+.el{display:grid;grid-template-columns:34px 1fr 22px;gap:10px;align-items:center;font-size:13px}
+.el b{font-family:var(--serif);font-size:15px;color:var(--c)}
+.el .t{height:8px;background:var(--rule-2);overflow:hidden}
+.el .t i{display:block;height:100%;width:0;background:var(--c);transition:width 1s ease}
+.el span{text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.duw{display:flex;overflow-x:auto;scrollbar-width:none;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-bottom:14px}
+.duw::-webkit-scrollbar{display:none}
+.duw div{flex:none;width:52px;padding:8px 0;text-align:center}
+.duw div+div{border-left:1px solid var(--rule-2)}
+.duw small{display:block;font-size:10.5px;color:var(--ink-3)}
+.duw b{display:block;font-family:var(--serif);font-size:16px;line-height:1.3;margin-top:3px}
+.duw div.now{background:var(--seal-bg)}
+.duw div.now small{color:var(--seal);font-weight:700}
+.yr{display:flex;align-items:flex-end;gap:14px;margin-bottom:14px}
+.yr .sc{font-family:var(--serif);font-size:52px;font-weight:900;line-height:.9;color:var(--seal)}
+.yr .sc small{font-size:15px;color:var(--ink-3);font-weight:500;margin-left:2px}
+.yr .lb{font-size:12.5px;color:var(--ink-2);line-height:1.5;padding-bottom:4px}
+.yr .lb b{display:block;font-family:var(--serif);font-size:17px;color:var(--ink)}
+.ask{margin-top:10px;padding:18px 16px;background:var(--desk);color:#f4f1ea}
+.ask h3{margin:0;font-family:var(--serif);font-size:17px}
+.ask p{margin:6px 0 12px;font-size:13px;color:#cfc6b8;line-height:1.6}
+.ask .qs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.ask .qs button{border:1px solid rgba(244,241,234,.35);background:none;color:#efe7da;font-size:13px;padding:7px 11px;cursor:pointer;border-radius:0}
+.ask .go{background:#f4f1ea;color:var(--desk);margin-top:0}
+.lock{position:relative;overflow:hidden}
+.lock .bl{filter:blur(5px);user-select:none;pointer-events:none}
+.lock .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:linear-gradient(180deg,rgba(255,253,248,.25),rgba(255,253,248,.94) 45%);text-align:center;padding:16px}
+.lock .ov b{font-family:var(--serif);font-size:16px}
+.lock .ov small{font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.toc{margin:0;padding:0;list-style:none}
+.toc li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--rule-2);font-size:13.5px}
+.toc li em{font-style:normal;flex:none;width:44px;color:var(--seal);font-family:var(--serif);font-weight:700}
+.pay{position:absolute;left:0;right:0;bottom:0;z-index:20;padding:30px 16px calc(env(safe-area-inset-bottom,0px) + 14px);background:linear-gradient(180deg,rgba(244,241,234,0),rgba(244,241,234,.95) 22px,var(--paper) 34px);transform:translateY(110%);transition:transform .6s cubic-bezier(.2,.8,.2,1);visibility:hidden}
+.pay.on{transform:none;visibility:visible}
+.pay .go{margin-top:0}
+.pay .pr{text-align:center;font-size:12.5px;color:var(--ink-2);margin-bottom:8px}
+.pay .pr s{color:var(--ink-3)}
+.pay .pr b{color:var(--seal);font-size:14px}
+.pay.done .pr{display:none}
+.note{font-size:11.5px;color:var(--ink-3);line-height:1.6;margin:14px 4px 0}
+.sheet{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(23,21,18,.38);opacity:0;pointer-events:none;transition:opacity .25s}
+.sheet.on{opacity:1;pointer-events:auto}
+.sheet .box{background:var(--sheet);padding:20px 20px calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateY(20px);transition:transform .25s}
+.sheet.on .box{transform:none}
+.sheet .box b{display:block;font-family:var(--serif);font-size:19px;margin-bottom:8px}
+.sheet .box p{margin:0 0 14px;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.toast{position:absolute;left:50%;bottom:120px;transform:translate(-50%,8px);z-index:60;background:var(--ink);color:var(--paper);font-size:13.5px;padding:10px 16px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+#prem[hidden]{display:none}
+@media print{
+  body{background:#fff;overflow:visible;height:auto;display:block}
+  .stage{max-width:none;height:auto;overflow:visible;box-shadow:none;background:#fff}
+  .scr{position:static;opacity:1;overflow:visible}
+  #sIntro,#sWrite,.top,.pay,.ask,.lock,.sheet,.toast,.noprint,.pcNav,.pcSide,.ak-wrap{display:none!important}
+  .doc{border:0;break-inside:avoid-page;page-break-inside:avoid}
+  .rep{padding:0}
+}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+
+  <div class="scr on" id="sIntro">
+    <div class="top"><button class="back" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>명리관 · 정통 감정</b><span class="gwan gw"><i>素</i><i>軒</i></span></div>
+    <div class="intro">
+      <div class="por" style="background-image:url('img/soheon.jpg')"><span class="gwan"><i>素</i><i>軒</i></span></div>
+      <div class="plate"><small>명리관 감정인</small><b>소헌 선생 · 素軒</b></div>
+      <h1>소헌 선생의 2027 명리 감정서</h1>
+      <p class="lead">만세력으로 원국을 세우고, 대운과 세운과 월운을<br>근거로 하나씩 짚어 쓰는 문서형 감정서입니다.</p>
+      <p class="say">사주는 정답이 아니라 지도일세.<br>길은 자네가 고르는 거고.<i>소헌 선생</i></p>
+      <div class="how"><div><b>원국을 세우고</b><small>절입 시각까지<br>분 단위로</small></div><div><b>근거를 달고</b><small>문장마다 각주로<br>원국 글자를 짚음</small></div><div><b>감정서로 남김</b><small>관인 찍힌<br>문서 그대로 저장</small></div></div>
+      <div class="form">
+        <label for="nm">의뢰인 이름</label>
+        <input class="field" id="nm" maxlength="10" value="" placeholder="이름 (예: 김은주)">
+        <div class="row2" style="margin-top:12px">
+          <div><label style="margin-top:0">성별</label><div class="seg" id="gSeg"><button class="on" data-v="f">여성</button><button data-v="m">남성</button></div></div>
+          <div><label style="margin-top:0">달력</label><div class="seg" id="cSeg"><button class="on" data-v="s">양력</button><button data-v="l">음력</button></div></div>
+        </div>
+        <label>생년월일</label>
+        <div class="grid3"><select id="by" aria-label="년"></select><select id="bm" aria-label="월"></select><select id="bd" aria-label="일"></select></div>
+        <label class="leap off" id="leapL"><input type="checkbox" id="leap" disabled> 윤달이에요</label>
+        <label>태어난 시</label>
+        <select id="bh" aria-label="태어난 시"></select>
+        <button class="go" id="goBtn">감정 의뢰하기</button>
+      </div>
+      <p class="fine">절입 시각은 천문 계산으로 분 단위까지 반영합니다.<br>같은 생년월일시는 언제 보아도 같은 원국이 나옵니다.</p>
+      <p class="ailbl">소헌 선생은 AI로 만든 가상의 명리가입니다</p>
+    </div>
+  </div>
+
+  <div class="scr write" id="sWrite">
+    <div class="wsh">
+      <h2>원국을 세우는 중</h2>
+      <p class="who" id="wWho"></p>
+      <div class="wg" id="wGrid" data-hj="0"></div>
+      <div class="wcap" id="wCap"></div>
+      <span class="gwan" id="wSeal"><i>素</i><i>軒</i></span>
+    </div>
+    <p class="wfoot">만세력 · 절입 시각 · 대운을 차례로 계산하고 있어요</p>
+  </div>
+
+  <div class="scr" id="sRep">
+    <div class="top"><button class="back" id="back2" aria-label="다시 입력"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>2027 명리 감정서</b><span class="gwan gw"><i>素</i><i>軒</i></span></div>
+    <div class="rep" id="rep">
+      <div class="doc" id="dHead"></div>
+      <div class="doc" id="d1"></div>
+      <div class="doc" id="d2"></div>
+      <div class="doc" id="d3"></div>
+      <div class="doc" id="d4"></div>
+      <div class="ask noprint"><h3>소헌 선생에게 묻기</h3><p>감정서를 읽다 걸리는 대목이 있으면 물어보게. 자네 원국의 근거를 짚어 가며 답하겠네. 세 번까지 물을 수 있어요.</p><div class="qs"><button data-q="올해 이직을 해도 되겠습니까">올해 이직을 해도 되겠습니까</button><button data-q="돈은 언제 모이겠습니까">돈은 언제 모이겠습니까</button><button data-q="조심할 달은 언제입니까">조심할 달은 언제입니까</button></div><button class="go" id="askBtn">소헌 선생에게 묻기</button></div>
+      <div class="doc lock noprint" id="dLock"><div class="bl"><div class="ch"><em>제5장</em><b>열두 달 월운 감정</b></div><p class="p">입춘 달 임인월은 자네에게 편인과 정인이 함께 드는 달일세. 문서와 배움의 기운이 앞서니 계약서와 자격 준비는 이달에 시작하게. 경칩 달은…</p><p class="p">재물의 기운은 하반기에 모이네. 입추 달에…</p></div>
+        <div class="ov"><b>감정서 전체 · 제5장부터 제9장</b><small>열두 달 월운 · 영역별 감정 · 소헌 선생의 권고<br>길일표 · 맺음말 · 관인 찍힌 감정서 저장</small></div></div>
+      <div id="prem" hidden></div>
+      <p class="note" id="aiNote">소헌 선생은 AI로 만든 가상의 명리가입니다. 만세력(절기 · 음력)은 실제 계산값이며, 감정 문장은 명리 규칙에 따라 구성됩니다. 자시(23:30~01:29) 출생은 당일 기준으로 계산합니다. 명리 전문가 감수 전 원고입니다.</p>
+    </div>
+  </div>
+
+  <div class="pay" id="pay"><div class="pr"><s>29,000원</s> <b>19,900원</b> · 2027 신년 한정</div><button class="go" id="payBtn">감정서 전체 열기</button></div>
+  <div class="sheet" id="sheet"><div class="box"><b id="shT"></b><p id="shP"></p><button class="go" id="shX" style="margin-top:0">알겠어요</button></div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script src="menuintro.js"></script>
+<script src="ask.js"></script>
+<script src="saju_x.js"></script>
+<script src="prem2_core.js"></script>
+<script src="premai.js"></script>
+<script src="myeongri_prem.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const S_=window.Saju, X=window.SajuX;
+const {GAN,JI,GAN_K,JI_K,EL,EL_K,BR_EL,HID,stEl}=S_;
+const ELC=['var(--wood)','var(--fire)','var(--earth)','var(--metal)','var(--water)'];
+const HOURS=['자시 (23:30~01:29)','축시 (01:30~03:29)','인시 (03:30~05:29)','묘시 (05:30~07:29)','진시 (07:30~09:29)','사시 (09:30~11:29)','오시 (11:30~13:29)','미시 (13:30~15:29)','신시 (15:30~17:29)','유시 (17:30~19:29)','술시 (19:30~21:29)','해시 (21:30~23:29)'];
+const TERMS=['소한','입춘','경칩','청명','입하','망종','소서','입추','백로','한로','입동','대설'];
+let gender='f', cal='s';
+(function(){
+  const by=$('by'),bm=$('bm'),bd=$('bd'),bh=$('bh');
+  for(let y=2008;y>=1955;y--) by.add(new Option(y+'년',y,false,y===1996));
+  for(let m=1;m<=12;m++) bm.add(new Option(m+'월',m,false,m===5));
+  const fill=()=>{ const n=cal==='s'?new Date(+by.value,+bm.value,0).getDate():30, cur=+bd.value||14; bd.innerHTML=''; for(let d=1;d<=n;d++) bd.add(new Option(d+'일',d,false,d===Math.min(cur,n)));
+    const can=cal==='l'&&S_.hasLeap(+by.value,+bm.value); $('leap').disabled=!can; if(!can) $('leap').checked=false; $('leapL').classList.toggle('off',!can); };
+  fill(); by.onchange=fill; bm.onchange=fill;
+  bh.add(new Option('모름','x')); HOURS.forEach((h,i)=>bh.add(new Option(h,i,false,i===6)));
+  const seg=(id,cb)=>$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{ $(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); cb(b.dataset.v); });
+  seg('gSeg',v=>gender=v); seg('cSeg',v=>{ cal=v; fill(); });
+})();
+(function(){ let me=null; try{ me=JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){}
+  if(me&&me.y){ const seg=(id,v)=>{ const s=$(id); if(!s||v==null) return; const b=s.querySelector(`[data-v="${v}"]`); if(b) b.click(); };
+    const set=(id,v)=>{ const e=$(id); if(e&&v!=null){ e.value=v; if(e.onchange) e.onchange(); } };
+    seg('gSeg',me.g); seg('cSeg',me.cal); set('by',me.y); set('bm',me.m); set('bd',me.d); set('bh',me.h==null?'x':me.h); if(me.name) $('nm').value=me.name; }
+  $('goBtn').addEventListener('click',()=>{ try{ const old=JSON.parse(sessionStorage.getItem('me')||'null')||{}, on=id=>{ const b=$(id).querySelector('.on'); return b?b.dataset.v:undefined; };
+    const o={y:+$('by').value,m:+$('bm').value,d:+$('bd').value,h:$('bh').value==='x'?null:+$('bh').value,g:on('gSeg'),cal:on('cSeg')}; if($('nm').value.trim()) o.name=$('nm').value.trim();
+    sessionStorage.setItem('me',JSON.stringify(Object.assign(old,o))); }catch(e){} },true);
+})();
+function show(id){ ['sIntro','sWrite','sRep'].forEach(s=>$(s).classList.toggle('on',s===id)); $('pay').classList.toggle('on',id==='sRep'); }
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2000); }
+const bt=w=>{ const c=w.charCodeAt(w.length-1)-0xAC00; return c>=0&&c<11172&&c%28>0; };
+const jo=(w,a,b)=>w+(bt(w)?a:b);
+
+/* ---------- 각주 ---------- */
+const GL={
+ '비견':'나와 같은 오행 · 같은 음양. 동료, 친구, 경쟁자, 나를 지탱하는 힘.','겁재':'나와 같은 오행 · 다른 음양. 경쟁, 승부욕, 나눠야 하는 돈.',
+ '식신':'내가 낳는 오행 · 같은 음양. 재능, 먹고 사는 일, 여유와 표현.','상관':'내가 낳는 오행 · 다른 음양. 말솜씨, 창의, 기존 질서와의 부딪힘.',
+ '편재':'내가 이기는 오행 · 같은 음양. 큰돈, 사업, 활동 범위, 유동적인 재물.','정재':'내가 이기는 오행 · 다른 음양. 월급, 저축, 성실하게 모으는 재물.',
+ '편관':'나를 이기는 오행 · 같은 음양. 압박, 책임, 권위, 돌파해야 할 과제.','정관':'나를 이기는 오행 · 다른 음양. 명예, 직장, 규칙, 인정받는 자리.',
+ '편인':'나를 낳는 오행 · 같은 음양. 직관, 특수한 공부, 혼자 파고드는 힘.','정인':'나를 낳는 오행 · 다른 음양. 학업, 문서, 어른의 도움, 안정.',
+ '신강':'나(일간)를 돕는 기운이 사주에 많은 상태. 밖으로 쓰는 기운(식상 · 재성 · 관성)이 들어올 때 좋다.','신약':'나(일간)를 돕는 기운이 적은 상태. 나를 돕는 기운(인성 · 비겁)이 들어올 때 힘을 얻는다.',
+ '합':'두 글자가 서로 끌어당겨 묶이는 관계. 결속, 인연, 협력이 생긴다.','충':'두 글자가 정면으로 부딪히는 관계. 변동, 이동, 갈등, 새 출발.','형':'丑 · 戌 · 未 / 寅 · 巳 · 申처럼 서로 견제하는 관계. 문서 · 법 · 건강에서 조심할 일.',
+ '대운':'10년 단위로 바뀌는 큰 흐름. 태어난 달의 기둥에서 순서대로 이어진다.','세운':'그해의 간지. 2027년은 정미(丁未), 붉은 양의 해.','월지':'태어난 달의 지지. 사주에서 가장 힘이 센 자리이자 사회 · 부모의 자리.','일지':'태어난 날의 지지. 배우자와 가장 가까운 관계의 자리.','일간':'태어난 날의 천간. 사주에서 "나" 자신.',
+ '절입':'달이 바뀌는 기준 시각. 사주의 달은 음력 1일이 아니라 절기(입춘 · 경칩 …)가 드는 순간에 바뀐다.','운성':'12운성. 일간이 그 지지에서 얼마나 힘을 쓰는지를 사람의 한살이(장생 · 건록 · 제왕 · 쇠 · 병 …)에 빗댄 것.','조후':'계절의 온도와 습도를 맞추는 일. 여름생은 물, 겨울생은 불이 균형을 잡아 준다.','지장간':'지지 속에 숨은 천간. 겉으로 드러나지 않는 기운과 사람.'};
+let FN=[];
+function fn(k,extra){ FN.push({k,t:extra||''}); const n=FN.length; return `<sup class="fn"><button type="button" data-n="${n}">${n}</button></sup>`; }
+function notes(){ const h=`<ol class="notes">${FN.map((x,i)=>`<li data-n="${i+1}"><b>${x.k}</b> ${x.t?x.t+' ':''}${GL[x.k]||''}</li>`).join('')}</ol>`; return h; }
+let FNALL={}; let FNSEQ=0;
+document.addEventListener('click',e=>{ const b=e.target.closest('sup.fn button'); if(!b) return; const li=b.closest('.doc')&&b.closest('.doc').querySelector(`ol.notes li[data-n="${b.dataset.n}"]`); if(!li) return; $('shT').textContent='각주 '+b.dataset.n; $('shP').textContent=li.textContent.replace(/^\d+/,''); $('sheet').classList.add('on'); });
+$('shX').onclick=()=>$('sheet').classList.remove('on'); $('sheet').onclick=e=>{ if(e.target.id==='sheet') $('sheet').classList.remove('on'); };
+
+/* ---------- 하게체 해석표 ---------- */
+const GROUP=['비겁','식상','재성','관성','인성'];
+const YEAR_TX={
+ 0:['자네 편이 늘어나는 해일세. 뜻 맞는 사람과 힘을 합치면 혼자일 때보다 멀리 가네.','경쟁자가 늘어나는 해일세. 돈 거래와 동업은 문서로 선을 그어 두게.'],
+ 1:['말과 재주가 밖으로 드러나는 해일세. 기획하고 만들고 표현하는 일에서 좋은 소리를 듣겠네.','말이 앞서기 쉬운 해일세. 윗사람과 부딪히는 일, 몸을 혹사하는 일을 조심하게.'],
+ 2:['움직인 만큼 돈이 붙는 해일세. 판을 넓히는 일에 기회가 들어오네.','들어오는 돈만큼 나가는 돈도 커지는 해일세. 큰 지출과 보증, 투자는 한 번 더 따져 보게.'],
+ 3:['자리와 이름이 생기는 해일세. 승진, 합격, 계약처럼 인정받는 일이 따르네.','책임이 무거워지는 해일세. 맡는 일이 늘어나니 몸과 마음의 여유부터 챙기게.'],
+ 4:['배우고 채우는 해일세. 자격, 공부, 문서의 운이 좋고 도와주는 어른이 나타나네.','생각이 많아 실행이 늦어지는 해일세. 계획은 줄이고 한 가지를 끝까지 하게.']};
+const DU_TX={0:'나를 세우고 사람을 모으는 10년',1:'재능을 밖으로 펼치는 10년',2:'재물과 활동 무대를 넓히는 10년',3:'자리와 책임이 커지는 10년',4:'배우고 실력을 쌓는 10년'};
+const FIRST=['문이 열리는 해일세. 지도에 길이 넓게 나 있으니, 걸어 들어가기만 하면 되네.','크게 흔들릴 해는 아닐세. 지금 선 자리를 단단히 다지는 데 쓰게.','바람이 센 해일세. 길을 잃을 해는 아니니, 걸음을 늦추고 지도를 자주 펴 보게.'];
+
+/* ---------- 원국을 세우는 의식 ---------- */
+function birthTerm(sol,h){ try{ const di=S_.dayIdx(sol.y,sol.m,sol.d), mins=di*1440+(h==null?720:h*120);
+  let best=null; [sol.y-1,sol.y].forEach(yy=>{ const J=MANSE.jie[yy]; if(!J) return; J.forEach((t,i)=>{ if(t<=mins&&(!best||t>best.t)) best={t,i}; }); });
+  if(!best) return null; const d=S_.fromIdx(Math.floor(best.t/1440)), mm=best.t%1440; return {name:TERMS[best.i],m:d.m,d:d.d,y:d.y,hh:Math.floor(mm/60),mi:mm%60}; }catch(e){ return null; } }
+async function ritual(name,sol,h,P,DU){
+  const cols=[['시주',P.h],['일주',P.d],['월주',P.m],['년주',P.y]];
+  $('wWho').textContent=`의뢰인 ${name} · 양력 ${sol.y}.${sol.m}.${sol.d} · ${h==null?'시 모름':HOURS[h].split(' ')[0]}`;
+  $('wGrid').innerHTML=cols.map(([n,p],i)=>`<div><small>${n}</small><b id="ws${i}" class="${p?'':'x'}">${p?GAN[p[0]]:'모름'}</b><b id="wb${i}" class="${p?'':'x'}">${p?JI[p[1]]:''}</b></div>`).join('');
+  $('wCap').innerHTML=''; $('wSeal').classList.remove('on'); show('sWrite');
+  const cap=(t,sub)=>{ $('wCap').innerHTML=`<span>${t}${sub?`<em>${sub}</em>`:''}</span>`; requestAnimationFrame(()=>requestAnimationFrame(()=>{ const s=$('wCap').querySelector('span'); if(s) s.classList.add('on'); })); };
+  const ink=async i=>{ $('ws'+i).classList.add('on'); await wait(380); $('wb'+i).classList.add('on'); };
+  const T=birthTerm(sol,h);
+  await wait(500);
+  cap(`년주부터 세우네. ${GAN[P.y[0]]}${JI[P.y[1]]}년일세.`,'해는 음력 설이 아니라 입춘에서 바뀝니다'); await ink(3); await wait(1100);
+  cap(`달은 절입 시각을 보아야 하네. ${GAN[P.m[0]]}${JI[P.m[1]]}월일세.`,T?`${T.name} ${T.y}년 ${T.m}월 ${T.d}일 ${String(T.hh).padStart(2,'0')}:${String(T.mi).padStart(2,'0')} 이후 출생`:'절기 시각 기준'); await ink(2); await wait(1300);
+  cap(`날은 ${GAN[P.d[0]]}${JI[P.d[1]]}일. 이 ${GAN_K[P.d[0]]}(${GAN[P.d[0]]}) 자리가 바로 자네일세.`,'일간, 사주에서 나 자신'); await ink(1); await wait(1200);
+  if(P.h){ cap(`시는 ${GAN[P.h[0]]}${JI[P.h[1]]}시로 세우네.`,'자시는 당일 기준'); await ink(0); }
+  else cap('태어난 시를 모르니 시주는 비워 두겠네.','시주 없이 여섯 글자로 감정합니다');
+  await wait(1100);
+  cap(`대운은 ${DU.fwd?'순행':'역행'}으로 ${DU.start}세부터 열리네.`,'10년마다 바뀌는 큰 흐름'); await wait(1200);
+  $('wSeal').classList.add('on'); try{ navigator.vibrate&&navigator.vibrate(18); }catch(e){} await wait(900);
+}
+
+/* ---------- 감정서 ---------- */
+let ASKU=null;
+$('goBtn').onclick=async()=>{
+  let y=+$('by').value,m=+$('bm').value,d=+$('bd').value; const h=$('bh').value==='x'?null:+$('bh').value;
+  let solar={y,m,d}; if(cal==='l'){ solar=S_.lunarToSolar(y,m,d,$('leap').checked); if(!solar){ toast('그 음력 날짜는 없는 날이에요'); return; } }
+  const name=($('nm').value.trim()||'은주');
+  const P=S_.pillars(solar.y,solar.m,solar.d,h), DU=S_.daeun(P,gender==='m');
+  await ritual(name,solar,h,P,DU);
+  render(name,solar,h,{y,m,d});
+  show('sRep'); $('sRep').scrollTop=0;
+  requestAnimationFrame(()=>document.querySelectorAll('.el .t i').forEach(i=>i.style.width=i.dataset.w+'%'));
+};
+function docNo(sol,h){ let x=0; for(const c of `${sol.y}${sol.m}${sol.d}${h}${gender}`) x=(x*31+c.charCodeAt(0))%9973; return String(x).padStart(4,'0'); }
+function render(name,sol,h,orig){
+  const nick=/^[가-힣]{3}$/.test(name)?name.slice(1):name, male=gender==='m';
+  ASKU={name,nick,gender,solar:sol,hour:h};
+  const P=S_.pillars(sol.y,sol.m,sol.d,h), dm=P.d[0], st=S_.strength(P);
+  const tgS=s=>S_.tgStem(dm,s), tgB=b=>S_.tgBranch(dm,b);
+  const today=new Date(); const td=`${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()}`;
+  const T=birthTerm(sol,h);
+  /* 머리 */
+  const age27=2027-sol.y+1, DU=S_.daeun(P,male); let cur=null; DU.list.forEach(x=>{ if(age27>=x.age&&age27<x.age+10) cur=x; }); if(!cur) cur=DU.list[0];
+  const YS=3, YB=7; const rS=S_.rel(dm,stEl(YS)), rB=S_.relBranch(dm,YB); const fS=S_.favorable(st,rS), fB=S_.favorable(st,rB);
+  const db=P.d[1], mb=P.m[1]; const curG=S_.rel(dm,stEl(cur.s)), curFav=S_.favorable(st,curG);
+  let ys=58+(fS?12:-6)+(fB?12:-6)+(curFav?4:-2); const ev=[];
+  if(S_.isHap(YB,db)){ ys+=7; ev.push(['hap','일지']); } if(S_.isChung(YB,db)){ ys-=10; ev.push(['chung','일지']); } if(S_.isChung(YB,mb)){ ys-=6; ev.push(['chung','월지']); }
+  if(S_.isHap(YB,mb)&&!S_.isHap(YB,db)){ ys+=4; ev.push(['hap','월지']); }
+  const hy=[P.y[1],P.m[1],P.d[1],P.h&&P.h[1]].some(b=>b!=null&&S_.isHyung(YB,b)); if(hy){ ys-=4; ev.push(['hyung']); }
+  ys=Math.max(38,Math.min(92,Math.round(ys))); const tier=ys>=75?0:ys>=60?1:2;
+  $('dHead').innerHTML=`<div class="dh"><small>明理館 · 2027 丁未年</small><h2>감정서</h2><p>제 2027-${docNo(sol,h)} 호</p></div>
+   <dl class="meta"><dt>의뢰인</dt><dd>${name} <small>· ${male?'남':'여'}</small></dd>
+   <dt>생년월일시</dt><dd>${cal==='l'?`음력 ${orig.y}.${orig.m}.${orig.d}${$('leap').checked?'(윤)':''} → `:''}양력 ${sol.y}.${sol.m}.${sol.d} · ${h==null?'시 모름':HOURS[h].split(' ')[0]}</dd>
+   <dt>감정 범위</dt><dd>2027년 입춘부터 2028년 입춘 전날까지</dd>
+   <dt>감정일</dt><dd>${td}</dd>
+   <dt>감정인</dt><dd class="sg"><span>소헌 선생 <small>· AI로 만든 가상의 명리가</small></span><span class="gwan"><i>素</i><i>軒</i></span></dd></dl>
+   <div class="first"><i style="background-image:url('img/soheon_av.jpg')"></i><div><b>소헌 선생의 첫마디</b><p>자네 2027년은 ${FIRST[tier]}</p></div></div>`;
+  /* 제1장 원국 */
+  FN=[]; const cols=[['시주',P.h],['일주',P.d],['월주',P.m],['년주',P.y]];
+  const gzc=(c,e,k)=>`<div class="gz" style="color:${ELC[e]}">${c}<small>${k}${EL_K[e]}</small></div>`;
+  let t=`<tr>${cols.map(c=>`<th>${c[0]}</th>`).join('')}</tr>
+   <tr>${cols.map((c,i)=>`<td class="tg">${c[1]?(i===1?'일간':tgS(c[1][0])):'-'}</td>`).join('')}</tr>
+   <tr>${cols.map((c,i)=>`<td class="${i===1?'me':''}">${c[1]?gzc(GAN[c[1][0]],stEl(c[1][0]),GAN_K[c[1][0]]):'<span class="na">모름</span>'}</td>`).join('')}</tr>
+   <tr>${cols.map(c=>`<td>${c[1]?gzc(JI[c[1][1]],BR_EL[c[1][1]],JI_K[c[1][1]]):'<span class="na">모름</span>'}</td>`).join('')}</tr>
+   <tr>${cols.map(c=>`<td class="tg">${c[1]?tgB(c[1][1]):'-'}</td>`).join('')}</tr>
+   <tr>${cols.map(c=>`<td class="sm">${c[1]?HID[c[1][1]].map(x=>GAN[x]).join(' '):'-'}</td>`).join('')}</tr>
+   <tr>${cols.map(c=>`<td class="tg">${c[1]?X.unseong(dm,c[1][1]):'-'}</td>`).join('')}</tr>`;
+  const p1=`자네 원국일세. 붉게 칠한 칸의 ${GAN_K[dm]}(${GAN[dm]})${bt(GAN_K[dm])?'이':'가'} 자네 자신이고${fn('일간')}, 나머지 일곱 글자는 자네를 둘러싼 사람과 일과 때를 가리키네. 달의 기둥은 ${T?`${T.name}(${T.y}.${T.m}.${T.d} ${String(T.hh).padStart(2,'0')}:${String(T.mi).padStart(2,'0')})`:'절기'}을 기준으로 세웠네${fn('절입')}.`;
+  $('d1').innerHTML=`<div class="ch"><em>제1장</em><b>원국</b><span>위부터 천간 십성 · 천간 · 지지 · 지지 십성 · 지장간 · 운성</span></div><table class="wk" data-hj="0">${t}</table><p class="capt">지장간${fn('지장간')}은 지지 속에 숨은 천간, 운성${fn('운성')}은 일간이 그 자리에서 쓰는 힘일세.</p><p class="p" style="margin-top:12px">${p1}</p>${notes()}`;
+  /* 제2장 오행과 강약 */
+  FN=[]; const cnt=S_.elCount(P), mx=Math.max(...cnt,1), weak=cnt.indexOf(Math.min(...cnt)), strongEl=cnt.indexOf(Math.max(...cnt));
+  const favG=st.strong?'식상 · 재성 · 관성':'인성 · 비겁'; const jh=X.johu(P);
+  $('d2').innerHTML=`<div class="ch"><em>제2장</em><b>오행과 강약</b></div><div class="els">${cnt.map((c,i)=>`<div class="el" style="--c:${ELC[i]}"><b>${EL[i]}</b><div class="t"><i data-w="${Math.max(c/mx*100,3)}"></i></div><span>${c}</span></div>`).join('')}</div>
+   <p class="p">자네 일간 <b>${GAN[dm]}${EL[stEl(dm)]}</b>은 ${EL[strongEl]} 기운이 가장 많고 ${EL[weak]} 기운이 가장 적네. 나를 돕는 글자의 비중으로 보면 <b>${st.label}</b>한 사주일세${fn(st.strong?'신강':'신약',`일간을 뺀 ${st.of}글자 중 나를 돕는 글자 ${st.n}개, 월지에 가중치를 두어 판단.`)}. 그러니 <b>${favG}</b>의 기운이 들어오는 해와 달에 자네가 힘을 쓰기 쉽네.</p>
+   ${jh&&jh.need!=null?`<p class="p">계절로 보면 자네는 ${jh.season}에 태어났네. ${jh.why.replace(/다$/,'네')}${fn('조후')}. 올해 처방에서 이 점을 함께 보겠네.</p>`:''}
+   <p class="p">${EL[weak]} 기운이 가장 모자라니, 오방사주에서 말하는 자네의 빈칸은 <b>${EL[weak]}</b>일세. 빈칸은 모자람이 아니라 채울 자리이니 마음 쓸 일은 아니네.</p>${notes()}`;
+  /* 제3장 대운 속의 2027 */
+  FN=[];
+  $('d3').innerHTML=`<div class="ch"><em>제3장</em><b>대운 속의 2027</b><span>${DU.fwd?'순행':'역행'} · ${DU.start}세 시작</span></div>
+   <div class="duw">${DU.list.map(x=>{ const now=x===cur; return `<div class="${now?'now':''}"><small>${x.age}세</small><b>${GAN[x.s]}<br>${JI[x.b]}</b></div>`; }).join('')}</div>
+   <p class="p">2027년 자네는 한국 나이 ${age27}세로, <b>${GAN[cur.s]}${JI[cur.b]} 대운</b>(${cur.age}~${cur.age+9}세)을 지나고 있네${fn('대운')}. ${GROUP[curG]}의 10년, 곧 <b>${DU_TX[curG]}</b>일세${fn(S_.tgStem(dm,cur.s))}. ${curFav?'큰 흐름이 사주를 받쳐 주니, 올해 기운을 마음껏 써도 좋은 때일세.':'큰 흐름이 사주에 버거운 때라, 올해는 속도보다 방향을 챙기는 편이 낫네.'}</p>${age27===cur.age+9?`<p class="p">올해가 이 대운의 마지막 해일세. 문턱 앞에 선 해라 마음이 들썩이기 쉬우니, 큰 결정은 가을에 굳히고 실행은 이듬해에 하게.</p>`:''}${notes()}`;
+  /* 제4장 2027 세운 총평 */
+  FN=[]; let yh=`<p class="p"><b>상반기</b>는 천간 정(丁)의 기운이 앞에 서네. 자네에게 정(丁)은 ${S_.tgStem(dm,YS)}일세${fn(S_.tgStem(dm,YS))}. ${YEAR_TX[rS][fS?0:1]}</p>`;
+  yh+=`<p class="p"><b>하반기</b>는 지지 미(未)가 살림의 바탕을 움직이네. 자네에게 미(未)는 ${S_.tgBranch(dm,YB)}일세${fn('세운')}. ${YEAR_TX[rB][fB?0:1]}</p>`;
+  ev.forEach(e=>{ if(e[0]==='hap'&&e[1]==='일지') yh+=`<p class="p">올해의 미(未)가 일지 ${JI[db]}${jo(JI[db],'과','와')} 합을 이루네${fn('합')}${fn('일지')}. 가까운 사람, 특히 배우자나 연인 자리에 좋은 결속이 생기네.</p>`;
+    if(e[0]==='chung'&&e[1]==='일지') yh+=`<p class="p">올해의 미(未)가 일지 ${JI[db]}${jo(JI[db],'과','와')} 충을 이루네${fn('충')}${fn('일지')}. 사는 곳이나 가까운 관계에 변동이 생기기 쉬우니 큰 결정은 서두르지 말게.</p>`;
+    if(e[0]==='chung'&&e[1]==='월지') yh+=`<p class="p">월지 ${JI[mb]}${jo(JI[mb],'과','와')}도 충이 걸리네${fn('월지')}. 일터와 집안 환경이 바뀌는 흐름이니 이직과 이사는 계획을 세워 움직이게.</p>`;
+    if(e[0]==='hap'&&e[1]==='월지') yh+=`<p class="p">월지 ${JI[mb]}${jo(JI[mb],'과','와')} 합이 드네${fn('합')}. 일터와 윗사람 쪽에서 손을 내미는 일이 생기겠네.</p>`;
+    if(e[0]==='hyung') yh+=`<p class="p">원국에 축(丑)이나 술(戌)이 있어 올해 미(未)와 형이 걸리네${fn('형')}. 서류와 계약, 법에 닿는 일은 두 번 확인하게.</p>`; });
+  $('d4').innerHTML=`<div class="ch"><em>제4장</em><b>2027 세운 총평</b></div><div class="yr"><div class="sc">${ys}<small>/100</small></div><div class="lb"><b>${['문이 열리는 해','다지고 쌓는 해','바람이 센 해'][tier]}</b>정미(丁未)년 · ${S_.tgStem(dm,YS)} · ${S_.tgBranch(dm,YB)}의 해</div></div>${yh}${notes()}`;
+  window.SNF={name,nick,male,P,dm,st,cnt,ys,tier,cur,curFav,inp:{y:sol.y,m:sol.m,d:sol.d,h,g:gender},docNo:docNo(sol,h),td};
+  const pr=$('prem'); pr.hidden=true; pr.innerHTML=''; $('dLock').hidden=false; $('pay').classList.remove('done'); $('payBtn').textContent='감정서 전체 열기';
+}
+function openAsk(first){ if(!window.AskChat||!ASKU) return; AskChat.open({persona:'soheon',theme:'paper',root:$('stage'),avatar:'img/soheon_av.jpg',user:ASKU,first,tier:'default'}); }
+$('askBtn').onclick=()=>openAsk();
+document.querySelectorAll('.ask .qs button').forEach(b=>b.onclick=()=>openAsk(b.dataset.q));
+$('payBtn').onclick=()=>{ const pr=$('prem'); if(!$('pay').classList.contains('done')){ if(!window.MRPrem) return; MRPrem.open(); $('pay').classList.add('done'); $('payBtn').textContent='감정서 이어서 보기'; toast('감정서 전체를 열었어요'); } pr.scrollIntoView({behavior:'smooth',block:'start'}); };
+$('back2').onclick=()=>show('sIntro');
+$('back1').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
+</script>
+<script>
+MenuIntro.play({src:'v/menu/soheon.mp4',poster:'img/soheon.jpg',who:'명리관 소헌 선생 · 素軒',title:'2027 명리 감정서',end:7.0,subs:[[0.6,'어서 오시게.'],[2.5,'사주는 정답이 아니라 지도일세.'],[5.3,'길은 자네가 고르는 거고.']]});
+</script>
+<script src="archive.js"></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
+</body>
+</html>

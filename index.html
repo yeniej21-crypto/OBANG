@@ -868,6 +868,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <button class="it" data-m="lifetime.html">평생 사주</button>
     <button class="it" data-m="chat.html">자유 상담</button>
     <button class="it" data-m="sinnyeon.html">2027 신년운세</button>
+    <button class="it" data-m="myeongri.html">2027 명리 감정서</button>
     <button class="it" data-m="peach.html">English · Peach Blossom</button>
     <button class="it" data-m="arch">보관함<small id="hMenuArch"></small></button>
   </div></div>
@@ -1001,6 +1002,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="sh"><small>정통</small><b>올해 내 사주, 제대로 한번 볼까</b></div>
       <div class="hRow">
         <div class="pc" data-kv="halmae" data-vid="v/poster/halmae.mp4" role="button" tabindex="0" style="background-image:url('img/halmae.jpg')"><div class="ct"><span class="yr">2027</span><span class="tt">신년 운세</span><span class="st">삼신 할매가 열두 달을 읽는다</span></div></div>
+        <div class="pc" id="cMyeongri" role="button" tabindex="0" style="background-image:url('img/soheon.jpg')"><div class="ct"><span class="yr">2027</span><span class="tt">명리 감정서</span><span class="st">소헌 선생이 근거를 짚어 쓰는 감정서</span></div></div>
         <div class="pc" id="cTaegil" data-vid="v/poster/taegil.mp4" role="button" tabindex="0" style="background-image:url('img/taegil.jpg')"><div class="ct"><span class="tt">택일</span><span class="st">이사·계약·고백, 그날이 길한지</span></div></div>
         <div class="pc" id="cLife" data-vid="v/poster/lifetime.mp4" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><div class="ct"><span class="tt">평생 사주</span><span class="st">대운 10년 흐름과 타고난 그릇</span></div></div>
         <div class="pc lockc" role="button" tabindex="0" style="background-image:url('img/tojeong.jpg')"><span class="chip">준비 중</span><div class="ct"><span class="tt">토정비결</span><span class="st">144괘로 읽는 한 해</span></div></div>
@@ -1552,7 +1554,7 @@ const goPage=u=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){}
 };
 window.addEventListener('pageshow',e=>{ if(e.persisted){ document.querySelectorAll('.mi').forEach(x=>x.remove()); if(window._miLv!=null) try{ bgm(window._miLv,1); }catch(_){} } });
 setTimeout(()=>{ ['v/menu/today.mp4','v/menu/career.mp4','v/menu/taegil.mp4','v/menu/gunghap.mp4'].forEach(h=>{ const l=document.createElement('link'); l.rel='prefetch'; l.as='video'; l.href=h; document.head.appendChild(l); }); },4000);
-$('cTaegil').onclick=()=>goPage('taegil.html');
+$('cTaegil').onclick=()=>goPage('taegil.html'); $('cMyeongri').onclick=()=>goPage('myeongri.html');
 $('hFort').onclick=()=>goPage('today.html'); $('tdH').onclick=()=>goPage('today.html');
 $('cToday').onclick=()=>goPage('today.html');
 $('cCareer').onclick=()=>goPage('career.html');
@@ -1644,7 +1646,7 @@ $('ppgMm').innerHTML=['wood','fire','earth','metal','water'].map(k=>`<i style="b
     v.addEventListener('error',()=>{ v.remove(); pc._v=null; });
     pc.insertBefore(v,pc.firstChild); pc._v=v; io.observe(pc); }); })();
 /* ---------- 보관함 (archive.js가 각 메뉴 결과를 모아 둠) ---------- */
-const AF={fort:['today','sinnyeon','lifetime','taegil'],love:['dohwa','gunghap','obgh'],work:['career'],card:['tarot'],me:['avatar'],free:['free','ppopgi','bujeok','dangbeon','myodang']};
+const AF={fort:['today','sinnyeon','myeongri','lifetime','taegil'],love:['dohwa','gunghap','obgh'],work:['career'],card:['tarot'],me:['avatar'],free:['free','ppopgi','bujeok','dangbeon','myodang']};
 let archF='all', archCur=null;
 const aEsc=t=>String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const aAgo=t=>{ const d=(Date.now()-t)/1000; if(d<60) return '방금'; if(d<3600) return Math.floor(d/60)+'분 전'; if(d<86400) return Math.floor(d/3600)+'시간 전'; return Math.floor(d/86400)+'일 전'; };

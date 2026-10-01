@@ -53,6 +53,7 @@
     'taegil.html':{src:'v/menu/taegil.mp4',poster:'img/taegil.jpg',who:'월하 · 擇日',title:'택일',subs:[[0.9,'그날…'],[2.2,'해도 되는 날일까.'],[4.6,'날은 내가 골라줄게.']]},
     'gunghap.html':{src:'v/menu/gunghap.mp4',poster:'img/taeo/wink.jpg',who:'태오 · 桃花',title:'도화 궁합',subs:[[1.0,'그 사람 생일 알아?'],[3.8,'누나한테 끌리는지 봐줄게.']]},
     'tarot.html':{src:'v/tarot/intro.mp4',poster:'img/tarot/mujin.jpg',who:'무진 · 한밤의 카드방',title:'무진의 타로',subs:[[0.3,'앉아요.'],[2.3,'…카드한테 물어보고 싶은 거,'],[5.1,'하나 있죠?']]},
+    'myeongri.html':{src:'v/menu/soheon.mp4',poster:'img/soheon.jpg',who:'명리관 소헌 선생 · 素軒',title:'2027 명리 감정서',end:7.0,subs:[[0.6,'어서 오시게.'],[2.5,'사주는 정답이 아니라 지도일세.'],[5.3,'길은 자네가 고르는 거고.']]},
     'sinnyeon.html':{src:'v/halmae.mp4',poster:'img/halmae.jpg',who:'삼신 할매 · 三神',title:'2027 신년운세',end:6.3,subs:[[0.3,'왔구나.'],[2.1,'…네 내년 열두 달,'],[4.0,'이 할미가 다 봐 뒀다.']]}
   };
   /* go(url): 클릭한 그 순간 인트로를 소리와 함께 틀고, 끝나면 url로 이동(도착 페이지는 같은 인트로를 건너뜀) */

@@ -9,5 +9,5 @@
   (document.head||d).appendChild(st);
   function fix(v){ if(!v.getAttribute('poster')) v.setAttribute('poster',T); }
   try{ new MutationObserver(function(ms){ for(var i=0;i<ms.length;i++){ var a=ms[i].addedNodes; for(var j=0;j<a.length;j++){ var n=a[j]; if(n.nodeType!==1) continue; if(n.tagName==='VIDEO') fix(n); else if(n.getElementsByTagName){ var vs=n.getElementsByTagName('video'); for(var k=0;k<vs.length;k++) fix(vs[k]); } } } }).observe(d,{childList:true,subtree:true}); }catch(e){}
-  try{ if(/(today|career|taegil|gunghap|sinnyeon|lifetime)\.html$|\/tarot(\.html|\/|\/index\.html)$/.test(location.pathname)&&location.hash!=='#re'&&!sessionStorage.getItem('obRe')&&!sessionStorage.getItem('skipMI')){ d.classList.add('mi-pre'); setTimeout(function(){ d.classList.remove('mi-pre'); },2500); } }catch(e){}
+  try{ if(/(today|career|taegil|gunghap|sinnyeon|myeongri|lifetime)\.html$|\/tarot(\.html|\/|\/index\.html)$/.test(location.pathname)&&location.hash!=='#re'&&!sessionStorage.getItem('obRe')&&!sessionStorage.getItem('skipMI')){ d.classList.add('mi-pre'); setTimeout(function(){ d.classList.remove('mi-pre'); },2500); } }catch(e){}
 })();

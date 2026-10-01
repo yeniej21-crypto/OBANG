@@ -199,6 +199,10 @@ function open(opts){
   async function viaServer(){ if(SRV_OFF||/^(localhost|127\.)/.test(location.hostname)||location.protocol==='file:') return 'skip';
     busy=true; const b=bubble('b',''); b.innerHTML='<span class="ak-think">사주 펼쳐보는 중…</span>';
     try{ const r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:rulesText(per,u,F)},...turns.slice(-8)]})});
+      if(r.ok&&(r.headers.get('content-type')||'').includes('text/plain')&&r.body){ const rd=r.body.getReader(), dc=new TextDecoder(); let t='';
+        for(;;){ const {done:fin,value}=await rd.read(); if(fin) break; t+=dc.decode(value,{stream:true}); const sh=show(t); if(sh) b.textContent=sh; scroll(); }
+        if(!t.trim()){ turns.pop(); b.className='ak-m sys'; b.textContent='답이 비어 있어요. 다시 보내 주세요.'; return 'ok'; }
+        done(b,t); return 'ok'; }
       let j=null; try{ j=await r.json(); }catch(e){}
       if(r.ok&&j&&j.text){ done(b,j.text); return 'ok'; }
       const c=(j&&j.error)||('http'+r.status);

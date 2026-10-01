@@ -6,6 +6,13 @@ import { getStore } from "@netlify/blobs";
 const MODEL = "claude-sonnet-5-5";
 const IP_DAY = 8, ALL_DAY = 300, ALL_MONTH = 4000;
 const ORIGINS = [/^https:\/\/obangsaju\.netlify\.app$/, /^https:\/\/[a-z0-9-]+--obangsaju\.netlify\.app$/, /^http:\/\/localhost(:\d+)?$/];
+/* Anthropic 스트림(SSE)에서 글자만 뽑아 그대로 흘려보낸다 → 첫 글자가 1~2초 안에 보이고, 넷리파이 스트리밍 한도(60초) 안에서 끝난다 */
+function sse(body, onEnd) { const enc = new TextEncoder(), dec = new TextDecoder(); let all = "";
+  return new ReadableStream({ async start(ctrl) { const rd = body.getReader(); let buf = "";
+    try { for (;;) { const { done, value } = await rd.read(); if (done) break; buf += dec.decode(value, { stream: true }); let k;
+      while ((k = buf.indexOf("\n\n")) >= 0) { const ev = buf.slice(0, k); buf = buf.slice(k + 2); const line = ev.split("\n").find(l => l.startsWith("data:")); if (!line) continue;
+        try { const j = JSON.parse(line.slice(5)); if (j.type === "content_block_delta" && j.delta && j.delta.text) { all += j.delta.text; ctrl.enqueue(enc.encode(j.delta.text)); } } catch {} } } }
+    catch {} if (onEnd) { try { await onEnd(all); } catch {} } ctrl.close(); } }); }
 const out = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
 export default async (req, context) => {
   if (req.method === "GET") return out({ ok: true, key: !!process.env.ANTHROPIC_API_KEY, model: MODEL });
@@ -31,10 +38,8 @@ export default async (req, context) => {
   if ((ipN || 0) >= IP_DAY || (allN || 0) >= ALL_DAY || (monN || 0) >= ALL_MONTH) return out({ error: "limit" }, 429);
   await Promise.all([store.setJSON(ipK, (ipN || 0) + 1), store.setJSON(allK, (allN || 0) + 1), store.setJSON(monK, (monN || 0) + 1)]);
   const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-    body: JSON.stringify({ model: MODEL, max_tokens: 700, messages: clean }) });
-  if (!r.ok) { const t = await r.text().catch(() => ""); return out({ error: "upstream", status: r.status, detail: t.slice(0, 300) }, 502); }
-  const j = await r.json(); const text = (j.content || []).map(c => c.text || "").join("").trim();
-  if (!text) return out({ error: "empty" }, 502);
-  return out({ text, left: Math.max(0, IP_DAY - (ipN || 0) - 1) });
+    body: JSON.stringify({ model: MODEL, max_tokens: 650, stream: true, messages: clean }) });
+  if (!r.ok || !r.body) { const t = await r.text().catch(() => ""); return out({ error: "upstream", status: r.status, detail: t.slice(0, 300) }, 502); }
+  return new Response(sse(r.body), { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store", "x-left": String(Math.max(0, IP_DAY - (ipN || 0) - 1)) } });
 };
 export const config = { path: "/api/chat", rateLimit: { windowLimit: 6, windowSize: 60, aggregateBy: ["ip", "domain"] } };

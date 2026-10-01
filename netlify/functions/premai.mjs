@@ -7,6 +7,12 @@ import { getStore } from "@netlify/blobs";
 const MODEL = "claude-sonnet-5-5";
 const IP_DAY = 16, ALL_DAY = 120, ALL_MONTH = 1500;
 const ORIGINS = [/^https:\/\/obangsaju\.netlify\.app$/, /^https:\/\/[a-z0-9-]+--obangsaju\.netlify\.app$/, /^http:\/\/localhost(:\d+)?$/];
+function sse(body, onEnd) { const enc = new TextEncoder(), dec = new TextDecoder(); let all = "";
+  return new ReadableStream({ async start(ctrl) { const rd = body.getReader(); let buf = "";
+    try { for (;;) { const { done, value } = await rd.read(); if (done) break; buf += dec.decode(value, { stream: true }); let k;
+      while ((k = buf.indexOf("\n\n")) >= 0) { const ev = buf.slice(0, k); buf = buf.slice(k + 2); const line = ev.split("\n").find(l => l.startsWith("data:")); if (!line) continue;
+        try { const j = JSON.parse(line.slice(5)); if (j.type === "content_block_delta" && j.delta && j.delta.text) { all += j.delta.text; ctrl.enqueue(enc.encode(j.delta.text)); } } catch {} } } }
+    catch {} if (onEnd) { try { await onEnd(all); } catch {} } ctrl.close(); } }); }
 const out = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
 async function sha(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("").slice(0, 40); }
 function parse(t) { t = String(t || "").trim(); try { return JSON.parse(t); } catch {} const m = t.match(/```(?:json)?\s*([\s\S]*?)```/); if (m) { try { return JSON.parse(m[1]); } catch {} }
@@ -27,11 +33,8 @@ export default async (req, context) => {
   if ((ipN || 0) >= IP_DAY || (allN || 0) >= ALL_DAY || (monN || 0) >= ALL_MONTH) return out({ error: "limit" }, 429);
   await Promise.all([store.setJSON(ipK, (ipN || 0) + 1), store.setJSON(allK, (allN || 0) + 1), store.setJSON(monK, (monN || 0) + 1)]);
   const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-    body: JSON.stringify({ model: MODEL, max_tokens: 3500, messages: [{ role: "user", content: prompt + "\n\n출력은 JSON 값 하나만. 앞뒤 설명이나 코드펜스 없이." }] }) });
-  if (!r.ok) { const t = await r.text().catch(() => ""); return out({ error: "upstream", status: r.status, detail: t.slice(0, 300) }, 502); }
-  const j = await r.json(); const text = (j.content || []).map(c => c.text || "").join("");
-  const data = parse(text); if (!data) return out({ error: "invalid_json" }, 502);
-  await store.setJSON("c/" + h, data).catch(() => {});
-  return out({ data });
+    body: JSON.stringify({ model: MODEL, max_tokens: 3500, stream: true, messages: [{ role: "user", content: prompt + "\n\n출력은 JSON 값 하나만. 앞뒤 설명이나 코드펜스 없이." }] }) });
+  if (!r.ok || !r.body) { const t = await r.text().catch(() => ""); return out({ error: "upstream", status: r.status, detail: t.slice(0, 300) }, 502); }
+  return new Response(sse(r.body, async all => { const data = parse(all); if (data) await store.setJSON("c/" + h, data); }), { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" } });
 };
 export const config = { path: "/api/premai", rateLimit: { windowLimit: 10, windowSize: 60, aggregateBy: ["ip", "domain"] } };

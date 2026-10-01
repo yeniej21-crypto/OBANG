@@ -37,7 +37,11 @@ function load(id){ try{ return JSON.parse(localStorage.getItem(LS+id)||'null'); 
 function save(id,v){ try{ localStorage.setItem(LS+id,JSON.stringify(v)); }catch(e){} }
 /* parts: [{id, prompt, check(data)->bool}] · onPart(id,data) · onDone(okCount) */
 /* 서버 함수(/api/premai) — 넷리파이 공개 사이트에서 쓰는 길 */
+function parseJ(t){ t=String(t||'').trim(); try{ return JSON.parse(t); }catch(e){} const m=t.match(/```(?:json)?\s*([\s\S]*?)```/); if(m){ try{ return JSON.parse(m[1]); }catch(e){} }
+  const a=Math.min(...['{','['].map(c=>{ const i=t.indexOf(c); return i<0?1e9:i; })), z=Math.max(t.lastIndexOf('}'),t.lastIndexOf(']')); if(a<z){ try{ return JSON.parse(t.slice(a,z+1)); }catch(e){} } return null; }
 async function viaServer(prompt){ const r=await fetch('/api/premai',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt})});
+  const ct=r.headers.get('content-type')||'';
+  if(r.ok&&ct.includes('text/plain')){ const t=await r.text(); const d=parseJ(t); if(!d) throw {code:'invalid_json'}; return d; }
   let j=null; try{ j=await r.json(); }catch(e){} if(!r.ok||!j||!j.data) throw {code:(j&&j.error)||('http'+r.status)}; return j.data; }
 /* parts: [{id, prompt, check(data)->bool}] · onPart(id,data,fromCache) · onDone(okCount,allCached,failCount) · onFail(code) */
 async function run({key,ver,parts,onStart,onPart,onDone,onFail}){ const sid=key+':'+ver;

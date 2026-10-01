@@ -47,7 +47,7 @@
       get:()=>({h:tx('#vBig'),s:'',sub:T(($('#qin')||{}).value)||tx('#vH'),lines:[tx('#vLine'),tx('#vTime')]}),re:false},
     free:{menu:()=>'무료 · '+(document.body.dataset.menu||'테스트'),img:'',form:null,ready:()=>vis('#sRs')&&tx('#rT'),
       get:()=>({h:tx('#rT'),s:(tx('#rV [data-cnt]')||''),sub:tx('#rK'),lines:[tx('#rP'),tx('#sayT')],img:bgOf('#rH')}),re:false},
-    bujeok:{menu:'부적 카드',img:'img/card/wood.jpg',form:null,ready:()=>tx('#cT')&&tx('#rar'),
+    bujeok:{menu:'부적 카드',img:'img/card/wood.jpg',form:null,ready:()=>document.body.dataset.bjGot==='1'&&tx('#cT')&&tx('#rar'),
       get:()=>({h:tx('#cT'),s:tx('#rar'),sub:tx('#cB'),lines:[tx('#bT')],img:bgOf('#face')||'img/card/wood.jpg'}),re:false},
     myodang:{menu:'묘당 · 고양이 점집',img:'img/cat/madam.jpg',form:null,ready:()=>vis('#res')&&tx('#res'),
       get:()=>({h:tx('#res .rh b')||tx('#res .ans b'),s:tx('#res .ring em'),sub:'묘당 · '+tx('#ptN'),lines:[tx('#bub')],img:bgOf('#pt')}),re:false},

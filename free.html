@@ -246,6 +246,11 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
           <div class="g3"><select id="by" aria-label="년"></select><select id="bm" aria-label="월"></select><select id="bd" aria-label="일"></select></div>
           <select id="bh" aria-label="태어난 시" style="margin-top:6px"></select></div>
       </div>
+      <div id="fPair" hidden>
+        <div class="card"><h3>그 사람</h3><input type="text" id="pNm" maxlength="8" placeholder="그 사람 이름 (예: 민준)">
+          <div class="g3" style="margin-top:8px"><select id="py" aria-label="그 사람 년"></select><select id="pm" aria-label="그 사람 월"></select><select id="pd" aria-label="그 사람 일"></select></div>
+          <p class="fine" style="text-align:left;margin-top:8px">양력 생일로 넣어 주세요. 태어난 시는 몰라도 돼요.</p></div>
+      </div>
       <div id="fTti" hidden>
         <div class="card"><h3>두 사람이 태어난 해</h3><div class="g2"><select id="ty1" aria-label="내 태어난 해"></select><select id="ty2" aria-label="그 사람 태어난 해"></select></div><p class="fine" style="text-align:left;margin-top:8px">1~2월 초 생일이면 띠가 앞 해일 수 있어요(입춘 기준).</p></div>
       </div>
@@ -270,6 +275,7 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
     <div class="say"><div class="av" id="sayAv"></div><div><small id="sayN"></small><p id="sayT"></p></div></div>
     <div id="rB"></div>
     <div class="row2"><button class="btn2 pr" id="shareBtn" type="button">결과 이미지 저장 · 공유</button></div>
+    <div class="row2" id="invRow" hidden><button class="btn2" id="invBtn" type="button">그 사람에게 보내서 같이 보기</button></div>
     <div class="row2"><button class="btn2" id="again" type="button">다시 하기</button><button class="btn2" id="toHub" type="button">다른 무료 테스트</button></div>
     <button class="up" id="up" type="button"><span class="th" id="upTh"></span><span><small id="upK"></small><b id="upT"></b><span id="upS"></span></span><i>›</i></button>
     <div class="more"><h4>이것도 30초면 돼</h4><div class="hs" id="more"></div></div>
@@ -279,6 +285,7 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
   <div class="toast" id="toast"></div>
 </div>
 <script src="saju.js"></script>
+<script src="free_plus.js"></script>
 <script>
 (()=>{
 const $=id=>document.getElementById(id), wait=ms=>new Promise(r=>setTimeout(r,ms));
@@ -319,6 +326,7 @@ const T={
    up:{k:'도화 궁합 · 태오',t:'생일까지 넣으면 진짜 궁합',s:'끌림·오래 감 점수, 두 사람 여덟 글자',go:'gunghap.html',img:'img/taeo/wink.jpg'}}
 };
 const ORDER=['past','animal','bok','mind','bujeok','tti'];
+Object.assign(T,window.FREE_PLUS||{}); ORDER.unshift(...(window.FREE_PLUS_ORDER||[]));
 
 /* ---- 전생 직업 ---- */
 const PAST={
@@ -463,8 +471,11 @@ function runTti(y1,y2){ const b1=((y1-4)%12+12)%12, b2=((y2-4)%12+12)%12;
 
 /* ================= 흐름 ================= */
 const Q=new URLSearchParams(location.search); let KEY=Q.get('t'); if(KEY&&!T[KEY]) KEY=null;
-let CUR=null, RES=null;
-function cardHTML(k,i){ const X=T[k]; return `<button class="fc" type="button" data-t="${k}" style="background-image:url('${HOST[X.host].img}');animation-delay:${i*50}ms"><span class="tg">FREE</span><span class="tm">${X.input==='quiz'?'1분':'30초'}</span><span class="ct"><b>${X.t}</b><span>${X.teaser}</span></span></button>`; }
+let CUR=null, RES=null, PAIR=null;
+const enc=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const dec=v=>{ try{ v=v.replace(/-/g,'+').replace(/_/g,'/'); return JSON.parse(decodeURIComponent(escape(atob(v)))); }catch(e){ return null; } };
+const INV=Q.get('f')?dec(Q.get('f')):null;
+function cardHTML(k,i){ const X=T[k]; return `<button class="fc" type="button" data-t="${k}" style="background-image:url('${HOST[X.host].img}');animation-delay:${i*50}ms"><span class="tg">${(window.FREE_PLUS_ORDER||[]).includes(k)?'NEW':'FREE'}</span><span class="tm">${X.input==='quiz'?'1분':'30초'}</span><span class="ct"><b>${X.t}</b><span>${X.teaser}</span></span></button>`; }
 function hub(f='all'){ $('hubG').innerHTML=ORDER.filter(k=>f==='all'||T[k].cat===f).map(cardHTML).join(''); }
 $('hubF').onclick=e=>{ const b=e.target.closest('[data-f]'); if(!b) return; $('hubF').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); hub(b.dataset.f); };
 document.addEventListener('click',e=>{ const c=e.target.closest('.fc[data-t]'); if(!c) return; openTest(c.dataset.t); });
@@ -474,6 +485,7 @@ let cal='s', gender='f';
 (function(){ const by=$('by'),bm=$('bm'),bd=$('bd'),bh=$('bh'),t1=$('ty1'),t2=$('ty2');
   for(let y=2010;y>=1950;y--){ by.add(new Option(y+'년',y,false,y===1996)); t1.add(new Option(y+'년생 (나)',y,false,y===1996)); t2.add(new Option(y+'년생 (그 사람)',y,false,y===1994)); }
   for(let m=1;m<=12;m++) bm.add(new Option(m+'월',m,false,m===5));
+  for(let y=2010;y>=1950;y--) $('py').add(new Option(y+'년',y,false,y===1994)); for(let m=1;m<=12;m++) $('pm').add(new Option(m+'월',m,false,m===3)); for(let d=1;d<=31;d++) $('pd').add(new Option(d+'일',d,false,d===8));
   window.fillD=()=>{ const n=cal==='s'?new Date(+by.value,+bm.value,0).getDate():30, cur=+bd.value||14; bd.innerHTML=''; for(let d=1;d<=n;d++) bd.add(new Option(d+'일',d,false,d===Math.min(cur,n))); };
   fillD(); by.onchange=fillD; bm.onchange=fillD; bh.add(new Option('태어난 시 모름','x',true,true)); HOURS.forEach((h,i)=>bh.add(new Option(h,i)));
   const seg=(id,cb)=>$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{ $(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); cb(b.dataset.v); });
@@ -488,24 +500,24 @@ function openTest(k){ KEY=k; CUR=T[k]; history.replaceState(null,'','?t='+k); WA
   if(window.Depth3D){ Depth3D.unmount($('inHero')); Depth3D.mount($('inHero'),{src:H.img,pos:[.5,.2]}); }
   if(CUR.input==='quiz'){ $('meQ').hidden=true; $('other').hidden=true; $('form').hidden=false; $('fBirth').hidden=true; $('fTti').hidden=true; $('goBtn').textContent='테스트 시작 (8문항)'; $('inFine').textContent='정답은 없어요. 가장 먼저 떠오르는 걸 골라요.'; show('sIn'); return; }
   openInput(); }
-function openInput(){ const me=loadMe(); $('fBirth').hidden=CUR.input==='tti'; $('fTti').hidden=CUR.input!=='tti'; $('inFine').textContent='입력한 정보는 결과 계산에만 쓰여요.';
+function openInput(){ const me=loadMe(); $('fBirth').hidden=CUR.input==='tti'; $('fTti').hidden=CUR.input!=='tti'; $('fPair').hidden=CUR.input!=='pair'; if(CUR.input==='pair'&&INV){ $('pNm').value=INV.name||''; $('py').value=INV.y; $('pm').value=INV.m; $('pd').value=INV.d; } $('inFine').textContent='입력한 정보는 결과 계산에만 쓰여요.';
   $('goBtn').textContent=WANT_BIRTH_FOR_MIND?'사주랑 비교하기':'결과 보기';
-  if(me&&me.y&&CUR.input!=='tti'){ prefill(me); $('meQ').hidden=false; $('other').hidden=false; $('form').hidden=true;
+  if(me&&me.y&&CUR.input!=='tti'&&CUR.input!=='pair'){ prefill(me); $('meQ').hidden=false; $('other').hidden=false; $('form').hidden=true;
     $('meIc').textContent=(me.name||'나').slice(-1); $('meT').textContent=`${me.name||'내'} 정보로 바로 보기`; $('meS').textContent=`${me.cal==='l'?'음력':'양력'} ${me.y}.${me.m}.${me.d}${me.h!=null?' · '+HOURS[me.h].split(' ')[0]:''}`; }
   else { if(me) prefill(me); $('meQ').hidden=true; $('other').hidden=true; $('form').hidden=false; }
   show('sIn'); }
 $('other').onclick=()=>{ $('form').hidden=false; $('other').hidden=true; $('meQ').hidden=true; };
 $('meQ').onclick=()=>go(loadMe());
 $('goBtn').onclick=()=>{ if(CUR.input==='quiz'&&!WANT_BIRTH_FOR_MIND){ startQuiz(); return; }
-  if(CUR.input==='tti'){ go(null); return; } const me=readForm(); if(!build(me)){ toast('없는 음력 날짜예요'); return; } saveMe(me); go(me); };
+  if(CUR.input==='tti'){ go(null); return; } const me=readForm(); if(CUR.input==='pair'){ PAIR={name:$('pNm').value.trim()||'그 사람',g:'f',cal:'s',y:+$('py').value,m:+$('pm').value,d:+$('pd').value,h:null}; } if(!build(me)){ toast('없는 음력 날짜예요'); return; } saveMe(me); go(me); };
 async function go(me){ if(me&&!build(me)){ toast('없는 음력 날짜예요'); return; } await loading(); finish(me); }
 async function loading(){ const H=HOST[CUR.host]; $('ldPf').style.backgroundImage=`url('${H.img}')`; $('ldT').textContent=`${H.n}${bat(H.n)?'이':'가'} 보는 중`; show('sLd');
   for(const t of CUR.ld){ $('ldP').textContent=t; await wait(560); } await wait(250); }
 async function finish(me){ if(KEY==='mind'&&!me){ await loading(); me=loadMe(); }
   const A=me&&me.y?build(me):null;
-  RES=KEY==='past'?runPast(A):KEY==='animal'?runAnimal(A):KEY==='bok'?runBok(A):KEY==='mind'?runMind(A):KEY==='bujeok'?runBujeok(A):runTti(+$('ty1').value,+$('ty2').value);
+  RES=T[KEY].run?T[KEY].run(A,{Sj,tgCount,esc,jo,bat,hash,PAST,build,B:PAIR?build(PAIR):null}):KEY==='past'?runPast(A):KEY==='animal'?runAnimal(A):KEY==='bok'?runBok(A):KEY==='mind'?runMind(A):KEY==='bujeok'?runBujeok(A):runTti(+$('ty1').value,+$('ty2').value);
   render(); }
-function render(){ const H=HOST[CUR.host];
+function render(){ const H=HOST[RES.host||CUR.host];
   $('rH').style.backgroundImage=`url('${H.img}')`; $('rK').textContent=RES.k; $('rT').textContent=RES.t; $('rP').textContent=RES.p;
   $('rV').innerHTML=RES.vis; $('rB').innerHTML=RES.body; $('sayAv').style.backgroundImage=`url('${H.img}')`; $('sayN').textContent=`${H.h} · ${H.n}`; $('sayT').textContent=RES.say;
   const U=CUR.up; $('upTh').style.backgroundImage=`url('${U.img}')`; $('upK').textContent=U.k; $('upT').textContent=U.t; $('upS').textContent=U.s; $('up').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} location.href=U.go; };
@@ -514,8 +526,12 @@ function render(){ const H=HOST[CUR.host];
   if(RES.hold){ $('rT').style.opacity=.25; $('rP').style.opacity=.25; setTimeout(()=>document.querySelectorAll('#rB .box,#rB .dd,.say').forEach(x=>{ x.style.transition='opacity .6s'; x.style.opacity=.25; }),0); }
   else { $('rT').style.opacity=1; $('rP').style.opacity=1; }
   show('sRs'); if(window.Depth3D){ Depth3D.unmount($('rH')); Depth3D.mount($('rH'),{src:H.img,pos:[.5,.18]}); }
+  $('invRow').style.display=CUR.input==='pair'?'':'none';
   if(RES.after) RES.after(); ding(); }
 $('again').onclick=()=>openTest(KEY);
+$('invBtn').onclick=async()=>{ const me=loadMe()||{}; const url=new URL('free.html?t='+KEY+'&f='+enc({name:me.name||'',y:me.y,m:me.m,d:me.d}),location.href).href;
+  try{ if(navigator.share){ await navigator.share({title:'전생에 우리는',text:`${me.name||'친구'}님이 전생에 우리가 무슨 사이였는지 보재`,url}); return; } }catch(e){ if(e&&e.name==='AbortError') return; }
+  try{ await navigator.clipboard.writeText(url); toast('링크를 복사했어요'); }catch(e){ prompt('이 링크를 보내세요',url); } };
 $('toHub').onclick=()=>{ history.replaceState(null,'',location.pathname); KEY=null; hub(); show('sHub'); $('sHub').dataset.seen='1'; $('topT').textContent='FREE ZONE'; };
 $('back').onclick=()=>{ if($('sHub').classList.contains('on')||!$('sHub').dataset.seen){ home(); return; } $('toHub').onclick(); };
 function home(){ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; }
@@ -533,6 +549,7 @@ async function card(){ const W=1080,H=1920, cv=document.createElement('canvas');
   if(im){ const s=Math.max(W/im.width,1250/im.height), w=im.width*s, h=im.height*s; x.drawImage(im,(W-w)/2,0,w,h); }
   let g=x.createLinearGradient(0,700,0,1300); g.addColorStop(0,'rgba(12,10,15,0)'); g.addColorStop(1,'rgba(12,10,15,1)'); x.fillStyle=g; x.fillRect(0,700,W,1220);
   x.fillStyle='#f3d79b'; x.beginPath(); x.roundRect?x.roundRect(60,70,200,64,32):x.rect(60,70,200,64); x.fill(); x.fillStyle='#1a1208'; x.font='800 30px "Noto Sans KR",sans-serif'; x.textAlign='center'; x.fillText('FREE · 30초',160,114);
+  if(RES.swatches){ const n=RES.swatches.length, sw=150, gap=14, x0=(W-(n*sw+(n-1)*gap))/2; RES.swatches.forEach((c,i)=>{ x.fillStyle=c; x.fillRect(x0+i*(sw+gap),1080,sw,150); }); }
   x.textAlign='center'; x.fillStyle='#f3d79b'; x.font='700 40px "Noto Sans KR",sans-serif'; x.fillText(RES.share[0],W/2,1330);
   x.fillStyle='#fff'; let fs=132; x.font=`${fs}px OBrush, "Noto Serif KR", serif`; while(x.measureText(RES.share[1]).width>W-120&&fs>70){ fs-=8; x.font=`${fs}px OBrush, "Noto Serif KR", serif`; } x.fillText(RES.share[1],W/2,1490);
   x.fillStyle='#d0c7bb'; x.font='42px "Song Myung", serif'; const words=String(RES.share[2]).split(' '); let line='', yy=1600; words.forEach(w=>{ const t=line?line+' '+w:w; if(x.measureText(t).width>W-160){ x.fillText(line,W/2,yy); yy+=62; line=w; } else line=t; }); if(line) x.fillText(line,W/2,yy);

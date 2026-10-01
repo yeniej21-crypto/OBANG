@@ -1614,8 +1614,14 @@ const CORE=['intro','idle','t1','t1a','t1b','t2','t3','t4','t5','t6'], NEED=['in
 let nDone=0; const enter=$('enter'), skip=$('skipStory'), lab=enter.textContent;
 const upd=()=>{ const pct=Math.round(nDone/CORE.length*100); $('loadbar').style.width=pct+'%'; $('loadtxt').textContent=pct<100?`영상 준비 중 ${pct}%`:'준비 완료'; };
 enter.disabled=skip.disabled=true; enter.textContent='준비 중…';
-(async()=>{ const q=CORE.slice(); const worker=async()=>{ while(q.length){ const k=q.shift(); await fetchClip(k); nDone++; upd(); } }; await Promise.all([worker(),worker(),worker()]); })();
-Promise.all(NEED.map(fetchClip)).then(()=>blobCheck).then(()=>{ back._p=prep(back,'intro'); return back._p; }).then(()=>{ enter.disabled=skip.disabled=false; enter.textContent=lab; });
+/* 로딩 순서: 오프닝 영상이 먼저 다 받아지게 두고 → 살롱 첫 영상(intro · idle · t1) → 나머지 대사.
+   예전엔 처음부터 영상 10개를 한꺼번에 받아서 오프닝이 끊기고 느렸음 */
+const afterOpening=new Promise(res=>{ const ot=$('opTake'); let done=false; const go=()=>{ if(!done){ done=true; res(); } };
+  let th=null; try{ th=sessionStorage.getItem('toHome'); }catch(e){} if(th==='1') return; /* 메뉴에서 홈으로 돌아올 땐 오프닝·살롱 영상을 받지 않는다 */ if(!ot||!ot.getAttribute('src')) return go();
+  if(ot.readyState>=4) return go(); ot.addEventListener('canplaythrough',go,{once:true}); ot.addEventListener('error',go,{once:true}); setTimeout(go,5000); });
+afterOpening.then(async()=>{ for(const k of NEED){ await fetchClip(k); nDone++; upd(); }
+  await blobCheck; back._p=prep(back,'intro'); await back._p; enter.disabled=skip.disabled=false; enter.textContent=lab;
+  const q=CORE.filter(k=>!NEED.includes(k)); const worker=async()=>{ while(q.length){ const k=q.shift(); await fetchClip(k); nDone++; upd(); } }; await Promise.all([worker(),worker()]); });
 
 /* ---------- 오프닝 v3: 문을 두드리면 다섯 수호신이 차례로 눈을 뜬다 ---------- */
 const OP_COL=[['靑龍','木','var(--wood)','img/wood.jpg','v/rv_wood.mp4',3.0,'#5fbf8a'],['朱雀','火','var(--fire)','img/fire.jpg','v/rv_fire.mp4',3.0,'#ff6a4a'],['黃龍','土','var(--earth)','img/earth.jpg','v/rv_earth.mp4',2.3,'#e0b25a'],['白虎','金','var(--metal)','img/sion.jpg','v/rv_metal.mp4',2.9,'#dfe6f0'],['玄武','水','var(--water)','img/water.jpg','v/rv_water.mp4',3.2,'#5f86ff']];
@@ -1723,7 +1729,7 @@ function opPick(y){
   opThump(false); setTimeout(()=>opThump(true),180);
 }
 let backHome=false; try{ backHome=sessionStorage.getItem('toHome')==='1'; sessionStorage.removeItem('toHome'); }catch(e){}
-if(backHome) showHome(); else opStart();
+if(backHome){ const t=$('opTake'); try{ t.removeAttribute('src'); t.load(); }catch(e){} showHome(); } else opStart();
 window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.contains('on')) showHome(); });
 })();
 </script>

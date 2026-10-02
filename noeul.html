@@ -196,6 +196,10 @@ select{height:46px;border:1px solid var(--line);background:#16121f;color:var(--i
 .end{position:relative;margin-top:34px;height:70vh;min-height:460px;max-height:620px;background:#000 center 30%/cover no-repeat}
 .end:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,15,28,.0) 50%,var(--bg) 100%)}
 .end .ct{position:absolute;left:22px;right:22px;bottom:18px;z-index:1;font-family:var(--bmj);font-size:20px;line-height:1.6;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.7)}
+.end video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.end .ep{position:absolute;left:50%;top:44%;z-index:2;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;border:0;background:none;color:#fff;font-size:13px;font-weight:700;letter-spacing:.06em;cursor:pointer;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.end .ep i{width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(241,219,164,.85);display:grid;place-items:center;background:rgba(18,15,28,.35);font-style:normal;font-size:20px;padding-left:4px;box-sizing:border-box}
+.end.playing .ep,.end.playing .ct{opacity:0;transition:opacity .4s}
 .flip{perspective:1200px;margin:20px auto 0;width:min(78%,300px);aspect-ratio:3/4.4;cursor:pointer}
 .flip .in{position:relative;width:100%;height:100%;transition:transform .9s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
 .flip.on .in{transform:rotateY(180deg)}
@@ -290,7 +294,7 @@ const {GAN,JI,GAN_K,JI_K,EL,EL_K,BR_EL,HID,stEl}=S_;
 /* 노을 화보 · 영상 자원 — 내려받는 대로 img/ v/ 로 옮긴다(지금은 원본 주소) */
 const HF='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
 const IMG={base:'img/noeul.jpg',sun:HF+'hf_20261002_120447_1ac1d6c0-b15d-4042-8e51-ff023a4c5c19.png',moon:HF+'hf_20261002_120446_537646f9-402f-4262-adae-bb44f93e6df0.png',split:HF+'hf_20261002_120447_e9a7e4c8-f31c-423a-8e3d-38307c441e73.png',ridge:HF+'hf_20261002_120447_3d3306ce-679f-4413-afe0-2b45e64e2da5.png'};
-const VID={trans:'',end:''};
+const VID={trans:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/8bbf9b24-f93b-4c00-bc96-36eebcc9078b.mp4',end:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/38bf7573-3af1-44d1-81e7-a98bae6884dc.mp4'};
 const HOURS=['자시 (23:30~01:29)','축시 (01:30~03:29)','인시 (03:30~05:29)','묘시 (05:30~07:29)','진시 (07:30~09:29)','사시 (09:30~11:29)','오시 (11:30~13:29)','미시 (13:30~15:29)','신시 (15:30~17:29)','유시 (17:30~19:29)','술시 (19:30~21:29)','해시 (21:30~23:29)'];
 let cal='s';
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
@@ -461,7 +465,7 @@ function premHTML(){
     <div class="talis rv"><small>2027 · 노을의 부적</small><p>${T}</p><span class="seal" data-hj="0">太<br>極</span></div>
   </div></section>`;
   /* 엔딩 + 카드 */
-  h+=`<div class="end rv" style="background-image:url('${IMG.ridge}')"><div class="ct">해와 달 사이에서, 또 기다리고 있을게요.</div></div>
+  h+=`<div class="end rv" id="endB" style="background-image:url('${IMG.ridge}')">${VID.end?`<video id="endV" playsinline preload="none" poster="${IMG.ridge}" src="${VID.end}"></video><button class="ep" id="endP" type="button"><i>&#9654;</i>노을의 마지막 말</button>`:''}<div class="ct">해와 달 사이에서, 또 기다리고 있을게요.</div></div>
   <div class="wrap"><div class="flip rv" id="flip"><div class="in">
     <div class="face ft" style="background-image:url('${IMG.sun}')"><small>낮의 ${r.nick}</small><b>${GROUP[r.rS]}의 해</b><p>${DAY_TX[r.rS][r.fS?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
     <div class="face bk" style="background-image:url('${IMG.moon}')"><small>밤의 ${r.nick}</small><b>${HID_MEAN[r.hid[0].g]}</b><p>${NIGHT_TX[r.rB][r.fB?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
@@ -481,7 +485,8 @@ let io=null;
 function reveal(){ if(io) io.disconnect(); io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{root:$('sRep'),threshold:.12}); document.querySelectorAll('#sRep .rv:not(.in)').forEach(el=>io.observe(el)); }
 $('payBtn').onclick=()=>{ const pr=$('prem');
   if(!$('pay').classList.contains('done')){ pr.innerHTML=premHTML(); pr.hidden=false; $('lock').hidden=true; drawChart(); reveal(); $('pay').classList.add('done'); $('payBtn').textContent='1장부터 보기'; toast('체험판이라 결제 없이 열었어요');
-    const f=$('flip'); if(f) f.onclick=()=>f.classList.toggle('on'); }
+    const f=$('flip'); if(f) f.onclick=()=>f.classList.toggle('on');
+    const ev=$('endV'), ep=$('endP'); if(ev&&ep){ ep.onclick=()=>{ $('endB').classList.add('playing'); ev.currentTime=0; ev.muted=false; ev.play().catch(()=>{}); }; ev.onended=()=>$('endB').classList.remove('playing'); } }
   pr.scrollIntoView({behavior:'smooth',block:'start'}); };
 $('back2').onclick=()=>{ $('msgs').innerHTML=''; show('sTalk'); talkStart(); };
 $('back1').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };

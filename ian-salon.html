@@ -945,6 +945,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="sh"><small>정통</small><b>올해 내 사주, 제대로 한번 볼까</b></div>
       <div class="hRow">
         <div class="pc" data-kv="halmae" data-vid="v/poster/halmae.mp4" role="button" tabindex="0" style="background-image:url('img/halmae.jpg')"><div class="ct"><span class="yr">2027</span><span class="tt">신년 운세</span><span class="st">삼신 할매가 열두 달을 읽는다</span></div></div>
+        <div class="pc" id="cNoeul" data-vid="v/poster/noeul.mp4" role="button" tabindex="0" style="background-image:url('img/noeul.jpg');background-position:center 15%"><span class="chip new">NEW</span><div class="ct"><span class="yr">2027</span><span class="tt">해와 달의 운세</span><span class="st">노을, 낮의 나와 밤의 나</span></div></div>
         <div class="pc" id="cTaegil" data-vid="v/poster/taegil.mp4" role="button" tabindex="0" style="background-image:url('img/taegil.jpg')"><div class="ct"><span class="tt">택일</span><span class="st">이사·계약·고백, 그날이 길한지</span></div></div>
         <div class="pc" id="cLife" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><div class="ct"><span class="tt">평생 사주</span><span class="st">대운 10년 흐름과 타고난 그릇</span></div></div>
         <div class="pc lockc" role="button" tabindex="0" style="background-image:url('img/tojeong.jpg')"><span class="chip">준비 중</span><div class="ct"><span class="tt">토정비결</span><span class="st">144괘로 읽는 한 해</span></div></div>
@@ -1480,7 +1481,7 @@ const goPage=u=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){}
 };
 window.addEventListener('pageshow',e=>{ if(e.persisted){ document.querySelectorAll('.mi').forEach(x=>x.remove()); if(window._miLv!=null) try{ bgm(window._miLv,1); }catch(_){} } });
 setTimeout(()=>{ ['v/menu/today.mp4','v/menu/career.mp4','v/menu/taegil.mp4','v/menu/gunghap.mp4'].forEach(h=>{ const l=document.createElement('link'); l.rel='prefetch'; l.as='video'; l.href=h; document.head.appendChild(l); }); },4000);
-$('cTaegil').onclick=()=>goPage('taegil.html');
+$('cTaegil').onclick=()=>goPage('taegil.html'); if($('cNoeul')) $('cNoeul').onclick=()=>goPage('noeul.html');
 $('hFort').onclick=()=>goPage('today.html'); $('tdH').onclick=()=>goPage('today.html');
 $('cToday').onclick=()=>goPage('today.html');
 $('cCareer').onclick=()=>goPage('career.html');

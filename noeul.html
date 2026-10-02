@@ -39,7 +39,7 @@ button,select,input{font-family:inherit}
 /* ---------- 1. 입력: 노을과의 대화 — 노을이 화면 가득, 대사는 영화 자막처럼 ---------- */
 /* 프롤로그: 웹툰처럼 내려 읽는 노을 이야기 */
 .pro{position:relative}
-.pp{height:calc(var(--sh,100vh)*.92);min-height:520px}
+.pp{height:min(calc(var(--sh,100vh)*.96),calc(min(100vw,460px)*16/9));min-height:480px}
 .pp:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,14,.5) 0%,rgba(8,6,14,0) 22%,rgba(8,6,14,0) 52%,rgba(8,6,14,.9) 86%,var(--bg) 100%)}
 .pp.first{height:var(--sh,100vh)}
 .pp.first .ct:not(.tp){bottom:calc(env(safe-area-inset-bottom,0px) + 86px)}
@@ -114,13 +114,14 @@ select option{background:#16121f;color:var(--ink)}
 /* ---------- 3. 결과(화보) ---------- */
 /* 화보 사진은 .ph 층에 깔고 스크롤에 따라 천천히 움직여(시차) 깊이를 만든다 */
 .px{position:relative;overflow:hidden;background:#000}
-.px .ph{position:absolute;left:0;right:0;top:-9%;bottom:-9%;background:#000 center 12%/cover no-repeat;will-change:transform}
+.px .ph{position:absolute;left:0;right:0;top:-3.5%;bottom:-3.5%;background:#000 center 12%/cover no-repeat;will-change:transform}
 .px:after{z-index:0}
+.stage:before{content:"";position:absolute;inset:0;z-index:40;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 .px .ph video.lv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center var(--fy,18%);opacity:0;transition:opacity 1.4s ease}
 .px .ph video.lv.on{opacity:1}
 .pp.s{height:calc(var(--sh,100vh)*.62);min-height:380px}
 /* 칸과 칸이 딱 끊기지 않게: 위아래 가장자리를 투명하게 녹이고 서로 겹쳐 디졸브처럼 이어지게 */
-:root{--ov:84px}
+:root{--ov:56px}
 .pro .pp{--mk:linear-gradient(180deg,transparent 0,#000 var(--ov),#000 calc(100% - var(--ov)),transparent 100%);-webkit-mask-image:var(--mk);mask-image:var(--mk);margin-top:calc(-1 * var(--ov))}
 .pro .pp.first{--mk:linear-gradient(180deg,#000 0,#000 calc(100% - var(--ov)),transparent 100%);margin-top:0}
 .pro .pp .ct{bottom:calc(var(--ov) + 14px)}
@@ -334,13 +335,13 @@ select option{background:#16121f;color:var(--ink)}
         <div class="ct"><p class="nar rv">해와 달. 낮과 밤.<br>남자와 여자.</p></div>
         <div class="scrollhint">내려서 보기</div>
       </div>
-      <div class="pp px s" data-v="hand"><div class="ph" data-im="hand"></div>
+      <div class="pp px s" data-v="hand" style="--fy:58%"><div class="ph" data-im="hand" style="background-position:center 58%"></div>
         <div class="ct"><p class="nar rv">갈라지지 않은 것에게는<br>이름이 없었다.</p></div>
       </div>
       <div class="pp px" data-v="cuDay"><div class="ph" data-im="cuDay"></div>
         <div class="ct"><p class="nl rv"><small>노을</small>그래서 다들 나를 노을이라 불러요.</p><p class="nar rv">하루에 단 한 번, 해와 달이 같은 하늘에 걸리는 시간의 이름.</p></div>
       </div>
-      <div class="pp px s" data-v="eyes"><div class="ph" data-im="eyes" style="background-position:center 40%"></div>
+      <div class="pp px s" data-v="eyes" style="--fy:42%"><div class="ph" data-im="eyes" style="background-position:center 42%"></div>
         <div class="ct"><p class="nar rv">남자도 여자도 아니다.<br>어디에도 속하지 않는다.</p><p class="nar rv"><b>모든 것이 여기서 시작되었으므로.</b></p></div>
       </div>
       <div class="gut rv"><i></i><b>太極</b>오방의 신들이 다섯 빛깔로 갈라지기 전,<br>세상은 하나의 원이었다.<br>모두가 제 빛을 찾아 떠날 때<br>끝까지 갈라지지 않은 단 하나.<br><br>오방의 신들도 길을 잃으면<br>이곳으로 돌아온다.</div>
@@ -441,9 +442,14 @@ function setSH(){ document.documentElement.style.setProperty('--sh',$('stage').c
 setSH(); addEventListener('resize',setSH);
 document.querySelectorAll('[data-im]').forEach(el=>el.style.backgroundImage=bgi(IMG[el.dataset.im]));
 $('bg0').style.backgroundImage=bgi(IMG.base); $('bg1').style.backgroundImage=bgi(IMG.cuDay); $('bg2').style.backgroundImage=bgi(IMG.cuNight);
-function bgStep(n){ ['bg0','bg1','bg2'].forEach((id,i)=>$(id).classList.toggle('on',i===n)); }
+const BGK=[null,'cuDay','cuNight'];
+function bgStep(n){ ['bg0','bg1','bg2'].forEach((id,i)=>{ const el=$(id), on=i===n; el.classList.toggle('on',on);
+  const k=BGK[i]; if(!k||!LV[k]) return; let v=el.querySelector('video');
+  if(on&&!v){ v=document.createElement('video'); v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline',''); v.src=LV[k];
+    v.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%;opacity:0;transition:opacity 1.6s'; v.addEventListener('playing',()=>v.style.opacity=1); el.appendChild(v); }
+  if(v){ if(on){ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); } else setTimeout(()=>{ if(!el.classList.contains('on')) v.pause(); },1800); } }); }
 /* 시차: 사진 층을 스크롤보다 느리게 움직여 앞뒤 깊이를 만든다 */
-function parallax(root){ let tk=0; const run=()=>{ tk=0; const rh=root.clientHeight; root.querySelectorAll('.px .ph').forEach(ph=>{ const b=ph.parentNode.getBoundingClientRect(), rt=root.getBoundingClientRect(); const c=(b.top-rt.top+b.height/2-rh/2)/rh; if(c>-1.4&&c<1.4) ph.style.transform=`translate3d(0,${(c*-7).toFixed(2)}%,0) scale(${(1.06+Math.abs(c)*.04).toFixed(3)})`; }); };
+function parallax(root){ let tk=0; const run=()=>{ tk=0; const rh=root.clientHeight; root.querySelectorAll('.px .ph').forEach(ph=>{ const b=ph.parentNode.getBoundingClientRect(), rt=root.getBoundingClientRect(); const c=(b.top-rt.top+b.height/2-rh/2)/rh; if(c>-1.4&&c<1.4) ph.style.transform=`translate3d(0,${(c*-3).toFixed(2)}%,0) scale(${(1.02+Math.abs(c)*.02).toFixed(3)})`; }); };
   root.addEventListener('scroll',()=>{ if(!tk) tk=requestAnimationFrame(run); },{passive:true}); run(); return run; }
 const pxTalk=parallax($('sTalk')), pxRep=parallax($('sRep'));
 /* 화면에 들어온 칸만 영상 재생, 벗어나면 멈춤. 사진 위로 서서히 녹아들게 */
@@ -570,7 +576,8 @@ const VER={day:'낮이 밝은 해',night:'밤이 깊은 해',even:'해와 달이
 const QUOTE={day:'올해 당신의 해는 높이 뜹니다. 보여 주는 쪽으로 걸어가세요.',night:'올해 당신의 달은 깊어집니다. 남이 모르는 곳에서 자라는 해예요.',even:'해와 달이 나란히 뜨는 해. 겉과 속을 같이 챙기면 둘 다 얻어요.'};
 function render(){
   const r=R;
-  $('coverPh').style.backgroundImage=bgi(r.kind==='night'?IMG.moon:r.kind==='day'?IMG.sun:IMG.endS);
+  const ck=r.kind==='night'?'moon':r.kind==='day'?'sun':'profile', cv=$('cover');
+  $('coverPh').style.backgroundImage=bgi(IMG[ck]); if(cv._lv){ cv._lv.remove(); cv._lv=null; } cv.dataset.v=ck; setTimeout(()=>armLoops($('sRep')),100);
   $('rWho').textContent=`${r.name}님의 2027년은`; $('rVer').textContent=VER[r.kind]; $('rQ').textContent=QUOTE[r.kind];
   $('gS').innerHTML=r.pS+'<sup>%</sup>'; $('gM').innerHTML=r.pM+'<sup>%</sup>';
   const one=t=>t.split('.')[0]+'.', ms=o=>[...o].sort((a,b)=>a.m-b.m).map(x=>x.m+'월').join(', ');

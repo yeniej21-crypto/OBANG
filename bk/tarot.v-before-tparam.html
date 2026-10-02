@@ -466,7 +466,6 @@ const syncSpread=()=>{ const sp=TAROT_SPREAD[S.topic]; $('sp3').textContent=(sp.
   const three=document.querySelector('.sp[data-n="3"]'); three.disabled=S.topic==='today'; three.style.opacity=S.topic==='today'?.35:1; if(S.topic==='today'){ S.n=1; } document.querySelectorAll('.sp').forEach(b=>b.classList.toggle('on',+b.dataset.n===S.n)); };
 $('topics').onclick=e=>{ const b=e.target.closest('.chip'); if(!b) return; tick(.06); S.topic=b.dataset.k; S.userTopic=true; document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b)); if(S.topic!=='today'&&S.n===1&&!S._n1) S.n=3; syncSpread(); };
 $('spreads').onclick=e=>{ const b=e.target.closest('.sp'); if(!b||b.disabled) return; tick(.06); S.n=+b.dataset.n; S._n1=S.n===1; syncSpread(); };
-{ const tq=new URLSearchParams(location.search).get('t'); if(tq&&window.TAROT_SPREAD[tq]){ S.topic=tq; S.userTopic=true; setTopic(tq); } } /* 연애 상담소에서 ?t=love · heart · flow 로 들어옴 */
 syncSpread();
 $('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
 $('toHome').onclick=$('back').onclick;

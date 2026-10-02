@@ -9,7 +9,7 @@ const NAV=[
   ['', [['홈','./','home'],['무료 존','free.html'],['연애 상담소','love.html'],['자유 상담','chat.html']]],
   ['오늘', [['오늘의 운세','today.html'],['오방 뽑기','ppopgi.html'],['부적 카드','bujeok.html']]],
   ['정통 풀이', [['2027 신년 기획전','newyear.html'],['2027 신년운세','sinnyeon.html'],['해와 달의 운세','noeul.html'],['2027 명리 감정서','myeongri.html'],['평생 사주','lifetime.html'],['커리어 사주','career.html'],['택일','taegil.html']]],
-  ['연애 · 궁합', [['곧 받을 편지','yeonseo.html'],['그 사람 속마음','heart.html'],['붉은 실 궁합','redthread.html'],['무료 연애 미니','lovemini.html'],['도화 사주','dohwa.html'],['도화 궁합','gunghap.html'],['오방 궁합','obgh.html'],['재회 사주','love2.html?m=re'],['다음 연애','love2.html?m=next']]],
+  ['연애 · 궁합', [['도화 사주','dohwa.html'],['도화 궁합','gunghap.html'],['오방 궁합','obgh.html'],['재회 사주','love2.html?m=re'],['다음 연애','love2.html?m=next']]],
   ['카드 · 고양이', [['무진의 타로','tarot.html'],['묘당','myodang.html']]]
 ];
 const PICK=[['color','사주 퍼스널컬러','내 오행에 맞는 색'],['food','사주 소울푸드','오미로 보는 내 음식'],['pastus','전생에 우리는','둘의 전생 이야기']];

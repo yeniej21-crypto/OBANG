@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="early.js?v=3"></script>
+<title>붉은 실 궁합 · 월하의 실타래</title>
+<meta name="description" content="월하가 두 사람 생일로 묶인 붉은 실을 풀어 줘요. 여덟 글자를 나란히 놓고 보는 정통 궁합">
+<meta property="og:type" content="website"><meta property="og:site_name" content="오방도감">
+<meta property="og:title" content="붉은 실 궁합 · 월하의 실타래"><meta property="og:description" content="두 사람 생일로 묶인 실이 얼마나 단단한지, 어디서 엉키는지">
+<meta property="og:image" content="https://obangsaju.netlify.app/img/og/taegil.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:url" content="https://obangsaju.netlify.app/redthread.html"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@500;600;700;900&display=swap">
+<link rel="stylesheet" href="lovebright.css">
+<script src="vidguard.js?v=1"></script>
+<style>
+/* 붉은 실 궁합 · 월하의 실타래(10/3): 월하 영상으로 들어서기(달빛 → 새벽) → 대화로 묻기 → 두 실패 사이로 붉은 실 끌어 잇기(실의 팽팽함 · 매듭이 계산 결과) → 실의 기록(무료, 밝은 한지) → 월하의 혼서(19,900원).
+   톤: 밝은 한지와 창살 사이로 드는 새벽빛. 강조색은 붉은 실(밀랍 빨강) 하나. 모서리는 각지게(완전한 원만 둥글게). 빛은 실제 광원(창빛 · 그림자)만, 반짝이 · 입자 금지. */
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+:root{--paper:#f6f0e6;--paper-2:#efe5d4;--paper-3:#e6d9c3;--ink:#2a2119;--ink-2:#6b5d4f;--ink-3:#9a8a78;--honey:#c8955a;--sage:#7d9a7a;--wax:#b8352a;--gold:#b8862f;
+  --line:rgba(42,33,25,.14);--line2:rgba(42,33,25,.26);
+  --serif:'Noto Serif KR',serif;--brush:'OBrush','Noto Serif KR',serif;--sans:'Noto Sans KR',"Apple SD Gothic Neo",system-ui,sans-serif;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .32 0 0 0 0 .2 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color-scheme:light}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;border-radius:0}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0;background:#e9dfcd}
+body{font-family:var(--sans);color:var(--ink);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+button,select,input{font-family:inherit;color:inherit}
+button{cursor:pointer}
+.stage{position:relative;width:100%;max-width:430px;height:100%;overflow:hidden;background:var(--paper)}
+.scr{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;opacity:0;pointer-events:none;transition:opacity .9s ease;scrollbar-width:none}
+.scr::-webkit-scrollbar{display:none}
+.scr.on{opacity:1;pointer-events:auto}
+/* 맨 위 */
+.top{position:absolute;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 10px) 12px 10px;pointer-events:none;transition:background .4s}
+.top>*{pointer-events:auto}
+.top.sc{background:linear-gradient(180deg,rgba(246,240,230,.97) 70%,rgba(246,240,230,0))}
+.ib{width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);background:rgba(246,240,230,.74);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;padding:0;color:var(--ink)}
+.ib svg{width:18px;height:18px}
+.ib.off .wv{display:none}.ib:not(.off) .mx{display:none}
+.top b{font-family:var(--serif);font-size:13px;font-weight:700;letter-spacing:.16em;color:var(--ink);text-shadow:0 0 10px rgba(246,240,230,.95),0 0 3px rgba(246,240,230,.9);opacity:0;transition:opacity .4s}
+.top.t b{opacity:1}
+/* 단추 */
+.go{display:block;width:100%;min-height:54px;border:0;background:var(--ink);color:var(--paper);font-size:15.5px;font-weight:700;letter-spacing:.03em;box-shadow:6px 10px 22px -10px rgba(60,38,18,.55);transition:transform .15s}
+.go:active{transform:translateY(1px) scale(.99)}
+.go.wx{background:var(--wax);color:#fff8f0;box-shadow:6px 12px 24px -12px rgba(120,30,20,.7)}
+.go.gl{background:transparent;color:var(--ink);border:1px solid var(--ink);box-shadow:none}
+.lnk{display:block;margin:10px auto 0;min-height:44px;padding:0 12px;border:0;background:none;font-size:13.5px;color:var(--ink-2);text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(42,33,25,.3)}
+
+/* ---------- 1. 들어서기: 달빛에서 새벽으로 ---------- */
+#sIn{background:var(--paper);overflow:hidden}
+.scene{position:absolute;left:0;right:0;top:0;height:74%;overflow:hidden;background:#ece4d6;-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+.ibg{position:absolute;inset:-3%;background:url('img/taegil.jpg') center 12%/cover no-repeat;animation:breathe 24s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:scale(1.01)}to{transform:scale(1.06) translateY(-1%)}}
+#iv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 12%;opacity:0;transition:opacity .8s}
+#iv.on{opacity:1}
+.moon{position:absolute;inset:0;pointer-events:none;transition:opacity 3.2s ease;
+  background:linear-gradient(180deg,rgba(176,190,218,.44) 0,rgba(176,190,218,.2) 30%,rgba(176,190,218,0) 58%),linear-gradient(115deg,rgba(150,166,200,.18),rgba(150,166,200,0) 50%)}
+.dawn{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 3.2s ease;
+  background:radial-gradient(ellipse 80% 50% at 8% 20%,rgba(255,224,178,.42),rgba(255,224,178,0) 70%),linear-gradient(118deg,rgba(255,214,160,.22),rgba(255,214,160,0) 46%)}
+#sIn.play .moon{opacity:0}
+#sIn.play .dawn{opacity:1}
+.drape{position:absolute;left:0;right:0;top:47%;width:100%;height:120px;pointer-events:none;overflow:visible}
+.drape g{transform-origin:50% 0;animation:sway 7s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-.5deg)}to{transform:rotate(.6deg) translateY(2px)}}
+.fadeP{position:absolute;left:0;right:0;bottom:0;height:58%;background:linear-gradient(180deg,rgba(246,240,230,0),rgba(246,240,230,.78) 26%,rgba(246,240,230,.94) 44%,var(--paper) 62%);pointer-events:none}
+.itx{position:absolute;left:22px;right:22px;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);z-index:6;transition:opacity .7s,transform .7s}
+#sIn.play .itx{opacity:0;transform:translateY(12px);pointer-events:none}
+.itx small{display:block;font-size:11px;letter-spacing:.3em;color:var(--ink-2);font-weight:700}
+.itx h1{margin:10px 0 0;font-family:var(--brush);font-weight:400;font-size:52px;line-height:1.04;color:var(--ink);letter-spacing:.02em}
+.itx h1 em{font-style:normal;color:var(--wax)}
+.itx h2{margin:8px 0 0;font-family:var(--serif);font-weight:600;font-size:15px;letter-spacing:.14em;color:var(--ink-2)}
+.itx p{margin:14px 0 0;padding-left:12px;border-left:2px solid var(--wax);font-family:var(--serif);font-size:15px;line-height:1.7;color:var(--ink)}
+.itx .go{margin-top:20px}
+.itx .lnk{margin-top:4px}
+.from{display:inline-block;margin-bottom:10px;padding:4px 9px;border:1px solid var(--line2);font-size:11.5px;color:var(--ink-2);background:rgba(246,240,230,.7)}
+.sub{position:absolute;left:22px;right:22px;bottom:calc(env(safe-area-inset-bottom,0px) + 70px);z-index:7;text-align:center;font-family:var(--serif);font-size:21px;font-weight:600;line-height:1.5;color:var(--ink);text-shadow:0 1px 0 rgba(255,250,240,.8),0 0 18px rgba(246,240,230,.9);opacity:0;transition:opacity .35s}
+.sub.on{opacity:1}
+
+/* ---------- 2. 대화 ---------- */
+#sTalk{overflow:hidden;background:var(--paper-2)}
+.tbg{position:absolute;left:0;right:0;top:0;height:64%;background:url('img/taegil.jpg') center 10%/cover no-repeat;animation:breathe 30s ease-in-out infinite alternate;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 52%,transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 52%,transparent 100%)}
+.tbg:after{content:"";position:absolute;inset:0;background:linear-gradient(118deg,rgba(255,226,176,.4),rgba(255,226,176,0) 46%)}
+.wl{position:absolute;left:-30%;top:46%;width:120%;height:70%;pointer-events:none;transform:skewX(-26deg);opacity:.7;filter:blur(5px);
+  background:repeating-linear-gradient(90deg,rgba(255,246,226,.85) 0 62px,rgba(255,246,226,0) 62px 72px),repeating-linear-gradient(0deg,rgba(255,246,226,0) 0 104px,rgba(214,196,166,.5) 104px 112px);
+  -webkit-mask-image:radial-gradient(ellipse 60% 55% at 40% 50%,#000 30%,transparent 72%);mask-image:radial-gradient(ellipse 60% 55% at 40% 50%,#000 30%,transparent 72%)}
+.talk{position:absolute;inset:0;z-index:2;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 70px) 20px calc(env(safe-area-inset-bottom,0px) + 20px)}
+.talk::-webkit-scrollbar{display:none}
+.msgs{display:flex;flex-direction:column;gap:12px;margin-top:auto}
+.ln{opacity:0;transform:translateY(10px);max-height:240px;overflow:hidden;transition:opacity .8s ease,transform .8s ease,font-size .5s,color .5s,max-height .6s ease .25s,margin .6s ease .25s}
+.ln.on{opacity:1;transform:none}
+.ln.gone{opacity:0!important;max-height:0;margin:0!important;transition:opacity .4s ease,max-height .6s ease .3s,margin .6s ease .3s}
+.ln.n{font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.6;color:var(--ink);text-shadow:0 1px 0 rgba(255,250,240,.7)}
+.ln.n small{display:block;font-family:var(--sans);font-size:10.5px;letter-spacing:.3em;color:var(--wax);font-weight:700;margin-bottom:4px}
+.ln.n.old{font-size:15px;color:rgba(42,33,25,.42)}
+.ln.n.old small{display:none}
+.ln.me{align-self:flex-end;max-width:85%;text-align:right;font-size:14.5px;color:var(--ink-2)}
+.ln.me:before{content:"";display:inline-block;width:18px;height:1.5px;background:var(--wax);vertical-align:middle;margin-right:8px;opacity:.8}
+.ln.me.old{opacity:.45}
+.ask{margin-top:18px;display:none}
+.ask.on{display:block;animation:up .45s ease}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{min-height:46px;padding:0 16px;border:1px solid var(--line2);background:rgba(250,246,238,.92);font-size:14.5px;color:var(--ink);box-shadow:4px 6px 12px -8px rgba(60,38,18,.4);transition:border-color .2s,background .2s}
+.chips button:active,.chips button:hover{border-color:var(--wax);background:#fff9ef}
+.pick{display:grid;gap:10px;padding:14px 14px 12px;background:rgba(250,246,238,.94);border:1px solid var(--line);box-shadow:8px 12px 24px -16px rgba(60,38,18,.5)}
+.pick .pn{margin:0;font-size:12px;color:var(--ink-2)}
+.seg{display:flex;border-bottom:1px solid var(--line2)}
+.seg button{flex:1;min-height:44px;border:0;background:none;color:var(--ink-3);font-size:14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.seg button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--wax)}
+.g3{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px}
+.g2{display:grid;grid-template-columns:1fr 1.2fr;gap:10px;align-items:end}
+.pick select{height:46px;border:0;border-bottom:1px solid var(--line2);background:transparent;color:var(--ink);font-family:var(--serif);font-size:16px;padding:0 4px;width:100%;-webkit-appearance:none;appearance:none}
+.pick .go{margin-top:4px}
+.pick .lnk{margin-top:0}
+
+/* ---------- 3. 실 건네기 ---------- */
+#sRit{background:#f1e8d8;overflow:hidden}
+.room{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 60% at 18% -6%,#fffaf0,rgba(255,250,240,0) 62%),linear-gradient(180deg,#f4ecdf,#ebdfca 70%,#e4d6bd)}
+.room:after{content:"";position:absolute;inset:0;background:var(--grain);opacity:.9}
+.lat{position:absolute;left:-26%;top:16%;width:96%;height:74%;pointer-events:none;transform:skewX(-20deg) rotate(3deg);opacity:.62;filter:blur(3px);
+  background:repeating-linear-gradient(90deg,rgba(255,249,234,.95) 0 56px,rgba(255,249,234,0) 56px 64px),repeating-linear-gradient(0deg,rgba(255,249,234,0) 0 88px,rgba(206,186,154,.4) 88px 94px);
+  -webkit-mask-image:radial-gradient(ellipse 58% 52% at 46% 46%,#000 32%,transparent 74%);mask-image:radial-gradient(ellipse 58% 52% at 46% 46%,#000 32%,transparent 74%);transition:opacity 2s}
+.rw{position:relative;z-index:1;min-height:100%;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 62px) 20px calc(env(safe-area-inset-bottom,0px) + 18px);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.rh{display:grid;grid-template-columns:48px 1fr;gap:12px;align-items:center}
+.rh .av{width:48px;height:48px;border-radius:50%;background:#ddd url('img/taegil.jpg') center 14%/220% no-repeat;box-shadow:0 0 0 2px var(--paper),0 0 0 3px var(--wax)}
+.rh small{display:block;font-size:10.5px;letter-spacing:.3em;color:var(--wax);font-weight:700}
+.rh p{margin:4px 0 0;font-family:var(--serif);font-size:16.5px;font-weight:600;line-height:1.55;min-height:4.65em;transition:opacity .4s}
+.loom{position:relative;flex:1;min-height:330px;margin:6px -20px 0;touch-action:none}
+#th{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.spool{position:absolute;width:96px;height:96px;margin:-48px 0 0 -48px;border:0;padding:0;background:none;border-radius:50%;touch-action:none}
+.spool .rot{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#d8bb8b,#c6a26c,#dcc296,#bf9861,#d6b787,#c9a671,#dfc79c,#c39d66,#d8bb8b);box-shadow:inset 0 0 0 1px rgba(90,60,30,.4),inset -5px -7px 12px rgba(90,60,30,.28),8px 14px 18px -6px rgba(70,45,20,.5)}
+.spool .wnd{position:absolute;inset:15%;border-radius:50%;background:repeating-radial-gradient(circle,#b8352a 0 1.4px,#9a2a20 1.4px 2.7px);box-shadow:inset 0 0 0 1px rgba(80,20,15,.45),inset -3px -4px 8px rgba(70,15,10,.35)}
+.spool .hub{position:absolute;inset:37%;border-radius:50%;background:radial-gradient(circle,#3b2a1d 0 24%,#e8d4b0 26% 100%);box-shadow:inset 0 0 0 1px rgba(90,60,30,.45),1px 2px 3px rgba(60,30,10,.35)}
+.spool:after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 32% 28%,rgba(255,252,242,.62),rgba(255,252,242,0) 42%)}
+.spool:before{content:"";position:absolute;inset:-12px;border-radius:50%;border:1.5px solid rgba(184,53,42,.0);pointer-events:none}
+.spool.hint:before{animation:ring 2.4s ease-out infinite}
+@keyframes ring{0%{border-color:rgba(184,53,42,.55);transform:scale(.9)}100%{border-color:rgba(184,53,42,0);transform:scale(1.25)}}
+.spool .lab{position:absolute;left:50%;top:calc(100% + 10px);transform:translateX(-50%);white-space:nowrap;text-align:center;pointer-events:none}
+.spool .lab b{display:block;font-family:var(--serif);font-size:14px;font-weight:900}
+.spool .lab small{display:block;margin-top:2px;font-size:11.5px;color:var(--ink-2)}
+#spB{transition:transform .25s}
+#spB .lab{top:auto;bottom:calc(100% + 10px)}
+#spB.jig{transform:translate(-2px,2px)}
+.rf{text-align:center;padding-top:6px}
+.rf .hn{margin:0;min-height:20px;font-size:13px;color:var(--ink-2)}
+.rbt{max-width:340px;margin:14px auto 0;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .8s,transform .8s}
+.rbt.on{opacity:1;transform:none;pointer-events:auto}
+
+/* ---------- 4. 실의 기록 (lovebright, 강조색 붉은 실) ---------- */
+#sRes{--acc:var(--wax);--acc-ink:var(--wax)}
+#prem,#lockW{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 64px)}
+.rwrap{padding:calc(env(safe-area-inset-top,0px) + 66px) 18px 0}
+.rhero{position:relative;display:grid;grid-template-columns:1fr 124px;gap:14px;margin-top:18px;align-items:end;padding-bottom:30px}
+.rhero .t small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--wax)}
+.rhero .t h1{margin:10px 0 0;font-family:var(--brush);font-weight:400;font-size:clamp(30px,9vw,38px);line-height:1.1;color:var(--ink)}
+.rhero .t h1 em{font-style:normal;color:var(--wax);font-size:1.5em;line-height:1}
+.rhero .t p{margin:10px 0 0;font-size:12.5px;line-height:1.6;color:var(--ink-2)}
+.rhero .lb-frame{height:184px}
+.rhero .stp{position:absolute;right:-8px;bottom:6px;z-index:3}
+.rhero .stp .lb-stamp{--sz:88px!important}
+.rfig{margin:18px -8px 0;position:relative}
+.rfig svg{display:block;width:100%;height:auto;overflow:visible}
+.rlead{margin:8px 0 0;font-size:14.5px;line-height:1.78;color:var(--ink-2)}
+.rlead b{color:var(--ink)}
+.scale{margin-top:16px}
+.scale .bar{position:relative;display:grid;grid-template-columns:40fr 15fr 15fr 15fr 15fr;height:12px;border:1px solid var(--line)}
+.scale .bar i{border-right:1px solid var(--line);background:var(--paper-2)}
+.scale .bar i:last-child{border-right:0}
+.scale .bar i.on{background:repeating-linear-gradient(135deg,rgba(184,53,42,.22) 0 3px,rgba(184,53,42,.08) 3px 6px)}
+.scale .mk{position:absolute;top:-7px;width:2px;height:24px;background:var(--wax);transform:translateX(-1px)}
+.scale .mk:after{content:"";position:absolute;left:50%;top:-6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--wax);box-shadow:0 0 0 2px var(--paper)}
+.scale .lbl{display:grid;grid-template-columns:40fr 15fr 15fr 15fr 15fr;margin-top:6px;font-size:10.5px;color:var(--ink-3);text-align:center}
+.scale .lbl span.on{color:var(--wax);font-weight:700}
+.scale .lbl span:first-child{text-align:left}
+/* 여덟 글자 */
+.p8{display:grid;grid-template-columns:50px repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);background:rgba(255,252,245,.55)}
+.p8>*{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.p8 .hd{padding:6px 0;text-align:center;font-size:11px;font-weight:700;color:var(--ink-3);letter-spacing:.1em}
+.p8 .who{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--serif);font-size:12.5px;font-weight:900;line-height:1.25;text-align:center}
+.p8 .who small{font-family:var(--sans);font-size:10px;font-weight:500;color:var(--ink-3)}
+.p8 .c{padding:10px 2px 8px;text-align:center;position:relative}
+.p8 .c b{display:block;font-family:var(--serif);font-size:22px;font-weight:900;line-height:1.18;color:var(--ink)}
+.p8 .c small{display:block;margin-top:4px;font-size:10px;color:var(--ink-3)}
+.p8 .c.d{background:rgba(184,53,42,.06);box-shadow:inset 0 0 0 1.5px rgba(184,53,42,.55)}
+.p8 .c.x b{color:var(--ink-3);opacity:.4}
+.p8 .gp{position:relative;height:54px;display:flex;align-items:center;justify-content:center;background:var(--paper)}
+.p8 .gp svg{position:absolute;left:50%;top:0;width:20px;height:54px;margin-left:-10px;overflow:visible}
+.p8 .gp span{position:absolute;left:50%;bottom:5px;transform:translateX(-50%);z-index:1;padding:1px 4px;background:var(--paper);font-size:10.5px;font-weight:700;line-height:1.3;color:var(--ink-2);white-space:nowrap}
+.p8 .gp span.pos{color:var(--wax)}
+.p8 .gp.lbl{font-size:10px;color:var(--ink-3);font-weight:700}
+.p8-n{margin:10px 0 0;font-size:11.5px;line-height:1.6;color:var(--ink-3)}
+/* 실의 장부 */
+.ledger{position:relative;padding-left:26px}
+.ledger:before{content:"";position:absolute;left:8px;top:14px;bottom:14px;width:2px;background:var(--wax);box-shadow:2px 3px 3px rgba(90,40,20,.18)}
+.ck{position:relative;margin-bottom:12px;background:var(--card);border:1px solid var(--line);padding:14px 14px 14px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 12px 26px -22px rgba(60,40,20,.55)}
+.ck:last-child{margin-bottom:0}
+.ck .nd{position:absolute;left:-27px;top:16px;width:20px;height:20px;overflow:visible}
+.ck-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ck-h .no{font-family:var(--serif);font-size:12px;font-weight:700;color:var(--wax)}
+.ck-h h4{margin:0;font-family:var(--serif);font-size:16px;font-weight:900}
+.ck-h .vd{margin-left:auto;font-style:normal;font-size:11.5px;font-weight:700;padding:4px 8px;border:1px solid var(--line2);color:var(--ink-2)}
+.ck-h .vd.pos{background:var(--wax);border-color:var(--wax);color:#fff8f0}
+.ck-h .vd.neg{color:var(--ink);border-color:rgba(42,33,25,.35);background:repeating-linear-gradient(135deg,rgba(42,33,25,.07) 0 3px,transparent 3px 6px)}
+.ck-h .askd{font-style:normal;font-size:10.5px;font-weight:700;color:var(--wax);letter-spacing:.06em}
+.ck-v{margin:12px 0 0}
+.ck-v svg{display:block;width:100%;height:auto;overflow:visible}
+.ck-p{margin:10px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.ck .lb-why{margin-top:10px;padding:9px 12px}
+.ck .lb-why p{font-size:12px}
+.ck.asked{border-color:rgba(184,53,42,.45)}
+.stars{display:grid;gap:8px}
+.stars .r{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:9px 10px;background:rgba(255,252,245,.6);border:1px solid var(--line-2)}
+.stars .r b{display:block;font-size:13px;font-weight:700}
+.stars .r small{display:block;margin-top:2px;font-size:11.5px;color:var(--ink-3)}
+.stars .lb-dots i{width:12px;height:12px}
+/* 한마디 */
+.lb-quote .lb-av{background-position:center 12%;background-size:210%}
+/* 잠금 */
+.lb-lock .price{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;font-size:12.5px;color:var(--ink-3)}
+.lb-lock .price b{font-family:var(--serif);font-size:22px;color:var(--ink)}
+.lb-lock .fine{margin:10px 0 0;font-size:11.5px;color:var(--ink-3);text-align:center}
+.lb-lock .pv p{font-size:14px}
+/* 혼서 */
+.pm-hd{display:grid;grid-template-columns:74px 1fr;gap:14px;align-items:center;margin-top:36px;padding:18px 0 16px;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink)}
+.pm-hd small{display:block;font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--wax)}
+.pm-hd b{display:block;margin-top:4px;font-family:var(--brush);font-weight:400;font-size:34px;line-height:1.1}
+.pm-hd p{margin:6px 0 0;font-size:12px;color:var(--ink-3);min-height:1em}
+.pp{margin:0 0 12px;font-size:14.5px;line-height:1.85;color:var(--ink-2)}
+.lb-card p.fx{color:var(--ink);padding-left:10px;border-left:2px solid var(--wax)}
+.lb-card p.fx:before{content:"푸는 법 · ";font-weight:700;color:var(--wax)}
+.yr{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.yr:last-child{border-bottom:1px solid var(--line)}
+.yr .a b{display:block;font-family:var(--serif);font-size:19px;font-weight:900;line-height:1.1}
+.yr .a small{display:block;margin-top:4px;font-size:11px;color:var(--ink-3)}
+.yr .a em{display:inline-block;margin-top:6px;font-style:normal;font-size:10.5px;padding:2px 5px;border:1px solid var(--line2);color:var(--ink-2)}
+.yr.hi .a em{border-color:var(--wax);color:var(--wax)}
+.yr h5{margin:0;font-family:var(--serif);font-size:15.5px;font-weight:900}
+.yr p{margin:6px 0 0;font-size:13.5px;line-height:1.72;color:var(--ink-2)}
+.yr p.tp{color:var(--ink);font-size:13px}
+.yr p.tp:before{content:"한 줄 · ";color:var(--wax);font-weight:700}
+.kp{list-style:none;margin:0;padding:0;counter-reset:k}
+.kp li{position:relative;padding:14px 0 14px 44px;border-top:1px solid var(--line);font-family:var(--serif);font-size:16px;font-weight:700;line-height:1.55}
+.kp li:last-child{border-bottom:1px solid var(--line)}
+.kp li:before{counter-increment:k;content:counter(k);position:absolute;left:0;top:12px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--wax);color:#fff8f0;font-size:14px}
+.hs{position:relative;margin-top:4px;padding:34px 22px 30px;background:#fffaf1;border:1px solid var(--line);box-shadow:0 26px 40px -30px rgba(60,40,20,.6);text-align:center}
+.hs:before{content:"";position:absolute;inset:7px;border:1px solid rgba(184,53,42,.35);pointer-events:none}
+.hs small{display:block;font-size:11px;font-weight:700;letter-spacing:.24em;color:var(--wax)}
+.hs p{margin:14px 0 0;font-family:var(--serif);font-size:19px;font-weight:700;line-height:1.7;color:var(--ink)}
+.hs .lb-stamp{margin:18px auto 0;--sz:60px}
+.pnote{margin:20px 0 0;font-size:11.5px;color:var(--ink-3);line-height:1.65}
+/* 끝 */
+.outro{margin-top:34px;padding:24px 0 0;border-top:1px solid var(--line);display:grid;gap:10px}
+.outro .lnk{margin-top:0}
+.ai{margin:28px 18px calc(env(safe-area-inset-bottom,0px) + 30px);text-align:center;font-size:11px;color:var(--ink-3);line-height:1.65}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s ease}
+.rv.in{opacity:1;transform:none}
+.toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(-50%);z-index:200;background:var(--ink);color:var(--paper);font-size:13.5px;padding:10px 16px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){.ibg,.tbg,.drape g,.spool.hint:before{animation:none}.rv{opacity:1;transform:none;transition:none}.moon,.dawn{transition:none}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="top" id="top">
+    <button class="ib" id="back" type="button" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <b>월하의 실타래</b>
+    <button class="ib" id="snd" type="button" aria-label="소리 켜고 끄기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="wv" d="M16 9a4 4 0 0 1 0 6"/><path class="mx" d="M17 9l5 6M22 9l-5 6"/></svg></button>
+  </div>
+
+  <section class="scr on" id="sIn">
+    <div class="scene">
+      <div class="ibg"></div>
+      <video id="iv" muted playsinline preload="auto" poster="img/taegil.jpg"></video>
+      <div class="moon"></div><div class="dawn"></div>
+      <svg class="drape" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><defs><filter id="dsh" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter></defs>
+        <g><path d="M-6 26 Q200 112 406 14" fill="none" stroke="rgba(84,52,26,.2)" stroke-width="3.2" filter="url(#dsh)" transform="translate(7 15)"/>
+        <path d="M-6 26 Q200 112 406 14" fill="none" stroke="#b8352a" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M-6 25.2 Q200 111 406 13.2" fill="none" stroke="rgba(255,226,206,.7)" stroke-width=".8"/></g></svg>
+    </div>
+    <div class="fadeP"></div>
+    <div class="sub" id="isub"></div>
+    <div class="itx" id="itx">
+      <small>오방도감 · 중매인 월하</small>
+      <h1>붉은 <em>실</em> 궁합</h1>
+      <h2>월하의 실타래</h2>
+      <p>두 사람 생일로 묶인 실을 풀어 볼게.<br>얼마나 단단한지, 어디서 엉키는지.</p>
+      <button class="go" id="start" type="button">실타래 앞에 앉기</button>
+      <button class="lnk" id="startMute" type="button">소리 없이 들어가기</button>
+    </div>
+  </section>
+
+  <section class="scr" id="sTalk">
+    <div class="tbg"></div><div class="wl"></div>
+    <div class="talk" id="talk"><div class="msgs" id="msgs"></div><div class="ask" id="ask"></div></div>
+  </section>
+
+  <section class="scr" id="sRit">
+    <div class="room"></div><div class="lat" id="lat"></div>
+    <div class="rw">
+      <div class="rh"><div class="av" aria-hidden="true"></div><div><small>실 건네기</small><p id="rT"></p></div></div>
+      <div class="loom" id="loom">
+        <canvas id="th" aria-hidden="true"></canvas>
+        <button class="spool hint" id="spA" type="button" aria-label="내 실패. 눌러서 그 사람 실패까지 끌기"><span class="rot" id="rotA"></span><span class="wnd"></span><span class="hub"></span><span class="lab"><b>나</b><small id="lA"></small></span></button>
+        <button class="spool" id="spB" type="button" aria-label="그 사람 실패"><span class="rot" id="rotB"></span><span class="wnd"></span><span class="hub"></span><span class="lab"><b>그 사람</b><small id="lB"></small></span></button>
+      </div>
+      <div class="rf">
+        <p class="hn" id="rH"></p>
+        <div class="rbt" id="rBt"><button class="go wx" id="rGo" type="button">실의 기록 보기</button></div>
+        <button class="lnk" id="rAuto" type="button">손 대신 실 건네기</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="scr lb" id="sRes">
+    <div class="rwrap">
+      <div class="lb-bar"><span>실의 기록</span><span id="mDate"></span></div>
+      <header class="rhero">
+        <div class="t"><small id="hK"></small><h1 id="hT"></h1><p id="hS"></p></div>
+        <div class="lb-frame"><div class="in" style="background-image:url('img/taegil.jpg')"></div></div>
+        <div class="lb-anim stp" id="hSt"></div>
+      </header>
+      <div class="rfig" id="fig"></div>
+      <p class="rlead" id="lead"></p>
+      <div class="scale" id="scale"></div>
+      <div id="free"></div>
+      <section class="lb-sec rv" id="lockW" hidden></section>
+      <div id="prem" hidden></div>
+      <div class="outro" id="outro">
+        <button class="lb-btn ghost" id="shareBtn" type="button">이 실타래, 친구에게 건네기</button>
+        <button class="lnk" id="again" type="button">다른 사람과 다시 묶어 보기</button>
+        <button class="lnk" id="toLove" type="button">연애 상담소로 가기</button>
+      </div>
+    </div>
+    <p class="ai">진행자는 AI로 만든 가상의 캐릭터예요. 풀이는 만세력 계산을 바탕으로 하며, 사람의 마음이나 행동을 단정하지 않아요.</p>
+  </section>
+
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script src="premai.js"></script>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const S=window.Saju, {GAN_K,JI_K,EL_K,BR_EL,stEl}=S;
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const RM=(()=>{ try{ return matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){ return false; } })();
+const toast=t=>{ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2200); };
+const vib=p=>{ try{ if(navigator.vibrate) navigator.vibrate(p); }catch(e){} };
+const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const loadMe=()=>{ try{ return JSON.parse(sessionStorage.getItem('me')||localStorage.getItem('obMe')||'null'); }catch(e){ return null; } };
+const saveMe=o=>{ try{ const old=loadMe()||{}; const n=Object.assign(old,o); sessionStorage.setItem('me',JSON.stringify(n)); localStorage.setItem('obMe',JSON.stringify(n)); }catch(e){} };
+function hash(s){ let h=2166136261; for(const ch of s){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619); } return (h>>>0).toString(36); }
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const NOW=new Date(), YNOW=NOW.getFullYear(), Y0=YNOW+(NOW.getMonth()>=9?1:0);
+const ELN=['나무','불','흙','쇠','물'];
+const HNAME=['자시','축시','인시','묘시','진시','사시','오시','미시','신시','유시','술시','해시'];
+const HOURS=['23:30~01:29','01:30~03:29','03:30~05:29','05:30~07:29','07:30~09:29','09:30~11:29','11:30~13:29','13:30~15:29','15:30~17:29','17:30~19:29','19:30~21:29','21:30~23:29'];
+const gzK=p=>GAN_K[p[0]]+JI_K[p[1]];
+const bat=w=>{ const c=String(w).charCodeAt(String(w).length-1)-0xAC00; return c>=0&&c<11172&&c%28>0; };
+const jo=(w,a,b)=>w+(bat(w)?a:b);
+function solarOf(o){ if(o.cal==='l'){ const s=S.lunarToSolar(+o.y,+o.m,+o.d,false); if(s) return s; } return {y:+o.y,m:+o.m,d:+o.d}; }
+
+/* ================= 계산: 정통 궁합 다섯 가지 ================= */
+const LIUHE=[1,0,11,10,9,8,7,6,5,4,3,2], SANHE=[[8,0,4],[2,6,10],[5,9,1],[11,3,7]], YUANJIN=[7,6,9,8,11,10,1,0,3,2,5,4], ZIH=[4,6,9,11];
+const sanhe=(a,b)=>a!==b&&SANHE.some(g=>g.includes(a)&&g.includes(b));
+const chung=(a,b)=>Math.abs(a-b)===6;
+const ganHap=(a,b)=>Math.abs(a-b)===5;
+const RN={hap:'육합',sanhe:'삼합',chung:'충',yj:'원진',hyung:'형',zih:'자형',same:'같은 글자'};
+const RWHY={hap:'육합은 두 글자가 짝을 이루는 합이야.',sanhe:'삼합은 같은 쪽을 보는 세 글자 중 둘이 만난 거야.',chung:'충은 정반대 기운이 정면으로 부딪히는 거야.',yj:'원진은 가까울수록 서운해지기 쉬운 사이야.',hyung:'형은 서로 고치려 드는 마찰이야.',zih:'자형은 같은 글자끼리 예민해지는 거야.',same:'같은 글자라 바라는 게 닮기 쉬워.'};
+const ORDER=['chung','hap','sanhe','yj','hyung','zih','same'];
+function brRels(a,b){ const r=[]; if(LIUHE[a]===b) r.push('hap'); else if(sanhe(a,b)) r.push('sanhe'); if(chung(a,b)) r.push('chung'); if(YUANJIN[a]===b) r.push('yj'); if(S.isHyung(a,b)) r.push('hyung'); if(a===b) r.push(ZIH.includes(a)?'zih':'same'); return r.sort((x,y)=>ORDER.indexOf(x)-ORDER.indexOf(y)); }
+const DAYW={hap:10,sanhe:6,same:2,zih:-2,chung:-10,yj:-6,hyung:-5}, YEARW={hap:3,sanhe:2,chung:-3,yj:-2,hyung:-1}, MONW={hap:2,chung:-2};
+const POSR=['hap','sanhe','same'], NEGR=['chung','yj','hyung','zih'];
+function stemRel(a,b){ const ea=stEl(a), eb=stEl(b);
+  if(ganHap(a,b)) return {k:'ganhap',w:10};
+  if(ea===eb) return {k:'same',w:2};
+  if((ea+1)%5===eb) return {k:'gen',dir:'ab',w:6};
+  if((eb+1)%5===ea) return {k:'gen',dir:'ba',w:6};
+  if((ea+2)%5===eb) return {k:'ctl',dir:'ab',w:-3};
+  return {k:'ctl',dir:'ba',w:-3}; }
+function person(o){ const s=solarOf(o), h=o.h==null||o.h===''?null:+o.h, P=S.pillars(s.y,s.m,s.d,h), male=o.g==='m', dm=P.d[0], el=stEl(dm);
+  return {o,s,P,male,dm,db:P.d[1],el,star:male?(el+2)%5:(el+3)%5,st:S.strength(P),du:S.daeun(P,male),cnt:S.elCount(P),by:s.y,dayK:gzK(P.d)}; }
+/* 그해 이 사람의 흐름: 대운(천간 · 지지가 이 사람에게 도움이 되는 기운인지) + 세운 천간 */
+function dyAt(p,Y){ const age=Y-p.by+1; let cur=null; for(const d of p.du.list){ if(age>=d.age) cur=d; } return cur; }
+function yearGood(p,Y){ const d=dyAt(p,Y), ds=d?d.s:p.P.m[0], db=d?d.b:p.P.m[1];
+  const a=S.favorable(p.st,S.rel(p.dm,stEl(ds)))?1:0, b=S.favorable(p.st,S.relBranch(p.dm,db))?1:0, yp=S.yearPillar(Y), c=S.favorable(p.st,S.rel(p.dm,stEl(yp[0])))?1:0;
+  return {lv:a+b,sv:c,good:a+b+c>=2,dy:[ds,db],isDu:!!d,age:d?d.age:null,yp}; }
+function fillOf(A,B){ const ca=A.cnt, cb=B.cnt, fa=[], fb=[], both=[];
+  for(let i=0;i<5;i++){ if(ca[i]===0&&cb[i]>0) fa.push(i); if(cb[i]===0&&ca[i]>0) fb.push(i); if(ca[i]===0&&cb[i]===0) both.push(i); }
+  let w=Math.min(7,fa.reduce((s,i)=>s+(cb[i]>=2?4:2),0))+Math.min(7,fb.reduce((s,i)=>s+(ca[i]>=2?4:2),0))-Math.min(6,both.length*3), soft=null;
+  if(!fa.length&&!fb.length&&!both.length){ const ma=ca.indexOf(Math.min(...ca)), mb=cb.indexOf(Math.min(...cb));
+    if(ca[ma]<=1&&cb[ma]>=3){ w+=2; soft=['a',ma]; } else if(cb[mb]<=1&&ca[mb]>=3){ w+=2; soft=['b',mb]; } }
+  return {fa,fb,both,soft,w}; }
+function starLv(st,Q){ if(stEl(Q.dm)===st) return 3; const c=Q.cnt[st]; return c>=2?2:c===1?1:0; }
+const STW=[-2,1,3,5];
+function flowOf(A,B){ const ys=[]; for(let i=0;i<10;i++){ const Y=Y0+i, a=yearGood(A,Y), b=yearGood(B,Y); ys.push({Y,a,b,both:a.good&&b.good}); }
+  const n=ys.filter(x=>x.both).length; return {ys,n,w:clamp(Math.round((n-4)*1.2),-4,6)}; }
+const BANDS=[['느슨하게 걸린 실','느슨'],['천천히 감기는 실','천천히'],['곱게 이어진 실','고움'],['단단히 매인 실','단단'],['두 겹으로 묶인 실','두 겹']];
+const bandOf=s=>s>=85?4:s>=70?3:s>=55?2:s>=40?1:0;
+const K0=41, K1=1.6;
+function pair(A,B){
+  const sr=stemRel(A.dm,B.dm), dr=brRels(A.db,B.db), yr=brRels(A.P.y[1],B.P.y[1]), mr=brRels(A.P.m[1],B.P.m[1]), hr=A.P.h&&B.P.h?brRels(A.P.h[1],B.P.h[1]):null;
+  let dw=dr.reduce((s,k)=>s+(DAYW[k]||0),0); if(dr.includes('chung')&&dr.includes('hyung')) dw+=3;
+  const yw=yr.reduce((s,k)=>s+(YEARW[k]||0),0), mw=mr.reduce((s,k)=>s+(MONW[k]||0),0);
+  const fill=fillOf(A,B), lvA=starLv(A.star,B), lvB=starLv(B.star,A), starW=STW[lvA]+STW[lvB], flow=flowOf(A,B);
+  const raw=sr.w+dw+yw+mw+fill.w+starW+flow.w, score=clamp(Math.round(K0+raw*K1),12,96), band=bandOf(score);
+  const knots=[]; if(dr.includes('chung')) knots.push({k:'chung',at:'배우자 자리',n:'배우자 자리 충'}); if(dr.includes('yj')) knots.push({k:'yj',at:'배우자 자리',n:'배우자 자리 원진'});
+  if(dr.includes('hyung')&&!dr.includes('chung')) knots.push({k:'hyung',at:'배우자 자리',n:'배우자 자리 형'}); if(yr.includes('chung')) knots.push({k:'ychung',at:'띠',n:'띠끼리 충'}); if(mr.includes('chung')) knots.push({k:'mchung',at:'월지',n:'태어난 달끼리 충'});
+  const taut=sr.k==='ganhap'||dr.includes('hap'), sagF=taut?0.035:clamp(0.06+(70-score)/45*0.18,0.05,0.26);
+  return {sr,dr,yr,mr,hr,dw,yw,mw,fill,lvA,lvB,starW,flow,raw,score,band,knots:knots.slice(0,3),taut,sagF}; }
+/* 앞으로 몇 해: 세운 지지와 두 배우자 자리의 관계 + 두 사람 흐름 + 인연의 별 */
+function relMain(y,b){ const r=brRels(y,b).filter(k=>k!=='same'&&k!=='zih'); return r[0]||''; }
+function yearsOf(A,B,from,n){ return Array.from({length:n},(_,i)=>{ const Y=from+i, yp=S.yearPillar(Y), ga=yearGood(A,Y), gb=yearGood(B,Y), rA=relMain(yp[1],A.db), rB=relMain(yp[1],B.db);
+  const sA=stEl(yp[0])===A.star||BR_EL[yp[1]]===A.star, sB=stEl(yp[0])===B.star||BR_EL[yp[1]]===B.star, rv=r=>r==='hap'?8:r==='sanhe'?4:r==='chung'?-9:r==='yj'?-4:r==='hyung'?-3:0;
+  const sc=50+(ga.good?8:-4)+(gb.good?8:-4)+rv(rA)+rv(rB)+(sA?4:0)+(sB?4:0);
+  return {Y,yp,ga,gb,rA,rB,sA,sB,sc}; }); }
+window.__rt={person,pair,yearsOf,BANDS,bandOf};
+
+/* ================= 해석 사전 ================= */
+const STAGE=['썸','연애 중','결혼 생각 중','결혼했어','헤어졌어'];
+const STAGE_K=['썸','연애 중','결혼 생각 중','결혼한 사이','헤어진 사이'];
+const STG_R=['아직 매듭 전이네. 실이 어느 쪽으로 감기는지 보자.','이어진 실이 얼마나 단단한지 보자.','실을 한 번 더 감을지 정할 때구나.','이미 묶인 실이야. 어디를 손봐야 오래 가는지 볼게.','끊긴 실도 끝은 남아 있어. 어디서 끊겼는지부터 보자.'];
+const WANT=['끌림','오래 갈지','결혼','부딪히는 이유'];
+const WANT_R=['끌림은 일간과 인연의 별에서 먼저 보여.','오래 가는지는 배우자 자리와 빈 기운에서 갈려.','결혼은 배우자 자리와 두 사람의 큰 흐름을 같이 봐야 해.','부딪히는 데엔 매듭이 있어. 그 자리를 짚어 줄게.'];
+const ORDER_W=[['stem','star','branch','fill','flow'],['branch','fill','stem','star','flow'],['star','flow','branch','stem','fill'],['branch','stem','fill','star','flow']];
+const BAND_D=['서로를 붙잡는 글자가 적고 부딪히는 자리가 있어. 자주 다시 감아야 이어지는 실이야.','당기는 힘이 약한 대신 천천히 감기는 실이야. 시간과 습관이 필요해.','크게 엉키지도, 아주 팽팽하지도 않아. 둘이 감는 만큼 단단해지는 실이야.','당기는 자리가 부딪히는 자리보다 많아. 손질만 하면 오래 가는 실이야.','여러 자리에서 서로를 붙잡는 글자가 겹쳐. 당기는 힘과 버티는 힘이 같이 있는 실이야.'];
+const STG_D=['아직 매듭 전이라, 지금 어떻게 감느냐에 따라 모양이 많이 달라져.','이미 이어진 실이라, 지금의 습관이 앞으로의 모양을 정해.','결혼을 생각한다면 매듭 자리와 흐름이 겹치는 해를 같이 봐.','이미 묶인 실이라, 매듭 자리를 알아 두는 게 제일 쓸모 있어.','끊긴 실이라도 원래 결은 남아 있어. 다시 이을지는 끊긴 이유부터 보고 정해.'];
+const ACT=['애매할 땐 약속 하나로 확인하기','서운한 건 그날 안에 한 문장으로','돈과 집 얘기를 먼저 한 번 꺼내 보기','한 달에 한 번, 둘만의 긴 대화','연락 전에 끊긴 이유부터 적어 보기'];
+const ELKEEP=['같이 배우는 걸 하나 정하기','고마운 건 그날 말로 꺼내기','돈과 집안일 규칙 정하기','미룬 결정에 기한 붙이기','일주일에 한 번 긴 대화'];
+const ELFIX=['둘 다 새로 시작하는 일을 미루기 쉬워. 같이 배우는 걸 하나 정해 두면 실이 앞으로 감겨.','둘 다 표현이 줄기 쉬워. 고마운 건 그날 말로 꺼내는 게 실을 데워.','둘 다 생활의 중심이 흔들리기 쉬워. 돈과 집안일 규칙을 먼저 정해 두는 게 좋아.','둘 다 정리와 결단이 늦어. 미룬 결정에 기한을 붙여 두면 덜 엉켜.','둘 다 속얘기가 마르기 쉬워. 일주일에 한 번은 길게 얘기하는 날을 만들어.'];
+const LINE=['느슨한 실은 끊어진 실이 아니야. 다시 감을지는 너희 손에 있어.','천천히 감긴 실이 잘 안 풀려. 서두르지 말고 한 바퀴씩.','실은 감는 사람의 손을 닮아. 둘이 감는 만큼 단단해져.','단단히 맨 매듭은 당길수록 조여. 힘들 때 놓지 말고 같이 당겨.','두 겹으로 감은 실은 한 올이 느슨해져도 다른 올이 붙잡아. 서로가 그 다른 올이 되어 줘.'];
+const QUOTE=[
+  {pos:'당기는 힘은 충분해. 서로 먼저 알아보는 실이야.',mid:'끌림은 있어. 다만 한쪽이 먼저 당겨야 움직이는 실이야.',neg:'첫 끌림보다 알아 갈수록 생기는 정이 큰 실이야. 서두르지 마.'},
+  {pos:'오래 갈 바탕은 있어. 매듭 자리만 미리 알아 두면 돼.',mid:'버티는 힘은 반반이야. 둘이 만드는 습관이 나머지를 채워.',neg:'가만두면 느슨해지는 실이야. 자주 다시 감아야 오래 가.'},
+  {pos:'살림을 같이 꾸릴 실로는 단단한 편이야. 때는 혼서에 적어 둘게.',mid:'같이 살 수 있는 실이야. 다만 언제 감느냐가 중요해.',neg:'결혼은 서두를수록 매듭이 늘어. 흐름이 겹치는 해를 기다려.'},
+  null];
+const NUMK=['','한','두','세'];
+
+/* ================= 소리: 낮은 패드(합성) + 실 튕김 + 매듭 ================= */
+let soundOn=true; try{ soundOn=sessionStorage.getItem('rtSnd')!=='off'; }catch(e){}
+const SND=(()=>{ let ctx=null, master=null; const BASE=.045;
+  function init(){ if(ctx) return true; const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false; try{ ctx=new AC(); }catch(e){ return false; }
+    master=ctx.createGain(); master.gain.value=0; master.connect(ctx.destination);
+    const lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=720; lp.Q.value=.4;
+    const dl=ctx.createDelay(1.5); dl.delayTime.value=.61; const fb=ctx.createGain(); fb.gain.value=.32; const wet=ctx.createGain(); wet.gain.value=.4;
+    lp.connect(master); lp.connect(dl); dl.connect(fb); fb.connect(dl); dl.connect(wet); wet.connect(master);
+    [[73.42,.48],[110,.3],[146.83,.22],[185,.14],[220,.1]].forEach(([f,a],i)=>{ const os=ctx.createOscillator(), g=ctx.createGain(); os.type=i%2?'triangle':'sine'; os.frequency.value=f; g.gain.value=a*.6;
+      const sl=ctx.createOscillator(), sg=ctx.createGain(); sl.frequency.value=.035+i*.013; sg.gain.value=a*.22; sl.connect(sg); sg.connect(g.gain); sl.start(); os.connect(g); g.connect(lp); os.start(); });
+    return true; }
+  function level(v,t){ if(!ctx) return; const n=ctx.currentTime; master.gain.cancelScheduledValues(n); master.gain.setValueAtTime(master.gain.value,n); master.gain.linearRampToValueAtTime(v,n+t); }
+  function tone(f,peak,dec,type){ if(!soundOn||!ctx) return; const n=ctx.currentTime, os=ctx.createOscillator(), g=ctx.createGain(); os.type=type||'triangle'; os.frequency.setValueAtTime(f,n); os.frequency.exponentialRampToValueAtTime(f*.985,n+dec);
+    g.gain.setValueAtTime(0,n); g.gain.linearRampToValueAtTime(peak,n+.006); g.gain.exponentialRampToValueAtTime(.0001,n+dec); os.connect(g); g.connect(ctx.destination); os.start(n); os.stop(n+dec+.05); }
+  return { start(){ if(!soundOn||!init()) return; const r=ctx.resume(); (r&&r.then?r:Promise.resolve()).then(()=>level(BASE,4)).catch(()=>{}); },
+    off(){ level(0,.8); },
+    pluck(taut){ const f=taut?392:262; tone(f,.06,1.6,'triangle'); tone(f*2.01,.02,.9,'sine'); },
+    knot(){ tone(98,.07,.5,'sine'); tone(196,.02,.25,'triangle'); } }; })();
+function sndUI(){ $('snd').classList.toggle('off',!soundOn); }
+sndUI();
+$('snd').onclick=()=>{ soundOn=!soundOn; try{ sessionStorage.setItem('rtSnd',soundOn?'on':'off'); }catch(e){} sndUI(); if(soundOn) SND.start(); else SND.off(); };
+document.addEventListener('pointerdown',()=>{ if(soundOn) SND.start(); },{passive:true});
+
+/* ================= 화면 전환 ================= */
+let cur='sIn';
+function show(id){ cur=id; ['sIn','sTalk','sRit','sRes'].forEach(s=>$(s).classList.toggle('on',s===id)); $('top').classList.toggle('t',id!=='sIn'); $('top').classList.remove('sc'); }
+$('back').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
+try{ if(new URLSearchParams(location.search).get('ref')==='share') $('itx').insertAdjacentHTML('afterbegin','<span class="from">친구가 건넨 붉은 실</span>'); }catch(e){}
+
+/* ---------- 1. 들어서기: 영상(소리 없이) + 월하 자막 ---------- */
+const iv=$('iv'); iv.src='v/menu/taegil.mp4';
+const SUBS=[[0.7,'실 두 가닥 가져왔어'],[2.5,'어디까지 이어졌는지'],[4.3,'같이 풀어 보자']];
+function intro(){ return new Promise(res=>{ const sub=$('isub'); let done=false, last='', t0=performance.now(), tk=0;
+  const setSub=t=>{ let c=''; SUBS.forEach(x=>{ if(t>=x[0]) c=x[1]; }); if(c!==last){ last=c; sub.classList.remove('on'); setTimeout(()=>{ if(last!==c) return; sub.textContent=c; if(c) sub.classList.add('on'); },220); } };
+  const fin=()=>{ if(done) return; done=true; clearInterval(tk); sub.classList.remove('on'); res(); };
+  let p=null; try{ iv.muted=true; iv.currentTime=0; p=iv.play(); }catch(e){}
+  if(p&&p.then) p.then(()=>iv.classList.add('on')).catch(()=>{});
+  tk=setInterval(()=>{ const t=iv.classList.contains('on')&&!iv.paused?iv.currentTime:(performance.now()-t0)/1000; setSub(t); if(t>=6.1) fin(); },90);
+  iv.onended=()=>setTimeout(fin,250); setTimeout(fin,8200); }); }
+let started=false;
+async function enter(withSound){ if(started) return; started=true; soundOn=withSound; try{ sessionStorage.setItem('rtSnd',soundOn?'on':'off'); }catch(e){} sndUI();
+  if(soundOn) SND.start(); $('sIn').classList.add('play'); vib(6);
+  if(RM) await wait(900); else await intro();
+  show('sTalk'); setTimeout(()=>{ try{ iv.pause(); }catch(e){} },1000); interview(); }
+$('start').onclick=()=>enter(true);
+$('startMute').onclick=()=>enter(false);
+
+/* ---------- 2. 대화 ---------- */
+let ANS={}, R=null;
+function toBottom(){ const t=$('talk'); t.scrollTo({top:t.scrollHeight,behavior:RM?'auto':'smooth'}); }
+function say(t,me){ const box=$('msgs'), kids=[...box.children].filter(c=>!c.classList.contains('gone')), last=kids[kids.length-1];
+  kids.forEach(c=>{ if(c===last) c.classList.add('old'); else { c.classList.add('gone'); setTimeout(()=>c.remove(),1200); } });
+  const d=document.createElement('div'); d.className='ln '+(me?'me':'n'); d.innerHTML=me?esc(t):`<small>월하</small>${esc(t)}`; box.appendChild(d);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>d.classList.add('on'))); setTimeout(toBottom,80); }
+function askChips(list){ return new Promise(res=>{ const a=$('ask'); a.innerHTML=`<div class="chips">${list.map((t,i)=>`<button type="button" data-i="${i}">${esc(t)}</button>`).join('')}</div>`; a.classList.add('on'); setTimeout(toBottom,120);
+  a.onclick=e=>{ const b=e.target.closest('[data-i]'); if(!b) return; a.onclick=null; a.classList.remove('on'); vib(6); res(+b.dataset.i); }; }); }
+function dateLabel(o){ return `${o.cal==='l'?'음력 ':''}${o.y}년 ${o.m}월 ${o.d}일 · ${o.g==='m'?'남자':'여자'}${o.h!=null&&o.h!==''?' · '+HNAME[+o.h]:''}`; }
+function askDate(kind,pre){ return new Promise(res=>{ const a=$('ask'), me=kind==='me', p=pre||{};
+  const ys=[]; for(let y=YNOW-19;y>=1950;y--) ys.push(y);
+  const dy=+p.y||(me?1996:1995), dm=+p.m||(me?5:6), dg=p.g||(me?'f':'m'), dc=p.cal==='l'?'l':'s';
+  a.innerHTML=`<div class="pick">
+    <p class="pn">${me?'네 생일':'그 사람 생일 · 날짜까지 꼭, 시는 몰라도 돼'}</p>
+    <div class="seg" id="kCal"><button type="button" data-v="s" class="${dc==='s'?'on':''}">양력</button><button type="button" data-v="l" class="${dc==='l'?'on':''}">음력</button></div>
+    <div class="g3"><select id="kY" aria-label="태어난 해">${ys.map(y=>`<option value="${y}" ${y===dy?'selected':''}>${y}년</option>`).join('')}</select><select id="kM" aria-label="태어난 달">${Array.from({length:12},(_,i)=>`<option value="${i+1}" ${dm===i+1?'selected':''}>${i+1}월</option>`).join('')}</select><select id="kD" aria-label="태어난 날"></select></div>
+    <div class="g2"><div class="seg" id="kG"><button type="button" data-v="f" class="${dg==='f'?'on':''}">여자</button><button type="button" data-v="m" class="${dg==='m'?'on':''}">남자</button></div><select id="kH" aria-label="태어난 시"><option value="">태어난 시 모름</option>${HNAME.map((n,i)=>`<option value="${i}" ${p.h!=null&&p.h!==''&&+p.h===i?'selected':''}>${n} ${HOURS[i]}</option>`).join('')}</select></div>
+    <button class="go" id="kGo" type="button">${me?'이 생일로 할게':'이 생일로 묶을게'}</button></div>`;
+  const lunar=()=>$('kCal').querySelector('.on').dataset.v==='l';
+  const fillD=()=>{ const y=+$('kY').value, m=+$('kM').value, n=lunar()?30:new Date(y,m,0).getDate(), c=+$('kD').value||+p.d||15; $('kD').innerHTML=Array.from({length:n},(_,i)=>`<option value="${i+1}" ${Math.min(c,n)===i+1?'selected':''}>${i+1}일</option>`).join(''); };
+  fillD(); $('kY').onchange=$('kM').onchange=fillD;
+  ['kCal','kG'].forEach(id=>$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{ $(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); if(id==='kCal') fillD(); }));
+  a.classList.add('on'); setTimeout(toBottom,140); a.onclick=null;
+  $('kGo').onclick=()=>{ const o={cal:$('kCal').querySelector('.on').dataset.v,y:+$('kY').value,m:+$('kM').value,d:+$('kD').value,g:$('kG').querySelector('.on').dataset.v,h:$('kH').value===''?null:+$('kH').value};
+    if(o.cal==='l'&&!S.lunarToSolar(o.y,o.m,o.d,false)){ toast('없는 음력 날짜야'); return; }
+    a.classList.remove('on'); vib(6); res(o); }; }); }
+async function interview(){ ANS={}; $('msgs').innerHTML='';
+  await wait(500); say('앉아. 실 두 가닥 꺼내 놓을게.'); await wait(1500);
+  let me=loadMe(); const lim=YNOW-19;
+  if(me&&me.y&&me.g&&+me.y<=lim){ say(`네 생일은 전에 들은 걸로 할게. ${dateLabel(me)}.`); const k=await askChips(['이대로 할게','다시 넣을게']);
+    if(k===1){ say('다시 넣을게',true); await wait(600); say('네 생일.'); me=await askDate('me',me); say(dateLabel(me),true); } else say('이대로 할게',true); }
+  else { say('먼저 네 생일.'); me=await askDate('me',me&&+me.y<=lim?me:null); say(dateLabel(me),true); }
+  saveMe(me); ANS.me=me; await wait(800); say(`${person(me).dayK}일생이구나. 이건 네 실.`); await wait(1600);
+  say('이제 그 사람. 날짜까지는 꼭 있어야 해.'); const pt=await askDate('pt',{g:me.g==='m'?'f':'m'}); ANS.pt=pt; say(dateLabel(pt),true); await wait(800);
+  say(`${person(pt).dayK}일생. 이건 그 사람 실.`); await wait(1600);
+  say('둘은 지금 어디쯤이야.'); ANS.stage=await askChips(STAGE); say(STAGE[ANS.stage],true); await wait(800); say(STG_R[ANS.stage]); await wait(1700);
+  say('제일 알고 싶은 걸 골라.'); ANS.want=await askChips(WANT); say(WANT[ANS.want],true); await wait(800); say(WANT_R[ANS.want]); await wait(1700);
+  R=compute(); say('됐어. 실을 건네 볼게.'); await wait(1500); toRitual(); }
+
+/* ---------- 계산 묶음 ---------- */
+function compute(){ const A=person(ANS.me), B=person(ANS.pt), X=pair(A,B), o=Object.assign({A,B},X);
+  o.pol=o.score>=65?'pos':o.score>=45?'mid':'neg';
+  o.yf=yearsOf(A,B,Y0,5).map(y=>Object.assign(y,yearText(y,o)));
+  o.win=windows(A,B,o); o.fr=frictions(A,B,o);
+  o.key=hash(JSON.stringify([ANS.me.cal,ANS.me.y,ANS.me.m,ANS.me.d,ANS.me.h,ANS.me.g,ANS.pt.cal,ANS.pt.y,ANS.pt.m,ANS.pt.d,ANS.pt.h,ANS.pt.g,ANS.stage,ANS.want]));
+  return o; }
+
+/* ---------- 3. 실 건네기 ---------- */
+const KT={1:[.5],2:[.36,.64],3:[.28,.5,.72]};
+const TH={mode:'idle',ex:0,ey:0,dep:0,v:0,target:0,knots:[],ang:0,angB:0,done:false};
+let G={W:0,H:0,ax:0,ay:0,bx:0,by:0}, ctx=null, dpr=1, raf=0;
+function layout(){ const L=$('loom'), r=L.getBoundingClientRect(); G.W=r.width; G.H=r.height; G.ax=G.W*.24; G.ay=G.H*.68; G.bx=G.W*.76; G.by=G.H*.3;
+  $('spA').style.left=G.ax+'px'; $('spA').style.top=G.ay+'px'; $('spB').style.left=G.bx+'px'; $('spB').style.top=G.by+'px';
+  const cv=$('th'); dpr=Math.min(2,window.devicePixelRatio||1); cv.width=Math.round(G.W*dpr); cv.height=Math.round(G.H*dpr); ctx=cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0);
+  if(TH.mode==='idle'){ TH.ex=G.ax+30; TH.ey=G.ay+52; TH.dep=6; }
+  if(TH.mode==='set'){ TH.ex=G.bx; TH.ey=G.by; TH.target=R.sagF*Math.hypot(G.bx-G.ax,G.by-G.ay); if(TH.done) TH.dep=TH.target; } }
+function ctrl(){ const mx=(G.ax+TH.ex)/2, my=(G.ay+TH.ey)/2; return [mx,my+2*TH.dep]; }
+function qp(t){ const [cx,cy]=ctrl(); return [(1-t)*(1-t)*G.ax+2*(1-t)*t*cx+t*t*TH.ex,(1-t)*(1-t)*G.ay+2*(1-t)*t*cy+t*t*TH.ey]; }
+function path(dx,dy){ const [cx,cy]=ctrl(); ctx.beginPath(); ctx.moveTo(G.ax+dx,G.ay+dy); ctx.quadraticCurveTo(cx+dx,cy+dy,TH.ex+dx,TH.ey+dy); }
+function draw(){ if(!ctx) return; ctx.clearRect(0,0,G.W,G.H); ctx.lineCap='round'; ctx.lineJoin='round';
+  /* 창빛이 왼쪽 위에서 들어오니 그림자는 오른쪽 아래 종이 위로 */
+  ctx.save(); ctx.strokeStyle='rgba(84,52,26,.2)'; ctx.lineWidth=3.4; try{ ctx.filter='blur(2.6px)'; }catch(e){} path(7,15); ctx.stroke(); ctx.restore();
+  ctx.strokeStyle='#b8352a'; ctx.lineWidth=2.7; path(0,0); ctx.stroke();
+  ctx.strokeStyle='rgba(96,22,14,.38)'; ctx.lineWidth=1; path(.6,1); ctx.stroke();
+  ctx.strokeStyle='rgba(255,228,210,.75)'; ctx.lineWidth=.8; path(-.5,-.8); ctx.stroke();
+  TH.knots.forEach(k=>{ if(k.p<=0) return; const [x,y]=qp(k.t), e=1-Math.pow(1-Math.min(1,k.p),3), r=5.3+(1-e)*8;
+    ctx.save(); ctx.globalAlpha=Math.min(1,k.p*2.2);
+    ctx.save(); ctx.fillStyle='rgba(84,52,26,.22)'; try{ ctx.filter='blur(2.5px)'; }catch(_){} ctx.beginPath(); ctx.arc(x+7,y+15,r+1.4,0,7); ctx.fill(); ctx.restore();
+    ctx.strokeStyle='#a52e24'; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.stroke();
+    ctx.fillStyle='#8a241b'; ctx.beginPath(); ctx.arc(x,y,Math.max(1.6,r*.42),0,7); ctx.fill();
+    ctx.strokeStyle='rgba(255,226,206,.7)'; ctx.lineWidth=.9; ctx.beginPath(); ctx.arc(x,y,r,3.6,4.9); ctx.stroke(); ctx.restore(); });
+  $('rotA').style.transform=`rotate(${TH.ang.toFixed(1)}deg)`; $('rotB').style.transform=`rotate(${TH.angB.toFixed(1)}deg)`; }
+function loop(){ raf=0; let more=false;
+  if(TH.mode==='set'&&!TH.done){ const taut=R.taut, k=taut?.09:.035, c=taut?.16:.26; const a=-k*(TH.dep-TH.target)-c*TH.v; TH.v+=a; TH.dep+=TH.v; TH.angB+=TH.v*1.4;
+    if(Math.abs(TH.dep-TH.target)<.35&&Math.abs(TH.v)<.05){ TH.dep=TH.target; TH.v=0; TH.done=true; tieKnots(); } else more=true; }
+  if(TH.mode==='ret'){ const tx=G.ax+30, ty=G.ay+52; TH.ex+=(tx-TH.ex)*.16; TH.ey+=(ty-TH.ey)*.16; TH.dep+=(6-TH.dep)*.16; TH.ang-=3; if(Math.hypot(tx-TH.ex,ty-TH.ey)<1){ TH.mode='idle'; $('spA').classList.add('hint'); } else more=true; }
+  if(TH.knots.some(k=>k.p>0&&k.p<1)){ TH.knots.forEach(k=>{ if(k.p>0&&k.p<1) k.p=Math.min(1,k.p+.045); }); more=true; }
+  draw(); if(more) raf=requestAnimationFrame(loop); }
+const kick=()=>{ if(!raf) raf=requestAnimationFrame(loop); };
+function toRitual(){ TH.mode='idle'; TH.done=false; TH.knots=[]; TH.ang=0; TH.angB=0; TH.v=0;
+  $('lA').textContent=`${R.A.dayK}일생`; $('lB').textContent=`${R.B.dayK}일생`;
+  $('rT').innerHTML='네 실패에서 실을 뽑아<br>그 사람 실패까지 끌어 와.'; $('rH').textContent='왼쪽 실패를 누른 채 오른쪽 위로';
+  $('rBt').classList.remove('on'); $('rAuto').hidden=false; $('spA').classList.add('hint'); $('lat').style.opacity='';
+  show('sRit'); requestAnimationFrame(()=>{ layout(); draw(); }); }
+addEventListener('resize',()=>{ if(cur==='sRit'){ layout(); draw(); } });
+function lpos(e){ const r=$('loom').getBoundingClientRect(); return [e.clientX-r.left,e.clientY-r.top]; }
+const loom=$('loom'); let pid=null;
+loom.addEventListener('pointerdown',e=>{ if(TH.mode!=='idle'&&TH.mode!=='ret') return; const [x,y]=lpos(e); if(Math.hypot(x-G.ax,y-G.ay)>70) return;
+  e.preventDefault(); pid=e.pointerId; try{ loom.setPointerCapture(pid); }catch(_){} TH.mode='drag'; $('spA').classList.remove('hint'); vib(5); move(x,y); });
+function move(x,y){ x=clamp(x,6,G.W-6); y=clamp(y,6,G.H-6); const d0=Math.hypot(TH.ex-G.ax,TH.ey-G.ay); TH.ex=x; TH.ey=y; const d=Math.hypot(x-G.ax,y-G.ay);
+  TH.ang+=(d-d0)*1.3; TH.dep=10+d*.06; $('rH').textContent=Math.hypot(x-G.bx,y-G.by)<90?'거기서 놓아':'조금 더'; draw(); }
+loom.addEventListener('pointermove',e=>{ if(TH.mode!=='drag'||e.pointerId!==pid) return; const [x,y]=lpos(e); move(x,y); if(Math.hypot(x-G.bx,y-G.by)<44) attach(); });
+const up=e=>{ if(TH.mode!=='drag'||e.pointerId!==pid) return; pid=null; if(Math.hypot(TH.ex-G.bx,TH.ey-G.by)<72) attach(); else { TH.mode='ret'; $('rH').textContent='그 사람 실패까지 닿아야 묶여'; kick(); } };
+loom.addEventListener('pointerup',up); loom.addEventListener('pointercancel',up);
+async function autoPass(){ if(TH.mode!=='idle'&&TH.mode!=='ret') return; TH.mode='auto'; $('spA').classList.remove('hint'); const sx=TH.ex, sy=TH.ey, t0=performance.now(), D=RM?1:1300;
+  await new Promise(res=>{ const st=()=>{ const p=Math.min(1,(performance.now()-t0)/D), e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2, lift=Math.sin(p*Math.PI)*-40;
+    TH.ex=sx+(G.bx-sx)*e; TH.ey=sy+(G.by-sy)*e+lift; const d=Math.hypot(TH.ex-G.ax,TH.ey-G.ay); TH.ang=d*1.3; TH.dep=10+d*.06; draw(); if(p<1) requestAnimationFrame(st); else res(); }; st(); });
+  attach(); }
+$('rAuto').onclick=autoPass; $('spB').onclick=()=>{ if(TH.mode==='idle') autoPass(); };
+$('spA').onclick=e=>{ e.preventDefault(); };
+function attach(){ if(TH.mode==='set') return; TH.mode='set'; pid=null; TH.ex=G.bx; TH.ey=G.by; const d=Math.hypot(G.bx-G.ax,G.by-G.ay);
+  TH.target=R.sagF*d; TH.dep=Math.max(TH.dep,d*.2); TH.v=0; TH.done=false; $('rAuto').hidden=true; $('rH').textContent='';
+  SND.pluck(R.taut); vib(R.taut?[14,30,10]:10); $('spB').classList.add('jig'); setTimeout(()=>$('spB').classList.remove('jig'),260);
+  TH.knots=(KT[R.knots.length]||[]).map(t=>({t,p:0}));
+  if(RM){ TH.dep=TH.target; TH.done=true; TH.knots.forEach(k=>k.p=1); draw(); finishRitual(); return; } kick(); }
+async function tieKnots(){ for(const k of TH.knots){ await wait(480); k.p=.02; SND.knot(); vib([18,30,18]); kick(); } await wait(TH.knots.length?700:300); finishRitual(); }
+function ritualLine(){ const n=R.knots.length; let a;
+  if(R.taut) a='팽팽해. 서로 당기는 힘이 있는 실이야.'; else if(R.sagF>=.16) a='조금 느슨해. 둘이 더 감아야 하는 실이야.'; else a='곱게 걸렸어. 크게 처지지도, 당기지도 않아.';
+  return a+(n?`<br>매듭이 ${NUMK[n]} 군데. 부딪히는 자리야.`:'<br>엉킨 매듭은 없어.'); }
+function finishRitual(){ $('rT').innerHTML=ritualLine(); $('rH').textContent=`실의 세기 ${R.score} · ${BANDS[R.band][0]}`; $('lat').style.opacity='.8'; setTimeout(()=>$('rBt').classList.add('on'),RM?0:700); }
+$('rGo').onclick=()=>{ renderFree(); show('sRes'); $('sRes').scrollTop=0; };
+
+/* ================= 4. 실의 기록 ================= */
+const elW=i=>`${EL_K[i]} 기운`;
+const who=(dir,a)=>dir==='ab'?a:!a;
+function stemTx(r){ const A=r.A, B=r.B, s=r.sr, ea=EL_K[A.el], eb=EL_K[B.el];
+  if(s.k==='ganhap') return '두 사람 일간이 천간합이야. 처음 볼 때부터 묘하게 당기고, 한번 엮이면 쉽게 잊히지 않는 쪽이야.';
+  if(s.k==='same') return `둘 다 ${ea} 일간이야. 말이 잘 통하지만 고집도 같은 방향이라 양보할 차례를 정해 두는 게 좋아.`;
+  if(s.k==='gen') return s.dir==='ab'?`네 일간 ${jo(ea,'이','가')} 그 사람 일간 ${jo(eb,'을','를')} 살려 주는 자리야. 네가 챙기고 그 사람이 기대는 흐름이 자연스러워.`:`그 사람 일간 ${jo(eb,'이','가')} 네 일간 ${jo(ea,'을','를')} 살려 주는 자리야. 그 사람이 챙기고 네가 기대는 흐름이 자연스러워.`;
+  return s.dir==='ab'?`네 일간 ${jo(ea,'이','가')} 그 사람 일간 ${jo(eb,'을','를')} 누르는 자리야. 네가 끌고 가는 쪽이 되기 쉽고, 그 긴장이 끌림이 되기도 해.`:`그 사람 일간 ${jo(eb,'이','가')} 네 일간 ${jo(ea,'을','를')} 누르는 자리야. 그 사람이 끌고 가는 쪽이 되기 쉽고, 그 긴장이 끌림이 되기도 해.`; }
+const BRTX={hap:'배우자 자리끼리 육합이야. 같이 있을 때 편안함이 쌓이고, 한번 묶이면 잘 안 풀리는 쪽이야.',sanhe:'배우자 자리가 삼합으로 같은 쪽을 봐. 목표가 맞으면 손발이 빨리 맞는 사이야.',chung:'배우자 자리가 정면으로 부딪히는 충이야. 끌림도 크지만 생활 리듬과 말투에서 자주 걸리기 쉬워.',yj:'배우자 자리가 원진이야. 가까워질수록 사소한 서운함이 쌓이기 쉬운 쪽이야.',hyung:'배우자 자리끼리 형이 걸려. 서로를 고치려 들 때 마찰이 커지기 쉬워.',zih:'배우자 자리 글자가 같고, 같은 글자끼리 예민해지는 자형이야. 닮은 만큼 같은 데서 날이 서기 쉬워.',same:'배우자 자리 글자가 같아. 연애에서 바라는 게 비슷할 가능성이 커.',none:'배우자 자리끼리 크게 당기거나 부딪히는 글자는 없어. 둘이 쌓는 습관이 관계의 모양을 정해.'};
+function branchTx(r){ const m=r.dr[0]||'none'; let t=BRTX[m]; if(m==='hap'&&r.dr.includes('hyung')) t+=' 다만 형도 함께 걸려 있어서, 가까운 만큼 잔소리가 늘기 쉬워.'; if(m==='chung'&&r.dr.includes('hyung')) t+=' 형까지 겹쳐 있어서 다툼이 길어지기 쉬운 자리야.'; return t; }
+function fillTx(r){ const f=r.fill, nm=a=>a.map(i=>EL_K[i]).join(' · ');
+  if(f.fa.length&&f.fb.length) return `네게 없는 ${nm(f.fa)} 기운을 그 사람이, 그 사람에게 없는 ${nm(f.fb)} 기운을 네가 갖고 있어. 곁에 있으면 양쪽 다 채워지는 조합이야.`;
+  if(f.fa.length) return `네게 없는 ${nm(f.fa)} 기운을 그 사람이 갖고 있어. 곁에 있으면 네 쪽이 편해지는 조합이야.`+(f.both.length?` 다만 ${nm(f.both)} 기운은 둘 다 비어 있어.`:'');
+  if(f.fb.length) return `그 사람에게 없는 ${nm(f.fb)} 기운을 네가 갖고 있어. 그 사람이 너한테서 편안함을 느끼기 쉬워.`+(f.both.length?` 다만 ${nm(f.both)} 기운은 둘 다 비어 있어.`:'');
+  if(f.both.length) return `둘 다 ${nm(f.both)} 기운이 비어 있어. 그 빈칸은 둘이 함께 채워야 하는 자리야.`;
+  if(f.soft) return f.soft[0]==='a'?`네게 적은 ${EL_K[f.soft[1]]} 기운을 그 사람이 넉넉히 갖고 있어. 크진 않아도 곁에서 채워지는 쪽이야.`:`그 사람에게 적은 ${EL_K[f.soft[1]]} 기운을 네가 넉넉히 갖고 있어. 크진 않아도 곁에서 채워 주는 쪽이야.`;
+  return '둘 다 기운이 고르게 있는 편이라, 크게 채워 주는 칸도 크게 겹치는 빈칸도 없어.'; }
+function starTx(r){ const a=r.lvA, b=r.lvB;
+  if(a>=2&&b>=2) return '서로의 사주에 서로의 인연의 별이 들어 있어. 양쪽 모두 상대를 짝으로 알아보기 쉬운 구조야.';
+  if(a>=2) return '그 사람 사주에 네 인연의 별이 뚜렷해. 네 쪽에서 짝으로 느끼기 쉬운 상대야.'+(a===3?' 그 사람 일간이 바로 그 별이야.':'');
+  if(b>=2) return '네 사주에 그 사람 인연의 별이 뚜렷해. 그 사람 쪽에서 너를 짝으로 느끼기 쉬운 구조야.'+(b===3?' 네 일간이 바로 그 별이야.':'');
+  if(a===1&&b===1) return '서로의 인연의 별이 옅게 걸려 있어. 알아보는 데 시간이 걸리는 쪽이야.';
+  if(a+b>=1) return '인연의 별이 한쪽에만 옅게 걸려 있어. 설렘보다 함께 보낸 시간이 묶어 주는 실이야.';
+  return '서로를 짝으로 붙잡는 별이 옅은 편이야. 설렘보다 생활의 약속으로 이어 가는 실이야.'; }
+function flowTx(r){ const n=r.flow.n, ys=r.flow.ys.filter(x=>x.both).map(x=>x.Y), list=ys.slice(0,3).join(', ')+(ys.length>3?' 들':'');
+  if(n>=6) return `앞으로 십 년 중 ${n}해는 두 사람 흐름이 함께 올라와. 같이 큰일을 벌이기 좋은 때가 넉넉한 편이야.`;
+  if(n>=3) return `앞으로 십 년 중 ${n}해가 겹쳐. ${list}년처럼 겹치는 해를 골라 쓰면 돼.`;
+  if(n>=1) return `두 사람 흐름이 함께 올라오는 해가 ${n}해뿐이야. ${list}년을 놓치지 않는 게 중요해.`;
+  return '앞으로 십 년은 한 사람이 오를 때 다른 사람이 쉬는 흐름이야. 번갈아 기대는 실이야.'; }
+const ptsTx=w=>`실의 세기에 ${w>0?'+':''}${w}`;
+const tagV=(t,c)=>`<em class="vd ${c||''}">${esc(t)}</em>`;
+function nodeSvg(kind){ return kind==='neg'?`<svg class="nd" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="var(--paper)"/><circle cx="10" cy="10" r="6" fill="none" stroke="#a52e24" stroke-width="3"/><circle cx="10" cy="10" r="2.6" fill="#8a241b"/></svg>`
+  :kind==='pos'?`<svg class="nd" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="var(--paper)"/><circle cx="10" cy="10" r="6" fill="#b8352a"/></svg>`
+  :`<svg class="nd" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="var(--paper)"/><circle cx="10" cy="10" r="5.5" fill="var(--paper)" stroke="#b8352a" stroke-width="1.6"/></svg>`; }
+/* 시각물 */
+function svgStem(r){ const A=r.A, B=r.B, s=r.sr, W=320, H=84, x1=56, x2=264, y=36;
+  const circ=(x,p)=>`<circle cx="${x}" cy="${y}" r="24" fill="#fffaf1" stroke="var(--ink)" stroke-width="1.3"/><text x="${x}" y="${y+7}" text-anchor="middle" font-family="Noto Serif KR,serif" font-weight="900" font-size="20" fill="var(--ink)">${GAN_K[p.dm]}</text><text x="${x}" y="${y+42}" text-anchor="middle" font-size="11" fill="var(--ink-2)">${p===A?'나':'그 사람'} · ${EL_K[p.el]}</text>`;
+  let mid='', lab='';
+  if(s.k==='ganhap'){ mid=`<path d="M82 ${y} C120 ${y-18},140 ${y+18},160 ${y} S200 ${y-18},238 ${y}" fill="none" stroke="#b8352a" stroke-width="2.4"/><path d="M82 ${y} C120 ${y+18},140 ${y-18},160 ${y} S200 ${y+18},238 ${y}" fill="none" stroke="#b8352a" stroke-width="2.4" opacity=".75"/>`; lab='천간합 · 서로 묶임'; }
+  else if(s.k==='same'){ mid=`<line x1="82" y1="${y-4}" x2="238" y2="${y-4}" stroke="var(--ink-2)" stroke-width="1.4"/><line x1="82" y1="${y+4}" x2="238" y2="${y+4}" stroke="var(--ink-2)" stroke-width="1.4"/>`; lab='같은 기운 · 나란함'; }
+  else { const ab=s.dir==='ab', xa=ab?84:236, xb=ab?232:88, hd=ab?-1:1; const gen=s.k==='gen';
+    mid=`<line x1="${xa}" y1="${y}" x2="${xb}" y2="${y}" stroke="${gen?'#b8352a':'var(--ink)'}" stroke-width="2" ${gen?'':'stroke-dasharray="5 4"'}/><path d="M${xb+hd*10} ${y-6} L${xb} ${y} L${xb+hd*10} ${y+6}" fill="none" stroke="${gen?'#b8352a':'var(--ink)'}" stroke-width="2"/>${gen?'':`<line x1="${xb+hd*2}" y1="${y-10}" x2="${xb+hd*2}" y2="${y+10}" stroke="var(--ink)" stroke-width="2"/>`}`;
+    lab=gen?`${ab?'내가':'그 사람이'} 살림`:`${ab?'내가':'그 사람이'} 누름`; }
+  return `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${mid}<text x="160" y="${y-14}" text-anchor="middle" font-size="11" font-weight="700" fill="${s.k==='ctl'?'var(--ink-2)':'#b8352a'}">${lab}</text>${circ(x1,A)}${circ(x2,B)}</svg>`; }
+function svgBranch(r){ const A=r.A, B=r.B, m=r.dr[0]||'none', W=320, H=84, y=34;
+  const box=(x,p)=>`<rect x="${x-22}" y="${y-22}" width="44" height="44" fill="#fffaf1" stroke="var(--ink)" stroke-width="1.3"/><text x="${x}" y="${y+7}" text-anchor="middle" font-family="Noto Serif KR,serif" font-weight="900" font-size="20" fill="var(--ink)">${JI_K[p.db]}</text><text x="${x}" y="${y+40}" text-anchor="middle" font-size="11" fill="var(--ink-2)">${p===A?'나':'그 사람'}의 배우자 자리</text>`;
+  const L=82, Rr=238; let mid='';
+  if(m==='hap') mid=`<line x1="${L}" y1="${y}" x2="${Rr}" y2="${y}" stroke="#b8352a" stroke-width="2.8"/>`;
+  else if(m==='sanhe') mid=`<path d="M${L} ${y} Q160 ${y+22} ${Rr} ${y}" fill="none" stroke="#b8352a" stroke-width="2.2"/>`;
+  else if(m==='same') mid=`<line x1="${L}" y1="${y-4}" x2="${Rr}" y2="${y-4}" stroke="#b8352a" stroke-width="1.6"/><line x1="${L}" y1="${y+4}" x2="${Rr}" y2="${y+4}" stroke="#b8352a" stroke-width="1.6"/>`;
+  else if(m==='none') mid=`<path d="M${L} ${y} Q160 ${y+16} ${Rr} ${y}" fill="none" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="4 4"/>`;
+  else { const dash=m==='yj'||m==='zih'; mid=`<path d="M${L} ${y} Q160 ${y+10} ${Rr} ${y}" fill="none" stroke="#b8352a" stroke-width="2.2" ${dash?'stroke-dasharray="6 3"':''}/><circle cx="160" cy="${y+5}" r="7.5" fill="var(--paper)" stroke="#a52e24" stroke-width="3"/><circle cx="160" cy="${y+5}" r="3" fill="#8a241b"/>`+(r.dr.includes('hyung')&&m!=='hyung'?`<circle cx="186" cy="${y+3}" r="5.5" fill="var(--paper)" stroke="#a52e24" stroke-width="2.4"/>`:''); }
+  const lab=m==='none'?'큰 관계 없음':r.dr.map(k=>RN[k]).join(' · ');
+  return `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${mid}<text x="160" y="${y-14}" text-anchor="middle" font-size="11" font-weight="700" fill="${NEGR.includes(m)?'var(--ink)':'#b8352a'}">${lab}</text>${box(56,A)}${box(264,B)}</svg>`; }
+function svgFill(r){ const ca=r.A.cnt, cb=r.B.cnt, f=r.fill, W=320, H=104, base=70, u=11;
+  let g=''; for(let i=0;i<5;i++){ const x=18+i*62, ha=ca[i]*u, hb=cb[i]*u, fillA=f.fa.includes(i), fillB=f.fb.includes(i), both=f.both.includes(i);
+    g+=`<rect x="${x}" y="${base-ha}" width="18" height="${ha}" fill="var(--ink-2)" opacity=".78"/><rect x="${x+21}" y="${base-hb}" width="18" height="${hb}" fill="#b8352a" opacity=".82"/>`;
+    if(ca[i]===0) g+=`<rect x="${x}" y="${base-u}" width="18" height="${u}" fill="none" stroke="var(--ink-3)" stroke-dasharray="2 2"/>`;
+    if(cb[i]===0) g+=`<rect x="${x+21}" y="${base-u}" width="18" height="${u}" fill="none" stroke="var(--ink-3)" stroke-dasharray="2 2"/>`;
+    if(fillA||fillB) g+=`<text x="${x+19.5}" y="${base-Math.max(ha,hb)-8}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b8352a">채움</text>`;
+    if(both) g+=`<text x="${x+19.5}" y="${base-u-8}" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--ink)">빈칸</text>`;
+    g+=`<text x="${x+19.5}" y="${base+16}" text-anchor="middle" font-family="Noto Serif KR,serif" font-size="13" font-weight="900" fill="var(--ink)">${EL_K[i]}</text><text x="${x+19.5}" y="${base+29}" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">${ELN[i]}</text>`; }
+  return `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true"><line x1="10" y1="${base}" x2="${W-10}" y2="${base}" stroke="var(--line)" stroke-width="1"/>${g}</svg>
+   <div class="lb-legend" style="margin-top:6px"><span><i style="border-radius:0;border:0;background:var(--ink-2)"></i>나</span><span><i style="border-radius:0;border:0;background:#b8352a"></i>그 사람</span><span><i style="border-radius:0;border:1px dashed var(--ink-3)"></i>없는 기운</span></div>`; }
+function starsHtml(r){ const row=(t,sub,lv)=>`<div class="r"><div><b>${t}</b><small>${sub}</small></div><div class="lb-dots">${[1,2,3].map(k=>`<i class="${k<=lv?'on':''}"></i>`).join('')}</div></div>`;
+  const cA=r.B.cnt[r.A.star], cB=r.A.cnt[r.B.star];
+  return `<div class="stars">${row(`내 인연의 별 · ${EL_K[r.A.star]} 기운`,`그 사람 사주에 ${cA}개${r.lvA===3?' · 일간이 바로 그 별':''}`,r.lvA)}${row(`그 사람 인연의 별 · ${EL_K[r.B.star]} 기운`,`내 사주에 ${cB}개${r.lvB===3?' · 내 일간이 바로 그 별':''}`,r.lvB)}</div>`; }
+function svgFlow(r){ const ys=r.flow.ys, W=320, H=96, cw=30, x0=12;
+  let g=''; ys.forEach((x,i)=>{ const cx=x0+i*cw, fa=x.a.good, fb=x.b.good;
+    if(x.both) g+=`<rect x="${cx}" y="4" width="${cw-4}" height="70" fill="rgba(184,53,42,.08)"/><line x1="${cx+(cw-4)/2}" y1="30" x2="${cx+(cw-4)/2}" y2="48" stroke="#b8352a" stroke-width="2.4"/>`;
+    g+=`<rect x="${cx+3}" y="10" width="${cw-10}" height="20" fill="${fa?'var(--ink-2)':'none'}" stroke="var(--ink-2)" stroke-width="1" ${fa?'':'stroke-dasharray="2 2"'} opacity="${fa?.85:.6}"/>`;
+    g+=`<rect x="${cx+3}" y="48" width="${cw-10}" height="20" fill="${fb?'#b8352a':'none'}" stroke="#b8352a" stroke-width="1" ${fb?'':'stroke-dasharray="2 2"'} opacity="${fb?.85:.6}"/>`;
+    g+=`<text x="${cx+(cw-4)/2}" y="88" text-anchor="middle" font-size="10" font-weight="${x.both?700:500}" fill="${x.both?'#b8352a':'var(--ink-3)'}">${String(x.Y).slice(2)}년</text>`; });
+  return `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${g}</svg><div class="lb-legend" style="margin-top:6px"><span><i style="border-radius:0;border:0;background:var(--ink-2)"></i>나의 오르는 해</span><span><i style="border-radius:0;border:0;background:#b8352a"></i>그 사람의 오르는 해</span><span><i style="border-radius:0;border:0;width:2px;background:#b8352a"></i>함께 오르는 해</span></div>`; }
+const why=(...ps)=>`<div class="lb-why"><small>근거</small>${ps.filter(Boolean).map(p=>`<p>${p}</p>`).join('')}</div>`;
+function checks(r){ const A=r.A, B=r.B, s=r.sr, m=r.dr[0]||'none', f=r.fill, du=x=>{ const g=yearGood(x,Y0); return g.isDu?`${gzK(g.dy)} 대운 (${g.age}세부터)`:'첫 대운 전'; };
+  const C={
+   stem:{t:'일간 관계',vd:s.k==='ganhap'?['묶임','pos']:s.k==='gen'?['살림','pos']:s.k==='same'?['나란함','']:['누름','neg'],nd:s.w>0?(s.k==='same'?'mid':'pos'):'neg',v:svgStem(r),p:stemTx(r),
+     w:why(`<b>일간</b>은 사주의 주인 글자야. 나 ${GAN_K[A.dm]}(${EL_K[A.el]}) · 그 사람 ${GAN_K[B.dm]}(${EL_K[B.el]}).`,s.k==='ganhap'?'천간합은 두 일간이 짝을 이루는 합이야.':s.k==='gen'?'한쪽 기운이 다른 쪽 기운을 살리는 상생이야.':s.k==='ctl'?'한쪽 기운이 다른 쪽 기운을 누르는 상극이야.':'같은 기운끼리 만난 비화야.',ptsTx(s.w))},
+   branch:{t:'일지 관계',vd:m==='none'?['무난','']:[RN[m],NEGR.includes(m)?'neg':'pos'],nd:r.dw>0?'pos':r.dw<0?'neg':'mid',v:svgBranch(r),p:branchTx(r),
+     w:why(`<b>일지</b>는 태어난 날의 땅 글자, 배우자 자리야. 나 ${JI_K[A.db]} · 그 사람 ${JI_K[B.db]}.`,m!=='none'?r.dr.map(k=>RWHY[k]).join(' '):'',`띠끼리는 ${r.yr.length?r.yr.map(k=>RN[k]).join(' · '):'무난'}, 태어난 달끼리는 ${r.mr.length?r.mr.map(k=>RN[k]).join(' · '):'무난'}.`,ptsTx(r.dw+r.yw+r.mw))},
+   fill:{t:'오행 보완',vd:f.fa.length||f.fb.length||f.soft?['채움','pos']:f.both.length?['빈칸','neg']:['고름',''],nd:f.w>0?'pos':f.w<0?'neg':'mid',v:svgFill(r),p:fillTx(r),
+     w:why(`여덟 글자를 다섯 기운으로 나눠 센 값이야. 나는 ${A.cnt.map((c,i)=>EL_K[i]+' '+c).join(', ')}. 그 사람은 ${B.cnt.map((c,i)=>EL_K[i]+' '+c).join(', ')}.`,(A.P.h&&B.P.h)?'':'시를 모르는 쪽은 여섯 글자로 셌어.',ptsTx(f.w))},
+   star:{t:'배우자 자리 서로 보기',vd:r.lvA>=2&&r.lvB>=2?['서로 봄','pos']:r.lvA>=2||r.lvB>=2?['한쪽 봄','pos']:r.lvA+r.lvB>=1?['옅음','']:['옅음','neg'],nd:r.starW>0?'pos':r.starW<0?'neg':'mid',v:starsHtml(r),p:starTx(r),
+     w:why(`<b>인연의 별</b>은 짝으로 끌리는 기운이야. ${A.male?'남자는 재성':'여자는 관성'} 자리를 봐. 내 별은 ${elW(A.star)}, 그 사람 별은 ${elW(B.star)}.`,'상대 사주에 그 기운이 많을수록, 일간이 바로 그 기운이면 더 진하게 쳤어.',ptsTx(r.starW))},
+   flow:{t:'대운 흐름이 겹치는 시기',vd:[`${r.flow.n}해 겹침`,r.flow.n>=4?'pos':r.flow.n<=1?'neg':''],nd:r.flow.w>0?'pos':r.flow.w<0?'neg':'mid',v:svgFlow(r),p:flowTx(r),
+     w:why(`<b>대운</b>은 열 해씩 바뀌는 큰 흐름이야. 지금 나는 ${du(A)}, 그 사람은 ${du(B)}.`,`일간의 힘(나는 ${A.st.label.replace(' (',', ').replace(')','')}, 그 사람은 ${B.st.label.replace(' (',', ').replace(')','')})에 비춰 도움이 되는 대운인지 보고, 해마다 바뀌는 세운을 더해 ${Y0}년부터 열 해를 셌어.`,ptsTx(r.flow.w))}};
+  return C; }
+function bandScale(sc){ const b=bandOf(sc), pct=clamp(sc,0,100);
+  return `<div class="bar">${[0,1,2,3,4].map(i=>`<i class="${i===b?'on':''}"></i>`).join('')}<span class="mk" style="left:${pct}%"></span></div><div class="lbl">${BANDS.map((x,i)=>`<span class="${i===b?'on':''}">${x[1]}</span>`).join('')}</div>`; }
+function threadFig(r){ const W=360, H=176, ax=62, ay=104, bx=298, by=52, d=Math.hypot(bx-ax,by-ay), dep=r.sagF*d, cx=(ax+bx)/2, cy=(ay+by)/2+2*dep;
+  const q=t=>[(1-t)*(1-t)*ax+2*(1-t)*t*cx+t*t*bx,(1-t)*(1-t)*ay+2*(1-t)*t*cy+t*t*by], P=`M${ax} ${ay} Q${cx.toFixed(1)} ${cy.toFixed(1)} ${bx} ${by}`;
+  const ks=(KT[r.knots.length]||[]).map(t=>{ const [x,y]=q(t); return `<circle cx="${(x+7).toFixed(1)}" cy="${(y+14).toFixed(1)}" r="6.5" fill="rgba(84,52,26,.2)" filter="url(#fsh)"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="none" stroke="#a52e24" stroke-width="3"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.1" fill="#8a241b"/>`; }).join('');
+  const sp=(x,y)=>`<g><circle cx="${x+6}" cy="${y+10}" r="33" fill="rgba(70,45,20,.22)" filter="url(#fsh2)"/><circle cx="${x}" cy="${y}" r="33" fill="url(#wood)" stroke="rgba(90,60,30,.45)"/><circle cx="${x}" cy="${y}" r="23" fill="#b8352a" stroke="rgba(80,20,15,.45)"/>${[19,15,11].map(rr=>`<circle cx="${x}" cy="${y}" r="${rr}" fill="none" stroke="rgba(110,26,18,.5)" stroke-width=".8"/>`).join('')}<circle cx="${x}" cy="${y}" r="9" fill="#e8d4b0" stroke="rgba(90,60,30,.45)"/><circle cx="${x}" cy="${y}" r="3" fill="#3b2a1d"/><circle cx="${x}" cy="${y}" r="33" fill="url(#hl)"/></g>`;
+  const lab=(x,y,a,b)=>`<text x="${x}" y="${y+52}" text-anchor="middle" font-family="Noto Serif KR,serif" font-size="13" font-weight="900" fill="var(--ink)">${a}</text><text x="${x}" y="${y+67}" text-anchor="middle" font-size="11" fill="var(--ink-2)">${b}</text>`;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="두 실패 사이에 걸린 붉은 실. 매듭 ${r.knots.length}개"><defs><filter id="fsh" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter><filter id="fsh2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+   <radialGradient id="wood" cx="50%" cy="50%" r="50%"><stop offset=".7" stop-color="#d6b787"/><stop offset="1" stop-color="#bf9861"/></radialGradient><radialGradient id="hl" cx="32%" cy="28%" r="60%"><stop offset="0" stop-color="#fffcf2" stop-opacity=".6"/><stop offset=".7" stop-color="#fffcf2" stop-opacity="0"/></radialGradient></defs>
+   <path d="${P}" fill="none" stroke="rgba(84,52,26,.2)" stroke-width="3.4" filter="url(#fsh)" transform="translate(7 14)"/>
+   <path d="${P}" fill="none" stroke="#b8352a" stroke-width="2.6" stroke-linecap="round"/><path d="${P}" fill="none" stroke="rgba(255,228,210,.75)" stroke-width=".8" transform="translate(-.5 -.8)"/>
+   ${ks}${sp(ax,ay)}${sp(bx,by)}${lab(ax,ay,'나',r.A.dayK+'일생')}${lab(bx,by,'그 사람',r.B.dayK+'일생')}</svg>`; }
+function chart(r){ const A=r.A, B=r.B, cols=['h','d','m','y'], NM={h:'시',d:'일',m:'월',y:'년'};
+  const cell=(p,k)=>{ const v=p.P[k]; if(!v) return `<div class="c x"><b>·</b><b>·</b><small>시 모름</small></div>`; return `<div class="c ${k==='d'?'d':''}"><b>${GAN_K[v[0]]}</b><b>${JI_K[v[1]]}</b><small>${EL_K[stEl(v[0])]} · ${EL_K[BR_EL[v[1]]]}</small></div>`; };
+  const gap=k=>{ const a=A.P[k], b=B.P[k]; if(!a||!b) return `<div class="gp"><svg viewBox="0 0 20 54"><line x1="10" y1="0" x2="10" y2="54" stroke="var(--ink-3)" stroke-dasharray="2 3" opacity=".5"/></svg></div>`;
+    const rl=brRels(a[1],b[1]), main=rl[0], sh=k==='d'&&ganHap(a[0],b[0]), pos=sh||POSR.includes(main), neg=NEGR.includes(main);
+    const ln=pos?`<line x1="10" y1="0" x2="10" y2="54" stroke="#b8352a" stroke-width="${sh||main==='hap'?2.8:1.8}"/>`:neg?`<line x1="10" y1="0" x2="10" y2="54" stroke="#b8352a" stroke-width="1.8"/><circle cx="10" cy="18" r="5.5" fill="var(--paper)" stroke="#a52e24" stroke-width="2.6"/><circle cx="10" cy="18" r="2" fill="#8a241b"/>`:`<line x1="10" y1="0" x2="10" y2="54" stroke="var(--ink-3)" stroke-dasharray="2 3" opacity=".6"/>`;
+    const t=[sh?'천간합':'',main?RN[main]:''].filter(Boolean).join(' · ');
+    return `<div class="gp"><svg viewBox="0 0 20 54" aria-hidden="true">${ln}</svg>${t?`<span class="${pos?'pos':''}">${t}</span>`:''}</div>`; };
+  return `<div class="p8"><div class="hd"></div>${cols.map(k=>`<div class="hd">${NM[k]}</div>`).join('')}
+   <div class="who">나<small>${A.male?'남':'여'}</small></div>${cols.map(k=>cell(A,k)).join('')}
+   <div class="gp lbl">마주 봄</div>${cols.map(gap).join('')}
+   <div class="who">그 사람<small>${B.male?'남':'여'}</small></div>${cols.map(k=>cell(B,k)).join('')}</div>
+   <p class="p8-n">위가 하늘 글자, 아래가 땅 글자야. 붉은 테두리가 사주의 주인인 일주. 가운데 실은 같은 자리끼리 마주 본 관계야. 곧은 실은 합, 매듭은 충 · 원진 · 형.</p>`; }
+const sec=(no,t,hint,body,cls)=>`<section class="lb-sec rv ${cls||''}"><div class="lb-h"><span class="lb-no">${no}</span><h3>${t}</h3>${hint?`<small>${hint}</small>`:''}</div>${body}</section>`;
+function quoteLine(r){ const w=ANS.want; if(w===3) return r.knots.length?`매듭이 ${NUMK[r.knots.length]} 군데야. 거기서만 조심하면 실은 쉽게 끊기지 않아.`:'크게 엉킨 매듭은 없어. 부딪히는 건 실보다 속도 차이야.';
+  let t=QUOTE[w][r.pol]; if(ANS.stage===4) t=r.pol==='pos'?'끊겼어도 당기는 힘은 남아 있는 실이야. 다시 이을지는 이유를 보고 정해.':r.pol==='mid'?'끊긴 자리보다 끊긴 이유가 중요해. 그게 바뀌었는지부터 봐.':'같은 자리에서 또 끊기기 쉬운 실이야. 서두르지 마.'; return t; }
+function actLine(r){ if(ANS.want===3&&r.fr.length) return r.fr[0].keep; return ACT[ANS.stage]; }
+let rvIO=null;
+function reveals(){ if(rvIO) rvIO.disconnect(); if(RM||!('IntersectionObserver' in window)){ $('sRes').querySelectorAll('.rv').forEach(e=>e.classList.add('in')); $('sRes').querySelectorAll('.lb-anim').forEach(e=>e.classList.add('in')); return; }
+  rvIO=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); e.target.querySelectorAll('.lb-anim').forEach(x=>x.classList.add('in')); rvIO.unobserve(e.target); } }),{root:$('sRes'),threshold:.1});
+  $('sRes').querySelectorAll('.rv:not(.in)').forEach(el=>rvIO.observe(el)); setTimeout(()=>$('hSt').classList.add('in'),500); }
+let C=null, AIS={};
+function renderFree(){ const r=R, b=BANDS[r.band];
+  $('mDate').textContent=`월하 작성 · ${YNOW}. ${NOW.getMonth()+1}. ${NOW.getDate()}`;
+  $('hK').textContent=`붉은 실 궁합 · ${STAGE_K[ANS.stage]}`; $('hT').innerHTML=esc(b[0].replace(/ 실$/,''))+'<br><em>실</em>'; $('hS').textContent=`나 ${r.A.dayK}일생 · 그 사람 ${r.B.dayK}일생`;
+  $('hSt').innerHTML=`<div class="lb-stamp is-fill" style="--sz:96px"><small>실의 세기</small><b>${r.score}</b><em>${b[1]}</em></div>`;
+  $('fig').innerHTML=threadFig(r);
+  $('lead').innerHTML=`<b>${esc(BAND_D[r.band])}</b> ${esc(STG_D[ANS.stage])}`;
+  $('scale').innerHTML=bandScale(r.score);
+  const CK=checks(r), ord=ORDER_W[ANS.want];
+  const ledger=`<div class="ledger">${ord.map((k,i)=>{ const c=CK[k]; return `<article class="ck rv ${i<2?'asked':''}">${nodeSvg(c.nd)}<div class="ck-h"><span class="no">${String(i+1).padStart(2,'0')}</span><h4>${c.t}</h4>${i<2?'<i class="askd">물어본 것</i>':''}${tagV(c.vd[0],c.vd[1])}</div><div class="ck-v">${c.v}</div><p class="ck-p">${esc(c.p)}</p>${c.w}</article>`; }).join('')}</div>`;
+  const h=[sec('01','여덟 글자 나란히','두 사람의 사주',chart(r)),
+    sec('02','실의 장부',`${WANT[ANS.want]} 쪽부터`,`<p class="lb-lead">다섯 자리를 차례로 짚었어. 붉게 찬 점은 실을 당기는 자리, 매듭은 부딪히는 자리야.</p>${ledger}`),
+    sec('03','월하의 한마디','',`<div class="lb-quote"><div class="lb-av" style="background-image:url('img/taegil.jpg')"></div><div><small>중매인 월하 · ${esc(WANT[ANS.want])}</small><p>${esc(quoteLine(r))}</p></div></div><div class="lb-act"><small>할 일 하나</small><b>${esc(actLine(r))}</b></div>`)];
+  $('free').innerHTML=h.join('');
+  C=draft(); AIS={}; $('prem').hidden=true; $('prem').innerHTML='';
+  if(isPaid()) openPrem(true); else { renderLock(); $('lockW').hidden=false; }
+  $('sRes').querySelectorAll('.rv').forEach(el=>el.classList.remove('in')); $('hSt').classList.remove('in'); reveals();
+  archive(); }
+$('sRes').addEventListener('scroll',()=>{ $('top').classList.toggle('sc',$('sRes').scrollTop>40); },{passive:true});
+
+/* ================= 5. 월하의 혼서 (19,900원) ================= */
+const paidSet=()=>{ try{ return JSON.parse(localStorage.getItem('rtPaid')||'[]'); }catch(e){ return []; } };
+const isPaid=()=>!!R&&paidSet().includes(R.key);
+function setPaid(){ try{ const a=paidSet(); if(!a.includes(R.key)) a.unshift(R.key); localStorage.setItem('rtPaid',JSON.stringify(a.slice(0,30))); }catch(e){} }
+const LOCKI=['두 사람이 엮이는 방식','부딪히는 지점과 푸는 법','__win','앞으로 5년 실의 흐름','오래 가려면 지킬 세 가지','월하의 한 줄 혼서'];
+const winTitle=()=>ANS.stage===3?'함께 큰일을 정할 시기 창':ANS.stage===4?'다시 닿기 쉬운 시기 창':'결혼 · 동거 시기 창';
+const LKI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><rect x="5" y="11" width="14" height="10"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+function renderLock(){ const L=LOCKI.map(t=>t==='__win'?winTitle():t), nY=R.yf.length;
+  $('lockW').innerHTML=`<div class="lb-h"><span class="lb-no">04</span><h3>월하의 혼서</h3><small>두 사람 몫의 긴 풀이</small></div>
+  <div class="lb-lock"><div class="hd"><small>혼서 · 혼인을 청하며 보내던 편지</small></div><h4>다 못 적은 것을<br>두 사람 몫으로 적어 둘게</h4><div class="lb-stamp is-fill seal"><small>열기 전</small><b>봉인</b></div>
+   <div class="pv" aria-hidden="true"><p>두 사람의 실은 처음 감길 때와 오래 감길 때 모양이 달라. 어느 해에 매듭이 조이고 어느 해에 풀리는지, 그해마다 둘이 할 일을 차례로 적었어.</p></div>
+   <ul>${L.map((t,i)=>`<li>${LKI}${esc(t)}<em>${i===2?`${R.win.length}개의 창`:i===3?`${Y0}~${Y0+nY-1}`:i===1?`${R.fr.length}곳`:''}</em></li>`).join('')}</ul>
+   <div class="price"><span>한 번 결제 · 보관함에 저장</span><b>19,900원</b></div>
+   <button class="lb-btn" id="payBtn" type="button">월하의 혼서 받기</button>
+   <p class="fine">결제 화면에서 결과를 공유하면 50% 할인돼요</p></div>`;
+  $('payBtn').onclick=()=>{ if(window.ObPay&&ObPay.products&&ObPay.products.redthread) ObPay.open(Object.assign({},ObPay.products.redthread,{after:()=>openPrem()})); else { toast('체험판이라 결제 없이 열었어요'); openPrem(); } }; }
+/* 부딪히는 지점 */
+function frictions(A,B,r){ const out=[], add=(point,why,fix,keep)=>out.push({point,why,fix,keep});
+  if(r.dr.includes('chung')) add('생활 리듬과 말투',`배우자 자리 ${JI_K[A.db]}와 ${JI_K[B.db]}가 정면으로 부딪혀. 자는 시간, 쉬는 방식, 말의 속도처럼 매일 겹치는 데서 걸리기 쉬워.`,'다툼은 그날 안에, 한 번에 한 가지 주제만. 지난 일을 묶어서 꺼내지 않기.','다툼은 그날 안에, 한 가지 주제만');
+  if(r.dr.includes('yj')) add('사소한 서운함',`배우자 자리가 원진이라, 큰일보다 작은 말 한마디에 서운함이 쌓이기 쉬워.`,'서운한 건 작을 때 한 문장으로. 쌓아 두면 원진은 더 커져.','서운한 건 작을 때 한 문장으로');
+  if(r.dr.includes('hyung')) add('서로 고치려는 마음','배우자 자리끼리 형이 걸려서, 아끼는 마음이 잔소리와 간섭으로 바뀌기 쉬워.','고칠 점 대신 바라는 것 하나만 말하기.','고칠 점 대신 바라는 것 하나만');
+  if(r.dr.includes('zih')) add('같은 데서 예민해짐','배우자 자리 글자가 같고 자형이라, 닮은 만큼 같은 지점에서 동시에 날이 서기 쉬워.','둘 중 한 사람은 먼저 한 박자 쉬기로 정해 두기.','한 사람은 먼저 한 박자 쉬기');
+  if(r.yr.includes('chung')) add('집안 분위기와 주변 사람','띠끼리 충이라, 자라 온 집의 방식과 주변 사람들의 결이 달라 맞춰 가는 시간이 필요해.','가족 얘기는 비교 없이. 각자 집의 방식은 각자 설명하기.','가족 얘기는 비교 없이');
+  if(r.mr.includes('chung')) add('바쁜 시기의 엇갈림','태어난 달끼리 충이라, 일과 바깥 생활의 리듬이 엇갈리기 쉬워.','바쁜 달은 미리 알려 두기. 연락 횟수보다 약속 지키기.','바쁜 달은 미리 알려 두기');
+  if(r.sr.k==='ctl') add('주도권',`일간끼리 한쪽이 한쪽을 누르는 관계라, 누가 정하느냐로 부딪히기 쉬워.`,'결정하는 쪽을 영역별로 나눠 두기. 돈은 누가, 일정은 누가.','결정하는 쪽을 영역별로 나누기');
+  if(r.sr.k==='same') add('같은 방향의 고집',`둘 다 ${EL_K[A.el]} 일간이라, 물러서지 않는 순간이 동시에 와.`,'양보할 차례를 미리 정해 두기.','양보할 차례를 미리 정하기');
+  r.fill.both.slice(0,1).forEach(i=>add(`둘 다 비어 있는 ${EL_K[i]} 기운`,`두 사람 모두 ${EL_K[i]} 기운이 없어서, 그 기운이 맡는 일을 서로 미루기 쉬워.`,ELFIX[i],ELKEEP[i]));
+  if(r.lvA+r.lvB<=1) add('서로를 붙잡는 별이 옅음','인연의 별이 서로의 사주에 옅게 걸려 있어서, 설렘이 식으면 이어 갈 이유를 놓치기 쉬워.','기념일과 둘만의 루틴을 만들어 생활로 묶기.','둘만의 루틴 하나 만들기');
+  if(!out.length) add('속도 차이','크게 엉킨 매듭은 없어. 대신 마음이 움직이는 속도가 달라서, 한쪽이 앞서 나가면 다른 쪽이 숨이 차기 쉬워.','앞선 쪽이 한 박자 늦추기. 큰 결정은 일주일 묵히기.','큰 결정은 일주일 묵히기');
+  return out.slice(0,4); }
+function yearText(y,r){ const both=y.ga.good&&y.gb.good, one=y.ga.good!==y.gb.good, ch=y.rA==='chung'||y.rB==='chung';
+  const title=ch?'부딪히기 쉬운 해':y.sc>=70?'가까워지는 해':one?'한쪽이 바쁜 해':y.sc>=56?'다져지는 해':'숨 고르는 해';
+  const rl=(rr,w)=>rr==='hap'?`그해 지지가 ${w} 배우자 자리와 육합이라 마음이 열리기 쉬워.`:rr==='sanhe'?`그해 지지가 ${w} 배우자 자리와 삼합이라 손발이 맞기 쉬워.`:rr==='chung'?`그해 지지가 ${w} 배우자 자리와 충이라 생활이 흔들리기 쉬워.`:rr==='yj'?`그해 지지가 ${w} 배우자 자리와 원진이라 괜한 서운함이 생기기 쉬워.`:rr==='hyung'?`그해 지지가 ${w} 배우자 자리와 형이라 말이 날카로워지기 쉬워.`:'';
+  const t=[`${y.Y}년은 ${gzK(y.yp)}년이야.`,both?'두 사람 흐름이 함께 올라와서 같이 정하는 일이 잘 풀리는 쪽이야.':one?`${y.ga.good?'네':'그 사람'} 흐름이 올라오고 ${y.ga.good?'그 사람은':'너는'} 숨을 고르는 해야. 오르는 쪽이 끌고, 쉬는 쪽을 재촉하지 않는 게 좋아.`:'두 사람 다 흐름이 낮은 해라, 큰 결정보다 지키는 쪽이 나아.',rl(y.rA,'네'),rl(y.rB,'그 사람'),y.sA&&y.sB?'둘의 인연의 별이 함께 뜨는 해이기도 해.':y.sA?'네 인연의 별이 뜨는 해이기도 해.':y.sB?'그 사람 인연의 별이 뜨는 해이기도 해.':''].filter(Boolean).join(' ');
+  const tip=ch?'큰 얘기는 날 잡아서':title==='가까워지는 해'?'큰 약속 의논하기':one?'오르는 쪽이 일정 맞추기':title==='다져지는 해'?'같이 쓰는 돈 정리하기':'각자 쉬는 시간 지키기';
+  return {title,text:t,tip}; }
+function windows(A,B,r){ const c=yearsOf(A,B,Y0,6).filter(y=>y.rA!=='chung'&&y.rB!=='chung').map(y=>{ const why=[]; let v=y.sc;
+    if(y.ga.good&&y.gb.good){ v+=6; why.push(['두 사람 흐름이 함께 올라오고','두 사람 흐름이 함께 올라오는 해야','두 사람 흐름이 함께 오름']); }
+    const okR=k=>k==='hap'||k==='sanhe';
+    if(okR(y.rA)) why.push([`그해 지지가 네 배우자 자리와 ${RN[y.rA]}을 이루고`,`그해 지지가 네 배우자 자리와 ${RN[y.rA]}을 이루는 해야`,`그해 지지와 내 배우자 자리 ${RN[y.rA]}`]);
+    if(okR(y.rB)){ const h=okR(y.rA)?'그 사람 배우자 자리와도':'그해 지지가 그 사람 배우자 자리와'; why.push([`${h} ${RN[y.rB]}을 이루고`,`${h} ${RN[y.rB]}을 이루는 해야`,`그해 지지와 그 사람 배우자 자리 ${RN[y.rB]}`]); }
+    if(y.sA&&y.sB) why.push(['둘의 인연의 별이 함께 뜨고','둘의 인연의 별이 함께 뜨는 해야','두 사람 인연의 별']); else if(y.sA) why.push(['네 인연의 별이 뜨고','네 인연의 별이 뜨는 해야','내 인연의 별']); else if(y.sB) why.push(['그 사람 인연의 별이 뜨고','그 사람 인연의 별이 뜨는 해야','그 사람 인연의 별']);
+    return Object.assign({},y,{v,why}); }).filter(y=>y.why.length);
+  let pick=c.filter(y=>y.v>=62).sort((a,b)=>b.v-a.v).slice(0,3); if(pick.length<2) pick=c.sort((a,b)=>b.v-a.v).slice(0,2);
+  const TAIL=[['관계를 한 단계 분명히 묶기 좋은 쪽으로 기울어.','둘 사이를 주변에 알리기도 편해.','다음 단계를 꺼내 봐도 실이 덜 흔들려.'],
+   ['함께 사는 일이나 결혼 약속을 의논하기 좋은 쪽으로 기울어.','양쪽 집에 인사를 가거나 같이 살 곳을 알아보기 좋아.','미뤄 둔 큰 약속을 꺼내 봐도 매듭이 덜 생겨.'],
+   ['결혼 날이나 함께 살 날을 의논하기 좋은 쪽으로 기울어.','양쪽 집안과 이야기를 맞추기도 편해.','살림을 합치는 일을 실제로 움직여 봐도 좋아.'],
+   ['집 · 이사 · 아이처럼 둘이 같이 정하는 큰일을 의논하기 좋은 쪽으로 기울어.','함께 모으는 돈이나 집 문제를 정리하기 좋아.','둘만의 시간을 다시 늘리기에도 좋아.'],
+   ['다시 연락이 닿을 여지가 커지는 쪽으로 기울어. 끊긴 이유가 정리됐다면 그때 움직여.','먼저 안부를 건네도 덜 어색해. 짧게, 한 번만.','다시 만나도 같은 데서 걸리지 않을지 확인해 보기 좋아.']][ANS.stage];
+  return pick.sort((a,b)=>a.Y-b.Y).map(y=>{
+    return y; }).map((y,i)=>{ const w=y.why, s1=w.slice(0,-1).map(x=>x[0]).concat([w[w.length-1][1]]).join(', ').replace(/고, /g,'고 '); return Object.assign(y,{text:`${s1}. ${TAIL[i%3]}`,whyK:w.map(x=>x[2])}); }); }
+function draft(){ const r=R, A=r.A, B=r.B, c={};
+  const s0=r.sr, ab=s0.dir==='ab', I=ab?'네가':'그 사람이', U=ab?'그 사람이':'네가';
+  const P1=s0.k==='ganhap'?'두 사람 일간은 서로를 짝으로 끌어당기는 천간합이야. 이런 사이는 처음엔 말이 없어도 편하고, 떨어져 있어도 생각이 자주 나. 대신 합은 서로에게 기대는 힘이라, 한쪽이 지치면 다른 쪽도 같이 처지기 쉬워. 기대는 차례를 번갈아 가져가는 게 오래 가는 방법이야.'
+    :s0.k==='gen'?`${I} 챙기고 ${U} 기대는 흐름이 자연스러운 사이야. 처음엔 이 역할이 둘 다 편해. 다만 주는 쪽은 티 내지 않고 쌓아 두다 한 번에 지치기 쉽고, 받는 쪽은 그걸 늦게 알아채. 받은 쪽이 고마움을 말로 돌려주는 습관 하나가 이 흐름을 오래 지켜.`
+    :s0.k==='ctl'?`${I} 방향을 정하고 ${U} 따라오는 모양이 되기 쉬운 사이야. 처음엔 그 단단함이 끌림이 되지만, 오래 가면 따라가는 쪽이 숨이 막힌다고 느낄 수 있어. 누르는 힘을 결정권이 아니라 책임으로 쓰면, 같은 힘이 든든함으로 읽혀.`
+    :'둘 다 같은 기운의 일간이라 친구처럼 말이 잘 통하는 사이야. 취향과 속도가 비슷해서 편하지만, 고집도 같은 방향이라 둘 다 물러서지 않는 순간이 와. 먼저 물러서는 쪽이 지는 게 아니라는 약속을 미리 해 두면 좋아.';
+  const BD={hap:'배우자 자리끼리 육합이라, 일상의 리듬이 자연스럽게 맞물려. 같이 밥을 먹고 같은 공간에 있는 시간이 길수록 정이 깊어지는 쪽이야.',sanhe:'배우자 자리가 삼합이라, 같은 목표를 가질 때 빨리 가까워져. 함께 이루려는 일이 있으면 실이 단단해지고, 각자 다른 곳을 볼 때는 느슨해지기 쉬워.',chung:'배우자 자리가 충이라, 잠드는 시간, 쉬는 방식, 말의 속도처럼 매일 겹치는 데서 부딪히기 쉬워. 같은 공간을 쓰는 규칙을 일찍 정해 둘수록 다툼이 줄어.',yj:'배우자 자리가 원진이라, 큰 다툼보다 작은 서운함이 쌓이는 쪽이야. 그날의 서운함을 그날 털어 내는 습관이 이 실의 매듭을 풀어.',hyung:'배우자 자리끼리 형이 걸려서, 아끼는 마음이 잔소리와 간섭으로 바뀌기 쉬워. 고쳐 주려는 말보다 바라는 것 하나를 말하는 게 나아.',zih:'배우자 자리가 같은 글자의 자형이라, 닮은 만큼 같은 지점에서 동시에 예민해지기 쉬워. 한 사람이 먼저 한 박자 쉬는 약속이 필요해.',same:'배우자 자리가 같은 글자라 연애에서 바라는 게 비슷해. 맞추기는 쉬운데, 둘 다 같은 걸 양보하기 싫어할 수도 있어.',none:'배우자 자리끼리 크게 당기거나 부딪히는 글자가 없어. 그래서 둘이 함께 쌓는 습관이 관계의 모양을 정해. 정해 둔 루틴이 있으면 실이 금방 단단해지는 쪽이야.'};
+  const P2='같이 지낼 때의 결은 일지에서 보여. '+BD[r.dr[0]||'none']+(r.yr.includes('hap')?' 띠끼리는 합이라 양쪽 주변 사람들과도 어울리기 쉬워.':r.yr.includes('chung')?' 띠끼리는 충이라 자라 온 집의 방식이 달라 맞춰 가는 시간이 필요해.':'')+(r.mr.includes('chung')?' 태어난 달끼리도 충이라 바깥 생활의 리듬이 엇갈리기 쉬워.':'');
+  const wq=ANS.want===0?(r.lvA>=2&&r.lvB>=2?'끌림만 놓고 보면, 서로를 알아보는 힘이 양쪽에 다 있어.':r.lvA>=2||r.lvB>=2?'끌림만 놓고 보면, 한쪽이 먼저 끌리고 다른 쪽이 천천히 따라오는 모양이야.':'끌림만 놓고 보면, 첫눈보다 시간이 끌림을 만드는 사이야.')
+    :ANS.want===1?(r.fill.w>0?'오래 가는 데는 서로의 빈칸을 채우는 힘이 받쳐 줘.':'오래 가려면 빈칸을 같이 채워 가는 노력이 필요해.')
+    :ANS.want===2?(r.flow.n>=4?'결혼을 놓고 보면, 흐름이 겹치는 해가 넉넉해서 때를 고르기 어렵지 않아.':'결혼을 놓고 보면, 흐름이 겹치는 해가 많지 않아서 그해를 잘 골라야 해.')
+    :`부딪히는 이유는 대개 ${r.fr.map(f=>f.point).slice(0,2).join(', ')}에서 나와. 아래에 하나씩 풀어 둘게.`;
+  const lt=[P1,P2,`${wq} ${r.fill.fa.length||r.fill.fb.length?'오행으로는 서로 없는 기운을 나눠 갖고 있어서 곁에 있을수록 편해지는 쪽이고,':r.fill.both.length?'오행으로는 둘 다 비어 있는 기운이 있어서 그 몫을 함께 챙겨야 하고,':'오행으로는 고르게 맞는 편이고,'} ${r.lvA+r.lvB>=4?'인연의 별도 서로에게 진하게 걸려 있어.':r.lvA+r.lvB>=2?'인연의 별은 한쪽에 더 진하게 걸려 있어.':'인연의 별은 옅어서 생활의 약속이 그 자리를 채워야 해.'} ${STG_D[ANS.stage]}`];
+  c.ways=lt; c.friction=r.fr.map(f=>({point:f.point,why:f.why,fix:f.fix}));
+  c.windows=r.win.map(w=>({y:w.Y,text:w.text})); c.years=r.yf.map(y=>({y:y.Y,title:y.title,text:y.text,tip:y.tip}));
+  const keep=[]; r.fr.forEach(f=>{ if(keep.length<2&&f.keep&&!keep.includes(f.keep)) keep.push(f.keep); });
+  [r.flow.n>=1?'흐름이 겹치는 해에 큰일 정하기':'오르는 쪽이 번갈아 끌어 주기','고마운 건 그날 말로 꺼내기','한 달에 한 번, 둘만의 긴 대화'].forEach(t=>{ if(keep.length<3&&!keep.includes(t)) keep.push(t); });
+  c.keep=keep; c.line=LINE[r.band]; return c; }
+function card(){ const r=R, A=r.A, B=r.B, pl=p=>[['년주',p.P.y],['월주',p.P.m],['일주',p.P.d],['시주',p.P.h]].map(([n,x])=>n+' '+(x?gzK(x):'모름')).join(', ');
+  const pp=p=>({성별:p.male?'남':'여',원국:pl(p),일간:GAN_K[p.dm]+'('+EL_K[p.el]+')',일지:JI_K[p.db],인연의별:EL_K[p.star]+(p.male?'(재성)':'(관성)'),오행개수:p.cnt.map((v,i)=>EL_K[i]+v).join(' '),일간의힘:p.st.label,지금대운:(()=>{ const g=yearGood(p,Y0); return g.isDu?gzK(g.dy)+' 대운':'첫 대운 전'; })()});
+  return JSON.stringify({오늘:NOW.toISOString().slice(0,10),관계:STAGE_K[ANS.stage],가장알고싶은것:WANT[ANS.want],나:pp(A),그사람:pp(B),
+    실의세기:{점수:r.score,이름:BANDS[r.band][0],매듭:r.knots.map(k=>k.n)},
+    다섯가지:{일간관계:{종류:{ganhap:'천간합',gen:'상생',ctl:'상극',same:'비화'}[r.sr.k],방향:r.sr.dir==='ab'?'내가 그 사람에게':r.sr.dir==='ba'?'그 사람이 나에게':'',설명:stemTx(r)},일지관계:{관계:r.dr.map(k=>RN[k]).join(', ')||'없음',띠끼리:r.yr.map(k=>RN[k]).join(', ')||'없음',태어난달끼리:r.mr.map(k=>RN[k]).join(', ')||'없음'},
+      오행보완:fillTx(r),인연의별:starTx(r),대운겹침:{겹치는해:r.flow.ys.filter(x=>x.both).map(x=>x.Y),설명:flowTx(r)}},
+    부딪히는지점:r.fr.map(f=>f.point),시기창:r.win.map(w=>({연도:w.Y,세운:gzK(w.yp),근거:w.whyK})),
+    다섯해:r.yf.map(y=>({연도:y.Y,세운:gzK(y.yp),나의흐름:y.ga.good?'오름':'쉼',그사람흐름:y.gb.good?'오름':'쉼',내배우자자리와:y.rA?RN[y.rA]:'없음',그사람배우자자리와:y.rB?RN[y.rB]:'없음',내인연의별:y.sA?'뜸':'없음',그사람인연의별:y.sB?'뜸':'없음'}))}); }
+const WOLHA='화자는 붉은 실을 잇는 중매인 월하. 40대 초반 여성, 낮고 차분한 반말(~해, ~야, ~지). 단정하고 위엄 있되 다정하다. 감정을 부풀리지 않고 짧게 핵심을 말한다. 비유는 실 · 매듭 · 실패 · 바느질 · 달빛 · 새벽 중에서 한 단락에 하나만. 듣는 사람은 "너", 상대는 "그 사람"이라고 부르고 상대의 성별을 단정하지 않는다.';
+function prompts(){ const P=window.PremAI;
+  const common=P.COMMON.replace(/- 한자를 혼자 쓰지 않는다[^\n]*\n/,'- 한자를 쓰지 않는다. 간지 · 오행은 한글로만 쓴다. 예: 무신년, 토 기운.\n').replace(/- 이름을 부를 때는 \{N\} 토큰만 쓴다[^\n]*\n/,'- 이름은 쓰지 않는다.\n');
+  const ST0=`[문체 규칙 · 오방도감 중매인 월하]\n- ${WOLHA}\n- 두 사람의 마음, 결혼 여부, 이별 여부를 절대 단정하지 않는다. "반드시", "무조건", "운명" 같은 말은 쓰지 않는다. "~쪽으로 기울어", "~하기 쉬워", "~일 가능성이 커"처럼 기울기로만 쓴다.\n- 꾸밈말 · 감탄 · 상투적인 위로를 쓰지 않는다.\n`+common;
+  const core=`${ST0}\n\n[할 일] '월하의 혼서' 본문을 쓴다. 관계 단계와 가장 알고 싶은 것을 꼭 반영한다.
+출력 JSON 형식: {"ways":["두 사람이 엮이는 방식 3단락. 일간 관계 · 일지 관계 · 오행과 인연의 별 순서. 단락마다 110~170자"],"friction":[{"point":"부딪히는 지점 이름 6~16자","why":"왜 부딪히는지 60~110자","fix":"푸는 법 40~90자"}],"windows":[{"y":연도숫자,"text":"그해가 왜 창인지와 할 일 70~130자"}],"keep":["오래 가려면 지킬 것 3개, 각 12~30자"],"line":"월하의 한 줄 혼서 20~45자"}
+friction은 사실 카드의 부딪히는지점 순서대로, windows는 사실 카드의 시기창 연도만 쓴다.
+
+[사실 카드]
+${card()}`;
+  const yrs=`${ST0}\n\n[할 일] 앞으로 다섯 해 두 사람 실의 흐름을 해마다 쓴다. 사실 카드의 다섯해 항목만 근거로.
+출력 JSON 형식: 배열. 해마다 {"y":연도숫자,"title":"그해 제목 6~12자","text":"그해 이야기 80~140자","tip":"한 줄 당부 8~18자"}
+
+[사실 카드]
+${card()}`;
+  const arr=d=>Array.isArray(d)&&d.length>=1&&d.every(x=>typeof x==='string');
+  return [{id:'core',prompt:core,check:d=>d&&arr(d.ways)&&Array.isArray(d.friction)&&arr(d.keep)&&typeof d.line==='string'},
+    {id:'yrs',prompt:yrs,check:d=>Array.isArray(d)&&d.every(x=>x&&typeof x.text==='string')}]; }
+const clean=s=>String(s==null?'':s).replace(/\(\s*[㐀-鿿]+\s*\)/g,'').replace(/[㐀-鿿]/g,'').replace(/\.\.\.|…/g,'.').replace(/[?？]/g,'.').replace(/[!！]/g,'.').replace(/\.{2,}/g,'.').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu,'').replace(/\s{2,}/g,' ').trim();
+function applyAI(id,d){ if(id==='core'){ if(d.ways&&d.ways.length) C.ways=d.ways.map(clean);
+    if(Array.isArray(d.friction)&&d.friction.length) C.friction=d.friction.filter(x=>x&&x.point).slice(0,4).map(x=>({point:clean(x.point),why:clean(x.why),fix:clean(x.fix)}));
+    if(Array.isArray(d.windows)) d.windows.forEach(x=>{ const w=C.windows.find(o=>o.y===+x.y); if(w&&x.text) w.text=clean(x.text); });
+    if(d.keep&&d.keep.length>=3) C.keep=d.keep.slice(0,3).map(clean); if(d.line) C.line=clean(d.line); }
+  else d.forEach(x=>{ const o=C.years.find(v=>v.y===+x.y); if(o){ o.title=clean(x.title||o.title); o.text=clean(x.text); o.tip=clean(x.tip||o.tip); } }); }
+function openPrem(silent){ setPaid(); $('lockW').hidden=true; const pm=$('prem'); pm.hidden=false; renderPrem();
+  if(!silent) requestAnimationFrame(()=>pm.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'}));
+  if(window.PremAI){ AIS.busy=true; renderPrem();
+    PremAI.run({key:'redthread-'+R.key,ver:'v1',parts:prompts(),onStart:()=>{},onPart:(id,d)=>{ applyAI(id,d); AIS.ai=true; renderPrem(); },
+      onDone:()=>{ AIS.busy=false; renderPrem(); },onFail:()=>{ AIS.busy=false; renderPrem(); }}); } }
+function curve(ys){ const W=320, H=96, n=ys.length, xs=i=>20+i*(W-40)/(n-1), yv=v=>H-14-clamp((v-20)/70,0,1)*(H-34);
+  const pts=ys.map((y,i)=>[xs(i),yv(y.sc)]); let d=`M${pts[0][0]} ${pts[0][1]}`; for(let i=1;i<n;i++){ const [x0,y0]=pts[i-1],[x1,y1]=pts[i], mx=(x0+x1)/2; d+=` C${mx} ${y0},${mx} ${y1},${x1} ${y1}`; }
+  return `<svg class="lb-curve" viewBox="0 0 ${W} ${H}" aria-hidden="true"><path d="${d} L${pts[n-1][0]} ${H} L${pts[0][0]} ${H}Z" fill="rgba(184,53,42,.08)"/><path d="${d}" fill="none" stroke="#b8352a" stroke-width="2.2"/>${pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="${ys[i].sc>=70?5:3.5}" fill="${ys[i].sc>=70?'#b8352a':'var(--paper)'}" stroke="#b8352a" stroke-width="1.6"/><text x="${p[0]}" y="${H-1}" text-anchor="middle" font-size="10" fill="var(--ink-3)">${ys[i].Y}</text>`).join('')}</svg>`; }
+function renderPrem(){ const r=R, c=C, T=t=>esc(t);
+  const s=(no,t,hint,body)=>`<section class="lb-sec"><div class="lb-h"><span class="lb-no">${no}</span><h3>${t}</h3>${hint?`<small>${hint}</small>`:''}</div>${body}</section>`;
+  const h=[`<div class="pm-hd"><div class="lb-stamp is-fill" style="--sz:74px"><small>봉인</small><b>열림</b></div><div><small>월하의 혼서</small><b>${esc(BANDS[r.band][0])}</b><p>${AIS.busy?'월하가 혼서를 다듬는 중이야. 그동안 계산으로 적은 것부터 보여 줄게.':`나 ${r.A.dayK}일생 · 그 사람 ${r.B.dayK}일생`}</p></div></div>`];
+  h.push(s('01','두 사람이 엮이는 방식','',c.ways.map(t=>`<p class="pp">${T(t)}</p>`).join('')));
+  h.push(s('02','부딪히는 지점과 푸는 법',`${c.friction.length}곳`,`<ol class="lb-tl">${c.friction.map((f,i)=>`<li class="is-risk"><span class="lb-o"><span>${i+1}</span></span><div class="lb-card"><div class="t"><b>${T(f.point)}</b></div><p>${T(f.why)}</p><p class="fx">${T(f.fix)}</p></div></li>`).join('')}</ol>`));
+  h.push(s('03',winTitle(),`${Y0}~${Y0+5}`,c.windows.length?`<ol class="lb-tl">${c.windows.map((w,i)=>{ const o=r.win[i]; return `<li class="is-acc"><span class="lb-o"><span>${i+1}</span></span><div class="lb-card"><div class="t"><b>${w.y}년</b><span>${o?gzK(o.yp)+'년':''}</span></div><p>${T(w.text)}</p></div></li>`; }).join('')}</ol>`:'<p class="pp">앞으로 여섯 해 안에는 따로 고른 해가 없어. 다섯 해 흐름에서 가까워지는 해를 노려.</p>'));
+  h.push(s('04','앞으로 5년 실의 흐름','해마다',curve(r.yf)+c.years.map((y,i)=>{ const o=r.yf[i]; return `<div class="yr${o.sc>=70?' hi':''}"><div class="a"><b>${y.y}</b><small>${gzK(o.yp)}년</small><em>${({'가까워지는 해':'당김','부딪히기 쉬운 해':'매듭','한쪽이 바쁜 해':'한쪽','다져지는 해':'다짐','숨 고르는 해':'쉼'})[o.title]||'흐름'}</em></div><div><h5>${T(y.title)}</h5><p>${T(y.text)}</p>${y.tip?`<p class="tp">${T(y.tip)}</p>`:''}</div></div>`; }).join('')));
+  h.push(s('05','오래 가려면 지킬 세 가지','',`<ol class="kp">${c.keep.slice(0,3).map(t=>`<li>${T(t)}</li>`).join('')}</ol>`));
+  h.push(s('06','월하의 한 줄 혼서','',`<div class="hs"><small>두 사람에게</small><p>${T(c.line)}</p><div class="lb-stamp"><b>월하</b></div></div>`));
+  h.push(`<p class="pnote">${AIS.ai?'이 혼서는 만세력 계산 근거와 네가 고른 답만 재료로 AI가 월하의 말투로 쓴 글이에요. 두 사람의 마음이나 앞날을 단정하지 않아요.':'이 혼서는 만세력 계산과 해석 사전으로 조립했어요. 두 사람의 마음이나 앞날을 단정하지 않고, 기우는 쪽만 보여 줘요.'}</p>`);
+  $('prem').innerHTML=h.join(''); }
+
+/* ---------- 보관함 저장 (archive.js와 같은 저장 형식) ---------- */
+function archive(){ try{ const r=R, it={id:'redthread|'+r.key,k:'redthread',menu:'붉은 실 궁합',h:BANDS[r.band][0],s:String(r.score),sub:`${STAGE_K[ANS.stage]} · ${r.A.dayK}일생과 ${r.B.dayK}일생`,
+    lines:[BAND_D[r.band],quoteLine(r)],img:new URL('img/taegil.jpg',location.href).href,url:location.href.split('#')[0].split('?')[0],me:ANS.me,form:null,re:false,at:Date.now()};
+  const KEY='obArch'; let a=[]; for(const st of ['localStorage','sessionStorage']){ try{ const v=window[st].getItem(KEY); if(v){ a=JSON.parse(v)||[]; break; } }catch(e){} }
+  a=a.filter(x=>x.id!==it.id); a.unshift(it); const s=JSON.stringify(a.slice(0,40)); ['localStorage','sessionStorage'].forEach(st=>{ try{ window[st].setItem(KEY,s); }catch(e){} }); }catch(e){} }
+
+/* ---------- 끝: 초대 공유 · 다시 ---------- */
+function invite(){ if(window.ObShare) ObShare.sheet({src:'img/taegil.jpg',name:'wolha.jpg',invite:true,head:'이 실타래, 친구에게 건네기',title:'붉은 실 궁합 · 월하의 실타래',text:'월하가 두 사람 생일로 묶인 붉은 실을 풀어 줘. 너도 묶어 봐',note:'친구는 링크로 바로 들어와 자기 두 사람으로 실을 묶어 볼 수 있어요. 내 결과와 생일은 보내지지 않아요.'}); else toast('공유 준비 중이야'); }
+$('shareBtn').onclick=invite;
+$('again').onclick=async()=>{ show('sTalk'); $('msgs').innerHTML=''; const me=ANS.me, st=ANS.stage, wn=ANS.want; await wait(500); say('다른 실을 꺼내 볼게. 그 사람 생일.');
+  const pt=await askDate('pt',{g:me.g==='m'?'f':'m'}); ANS={me,pt,stage:st,want:wn}; say(dateLabel(pt),true); await wait(800); say(`${person(pt).dayK}일생. 이건 그 사람 실.`); await wait(1500);
+  R=compute(); say('됐어. 실을 건네 볼게.'); await wait(1300); toRitual(); };
+$('toLove').onclick=()=>{ location.href='love.html'; };
+})();
+</script>
+<script src="pcshell.js" defer></script><script src="obpay.js" defer></script><script src="obshare.js" defer></script>
+</body>
+</html>

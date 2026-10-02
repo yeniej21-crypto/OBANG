@@ -2,7 +2,7 @@
    계산: 두 사람 각각 prem2_core(오늘이 든 절월부터 열두 달) + 연애 점수 → 둘이 함께 열리는 달 · 부딪히는 달 · 먼저 연락하기 좋은 날 · 원국 교차 관계
    → AI(태오 문체) · 없으면 초안 */
 (function(){
-const S_=window.Saju, X=window.SajuX, {GAN,JI,EL,stEl,BR_EL,GAN_K,JI_K}=S_; const gk=(s,b)=>GAN_K[s]+JI_K[b], kr=t=>String(t).replace(/[甲乙丙丁戊己庚辛壬癸]/g,c=>GAN_K[GAN.indexOf(c)]).replace(/[子丑寅卯辰巳午未申酉戌亥]/g,c=>JI_K[JI.indexOf(c)]); /* 화면에는 한자 대신 한글 읽기 */ const $=id=>document.getElementById(id); const K=window.PK;
+const S_=window.Saju, X=window.SajuX, {GAN,JI,EL,stEl,BR_EL}=S_; const $=id=>document.getElementById(id); const K=window.PK;
 const DOW=['일','월','화','수','목','금','토'], EK=['木','火','土','金','水'], EN=['나무','불','흙','쇠','물'];
 let D=null,FA=null,FB=null,M=null,C=null,ST={},HON='누나';
 function loveScore(o,loveG){ let s=50; if(o.ss.includes('도화')) s+=15; if(o.ss.includes('홍염')) s+=6;
@@ -14,10 +14,10 @@ const chungD=(o)=>o.br.some(r=>r.at==='일지'&&r.k==='충'), hapD=o=>o.br.some(
 /* 원국끼리 맞닿는 글자: 서로의 일지 · 일간 기준 */
 function cross(){ const A=FA.P, B=FB.P, out=[], seen=new Set();
   const add=(t)=>{ if(!seen.has(t)){ seen.add(t); out.push(t); } };
-  X.branchRel(A.d[1],B).filter(r=>r.k!=='같은 글자'||r.at==='일지').forEach(r=>add(`나의 일지 ${JI_K[A.d[1]]} · 그 사람 ${r.at} ${r.k}`));
-  X.branchRel(B.d[1],A).filter(r=>r.at!=='일지'&&r.k!=='같은 글자').forEach(r=>add(`그 사람 일지 ${JI_K[B.d[1]]} · 나의 ${r.at} ${r.k}`));
-  if(X.ganHap(A.d[0],B.d[0])) add(`일간 ${GAN_K[A.d[0]]} · ${GAN_K[B.d[0]]} 천간합`);
-  if(X.ganChung(A.d[0],B.d[0])) add(`일간 ${GAN_K[A.d[0]]} · ${GAN_K[B.d[0]]} 천간충`);
+  X.branchRel(A.d[1],B).filter(r=>r.k!=='같은 글자'||r.at==='일지').forEach(r=>add(`나의 일지 ${JI[A.d[1]]} · 그 사람 ${r.at} ${r.k}`));
+  X.branchRel(B.d[1],A).filter(r=>r.at!=='일지'&&r.k!=='같은 글자').forEach(r=>add(`그 사람 일지 ${JI[B.d[1]]} · 나의 ${r.at} ${r.k}`));
+  if(X.ganHap(A.d[0],B.d[0])) add(`일간 ${GAN[A.d[0]]} · ${GAN[B.d[0]]} 천간합`);
+  if(X.ganChung(A.d[0],B.d[0])) add(`일간 ${GAN[A.d[0]]} · ${GAN[B.d[0]]} 천간충`);
   const dA=X.shinsal(B.d[1],A,B.d[0]), dB=X.shinsal(A.d[1],B,A.d[0]);
   if(dA.includes('도화')) add('그 사람 일지가 나의 도화'); if(dB.includes('도화')) add('나의 일지가 그 사람의 도화');
   if(dA.includes('천을귀인')) add('그 사람 일지가 나의 천을귀인'); if(dB.includes('천을귀인')) add('나의 일지가 그 사람의 천을귀인');
@@ -30,15 +30,12 @@ function togetherDays(){ const A=FA.P, B=FB.P, out=[];
     const v=(hA?2.5:0)+(hB?2.5:0)+(gA||gB?1.5:0)+(dA||dB?1:0)+(w===5||w===6?1:0);
     if(v>=4) out.push({y,m,d:dd,w,s,b,v,why:[hA&&hB?'두 사람 배우자 자리와 모두 합':hA?'나의 배우자 자리와 합':hB?'그 사람 배우자 자리와 합':'',gA||gB?'일간과 천간합':'',dA||dB?'도화가 뜨는 날':''].filter(Boolean)}); }
   const r=[], used=new Set(); out.sort((a,b)=>b.v-a.v||a.m-b.m||a.d-b.d).forEach(o=>{ const k=o.y*100+o.m; if(r.length<4&&!used.has(k)){ used.add(k); r.push(o); } }); return r.sort((a,b)=>a.y-b.y||a.m-b.m||a.d-b.d); }
-/* 둘의 열두 달: 두 사람 각각의 연애 점수 → 둘의 점수(평균 · 둘 다 열리면 +5 · 한쪽이라도 일지 충이면 −6 · 둘 다 일지 합이면 +4). 무료 화면의 달력도 이 값을 쓴다 */
-function calc(G){ G=G||window.GHF; if(!G) return null; const fa=window.Prem2Core.rolling(S_,X,sol(G.a),12), fb=window.Prem2Core.rolling(S_,X,sol(G.b),12);
-  const gA=fa.male?2:3, gB=fb.male?2:3;
-  const months=fa.months.map((oa,i)=>{ const ob=fb.months[i]; const la=loveScore(oa,gA), lb=loveScore(ob,gB);
-    let t=Math.round((la+lb)/2); const both=la>=62&&lb>=62, clash=chungD(oa)||chungD(ob), hh=hapD(oa)&&hapD(ob); if(both) t+=5; if(clash) t-=6; if(hh) t+=4;
-    return {i,oa,ob,la,lb,t:Math.max(30,Math.min(96,t)),both,clash,hh,gz:oa.gz,start:oa.start,end:oa.end,term:oa.term}; });
-  return {FA:fa,FB:fb,M:months}; }
 function prep(){ D=window.GHF; if(!D) return false; HON=D.a.g==='m'?'형':'누나'; if(window.PK) PK.male=D.a.g==='m';
-  const Q=calc(D); FA=Q.FA; FB=Q.FB; M=Q.M;
+  FA=window.Prem2Core.rolling(S_,X,sol(D.a),12); FB=window.Prem2Core.rolling(S_,X,sol(D.b),12);
+  const gA=FA.male?2:3, gB=FB.male?2:3;
+  M=FA.months.map((oa,i)=>{ const ob=FB.months[i]; const la=loveScore(oa,gA), lb=loveScore(ob,gB);
+    let t=Math.round((la+lb)/2); const both=la>=62&&lb>=62, clash=chungD(oa)||chungD(ob); if(both) t+=5; if(clash) t-=6; if(hapD(oa)&&hapD(ob)) t+=4;
+    return {i,oa,ob,la,lb,t:Math.max(30,Math.min(96,t)),both,clash,gz:oa.gz,start:oa.start,term:oa.term}; });
   D.cross=cross(); D.days=togetherDays(); C=K.gl(draft()); ST={}; return true; }
 const h=t=>String(t==null?'':t).replace(/\{S\}/g,HON);
 function relTxt(o,who){ return o.br.filter(r=>r.at==='일지').map(r=>`${who} 일지와 ${r.k}`).concat(o.ss.filter(k=>['도화','홍염','천을귀인'].includes(k)).map(k=>`${who}에게 ${k}`)); }
@@ -49,13 +46,13 @@ function draft(){ const R=D.R, A=FA.P, B=FB.P, top=[...M].sort((a,b)=>b.t-a.t), 
   const blank=[...new Set([FA.blank,FB.blank])];
   return {draft:true,
    bond:[`{S}랑 그 사람은 ${R.title}야. 끌림 ${R.pull}, 오래 감 ${R.stay}. ${R.pts[0]?R.pts[0][1]+'이 이 관계의 첫 단추야.':''}`,
-     `배우자 자리끼리 보면 ${JI_K[A.d[1]]} · ${JI_K[B.d[1]]}${hp?' 합이라 한번 묶이면 잘 안 풀려.':ch?' 충이라 만나면 불꽃이 튀고 싸워도 크게 싸워.':', 크게 묶이지도 부딪히지도 않는 사이야.'}`,
+     `배우자 자리끼리 보면 ${JI[A.d[1]]} · ${JI[B.d[1]]}${hp?' 합이라 한번 묶이면 잘 안 풀려.':ch?' 충이라 만나면 불꽃이 튀고 싸워도 크게 싸워.':', 크게 묶이지도 부딪히지도 않는 사이야.'}`,
      D.cross.length?`둘 원국이 맞닿는 자리는 ${D.cross.slice(0,3).join(', ')}.`:'둘 원국이 직접 맞닿는 글자는 많지 않아. 대신 시간이 쌓이면서 엮이는 사이야.'],
    months:M.map(o=>({title:o.both?'둘 다 열리는 달':o.clash?'부딪히기 쉬운 달':o.t>=62?'가까워지는 달':'천천히 가는 달',
-     text:`${o.term} 달 ${kr(o.gz)}. {S} 연애 점수 ${o.la}, 그 사람 ${o.lb}. ${relTxt(o.oa,'{S}').concat(relTxt(o.ob,'그 사람')).join(', ')}`.trim(),tip:o.clash?'말보다 만남 먼저':o.both?'먼저 연락하기':'서두르지 않기'})),
-   fight:[ch?`일지 ${JI_K[A.d[1]]}${K.bt(JI_K[A.d[1]])?'과':'와'} ${JI_K[B.d[1]]}${K.bt(JI_K[B.d[1]])?'이':'가'} 충이라 싸움은 크게 붙어. 그날 안에 푸는 게 규칙이야.`:`둘은 크게 부딪히는 글자가 적어서, 싸움보다 서운함이 쌓이는 쪽을 조심해.`, `${lo.start.m}월이 가장 예민한 달이야.`],
+     text:`${o.term} 달 ${o.gz}. {S} 연애 점수 ${o.la}, 그 사람 ${o.lb}. ${relTxt(o.oa,'{S}').concat(relTxt(o.ob,'그 사람')).join(', ')}`.trim(),tip:o.clash?'말보다 만남 먼저':o.both?'먼저 연락하기':'서두르지 않기'})),
+   fight:[ch?`일지 ${JI[A.d[1]]}와 ${JI[B.d[1]]}가 충이라 싸움은 크게 붙어. 그날 안에 푸는 게 규칙이야.`:`둘은 크게 부딪히는 글자가 적어서, 싸움보다 서운함이 쌓이는 쪽을 조심해.`, `${lo.start.m}월이 가장 예민한 달이야.`],
    roles:[fillA.length?`그 사람은 {S}에게 없는 ${fillA.map(i=>EN[i]).join(' · ')} 기운을 갖고 있어.`:`{S}가 먼저 손 내밀 때 이 관계가 움직여.`, fillB.length?`{S}는 그 사람에게 없는 ${fillB.map(i=>EN[i]).join(' · ')} 기운을 채워 줘.`:'그 사람은 받는 만큼 돌려주는 타입이야.'],
-   missions:[{t:`${top[0].start.m}월에 둘만의 약속 잡기`,d:`둘의 점수가 가장 높은 달이야. 여행이든 고백이든 이달에.`},{t:blank.map(i=>EN[i]).join(' · ')+' 기운 같이 채우기',d:blank.map(i=>ACT[i]).join(', ')+'.'},{t:ch?'싸운 날은 그날 풀기':'서운한 건 바로 말하기',d:ch?'충이 있는 사이는 하룻밤만 넘겨도 커져.':'쌓아 두면 크게 터지는 조합이야.'}],
+   missions:[{t:`${top[0].start.m}월에 둘만의 약속 잡기`,d:`둘의 점수가 가장 높은 달이야. 여행이든 고백이든 이달에.`},{t:blank.map(i=>EK[i]).join('·')+' 기운 같이 채우기',d:blank.map(i=>ACT[i]).join(', ')+'.'},{t:ch?'싸운 날은 그날 풀기':'서운한 건 바로 말하기',d:ch?'충이 있는 사이는 하룻밤만 넘겨도 커져.':'쌓아 두면 크게 터지는 조합이야.'}],
    letter:[`${HON}.`,'궁합은 점수가 아니라 타이밍이야. 좋은 달에 먼저 움직이는 쪽이 이겨.','또 와. 다음엔 둘이 같이.']}; }
 function card(ids){ const gz=p=>p?GAN[p[0]]+JI[p[1]]:'모름', R=D.R;
   const one=(F,o)=>({성별:F.male?'남':'여',일간:GAN[F.dm]+EL[stEl(F.dm)],일지:JI[F.P.d[1]]+' '+S_.tgBranch(F.dm,F.P.d[1]),원국:[['년주',F.P.y],['월주',F.P.m],['일주',F.P.d],['시주',F.P.h]].map(([n,p])=>n+' '+gz(p)),오행개수:EK.map((k,i)=>k+F.cnt[i]).join(' '),원국신살:F.natal.map(x=>x.at+' '+x.k)});
@@ -83,22 +80,21 @@ ${card(ids)}`;
 function apply(id,d){ if(id==='core') ['bond','fight','roles','missions','letter'].forEach(k=>{ if(d[k]&&d[k].length) C[k]=d[k]; }); else d.forEach(x=>{ const i=+x.i; if(i>=0&&i<12) C.months[i]=Object.assign({},C.months[i],x); }); }
 function build(){ const n='', ps=a=>K.ps((a||[]).map(h),n), a=D.a, b=D.b;
   const top=[...M].sort((x,y)=>y.t-x.t), hi=top.slice(0,2), lo=[...M].filter(o=>o.clash).sort((x,y)=>x.t-y.t).slice(0,2);
-  const H=[`<div class="gh-open"><div class="lb-stamp is-fill" style="--sz:74px"><small>봉인</small><b>열림</b></div><div><small>태오의 궁합 노트</small><b>둘이 가까워지는 날까지 적어 뒀어</b></div></div>`,`<div class="pk-st" id="ghst" hidden></div>`];
-  const who=(F,o)=>`<div><small>${K.esc(o.n)}</small><b>${gk(F.P.d[0],F.P.d[1])}</b><em>${EN[stEl(F.dm)]}의 사람 · 배우자 자리 ${JI_K[F.P.d[1]]}</em></div>`;
-  if(window.ghCalHtml) H.push(K.sec('열두 달 접목 달력',window.ghCalHtml(M,a,b),'절기 기준 월'));
+  const H=[`<div class="pk-st" id="ghst" hidden></div>`];
+  const who=(F,o)=>`<div><small>${K.esc(o.n)}</small><b>${GAN[F.P.d[0]]}${JI[F.P.d[1]]}</b><em>${EL[stEl(F.dm)]} 일간 · ${JI[F.P.d[1]]} 일지</em></div>`;
   H.push(K.sec('태오의 궁합 노트 · 둘의 궁합 정체',`<div class="pk-vs">${who(FA,a)}${who(FB,b)}</div>`+ps(C.bond)+K.ev(D.R.pts.map(p=>p[1]).concat(D.cross))));
   H.push(K.sec('앞으로 열두 달 둘의 인연 달력',`<div class="pk-acc">${M.map((o,i)=>{ const c=C.months[i]||{}; const tag=hi.includes(o)?'함께 열림':lo.includes(o)?'조심':'';
-    return K.row({k:'g'+i,cls:hi.includes(o)?'pk-hi':lo.includes(o)?'pk-lo':'',a:`${o.start.m}월`,asub:`${o.start.y}.${o.start.m}.${o.start.d}~`,b:`<em>${kr(o.gz)}</em>${K.esc(h(c.title||''))}${tag?`<span class="pk-tag">${tag}</span>`:''}`,c:o.t,
+    return K.row({k:'g'+i,cls:hi.includes(o)?'pk-hi':lo.includes(o)?'pk-lo':'',a:`${o.start.m}월`,asub:`${o.start.y}.${o.start.m}.${o.start.d}~`,b:`<em>${o.gz}</em>${K.esc(h(c.title||''))}${tag?`<span class="pk-tag">${tag}</span>`:''}`,c:o.t,
       body:`<div class="pk-rx3"><div><small>${K.esc(a.n)}</small><b>${o.la}</b></div><div><small>${K.esc(b.n)}</small><b>${o.lb}</b></div><div><small>둘</small><b>${o.t}</b></div></div>`+ps([c.text])+(c.tip?`<p class="pk-key"><b>이달 한 줄</b>${K.esc(h(c.tip))}</p>`:'')+K.ev(relTxt(o.oa,a.n).concat(relTxt(o.ob,b.n)))}); }).join('')}</div>`,'절기 기준 월 · 숫자는 둘의 점수'));
-  H.push(K.sec('먼저 연락하기 좋은 날',D.days.length?`<div class="pk-cards">${D.days.map(o=>`<div class="pk-card"><b>${o.m}.${o.d}<small>${DOW[o.w]}요일 · ${gk(o.s,o.b)}일</small></b><div><p>${o.why.join(' · ')}</p></div></div>`).join('')}</div>`:'<p class="pk-p">앞으로 열두 달은 따로 고른 날이 없어. 둘의 점수가 높은 달을 노려.</p>','두 사람 모두 충이 없는 날'));
+  H.push(K.sec('먼저 연락하기 좋은 날',D.days.length?`<div class="pk-cards">${D.days.map(o=>`<div class="pk-card"><b>${o.m}.${o.d}<small>${DOW[o.w]}요일 · ${GAN[o.s]}${JI[o.b]}일</small></b><div><p>${o.why.join(' · ')}</p></div></div>`).join('')}</div>`:'<p class="pk-p">앞으로 열두 달은 따로 고른 날이 없어. 둘의 점수가 높은 달을 노려.</p>','두 사람 모두 충이 없는 날'));
   H.push(K.sec('부딪히는 지점과 푸는 법',ps(C.fight)));
   H.push(K.sec('서로에게 어떤 사람인가',`<div class="pk-items">${(C.roles||[]).map((p,i)=>`<div><small>${i===0?K.esc(b.n)+' → '+K.esc(a.n):K.esc(a.n)+' → '+K.esc(b.n)}</small><p>${K.esc(h(p))}</p></div>`).join('')}</div>`));
   H.push(K.sec('오래 가는 법 세 가지',`<div class="pk-cards">${(C.missions||[]).slice(0,3).map((m,i)=>`<div class="pk-card"><b>${i+1}</b><div><p class="pk-ct">${K.esc(h(m.t))}</p><p>${K.esc(h(m.d))}</p></div></div>`).join('')}</div>`));
-  H.push(K.letter((C.letter||[]).map(h),{title:'태오가 둘에게',name:'태오'},'도화',n));
+  H.push(K.letter((C.letter||[]).map(h),{title:'태오가 둘에게',name:'태오'},'桃花',n));
   H.push(`<p class="pk-note" style="margin:14px 0 0">${ST.ai?'이 노트는 두 사람의 만세력 계산 근거만 재료로 AI가 태오의 말투로 쓴 글이에요. 명리 전문가 감수 전 원고예요':'이 부분은 해석 사전으로 조립한 초안이에요. 정식 서비스에서는 같은 근거로 태오가 길게 써 줘요'}</p>`);
   return H.join(''); }
 function render(){ const host=$('gprem'); K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status($('ghst'),Object.assign({who:'태오가 궁합 노트'},ST)); }
-window.GunghapPrem={calc,open(){ const host=$('gprem'); if(!host||!prep()) return false; host.className='pkx'; host.hidden=false; K.bind(host); render();
+window.GunghapPrem={open(){ const host=$('gprem'); if(!host||!prep()) return false; host.className='pkx dark'; host.hidden=false; K.bind(host); render();
   const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
   K.runAI({key:FA.key+'_'+FB.key+'-gh-'+HON+'-'+FA.from.y+'.'+FA.from.m,ver:'v3',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
 })();

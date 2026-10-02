@@ -426,7 +426,6 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .kvm b{display:block;font-family:var(--serif);font-size:26px;font-weight:900;line-height:1.3;margin:6px 0 8px}
 .kvm p{margin:0 0 16px;font-size:14.5px;line-height:1.7;color:var(--ink-2)}
 .homeLink{display:block;margin:10px auto 0}
-.card .hero .heroShare{position:absolute;right:14px;top:12px;z-index:2;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(10,8,12,.55);color:#f3e6c8;border:1px solid rgba(243,214,168,.55);cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 /* result */
 .result{position:absolute;inset:0;z-index:35;overflow-y:auto;background:linear-gradient(180deg,#120e14,#09070b);opacity:0;pointer-events:none;transition:opacity .6s;padding:calc(env(safe-area-inset-top,0px) + 64px) 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
 .result.on{opacity:1;pointer-events:auto}
@@ -781,17 +780,20 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 
   <div class="result" id="result">
     <div class="card">
-      <div class="hero" id="rHero"><span class="tag">나의 수호신 카드</span><button type="button" class="heroShare" id="ctaShare" aria-label="수호신 카드 공유하기"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6h14v-6"/></svg></button><div class="nm"><small id="rGod"></small><b id="rName"></b></div></div>
+      <div class="hero" id="rHero"><span class="tag">나의 수호신 카드</span><div class="nm"><small id="rGod"></small><b id="rName"></b></div></div>
       <div class="body">
         <div class="sec"><h4>나의 명식</h4><div class="pillars" id="rPillars"></div></div>
         <div class="sec"><h4>오행 밸런스</h4><div class="bars" id="rBars"></div></div>
         <div class="sec"><div class="mission"><div class="k">내일 08:00 · 첫 개운 미션</div><p id="rMission"></p><div class="lock">알림을 켜면 아침에 열립니다</div></div></div>
         <div class="actions">
           <button class="choice silver" id="ctaPartner" style="order:-1">그 사람 속마음, 시온한테 물어보기</button>
+          <button class="choice" id="ctaPay">서하의 상담 이어서 보기 · 29,000원</button>
           <button class="choice primary" id="ctaPush">내일 아침 첫 미션 받기</button>
           <button class="choice" id="ctaAvatar" style="border-color:var(--gold);color:var(--gold-2)">사주가 그린 나 보기 · NEW</button>
+          <button class="choice" id="ctaShare">수호신 카드 공유하기</button>
+          <button class="link homeLink" id="ctaHome">홈으로 가기 →</button>
         </div>
-        <p class="note">체험판이라 결제와 알림 신청은 실제로 진행되지 않아요.</p>
+        <p class="note">체험판입니다. 결제·알림·공유는 동작하지 않습니다.</p>
       </div>
     </div>
   </div>
@@ -1094,7 +1096,7 @@ const FALLBACK_DUR=Object.assign({intro:6,idle:5,rv:5},HOST.dur);
 const POSTER={host:HOST.poster};
 // host-specific copy
 document.title=HOST.title; document.querySelector('.brand').textContent=HOST.brand; $('who').textContent=HOST.name;
-$('c1a').textContent=HOST.c1a; $('c1b').textContent=HOST.c1b; document.querySelector('#pWorry h3').textContent=HOST.worry; document.querySelector('.start .kicker').textContent=HOST.kicker; document.querySelector('.start p').textContent=HOST.lead;
+$('c1a').textContent=HOST.c1a; $('c1b').textContent=HOST.c1b; document.querySelector('#pWorry h3').textContent=HOST.worry; $('ctaPay').textContent=HOST.pay; document.querySelector('.start .kicker').textContent=HOST.kicker; document.querySelector('.start p').textContent=HOST.lead;
 const GODS={
   wood:{h:'靑龍',n:'하람',el:'木',dir:'동쪽',c:'var(--wood)',label:'목(木)',desc:'동쪽을 지키는 청룡 · 새 시작과 다음 인연',mission:'초록색 하나 걸치고, 동쪽으로 딱 10분만 걸어.'},
   fire:{h:'朱雀',n:'이안',el:'火',dir:'남쪽',c:'var(--fire)',label:'화(火)',desc:'남쪽을 지키는 주작 · 고백과 결단',mission:'오늘은 네가 먼저 연락해. 망설이면 불 꺼진다.'},
@@ -1338,6 +1340,7 @@ $('ctaPartner').onclick=partnerStart;
 $('partnerGo').onclick=partnerGo;
 $('rpMore').onclick=partnerMore;
 $('payGo').onclick=()=>toast('체험판: 결제 화면으로 이동합니다');
+$('ctaPay').onclick=()=>toast('체험판: 결제 화면으로 이동합니다');
 /* ---------- membership demo ---------- */
 const MS={wood:{push:'일어났어? 오늘 미션 왔어 🌿',l:['좋은 아침.','오늘은 초록색 하나 걸치고,','동쪽으로 딱 10분만 걸어.']},
   fire:{push:'일어나. 오늘 미션 하나 줄게 🔥',l:['일어났어?','오늘은 네가 먼저 연락해.','망설이면 불 꺼진다.']},
@@ -1601,7 +1604,7 @@ $('backBtn').onclick=()=>{
   $('namecard').classList.remove('on'); $('flash').classList.remove('go');
   showHome();
 };
-if($('ctaHome')) $('ctaHome').onclick=showHome;
+$('ctaHome').onclick=showHome;
 $('goHome').onclick=async()=>{ await unlock(); showHome(); };
 document.querySelectorAll('[data-home]').forEach(b=>b.onclick=showHome);
 $('subGo').onclick=()=>toast('체험판: 7일 무료 체험이 시작됩니다');

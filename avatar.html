@@ -259,7 +259,7 @@ const PENTA=[392,440,523.25,587.33,659.25,783.99,880,1046.5];
 /* ---------- 입력 ---------- */
 let cal='s', gender='f';
 (function(){ const by=$('by'),bm=$('bm'),bd=$('bd'),bh=$('bh');
-  for(let y=2008;y>=1955;y--) by.add(new Option(y+'년',y,false,y===1996)); for(let m=1;m<=12;m++) bm.add(new Option(m+'월',m,false,m===5));
+  for(let y=2008;y>=1950;y--) by.add(new Option(y+'년',y,false,y===1996)); for(let m=1;m<=12;m++) bm.add(new Option(m+'월',m,false,m===5));
   window.fillD=()=>{ const n=cal==='s'?new Date(+by.value,+bm.value,0).getDate():30, cur=+bd.value||14; bd.innerHTML=''; for(let d=1;d<=n;d++) bd.add(new Option(d+'일',d,false,d===Math.min(cur,n))); };
   fillD(); by.onchange=fillD; bm.onchange=fillD; bh.add(new Option('태어난 시 모름','x',true,true)); HOURS.forEach((h,i)=>bh.add(new Option(h,i)));
   const seg=(id,cb)=>$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{ $(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); cb(b.dataset.v); });

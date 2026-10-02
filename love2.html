@@ -153,7 +153,7 @@ $('fRe').hidden=MODE!=='re'; $('fNext').hidden=MODE!=='next';
 /* 입력 */
 let cal='s', gender='f', status='solo';
 (function(){ const now=new Date().getFullYear();
-  for(let y=2010;y>=1950;y--){ $('by').add(new Option(y+'년',y,false,y===1996)); $('py').add(new Option(y+'년',y,false,y===1994)); }
+  for(let y=2008;y>=1950;y--){ $('by').add(new Option(y+'년',y,false,y===1996)); $('py').add(new Option(y+'년',y,false,y===1994)); }
   $('py').insertBefore(new Option('그 사람 생일 모름','x',true,true),$('py').firstChild); $('py').value='x';
   for(let m=1;m<=12;m++){ $('bm').add(new Option(m+'월',m,false,m===5)); $('pm').add(new Option(m+'월',m)); $('xm').add(new Option(m+'월',m,false,m===new Date().getMonth()+1)); }
   for(let d=1;d<=31;d++) $('pd').add(new Option(d+'일',d));

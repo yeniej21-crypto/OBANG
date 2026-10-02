@@ -439,7 +439,7 @@ function askName(){ return new Promise(res=>{
 }); }
 function askDate(){ return new Promise(res=>{
   const Y0=SAVED&&SAVED.y||1996, M0=SAVED&&SAVED.m||5, D0=SAVED&&SAVED.d||14;
-  const ys=[];for(let y=2008;y>=1955;y--) ys.push(`<option${y===Y0?' selected':''}>${y}</option>`);
+  const ys=[];for(let y=2008;y>=1950;y--) ys.push(`<option${y===Y0?' selected':''}>${y}</option>`);
   const ms=[];for(let m=1;m<=12;m++) ms.push(`<option value="${m}"${m===M0?' selected':''}>${m}월</option>`);
   const ds=[];for(let d=1;d<=31;d++) ds.push(`<option value="${d}"${d===D0?' selected':''}>${d}일</option>`);
   ask(`<div class="card"><div class="seg"><button class="on" data-c="양력">양력</button><button data-c="음력">음력</button></div>

@@ -5,7 +5,8 @@
    4) 시기 읽기: 골든 던 대응(별자리 → 기간, 행성 → 속도, 달 → 다음 보름)
    카드 뜻 자체는 tarot_data.js(라이더-웨이트 표준)에서만 가져온다. */
 (function(){
-const jong=w=>{ const c=String(w).charCodeAt(String(w).length-1)-0xAC00; return c>=0&&c<11172&&c%28>0; };
+/* 받침 판별: 끝이 숫자면 읽는 소리로(3 삼 → 받침 있음, 2 이 → 없음) */
+const jong=w=>{ w=String(w); const ch=w[w.length-1]; if(/[0-9]/.test(ch)){ if(/10$/.test(w)) return true; return '013678'.includes(ch); } const c=ch.charCodeAt(0)-0xAC00; return c>=0&&c<11172&&c%28>0; };
 const ro=(w,a,b)=>w+(jong(w)?a:b);
 
 /* ---------- 1. 질문 읽기 ---------- */
@@ -66,8 +67,8 @@ function hint(a){ if(!a.q) return ''; const parts=[];
   return parts.length?`무진이 ${parts.join(' · ')} 읽을게요`:'카드 흐름으로 읽을게요'; }
 
 /* ---------- 2. 자리 읽기 ---------- */
-const KINDS={flow:['now','future','advice'],love:['self','other','future'],heart:['view','other','act'],work:['now','block','key'],money:['now','caution','chance'],pick:['A','B','advice'],today:['today']};
-const WEIGHT={self:.8,other:1,future:1.5,view:.7,act:1.6,now:1,block:.5,key:1.3,caution:.5,chance:1.3,A:.6,B:.6,advice:1.5,today:1,answer:1};
+const KINDS={flow:['now','future','advice'],love:['self','other','future'],heart:['view','other','act'],work:['now','block','key'],money:['now','caution','chance'],pick:['A','B','advice'],today:['today'],contact:['answer'],month:['w1','w2','w3','w4']};
+const WEIGHT={self:.8,other:1,future:1.5,view:.7,act:1.6,now:1,block:.5,key:1.3,caution:.5,chance:1.3,A:.6,B:.6,advice:1.5,today:1,answer:1,w1:.8,w2:.9,w3:1,w4:1.1};
 const val=(c,rv)=>rv?(c.tone===0?-.5:-c.tone*.5):c.tone;
 function frame(kind,c,rv,text,pos){ const bad=kind==='block'||kind==='caution', good=kind==='key'||kind==='chance'||kind==='advice';
   if(bad&&!rv&&c.tone===1) return `원래는 밝은 카드인데 ${pos} 자리에 왔어요. ‘${c.kw[0]}’${jong(c.kw[0])?'이':'가'} 너무 앞서가는 게 오히려 발목을 잡아요.`;
@@ -122,14 +123,33 @@ function combos(T,picked,rv){ const out=[];
   for(let i=0;i<picked.length;i++) for(let j=i+1;j<picked.length;j++){ const a=Math.min(picked[i],picked[j]), b=Math.max(picked[i],picked[j]), t=COMBO[a+'-'+b];
     if(t) out.push({a:T[picked[i]].ko,b:T[picked[j]].ko,text:t+(rv[i]||rv[j]?' 다만 역방향이 섞여 있어 이 흐름은 늦게, 약하게 와요.':'')}); }
   return out.slice(0,2); }
+const SUIT_KO={wa:'지팡이',cu:'잔',sw:'칼',pe:'엽전'};
+const SUIT_THEME={
+ wa:'열정과 움직임의 판이에요. 생각보다 일이 빨리 굴러가요. 망설이기보다 먼저 움직이는 쪽이 유리해요.',
+ cu:'감정과 관계의 판이에요. 이번 질문의 답은 숫자보다 마음 쪽에 있어요. 서운함도 고마움도 말로 꺼내요.',
+ sw:'생각과 결단의 판이에요. 머릿속이 바쁜 시기예요. 말 한마디, 판단 하나가 흐름을 바꿔요.',
+ pe:'돈과 현실의 판이에요. 마음보다 조건과 생활이 먼저 움직여요. 손에 잡히는 것부터 챙겨요.'};
+/* 수트·궁정·메이저 비율로 보는 판의 성격 (3장 이상일 때) */
+function suitNotes(T,picked,rv){ const n=picked.length, out=[]; if(n<3) return out;
+  const cs=picked.map(k=>T[k]), maj=cs.filter(c=>!c.suit).length, court=cs.filter(c=>c.suit&&c.rank>=11).length, sc={};
+  cs.forEach(c=>{ if(c.suit) sc[c.suit]=(sc[c.suit]||0)+1; });
+  const big=Object.keys(sc).find(k=>sc[k]>=3);
+  if(maj>=Math.max(2,n-1)) out.push(`${n}장 중 ${maj}장이 메이저 카드예요. 작은 일이 아니라 인생의 큰 문턱이에요. 방향이 바뀌는 시기라, 지금 고르는 게 꽤 오래 가요.`);
+  if(big) out.push(`${SUIT_KO[big]} 카드가 ${sc[big]}장. ${SUIT_THEME[big]}`);
+  if(court>=2) out.push(`사람 카드(시동·기사·여왕·왕)가 ${court}장이에요. 이번 일은 상황보다 사람이 열쇠예요. 누구와 함께하느냐, 누가 움직이느냐가 판을 정해요.`);
+  if(!maj&&!big&&n>=3&&Object.keys(sc).length===n&&n===4) out.push('네 수트가 한 장씩 고르게 나왔어요. 한쪽으로 쏠리지 않은 균형 잡힌 달이에요.');
+  return out.slice(0,2); }
 function pattern(T,picked,rv){ const n=picked.length; if(n<3) return null;
   const nr=rv.filter(Boolean).length;
-  if(nr>=2) return `역방향이 ${nr}장이에요. 밖의 문제보다 내 안에서 막힌 게 더 커요. 급하게 풀려 하지 말고요.`;
-  const cnt={}; picked.forEach(k=>{ const e=T[k].el; cnt[e]=(cnt[e]||0)+1; }); const e=Object.keys(cnt).find(k=>cnt[k]>=2);
+  if(nr>=Math.max(2,Math.ceil(n/2))) return `역방향이 ${nr}장이에요. 밖의 문제보다 내 안에서 막힌 게 더 커요. 급하게 풀려 하지 말고요.`;
+  const cnt={}; picked.forEach(k=>{ const e=T[k].el; cnt[e]=(cnt[e]||0)+1; }); const e=Object.keys(cnt).find(k=>cnt[k]>=Math.max(2,n-1));
   if(e) return `${n}장 중 ${cnt[e]}장이 ${EL_KO[e]}(${e}) 기운이에요. ${EL_FLAVOR[e]} 기운이 이 판을 이끌어요.`;
-  if(picked[0]<picked[1]&&picked[1]<picked[2]) return '카드 번호가 순서대로 올라가요. 차근차근 앞으로 나아가는 흐름이에요.';
-  if(picked[0]>picked[1]&&picked[1]>picked[2]) return '카드 번호가 거꾸로 내려와요. 앞으로 가기 전에 한 번 되짚을 게 있어요.';
-  if(nr===0) return '세 장 모두 정방향. 흐름이 막힘 없이 흘러요.';
+  /* 번호 흐름은 메이저끼리, 또는 같은 수트끼리일 때만 의미가 있다 */
+  const cs=picked.map(k=>T[k]), allMaj=cs.every(c=>!c.suit), oneSuit=cs.every(c=>c.suit&&c.suit===cs[0].suit);
+  if(allMaj||oneSuit){ const v=cs.map(c=>allMaj?c.n:c.rank); let up=true, dn=true; for(let i=1;i<n;i++){ if(!(v[i-1]<v[i])) up=false; if(!(v[i-1]>v[i])) dn=false; }
+    if(up) return '카드 번호가 순서대로 올라가요. 차근차근 앞으로 나아가는 흐름이에요.';
+    if(dn) return '카드 번호가 거꾸로 내려와요. 앞으로 가기 전에 한 번 되짚을 게 있어요.'; }
+  if(nr===0) return `${n===4?'네':'세'} 장 모두 정방향. 흐름이 막힘 없이 흘러요.`;
   return null; }
 
 /* ---------- 4. 시기 읽기 (골든 던 대응) ---------- */
@@ -140,13 +160,36 @@ const SPEED={0:'생각보다 갑자기 와요. 며칠에서 2주 안.',1:'빠르
   19:'가까운 시일, 밝게 선명하게. 한 달 안.',20:'부름이 오는 때. 몇 주 안에 소식이 와요.',21:'한 바퀴를 채워야 해요. 몇 달에 걸쳐 완성.'};
 const PLANET={0:'공기',1:'수성',2:'달',3:'금성',10:'목성',12:'물',16:'화성',19:'태양',20:'불',21:'토성'};
 function nextFullMoon(now){ const syn=29.530588853, nm=Date.UTC(2000,0,6,18,14)/864e5, d=now/864e5; let k=Math.floor((d-nm-14.765)/syn); let f; do{ f=nm+14.765+k*syn; k++; }while(f<d+.5); return new Date(f*864e5); }
-function timing(n,rv,now=new Date()){ let t, basis;
+/* 마이너 시기: 수트가 단위(지팡이 날 · 잔 주 · 칼 조금 긴 주 · 엽전 달), 숫자가 개수. 궁정 카드는 사람을 통해 */
+const DAYS=['','하루이틀','이틀','사흘','나흘','닷새','엿새','이레','여드레','아흐레','열흘'];
+const WEEKS=['','한 주','두 주','세 주','네 주','다섯 주','여섯 주','일곱 주','여덟 주','아홉 주','열 주'];
+const MONTHS=['','한 달','두 달','석 달','넉 달','다섯 달','여섯 달','일곱 달','여덟 달','아홉 달','열 달'];
+const COURT_T={wa:'일주일 안팎, 누군가의 움직임을 따라 빠르게 와요.',cu:'몇 주 안, 마음을 전해 주는 사람이 계기가 돼요.',sw:'한두 달쯤, 말이나 소식을 가진 사람이 길을 터 줘요.',pe:'두세 달쯤, 믿을 만한 사람을 통해 천천히 와요.'};
+const COURT_KO=['','','','','','','','','','','','시동','기사','여왕','왕'];
+function minorTiming(c){ const r=c.rank, nm=SUIT_KO[c.suit];
+  if(r>=11) return {t:COURT_T[c.suit], basis:`사람 카드 · ${nm} 수트`};
+  const t={wa:`${DAYS[r]} 안팎으로 빠르게 움직일 수 있어요.`,cu:`${WEEKS[r]} 안팎, 마음이 차오르는 만큼 와요.`,sw:`${WEEKS[r]}에서 조금 더, 정리할 게 있어서 조금 걸려요.`,pe:`${MONTHS[r]} 안팎, 느리지만 손에 잡히게 와요.`}[c.suit];
+  return {t, basis:`${nm} 수트는 ${{wa:'날',cu:'주',sw:'주',pe:'달'}[c.suit]}, 숫자는 개수`}; }
+function timing(n,rv,now=new Date()){ let t, basis; const T=window.TAROT, mc=T&&T[n]&&T[n].suit?T[n]:null;
+  if(mc){ const m=minorTiming(mc); t=m.t; basis=m.basis; if(rv) t+=' 역방향이라 조금 늦어질 수 있어요.'; return {t,basis,sys:'수트와 숫자'}; }
   if(SIGN[n]){ const [nm,m1,d1,m2,d2]=SIGN[n]; basis=`${nm} 대응`; const y=now.getFullYear(), md=(now.getMonth()+1)*100+now.getDate(), s=m1*100+d1, e=m2*100+d2;
     const inside=s<=e?(md>=s&&md<=e):(md>=s||md<=e);
     t=inside?`지금부터 ${m2}월 ${d2}일 무렵까지`:`${m1}월 ${d1}일 ~ ${m2}월 ${d2}일 무렵`; }
   else if(n===2){ const f=nextFullMoon(now.getTime()); basis='달 대응'; t=`다음 보름달 무렵 (${f.getMonth()+1}월 ${f.getDate()}일 전후)`; }
   else { basis=`${PLANET[n]} 대응`; t=SPEED[n]; }
-  if(rv) t+=' 역방향이라 조금 늦어질 수 있어요.'; return {t,basis}; }
+  if(rv) t+=' 역방향이라 조금 늦어질 수 있어요.'; return {t,basis,sys:'골든 던 체계'}; }
 
-window.TarotRead={analyze,hint,KINDS,WEIGHT,val,frame,combos,pattern,timing,KW_LINE,TYPE_NAME,ro,jong};
+/* ---------- 5. 연애 배치: 연락 올까 · 이번 달 연애 ---------- */
+const CONTACT_BIG={good:'연락, 올 거예요',think:'올 수도, 아직은 반반',warn:'먼저 오긴 어려워요'};
+/* 오늘부터 7일씩 끊은 네 주 */
+function weekRange(i,now=new Date()){ const a=new Date(now.getFullYear(),now.getMonth(),now.getDate()+7*i), b=new Date(a.getFullYear(),a.getMonth(),a.getDate()+6);
+  return `${a.getMonth()+1}월 ${a.getDate()}일 ~ ${b.getMonth()===a.getMonth()?'':(b.getMonth()+1)+'월 '}${b.getDate()}일`; }
+function monthRead(T,picked,rv,pos){ const v=picked.map((k,i)=>val(T[k],rv[i])); let hi=0, lo=0; v.forEach((x,i)=>{ if(x>v[hi]) hi=i; if(x<v[lo]) lo=i; });
+  const flat=v[hi]-v[lo]<.5, ch=T[picked[hi]], cl=T[picked[lo]];
+  if(flat) return {hi,lo,big:'네 주 내내 고른 흐름',line:`큰 굴곡 없이 비슷한 온도로 흘러가는 달이에요. 특별한 날을 기다리기보다, 매주 한 번씩 작은 연락과 약속을 이어 가요.`};
+  const big=v[hi]>0?`${ro(pos[hi],'이','가')} 가장 밝아요`:`${pos[hi]}부터 조금씩 풀려요`;
+  const line=`${pos[hi]}엔 <b>${ch.ko}</b>${rv[hi]?'(역방향)':''}, ${pos[lo]}엔 <b>${cl.ko}</b>${rv[lo]?'(역방향)':''}. 약속과 고백은 ${pos[hi]}에, ${pos[lo]}엔 속도를 늦추고 나를 먼저 챙겨요.`;
+  return {hi,lo,big,line}; }
+
+window.TarotRead={analyze,hint,KINDS,WEIGHT,val,frame,combos,pattern,suitNotes,timing,weekRange,monthRead,CONTACT_BIG,KW_LINE,TYPE_NAME,ro,jong};
 })();

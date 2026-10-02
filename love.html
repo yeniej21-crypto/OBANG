@@ -113,6 +113,23 @@ button{font-family:inherit;color:inherit}
 .ai{margin:34px 16px 0;text-align:center;font-size:11px;color:var(--ink-3);line-height:1.6}
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(-50%);z-index:80;background:rgba(0,0,0,.85);color:#fff;font-size:14px;padding:10px 16px;border-radius:999px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1}
+/* 무료로 가볍게(10/3): 무료 연애 미니 세 가지로 가는 종이 카드. 모서리 없음, 그림은 CSS/SVG */
+.mini{display:grid;gap:8px}
+.mini a{position:relative;display:flex;align-items:center;gap:14px;min-height:96px;padding:10px 14px 10px 10px;border-radius:0;background:linear-gradient(118deg,#fbf7ef 0,#f6f0e6 45%,#ece2d0 100%);color:#2a2119;text-decoration:none;box-shadow:0 14px 24px -16px rgba(0,0,0,.7);transition:transform .15s}
+.mini a:active{transform:scale(.985)}
+.mini .pic{flex:none;width:76px;height:76px;display:grid;place-items:center;background:#efe5d4;box-shadow:inset 0 0 0 1px rgba(42,33,25,.1);overflow:hidden;position:relative}
+.mini .pic svg{display:block}
+.mini .tx{flex:1;min-width:0}
+.mini .tx small{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:#9a8b7a}
+.mini .tx b{display:block;margin-top:3px;font-size:16px;font-weight:800;letter-spacing:-.02em;color:#2a2119}
+.mini .tx em{display:block;margin-top:3px;font-style:normal;font-size:12.5px;line-height:1.5;color:#6b5d4f}
+.mini .ar{flex:none;color:#9a8b7a}
+.mini .wk{position:absolute;inset:14px 6px;display:grid;grid-template-columns:repeat(7,1fr);background:#e6d9c3;box-shadow:inset 0 0 0 1px rgba(42,33,25,.12)}
+.mini .wk i{border-left:1px solid rgba(42,33,25,.12)}.mini .wk i:first-child{border-left:0}
+.mini .wk i.on{background:radial-gradient(70% 60% at 50% 45%,#fff3d9,rgba(255,230,180,.75) 55%,rgba(255,230,180,0))}
+.mini .wk::after{content:"";position:absolute;top:-30%;bottom:-30%;left:-30%;width:40%;transform:skewX(-14deg);background:linear-gradient(90deg,rgba(255,236,196,0),rgba(255,236,196,.7),rgba(255,236,196,0));animation:miniSun 4.5s ease-in-out infinite}
+@keyframes miniSun{0%{left:-40%;opacity:0}15%{opacity:1}70%{opacity:1}85%,100%{left:110%;opacity:0}}
+@media (prefers-reduced-motion:reduce){.mini .wk::after{animation:none;opacity:0}}
 </style>
 </head>
 <body>
@@ -131,6 +148,15 @@ button{font-family:inherit;color:inherit}
   <section class="sec" id="secWx">
     <div class="sh"><small>매일 무료</small><b>오늘의 연애 날씨</b><p>내 사주와 오늘의 기운이 어떻게 만나는지, 매일 아침 바뀌어요.</p></div>
     <div class="wx" id="wx"></div>
+  </section>
+
+  <section class="sec" id="secMini">
+    <div class="sh"><small>무료 · 한 번 눌러 보기</small><b>무료로 가볍게</b><p>생일만 있으면 바로 나와요. 마음에 들면 친구에게 카드로 보내요.</p></div>
+    <div class="mini">
+      <a href="lovemini.html?t=type"><span class="pic"><svg viewBox="0 0 76 76" width="62" height="62" aria-hidden="true"><defs><radialGradient id="mnW" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#d65a4a"/><stop offset=".55" stop-color="#b8352a"/><stop offset="1" stop-color="#7f1e16"/></radialGradient><filter id="mnB"><feGaussianBlur stdDeviation="2.4"/></filter></defs><ellipse cx="40" cy="43" rx="25" ry="23" fill="#2a2119" opacity=".3" filter="url(#mnB)"/><path d="M38 12c6 0 9 3 13 4s8 4 9 9 4 8 3 13-1 9-4 12-6 8-11 9-8 3-13 2-8-2-12-5-7-6-8-11-3-8-1-13 2-9 6-12 7-6 12-7z" fill="url(#mnW)"/><circle cx="38" cy="38" r="17" fill="#a42e24" stroke="#7e1d15" stroke-opacity=".6"/><g fill="#c94a3c"><circle cx="38" cy="32" r="4"/><circle cx="43.7" cy="36.1" r="4"/><circle cx="41.5" cy="42.9" r="4"/><circle cx="34.5" cy="42.9" r="4"/><circle cx="32.3" cy="36.1" r="4"/></g><circle cx="38" cy="38" r="2.4" fill="#e9b26a"/><ellipse cx="30" cy="25" rx="7" ry="3" fill="#fff" fill-opacity=".18" transform="rotate(-32 30 25)"/></svg></span><span class="tx"><small>도장을 깨면</small><b>연애 체질 카드</b><em>내 일간으로 읽은 사랑하는 방식</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+      <a href="lovemini.html?t=match"><span class="pic"><svg viewBox="0 0 76 76" width="76" height="76" aria-hidden="true"><path d="M-2 46C10 46 14 38 22 38" fill="none" stroke="#2a2119" stroke-width="2.4" stroke-linecap="round"/><path d="M78 30C66 30 62 38 54 38" fill="none" stroke="#b8352a" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="44" cy="38" rx="10" ry="7" fill="none" stroke="#b8352a" stroke-width="2.4"/><ellipse cx="32" cy="38" rx="10" ry="7" fill="none" stroke="#2a2119" stroke-width="2.4"/><path d="M36.5 32.4A10 7 0 0 1 41.6 31.2" fill="none" stroke="#efe5d4" stroke-width="5"/><path d="M36.5 32.4A10 7 0 0 1 41.6 31.2" fill="none" stroke="#b8352a" stroke-width="2.4"/></svg></span><span class="tx"><small>실을 묶으면</small><b>우리 궁합 한 줄</b><em>두 사람의 생일로 보는 매듭의 결</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+      <a href="lovemini.html?t=week"><span class="pic"><span class="wk"><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i></span></span><span class="tx"><small>햇빛이 머무는</small><b>이번 주 연락하기 좋은 날</b><em>이틀과 두 시간, 근거까지</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>
   </section>
 
   <section class="sec">

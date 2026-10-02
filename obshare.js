@@ -21,6 +21,7 @@ const CFG={
  'taegil.html':{before:()=>$('lockT'),ready:()=>T('oT'),data:()=>({menu:'택일',kicker:T('oK'),head:T('oT'),sub:T('oS'),img:'img/taegil.jpg'})},
  'gunghap.html':{before:()=>$('lockG'),ready:()=>T('scT'),data:()=>({menu:'도화 궁합',kicker:`${T('nA')} × ${T('nB')} · 도화 궁합`,big:T('sc'),unit:'점',head:T('scT'),sub:T('say'),img:'img/taeo/base.jpg'})},
  'tarot.html':{before:()=>$('lockR'),ready:()=>T('vBig'),data:()=>({menu:'무진의 타로',kicker:T('rKick'),head:T('vBig'),sub:T('vLine'),img:'img/tarot/mujin.jpg'})},
+ 'noeul.html':{before:()=>$('lock'),ready:()=>T('rVer'),data:()=>({menu:'해와 달의 운세',kicker:'2027 해와 달의 운세 · 노을',big:T('gM').replace('%',''),unit:'% 밤',head:`${T('rWho')} ${T('rVer')}`,sub:T('say1'),img:'img/noeul.jpg'})},
  'home':{before:()=>$('ctaShare'),replace:true,ready:()=>T('rName'),data:()=>({menu:'수호신 카드',kicker:'나의 수호신 · '+T('rGod'),head:T('rName'),sub:T('rMission'),img:BG('rHero')})}
 };
 
@@ -63,7 +64,7 @@ function build(){ el=document.createElement('div'); el.className='obs'; el.datas
   root().appendChild(el); }
 function close(){ if(el) el.classList.remove('on'); }
 async function toBlob(o){ if(o.blob) return o.blob; if(o.src){ const r=await fetch(o.src); return await r.blob(); } return null; }
-async function sheet(o){ if(!el) build(); cur=Object.assign({name:'obang-card.png',title:'오방사주',text:'',url:shareUrl()},o); cur.blob=await toBlob(o);
+async function sheet(o){ if(!el) build(); cur=Object.assign({name:'obang-card.png',title:'오방사주',text:'',url:shareUrl()},o); cur.blob=await toBlob(o); el.querySelector('.hd b').textContent=o.head||'결과 공유하기';
   const img=el.querySelector('.pv img'); img.src=o.src||URL.createObjectURL(cur.blob); el.querySelector('.pv').hidden=!cur.blob;
   requestAnimationFrame(()=>el.classList.add('on')); }
 function done(){ try{ window.dispatchEvent(new CustomEvent('obshare:done',{detail:{key:file}})); }catch(e){} }

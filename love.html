@@ -52,7 +52,7 @@ button{font-family:inherit;color:inherit}
 .sh p{margin:6px 0 0;font-size:13px;color:var(--ink-3);line-height:1.55}
 .sh{margin-bottom:16px}
 /* 2. 오늘의 연애 날씨 */
-.wx{position:relative;border-radius:22px;overflow:hidden;padding:20px 18px 18px;background:var(--sky,linear-gradient(160deg,#2a2033,#120e15));border:1px solid var(--line);transition:background .8s}
+.wx{position:relative;border-radius:22px;overflow:hidden;padding:20px 18px 18px;background:var(--sky,linear-gradient(160deg,#2a2119,#120e10));border:1px solid var(--line);transition:background .8s}
 .wx .ic{position:absolute;right:14px;top:12px;width:92px;height:92px;opacity:.95}
 .wx small{font-size:12px;color:rgba(255,255,255,.75);font-weight:700;letter-spacing:.04em}
 .wx h3{margin:8px 0 0;font-family:var(--serif);font-size:25px;font-weight:900;line-height:1.3;max-width:70%}
@@ -64,7 +64,7 @@ button{font-family:inherit;color:inherit}
 .wx .why{margin-top:12px;font-size:11.5px;color:rgba(255,255,255,.62);line-height:1.6}
 .wx .meter{display:flex;align-items:center;gap:10px;margin-top:12px}
 .wx .meter i{flex:1;height:6px;border-radius:6px;background:rgba(255,255,255,.14);overflow:hidden}
-.wx .meter i b{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,#f3d79b,#e9a2a0);transition:width 1.2s cubic-bezier(.2,.7,.2,1) .2s}
+.wx .meter i b{display:block;height:100%;width:0;border-radius:6px;background:#e3b866;transition:width 1.2s cubic-bezier(.2,.7,.2,1) .2s}
 .wx .meter span{font-family:var(--serif);font-weight:900;font-size:18px;min-width:34px;text-align:right}
 .wxf{display:grid;gap:10px}
 .wxf .g3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:6px}
@@ -76,12 +76,12 @@ button{font-family:inherit;color:inherit}
 .go{width:100%;height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#f0cf8a,#d6a957);color:#1a1206;font-size:16px;font-weight:800;cursor:pointer}
 .wx .again{margin-top:12px;background:none;border:0;padding:0;font-size:12px;color:rgba(255,255,255,.55);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 /* 3. 지금 상황 */
-.st{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.st button{position:relative;aspect-ratio:1/1.18;border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,#1a151d,#120f14);padding:10px 6px 9px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;cursor:pointer;transition:transform .15s,border-color .2s}
-.st button:active{transform:scale(.95)}
-.st button .hj{font-family:var(--serif);font-weight:900;font-size:30px;line-height:1;color:var(--c);margin-top:4px;text-shadow:0 0 22px color-mix(in srgb,var(--c) 40%,transparent)}
-.st button b{font-size:12.5px;font-weight:700}
-.st button small{display:block;font-size:9.5px;color:var(--ink-3);margin-top:1px;white-space:nowrap}
+.st{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.st button{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:64px;padding:12px 12px 12px 14px;border-radius:14px;border:1px solid var(--line);background:#141016;text-align:left;cursor:pointer;transition:transform .15s,background .2s}
+.st button:active{transform:scale(.97);background:#1b161e}
+.st button b{display:block;font-size:15px;font-weight:700}
+.st button small{display:block;margin-top:3px;font-size:11.5px;color:var(--ink-3)}
+.st button svg{flex:none;color:rgba(243,215,155,.6)}
 /* 상황 시트 */
 .sheet{position:fixed;inset:0;margin:0 auto;max-width:430px;z-index:40;display:flex;align-items:flex-end;background:rgba(4,3,6,.62);opacity:0;pointer-events:none;transition:opacity .3s}
 .sheet.on{opacity:1;pointer-events:auto}
@@ -93,7 +93,7 @@ button{font-family:inherit;color:inherit}
 .sheet .who p{margin:4px 0 0;font-family:var(--serif);font-size:17px;line-height:1.55;min-height:3.1em}
 .pl{margin-top:16px;display:grid;gap:8px}
 .pi{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.03);cursor:pointer;text-align:left;width:100%}
-.pi .av{flex:none;width:46px;height:46px;border-radius:50%;background:#222 center 16%/cover;box-shadow:0 0 0 1.5px var(--c,rgba(255,255,255,.2))}
+.pi .av{flex:none;width:46px;height:46px;border-radius:50%;background:#222 center 16%/cover;box-shadow:0 0 0 1.5px rgba(227,184,102,.45)}
 .pi .t{flex:1;min-width:0}
 .pi .t b{display:block;font-size:14.5px;font-weight:700}
 .pi .t small{display:block;margin-top:2px;font-size:12px;color:var(--ink-3);line-height:1.45}
@@ -107,7 +107,7 @@ button{font-family:inherit;color:inherit}
 .ppl{display:flex;gap:14px;overflow-x:auto;margin:0 -16px;padding:2px 16px 4px;scrollbar-width:none}
 .ppl::-webkit-scrollbar{display:none}
 .ppl button{flex:none;width:66px;border:0;background:none;padding:0;cursor:pointer;text-align:center}
-.ppl i{display:block;width:58px;height:58px;margin:0 auto;border-radius:50%;background:#222 center 16%/cover;box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--c)}
+.ppl i{display:block;width:58px;height:58px;margin:0 auto;border-radius:50%;background:#222 center 16%/cover;box-shadow:0 0 0 2px var(--bg),0 0 0 3px rgba(227,184,102,.55)}
 .ppl b{display:block;margin-top:7px;font-size:12px}
 .ppl small{display:block;font-size:10px;color:var(--ink-3);margin-top:1px;white-space:nowrap}
 .ai{margin:34px 16px 0;text-align:center;font-size:11px;color:var(--ink-3);line-height:1.6}
@@ -206,7 +206,7 @@ function weather(me,date){
   hs.sort((a,b)=>b[1]-a[1]||a[0]-b[0]); const good=hs.slice(0,2).map(x=>x[0]).sort((a,b)=>a-b);
   return {sc,tags,why,ts,tb,good,dm,db,loveEl};
 }
-const KIND=sc=>sc>=72?['clear','맑음','#3a2a3f','#1b1420','sun']:sc>=56?['bright','구름 조금','#2b2a3d','#141320','cloudsun']:sc>=40?['cloud','흐림','#232631','#121318','cloud']:['rain','소나기','#1d2430','#0d1016','rain'];
+const KIND=sc=>sc>=72?['clear','맑음','#2a2119','#120e10','sun']:sc>=56?['bright','구름 조금','#2a2119','#120e10','cloudsun']:sc>=40?['cloud','흐림','#2a2119','#120e10','cloud']:['rain','소나기','#2a2119','#120e10','rain'];
 const LINE={peach:'눈길이 머무는 날이에요. 먼저 웃어 주는 쪽이 이겨요.',hap:'가까운 사람과 마음이 맞물리는 날이에요. 미뤄 둔 연락, 오늘 해도 좋아요.',star:'인연의 기운이 들어오는 날이에요. 새 자리에 한 번 나가 봐요.',
   chung:'말이 어긋나기 쉬운 날이에요. 중요한 얘기는 하루 미뤄요.',yj:'괜히 서운해지기 쉬운 날이에요. 혼자 결론 내리지 말아요.',none:'조용한 날이에요. 나를 돌보는 데 쓰면 다음 주가 달라져요.'};
 const TITLE={clear:'마음이 잘 닿는 날',bright:'조금씩 가까워지는 날',cloud:'천천히 가도 되는 날',rain:'오늘은 한 박자 쉬기'};
@@ -214,7 +214,7 @@ function icon(k){ const g='#f3d79b', w='rgba(255,255,255,.88)';
   if(k==='sun') return `<svg class="ic" viewBox="0 0 100 100"><circle cx="50" cy="50" r="18" fill="${g}"/><g stroke="${g}" stroke-width="3.5" stroke-linecap="round">${[0,45,90,135,180,225,270,315].map(a=>{const r=a*Math.PI/180;return `<line x1="${50+Math.cos(r)*27}" y1="${50+Math.sin(r)*27}" x2="${50+Math.cos(r)*36}" y2="${50+Math.sin(r)*36}"/>`;}).join('')}</g></svg>`;
   if(k==='cloudsun') return `<svg class="ic" viewBox="0 0 100 100"><circle cx="40" cy="38" r="15" fill="${g}"/><path d="M30 72h44a14 14 0 0 0 0-28 20 20 0 0 0-38 6 11 11 0 0 0-6 22z" fill="${w}"/></svg>`;
   if(k==='cloud') return `<svg class="ic" viewBox="0 0 100 100"><path d="M24 70h52a15 15 0 0 0 0-30 22 22 0 0 0-42 6 12 12 0 0 0-10 24z" fill="${w}" opacity=".85"/></svg>`;
-  return `<svg class="ic" viewBox="0 0 100 100"><path d="M24 58h52a15 15 0 0 0 0-30 22 22 0 0 0-42 6 12 12 0 0 0-10 24z" fill="${w}" opacity=".8"/><g stroke="#9cc0ff" stroke-width="3" stroke-linecap="round"><line x1="36" y1="68" x2="32" y2="80"/><line x1="50" y1="68" x2="46" y2="80"/><line x1="64" y1="68" x2="60" y2="80"/></g></svg>`; }
+  return `<svg class="ic" viewBox="0 0 100 100"><path d="M24 58h52a15 15 0 0 0 0-30 22 22 0 0 0-42 6 12 12 0 0 0-10 24z" fill="${w}" opacity=".8"/><g stroke="#f3d79b" stroke-width="3" stroke-linecap="round"><line x1="36" y1="68" x2="32" y2="80"/><line x1="50" y1="68" x2="46" y2="80"/><line x1="64" y1="68" x2="60" y2="80"/></g></svg>`; }
 function renderWx(){ const me=loadMe(), box=$('wx');
   if(!me||!me.y){ renderForm(); return; }
   const now=new Date(), W=weather(me,now), K=KIND(W.sc), top=W.tags.find(t=>['chung','yj'].includes(t))&&W.sc<50?W.tags.find(t=>['chung','yj'].includes(t)):(W.tags[0]||'none');
@@ -229,7 +229,7 @@ function renderWx(){ const me=loadMe(), box=$('wx');
   requestAnimationFrame(()=>setTimeout(()=>{ const b=$('wxB'); if(b) b.style.width=W.sc+'%'; },60));
   $('wxRe').onclick=()=>renderForm(me); }
 function renderForm(me){ const box=$('wx'); me=me||{};
-  box.style.setProperty('--sky','linear-gradient(160deg,#2a2033,#120e15)');
+  box.style.setProperty('--sky','linear-gradient(160deg,#2a2119,#120e10)');
   const yNow=new Date().getFullYear(), ys=[]; for(let y=yNow-19;y>=1950;y--) ys.push(y);
   box.innerHTML=`${icon('cloudsun')}<small>생일만 알려 주면 바로</small><h3>오늘 내 연애 기운은</h3>
     <div class="wxf" style="margin-top:16px">
@@ -289,7 +289,7 @@ const PR={
  hundred:{n:'이별 후 100일',d:'하람 · 매일 아침 한 줄로 회복하기',img:'img/wood.jpg',c:'var(--wood)',pr:'준비 중',soon:'2월 오픈'},
  reNew:{n:'재회 감정서',d:'재이 · 이별 사정까지 듣고 읽는 재회',img:'img/water.jpg',c:'var(--water)',pr:'준비 중',soon:'11월 오픈'},
  marry:{n:'붉은 실 결혼운',d:'월하 · 결혼의 때와 결혼 궁합',img:'img/taegil.jpg',c:'#d9b38c',pr:'준비 중',soon:'1월 오픈'}};
-$('st').innerHTML=ST.map((x,i)=>`<button type="button" data-i="${i}" style="--c:${x.c}"><span class="hj" data-hj="0">${x.hj}</span><span><b>${x.n}</b><small>${x.s}</small></span></button>`).join('');
+$('st').innerHTML=ST.map((x,i)=>`<button type="button" data-i="${i}"><span><b>${x.n}</b><small>${x.s}</small></span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>`).join('');
 let typeT=null;
 function openSt(i){ const x=ST[i]; $('shK').textContent=`서하 · ${x.n}`; const L=$('shL'); L.textContent=''; clearTimeout(typeT);
   let k=0; const ty=()=>{ L.textContent=x.line.slice(0,++k); if(k<x.line.length) typeT=setTimeout(ty,34); }; setTimeout(ty,260);

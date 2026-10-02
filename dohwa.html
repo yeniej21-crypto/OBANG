@@ -355,8 +355,8 @@ video.layer.on{opacity:1}
   <div class="letter" id="letter">
     <div class="lh"><div class="lp" id="lp"></div><video id="vL" playsinline preload="auto"></video><div class="ls" id="ls"></div>
       <div class="lt"><small>桃花 · LETTER</small><h2>태오의 도화 편지</h2><p id="lTo"></p></div></div>
-    <div class="lb"><h3>2027 인연 달력</h3><div class="sub2">절기 기준 월 · 누나 사주의 도화·일지와 맞춰 본 결과</div><div class="cal12" id="cal12"></div>
-      <div class="legend"><span>🌸 도화가 피는 달</span><span>♡ 마음이 묶이는 달</span><span>! 흔들리는 달</span></div><p id="calTx"></p></div>
+    <div class="lb"><h3>앞으로 열두 달 인연 달력</h3><div class="sub2" id="calSub">절기 기준 월 · 누나 사주의 도화·일지와 맞춰 본 결과</div><div class="cal12" id="cal12"></div>
+      <div class="legend"><span>桃 도화가 피는 달</span><span>♡ 마음이 묶이는 달</span><span>△ 흔들리는 달</span><span>굵은 테두리 · 가장 크게 열리는 달</span></div><p id="calTx"></p></div>
     <div class="lb"><h3>끌리는 사람, 끌려오는 사람</h3><div class="sub2">누나 일간과 오행의 관계로 본 성향</div><div class="two" id="two"></div><p id="twoTx"></p></div>
     <div class="lb"><h3>누나 도화 살리는 법</h3><div class="sub2" id="kitSub"></div><div class="kit" id="kit"></div></div>
     <div class="lb"><h3>조심해야 할 인연</h3><div class="sub2" id="warnSub"></div><p id="warnTx"></p></div>
@@ -451,7 +451,9 @@ function askDate(){ return new Promise(res=>{
   ask(`<div class="card"><div class="seg"><button class="on" data-c="양력">양력</button><button data-c="음력">음력</button></div>
   <div class="sels"><select id="dy" aria-label="년">${ys.join('')}</select><select id="dm" aria-label="월">${ms.join('')}</select><select id="dd" aria-label="일">${ds.join('')}</select></div>
   <button class="cta" id="dGo">이 날 태어났어</button></div>`);
-  let cal='양력'; dock.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{ cal=b.dataset.c; dock.querySelectorAll('.seg button').forEach(x=>x.classList.toggle('on',x===b)); });
+  let cal='양력'; const fillD=()=>{ const D=$('dd'), n=cal==='음력'?30:new Date(+$('dy').value,+$('dm').value,0).getDate(), cur=+D.value||D0; D.innerHTML=''; for(let d=1;d<=n;d++) D.add(new Option(d+'일',d,false,d===Math.min(cur,n))); };
+  $('dy').onchange=fillD; $('dm').onchange=fillD; fillD();
+  dock.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{ cal=b.dataset.c; dock.querySelectorAll('.seg button').forEach(x=>x.classList.toggle('on',x===b)); fillD(); });
   if(SAVED&&SAVED.cal==='l'){ const lb=dock.querySelector('.seg button[data-c="음력"]'); if(lb) lb.onclick(); }
   $('dGo').onclick=()=>{ const y=+$('dy').value,m=+$('dm').value,d=+$('dd').value; clearDock(); me(`${cal} ${y}년 ${m}월 ${d}일`); res({y,m,d,cal}); };
 }); }
@@ -479,8 +481,10 @@ function saju(y,m,d,h,cal){
   let hs=null,hb=null; if(h>=0){ hb=h; hs=(((ds%5)*2)+hb)%10; }
   return {y:[ys,yb],m:[ms,mb],d:[ds,db],h:h>=0?[hs,hb]:null};
 }
-const PEACH=[0,6,3,9]; // 子午卯酉
-function target(b){ if([2,6,10].includes(b)) return 3; if([8,0,4].includes(b)) return 9; if([5,9,1].includes(b)) return 6; return 0; }
+const PEACH=[0,6,3,9]; // 子午卯酉 (도화가 될 수 있는 글자. 실제 도화 판정은 isPeach)
+function target(b){ if([2,6,10].includes(b)) return 3; if([8,0,4].includes(b)) return 9; if([5,9,1].includes(b)) return 6; return 0; } // 삼합 기준: 寅午戌→卯 申子辰→酉 巳酉丑→午 亥卯未→子
+/* 실제 도화: 일지 · 년지 기준 도화 글자와 같은 지지(기준 자리 자신은 빼고) */
+function peachSpots(P){ const tg=target(P.d[1]), tg2=target(P.y[1]); return [['y',P.y],['m',P.m],['d',P.d],['h',P.h]].filter(([k,p])=>p&&((p[1]===tg&&k!=='d')||(p[1]===tg2&&k!=='y'))).map(([k])=>k); }
 const TYPES={
   3:{n:'봄꽃 도화',d:'첫눈에 스며드는 타입',t:['#첫인상_반칙','#웃을때_무장해제','#봄같은_사람'],s:'누나는 처음 본 사람도 경계를 풀게 만드는 사람이야. 웃는 순간 공기가 바뀌거든. 문제는… 누나가 그걸 전혀 모른다는 거.'},
   6:{n:'햇살 도화',d:'있기만 해도 분위기가 바뀌는 타입',t:['#존재감','#밝은_에너지','#자꾸_눈이_감'],s:'누나가 들어오면 방이 밝아져. 사람들이 이유 없이 누나 쪽으로 몸을 돌려. 근데 정작 누나는 그 시선을 좀 피하더라.'},
@@ -546,14 +550,14 @@ async function toVideo(){
   await playSeq(['v1','v2','v3']);
   await loadingSeq();
 }
-const STEPS=['사주 원국 세우는 중','도화·홍염 기운 위치 찾는 중','누나만의 매력 포인트 읽는 중','올해 인연이 들어오는 달 계산 중','태오가 결과 정리하는 중'];
+const STEPS=['사주 원국 세우는 중','도화·홍염 기운 위치 찾는 중','누나만의 매력 포인트 읽는 중','인연이 들어오는 달 계산 중','태오가 결과 정리하는 중'];
 let R;
 async function loadingSeq(){
   const {y,m,d,cal}=S.date; R=saju(y,m,d,S.hour,cal);
   bgm(.32,1.5);
   $('steps').innerHTML=STEPS.map(s=>`<li><span class="ck"></span>${H(s)}</li>`).join('');
   const cols=[R.h,R.d,R.m,R.y]; const won=$('won'); won.innerHTML='';
-  cols.forEach(c=>{ if(!c) return; [GAN[c[0]],JI[c[1]]].forEach((ch,i)=>{ const s=document.createElement('span'); s.textContent=ch; if(i===1&&PEACH.includes(c[1])) s.dataset.dh=1; won.appendChild(s); }); });
+  const spots=peachSpots(R), keyOf=c=>c===R.h?'h':c===R.d?'d':c===R.m?'m':'y'; cols.forEach(c=>{ if(!c) return; [GAN[c[0]],JI[c[1]]].forEach((ch,i)=>{ const s=document.createElement('span'); s.textContent=ch; if(i===1&&spots.includes(keyOf(c))) s.dataset.dh=1; won.appendChild(s); }); });
   stage.classList.add('load'); stage.classList.remove('vid');
   [vA,vB].forEach(v=>{ v.classList.remove('on'); try{v.pause();}catch(e){} });
   const li=[...$('steps').children];
@@ -568,23 +572,26 @@ async function loadingSeq(){
   await wait(600);
   showResult();
 }
-function hash(s){ let h=0; for(const c of s) h=(h*31+c.charCodeAt(0))>>>0; return h; }
+/* 도화 지수: 이름과 무관. 원국의 실제 도화 · 홍염 · 인연의 별, 앞으로 열두 달 안의 도화 달로만 계산 */
+const HONGYEOM={0:6,1:6,2:2,3:7,4:4,5:4,6:10,7:9,8:0,9:8};
 async function showResult(){
   const br=[R.y[1],R.m[1],R.d[1]].concat(R.h?[R.h[1]]:[]);
-  const tg=target(R.d[1]), tg2=target(R.y[1]);
-  const peachN=br.filter(b=>PEACH.includes(b)).length;
-  const real=br.filter(b=>b===tg||b===tg2).length;
-  const score=Math.max(63,Math.min(97,58+peachN*8+real*9+hash(S.name)%9));
+  const tg=target(R.d[1]), tg2=target(R.y[1]), spots=peachSpots(R), peachN=spots.length;
+  const hong=br.includes(HONGYEOM[R.d[0]]), dm=R.d[0], loveG=S.bro?2:3;
+  const rel=(el)=>(el-Math.floor(dm/2)+5)%5, BREL=[4,2,0,0,2,1,1,2,3,3,2,4];
+  const stars=[R.y[0],R.m[0]].concat(R.h?[R.h[0]]:[]).filter(x=>rel(Math.floor(x/2))===loveG).length+br.filter(b=>rel(BREL[b])===loveG).length;
+  let pkMonth=null; try{ if(window.Prem2Core&&window.SajuX){ const u=askUser(); const F=Prem2Core.rolling(Saju,SajuX,{y:u.solar.y,m:u.solar.m,d:u.solar.d,h:S.hour>=0?S.hour:null,g:S.bro?'m':'f'},12); const o=F.months.find(x=>x.ss.includes('도화')); if(o) pkMonth=o.start.m; } }catch(e){}
+  const score=Math.max(42,Math.min(96,50+14*Math.min(peachN,2)+(hong?8:0)+(stars===0?-4:stars<=2?6:3)+(spots.some(k=>k==='d'||k==='h')?4:0)));
   const T=TYPES[tg];
   RES={T,score,peachN};
   $('rName').textContent=`${S.nick} 누나의 도화 유형`;
   $('rType').textContent=T.n; $('rDesc').textContent=T.d;
-  $('rTop').textContent=`같은 나이대 중 상위 ${Math.max(2,100-score+3)}% · ${peachN?`원국에 도화 글자 ${peachN}개`:'숨은 도화형 (대운에서 피어나는 타입)'}`;
+  $('rTop').textContent=peachN?`원국에 도화 글자 ${peachN}개${hong?' · 홍염 있음':''} · 도화 기준 ${JI[tg]}${tg2!==tg?'·'+JI[tg2]:''}`:`원국엔 도화 글자가 없어${hong?', 대신 홍염이 있어':''}. ${pkMonth?`운에서 도화가 들어오는 ${pkMonth}월에 피는 타입`:'운에서 도화가 들어오는 달에 피는 타입'}`;
   const lab=['시','일','월','년'];
-  $('rPil').innerHTML=[R.h,R.d,R.m,R.y].map((c,i)=>`<div><small>${lab[i]}주</small>${c?`<div class="gz"><em>${GAN[c[0]]}</em><em class="${PEACH.includes(c[1])?'dh':''}">${JI[c[1]]}</em></div>`:'<div class="gz none">모름</div>'}</div>`).join('');
+  $('rPil').innerHTML=[R.h,R.d,R.m,R.y].map((c,i)=>`<div><small>${lab[i]}주</small>${c?`<div class="gz"><em>${GAN[c[0]]}</em><em class="${spots.includes(['h','d','m','y'][i])?'dh':''}">${JI[c[1]]}</em></div>`:'<div class="gz none">모름</div>'}</div>`).join('');
   $('rTags').innerHTML=T.t.map(t=>`<span>${t}</span>`).join('');
   $('rSay').textContent=T.s;
-  const L=[['올해 인연이 들어오는 달','누나 사주에서 도화가 가장 세게 열리는 달은 바로 그 달이야'],['누나가 끌리는 사람, 누나한테 끌리는 사람','둘이 다르다는 게 문제야, 누나는 늘 반대쪽을 골랐거든'],['도화를 살리는 법','색, 향, 그리고 누나가 제일 예뻐 보이는 시간대까지'],['조심해야 할 인연','이 사람만큼은 피해, 첫인상이 제일 좋은 사람일 거야']];
+  const L=[['앞으로 열두 달, 인연이 들어오는 달','누나 사주에서 도화가 가장 세게 열리는 달은 바로 그 달이야'],['누나가 끌리는 사람, 누나한테 끌리는 사람','둘이 다르다는 게 문제야, 누나는 늘 반대쪽을 골랐거든'],['도화를 살리는 법','색, 향, 그리고 누나가 제일 예뻐 보이는 시간대까지'],['조심해야 할 인연','이 사람만큼은 조심해, 첫인상이 좋게 느껴지기 쉬운 사람이야']];
   const lk='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
   $('rLock').innerHTML=L.map(l=>`<div class="lock"><div class="ic">${lk}</div><div><b>${l[0]}</b><span>${l[1]}</span></div></div>`).join('');
   broDom($('res')||stage); stage.classList.remove('load','push'); stage.classList.add('res');
@@ -630,7 +637,7 @@ async function makeCard(){
   x.fillStyle='#ffb9a6'; x.textAlign='left'; x.fillText(num,cx-nw/2-24,1628); x.font=`700 60px ${SANS}`; x.fillText('%',cx+nw/2-14,1628);
   x.textAlign='center'; x.fillStyle='#9a8f89'; x.font=`500 32px ${SANS}`; x.fillText('도화 지수',cx,1462);
   // pillars row
-  const cols=[R.h,R.d,R.m,R.y].filter(Boolean); const chars=[]; cols.forEach(cc=>{ chars.push([GAN[cc[0]],false]); chars.push([JI[cc[1]],PEACH.includes(cc[1])]); });
+  const sp=peachSpots(R), cols=[[R.h,'h'],[R.d,'d'],[R.m,'m'],[R.y,'y']].filter(x=>x[0]); const chars=[]; cols.forEach(([cc,k])=>{ chars.push([GAN[cc[0]],false]); chars.push([JI[cc[1]],sp.includes(k)]); });
   const bw=86,gap=14, tw=chars.length*bw+(chars.length-1)*gap; let bx=cx-tw/2;
   chars.forEach(([ch,dh])=>{ rr(x,bx,1668,bw,100,18); if(dh){ x.fillStyle='#ffb9a6'; x.fill(); } else { x.strokeStyle='rgba(255,226,214,.3)'; x.lineWidth=2; x.stroke(); }
     x.fillStyle=dh?'#2a0d14':'#f7f1ec'; x.font=`900 54px ${SERIF}`; x.fillText(ch,bx+bw/2,1738); bx+=bw+gap; });
@@ -668,14 +675,13 @@ function buildLetter(){
   const dm=R.d[0], db=R.d[1], tg=target(db), tg2=target(R.y[1]);
   $('lTo').textContent=`${S.nick} 누나에게`;
   // calendar
-  const marks=[]; let peakM=null;
-  for(let m=1;m<=12;m++){ const mp=window.Saju?Saju.monthPillarAt(2027,m,15):[0,(m)%12]; const b=mp[1];
-    const pk=(b===tg||b===tg2), hp=window.Saju&&Saju.isHap(b,db), chg=window.Saju&&Saju.isChung(b,db);
-    marks.push({m,mp,pk,hp,chg}); if(pk&&!peakM) peakM=m; }
-  if(!peakM){ const h=marks.find(x=>x.hp); peakM=h?h.m:4; marks[peakM-1].pk=true; }
-  $('cal12').innerHTML=marks.map(x=>`<div class="${x.pk?'pk':x.hp?'hp':x.chg?'ch':''}">${x.pk?'<em>🌸</em>':x.hp?'<em>♡</em>':x.chg?'<em>!</em>':''}<b>${x.m}월</b><small>${GAN[x.mp[0]]}${JI[x.mp[1]]}</small></div>`).join('');
-  const hps=marks.filter(x=>x.hp).map(x=>x.m+'월'), chs=marks.filter(x=>x.chg).map(x=>x.m+'월');
-  $('calTx').innerHTML=`누나 도화가 제일 크게 피는 달은 <b>${peakM}월</b>이야. 그 달엔 약속 거절하지 마.${hps.length?` ${hps.join('·')}은 마음이 묶이는 달이라 관계가 한 걸음 깊어지고,`:''}${chs.length?` ${chs.join('·')}은 흔들리는 달이니까 싸워도 그날 풀어.`:''}<span class="chip2">${JI[tg]} 도화 · 일지 ${JI[db]}</span>`;
+  /* 프리미엄 달력과 같은 기준: 오늘이 든 절월부터 열두 달 · 같은 연애 점수로 최고의 달을 고른다 */
+  const CAL=window.DohwaPrem&&DohwaPrem.calc(); let marks=[], peakM=null;
+  if(CAL){ marks=CAL.months.map(o=>({m:o.start.m,y:o.start.y,mp:[o.s,o.b],pk:o.ss.includes('도화'),hp:o.br.some(r=>r.at==='일지'&&(r.k==='육합'||r.k==='삼합')),chg:o.br.some(r=>r.at==='일지'&&r.k==='충'),top:o===CAL.top[0]})); peakM=CAL.top[0].start.m;
+    const a=CAL.months[0].start, z=CAL.months[CAL.months.length-1].start; $('calSub').textContent=`${a.y}.${a.m} ~ ${z.y}.${z.m} · 절기 기준 월 · 누나 사주의 도화·일지와 맞춰 본 결과`; }
+  $('cal12').innerHTML=marks.map(x=>`<div class="${x.pk?'pk':x.hp?'hp':x.chg?'ch':''}"${x.top?' style="outline:2px solid var(--peach);outline-offset:-2px"':''}>${x.pk?'<em>桃</em>':x.hp?'<em>♡</em>':x.chg?'<em>△</em>':''}<b>${x.m}월</b><small>${GAN[x.mp[0]]}${JI[x.mp[1]]}</small></div>`).join('');
+  const hps=marks.filter(x=>x.hp&&!x.top).map(x=>x.m+'월'), chs=marks.filter(x=>x.chg).map(x=>x.m+'월');
+  $('calTx').innerHTML=`앞으로 열두 달 중 누나 인연이 제일 크게 열리는 달은 <b>${peakM}월</b>이야. 그 달엔 약속 거절하지 마.${hps.length?` ${hps.join('·')}은 마음이 묶이는 달이라 관계가 한 걸음 깊어지고,`:''}${chs.length?` ${chs.join('·')}은 흔들리는 달이니까 싸워도 그날 풀어.`:''}<span class="chip2">${JI[tg]} 도화 · 일지 ${JI[db]}</span>`;
   // attraction
   const me=Math.floor(dm/2), gw=S.bro?(me+2)%5 /* 남성 인연의 별 재성: 내가 이기는 */:(me+3)%5 /* 여성 인연의 별 관성: 나를 이기는 */, sk=(me+1)%5 /* 식상: 내가 낳는 */, gwN=S.bro?'재성':'관성';
   $('two').innerHTML=`<div><small>누나가 끌리는 사람</small><b>${EL_N[gw]} 기질</b><span>${EL_P[gw]}</span></div><div><small>누나한테 빠지는 사람</small><b>${EL_N[sk]} 기질</b><span>${EL_P[sk]}</span></div>`;
@@ -684,8 +690,8 @@ function buildLetter(){
   const K=KIT[tg]; $('kitSub').textContent=`누나 도화 글자 ${JI[tg]} 기준`;
   $('kit').innerHTML=`<div><small>색</small><span>${K.c}</span></div><div><small>향</small><span>${K.h}</span></div><div><small>시간</small><span>${K.t}</span></div><div><small>장소</small><span>${K.p}</span></div>`;
   // caution
-  const cb=(db+6)%12; $('warnSub').textContent=`일지 ${JI[db]}와 부딪히는 글자 ${JI[cb]}`;
-  $('warnTx').innerHTML=`<b>${TTI_L[cb]}띠</b>, 아니면 사주에 ${JI[cb]}이(가) 센 사람. 첫인상이 제일 좋은 사람일 거야. 설레는 거랑 편한 건 다르니까, 이 사람 앞에서는 한 템포만 늦게 대답해.`;
+  const cb=(db+6)%12; $('warnSub').textContent=`누나 일지(배우자 자리) ${JI[db]}와 충이 되는 글자 ${JI[cb]}`;
+  $('warnTx').innerHTML=`<b>일지가 ${JI_K[cb]}(${JI[cb]})인 사람</b>, 그러니까 태어난 날의 글자가 ${JI_K[cb]}인 사람. 띠가 아니라 태어난 날 기준이야. 누나 일지와 충이라 첫인상은 강하게 끌리기 쉬운데, 가까워질수록 부딪힐 가능성이 커. 설레는 거랑 편한 건 다르니까, 이 사람 앞에서는 한 템포만 늦게 대답해.`;
   $('bye').innerHTML=`${S.nick} 누나. 도화는 타고나는 거지만, 피우는 건 누나가 하는 거야. ${peakM}월에 누나가 제일 예쁠 거니까… 그때 나한테도 얘기해줘.`;
   $('lp').style.backgroundImage=`url('${IMG.chin}')`;
   broDom($('letter'));

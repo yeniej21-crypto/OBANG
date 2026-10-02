@@ -23,7 +23,7 @@ function buildFacts(u){
   add(st.strong?'신강':'신약',`일간을 돕는 글자 ${st.n}/${st.of}개 → ${st.label}. 반기는 기운: ${st.strong?'식상·재성·관성':'인성·비겁'}.`,st.strong?'신강':'신약');
   const t1=target(P.d[1]), t2=target(P.y[1]); const inChart=[P.y,P.m,P.d,P.h].filter(Boolean).some(p=>[0,3,6,9].includes(p[1]));
   add('도화',`도화 글자: 일지 기준 ${JI[t1]}, 년지 기준 ${JI[t2]}. 원국 안에 子午卯酉 ${inChart?'있음':'없음'}.`,'도화');
-  add('배우자궁',`일지(배우자·가까운 관계 자리)는 ${JI[P.d[1]]}(${S.tgBranch(dm,P.d[1])}). 연애 상대 별: ${male?'재성(여성)':'관성(남성)'}.`,'일지');
+  add('배우자궁',`일지(배우자·가까운 관계 자리)는 ${JI[P.d[1]]}(${S.tgBranch(dm,P.d[1])}). 인연의 별: ${male?'재성':'관성'}(전통 명리에서 연애 · 배우자 인연으로 보는 십성. 상대의 성별과는 무관).`,'일지');
   const age=(new Date()).getFullYear()-u.solar.y+1; const DU=S.daeun(P,male); const cur=DU.list.find(x=>age>=x.age&&age<x.age+10)||DU.list[0];
   add('대운 '+GAN[cur.s]+JI[cur.b],`현재 대운: ${GAN[cur.s]}${JI[cur.b]}(${cur.age}~${cur.age+9}세, ${S.tgStem(dm,cur.s)}·${S.tgBranch(dm,cur.b)}, ${GROUP[S.rel(dm,stEl(cur.s))]}의 10년). 대운 ${DU.fwd?'순행':'역행'}, ${DU.start}세 시작.`,'대운');
   const rels=(b)=>{ const r=[]; [['일지',P.d],['월지',P.m],['년지',P.y],['시지',P.h]].forEach(([n,p])=>{ if(!p) return; if(S.isHap(b,p[1])) r.push(n+'와 합'); if(S.isChung(b,p[1])) r.push(n+'와 충'); }); if([P.y,P.m,P.d,P.h].filter(Boolean).some(p=>S.isHyung(b,p[1]))) r.push('형'); if(b===t1||b===t2) r.push('도화 글자'); return r.length?r.join('·'):'특이 관계 없음'; };

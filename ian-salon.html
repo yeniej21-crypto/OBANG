@@ -749,17 +749,15 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .home .logo img.lw,.logo img.lw{width:auto;height:21px;border-radius:0}
 .hMenuS .hd img.lw{width:auto;height:20px}
 
-/* 연애 상담소 입구(10/3) */
-.lhub{position:relative;display:block;margin:0 16px;min-height:300px;overflow:hidden;color:#fff;text-decoration:none;border-radius:20px}
-.lhub .bg{position:absolute;inset:0;background:url('img/pop/seoha_bg.jpg') 70% 14%/cover no-repeat;transform:scale(1.02)}
-.lhub::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,8,12,.94) 0,rgba(10,8,12,.72) 48%,rgba(10,8,12,.05) 100%)}
-.lhub .tx{position:relative;z-index:1;display:flex;flex-direction:column;padding:22px 18px;width:68%}
-.lhub small{font-size:11px;letter-spacing:.14em;color:#f3d79b;font-weight:700}
-.lhub b{margin-top:8px;font-family:var(--brush);font-weight:400;font-size:32px;line-height:1.1}
-.lhub em{margin-top:10px;font-style:normal;font-size:12.5px;line-height:1.6;color:rgba(255,255,255,.8)}
-.lhub .hjs{display:flex;flex-wrap:wrap;gap:4px;margin-top:14px}
-.lhub .hjs i{font-style:normal;font-family:var(--serif);font-weight:900;font-size:14px;width:26px;height:26px;display:grid;place-items:center;border:1px solid rgba(243,215,155,.35);color:#f3d79b}
-.lhub .go{margin-top:16px;align-self:flex-start;font-size:13px;font-weight:800;color:#1a1206;background:#e3b866;padding:8px 14px}
+/* 연애 상담소 입구(10/3 v2: 흰 띠 위 크림 카드 + 서하 누끼, 한자 칩 삭제) */
+.home .lhubS .sh{margin-bottom:14px}
+.lhub{position:relative;display:flex;align-items:center;margin:26px 18px 0;min-height:150px;padding:0 0 0 18px;background:#f5efe5;color:#1f1a15;text-decoration:none;overflow:visible}
+.lhub .tx{position:relative;z-index:1;display:flex;flex-direction:column;padding:20px 0;width:58%}
+.lhub small{font-size:10.5px;font-weight:800;letter-spacing:.08em;color:#b8862f}
+.lhub b{margin-top:6px;font-family:var(--brush);font-weight:400;font-size:30px;line-height:1.1;color:#1f1a15}
+.lhub em{margin-top:6px;font-style:normal;font-size:12.5px;line-height:1.5;color:#8a8178}
+.lhub .go{margin-top:12px;align-self:flex-start;font-size:12.5px;font-weight:800;color:#f5efe5;background:#1f1a15;padding:7px 14px}
+.lhub .pp{position:absolute;right:-4px;bottom:0;height:calc(100% + 34px);width:auto;max-width:46%;object-fit:cover;object-position:top;pointer-events:none}
 </style>
 
 <div class="stage" id="stage">
@@ -1000,8 +998,8 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       </div>
     </section>
 
-    <section class="hSec" id="secLoveHub" data-cats="all love heart re match">
-      <a class="lhub" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="bg"></span><span class="tx"><small>NEW · 연애 상담소</small><b>누구 때문에 왔어</b><em>솔로부터 재회, 결혼까지. 상황을 고르면 서하가 맞는 풀이로 안내해요.</em><span class="hjs" data-hj="0"><i>緣</i><i>戀</i><i>曖</i><i>愛</i><i>倦</i><i>別</i><i>回</i><i>婚</i></span><span class="go">상담소 들어가기</span></span></a>
+    <section class="hSec band lhubS" id="secLoveHub" data-cats="all love heart re match">
+      <a class="lhub" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 연애 상담소</small><b>누구 때문에 왔어</b><em>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span><img class="pp" src="img/pop/seoha.webp" alt="" loading="lazy"></a>
     </section>
     <section class="hSec" id="secDohwa" data-cats="all love match">
       <div class="sh"><small>도화 · 매력</small><b>내 사주 속 도화, 얼마나 진할까</b></div>

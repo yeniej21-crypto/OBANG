@@ -1,5 +1,5 @@
 /* 도화 궁합 프리미엄 — 둘의 인연 타이밍 (결제 뒤 결과 아래에 이어짐)
-   계산: 두 사람 각각 prem2_core(2027 절월) + 연애 점수 → 둘이 함께 열리는 달 · 부딪히는 달 · 먼저 연락하기 좋은 날 · 원국 교차 관계
+   계산: 두 사람 각각 prem2_core(오늘이 든 절월부터 열두 달) + 연애 점수 → 둘이 함께 열리는 달 · 부딪히는 달 · 먼저 연락하기 좋은 날 · 원국 교차 관계
    → AI(태오 문체) · 없으면 초안 */
 (function(){
 const S_=window.Saju, X=window.SajuX, {GAN,JI,EL,stEl,BR_EL}=S_; const $=id=>document.getElementById(id); const K=window.PK;
@@ -9,7 +9,7 @@ function loveScore(o,loveG){ let s=50; if(o.ss.includes('도화')) s+=15; if(o.s
   if(o.br.some(r=>r.at==='일지'&&(r.k==='육합'||r.k==='삼합'))) s+=12; if(o.sr.some(r=>r.at==='일간'&&r.k==='천간합')) s+=10;
   if(o.g1===loveG||o.g2===loveG) s+=o.f1||o.f2?8:4; if(o.br.some(r=>r.at==='일지'&&r.k==='충')) s-=15; if(o.br.some(r=>r.at==='일지'&&r.k==='원진')) s-=6; if(o.ss.includes('공망')) s-=4;
   return Math.max(30,Math.min(96,Math.round(s))); }
-const sol=o=>{ let s={y:o.y,m:o.m,d:o.d}; if(o.c==='l'){ const c=S_.lunarToSolar(o.y,o.m,o.d,false); if(c) s=c; } return {y:s.y,m:s.m,d:s.d,h:o.h>=0?o.h:null,g:o.g}; };
+const sol=o=>{ if(o.P) return {P:o.P,g:o.g}; /* 신청 링크로 온 사람: 생일 없이 여덟 글자만 */ let s={y:o.y,m:o.m,d:o.d}; if(o.c==='l'){ const c=S_.lunarToSolar(o.y,o.m,o.d,false); if(c) s=c; } return {y:s.y,m:s.m,d:s.d,h:o.h>=0?o.h:null,g:o.g}; };
 const chungD=(o)=>o.br.some(r=>r.at==='일지'&&r.k==='충'), hapD=o=>o.br.some(r=>r.at==='일지'&&(r.k==='육합'||r.k==='삼합'));
 /* 원국끼리 맞닿는 글자: 서로의 일지 · 일간 기준 */
 function cross(){ const A=FA.P, B=FB.P, out=[], seen=new Set();
@@ -23,14 +23,15 @@ function cross(){ const A=FA.P, B=FB.P, out=[], seen=new Set();
   if(dA.includes('천을귀인')) add('그 사람 일지가 나의 천을귀인'); if(dB.includes('천을귀인')) add('나의 일지가 그 사람의 천을귀인');
   return out; }
 function togetherDays(){ const A=FA.P, B=FB.P, out=[];
-  for(let t=Date.UTC(2027,1,4);t<=Date.UTC(2028,1,3);t+=864e5){ const d=new Date(t), y=d.getUTCFullYear(), m=d.getUTCMonth()+1, dd=d.getUTCDate(), w=d.getUTCDay(); const [s,b]=S_.dayPillar(y,m,dd);
+  const n0=new Date(), t0=Date.UTC(n0.getFullYear(),n0.getMonth(),n0.getDate());
+  for(let t=t0+864e5;t<=t0+365*864e5;t+=864e5){ const d=new Date(t), y=d.getUTCFullYear(), m=d.getUTCMonth()+1, dd=d.getUTCDate(), w=d.getUTCDay(); const [s,b]=S_.dayPillar(y,m,dd);
     if(S_.isChung(b,A.d[1])||S_.isChung(b,B.d[1])) continue;
     const hA=S_.isHap(b,A.d[1]), hB=S_.isHap(b,B.d[1]), gA=X.ganHap(s,A.d[0]), gB=X.ganHap(s,B.d[0]), dA=X.shinsal(b,A,s).includes('도화'), dB=X.shinsal(b,B,s).includes('도화');
     const v=(hA?2.5:0)+(hB?2.5:0)+(gA||gB?1.5:0)+(dA||dB?1:0)+(w===5||w===6?1:0);
     if(v>=4) out.push({y,m,d:dd,w,s,b,v,why:[hA&&hB?'두 사람 배우자 자리와 모두 합':hA?'나의 배우자 자리와 합':hB?'그 사람 배우자 자리와 합':'',gA||gB?'일간과 천간합':'',dA||dB?'도화가 뜨는 날':''].filter(Boolean)}); }
   const r=[], used=new Set(); out.sort((a,b)=>b.v-a.v||a.m-b.m||a.d-b.d).forEach(o=>{ const k=o.y*100+o.m; if(r.length<4&&!used.has(k)){ used.add(k); r.push(o); } }); return r.sort((a,b)=>a.y-b.y||a.m-b.m||a.d-b.d); }
 function prep(){ D=window.GHF; if(!D) return false; HON=D.a.g==='m'?'형':'누나'; if(window.PK) PK.male=D.a.g==='m';
-  FA=window.Prem2Core.build(S_,X,sol(D.a)); FB=window.Prem2Core.build(S_,X,sol(D.b));
+  FA=window.Prem2Core.rolling(S_,X,sol(D.a),12); FB=window.Prem2Core.rolling(S_,X,sol(D.b),12);
   const gA=FA.male?2:3, gB=FB.male?2:3;
   M=FA.months.map((oa,i)=>{ const ob=FB.months[i]; const la=loveScore(oa,gA), lb=loveScore(ob,gB);
     let t=Math.round((la+lb)/2); const both=la>=62&&lb>=62, clash=chungD(oa)||chungD(ob); if(both) t+=5; if(clash) t-=6; if(hapD(oa)&&hapD(ob)) t+=4;
@@ -68,7 +69,7 @@ missions는 정확히 3개.
 
 [사실 카드]
 ${card([])}`;
-  const cal=ids=>`${ST0}\n\n[할 일] 2027 둘의 인연 달력의 달별 풀이를 쓴다. 입춘 기준 절월이다. 둘의 점수, 두 사람 각각의 연애 점수와 관계 · 신살을 근거로 둘 사이에 그달 무슨 결이 흐르는지 쓴다.
+  const cal=ids=>`${ST0}\n\n[할 일] 앞으로 열두 달(오늘이 든 절월부터) 둘의 인연 달력의 달별 풀이를 쓴다. 절기 기준 월이다. 둘의 점수, 두 사람 각각의 연애 점수와 관계 · 신살을 근거로 둘 사이에 그달 무슨 결이 흐르는지 쓴다.
 출력 JSON 형식: 배열. 달마다 {"i":달 번호,"title":"그달 둘 사이의 제목 6~12자","text":"그달 둘의 이야기 150~220자","tip":"그달 한 줄 당부 10~20자"}
 대상 달 번호: ${ids.join(', ')}
 
@@ -82,10 +83,10 @@ function build(){ const n='', ps=a=>K.ps((a||[]).map(h),n), a=D.a, b=D.b;
   const H=[`<div class="pk-st" id="ghst" hidden></div>`];
   const who=(F,o)=>`<div><small>${K.esc(o.n)}</small><b>${GAN[F.P.d[0]]}${JI[F.P.d[1]]}</b><em>${EL[stEl(F.dm)]} 일간 · ${JI[F.P.d[1]]} 일지</em></div>`;
   H.push(K.sec('태오의 궁합 노트 · 둘의 궁합 정체',`<div class="pk-vs">${who(FA,a)}${who(FB,b)}</div>`+ps(C.bond)+K.ev(D.R.pts.map(p=>p[1]).concat(D.cross))));
-  H.push(K.sec('2027 둘의 인연 달력',`<div class="pk-acc">${M.map((o,i)=>{ const c=C.months[i]||{}; const tag=hi.includes(o)?'함께 열림':lo.includes(o)?'조심':'';
-    return K.row({k:'g'+i,cls:hi.includes(o)?'pk-hi':lo.includes(o)?'pk-lo':'',a:`${o.start.m}월`,asub:`${o.start.m}.${o.start.d}~`,b:`<em>${o.gz}</em>${K.esc(h(c.title||''))}${tag?`<span class="pk-tag">${tag}</span>`:''}`,c:o.t,
-      body:`<div class="pk-rx3"><div><small>${K.esc(a.n)}</small><b>${o.la}</b></div><div><small>${K.esc(b.n)}</small><b>${o.lb}</b></div><div><small>둘</small><b>${o.t}</b></div></div>`+ps([c.text])+(c.tip?`<p class="pk-key"><b>이달 한 줄</b>${K.esc(h(c.tip))}</p>`:'')+K.ev(relTxt(o.oa,a.n).concat(relTxt(o.ob,b.n)))}); }).join('')}</div>`,'입춘 기준 · 숫자는 둘의 점수'));
-  H.push(K.sec('먼저 연락하기 좋은 날',D.days.length?`<div class="pk-cards">${D.days.map(o=>`<div class="pk-card"><b>${o.m}.${o.d}<small>${DOW[o.w]}요일 · ${GAN[o.s]}${JI[o.b]}일</small></b><div><p>${o.why.join(' · ')}</p></div></div>`).join('')}</div>`:'<p class="pk-p">올해는 따로 고른 날이 없어. 둘의 점수가 높은 달을 노려.</p>','두 사람 모두 충이 없는 날'));
+  H.push(K.sec('앞으로 열두 달 둘의 인연 달력',`<div class="pk-acc">${M.map((o,i)=>{ const c=C.months[i]||{}; const tag=hi.includes(o)?'함께 열림':lo.includes(o)?'조심':'';
+    return K.row({k:'g'+i,cls:hi.includes(o)?'pk-hi':lo.includes(o)?'pk-lo':'',a:`${o.start.m}월`,asub:`${o.start.y}.${o.start.m}.${o.start.d}~`,b:`<em>${o.gz}</em>${K.esc(h(c.title||''))}${tag?`<span class="pk-tag">${tag}</span>`:''}`,c:o.t,
+      body:`<div class="pk-rx3"><div><small>${K.esc(a.n)}</small><b>${o.la}</b></div><div><small>${K.esc(b.n)}</small><b>${o.lb}</b></div><div><small>둘</small><b>${o.t}</b></div></div>`+ps([c.text])+(c.tip?`<p class="pk-key"><b>이달 한 줄</b>${K.esc(h(c.tip))}</p>`:'')+K.ev(relTxt(o.oa,a.n).concat(relTxt(o.ob,b.n)))}); }).join('')}</div>`,'절기 기준 월 · 숫자는 둘의 점수'));
+  H.push(K.sec('먼저 연락하기 좋은 날',D.days.length?`<div class="pk-cards">${D.days.map(o=>`<div class="pk-card"><b>${o.m}.${o.d}<small>${DOW[o.w]}요일 · ${GAN[o.s]}${JI[o.b]}일</small></b><div><p>${o.why.join(' · ')}</p></div></div>`).join('')}</div>`:'<p class="pk-p">앞으로 열두 달은 따로 고른 날이 없어. 둘의 점수가 높은 달을 노려.</p>','두 사람 모두 충이 없는 날'));
   H.push(K.sec('부딪히는 지점과 푸는 법',ps(C.fight)));
   H.push(K.sec('서로에게 어떤 사람인가',`<div class="pk-items">${(C.roles||[]).map((p,i)=>`<div><small>${i===0?K.esc(b.n)+' → '+K.esc(a.n):K.esc(a.n)+' → '+K.esc(b.n)}</small><p>${K.esc(h(p))}</p></div>`).join('')}</div>`));
   H.push(K.sec('오래 가는 법 세 가지',`<div class="pk-cards">${(C.missions||[]).slice(0,3).map((m,i)=>`<div class="pk-card"><b>${i+1}</b><div><p class="pk-ct">${K.esc(h(m.t))}</p><p>${K.esc(h(m.d))}</p></div></div>`).join('')}</div>`));
@@ -95,5 +96,5 @@ function build(){ const n='', ps=a=>K.ps((a||[]).map(h),n), a=D.a, b=D.b;
 function render(){ const host=$('gprem'); K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status($('ghst'),Object.assign({who:'태오가 궁합 노트'},ST)); }
 window.GunghapPrem={open(){ const host=$('gprem'); if(!host||!prep()) return false; host.className='pkx dark'; host.hidden=false; K.bind(host); render();
   const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
-  K.runAI({key:FA.key+'_'+FB.key+'-gh-'+HON,ver:'v2',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
+  K.runAI({key:FA.key+'_'+FB.key+'-gh-'+HON+'-'+FA.from.y+'.'+FA.from.m,ver:'v3',parts:prompts(),apply,rerender:render,S:ST}); return true; }};
 })();

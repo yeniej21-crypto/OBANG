@@ -1,3 +1,4 @@
+<script src="vidguard.js?v=1"></script>
 <title>오방사주 · 서하의 살롱</title>
 <meta name="description" content="다섯 신이 읽어 주는 나의 사주">
 <meta property="og:type" content="website"><meta property="og:site_name" content="오방사주">
@@ -446,13 +447,6 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .card .hero .fv.on{opacity:1}
 .card .hero .fsub{position:absolute;left:18px;right:18px;bottom:96px;z-index:1;text-align:center;font-family:var(--serif);font-size:18px;line-height:1.5;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.9);opacity:0;transition:opacity .5s}
 .card .hero .fsub.on{opacity:1}
-.card .hero .faceSw{position:absolute;right:12px;top:60px;z-index:2;text-align:right}
-.card .hero .faceSw small{display:block;font-size:10px;letter-spacing:.18em;color:rgba(243,230,200,.85);margin-bottom:6px;text-shadow:0 1px 6px rgba(0,0,0,.8)}
-.card .hero .faceSw div{display:inline-flex;border:1px solid rgba(243,214,168,.5);background:rgba(10,8,12,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.card .hero .faceSw button{border:0;background:none;color:rgba(243,230,200,.7);padding:6px 10px;cursor:pointer;font-family:inherit;line-height:1.15}
-.card .hero .faceSw button b{display:block;font-size:13px;font-weight:700}
-.card .hero .faceSw button em{display:block;font-style:normal;font-size:9.5px;letter-spacing:.06em;opacity:.8}
-.card .hero .faceSw button.on{background:var(--gold);color:#1a1206}
 .card .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(20,16,22,1) 100%)}
 .card .hero .tag{position:absolute;left:16px;top:16px;z-index:1;font-size:11px;letter-spacing:.24em;font-weight:700;color:#1a1206;background:var(--gold);padding:5px 10px;border-radius:999px}
 .card .hero .nm{position:absolute;left:18px;bottom:14px;z-index:1}
@@ -480,8 +474,36 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .mission p{margin:6px 0 0;font-family:var(--serif);font-size:18px;font-weight:700;line-height:1.5;filter:blur(4px);user-select:none}
 .mission .lock{font-size:12px;color:var(--ink-3);margin-top:8px}
 .actions{display:grid;gap:10px;margin-top:18px}
-.resHome{position:sticky;bottom:0;z-index:5;margin:18px -16px 0;padding:22px 16px 14px;background:linear-gradient(180deg,rgba(9,7,11,0),rgba(9,7,11,.92) 34%,#09070b)}
-.resHome .choice{box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.resHome{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);z-index:5;display:flex;justify-content:flex-end;margin:18px 0 0;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+.resHome.on{opacity:1;transform:none}
+.resHome button{pointer-events:auto;display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 15px 0 12px;border-radius:999px;border:1px solid rgba(227,184,102,.45);background:rgba(14,11,16,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--gold-2);font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.02em;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+.resHome button svg{flex:none}
+.twin{display:flex;align-items:center;gap:12px;width:100%;margin:14px 0 2px;padding:12px 12px 12px 12px;border:1px solid rgba(227,184,102,.28);background:linear-gradient(90deg,rgba(227,184,102,.08),rgba(227,184,102,0));color:var(--ink);font-family:inherit;text-align:left;cursor:pointer}
+.twin i{flex:none;width:44px;height:44px;border-radius:50%;background:#000 center 18%/cover no-repeat;border:1px solid rgba(227,184,102,.5)}
+.twin span{flex:1;min-width:0}
+.twin b{display:block;font-size:14px;font-weight:700;line-height:1.35}
+.twin em{display:block;margin-top:2px;font-style:normal;font-size:12px;color:var(--ink-3);letter-spacing:.02em}
+.twin svg{flex:none;color:var(--gold-2)}
+.twinS{position:absolute;inset:0;z-index:62;display:flex;align-items:flex-end;background:rgba(5,4,7,.6);opacity:0;pointer-events:none;transition:opacity .35s}
+.twinS.on{opacity:1;pointer-events:auto}
+.twinS .in{width:100%;max-height:92%;overflow-y:auto;background:linear-gradient(180deg,#19131b,#0d0a0f);border-top:1px solid rgba(227,184,102,.35);padding:22px 18px calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateY(24px);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.twinS.on .in{transform:none}
+.twinS .k{font-size:11px;letter-spacing:.22em;color:var(--gold-2);font-weight:700}
+.twinS h3{margin:8px 0 10px;font-family:var(--serif);font-size:24px;font-weight:900;line-height:1.3}
+.twinS p{margin:0;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.twinS .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 14px}
+.twinS .pair button{position:relative;aspect-ratio:3/4;border:1px solid rgba(255,255,255,.14);background:#000 center 18%/cover no-repeat;padding:0;cursor:pointer;font-family:inherit;color:#fff;text-align:left;overflow:hidden}
+.twinS .pair button::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(8,6,10,.94) 100%)}
+.twinS .pair button.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.twinS .pair .cap{position:absolute;left:10px;right:10px;bottom:10px;z-index:1}
+.twinS .pair .cap small{display:block;font-size:10.5px;letter-spacing:.12em;color:var(--gold-2);font-weight:700}
+.twinS .pair .cap b{display:block;margin-top:2px;font-family:var(--serif);font-size:21px;font-weight:900}
+.twinS .pair .cap em{display:block;margin-top:3px;font-style:normal;font-size:12px;line-height:1.45;color:rgba(255,255,255,.82)}
+.twinS .pair .now{position:absolute;left:8px;top:8px;z-index:1;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:#1a1206;background:var(--gold);padding:3px 8px;display:none}
+.twinS .pair button.cur .now{display:block}
+.twinS .nt{font-size:12px;color:var(--ink-3);line-height:1.6;margin:0 0 14px}
+.twinS .go{width:100%}
+.twinS .x{display:block;width:100%;margin-top:8px;padding:12px;border:0;background:none;color:var(--ink-3);font-family:inherit;font-size:14px;cursor:pointer}
 .note{font-size:11.5px;color:var(--ink-3);text-align:center;margin-top:14px;line-height:1.5}
 .toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 90px);transform:translateX(-50%);z-index:60;background:rgba(0,0,0,.8);color:#fff;font-size:14px;padding:10px 16px;border-radius:999px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1}
@@ -880,8 +902,9 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   <div class="result" id="result">
     <div class="card">
       <div class="hero" id="rHero"><span class="tag">나의 수호신 카드</span><button type="button" class="heroShare" id="ctaShare" aria-label="수호신 카드 공유하기"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6h14v-6"/></svg></button><video class="fv" id="faceV" playsinline preload="none"></video><div class="fsub" id="faceSub"></div><div class="nm"><small id="rGod"></small><b id="rName"></b></div>
-        <div class="faceSw" id="faceSw" aria-label="같은 기운의 두 얼굴"><small>같은 기운, 두 얼굴</small><div><button type="button" data-f="yang" class="on"><b id="fsYang"></b><em id="fsYangS" data-hj="0"></em></button><button type="button" data-f="yin"><b id="fsYin"></b><em id="fsYinS" data-hj="0"></em></button></div></div></div>
+</div>
       <div class="body">
+        <button type="button" class="twin" id="twinB"><i id="twinAv"></i><span><b id="twinT"></b><em id="twinE"></em></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
         <div class="sec gwhy"><h4>수호신 카드</h4>
           <div><b>빈칸을 채우는 신</b><span>내 사주 여덟 글자 가운데 비어 있는 기운을 맡은 신이에요.</span></div>
           <div><b>매일 아침 미션</b><span>그 기운을 채우는 색 · 방향 · 행동을 하루 하나씩 보내 줘요.</span></div>
@@ -899,8 +922,15 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
         <p class="note">체험판이라 결제와 알림 신청은 실제로 진행되지 않아요.</p>
       </div>
     </div>
-    <div class="resHome"><button type="button" class="choice primary" id="ctaHomeBar">홈에서 다양한 사주 보기</button></div>
+    <div class="resHome" id="resHome"><button type="button" id="ctaHomeBar"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/></svg>홈 둘러보기</button></div>
   </div>
+  <div class="twinS" id="twinS" aria-hidden="true"><div class="in">
+    <div class="k" id="twinK"></div><h3 id="twinH"></h3><p id="twinP"></p>
+    <div class="pair" id="twinPair"></div>
+    <p class="nt">고른 얼굴은 수호신 카드와 아침 미션, 알림, 홈 화면에 함께 나와요. 언제든 다시 바꿀 수 있어요.</p>
+    <button type="button" class="choice primary go" id="twinGo"></button>
+    <button type="button" class="x" id="twinX">닫기</button>
+  </div></div>
 
   <div class="hMenuS" id="hMenuS"><div class="in"><div class="hd"><img src="img/brand/mark.svg" alt=""><b>오방사주</b></div>
     <button class="it hi" data-m="intro">처음부터 다시 보기<small id="hMenuHost">서하의 살롱</small></button>
@@ -928,7 +958,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   <div class="op" id="op" aria-label="오방사주 오프닝">
     <video class="opTake" id="opTake" muted playsinline preload="auto" poster="img/op_take_0.jpg" src="v/op_take.mp4"></video><div id="opSls"></div><div class="opVig"></div><div class="opSmoke"></div><div class="opFl" id="opFl"></div><div class="opRing" id="opRing"></div>
     <svg class="opMark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" stroke-width="2.4"/><path d="M28 29 H72" stroke-width="5.2"/><path d="M47 29 L41 71" stroke-width="5.2"/><path d="M33 49 H64 L61 71" stroke-width="5.2"/><path d="M22 71 H78" stroke-width="5.2"/></svg>
-    <div class="opGate"><b>문을 두드려</b><small>🔊 소리를 켜고 화면을 눌러줘</small></div><div class="opCap" id="opCap">다섯 신이 깨어난다</div>
+    <div class="opGate"><b>문을 두드려</b><small>소리를 켜고 화면을 눌러줘</small></div><div class="opCap" id="opCap">다섯 신이 깨어난다</div>
     <div class="opEnd"><div class="bgS"></div><div class="bgF"></div><div class="bgG"></div><div class="emb" id="opEmb"></div><div class="opDots" id="opDots"></div><h2>네 사주,<br>한 칸이 비어 있어.</h2><p>그 빈자리, 신이 채워줄게.</p><div class="opRes" id="opRes"></div></div>
     <div class="opPick"><select class="opYr" id="opYr" aria-label="태어난 해"></select><button class="opGo" id="opGo" disabled>내 빈칸 찾으러 들어가기</button><button class="opHome" id="opHome">이미 수호신이 있어요 · 홈으로</button></div>
     <button class="opX" id="opX">건너뛰기</button>
@@ -941,7 +971,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <button class="choice primary" id="enter">안으로 들어가기</button>
     <button class="link" id="skipStory">스토리 건너뛰기</button>
     <button class="link" id="goHome" style="font-size:15px;font-weight:600;color:var(--ink-2)">이미 수호신이 있어요 · 홈으로</button>
-    <div class="snd">🔊 소리를 켜고 들어가세요</div>
+    <div class="snd">소리를 켜고 들어가세요</div>
     <div class="load"><div class="lb"><i id="loadbar"></i></div><span id="loadtxt">영상 준비 중 0%</span></div>
   </div>
 
@@ -1274,8 +1304,8 @@ function godImg(k){ return faceOf()==='yin'?YIN[k].img:`img/${k}.jpg`; }
 function godName(k){ return faceOf()==='yin'?YIN[k].n:GODS[k].n; }
 function applyFace(f,withVoice){ const k=S.low, g=GODS[k], y=YIN[k], h=$('rHero'), v=$('faceV'), sub=$('faceSub');
   try{ localStorage.setItem('obFace',f); }catch(e){}
-  $('faceSw').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.f===f));
-  $('fsYang').textContent=g.n; $('fsYangS').textContent='양 · '+y.ys; $('fsYin').textContent=y.n; $('fsYinS').textContent='음 · '+y.st;
+  const o=f==='yin'?{n:g.n,img:`img/${k}.jpg`}:{n:y.n,img:y.img};
+  $('twinAv').style.backgroundImage=`url("${o.img}")`; $('twinT').textContent=`${f==='yin'?y.n:g.n}에게는 또 하나의 얼굴이 있어요`; $('twinE').textContent=`같은 ${TW_BEAST[k]}(${g.el}) · ${o.n}`;
   const img=f==='yin'?y.img:`img/${k}.jpg`; h.style.backgroundImage=`url("${img}")`;
   if(window.Depth3D){ Depth3D.unmount(h); Depth3D.unholo(h); if(f==='yang') Depth3D.mount(h,{src:img,pos:[.5,.18]}); }
   $('rGod').textContent=`${g.h} · ${g.el} · ${g.dir}`+(f==='yin'?' · 음의 현신':''); $('rName').textContent=`나의 수호신, ${f==='yin'?y.n:g.n}`;
@@ -1284,6 +1314,25 @@ function applyFace(f,withVoice){ const k=S.low, g=GODS[k], y=YIN[k], h=$('rHero'
     v.onplaying=()=>{ v.classList.add('on'); setTimeout(()=>{ sub.textContent=y.line; sub.classList.add('on'); },500); };
     v.onended=()=>{ sub.classList.remove('on'); setTimeout(()=>v.classList.remove('on'),600); }; }
   try{ refreshFaceSpots(); }catch(e){} }
+/* 두 얼굴 소개 창: 같은 신수의 양(드러나는) · 음(스며드는) 얼굴. 천간 상징(甲 큰 나무 · 乙 덩굴 등)에 근거 */
+const TW_BEAST={wood:'청룡',fire:'주작',earth:'황룡',metal:'백호',water:'현무'};
+const TW={wood:[['甲','큰 나무','곧게 뻗어 길을 내는 얼굴'],['乙','덩굴','휘어도 다시 일어서는 얼굴']],
+  fire:[['丙','한낮의 해','환하게 앞을 비추는 얼굴'],['丁','등불','곁에서 오래 타는 얼굴']],
+  earth:[['戊','큰 산','흔들리지 않게 받치는 얼굴'],['己','기름진 밭','품어서 키워 내는 얼굴']],
+  metal:[['庚','무쇠','단번에 끊어 내는 얼굴'],['辛','보석','다듬어 빛나게 하는 얼굴']],
+  water:[['壬','큰 물','깊고 멀리 흐르는 얼굴'],['癸','빗물','조용히 스며드는 얼굴']]};
+let twPick='yang';
+function twJ(w,a,b){ const c=w.charCodeAt(w.length-1)-0xAC00; return w+(c>=0&&c<11172&&c%28>0?a:b); }
+function openTwin(){ const k=S.low, g=GODS[k], y=YIN[k], t=TW[k], cur=faceOf(); twPick=cur;
+  $('twinK').textContent=`${g.dir}을 지키는 ${TW_BEAST[k]} · ${g.label}`;
+  $('twinH').textContent=`같은 ${TW_BEAST[k]}, 다른 얼굴`;
+  $('twinP').textContent=`${twJ(g.n,'과','와')} ${twJ(y.n,'은','는')} 같은 ${TW_BEAST[k]}의 기운에서 나온 두 얼굴이에요. 오방의 신은 하나의 기운을 드러나는 양의 얼굴과 스며드는 음의 얼굴, 두 모습으로 지녀요. 지켜 주는 힘은 같고, 곁에 있는 방식만 달라요.`;
+  const tile=(f,n,img,[hj,img2,tr])=>`<button type="button" data-f="${f}" class="${f===cur?'on cur':''}" style="background-image:url('${img}')"><span class="now">지금 함께하는 얼굴</span><span class="cap"><small>${f==='yang'?'양의 얼굴':'음의 얼굴'} · ${hj} ${img2}</small><b>${n}</b><em>${tr}</em></span></button>`;
+  $('twinPair').innerHTML=tile('yang',g.n,`img/${k}.jpg`,t[0])+tile('yin',y.n,y.img,t[1]);
+  $('twinPair').querySelectorAll('button').forEach(b=>b.onclick=()=>{ twPick=b.dataset.f; $('twinPair').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); twGoTxt(); });
+  twGoTxt(); $('twinS').classList.add('on'); $('twinS').setAttribute('aria-hidden','false'); }
+function twGoTxt(){ const k=S.low, n=twPick==='yin'?YIN[k].n:GODS[k].n; $('twinGo').textContent=twPick===faceOf()?`${n}${twJ(n,'과','와').slice(n.length)} 계속 함께하기`:`${n}${(c=>c>=0&&c<11172&&c%28>0&&c%28!==8?'으로':'로')(n.charCodeAt(n.length-1)-0xAC00)} 바꾸기`; }
+function closeTwin(){ $('twinS').classList.remove('on'); $('twinS').setAttribute('aria-hidden','true'); }
 function refreshFaceSpots(){ if(!S||!S.low) return; const im=`url("${godImg(S.low)}")`;
   ['preAv','ovLock','notiPic','hMisAv'].forEach(id=>{ const e=$(id); if(e) e.style.backgroundImage=im; }); }
 
@@ -1457,7 +1506,9 @@ function subMode(on){ $('stage').classList.toggle('subm',on); if(on) $('stage').
 function showResult(){ subMode(true);
   const g=GODS[S.low];
   applyFace(faceOf(),false);
-  $('faceSw').querySelectorAll('button').forEach(b=>b.onclick=e=>{ e.stopPropagation(); applyFace(b.dataset.f,true); });
+  $('twinB').onclick=openTwin; $('twinX').onclick=closeTwin; $('twinS').onclick=e=>{ if(e.target===$('twinS')) closeTwin(); };
+  $('twinGo').onclick=()=>{ const ch=twPick!==faceOf(); closeTwin(); if(ch){ applyFace(twPick,true); $('result').scrollTo({top:0,behavior:'smooth'}); } };
+  const rh=$('resHome'), rs=$('result'); rs.onscroll=()=>rh.classList.toggle('on',rs.scrollTop>240); rh.classList.toggle('on',rs.scrollTop>240);
   $('rPillars').innerHTML=S.P.map(p=>`<div><div class="l">${p.l}</div><div class="c">${p.s===null?'<span style="color:var(--ink-3)">?</span>':`<span style="color:${EL_COL[STEM_EL[p.s]]}">${STEM[p.s]}</span><br><span style="color:${EL_COL[BR_EL[p.b]]}">${BR[p.b]}</span>`}</div></div>`).join('');
   const max=Math.max(...S.cnt,1), names=['목(木)','화(火)','토(土)','금(金)','수(水)'];
   $('rBars').innerHTML=S.cnt.map((c,i)=>`<div class="bar ${EL_KEYS[i]===S.low?'low':''}" style="--c:${EL_COL[i]}"><span class="lbl">${names[i]}</span><div class="t"><i data-w="${Math.max(c/max*100,4)}"></i></div><span class="v">${c}</span></div>`).join('');

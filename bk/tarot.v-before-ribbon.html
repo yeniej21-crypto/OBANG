@@ -301,8 +301,7 @@ details.how .nb{margin:12px 0 0;font-size:12px;color:var(--ink-3);line-height:1.
 /* ===== 78장 (2026-10-03): 리본처럼 길게 펼친 덱 · 진짜 빛이 지나가는 3D 뒤집기 ===== */
 .deckArea{perspective:820px;perspective-origin:50% 68%}
 .deckArea .cd{left:0;top:0;width:60px;height:107px;transition:none;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform-origin:50% 50%}
-.deckArea .cd.off,.deckArea .cd.gone{visibility:hidden}
-.deckArea{outline:none}.deckArea:focus-visible{box-shadow:inset 0 0 0 1px rgba(243,215,155,.55)}
+.deckArea .cd.off{visibility:hidden}
 .deckArea .cd.ctr{box-shadow:0 10px 26px rgba(0,0,0,.65),0 0 18px rgba(243,215,155,.4),0 0 0 1.5px rgba(243,215,155,.85) inset}
 .deckArea .cd.pull{box-shadow:0 22px 40px rgba(0,0,0,.7),0 0 30px 4px rgba(243,215,155,.55),0 0 0 1.5px rgba(243,215,155,.95) inset}
 .deckArea .cd.fly{transition:transform .72s cubic-bezier(.3,.8,.2,1),box-shadow .72s;box-shadow:0 0 30px 6px rgba(243,215,155,.6),0 0 0 1.5px rgba(243,215,155,.9) inset}
@@ -336,37 +335,6 @@ details.how .nb{margin:12px 0 0;font-size:12px;color:var(--ink-3);line-height:1.
   background:linear-gradient(104deg,rgba(255,255,255,0) 18%,rgba(255,226,170,.14) 32%,rgba(255,246,226,.55) 45%,rgba(255,255,250,.95) 50%,rgba(255,240,205,.5) 55%,rgba(255,220,160,.08) 66%,rgba(255,255,255,0) 80%)}
 .fc.flip .f .spec{animation:spec 1.6s .42s cubic-bezier(.3,.55,.25,1) both}
 @keyframes spec{0%{opacity:0;transform:translateX(0)}12%{opacity:1}80%{opacity:.9}100%{opacity:0;transform:translateX(205%)}}
-/* ===== 프리미엄 열 장 고르기 (2026-10-03): 무료와 같은 리본 덱(tarot_deck.js) 위에 켈틱 크로스 자리판. 카드방 장면 안에서 고른다 ===== */
-.stage.tpk-on .scr.on{visibility:hidden}
-.stage.tpk-on .top{opacity:0;pointer-events:none}
-.tpk{position:absolute;inset:0;z-index:19;opacity:0;transition:opacity .45s;overflow:hidden}
-.tpk.on{opacity:1}.tpk[hidden]{display:none}
-.tpk:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(5,4,7,.72),rgba(5,4,7,.38) 46%,rgba(5,4,7,0) 62%)}
-.tpk-area{position:absolute;inset:0;z-index:1}
-.tpk-hd{position:absolute;left:0;right:0;top:0;z-index:3;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 0 14px}
-.tpk-hd b{font-size:13px;font-weight:700;letter-spacing:.14em;color:rgba(255,236,200,.9);text-shadow:0 1px 8px rgba(0,0,0,.8)}
-.tpk-n{margin-left:auto;font-family:var(--cg);font-weight:700;font-size:16px;color:var(--ink-3);letter-spacing:.06em}
-.tpk-n em{font-style:normal;font-size:24px;color:var(--gold-2);margin-right:2px}
-.tpk-g{position:absolute;left:16px;right:16px;top:calc(env(safe-area-inset-top,0px) + 58px);z-index:3;text-align:center;pointer-events:none}
-.tpk-g b{display:block;font-family:var(--bmj);font-weight:400;font-size:20px;line-height:1.3;color:var(--gold-2);text-shadow:0 2px 12px #000}
-.tpk-g small{display:block;margin-top:4px;font-size:12px;line-height:1.45;color:var(--ink-2);text-shadow:0 1px 8px #000}
-.tpk-tray{position:absolute;left:50%;top:110px;width:398px;height:282px;z-index:2;pointer-events:none;transform-origin:50% 0}
-.tpk-s{position:absolute;width:0;height:0}
-.tpk-s span{position:absolute;left:-18px;top:-32px;width:36px;height:64px;border:1px dashed rgba(227,184,102,.4);display:grid;place-items:center;font-family:var(--cg);font-weight:700;font-size:15px;color:rgba(243,215,155,.38);transition:border-color .3s,box-shadow .3s,background-color .3s,color .3s}
-.tpk-s.x{z-index:2}.tpk-s.x span{transform:rotate(90deg)}
-.tpk-s.now span{border:1px solid var(--gold);color:var(--gold-2);box-shadow:0 0 16px rgba(227,184,102,.42),inset 0 0 12px rgba(227,184,102,.16)}
-.tpk-s.on span{border:0;color:transparent;background:#111 url('img/tarot/back.jpg') center/cover;box-shadow:0 0 0 1px rgba(227,184,102,.6),0 6px 14px rgba(0,0,0,.55);animation:tpkIn .45s ease-out both}
-@keyframes tpkIn{from{filter:brightness(1.7)}to{filter:none}}
-.tpk-s i{position:absolute;top:35px;left:-50px;width:100px;text-align:center;font-style:normal;font-size:11px;line-height:1.25;color:var(--ink-3);white-space:nowrap;text-shadow:0 1px 6px #000}
-.tpk-s.r i{top:-7px;left:26px;width:auto;text-align:left}
-.tpk-s u{text-decoration:none;transition:color .3s}.tpk-s u.on{color:var(--ink-2)}.tpk-s u.now{color:var(--gold-2);font-weight:700}
-.tpk-ft{position:absolute;left:0;right:0;bottom:0;z-index:3;display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:8px;padding:28px 16px calc(env(safe-area-inset-bottom,0px) + 14px);background:linear-gradient(180deg,rgba(7,5,8,0),rgba(7,5,8,.82) 42%)}
-.tpk-ft button{height:48px;min-width:0;border:1px solid var(--line-2);background:rgba(12,9,14,.62);color:var(--ink);font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:opacity .25s,background .25s}
-.tpk-ft button:disabled{opacity:.35;cursor:default}
-.tpk-ft .tpk-go{border:0;background:linear-gradient(180deg,#f0cf85,#d6a64f);color:#1a120a;font-weight:900;font-size:15px}
-.tpk-ft .tpk-go:disabled{opacity:1;background:rgba(227,184,102,.14);color:rgba(243,215,155,.7);box-shadow:inset 0 0 0 1px rgba(227,184,102,.3)}
-.tpk button:focus-visible{outline:1px solid var(--gold-2);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){.tpk,.tpk-s span,.tpk-ft button{transition:none}.tpk-s.on span{animation:none}}
 </style>
 <script src="vidguard.js?v=1"></script>
 </head>
@@ -501,7 +469,14 @@ const ro=(w,a,b)=>w+(jong(w)?a:b);
   h+=`<i style="left:${l}%;--dx:${dx}px;width:${s}px;height:${s}px;animation-duration:${du}s;animation-delay:${de}s"></i>`; } d.innerHTML=h; })();
 
 /* ---------- 소리 (합성) ---------- */
-const {ctx,tick,riffle,chime,whoosh}=D.sfx; /* 효과음은 tarot_deck.js 공통(프리미엄 열 장 고르기와 같은 소리) */
+let AC=null, FX=null;
+const ctx=()=>{ if(!AC){ AC=new (window.AudioContext||window.webkitAudioContext)(); FX=AC.createGain(); FX.gain.value=1; FX.connect(AC.destination); } AC.resume(); return AC; };
+function tick(vol=.12){ try{ const A=ctx(), t=A.currentTime, n=A.sampleRate*.05, b=A.createBuffer(1,n,A.sampleRate), d=b.getChannelData(0); for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3);
+  const s=A.createBufferSource(), f=A.createBiquadFilter(), g=A.createGain(); s.buffer=b; f.type='bandpass'; f.frequency.value=2200+Math.random()*1800; f.Q.value=.9; g.gain.value=vol; s.connect(f).connect(g).connect(FX); s.start(t); }catch(e){} }
+function riffle(){ for(let i=0;i<10;i++) setTimeout(()=>tick(.08+Math.random()*.06),i*22); }
+function chime(f=660,vol=.18){ try{ const A=ctx(), t=A.currentTime; [[1,vol,2.2],[2.01,vol*.4,1.4],[3.02,vol*.22,1]].forEach(([r,a,d])=>{ const o=A.createOscillator(), g=A.createGain(); o.frequency.value=f*r; g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(a,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+d); o.connect(g).connect(FX); o.start(t); o.stop(t+d+.1); }); }catch(e){} }
+function whoosh(vol=.12){ try{ const A=ctx(), t=A.currentTime, n=A.sampleRate*.6, b=A.createBuffer(1,n,A.sampleRate), d=b.getChannelData(0); for(let i=0;i<n;i++) d[i]=Math.random()*2-1;
+  const s=A.createBufferSource(), f=A.createBiquadFilter(), g=A.createGain(); s.buffer=b; f.type='bandpass'; f.Q.value=1.2; f.frequency.setValueAtTime(400,t); f.frequency.exponentialRampToValueAtTime(2400,t+.3); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+.12); g.gain.exponentialRampToValueAtTime(.0001,t+.55); s.connect(f).connect(g).connect(FX); s.start(t); }catch(e){} }
 /* 카드방 공기: 낮은 패드 + 촛불 타닥임. 무진이 말할 땐 작아진다 */
 const AMB={g:null,lv:.035,
   start(){ if(this.g) return; try{ const A=ctx(), t=A.currentTime; const g=A.createGain(); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(this.lv,t+3); g.connect(A.destination); this.g=g;
@@ -548,21 +523,111 @@ $('toHome').onclick=$('back').onclick;
 const rnd=n=>{ const a=new Uint32Array(1); crypto.getRandomValues(a); return a[0]%n; };
 function shuffleDeck(){ const d=TAROT.map(c=>c.n); for(let i=d.length-1;i>0;i--){ const j=rnd(i+1); [d[i],d[j]]=[d[j],d[i]]; } return d; }
 
-/* ---------- 2. 섞기 · 고르기: 78장 리본 덱(꾹 눌러 리플로 섞기 · 관성 리본 · 3D 가운데 카드 · 밀어 올려 뽑기)은 tarot_deck.js의 TarotDeck.ribbon ---------- */
+/* ---------- 2. 섞기: 78장 덱을 꾹 누르는 동안 반으로 갈라 엇갈려 떨어뜨린다(리플) ---------- */
 let POS=[];
+const area=$('deckArea'); let cards=[], stk=[], held=0, holding=false, phase='shuffle';
+const NEED=2200; /* 섞는 시간(ms) */
+const RIF=640;   /* 리플 한 번(ms) */
+let G={W:0,H:0,cw:60,ch:107,sx:0,sy:0,ry:0,sp:26};
+function geom(keep){ const W=area.clientWidth, H=area.clientHeight, cw=keep?G.cw:Math.round(Math.min(66,W/5.6)), ch=keep?G.ch:Math.round(cw*16/9);
+  const sl=$('slots').firstElementChild, slotBottom=sl?sl.offsetTop+$('slots').offsetTop+sl.offsetHeight+34:150;
+  G={W,H,cw,ch,sx:W/2,sy:H*.58,ry:Math.min(H-ch*.7,Math.max(H*.68,slotBottom+ch*.72)),sp:cw*.44}; }
+/* 모든 움직임은 transform 하나로: 위치 → 기울기(Z) → 3D 회전(Y) → 크기 */
+const TF=(x,y,rz,ry,s)=>`translate3d(${(x-G.cw/2).toFixed(1)}px,${(y-G.ch/2).toFixed(1)}px,0) rotateZ(${rz.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) scale(${s.toFixed(3)})`;
+const stackPose=(c,k)=>({x:G.sx+c._j*1.2,y:G.sy-k*.3,rz:c._j,ry:0,s:1.25});
+let rif=null, rafS=0, rafP=0, rib=[], off=0, vel=0, spreadT0=0, drag=null, lastCi=-1, lastBuzz=0, ctr=null;
+function layoutStack(){ cancelAnimationFrame(rafS); cancelAnimationFrame(rafP); rafS=rafP=0; rif=null; rib=[]; drag=null; vel=0; ctr=null; lastCi=-1; spreadT0=0;
+  area.classList.remove('rib'); area.innerHTML=''; cards=[]; $('slots').classList.remove('n4'); geom();
+  const fr=document.createDocumentFragment();
+  for(let i=0;i<TAROT.length;i++){ const c=document.createElement('div'); c.className='cd'; c.style.width=G.cw+'px'; c.style.height=G.ch+'px'; c._j=(Math.random()-.5)*2.6; c.style.zIndex=i+1; fr.appendChild(c); cards.push(c); }
+  area.appendChild(fr); stk=cards.slice(); stk.forEach((c,k)=>{ const P=stackPose(c,k); c.style.transform=TF(P.x,P.y,P.rz,P.ry,P.s); }); }
+/* 리플: 위쪽 절반은 왼손, 아래쪽 절반은 오른손. 살짝 휘어 들렸다가 한 장씩 번갈아 떨어지며 섞인다 */
+function riffStart(){ const N=stk.length, h=N>>1, L=stk.slice(0,h), Rr=stk.slice(h), order=[];
+  for(let i=0;i<Math.max(L.length,Rr.length);i++){ const a=L[i], b=Rr[i]; if(rnd(5)===0){ if(b) order.push(b); if(a) order.push(a); } else { if(a) order.push(a); if(b) order.push(b); } }
+  stk.forEach((c,k)=>{ c._side=k<h?-1:1; c._hk=k<h?k:k-h; });
+  order.forEach((c,k)=>{ c._to=k; c._td=.32+.5*k/(N-1); c._dropped=false; });
+  rif={t0:performance.now(),order,N}; tick(.06); }
+function riffFrame(now){ const r=rif, p=Math.min(1,(now-r.t0)/RIF); let tk=0;
+  const spl=Math.min(1,p/.28), e=1-Math.pow(1-spl,3);
+  r.order.forEach(c=>{ const s=c._side, sxp=G.sx+s*G.cw*1.02*e, syp=G.sy-c._hk*.3-14*e-Math.sin(e*Math.PI)*6, rzs=s*9*e+c._j*(1-e), rys=-s*24*e; let x,y,rz,ry;
+    if(p<c._td){ x=sxp; y=syp; rz=rzs; ry=rys; }
+    else { const f=Math.min(1,(p-c._td)/.14), q=f*f*(3-2*f); if(!c._dropped){ c._dropped=true; c.style.zIndex=200+c._to; if(c._to%6===0) tk++; }
+      x=sxp+(G.sx+c._j*1.2-sxp)*q; y=syp+(G.sy-c._to*.3-syp)*q-Math.sin(q*Math.PI)*7; rz=rzs+(c._j-rzs)*q; ry=rys*(1-q); }
+    c.style.transform=TF(x,y,rz,ry,1.25); });
+  if(tk){ tick(.045+Math.random()*.04); }
+  if(p>=1){ stk=r.order; stk.forEach((c,k)=>c.style.zIndex=k+1); rif=null; } }
 const ringFg=$('ringFg'); const setRing=p=>ringFg.style.strokeDashoffset=String(503*(1-Math.min(1,p)));
-const RB=D.ribbon($('deckArea'),{
-  floor:()=>{ const sl=$('slots').firstElementChild; return sl?sl.offsetTop+$('slots').offsetTop+sl.offsetHeight+34:150; },
-  onHold:setRing,
-  onShort:()=>{ $('guide').innerHTML='조금만 더 섞어요<small>꾹 누르고 있으면 카드가 섞여요</small>'; },
-  onShuffled:()=>doneShuffle(),
-  pick:(c,i)=>{ const k=S.picked.length; if(k>=S.n) return null; const n=S.deck[i]; S.picked.push(n); S.rv.push(rnd(100)<35); D.preload(TAROT[n]);
-    if(S.picked.length===S.n){ RB.done(); setTimeout(toReveal,1100); } return {el:$('slots').children[k],z:k}; }});
-async function doneShuffle(){ if(window.ROOM) ROOM.mode('pick'); setRing(1); chime(523); S.deck=shuffleDeck(); await wait(250); $('ringFg').parentNode.style.opacity=0;
+let tH=0;
+function holdLoop(now){ rafS=0; if(holding){ held=Math.min(NEED,held+(tH?now-tH:0)); setRing(held/NEED); } tH=now;
+  if(!rif&&holding&&held<NEED){ riffStart(); try{ navigator.vibrate&&navigator.vibrate(8); }catch(e){} }
+  if(rif) riffFrame(now);
+  if(holding&&held>=NEED) holding=false;
+  if(rif||holding){ rafS=requestAnimationFrame(holdLoop); return; }
+  tH=0; if(held>=NEED&&phase==='shuffle') doneShuffle(); }
+function startHold(e){ if(phase!=='shuffle') return; e.preventDefault(); ctx(); holding=true; if(!rafS){ tH=0; rafS=requestAnimationFrame(holdLoop); } }
+function endHold(){ if(!holding) return; holding=false; if(held<NEED) $('guide').innerHTML='조금만 더 섞어요<small>꾹 누르고 있으면 카드가 섞여요</small>'; }
+
+/* 리본: 78장을 길게 겹쳐 펼친다. 좌우로 밀면 관성으로 흐르고, 가운데를 지날 때 카드가 3D로 돌아서며 살짝 커진다.
+   눌러서 뽑거나, 위로 밀어 올려 줄에서 빼낸다. 카드 한 장 지날 때마다 짧은 틱과 진동 */
+/* 가운데는 넉넉히, 바깥으로 갈수록 촘촘히 겹쳐서 긴 줄이 화면 밖까지 이어지는 느낌 */
+function ribPose(u){ const a=Math.abs(u), g=Math.exp(-u*u/1.6), sg=u<0?-1:1, m=Math.min(a,10);
+  const X=G.sp*(1.7*Math.min(a,1)+.8*Math.max(0,Math.min(a,4)-1)+.46*Math.max(0,a-4));
+  return {x:G.sx+sg*X, y:G.ry+m*m*.75-16*g, rz:sg*Math.min(a,10)*2.1, ry:-sg*Math.min(60,a*18), s:1+.22*g, a}; }
+const mix=(A,B,e)=>({x:A.x+(B.x-A.x)*e,y:A.y+(B.y-A.y)*e,rz:A.rz+(B.rz-A.rz)*e,ry:A.ry+(B.ry-A.ry)*e,s:A.s+(B.s-A.s)*e});
+function setCtr(c){ if(c===ctr) return; if(ctr) ctr.classList.remove('ctr'); ctr=c; if(c&&!c._picked) c.classList.add('ctr'); }
+let tP=0;
+function ribFrame(now){ rafP=0; const dt=tP?Math.min(40,now-tP):16; tP=now; const mx=rib.length-1;
+  if(!drag){ if(Math.abs(vel)>.0005){ off+=vel*dt; vel*=Math.pow(.94,dt/16); if(off<0){ off*=.8; vel*=.4; } if(off>mx){ off=mx+(off-mx)*.8; vel*=.4; } }
+    else { vel=0; const tg=Math.max(0,Math.min(mx,Math.round(off))); off+=(tg-off)*Math.min(1,dt/90); if(Math.abs(tg-off)<.003) off=tg; } }
+  const sT=spreadT0?Math.min(1,(now-spreadT0)/1300):1; let moving=!!drag||vel!==0||sT<1||off!==Math.round(off);
+  for(let i=0;i<rib.length;i++){ const c=rib[i]; if(c._p!==i){ c._p+=(i-c._p)*Math.min(1,dt/110); if(Math.abs(i-c._p)<.003) c._p=i; moving=true; }
+    const u=c._p-off; let P=ribPose(u); const a=P.a;
+    if(sT<1){ const q=Math.max(0,Math.min(1,(sT-Math.min(.45,a*.035))/.5)), e=1-Math.pow(1-q,3); P=mix(c._st,P,e); }
+    if(c._py){ P.y+=c._py; P.x+=c._px*.35; const k=Math.min(1,-c._py/120); P.rz*=1-k*.8; P.ry*=1-k*.8; P.s+=Math.min(.25,-c._py/420);
+      if(!(drag&&drag.card===c)){ c._py*=Math.pow(.8,dt/16); c._px*=Math.pow(.8,dt/16); if(c._py>-.5){ c._py=0; c._px=0; } } moving=true; }
+    const hide=a>11.5&&sT>=1; if(hide!==c._hid){ c._hid=hide; c.classList.toggle('off',hide); } if(hide) continue;
+    c.style.transform=TF(P.x,P.y,P.rz,P.ry,P.s);
+    const z=c._py?900:500-Math.round(a*10); if(z!==c._z){ c._z=z; c.style.zIndex=z; } }
+  const ci=Math.max(0,Math.min(mx,Math.round(off)));
+  if(sT>=1&&ci!==lastCi){ if(lastCi>=0){ tick(.035); if(now-lastBuzz>45){ lastBuzz=now; try{ navigator.vibrate&&navigator.vibrate(6); }catch(e){} } } lastCi=ci; setCtr(rib[ci]); }
+  if(sT>=1&&phase==='spread'){ phase='pick'; spreadT0=0; }
+  if(moving) rafP=requestAnimationFrame(ribFrame); else tP=0; }
+const kick=()=>{ if(!rafP){ tP=0; rafP=requestAnimationFrame(ribFrame); } };
+function cardAt(cx,cy){ const r=area.getBoundingClientRect(), x=cx-r.left, y=cy-r.top; if(y<G.ry-G.ch*1.05||y>G.ry+G.ch*.95) return null;
+  let best=null, bd=1e9; rib.forEach(c=>{ if(c._hid) return; const u=c._p-off, d=Math.abs(ribPose(u).x-x)+Math.abs(u)*.5; if(d<bd){ bd=d; best=c; } }); return bd<G.cw*.75?best:null; }
+area.addEventListener('pointerdown',e=>{ if(phase==='shuffle') return startHold(e); if(phase!=='pick') return; e.preventDefault(); ctx();
+  try{ area.setPointerCapture(e.pointerId); }catch(_){}
+  const now=performance.now(); drag={id:e.pointerId,x0:e.clientX,y0:e.clientY,off0:off,t0:now,mode:null,card:cardAt(e.clientX,e.clientY),hist:[[now,e.clientX]]}; vel=0; kick(); });
+area.addEventListener('pointermove',e=>{ if(!drag||e.pointerId!==drag.id) return; const dx=e.clientX-drag.x0, dy=e.clientY-drag.y0, now=performance.now();
+  if(!drag.mode&&Math.hypot(dx,dy)>8){ drag.mode=(dy<0&&-dy>Math.abs(dx)*1.1&&drag.card)?'pull':'scroll'; if(drag.mode==='pull'){ drag.card.classList.add('pull'); tick(.05); } }
+  if(drag.mode==='scroll'){ const mx=rib.length-1; off=drag.off0-dx/G.sp; if(off<0) off*=.35; if(off>mx) off=mx+(off-mx)*.35; drag.hist.push([now,e.clientX]); if(drag.hist.length>6) drag.hist.shift(); }
+  else if(drag.mode==='pull'){ drag.card._px=dx; drag.card._py=Math.min(-.01,dy); }
+  kick(); });
+function endDrag(e){ if(!drag||(e&&e.pointerId!==drag.id)) return; const d=drag; drag=null; const now=performance.now();
+  if(d.mode==='scroll'){ const h=d.hist, a=h[0], b=h[h.length-1]; if(h.length>1&&b[0]>a[0]&&now-b[0]<90) vel=Math.max(-.09,Math.min(.09,-((b[1]-a[1])/(b[0]-a[0]))/G.sp)); }
+  else if(d.mode==='pull'){ d.card.classList.remove('pull'); if(-d.card._py>G.ch*.42) pickCard(d.card); }
+  else if(!d.mode&&d.card&&now-d.t0<450) pickCard(d.card);
+  kick(); }
+area.addEventListener('pointerup',endDrag); area.addEventListener('pointercancel',endDrag);
+window.addEventListener('pointerup',endHold); window.addEventListener('pointercancel',endHold);
+addEventListener('resize',()=>{ if(phase==='pick'||phase==='spread'){ geom(true); kick(); } });
+
+async function doneShuffle(){ phase='spread'; if(window.ROOM) ROOM.mode('pick'); setRing(1); chime(523); S.deck=shuffleDeck(); await wait(250); $('ringFg').parentNode.style.opacity=0;
   $('slots').classList.toggle('n4',POS.length===4);
   $('slots').innerHTML=POS.map(p=>`<div class="slot"><i>${p}</i></div>`).join('');
   $('guide').innerHTML=`끌리는 카드 ${S.n}장을 골라요<small>좌우로 넘기다가, 끌리는 카드를 위로 밀어 올려요</small>`;
-  RB.spread(); }
+  geom(true); area.classList.add('rib'); stk.forEach((c,k)=>{ c._st=stackPose(c,k); });
+  rib=cards.slice(); rib.forEach((c,i)=>{ c.dataset.i=i; c._p=i; c._px=0; c._py=0; c._hid=false; c._z=0; });
+  off=Math.floor((rib.length-1)/2); vel=0; spreadT0=performance.now(); whoosh(.1); kick(); }
+function pickCard(c){ if(phase!=='pick'||c._picked) return; const k=S.picked.length; if(k>=S.n) return; c._picked=true;
+  const n=S.deck[+c.dataset.i]; S.picked.push(n); S.rv.push(rnd(100)<35); D.preload(TAROT[n]);
+  const slot=$('slots').children[k], ar=area.getBoundingClientRect(), sr=slot.getBoundingClientRect();
+  const ri=rib.indexOf(c); if(ri>=0) rib.splice(ri,1); if(ctr===c) ctr=null; lastCi=-1;
+  c.classList.remove('ctr','pull','off'); c.classList.add('fly'); c.style.zIndex=950+k; c._py=0;
+  c.style.transform=TF(sr.left-ar.left+sr.width/2,sr.top-ar.top+sr.height/2,0,0,sr.width/G.cw);
+  whoosh(); try{ navigator.vibrate&&navigator.vibrate(14); }catch(e){}
+  setTimeout(()=>{ c.classList.remove('fly'); c.classList.add('land'); chime(784,.07); },740);
+  if(S.picked.length===S.n){ phase='done'; setTimeout(toReveal,1100); } kick(); }
 
 /* 셔플 영상: 첫 대사는 목소리와 함께 한 번만, 그 뒤엔 말없이 카드를 만지는 루프 영상으로 넘어간다 */
 const SUBS={shuffle:[[0.5,'질문 하나만 떠올려요.'],[2.95,'…그리고 천천히, 카드 섞어요.']],
@@ -579,11 +644,11 @@ $('go1').onclick=async()=>{ S.q=$('qin').value.trim(); S.picked=[]; S.rv=[]; S.A
     if(t&&t!=='pick'&&t!==S.topic&&!(LOVEG.includes(t)&&LOVEG.includes(S.topic))){ setTopic(t); syncSpread(); } }
   const baseK=TAROT_SPREAD[S.topic].k; S.k=S.A.domain||baseK; S.kOver=!!S.A.domain&&S.A.domain!==baseK;
   const sp0=TAROT_SPREAD[S.topic]; POS=S.n===1?[sp0.pos.length===1?sp0.pos[0]:'답']:(S.topic==='pick'&&S.A.ab?[S.A.ab[0]+' 쪽',S.A.ab[1]+' 쪽','무진의 조언']:sp0.pos.slice());
-  S.kinds=S.n===1?[S.topic==='today'?'today':'answer']:R.KINDS[S.topic]; window._tS={pos:POS.slice(),k:S.k,topic:S.topic}; ctx(); AMB.start();
+  S.kinds=S.n===1?[S.topic==='today'?'today':'answer']:R.KINDS[S.topic]; window._tS={pos:POS.slice(),k:S.k,topic:S.topic}; held=0; phase='shuffle'; ctx(); AMB.start();
   const box=$('s2').querySelector('.vbox'); box.classList.remove('still','loop','gone'); if(window.ROOM) ROOM.mode('shuffle');
   await go('s2'); $('ringFg').parentNode.style.opacity=1; setRing(0); $('slots').innerHTML='';
   $('guide').innerHTML='카드를 꾹 누른 채 문질러서 섞어요<small>질문을 마음속으로 한 번 더 떠올리면서</small>';
-  $('slots').classList.remove('n4'); RB.stack(true);
+  layoutStack();
   const v=$('vS'); v.muted=false; v.loop=false; v.currentTime=0; AMB.duck(true);
   v.play().then(()=>{ $('s2').classList.add('talk'); subsOn(v,SUBS.shuffle,$('sSub')); }).catch(()=>{ AMB.duck(false); toLoop(); });
   v.onended=()=>{ AMB.duck(false); toLoop(); }; };
@@ -704,7 +769,7 @@ function render(){ const sp=TAROT_SPREAD[S.topic]; const m=S.mood;
 function zoom(i){ const n=S.picked[i], c=TAROT[n], rv=S.rv[i]; $('zi').outerHTML=artHTML(c,'zi','i',' id="zi"'); $('zc').classList.toggle('rv',rv);
   $('zn').textContent=`${c.ko} · ${c.en}${rv?' (역방향)':''}`; $('zk').textContent=(rv?c.kwR:c.kw).map(k=>'#'+k).join('  '); $('zoom').classList.add('on'); tick(.06); if(window.Depth3D) Depth3D.holo($('zc'),{max:16}); }
 $('zoom').onclick=()=>{ $('zoom').classList.remove('on'); if(window.Depth3D) Depth3D.unholo($('zc')); };
-$('payBtn').onclick=()=>{ if(window.TarotPrem&&TarotPrem.open($('rprem'),S)){ $('lockR').hidden=true; if(!$('stage').classList.contains('tpk-on')) setTimeout(()=>{ const sc=$('s4s'); sc.scrollTo({top:Math.max(0,$('rprem').getBoundingClientRect().top-sc.getBoundingClientRect().top+sc.scrollTop-64),behavior:'smooth'}); },60); } else toast('체험판이라 결제는 여기까지예요'); };
+$('payBtn').onclick=()=>{ if(window.TarotPrem&&TarotPrem.open($('rprem'),S)){ $('lockR').hidden=true; setTimeout(()=>$('rprem').scrollIntoView({behavior:'smooth',block:'start'}),60); } else toast('체험판이라 결제는 여기까지예요'); };
 $('again').onclick=()=>{ go('s1'); $('s1').scrollTop=0; };
 
 /* 살아 있는 일러스트: 첫 화면 무진 */

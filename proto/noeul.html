@@ -116,7 +116,7 @@ select option{background:#16121f;color:var(--ink)}
 .px{position:relative;overflow:hidden;background:#000}
 .px .ph{position:absolute;left:0;right:0;top:-9%;bottom:-9%;background:#000 center 12%/cover no-repeat;will-change:transform}
 .px:after{z-index:0}
-.px .ph video.lv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:inherit;opacity:0;transition:opacity 1.4s ease}
+.px .ph video.lv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center var(--fy,18%);opacity:0;transition:opacity 1.4s ease}
 .px .ph video.lv.on{opacity:1}
 .pp.s{height:calc(var(--sh,100vh)*.62);min-height:380px}
 /* 칸과 칸이 딱 끊기지 않게: 위아래 가장자리를 투명하게 녹이고 서로 겹쳐 디졸브처럼 이어지게 */
@@ -133,6 +133,12 @@ select option{background:#16121f;color:var(--ink)}
 .chHero{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 110px);mask-image:linear-gradient(180deg,transparent 0,#000 110px);margin-top:-40px!important}
 .pan{--mk:linear-gradient(180deg,transparent 0,#000 46px,#000 calc(100% - 46px),transparent 100%);-webkit-mask-image:var(--mk);mask-image:var(--mk)}
 .toon{gap:0}.toon>.pan+.toon2,.toon2{margin-top:-30px}
+.toon>.pan{height:calc(var(--sh,100vh)*.82);min-height:520px;margin:0 -18px}
+#prem .toon>.pan{margin:0 -18px}
+.toon>.pan .ph{background-position:center 18%}
+.toon>.pan .cap{left:22px;right:22px;bottom:56px}
+.toon2 .pan{height:300px}.toon2 .pan .ph{background-position:center 12%}
+.toon2 .pan{--fy:10%}
 .toon2 .pan{--mk:radial-gradient(120% 80% at 50% 45%,#000 55%,transparent 100%)}
 .end{--mk:linear-gradient(180deg,transparent 0,#000 120px,#000 calc(100% - 100px),transparent 100%);-webkit-mask-image:var(--mk);mask-image:var(--mk)}
 .pp.m{height:calc(var(--sh,100vh)*.78);min-height:460px}
@@ -344,7 +350,7 @@ select option{background:#16121f;color:var(--ink)}
       <div class="pp px m" data-v="profile"><div class="ph" data-im="profile"></div>
         <div class="ct"><p class="nl rv"><small>노을</small>사람에게도 낮과 밤이 있어요.<br>대부분은 한쪽만 보고 살죠.</p><p class="nar rv"><b>낮의 나</b> 남들이 보는 나. 일과 이름, 돈과 사람.</p><p class="nar rv"><b>밤의 나</b> 나만 아는 나. 속마음과 인연, 숨은 기회.</p></div>
       </div>
-      <div class="pp px s" data-v="corridor"><div class="ph" data-im="corridor"></div>
+      <div class="pp px m" data-v="corridor"><div class="ph" data-im="corridor"></div>
         <div class="ct"><p class="nl rv"><small>노을</small>이리 와요.<br>당신의 나머지 반쪽을 보여 줄게요.</p></div>
       </div>
       <div class="gut rv"><i></i><b>2027 · 丁未</b>붉은 불의 하늘과 메마른 흙의 땅.<br>그 해, 당신의 해와 달은 어떻게 뜰까.</div>

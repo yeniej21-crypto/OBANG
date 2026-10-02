@@ -1,8 +1,8 @@
 /* PC(마우스)에서 가로 스크롤 줄을 움직이게: 끌어서 넘기기 + 좌우 화살표 버튼 + 가로 휠(트랙패드)
    터치 기기에서는 아무것도 바꾸지 않는다. */
 (function(){
-  const SEL='.hRow,.chRow,.cRow,.oRow,.fzRow,.hs,.pills,.du,.yrRow,.fl,.atabs,.pk-tabs';
-  const ARROW='.hRow,.chRow,.cRow,.oRow,.fzRow,.hs';
+  const SEL='.hRow,.chRow,.chMini,.cRow,.oRow,.fzRow,.hs,.pills,.du,.yrRow,.fl,.atabs,.pk-tabs';
+  const ARROW='.hRow,.chRow,.chMini,.cRow,.oRow,.fzRow,.hs';
   const fine=window.matchMedia&&window.matchMedia('(hover:hover) and (pointer:fine)').matches;
   const css=`.hsW{position:relative}
 .hsB{position:absolute;top:50%;z-index:6;width:40px;height:40px;margin-top:-20px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(18,16,20,.78);color:#fff;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 18px rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}

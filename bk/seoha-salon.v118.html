@@ -766,16 +766,6 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .home .ny .fzAll{color:#e9c9a0;bottom:14px}
 .home .nyRow .pc{width:43%;max-width:200px}
 .home .nyRow .pc.nyHero{width:58%;max-width:260px}
-/* 노을 대표 배너(홈 맨 위) */
-.home .ftS{padding-top:6px}
-.home .feat{position:relative;margin:0 16px;height:min(62vw,300px);min-height:230px;overflow:hidden;background:#000;cursor:pointer;box-shadow:0 18px 40px rgba(0,0,0,.45)}
-.home .feat video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 16%}
-.home .feat .fsh{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,8,14,.92) 0%,rgba(10,8,14,.6) 42%,rgba(10,8,14,0) 72%),linear-gradient(0deg,rgba(10,8,14,.55),rgba(10,8,14,0) 40%)}
-.home .feat .fct{position:absolute;left:18px;bottom:18px;right:30%;z-index:1;color:#fff}
-.home .feat small{display:block;font-size:10.5px;letter-spacing:.24em;color:#E9C98B;font-weight:700}
-.home .feat b{display:block;margin-top:8px;font-family:'OBrush','Noto Serif KR',serif;font-weight:400;font-size:34px;line-height:1.1;text-shadow:0 3px 18px rgba(0,0,0,.7)}
-.home .feat p{margin:8px 0 0;font-size:12.5px;line-height:1.6;color:rgba(243,235,222,.85)}
-.home .feat .fgo{display:inline-block;margin-top:12px;padding:8px 12px;border:1px solid rgba(233,201,139,.7);font-size:12.5px;font-weight:700;color:#F1DBA4}
 .home .nyRow .pc .tt{font-size:26px!important}
 .home .nyRow .pc.nyHero .tt{font-size:31px!important}
 .home .nyRow .pc .st{font-size:11.5px}
@@ -901,8 +891,8 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <button class="it" data-m="chat.html">자유 상담</button>
     <button class="it" data-m="newyear.html">2027 신년 기획전</button>
     <button class="it" data-m="sinnyeon.html">2027 신년운세</button>
-    <button class="it" data-m="noeul.html">해와 달의 운세<small>노을 · NEW</small></button>
     <button class="it" data-m="myeongri.html">2027 명리 감정서</button>
+    <button class="it" data-m="noeul.html">해와 달의 운세<small>노을 · NEW</small></button>
     <button class="it" data-m="peach.html">English · Peach Blossom</button>
     <button class="it" data-m="arch">보관함<small id="hMenuArch"></small></button>
   </div></div>
@@ -1030,19 +1020,12 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="pills" id="pills"><button class="on" data-c="all">전체</button><button data-c="ny">신년</button><button data-c="jt">정통</button><button data-c="love">연애</button><button data-c="match">궁합</button><button data-c="re">재회</button><button data-c="heart">속마음</button><button data-c="gaeun">개운</button><button data-c="tg">택일</button><button data-c="job">커리어</button></div>
     </div>
 
-    <section class="hSec ftS" id="secFeat" data-cats="all ny jt">
-      <div class="feat" id="featNoeul" role="button" tabindex="0" aria-label="해와 달의 운세 보기">
-        <video muted loop playsinline preload="none" poster="img/noeul.jpg" data-src="v/poster/noeul.mp4"></video>
-        <div class="fsh"></div>
-        <div class="fct"><small>2027 · 노을 · 특별 운세</small><b>해와 달의 운세</b><p>낮도 밤도 아닌 노을이<br>당신의 낮과 밤을 함께 읽어요</p><span class="fgo">노을 만나러 가기</span></div>
-      </div>
-    </section>
     <section class="hSec ny" id="secNY" data-cats="all ny jt">
       <div class="sh nyH"><small>2027 정미년 · 신년 기획전</small><b>새해를 묻는 열 가지 길</b><button class="fzAll" id="nyAll" type="button">모두 보기</button></div>
       <div class="hRow nyRow">
         <div class="pc nyHero" data-kv="halmae" data-vid="v/poster/halmae.mp4" role="button" tabindex="0" style="background-image:url('img/halmae.jpg')"><span class="chip nyB">대표</span><div class="ct"><span class="yr">2027</span><span class="tt">신년 운세</span><span class="st">삼신 할매의 열두 달</span></div></div>
-        <div class="pc" id="cNoeul" data-vid="v/poster/noeul.mp4" role="button" tabindex="0" style="background-image:url('img/noeul.jpg')"><span class="chip">특별</span><div class="ct"><span class="yr">2027</span><span class="tt">해와 달의 운세</span><span class="st">노을, 낮의 나와 밤의 나</span></div></div>
         <div class="pc" id="cMyeongri" data-vid="v/poster/soheon.mp4" role="button" tabindex="0" style="background-image:url('img/soheon.jpg')"><span class="chip">정통</span><div class="ct"><span class="yr">2027</span><span class="tt">명리 감정서</span><span class="st">근거를 짚는 소헌 선생</span></div></div>
+        <div class="pc" id="cNoeul" data-vid="v/poster/noeul.mp4" role="button" tabindex="0" style="background-image:url('img/noeul.jpg')"><span class="chip">NEW</span><div class="ct"><span class="yr">2027</span><span class="tt">해와 달의 운세</span><span class="st">노을, 낮의 나와 밤의 나</span></div></div>
         <div class="pc lockc nyL" data-ny="sJt" role="button" tabindex="0" style="background-image:url('img/seoha.jpg')"><span class="chip">무료 · 11월</span><div class="ct"><span class="yr">2027</span><span class="tt">맛보기</span><span class="st">서하가 써 주는 올해의 한 단어</span></div></div>
         <div class="pc lockc nyL" data-ny="sJt" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><span class="chip">11월 오픈</span><div class="ct"><span class="tt">대운 속 2027</span><span class="st">현암, 10년 흐름 속 올해</span></div></div>
         <div class="pc lockc nyL" data-ny="sJt" role="button" tabindex="0" style="background-image:url('img/tojeong.jpg')"><span class="chip">11월 오픈</span><div class="ct"><span class="tt">토정비결</span><span class="st">144괘로 읽는 한 해</span></div></div>
@@ -1654,8 +1637,6 @@ const goPage=u=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){}
 window.addEventListener('pageshow',e=>{ if(e.persisted){ document.querySelectorAll('.mi').forEach(x=>x.remove()); if(window._miLv!=null) try{ bgm(window._miLv,1); }catch(_){} } });
 setTimeout(()=>{ ['v/menu/today.mp4','v/menu/career.mp4','v/menu/taegil.mp4','v/menu/gunghap.mp4'].forEach(h=>{ const l=document.createElement('link'); l.rel='prefetch'; l.as='video'; l.href=h; document.head.appendChild(l); }); },4000);
 $('cTaegil').onclick=()=>goPage('taegil.html'); $('cMyeongri').onclick=()=>goPage('myeongri.html'); if($('cNoeul')) $('cNoeul').onclick=()=>goPage('noeul.html');
-if($('featNoeul')){ const fe=$('featNoeul'), fv=fe.querySelector('video'); fe.onclick=()=>goPage('noeul.html');
-  new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ if(!fv.getAttribute('src')) fv.src=fv.dataset.src; const p=fv.play(); if(p) p.catch(()=>{}); } else { try{ fv.pause(); }catch(_){} } }),{threshold:.3}).observe(fe); }
 $('hFort').onclick=()=>goPage('today.html'); $('tdH').onclick=()=>goPage('today.html');
 $('cToday').onclick=()=>goPage('today.html');
 $('cCareer').onclick=()=>goPage('career.html');

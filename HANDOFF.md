@@ -618,3 +618,4 @@
   - 노을 페이지 공유 자리 3곳만: ① 오른쪽 위 원형 공유 아이콘(언제든, 메뉴 소개 카드 + 링크) ② 무료 결과 끝 '결과 공유하기'(내 결과 스토리 카드 1080×1920, obshare.js CFG에 noeul 추가) ③ 맨 끝 '내 낮과 밤 카드 보내기' + '다른 신들의 운세 보러 가기'(홈으로). 맨 끝에선 아래 고정 버튼을 내림.
   - 공유 링크(?ref=share)로 들어오면 첫 컷에 '친구가 보낸 이야기' 한 줄 → 인트로(노을 목소리) → 프롤로그(후킹) → 대화 입력 → 무료 결과 → 990원. 뒤로 버튼은 기록이 없으면 홈으로.
   - obshare.js: 시트 제목을 상황별로(head 값), 백업 bk/obshare.v-before-noeul.js · bk/noeul.v-before-share.html.
+- 2026-10-02 23:10 · 은주: 노을 = 완전 대표 상품, 소헌 선생 앞으로, 더 많이 노출, 공유 미끼로. → 서하 홈 맨 위(신년 기획전 위)에 노을 대표 배너(움직이는 영상 v/poster/noeul.mp4 · '노을 만나러 가기'), 신년 줄 순서 할매 → 노을(딱지 '특별') → 소헌, 서하 메뉴 · PC 메뉴도 노을이 명리 감정서 앞. 백업 bk/seoha-salon.v118.html · bk/pcshell.v-before-noeul-front.js. 공유용 주소: https://obangsaju.netlify.app/noeul.html (링크 미리보기 그림 img/og/noeul.jpg).

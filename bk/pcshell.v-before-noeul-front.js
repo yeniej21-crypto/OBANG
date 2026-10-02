@@ -8,7 +8,7 @@ const isHome=!!document.getElementById('home')&&!!document.getElementById('op');
 const NAV=[
   ['', [['홈','./','home'],['무료 존','free.html'],['자유 상담','chat.html']]],
   ['오늘', [['오늘의 운세','today.html'],['오방 뽑기','ppopgi.html'],['부적 카드','bujeok.html']]],
-  ['정통 풀이', [['2027 신년 기획전','newyear.html'],['2027 신년운세','sinnyeon.html'],['해와 달의 운세','noeul.html'],['2027 명리 감정서','myeongri.html'],['평생 사주','lifetime.html'],['커리어 사주','career.html'],['택일','taegil.html']]],
+  ['정통 풀이', [['2027 신년 기획전','newyear.html'],['2027 신년운세','sinnyeon.html'],['2027 명리 감정서','myeongri.html'],['해와 달의 운세','noeul.html'],['평생 사주','lifetime.html'],['커리어 사주','career.html'],['택일','taegil.html']]],
   ['연애 · 궁합', [['도화 사주','dohwa.html'],['도화 궁합','gunghap.html'],['오방 궁합','obgh.html'],['재회 사주','love2.html?m=re'],['다음 연애','love2.html?m=next']]],
   ['카드 · 고양이', [['무진의 타로','tarot.html'],['묘당','myodang.html']]]
 ];

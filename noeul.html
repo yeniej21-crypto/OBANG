@@ -116,6 +116,10 @@ select option{background:#16121f;color:var(--ink)}
 .px{position:relative;overflow:hidden;background:#000}
 .px .ph{position:absolute;left:0;right:0;top:-9%;bottom:-9%;background:#000 center 12%/cover no-repeat;will-change:transform}
 .px:after{z-index:0}
+.px .ph video.lv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:inherit;opacity:0;transition:opacity 1.4s ease}
+.px .ph video.lv.on{opacity:1}
+.pp.s{height:calc(var(--sh,100vh)*.62);min-height:380px}
+.pp.m{height:calc(var(--sh,100vh)*.78);min-height:460px}
 .px .ct{z-index:1}
 .rep{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 110px)}
 .cover{height:86vh;min-height:560px;max-height:760px}
@@ -288,20 +292,29 @@ select option{background:#16121f;color:var(--ink)}
     <div class="top"><button class="back" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>노을 · 太極</b><span class="tg"><i class="orb s"></i><i class="orb m"></i></span></div>
     <!-- 프롤로그: 노을은 누구인가 -->
     <section class="pro">
-      <div class="pp px first"><div class="ph" data-im="split"></div>
-        <div class="ct tp"><p class="nar rv">하루에 두 번, 세상이 경계를 지나는 때가 있다.</p></div>
-        <div class="ct"><p class="nar rv">해는 아직 지지 않았고<br>달은 아직 뜨지 않은 시간.</p><p class="nar rv">그 틈에만 머무는 이가 있다.</p></div>
+      <div class="pp px first" data-v="aerial"><div class="ph" data-im="aerial"></div>
+        <div class="ct tp"><p class="nar rv">모든 것은 둘로 갈라지며 이름을 얻었다.</p></div>
+        <div class="ct"><p class="nar rv">해와 달. 낮과 밤.<br>남자와 여자.</p></div>
         <div class="scrollhint">내려서 보기</div>
       </div>
-      <div class="pp px"><div class="ph" data-im="cuDay"></div>
-        <div class="ct"><p class="nl rv"><small>노을</small>나는 노을이에요.</p><p class="nar rv">남자도, 여자도 아니다.<br>낮에도 밤에도 속하지 않는다.</p></div>
+      <div class="pp px s" data-v="hand"><div class="ph" data-im="hand"></div>
+        <div class="ct"><p class="nar rv">갈라지지 않은 것에게는<br>이름이 없었다.</p></div>
       </div>
-      <div class="gut rv"><i></i><b>太極</b>오방의 신들이 다섯 빛깔로 갈라지기 전,<br>세상은 하나의 원이었다.<br>모두가 제 빛을 찾아 떠났을 때<br>갈라지지 않고 남은 단 하나.</div>
-      <div class="pp px"><div class="ph" data-im="moon"></div>
+      <div class="pp px" data-v="cuDay"><div class="ph" data-im="cuDay"></div>
+        <div class="ct"><p class="nl rv"><small>노을</small>그래서 다들 나를 노을이라 불러요.</p><p class="nar rv">하루에 단 한 번, 해와 달이 같은 하늘에 걸리는 시간의 이름.</p></div>
+      </div>
+      <div class="pp px s" data-v="eyes"><div class="ph" data-im="eyes" style="background-position:center 40%"></div>
+        <div class="ct"><p class="nar rv">남자도 여자도 아니다.<br>어디에도 속하지 않는다.</p><p class="nar rv"><b>모든 것이 여기서 시작되었으므로.</b></p></div>
+      </div>
+      <div class="gut rv"><i></i><b>太極</b>오방의 신들이 다섯 빛깔로 갈라지기 전,<br>세상은 하나의 원이었다.<br>모두가 제 빛을 찾아 떠날 때<br>끝까지 갈라지지 않은 단 하나.<br><br>오방의 신들도 길을 잃으면<br>이곳으로 돌아온다.</div>
+      <div class="pp px" data-v="taeguk"><div class="ph" data-im="taeguk"></div>
         <div class="ct"><p class="nl rv"><small>노을</small>어느 쪽에도 서지 않아요.<br>그래서 양쪽이 다 보여요.</p></div>
       </div>
-      <div class="pp px"><div class="ph" data-im="closed"></div>
-        <div class="ct"><p class="nl rv"><small>노을</small>사람에게도 낮과 밤이 있어요.</p><p class="nar rv"><b>낮의 나</b> 남들이 보는 나. 일과 이름, 돈과 사람.</p><p class="nar rv"><b>밤의 나</b> 나만 아는 나. 속마음과 인연, 숨은 기회.</p></div>
+      <div class="pp px m" data-v="profile"><div class="ph" data-im="profile"></div>
+        <div class="ct"><p class="nl rv"><small>노을</small>사람에게도 낮과 밤이 있어요.<br>대부분은 한쪽만 보고 살죠.</p><p class="nar rv"><b>낮의 나</b> 남들이 보는 나. 일과 이름, 돈과 사람.</p><p class="nar rv"><b>밤의 나</b> 나만 아는 나. 속마음과 인연, 숨은 기회.</p></div>
+      </div>
+      <div class="pp px s" data-v="corridor"><div class="ph" data-im="corridor"></div>
+        <div class="ct"><p class="nl rv"><small>노을</small>이리 와요.<br>당신의 나머지 반쪽을 보여 줄게요.</p></div>
       </div>
       <div class="gut rv"><i></i><b>2027 · 丁未</b>붉은 불의 하늘과 메마른 흙의 땅.<br>그 해, 당신의 해와 달은 어떻게 뜰까.</div>
     </section>
@@ -369,8 +382,15 @@ const {GAN,JI,GAN_K,JI_K,EL,EL_K,BR_EL,HID,stEl}=S_;
 /* 노을 화보 · 영상 자원 — 내려받는 대로 img/ v/ 로 옮긴다(지금은 원본 주소) */
 const HF='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
 const IMG={base:'img/noeul.jpg',
-  cuDay:HF+'hf_20261002_124211_13bebaf9-a832-44b1-a420-da831d6550af.png',cuNight:HF+'hf_20261002_124211_00760b88-20eb-466d-8105-0bc8b30ca25d.png',
-  endS:HF+'hf_20261002_124211_26ac8827-40fb-466d-a0be-ec5c45b330fe.png',closed:HF+'hf_20261002_124211_d237a3ba-8bae-43ed-beea-ad9e8569534e.png',sun:HF+'hf_20261002_122512_5a6dfeac-3a54-417c-870d-898b2a380c2c.png',moon:HF+'hf_20261002_122512_02c148b3-3420-47d8-ad60-211393348ec3.png',split:HF+'hf_20261002_122512_ddedaf6f-4b18-41c2-abca-a644b4f270df.png',ridge:HF+'hf_20261002_122512_38b0baae-52b8-4ff8-b8ca-adebb168f850.png'};
+  cuDay:HF+'hf_20261002_124211_13bebaf9-a832-44b1-a420-da831d6550af_min.webp',cuNight:HF+'hf_20261002_124211_00760b88-20eb-466d-8105-0bc8b30ca25d_min.webp',
+  aerial:HF+'hf_20261002_125821_0dbb64a6-8a74-49c7-be19-16792c2c015f_min.webp',hand:HF+'hf_20261002_125821_e88f6085-e8ff-4f91-9db9-d5bae2a401f1_min.webp',eyes:HF+'hf_20261002_125821_a71f3e42-28b1-4288-83db-f9dd690c4865_min.webp',
+  taeguk:HF+'hf_20261002_125822_26ff2dcf-6ef4-491d-be90-e126a691207e_min.webp',corridor:HF+'hf_20261002_125822_4127e0fb-f5fa-426c-86d5-72e50ee09577_min.webp',profile:HF+'hf_20261002_125821_2af8ed05-e6b5-4352-810f-fc1b192a8f99_min.webp',
+  back:HF+'hf_20261002_125821_888f9b4f-a6a9-4223-bc48-2fef92dd8720_min.webp',scroll:HF+'hf_20261002_125822_706e476b-dde6-4b4b-acd9-0746790e96e2_min.webp',lantern:HF+'hf_20261002_125821_fbb7ba4f-45fc-4c18-98e5-ca8893a27eda_min.webp',
+  endS:HF+'hf_20261002_124211_26ac8827-40fb-466d-a0be-ec5c45b330fe_min.webp',closed:HF+'hf_20261002_124211_d237a3ba-8bae-43ed-beea-ad9e8569534e_min.webp',sun:HF+'hf_20261002_122512_5a6dfeac-3a54-417c-870d-898b2a380c2c_min.webp',moon:HF+'hf_20261002_122512_02c148b3-3420-47d8-ad60-211393348ec3_min.webp',split:HF+'hf_20261002_122512_ddedaf6f-4b18-41c2-abca-a644b4f270df_min.webp',ridge:HF+'hf_20261002_122512_38b0baae-52b8-4ff8-b8ca-adebb168f850_min.webp'};
+/* 움직이는 칸(무음 반복 영상). 키 = IMG와 같은 이름. 비어 있으면 사진만 */
+/* 원본 클링 작업: aerial 3f807055 · hand f3407792 · eyes dd5d0a3d · taeguk 265aae92 · corridor 9ff5ad87 · profile 52b7d07a · back 26b446ef · scroll 63d7f4b0 · lantern 25ce916f · cuDay c48feb2d · cuNight 8f614767 (720 · 앞뒤 이어 붙인 10초 반복) */
+const LVB='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
+const LV={aerial:LVB+'bd287e3a-1680-46a6-9791-3ecfc44c6958.mp4',hand:LVB+'c15eec45-ece1-4106-9206-d11f50c98d15.mp4',eyes:LVB+'8f3490e3-4d21-4a96-b61f-ddbe2271f8da.mp4',taeguk:LVB+'9e840e13-5ecb-49bc-875f-d418b621cbe8.mp4',corridor:LVB+'cbae021a-27ae-4ace-946a-90579ab60d94.mp4',profile:LVB+'5c570313-d911-4875-b666-2e64e3b36e9c.mp4',back:LVB+'7f8b3e4c-e8d3-4020-b6fe-2b71653eed9a.mp4',scroll:LVB+'573d25ae-a4de-4455-acb3-1bf56dbc32c9.mp4',lantern:LVB+'82d97eb2-4e26-4782-ae3f-a74c3080e11a.mp4',cuDay:LVB+'f97d5edb-1f13-439f-abae-b28472f445b1.mp4',cuNight:LVB+'aa962a5c-78a2-4f57-8850-66ba26968cbd.mp4'};
 /* 전환: cfd99ec5(눈 감은 클로즈업 → 빛이 달빛으로, 무음) · 엔딩: 7c70993d + noeul_B_duo (예비 6ee5cdc6 → a6f6ebb7 업로드본) */
 const VID={trans:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/aac04120-323e-44ba-ae7f-827df907374e.mp4',end:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/35c7447e-1e04-4c81-9ebd-af7830f72268.mp4'};
 const HOURS=['자시 (23:30~01:29)','축시 (01:30~03:29)','인시 (03:30~05:29)','묘시 (05:30~07:29)','진시 (07:30~09:29)','사시 (09:30~11:29)','오시 (11:30~13:29)','미시 (13:30~15:29)','신시 (15:30~17:29)','유시 (17:30~19:29)','술시 (19:30~21:29)','해시 (21:30~23:29)'];
@@ -388,6 +408,13 @@ function bgStep(n){ ['bg0','bg1','bg2'].forEach((id,i)=>$(id).classList.toggle('
 function parallax(root){ let tk=0; const run=()=>{ tk=0; const rh=root.clientHeight; root.querySelectorAll('.px .ph').forEach(ph=>{ const b=ph.parentNode.getBoundingClientRect(), rt=root.getBoundingClientRect(); const c=(b.top-rt.top+b.height/2-rh/2)/rh; if(c>-1.4&&c<1.4) ph.style.transform=`translate3d(0,${(c*-7).toFixed(2)}%,0) scale(${(1.06+Math.abs(c)*.04).toFixed(3)})`; }); };
   root.addEventListener('scroll',()=>{ if(!tk) tk=requestAnimationFrame(run); },{passive:true}); run(); return run; }
 const pxTalk=parallax($('sTalk')), pxRep=parallax($('sRep'));
+/* 화면에 들어온 칸만 영상 재생, 벗어나면 멈춤. 사진 위로 서서히 녹아들게 */
+function armLoops(root){ const els=[...root.querySelectorAll('.px[data-v]')].filter(el=>LV[el.dataset.v]&&!el._lv);
+  const o=new IntersectionObserver(es=>es.forEach(e=>{ const v=e.target._lv; if(!v) return;
+    if(e.isIntersecting){ if(!v.src) v.src=LV[e.target.dataset.v]; const p=v.play(); if(p&&p.catch) p.catch(()=>{}); } else if(!v.paused) v.pause(); }),{root,threshold:.3});
+  els.forEach(el=>{ const v=document.createElement('video'); v.className='lv'; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline',''); v.preload='none';
+    v.addEventListener('playing',()=>v.classList.add('on')); el.querySelector('.ph').appendChild(v); el._lv=v; o.observe(el); }); }
+armLoops($('sTalk'));
 
 /* ---------- 1. 대화형 입력 ---------- */
 function toBottom(){ const t=$('sTalk'); t.scrollTo({top:t.scrollHeight,behavior:'smooth'}); }
@@ -528,30 +555,30 @@ function premHTML(){
   const meetTx=r.meet.map(mName).join(', '), crossTx=r.cross.map(o=>`${o.m}월은 ${o.d>o.n?'낮':'밤'}이 앞서요`).join(', ');
   let h='';
   /* 1장 */
-  h+=`<section class="ch"><div class="chHero sunC px"><div class="ph" style="background-image:url('${IMG.cuDay}')"></div><div class="ct"><small>1장 · 丁 · ${tgS}</small><h3>낮의 나</h3><p>겉으로 드러날 2027년</p></div></div><div class="wrap">
+  h+=`<section class="ch"><div class="chHero sunC px" data-v="cuDay"><div class="ph" style="background-image:url('${IMG.cuDay}')"></div><div class="ct"><small>1장 · 丁 · ${tgS}</small><h3>낮의 나</h3><p>겉으로 드러날 2027년</p></div></div><div class="wrap">
     <p class="lead rv">${DAY_TX[r.rS][r.fS?0:1]}</p>
     <p class="body rv">올해의 하늘 글자 丁은 일간 <b>${GAN[r.dm]}</b>에게 <span class="chip">${tgS}</span>이에요. ${GROUP[r.rS]}의 기운이 낮에 서고, 당신 사주는 이 기운을 <b>${r.fS?'반기는':'버거워하는'}</b> 쪽이에요. 그래서 밖에서 일어나는 일은 ${r.fS?'밀어붙일수록 커지고':'속도를 늦출수록 지켜집니다'}.</p>
     ${areasHTML(dA,['일','평판','관계','돈의 흐름'],'sunA rv')}
     ${r.evD.map(e=>`<div class="ev rv"><b>${e[0]}</b><p>${e[1]}</p></div>`).join('')}
-    <div class="toon"><div class="pan px rv"><div class="ph" style="background-image:url('${IMG.sun}')"></div><div class="cap"><small>노을의 한마디</small><q>${r.fS?'올해는 숨지 말고 앞에 서요. 보는 눈이 당신 편이에요.':'올해 낮은 천천히 걸어요. 늦게 낸 답이 오래 남아요.'}</q></div></div></div>
+    <div class="toon"><div class="pan px rv" data-v="scroll"><div class="ph" style="background-image:url('${IMG.scroll||IMG.sun}')"></div><div class="cap"><small>노을의 한마디</small><q>${r.fS?'올해는 숨지 말고 앞에 서요. 보는 눈이 당신 편이에요.':'올해 낮은 천천히 걸어요. 늦게 낸 답이 오래 남아요.'}</q></div></div></div>
   </div></section>`;
   /* 2장 */
-  h+=`<section class="ch"><div class="chHero moonC px"><div class="ph" style="background-image:url('${IMG.cuNight}')"></div><div class="ct"><small>2장 · 未 · ${tgB}</small><h3>밤의 나</h3><p>속으로 차오를 2027년</p></div></div><div class="wrap">
+  h+=`<section class="ch"><div class="chHero moonC px" data-v="cuNight"><div class="ph" style="background-image:url('${IMG.cuNight}')"></div><div class="ct"><small>2장 · 未 · ${tgB}</small><h3>밤의 나</h3><p>속으로 차오를 2027년</p></div></div><div class="wrap">
     <p class="lead rv">${NIGHT_TX[r.rB][r.fB?0:1]}</p>
     <p class="body rv">땅 글자 未는 당신에게 <span class="chip">${tgB}</span>이고, 그 안에는 세 글자가 숨어 있어요. 겉으로는 보이지 않지만 올해 내내 속에서 움직이는 기운입니다.</p>
     <div class="hid3 rv">${r.hid.map(x=>`<div><b>${GAN[x.s]}</b><em>${x.tg}</em><span>${HID_MEAN[x.g]}</span><p>${HID_TX[x.g]}</p></div>`).join('')}</div>
     ${areasHTML(nA,['속마음','감정','숨은 인연과 기회','쉬어야 할 때'],'moonA rv')}
     ${r.evN.map(e=>`<div class="ev rv"><b>${e[0]}</b><p>${e[1]}</p></div>`).join('')}
-    <div class="toon"><div class="pan px rv"><div class="ph" style="background-image:url('${IMG.moon}')"></div><div class="cap"><small>노을의 한마디</small><q>${r.fB?'밤에 혼자 한 생각이 맞아요. 그 느낌을 믿어요.':'밤에는 결정하지 말아요. 아침이 답을 줄 거예요.'}</q></div></div></div>
+    <div class="toon"><div class="pan px rv" data-v="lantern"><div class="ph" style="background-image:url('${IMG.lantern||IMG.moon}')"></div><div class="cap"><small>노을의 한마디</small><q>${r.fB?'밤에 혼자 한 생각이 맞아요. 그 느낌을 믿어요.':'밤에는 결정하지 말아요. 아침이 답을 줄 거예요.'}</q></div></div></div>
   </div></section>`;
   /* 3장 */
   h+=`<section class="ch"><div class="wrap"><div class="rv" style="padding-top:6px"><small style="font-size:11.5px;letter-spacing:.32em;color:var(--gold);font-weight:700">3장</small><h3 class="ttl2">해와 달의 열두 달</h3><p class="sub2">달마다 낮(하늘 글자)과 밤(땅 글자)이 얼마나 밝은지 겹쳐 봤어요.</p></div>
     <svg class="chart rv" id="chart" viewBox="0 0 340 180" role="img" aria-label="2027년 월별 낮과 밤"></svg>
     <div class="legend rv"><span><i style="background:var(--sun)"></i>낮</span><span><i style="background:var(--moon)"></i>밤</span></div>
     <div class="toon">
-      <div class="pan px rv"><div class="ph" style="background-image:url('${IMG.split}')"></div><div class="cap"><small>만나는 달</small><b>${meetTx}</b><p>겉과 속이 같은 방향을 봐요. 큰 결정, 고백, 시작은 이 달에.</p><q>해와 달이 같은 하늘에 떠요.</q></div></div>
+      <div class="pan px rv" data-v="back"><div class="ph" style="background-image:url('${IMG.back||IMG.split}')"></div><div class="cap"><small>만나는 달</small><b>${meetTx}</b><p>겉과 속이 같은 방향을 봐요. 큰 결정, 고백, 시작은 이 달에.</p><q>해와 달이 같은 하늘에 떠요.</q></div></div>
       <div class="toon2">
-        <div class="pan px rv"><div class="ph" style="background-image:url('${IMG.cuDay}')"></div><div class="cap"><small>엇갈리는 달</small><b>${r.cross.map(mName).join(', ')}</b><p>${crossTx}. 한쪽만 챙기지 마세요.</p></div></div>
+        <div class="pan px rv"><div class="ph" style="background-image:url('${IMG.split}')"></div><div class="cap"><small>엇갈리는 달</small><b>${r.cross.map(mName).join(', ')}</b><p>${crossTx}. 한쪽만 챙기지 마세요.</p></div></div>
         <div class="pan px rv"><div class="ph" style="background-image:url('${IMG.closed}')"></div><div class="cap"><small>숨 고르는 달</small><b>${r.low.m}월</b><p>낮도 밤도 낮게 흘러요. 약속을 줄이세요.</p></div></div>
       </div>
     </div>
@@ -597,7 +624,7 @@ function armEnd(){ const v=$('endV'), b=$('endB'), t=$('endT'), sb=$('endSnd'); 
 $('payBtn').onclick=()=>{ const pr=$('prem');
   if(!$('pay').classList.contains('done')){ pr.innerHTML=premHTML(); pr.hidden=false; $('lock').hidden=true; drawChart(); reveal(); $('pay').classList.add('done'); $('payBtn').textContent='1장부터 보기'; toast('체험판이라 결제 없이 열었어요');
     const f=$('flip'); if(f) f.onclick=()=>f.classList.toggle('on');
-    unlockEnd(); armEnd(); pxRep(); }
+    unlockEnd(); armEnd(); armLoops($('sRep')); pxRep(); }
   pr.scrollIntoView({behavior:'smooth',block:'start'}); };
 $('back2').onclick=()=>{ $('msgs').innerHTML=''; $('ttl0').classList.remove('off'); show('sTalk'); talked=false; $('sTalk').scrollTop=$('meet').offsetTop; talkStart(); };
 $('back1').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };

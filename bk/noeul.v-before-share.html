@@ -5,11 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <script src="early.js?v=3"></script>
 <title>해와 달의 운세 · 오방사주</title>
-<meta name="description" content="남자도 여자도, 낮도 밤도 아닌 노을이 읽어 주는 2027 낮의 나와 밤의 나">
-<meta property="og:type" content="website"><meta property="og:site_name" content="오방사주">
-<meta property="og:title" content="해와 달의 운세 · 노을"><meta property="og:description" content="남자도 여자도, 낮도 밤도 아닌 노을이 읽어 주는 2027 낮의 나와 밤의 나">
-<meta property="og:image" content="https://obangsaju.netlify.app/img/og/noeul.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta property="og:url" content="https://obangsaju.netlify.app/noeul.html"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700;900&family=Song+Myung&display=swap">
 <style>
@@ -298,13 +293,6 @@ select option{background:#16121f;color:var(--ink)}
 .cardH b{display:block;margin-top:6px;font-family:var(--serif);font-size:19px;font-weight:700;color:var(--ink)}
 #sndB{position:absolute;right:14px;top:calc(env(safe-area-inset-top,0px) + 12px);z-index:30;width:36px;height:36px;border-radius:50%;border:1px solid rgba(227,194,122,.5);background:rgba(18,15,28,.55);color:var(--gold2);display:grid;place-items:center;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 #sndB svg{width:17px;height:17px}
-#shrB{position:absolute;right:58px;top:calc(env(safe-area-inset-top,0px) + 12px);z-index:30;width:36px;height:36px;border-radius:50%;border:1px solid rgba(227,194,122,.5);background:rgba(18,15,28,.55);color:var(--gold2);display:grid;place-items:center;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-#shrB svg{width:16px;height:16px}
-.fromF{display:block;margin-bottom:10px;font-size:11px;letter-spacing:.3em;color:var(--gold);font-weight:700}
-.outro{margin:26px 0 0;display:grid;gap:10px}
-.outro .go{margin-top:0}
-.outro .ghost2{height:48px;border:1px solid var(--line);background:none;color:var(--ink2);font-size:14px;font-weight:700;cursor:pointer}
-.obs-btn{color:var(--gold2)!important;border-color:rgba(227,194,122,.55)!important;margin-top:24px!important}
 #sndB .x{display:none}#sndB.off .x{display:block}#sndB.off .w{display:none}
 .top .tg{display:none}
 .end .snd{position:absolute;right:14px;top:14px;z-index:3;display:none;height:32px;padding:0 12px;border:1px solid rgba(241,219,164,.6);background:rgba(18,15,28,.45);color:var(--gold2);font-size:12px;cursor:pointer}
@@ -425,7 +413,6 @@ select option{background:#16121f;color:var(--ink)}
 
   <div class="pay" id="pay"><div class="pr">2027 해와 달의 운세 전체 · <b>990원</b></div><button class="go" id="payBtn">노을의 이야기 전부 듣기</button></div>
   <div class="toast" id="toast"></div>
-  <button id="shrB" type="button" aria-label="이 운세 공유하기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6h14v-6"/></svg></button>
   <button id="sndB" type="button" aria-label="배경 음악 켜기 끄기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg></button>
 </div>
 
@@ -662,8 +649,7 @@ function premHTML(){
   <div class="wrap"><div class="cardH rv"><small>노을이 남긴 두 장</small><b>앞은 낮의 나, 뒤는 밤의 나</b></div><div class="flip rv" id="flip"><div class="in">
     <div class="face ft" style="background-image:url('${IMG.cuDay}')"><small>낮의 ${r.nick}</small><b>${GROUP[r.rS]}의 해</b><p>${DAY_TX[r.rS][r.fS?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
     <div class="face bk" style="background-image:url('${IMG.cuNight}')"><small>밤의 ${r.nick}</small><b>${HID_MEAN[r.hid[0].g]}</b><p>${NIGHT_TX[r.rB][r.fB?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
-  </div></div><p class="fliphint">카드를 누르면 밤의 내가 보여요</p>
-    <div class="outro"><button class="go" id="shareMine" type="button">내 낮과 밤 카드 보내기</button><button class="ghost2" id="toHome" type="button">다른 신들의 운세 보러 가기</button></div></div>`;
+  </div></div><p class="fliphint">카드를 누르면 밤의 내가 보여요</p></div>`;
   return h;
 }
 function drawChart(){
@@ -693,16 +679,9 @@ function armEnd(){ const v=$('endV'), b=$('endB'), t=$('endT'), sb=$('endSnd'); 
 $('payBtn').onclick=()=>{ const pr=$('prem');
   if(!$('pay').classList.contains('done')){ pr.innerHTML=premHTML(); pr.hidden=false; $('lock').hidden=true; drawChart(); reveal(); $('pay').classList.add('done'); $('payBtn').textContent='1장부터 보기'; toast('체험판이라 결제 없이 열었어요');
     const f=$('flip'); if(f) f.onclick=()=>f.classList.toggle('on');
-    unlockEnd(); armEnd(); armLoops($('sRep')); pxRep(); if(window.BGM) BGM.watch();
-    $('shareMine').onclick=()=>{ if(!window.ObShare) return; const r=R; ObShare.open({menu:'해와 달의 운세',kicker:`2027 · 낮의 ${r.nick} · 밤의 ${r.nick}`,big:String(r.pS),unit:'% 낮',head:`${GROUP[r.rS]}의 해, ${HID_MEAN[r.hid[0].g]}`,sub:`${DAY_TX[r.rS][r.fS?0:1].split('.')[0]}. ${NIGHT_TX[r.rB][r.fB?0:1].split('.')[0]}.`,img:'img/noeul.jpg'}); };
-    $('toHome').onclick=()=>{ location.href='./'; };
-    /* 맨 끝에 오면 아래 고정 버튼을 내려 끝 화면을 가리지 않게 */
-    new IntersectionObserver(es=>es.forEach(e=>$('pay').classList.toggle('on',!e.isIntersecting)),{root:$('sRep'),threshold:.1}).observe(document.querySelector('.outro')); }
+    unlockEnd(); armEnd(); armLoops($('sRep')); pxRep(); if(window.BGM) BGM.watch(); }
   pr.scrollIntoView({behavior:'smooth',block:'start'}); };
 $('back2').onclick=()=>{ $('msgs').innerHTML=''; $('ttl0').classList.remove('off'); show('sTalk'); talked=false; $('sTalk').scrollTop=$('meet').offsetTop; talkStart(); };
-$('shrB').onclick=()=>{ if(window.ObShare) ObShare.sheet({src:'img/og/noeul.jpg',name:'noeul.jpg',head:'이 운세 공유하기',title:'해와 달의 운세 · 오방사주',text:'남자도 여자도, 낮도 밤도 아닌 노을이 읽어 주는 2027 낮의 나와 밤의 나'}); };
-/* 공유 링크로 들어온 사람: 첫 컷에 한 줄 */
-try{ if(new URLSearchParams(location.search).get('ref')==='share'){ const tp=document.querySelector('.pp.first .ct.tp'); if(tp) tp.insertAdjacentHTML('afterbegin','<span class="fromF">친구가 보낸 이야기</span>'); } }catch(e){}
 $('back1').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
 </script>
 <script>

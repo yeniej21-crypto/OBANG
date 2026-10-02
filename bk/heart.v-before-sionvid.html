@@ -41,7 +41,7 @@ button,select,input{font-family:inherit;color:inherit}
 
 /* ---------- 1. 들어서기 ---------- */
 #sIn{background:#000}
-.ibg{position:absolute;inset:0;background:url('https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/2bf60153-6138-439e-854a-a22ef5e28c37.jpg') center 30%/cover no-repeat,url('img/sion.jpg') center 22%/cover no-repeat;transform:scale(1.06);animation:kb 24s ease-in-out infinite alternate}
+.ibg{position:absolute;inset:0;background:url('img/sion.jpg') center 22%/cover no-repeat;transform:scale(1.06);animation:kb 24s ease-in-out infinite alternate}
 @keyframes kb{from{transform:scale(1.03)}to{transform:scale(1.11) translateY(-1.2%)}}
 #iv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;opacity:0;transition:opacity .7s}
 #iv.on{opacity:1}
@@ -62,7 +62,7 @@ button,select,input{font-family:inherit;color:inherit}
 .sub.on{opacity:1}
 
 /* ---------- 2. 대화 ---------- */
-.tbg{position:absolute;inset:0;background:url('https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/12fc7564-0053-4b5f-9520-68c1a894eba0.jpg') center 26%/cover no-repeat,url('img/sion.jpg') center 16%/cover no-repeat;animation:kb 30s ease-in-out infinite alternate;filter:brightness(.86)}
+.tbg{position:absolute;inset:0;background:url('img/sion.jpg') center 16%/cover no-repeat;animation:kb 30s ease-in-out infinite alternate;filter:brightness(.86)}
 .tlt{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 6% 96%,rgba(255,196,120,.2),rgba(255,196,120,0) 42%);animation:fl 5.5s ease-in-out infinite}
 @keyframes fl{0%,100%{opacity:.75}22%{opacity:.95}38%{opacity:.7}61%{opacity:1}80%{opacity:.82}}
 .tsh{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,9,13,.55) 0,rgba(7,9,13,0) 14%,rgba(7,9,13,0) 30%,rgba(7,9,13,.82) 56%,rgba(7,9,13,.97) 78%)}
@@ -98,7 +98,7 @@ button,select,input{font-family:inherit;color:inherit}
 .pick .lnk{margin-top:2px}
 
 /* ---------- 3. 은거울 닦기 ---------- */
-.mbg{position:absolute;inset:-20px;background:url('https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/af566d6d-84c2-4346-b695-8218e8e3cdbf.jpg') center 60%/cover no-repeat;filter:blur(16px) brightness(.32) saturate(.7)}
+.mbg{position:absolute;inset:-20px;background:url('img/sion.jpg') center 70%/cover no-repeat;filter:blur(16px) brightness(.32) saturate(.7)}
 .mbg:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(201,209,220,.08),rgba(7,9,13,.6) 70%)}
 .mw{position:relative;z-index:1;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 64px) 20px calc(env(safe-area-inset-bottom,0px) + 24px)}
 .mw .mk{font-size:11px;letter-spacing:.32em;color:var(--silver);font-weight:700}
@@ -133,7 +133,7 @@ button,select,input{font-family:inherit;color:inherit}
 /* ---------- 4. 결과 ---------- */
 #sRes{background:var(--bg)}
 .hero{position:relative;height:calc(var(--sh,100vh)*.7);min-height:430px;overflow:hidden}
-.hero .ph{position:absolute;left:0;right:0;top:-4%;bottom:-4%;background:url('https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/b5576885-c4a8-4c6b-b25b-79dbc95a20e0.jpg') center 24%/cover no-repeat,url('img/sion.jpg') center 18%/cover no-repeat;will-change:transform}
+.hero .ph{position:absolute;left:0;right:0;top:-4%;bottom:-4%;background:url('img/sion.jpg') center 18%/cover no-repeat;will-change:transform}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,9,13,.55) 0,rgba(7,9,13,0) 20%,rgba(7,9,13,.15) 45%,rgba(7,9,13,.88) 80%,var(--bg) 100%)}
 .hero .ct{position:absolute;left:20px;right:20px;bottom:20px;z-index:1}
 .hero small{display:block;font-size:11px;letter-spacing:.3em;color:var(--silver);font-weight:700}
@@ -225,13 +225,6 @@ button,select,input{font-family:inherit;color:inherit}
 .vo .sub{z-index:2}
 .toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(-50%);z-index:200;background:rgba(10,12,16,.94);border:1px solid var(--line2);color:#fff;font-size:13.5px;padding:10px 16px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1}
-.amb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;pointer-events:none}
-.amb.on{opacity:1}
-#sIn .amb{object-position:center 30%}
-#sTalk .amb{object-position:center 26%;filter:brightness(.86)}
-.hero .amb{object-position:center 24%}
-#sIn.live .ibg,#sTalk.live .tbg{animation:none}
-.vo .vp.mi{background-image:url('https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/af566d6d-84c2-4346-b695-8218e8e3cdbf.jpg')}
 @media (prefers-reduced-motion:reduce){.ibg,.tbg,.sheen,.tlt{animation:none}}
 </style>
 </head>
@@ -245,7 +238,6 @@ button,select,input{font-family:inherit;color:inherit}
 
   <section class="scr on" id="sIn">
     <div class="ibg"></div>
-    <video class="amb" id="a0" muted loop playsinline preload="auto" poster="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/2bf60153-6138-439e-854a-a22ef5e28c37.jpg"></video>
     <video id="iv" playsinline preload="auto" poster="img/sion.jpg"></video>
     <div class="ish"></div>
     <div class="sub" id="isub"></div>
@@ -260,7 +252,7 @@ button,select,input{font-family:inherit;color:inherit}
   </section>
 
   <section class="scr" id="sTalk">
-    <div class="tbg"></div><video class="amb" id="a3" muted loop playsinline preload="none" poster="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/12fc7564-0053-4b5f-9520-68c1a894eba0.jpg"></video><div class="tlt"></div><div class="tsh"></div>
+    <div class="tbg"></div><div class="tlt"></div><div class="tsh"></div>
     <div class="talk" id="talk"><div class="msgs" id="msgs"></div><div class="ask" id="ask"></div></div>
   </section>
 
@@ -281,7 +273,7 @@ button,select,input{font-family:inherit;color:inherit}
   </section>
 
   <section class="scr" id="sRes">
-    <div class="hero" id="hero"><div class="ph" id="heroPh"><video class="amb" id="a2" muted loop playsinline preload="none" poster="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/b5576885-c4a8-4c6b-b25b-79dbc95a20e0.jpg"></video></div><div class="ct"><small id="hK">시온의 은거울</small><h1 id="hT"></h1><p id="hS"></p></div></div>
+    <div class="hero" id="hero"><div class="ph" id="heroPh"></div><div class="ct"><small id="hK">시온의 은거울</small><h1 id="hT"></h1><p id="hS"></p></div></div>
     <div class="wrap">
       <div id="free"></div>
       <div class="one rv" id="one"></div>
@@ -531,28 +523,11 @@ function clip(v,sub,src,lines,dur){ return new Promise(res=>{ let done=false, ti
   else timer();
   sf=setTimeout(()=>{ if(!done&&!timerOn&&(v.paused||v.currentTime<.05)) timer(); },2400);
   setTimeout(fin,(dur+6)*1000); }); }
-
-/* ---------- 배경 영상 (소리 없는 반복 컷) ---------- */
-const AMB=['dd68b393-58f6-4775-b8fc-10b2ea9e8eb8','752ca779-73a4-4c8e-9594-488171b4b817','1dc6d71f-ff0c-44b2-8eb6-e83be1a367ff','cb751720-6d31-4b47-9ca9-fade94e81a78'].map(id=>'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/'+id+'.mp4');
-function amb(v,i){ if(!v) return; const sec=v.closest('.scr'); if(v.getAttribute('src')!==AMB[i]){ v.src=AMB[i]; }
-  v.muted=true; v.onplaying=()=>{ v.classList.add('on'); if(sec) sec.classList.add('live'); };
-  try{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} }
-function ambStop(v){ if(!v) return; try{ v.pause(); }catch(e){} }
-function ambLoad(v,i){ if(v&&!v.getAttribute('src')){ v.preload='auto'; v.src=AMB[i]; } }
-document.addEventListener('visibilitychange',()=>{ if(document.hidden) return; const m={sIn:'a0',sTalk:'a3',sRes:'a2'}[cur]; const v=m&&$(m); if(v&&v.getAttribute('src')&&v.paused){ try{ v.play().catch(()=>{}); }catch(e){} } });
-/* 거울을 내미는 짧은 장면 */
-async function mirrorBridge(){ const vo=$('vo'), vv=$('vv'), sub=$('vsub'), vp=vo.querySelector('.vp');
-  vp.classList.add('mi'); vv.loop=false; vv.muted=true; vv.src=AMB[1]; try{ vv.currentTime=0; }catch(e){}
-  vo.classList.add('on'); sub.textContent='이 거울에 비춰 볼게'; setTimeout(()=>sub.classList.add('on'),350);
-  let ok=false; try{ const p=vv.play(); if(p&&p.then){ await Promise.race([p.then(()=>{ ok=true; vv.classList.add('on'); }).catch(()=>{}),wait(1600)]); } }catch(e){}
-  await wait(ok?3000:1900); sub.classList.remove('on'); await wait(250);
-  return ()=>{ vo.classList.remove('on'); setTimeout(()=>{ try{ vv.pause(); }catch(e){} vv.classList.remove('on'); vp.classList.remove('mi'); sub.textContent=''; },650); }; }
 const E1=[[0.1,'그 사람 얘기'],[1.85,'생일 줘봐']], E3=[[0.15,'여기서부턴 진짜 속마음이야'],[3.35,'들을 준비 됐어']];
 const iv=$('iv'); iv.src='v/sion/e1.mp4';
 
 /* ---------- 화면 전환 ---------- */
 let cur='sIn';
-amb($('a0'),0);
 function show(id){ cur=id; ['sIn','sTalk','sMir','sRes'].forEach(s=>$(s).classList.toggle('on',s===id)); $('top').classList.toggle('t',id!=='sIn'); $('top').classList.remove('sc'); }
 $('back').onclick=()=>{ if(cur==='sMir'||cur==='sTalk'){ if(history.length>1) history.back(); else location.href='./'; return; } if(history.length>1) history.back(); else location.href='./'; };
 try{ if(new URLSearchParams(location.search).get('ref')==='share') $('itx').insertAdjacentHTML('afterbegin','<span class="from">친구가 보낸 은거울</span>'); }catch(e){}
@@ -560,9 +535,9 @@ try{ if(new URLSearchParams(location.search).get('ref')==='share') $('itx').inse
 /* ---------- 1. 들어서기 ---------- */
 let started=false;
 async function enter(withSound){ if(started) return; started=true; soundOn=withSound; try{ sessionStorage.setItem('heartSnd',soundOn?'on':'off'); }catch(e){} sndUI();
-  if(soundOn) BGM.start(); $('sIn').classList.add('play'); ambLoad($('a3'),3);
+  if(soundOn) BGM.start(); $('sIn').classList.add('play');
   await clip(iv,$('isub'),'v/sion/e1.mp4',E1,3.4);
-  show('sTalk'); amb($('a3'),3); setTimeout(()=>{ try{ iv.pause(); }catch(e){} ambStop($('a0')); },1000); interview(); }
+  show('sTalk'); setTimeout(()=>{ try{ iv.pause(); }catch(e){} },1000); interview(); }
 $('start').onclick=()=>enter(true);
 $('startMute').onclick=()=>enter(false);
 
@@ -613,8 +588,7 @@ let fogReady=false, revealed=false;
 function toMirror(){ revealed=false; $('mirror').classList.remove('clear'); $('mBt').classList.remove('on'); $('mSkip').hidden=false; $('mH').textContent='문지른 만큼 맑아져';
   $('mT').innerHTML='김이 서려 있어.<br>손가락으로 천천히 닦아 봐.';
   $('mf').innerHTML=`<small>${R.Q?'그 사람의 결':'네 쪽의 결'}</small><b>${esc(R.mirT).replace('\n','<br>')}</b><em>${esc(R.mirS)}</em>`;
-  ambLoad($('a2'),2);
-  mirrorBridge().then(close=>{ show('sMir'); ambStop($('a3')); requestAnimationFrame(()=>requestAnimationFrame(fogInit)); close(); }); }
+  show('sMir'); requestAnimationFrame(()=>requestAnimationFrame(fogInit)); }
 const N=34; let cells=null, inside=0, cleared=0, lastStep=0, fctx=null, dpr=1, FW=0;
 function fogInit(){ const cv=$('fog'); cv.classList.remove('gone'); FW=cv.clientWidth||280; dpr=Math.min(2,window.devicePixelRatio||1); cv.width=Math.round(FW*dpr); cv.height=Math.round(FW*dpr);
   fctx=cv.getContext('2d'); const c=fctx, W=cv.width; c.globalCompositeOperation='source-over'; c.clearRect(0,0,W,W);
@@ -641,7 +615,7 @@ function reveal(){ if(revealed) return; revealed=true; down=false; ring(1); $('f
   BGM.bell(); vib([10,40,18]); $('mH').textContent=''; $('mT').innerHTML=R.Q?'비쳤어.<br>이 사람, 이런 결이야.':'비쳤어.<br>먼저 네 쪽부터.';
   setTimeout(()=>$('mBt').classList.add('on'),1100); }
 $('mSkip').onclick=reveal;
-$('mGo').onclick=()=>{ renderFree(); show('sRes'); $('sRes').scrollTop=0; amb($('a2'),2); };
+$('mGo').onclick=()=>{ renderFree(); show('sRes'); $('sRes').scrollTop=0; };
 
 /* ---------- 4. 무료 풀이 ---------- */
 const tags=a=>`<div class="ev"><em>근거</em>${a.filter(Boolean).map(t=>`<span>${esc(ev(t))}</span>`).join('')}</div>`;

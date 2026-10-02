@@ -114,6 +114,15 @@ button{font-family:inherit;color:inherit}
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(-50%);z-index:80;background:rgba(0,0,0,.85);color:#fff;font-size:14px;padding:10px 16px;border-radius:999px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1}
 /* 무료로 가볍게(10/3): 무료 연애 미니 세 가지로 가는 종이 카드. 모서리 없음, 그림은 CSS/SVG */
+.ysf{position:relative;display:block;height:200px;margin-bottom:10px;overflow:hidden;color:#2a2119;text-decoration:none;background:#efe5d4;box-shadow:0 18px 30px -18px rgba(0,0,0,.8)}
+.ysf .im{position:absolute;right:0;top:0;bottom:0;width:58%;background:url('img/wood.jpg') center 18%/cover no-repeat}
+.ysf .im:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f6f0e6 0,rgba(246,240,230,.6) 30%,rgba(246,240,230,0) 62%),linear-gradient(200deg,rgba(255,226,170,.35),rgba(255,226,170,0) 50%)}
+.ysf .tx{position:absolute;left:16px;top:18px;bottom:16px;width:62%;display:flex;flex-direction:column}
+.ysf small{font-size:11px;font-weight:700;letter-spacing:.1em;color:#b8352a}
+.ysf b{margin-top:6px;font-size:22px;font-weight:900;letter-spacing:-.03em;line-height:1.25}
+.ysf em{margin-top:6px;font-style:normal;font-size:13px;line-height:1.55;color:#6b5d4f}
+.ysf i{margin-top:auto;align-self:flex-start;font-style:normal;font-size:13px;font-weight:800;padding:9px 14px;background:#2a2119;color:#f6f0e6}
+.ysf:active{transform:scale(.985)}
 .mini{display:grid;gap:8px}
 .mini a{position:relative;display:flex;align-items:center;gap:14px;min-height:96px;padding:10px 14px 10px 10px;border-radius:0;background:linear-gradient(118deg,#fbf7ef 0,#f6f0e6 45%,#ece2d0 100%);color:#2a2119;text-decoration:none;box-shadow:0 14px 24px -16px rgba(0,0,0,.7);transition:transform .15s}
 .mini a:active{transform:scale(.985)}
@@ -152,6 +161,7 @@ button{font-family:inherit;color:inherit}
 
   <section class="sec" id="secMini">
     <div class="sh"><small>무료 · 한 번 눌러 보기</small><b>무료로 가볍게</b><p>생일만 있으면 바로 나와요. 마음에 들면 친구에게 카드로 보내요.</p></div>
+    <a class="ysf" href="yeonseo.html"><span class="im"></span><span class="tx"><small>새로 열었어요 · 무료</small><b>하람의 연서당<br>곧 받을 편지</b><em>열두 서랍 중 햇빛이 멈추는 달, 다음 인연의 편지가 와요</em><i>서랍 열어 보기</i></span></a>
     <div class="mini">
       <a href="lovemini.html?t=type"><span class="pic"><svg viewBox="0 0 76 76" width="62" height="62" aria-hidden="true"><defs><radialGradient id="mnW" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#d65a4a"/><stop offset=".55" stop-color="#b8352a"/><stop offset="1" stop-color="#7f1e16"/></radialGradient><filter id="mnB"><feGaussianBlur stdDeviation="2.4"/></filter></defs><ellipse cx="40" cy="43" rx="25" ry="23" fill="#2a2119" opacity=".3" filter="url(#mnB)"/><path d="M38 12c6 0 9 3 13 4s8 4 9 9 4 8 3 13-1 9-4 12-6 8-11 9-8 3-13 2-8-2-12-5-7-6-8-11-3-8-1-13 2-9 6-12 7-6 12-7z" fill="url(#mnW)"/><circle cx="38" cy="38" r="17" fill="#a42e24" stroke="#7e1d15" stroke-opacity=".6"/><g fill="#c94a3c"><circle cx="38" cy="32" r="4"/><circle cx="43.7" cy="36.1" r="4"/><circle cx="41.5" cy="42.9" r="4"/><circle cx="34.5" cy="42.9" r="4"/><circle cx="32.3" cy="36.1" r="4"/></g><circle cx="38" cy="38" r="2.4" fill="#e9b26a"/><ellipse cx="30" cy="25" rx="7" ry="3" fill="#fff" fill-opacity=".18" transform="rotate(-32 30 25)"/></svg></span><span class="tx"><small>도장을 깨면</small><b>연애 체질 카드</b><em>내 일간으로 읽은 사랑하는 방식</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
       <a href="lovemini.html?t=match"><span class="pic"><svg viewBox="0 0 76 76" width="76" height="76" aria-hidden="true"><path d="M-2 46C10 46 14 38 22 38" fill="none" stroke="#2a2119" stroke-width="2.4" stroke-linecap="round"/><path d="M78 30C66 30 62 38 54 38" fill="none" stroke="#b8352a" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="44" cy="38" rx="10" ry="7" fill="none" stroke="#b8352a" stroke-width="2.4"/><ellipse cx="32" cy="38" rx="10" ry="7" fill="none" stroke="#2a2119" stroke-width="2.4"/><path d="M36.5 32.4A10 7 0 0 1 41.6 31.2" fill="none" stroke="#efe5d4" stroke-width="5"/><path d="M36.5 32.4A10 7 0 0 1 41.6 31.2" fill="none" stroke="#b8352a" stroke-width="2.4"/></svg></span><span class="tx"><small>실을 묶으면</small><b>우리 궁합 한 줄</b><em>두 사람의 생일로 보는 매듭의 결</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>

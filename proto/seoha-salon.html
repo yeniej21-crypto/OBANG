@@ -1887,6 +1887,7 @@ $('backBtn').onclick=()=>{
 };
 if($('ctaHome')) $('ctaHome').onclick=showHome;
 $('ctaHomeBar').onclick=showHome;
+window.ObHome={goPage:u=>goPage(u),duck:()=>{ try{ bgm(BGM_LV.talk,.4); }catch(e){} },idle:()=>{ try{ bgm(BGM_LV.idle,1); }catch(e){} }}; /* charhub.js 연결 */
 $('goHome').onclick=async()=>{ await unlock(); showHome(); };
 document.querySelectorAll('[data-home]').forEach(b=>b.onclick=showHome);
 $('subGo').onclick=()=>{ if(!window.ObPay) return toast('체험판: 7일 무료 체험이 시작됩니다'); const k=S&&S.low||'wood'; ObPay.open({name:'오방 멤버십 · 월 구독',who:'수호신',desc:'매달 수호신의 편지 · 매일 개운 미션 · 엽전 · 매일 상담',price:9900,img:`img/${k}.jpg`,trial:'첫 7일 무료, 이후 매달',cta:'7일 무료로 시작하기',agree:'7일 무료 체험이 끝나면 매달 9,900원이 자동 결제되고, 마이페이지에서 언제든 해지할 수 있음을 확인했어요.',okTitle:'멤버십이 시작됐어요',okText:'내일 아침 첫 편지가 도착해요',after:()=>{ ov(null); toast('체험판: 멤버십 체험이 시작됐어요'); }}); };
@@ -2022,6 +2023,7 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.con
 })();
 </script>
 
+<script src="charhub.js?v=1"></script>
 <script src="hscroll.js"></script>
 <script src="menuintro.js"></script>
 

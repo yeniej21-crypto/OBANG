@@ -1624,6 +1624,7 @@ $('backBtn').onclick=()=>{
 };
 if($('ctaHome')) $('ctaHome').onclick=showHome;
 $('ctaHomeBar').onclick=showHome;
+window.ObHome={goPage:u=>goPage(u),duck:()=>{ try{ bgm(BGM_LV.talk,.4); }catch(e){} },idle:()=>{ try{ bgm(BGM_LV.idle,1); }catch(e){} }}; /* charhub.js 연결 */
 (()=>{ const rh=$('resHome'), rs=$('result'); if(rh&&rs) rs.addEventListener('scroll',()=>rh.classList.toggle('on',rs.scrollTop>240),{passive:true}); })();
 $('goHome').onclick=async()=>{ await unlock(); showHome(); };
 document.querySelectorAll('[data-home]').forEach(b=>b.onclick=showHome);
@@ -1760,6 +1761,7 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.con
 })();
 </script>
 
+<script src="charhub.js?v=1"></script>
 <script src="hscroll.js"></script>
 <script src="menuintro.js"></script>
 

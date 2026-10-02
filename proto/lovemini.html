@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="early.js?v=3"></script>
+<title>무료 연애 미니 · 오방도감</title>
+<meta name="description" content="연애 체질 카드, 우리 궁합 한 줄, 이번 주 연락하기 좋은 날. 생일만 넣으면 바로 보는 무료 연애 풀이">
+<meta property="og:type" content="website"><meta property="og:site_name" content="오방도감">
+<meta property="og:title" content="무료 연애 미니 · 오방도감"><meta property="og:description" content="도장을 깨고, 실을 묶고, 햇빛이 머무는 날을 찾아요">
+<meta property="og:image" content="https://obangsaju.netlify.app/img/og/home.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f6f0e6">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&display=swap">
+<script src="vidguard.js?v=1"></script>
+<style>
+/* 무료 연애 미니(10/3): 연애 체질 카드(t=type) · 우리 궁합 한 줄(t=match) · 이번 주 연락하기 좋은 날(t=week).
+   손으로 한 번 만지는 장면(도장 깨기 · 실 묶기 · 가림막 걷기) + 공유 카드. 밝은 종이 톤, 모서리 없음(원만 예외), 빛은 실제 빛만. */
+:root{--paper:#f6f0e6;--paper-2:#efe5d4;--paper-3:#e6d8c1;--ink:#2a2119;--ink-2:#6b5d4f;--ink-3:#9a8b7a;--honey:#c8955a;--sage:#7d9a7a;--wax:#b8352a;--gold:#b8862f;--slate:#5b6f78;
+  --line:rgba(42,33,25,.14);--line-2:rgba(42,33,25,.24);--ac:var(--wax);
+  --serif:'Noto Serif KR','Noto Serif CJK KR',serif;--sans:'Noto Sans KR','Noto Sans CJK KR',system-ui,sans-serif}
+*{box-sizing:border-box;border-radius:0}
+html,body{margin:0;background:#e7dbc6}
+body{font-family:var(--sans);color:var(--ink);word-break:keep-all;display:flex;justify-content:center;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+button{font-family:inherit;color:inherit;border-radius:0}
+select{border-radius:0}
+.ph{position:relative;width:100%;max-width:430px;min-height:100vh;overflow:hidden;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 40px);
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(118deg,rgba(255,252,245,.9) 0,rgba(255,252,245,0) 38%),
+    radial-gradient(140% 70% at 100% 100%,rgba(42,33,25,.05),rgba(42,33,25,0) 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .16 0 0 0 0 .13 0 0 0 0 .1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:100% 900px,100% 100%,180px 180px;background-repeat:no-repeat,no-repeat,repeat}
+/* 위 막대 */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;background:rgba(246,240,230,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid transparent;transition:border-color .3s}
+.top.sc{border-bottom-color:var(--line)}
+.ib{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:transparent;display:grid;place-items:center;cursor:pointer}
+.top b{font-size:15px;font-weight:700;letter-spacing:-.01em}
+/* 세 가지 탭 */
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);margin:6px 16px 0;border-bottom:1px solid var(--line)}
+.tabs button{height:46px;border:0;background:none;font-size:13.5px;color:var(--ink-3);cursor:pointer;position:relative;padding:0 2px}
+.tabs button.on{color:var(--ink);font-weight:700}
+.tabs button.on::after{content:"";position:absolute;left:18%;right:18%;bottom:-1px;height:2px;background:var(--ink)}
+/* 머리 */
+.hero{padding:26px 20px 4px}
+.hero small{display:block;font-size:11.5px;letter-spacing:.16em;color:var(--ink-3);font-weight:700}
+.hero h1{margin:8px 0 0;font-family:var(--serif);font-weight:900;font-size:29px;line-height:1.25;letter-spacing:-.02em}
+.hero p{margin:10px 0 0;font-size:14px;line-height:1.65;color:var(--ink-2)}
+/* 내 생일 줄 */
+.meline{display:flex;align-items:center;gap:10px;margin:18px 16px 0;padding:12px 4px 12px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.meline span{font-size:12px;color:var(--ink-3);flex:none}
+.meline b{flex:1;font-size:14px;font-weight:600;min-width:0}
+.meline button{flex:none;height:44px;padding:0 12px;border:0;background:none;font-size:13px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+/* 무대 */
+.stage{position:relative;margin:18px 16px 0}
+.hint{margin:16px 0 0;text-align:center;font-size:13px;color:var(--ink-2);line-height:1.6}
+.hint em{font-style:normal;color:var(--ink);font-weight:700}
+/* 생일 폼 */
+.form{display:grid;gap:10px;padding:18px 16px 16px;background:rgba(255,252,246,.6);border:1px solid var(--line);box-shadow:0 1px 0 rgba(255,255,255,.7) inset}
+.form .lab{font-size:12.5px;font-weight:700;color:var(--ink-2);letter-spacing:.02em}
+.form .lab+.lab{margin-top:6px}
+.g3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:6px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.form select{width:100%;height:48px;border:1px solid var(--line-2);background:#fbf8f2 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%236b5d4f' stroke-width='1.4'/%3E%3C/svg%3E") right 10px center no-repeat;color:var(--ink);font-size:15px;padding:0 24px 0 10px;font-family:inherit;appearance:none;-webkit-appearance:none}
+.seg{display:flex;border:1px solid var(--line-2)}
+.seg button{flex:1;height:46px;border:0;background:#fbf8f2;font-size:14px;cursor:pointer;color:var(--ink-2)}
+.seg button+button{border-left:1px solid var(--line-2)}
+.seg button.on{background:var(--ink);color:var(--paper);font-weight:700}
+.sep{height:1px;background:var(--line);margin:8px 0 4px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:52px;border:0;background:var(--ink);color:var(--paper);font-size:15.5px;font-weight:700;cursor:pointer;letter-spacing:-.01em}
+.btn:active{transform:translateY(1px)}
+.btn.line{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn svg{width:18px;height:18px;flex:none}
+.acts{display:grid;grid-template-columns:1.4fr 1fr;gap:8px;margin:18px 16px 0}
+.cross{display:flex;align-items:center;gap:12px;margin:22px 16px 0;padding:14px 4px 14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:inherit;min-height:64px}
+.cross .cx{flex:1;min-width:0}
+.cross small{display:block;font-size:11.5px;color:var(--ink-3);letter-spacing:.04em}
+.cross b{display:block;margin-top:3px;font-size:14.5px;font-weight:700}
+.cross em{display:block;margin-top:2px;font-style:normal;font-size:12.5px;color:var(--ink-2)}
+.cross svg{flex:none;color:var(--ink-3)}
+.foot{margin:30px 20px 0;font-size:11.5px;line-height:1.7;color:var(--ink-3);text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 28px);transform:translateX(-50%);z-index:300;background:rgba(42,33,25,.92);color:var(--paper);font-size:13.5px;padding:11px 16px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+.obs{position:fixed!important;left:0!important;right:0!important;margin:0 auto;max-width:430px}
+.fade-in{animation:fi .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes fi{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---------- 1. 연애 체질: 봉투와 밀랍 도장 ---------- */
+.env{position:relative;width:100%;aspect-ratio:1.42;perspective:900px;
+  background:linear-gradient(160deg,#f3eadb 0,#eadcc5 100%);box-shadow:0 26px 40px -26px rgba(42,33,25,.55),0 2px 0 rgba(255,255,255,.6) inset;transition:opacity .5s,transform .7s cubic-bezier(.3,.6,.2,1)}
+.env .fold{position:absolute;inset:0;width:100%;height:100%}
+.env .flap{position:absolute;left:0;top:0;width:100%;height:62%;transform-origin:50% 0;transition:transform .8s cubic-bezier(.5,0,.2,1);z-index:3;filter:drop-shadow(0 6px 6px rgba(42,33,25,.14))}
+.env .peek{position:absolute;left:9%;right:9%;top:16%;height:70%;background:var(--paper);border:1px solid var(--line);z-index:2;transform:translateY(0);transition:transform .9s cubic-bezier(.2,.7,.2,1) .35s;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:18px;text-align:center}
+.env .peek small{font-size:10.5px;letter-spacing:.2em;color:var(--ink-3);font-weight:700}
+.env .peek b{margin-top:6px;font-family:var(--serif);font-size:19px;font-weight:900}
+.env .front{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+.env .peek{z-index:1}
+.env.open .flap{transform:rotateX(178deg);opacity:0;transition:transform .8s cubic-bezier(.5,0,.2,1),opacity .35s ease .4s}
+.env.open .peek{transform:translateY(-62%)}
+.env.open .seal{opacity:0;transition:opacity .3s .5s}
+.seal{position:absolute;left:50%;top:62%;width:176px;height:176px;margin:-88px 0 0 -88px;z-index:5;border:0;padding:0;background:none;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;outline:none}
+.seal svg{width:100%;height:100%;overflow:visible;display:block}
+.seal .art{transform-origin:100px 100px;transition:transform .25s}
+.seal.hold .art{transform:scale(.965)}
+.seal .glow{opacity:var(--heat,0);transition:opacity .2s}
+.seal .ring{transition:stroke-dashoffset .05s linear}
+.seal .halfL,.seal .halfR{transform-origin:100px 100px;opacity:0}
+.seal.crack .whole{opacity:0}
+.seal.crack .halfL{animation:hL .9s cubic-bezier(.4,.05,.4,1) .2s both}
+.seal.crack .halfR{animation:hR .9s cubic-bezier(.4,.05,.4,1) .2s both}
+@keyframes hL{0%{opacity:1;transform:none}35%{opacity:1;transform:translate(-5px,2px) rotate(-4deg)}100%{opacity:0;transform:translate(-22px,40px) rotate(-18deg)}}
+@keyframes hR{0%{opacity:1;transform:none}35%{opacity:1;transform:translate(5px,3px) rotate(4deg)}100%{opacity:0;transform:translate(22px,44px) rotate(15deg)}}
+.seal .shd{transition:opacity .5s .3s}
+.seal.crack .shd,.seal.crack .glow{opacity:0!important}
+.seal .crk{stroke-dasharray:190;stroke-dashoffset:190;transition:stroke-dashoffset .22s ease-out}
+.seal.crack .crk{stroke-dashoffset:0;opacity:0;transition:stroke-dashoffset .22s ease-out,opacity .4s ease .55s}
+.seal.crack .ring,.seal.crack .track{opacity:0;transition:opacity .3s}
+.seal:focus-visible .track{stroke:var(--ink)}
+
+/* 체질 카드 */
+.tcard{position:relative;margin:0;padding:26px 22px 22px;background:linear-gradient(170deg,#fbf7ef 0,#f3eadb 100%);border:1px solid var(--line);box-shadow:0 30px 44px -30px rgba(42,33,25,.5),0 1px 0 rgba(255,255,255,.8) inset}
+.tcard::before{content:"";position:absolute;inset:7px;border:1px solid var(--line);pointer-events:none}
+.tcard .kk{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;letter-spacing:.14em;font-weight:700;color:var(--ink-3)}
+.tcard .kk i{font-style:normal;color:var(--ac);letter-spacing:.06em}
+.tcard .emb{display:block;width:112px;height:112px;margin:20px auto 0;border-radius:50%;background:radial-gradient(circle at 38% 32%,#fffdf8,#efe5d4 70%);box-shadow:0 10px 18px -12px rgba(42,33,25,.45),0 0 0 1px var(--line);padding:16px}
+.tcard .emb svg{width:100%;height:100%;display:block}
+.tcard h2{margin:18px 0 0;text-align:center;font-family:var(--serif);font-weight:900;font-size:27px;line-height:1.3;letter-spacing:-.02em}
+.tcard .gyeol{margin:8px 0 0;text-align:center;font-size:13px;color:var(--ac);font-weight:700}
+.tcard .lead{margin:16px 0 0;padding:16px 0 0;border-top:1px solid var(--line);font-family:var(--serif);font-size:16px;line-height:1.75;font-weight:600;text-align:center}
+.tcard dl{margin:18px 0 0;display:grid;gap:14px}
+.tcard dt{font-size:12px;font-weight:700;color:var(--ink-3);letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+.tcard dt::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ac);flex:none}
+.tcard dd{margin:5px 0 0;font-size:14.5px;line-height:1.7}
+.tcard .ref{margin:18px 0 0;padding:14px 14px;background:rgba(42,33,25,.035);font-size:13.5px;line-height:1.7;color:var(--ink-2)}
+.basis{margin:14px 0 0;font-size:11.5px;line-height:1.6;color:var(--ink-3)}
+.rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(36px) rotate(-1.2deg)}to{opacity:1;transform:none}}
+
+/* ---------- 2. 궁합: 실 두 가닥 ---------- */
+.loom{position:relative;width:100%;aspect-ratio:1.36;background:linear-gradient(175deg,#f8f2e8,#eee3d1);border:1px solid var(--line);overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
+.loom svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.loom .who{position:absolute;top:12px;font-size:11.5px;font-weight:700;color:var(--ink-2);letter-spacing:.06em}
+.loom .who.l{left:14px}.loom .who.r{right:14px;text-align:right}
+.loom .who small{display:block;font-weight:500;color:var(--ink-3);letter-spacing:0;margin-top:2px}
+.loom .h{cursor:grab}
+.loom.tied .h{pointer-events:none}
+#tgt{transition:opacity .3s}.loom.tied #tgt{opacity:0}
+.knot{opacity:0;transform-origin:50% 50%;transform-box:fill-box}
+.loom.tied .knot{opacity:1;animation:knot .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes knot{0%{opacity:0;transform:scale(.4) rotate(-30deg)}60%{opacity:1;transform:scale(1.12) rotate(4deg)}100%{transform:none}}
+.knot path,.knot ellipse{stroke-dasharray:140;stroke-dashoffset:140}
+.loom.tied .knot path,.loom.tied .knot ellipse{animation:draw .7s ease-out .1s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.mcard{position:relative;padding:26px 20px 20px;background:linear-gradient(170deg,#fbf7ef,#f3eadb);border:1px solid var(--line);box-shadow:0 30px 44px -30px rgba(42,33,25,.5)}
+.mcard::before{content:"";position:absolute;inset:7px;border:1px solid var(--line);pointer-events:none}
+.mcard .kk{font-size:11.5px;letter-spacing:.14em;font-weight:700;color:var(--ink-3);text-align:center}
+.mcard .ksvg{display:block;width:150px;height:72px;margin:14px auto 0}
+.mcard h2{margin:12px 0 0;text-align:center;font-family:var(--serif);font-weight:900;font-size:24px;line-height:1.4;letter-spacing:-.02em}
+.band{display:flex;flex-direction:column;align-items:center;margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--line)}
+.band .ks{display:flex;gap:10px}
+.band .ks i{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--wax);background:transparent}
+.band .ks i.on{background:radial-gradient(circle at 35% 30%,#d4574a,#b8352a 60%,#8e2219);box-shadow:0 2px 4px rgba(142,34,25,.35)}
+.band b{margin-top:8px;font-size:17px;font-weight:800;color:var(--wax);letter-spacing:.02em}
+.band small{margin-top:4px;font-size:12.5px;color:var(--ink-2)}
+.notes{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:0}
+.notes li{display:grid;grid-template-columns:26px 1fr;gap:8px;padding:12px 0;border-top:1px solid var(--line)}
+.notes li>i{font-style:normal;font-family:var(--serif);font-weight:900;font-size:15px;color:var(--ink-3);line-height:1.5}
+.notes b{display:block;font-size:12.5px;color:var(--ink-2);font-weight:700}
+.notes p{margin:3px 0 0;font-size:14.5px;line-height:1.65}
+.pinfo{display:grid;gap:10px}
+
+/* ---------- 3. 이번 주: 햇빛 띠 ---------- */
+.sill{position:relative;padding:12px;background:linear-gradient(180deg,#efe5d4,#e8dcc6);border:1px solid var(--line);box-shadow:0 22px 36px -26px rgba(42,33,25,.5)}
+.strip{position:relative;display:grid;grid-template-columns:repeat(7,1fr);background:#efe6d6;border:1px solid var(--line);overflow:hidden;isolation:isolate}
+.strip .c{position:relative;height:118px;display:flex;flex-direction:column;align-items:center;padding-top:12px;border-left:1px solid var(--line);transition:background .8s,opacity .8s;z-index:4}
+.strip .c:first-child{border-left:0}
+.strip .c small{font-size:11px;color:var(--ink-3);font-weight:700}
+.strip.done .c.best small{color:var(--gold)}
+.strip .c b{margin-top:6px;font-family:var(--serif);font-size:21px;font-weight:900;line-height:1}
+.strip .c em{margin-top:5px;font-style:normal;font-size:10px;color:var(--ink-3);height:12px}
+.strip .c .bar{position:absolute;left:50%;bottom:10px;width:3px;margin-left:-1.5px;height:0;background:var(--ink-2);opacity:.5;transition:height .9s cubic-bezier(.2,.7,.2,1)}
+.strip.done .c{opacity:.6}
+.strip.done .c.best{opacity:1}
+.strip.done .c.best b{color:var(--ink)}
+.strip.done .c.best .bar{background:var(--gold);opacity:1}
+.strip .dim{position:absolute;inset:0;background:rgba(42,33,25,.16);z-index:1;transition:opacity 1.2s;pointer-events:none}
+.strip.lit .dim{opacity:.55}
+.strip.done .dim{opacity:.7}
+.sun{position:absolute;top:-20%;bottom:-20%;width:34%;left:-40%;z-index:2;pointer-events:none;mix-blend-mode:screen;transform:skewX(-14deg);opacity:0;
+  background:linear-gradient(90deg,rgba(255,214,150,0),rgba(255,226,170,.85) 30%,rgba(255,236,196,.95) 50%,rgba(255,226,170,.85) 70%,rgba(255,214,150,0))}
+.sun::before,.sun::after{content:"";position:absolute;background:rgba(120,84,40,.35);filter:blur(1.5px)}
+.sun::before{top:0;bottom:0;left:50%;width:4px;margin-left:-2px}
+.sun::after{left:0;right:0;top:44%;height:4px}
+.strip.sweep .sun{animation:sweep 2.2s cubic-bezier(.45,.05,.35,1) forwards}
+@keyframes sweep{0%{left:-40%;opacity:0}12%{opacity:1}85%{opacity:1}100%{left:110%;opacity:0}}
+.pool{position:absolute;top:-6%;bottom:-6%;z-index:2;pointer-events:none;mix-blend-mode:screen;opacity:0;transform:skewX(-10deg) scaleX(.6);transition:opacity 1.1s ease,transform 1.3s cubic-bezier(.2,.7,.2,1);
+  background:radial-gradient(60% 55% at 50% 45%,rgba(255,236,196,.95),rgba(255,222,160,.6) 55%,rgba(255,214,150,0) 100%)}
+.pool::before,.pool::after{content:"";position:absolute;background:rgba(120,84,40,.22);filter:blur(2px)}
+.pool::before{top:8%;bottom:8%;left:50%;width:3px}
+.pool::after{left:12%;right:12%;top:46%;height:3px}
+.strip.done .pool{opacity:1;transform:skewX(-10deg) scaleX(1)}
+.shade{position:absolute;inset:12px;z-index:6;background:
+  repeating-linear-gradient(90deg,rgba(42,33,25,.045) 0 1px,rgba(42,33,25,0) 1px 6px),
+  linear-gradient(180deg,#e2d3bb,#d9c8ab);box-shadow:0 8px 14px -6px rgba(42,33,25,.35);display:flex;align-items:center;justify-content:flex-start;padding-left:10px;touch-action:none;-webkit-user-select:none;user-select:none;cursor:grab;transition:transform .55s cubic-bezier(.3,.6,.2,1),opacity .4s}
+.shade.drag{transition:none}
+.shade.gone{transform:translateX(104%)!important;opacity:0}
+.shade .pull{flex:none;width:52px;height:52px;border-radius:50%;border:1.5px solid rgba(42,33,25,.5);display:grid;place-items:center;background:radial-gradient(circle at 40% 35%,#f6efe2,#e3d4bb);box-shadow:0 3px 6px rgba(42,33,25,.22)}
+.shade .pull i{width:14px;height:14px;border-radius:50%;background:var(--ink-2)}
+.shade span{margin-left:12px;font-size:13px;color:var(--ink-2);font-weight:700;letter-spacing:.02em}
+.shade svg{margin-left:6px;color:var(--ink-2)}
+.days{display:grid;gap:10px}
+.day{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:18px 16px;background:linear-gradient(170deg,#fbf7ef,#f3eadb);border:1px solid var(--line);box-shadow:0 20px 30px -24px rgba(42,33,25,.45);position:relative;overflow:hidden}
+.day::after{content:"";position:absolute;right:-30px;top:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(255,226,170,.55),rgba(255,226,170,0) 70%);pointer-events:none}
+.day .dd{border-right:1px solid var(--line);padding-right:10px}
+.day .dd small{display:block;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.08em}
+.day .dd b{display:block;margin-top:4px;font-family:var(--serif);font-size:26px;font-weight:900;line-height:1.1}
+.day .dd em{display:block;margin-top:4px;font-style:normal;font-size:12.5px;color:var(--ink-2)}
+.day .tt{position:relative;z-index:1}
+.day .tt small{display:block;font-size:11.5px;color:var(--ink-3)}
+.day .tt b{display:block;margin-top:2px;font-size:17px;font-weight:800}
+.day .tt p{margin:8px 0 0;font-size:14px;line-height:1.65}
+.day .tt .basis{margin-top:8px}
+.rest{margin:12px 0 0;padding:12px 14px;border:1px solid var(--line);font-size:13px;line-height:1.65;color:var(--ink-2);background:rgba(255,252,246,.5)}
+.rest b{color:var(--ink)}
+.whead{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 12px}
+.whead b{font-family:var(--serif);font-size:19px;font-weight:900}
+.whead small{font-size:12px;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){.strip.sweep .sun{animation-duration:.01s}.rise,.fade-in{animation:none}}
+</style>
+</head>
+<body>
+<div class="ph" id="ph">
+  <div class="top" id="top"><button class="ib" id="back" type="button" aria-label="뒤로"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>무료 연애 미니</b><span style="width:44px"></span></div>
+  <nav class="tabs" id="tabs"><button type="button" data-t="type">연애 체질</button><button type="button" data-t="match">우리 궁합</button><button type="button" data-t="week">연락하기 좋은 날</button></nav>
+  <header class="hero"><small id="hK"></small><h1 id="hT"></h1><p id="hP"></p></header>
+  <div id="meWrap"></div>
+  <section class="stage" id="stage"></section>
+  <div id="after"></div>
+  <p class="foot">풀이는 만세력 계산을 바탕으로 하며, 사람의 마음이나 행동을 단정하지 않아요.</p>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const toast=t=>{ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2200); };
+const vib=p=>{ try{ if(navigator.vibrate) navigator.vibrate(p); }catch(e){} };
+$('back').onclick=()=>{ if(history.length>1) history.back(); else location.href='love.html'; };
+addEventListener('scroll',()=>$('top').classList.toggle('sc',scrollY>10),{passive:true});
+
+/* ---------- 공통: 사주 · 생일 ---------- */
+const S=window.Saju, GK=S.GAN_K, JK=S.JI_K, EK=S.EL_K, stEl=S.stEl;
+const loadMe=()=>{ try{ return JSON.parse(sessionStorage.getItem('me')||localStorage.getItem('obMe')||'null'); }catch(e){ return null; } };
+const saveMe=o=>{ try{ const old=loadMe()||{}; const n=Object.assign(old,o); sessionStorage.setItem('me',JSON.stringify(n)); localStorage.setItem('obMe',JSON.stringify(n)); }catch(e){} };
+const loadThem=()=>{ try{ return JSON.parse(sessionStorage.getItem('lmThem')||'null'); }catch(e){ return null; } };
+const saveThem=o=>{ try{ sessionStorage.setItem('lmThem',JSON.stringify(o)); }catch(e){} };
+const PEACH={8:9,0:9,4:9, 2:3,6:3,10:3, 5:6,9:6,1:6, 11:0,3:0,7:0}; /* 일지 · 연지 삼합 → 도화 */
+const LIUHE=[1,0,11,10,9,8,7,6,5,4,3,2];
+const SANHE=[[8,0,4],[2,6,10],[5,9,1],[11,3,7]];
+const YUANJIN=[7,6,9,8,11,10,1,0,3,2,5,4];
+const sanhe=(a,b)=>a!==b&&SANHE.some(g=>g.includes(a)&&g.includes(b));
+const chung=(a,b)=>Math.abs(a-b)===6;
+const ganHap=(a,b)=>Math.abs(a-b)===5;
+const HOURS=['23:30~01:29','01:30~03:29','03:30~05:29','05:30~07:29','07:30~09:29','09:30~11:29','11:30~13:29','13:30~15:29','15:30~17:29','17:30~19:29','19:30~21:29','21:30~23:29'];
+const HNAME=['자시','축시','인시','묘시','진시','사시','오시','미시','신시','유시','술시','해시'];
+const ELW=['나무','불','흙','쇠','물'];
+const NUMW=['없음','하나','둘','셋','넷','다섯','여섯','일곱'];
+const WD=['일','월','화','수','목','금','토'];
+function solarOf(o){ if(o.cal==='l'){ const s=S.lunarToSolar(+o.y,+o.m,+o.d,!!o.leap); if(s) return s; } return {y:+o.y,m:+o.m,d:+o.d}; }
+function pillarsOf(o){ const s=solarOf(o); return S.pillars(s.y,s.m,s.d,o.h==null||o.h===''?null:+o.h); }
+const dateLabel=o=>`${o.cal==='l'?'음력 ':''}${o.y}년 ${o.m}월 ${o.d}일${o.g?' · '+(o.g==='m'?'남자':'여자'):''}`;
+const gzK=p=>GK[p[0]]+JK[p[1]];
+const josa=(w,a,b)=>{ const c=w.charCodeAt(w.length-1)-0xAC00; return w+((c>=0&&c%28>0)?a:b); };
+
+/* 생일 폼: pre = id 앞머리, o = 미리 채울 값, opt = {g:성별, h:태어난 시} */
+function formFields(pre,o,opt){ o=o||{}; const yNow=new Date().getFullYear(), ys=[]; for(let y=yNow-19;y>=1950;y--) ys.push(y);
+  const dy=+o.y||opt.dy||1996;
+  return `<div class="seg" id="${pre}Cal"><button type="button" data-v="s" class="${o.cal!=='l'?'on':''}">양력</button><button type="button" data-v="l" class="${o.cal==='l'?'on':''}">음력</button></div>
+  <div class="g3"><select id="${pre}Y" aria-label="태어난 해">${ys.map(y=>`<option value="${y}" ${y===dy?'selected':''}>${y}년</option>`).join('')}</select><select id="${pre}M" aria-label="태어난 달">${Array.from({length:12},(_,i)=>`<option value="${i+1}" ${(+o.m||opt.dm||3)===i+1?'selected':''}>${i+1}월</option>`).join('')}</select><select id="${pre}D" aria-label="태어난 날"></select></div>
+  ${opt.g||opt.h?`<div class="${opt.g&&opt.h?'g2':''}">${opt.g?`<div class="seg" id="${pre}G"><button type="button" data-v="f" class="${o.g!=='m'?'on':''}">여자</button><button type="button" data-v="m" class="${o.g==='m'?'on':''}">남자</button></div>`:''}${opt.h?`<select id="${pre}H" aria-label="태어난 시"><option value="">태어난 시 모름</option>${HNAME.map((n,i)=>`<option value="${i}" ${o.h!=null&&o.h!==''&&+o.h===i?'selected':''}>${n} ${HOURS[i]}</option>`).join('')}</select>`:''}</div>`:''}`; }
+function bindForm(pre,o){ o=o||{};
+  const fillD=()=>{ const y=+$(pre+'Y').value, m=+$(pre+'M').value, n=new Date(y,m,0).getDate(), c=+$(pre+'D').value||+o.d||14; $(pre+'D').innerHTML=Array.from({length:n},(_,i)=>`<option value="${i+1}" ${Math.min(c,n)===i+1?'selected':''}>${i+1}일</option>`).join(''); };
+  fillD(); $(pre+'Y').onchange=$(pre+'M').onchange=fillD;
+  [pre+'Cal',pre+'G'].forEach(id=>{ const e=$(id); if(e) e.querySelectorAll('button').forEach(b=>b.onclick=()=>e.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))); }); }
+function readForm(pre){ const o={cal:$(pre+'Cal').querySelector('.on').dataset.v,y:+$(pre+'Y').value,m:+$(pre+'M').value,d:+$(pre+'D').value};
+  if($(pre+'G')) o.g=$(pre+'G').querySelector('.on').dataset.v;
+  if($(pre+'H')) o.h=$(pre+'H').value===''?null:+$(pre+'H').value;
+  if(o.cal==='l'&&!S.lunarToSolar(o.y,o.m,o.d,false)){ toast('없는 음력 날짜예요. 날짜를 다시 골라 주세요'); return null; }
+  return o; }
+
+/* 내 생일 줄(있을 때) */
+function meLine(){ const me=loadMe(), w=$('meWrap');
+  if(!me||!me.y){ w.innerHTML=''; return; }
+  w.innerHTML=`<div class="meline"><span>내 생일</span><b>${dateLabel(me)}</b><button type="button" id="meEd">바꾸기</button></div>`;
+  $('meEd').onclick=()=>{ w.innerHTML=`<div class="stage"><div class="form"><div class="lab">내 생일</div>${formFields('e',me,{g:true,h:true})}<button class="btn" id="eGo" type="button">이 생일로 다시 보기</button></div></div>`; bindForm('e',me);
+    $('eGo').onclick=()=>{ const o=readForm('e'); if(!o) return; saveMe(o); meLine(); render(); }; }; }
+
+/* ---------- 모드 ---------- */
+const HERO={
+ type:['무료 연애 미니 · 하나','연애 체질 카드','도장을 꾹 눌러 봉인을 풀면, 내 일간으로 읽은 연애 체질이 나와요.'],
+ match:['무료 연애 미니 · 둘','우리 궁합 한 줄','두 사람의 생일로 실 두 가닥을 꺼내 직접 묶어 봐요. 매듭이 어떻게 지어지는지 알려 드려요.'],
+ week:['무료 연애 미니 · 셋','이번 주 연락하기 좋은 날','가림막을 걷으면 이번 주 햇빛이 오래 머무는 이틀을 찾아 드려요.']};
+const TITLE={type:'연애 체질 카드',match:'우리 궁합 한 줄',week:'이번 주 연락하기 좋은 날'};
+let MODE=(new URLSearchParams(location.search).get('t')||'type'); if(!HERO[MODE]) MODE='type';
+$('tabs').onclick=e=>{ const b=e.target.closest('[data-t]'); if(!b||b.dataset.t===MODE) return; MODE=b.dataset.t;
+  try{ const u=new URL(location.href); u.searchParams.set('t',MODE); history.replaceState(null,'',u); }catch(_){}
+  render(); scrollTo({top:0}); };
+function render(){ const H=HERO[MODE]; $('hK').textContent=H[0]; $('hT').textContent=H[1]; $('hP').textContent=H[2];
+  document.title=`${TITLE[MODE]} · 오방도감`;
+  $('tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.t===MODE));
+  $('after').innerHTML=''; meLine();
+  ({type:Type,match:Match,week:Week})[MODE].start(); }
+
+/* 생일이 없을 때 무대에 폼 */
+function askMe(btnText,next){ $('stage').innerHTML=`<div class="form fade-in"><div class="lab">내 생일만 알려 주세요</div>${formFields('k',{},{g:true,h:true})}<button class="btn" id="kGo" type="button">${btnText}</button></div>`;
+  bindForm('k',{}); $('kGo').onclick=()=>{ const o=readForm('k'); if(!o) return; saveMe(o); meLine(); vib(6); next(); }; }
+
+/* 결과 아래 공통: 공유 · 다시 보기 · 관련 상품 */
+const ICON_SH='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M7 8l5-5 5 5"/><path d="M5 13v7h14v-7"/></svg>';
+const ICON_RE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg>';
+const ARR='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>';
+function afterBlock(cross,onShare,onRe,pre){ $('after').innerHTML=(pre||'')+`<div class="acts fade-in"><button class="btn" id="aSh" type="button">${ICON_SH}카드 공유하기</button><button class="btn line" id="aRe" type="button">${ICON_RE}다시 보기</button></div>
+  <a class="cross fade-in" href="${cross.u}"><span class="cx"><small>${cross.k}</small><b>${cross.n}</b><em>${cross.d}</em></span>${ARR}</a>`;
+  $('aSh').onclick=onShare; $('aRe').onclick=()=>{ vib(6); onRe(); scrollTo({top:Math.max(0,$('stage').offsetTop-90),behavior:'smooth'}); }; }
+async function share(build,name,title,text){
+  if(!window.ObShare){ toast('공유는 잠시 뒤에 다시 눌러 주세요'); return; }
+  toast('공유 카드를 만드는 중이에요');
+  try{ const blob=await build(); ObShare.sheet({blob,name,title,text,head:'카드 공유하기',note:'링크로 들어온 친구는 자기 생일로 바로 볼 수 있어요. 내 생일은 보내지지 않아요.'}); }
+  catch(e){ toast('카드를 만들지 못했어요. 다시 눌러 주세요'); } }
+
+/* ---------- 공유 카드(1080×1350) 공통 ---------- */
+const CW=1080, CH=1350;
+async function fontsReady(){ try{ await Promise.all(['900 80px "Noto Serif KR"','600 40px "Noto Serif KR"','700 32px "Noto Sans KR"','500 34px "Noto Sans KR"'].map(f=>document.fonts.load(f))); }catch(e){} }
+const SERIF='"Noto Serif KR","Noto Serif CJK KR",serif', SANS='"Noto Sans KR","Noto Sans CJK KR",sans-serif';
+function paper(x){ x.fillStyle='#f6f0e6'; x.fillRect(0,0,CW,CH);
+  let g=x.createLinearGradient(0,0,CW*.7,CH*.6); g.addColorStop(0,'rgba(255,252,245,.95)'); g.addColorStop(1,'rgba(255,252,245,0)'); x.fillStyle=g; x.fillRect(0,0,CW,CH);
+  g=x.createRadialGradient(CW,CH,0,CW,CH,CH*.9); g.addColorStop(0,'rgba(42,33,25,.08)'); g.addColorStop(1,'rgba(42,33,25,0)'); x.fillStyle=g; x.fillRect(0,0,CW,CH);
+  x.strokeStyle='rgba(42,33,25,.22)'; x.lineWidth=2; x.strokeRect(44,44,CW-88,CH-88); x.strokeStyle='rgba(42,33,25,.12)'; x.strokeRect(58,58,CW-116,CH-116); }
+function spaced(x,t,cx,y,sp){ const w=[...t].reduce((a,c)=>a+x.measureText(c).width+sp,0)-sp; let px=cx-w/2; x.textAlign='left'; [...t].forEach(c=>{ x.fillText(c,px,y); px+=x.measureText(c).width+sp; }); x.textAlign='center'; }
+function wrap(x,t,w,max){ const out=[]; let line=''; for(const wd of String(t||'').split(' ')){ const n=line?line+' '+wd:wd; if(x.measureText(n).width>w&&line){ out.push(line); line=wd; if(out.length>=max) return out; } else line=n; } if(line&&out.length<max) out.push(line); return out; }
+function head(x,kicker){ x.textBaseline='alphabetic'; x.textAlign='center'; x.fillStyle='#9a8b7a'; x.font=`700 26px ${SANS}`; spaced(x,'오방도감 · 무료 연애 미니',CW/2,128,6);
+  x.fillStyle='#6b5d4f'; x.font=`700 32px ${SANS}`; x.fillText(kicker,CW/2,180); }
+function foot(x,basis){ x.textAlign='center'; x.fillStyle='rgba(42,33,25,.18)'; x.fillRect(120,CH-200,CW-240,1.5);
+  x.fillStyle='#9a8b7a'; x.font=`500 24px ${SANS}`; wrap(x,basis,CW-240,2).forEach((l,i)=>x.fillText(l,CW/2,CH-156+i*34));
+  x.fillStyle='#6b5d4f'; x.font=`700 24px ${SANS}`; x.fillText((location.host||'obangsaju.netlify.app')+' · 생일만 넣으면 바로',CW/2,CH-76); }
+function svgImg(svg){ return new Promise((r,j)=>{ const i=new Image(); i.onload=()=>r(i); i.onerror=j; i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg); }); }
+const toBlob=c=>new Promise(r=>c.toBlob(r,'image/png'));
+
+/* =========================================================
+   1. 연애 체질 카드
+   ========================================================= */
+const ELC=['#7d9a7a','#b8352a','#c8955a','#b8862f','#5b6f78'];
+const TYPES=[
+ {n:['곧게 마음을 세우는','큰나무형'],lead:'한번 마음을 정하면 쉽게 옮기지 않아요. 좋아하는 사람에게 든든한 그늘이 되어 주고 싶어 해요.',
+  love:'말보다 약속으로 마음을 보여 줘요. 표현은 투박해도 방향은 늘 그 사람 쪽이에요.',need:'내 계획을 존중하면서도, 가끔은 쉬어 가자고 말해 주는 사람.',tire:'진심을 시험받을 때. 정해 둔 일이 이유 없이 자꾸 뒤집힐 때.',suit:4,suitT:'차분히 들어 주고 기다려 주는 사람 곁에서 뿌리를 깊게 내려요.'},
+ {n:['곁을 감아 오르는','덩굴형'],lead:'상대의 결에 맞춰 부드럽게 다가가요. 작은 연락 하나에도 마음이 자라는 사람이에요.',
+  love:'일상의 사소한 것을 나누며 가까워져요. 그 사람이 좋아하는 걸 기억해 두었다가 챙겨요.',need:'연락의 온도가 한결같은 사람. 기대어도 흔들리지 않는 사람.',tire:'답이 없어 마음을 짐작만 해야 할 때. 혼자 매달리는 기분이 들 때.',suit:1,suitT:'밝게 웃어 주는 사람 곁에서, 햇빛 쪽으로 뻗는 덩굴처럼 잘 자라요.'},
+ {n:['먼저 다가가는','봄볕형'],lead:'좋으면 숨기지 못해요. 먼저 웃고, 먼저 연락하고, 먼저 마음을 꺼내 놓는 사람이에요.',
+  love:'같이 있는 시간을 환하게 만드는 데 진심이에요. 기념일과 작은 이벤트를 잘 챙겨요.',need:'내 표현을 부담스러워하지 않고, 고맙다는 말을 잘 돌려주는 사람.',tire:'마음을 줘도 반응이 없을 때. 밝은 모습만 기대받고 지친 날은 이해받지 못할 때.',suit:4,suitT:'내 빛을 차분히 비춰 주는 사람과 있을 때 더 맑고 오래 빛나요.'},
+ {n:['오래 켜 두는','등불형'],lead:'크게 드러내지 않아도 오래 마음을 켜 두는 사람이에요. 한번 정이 들면 깊어요.',
+  love:'그 사람의 기분과 컨디션을 먼저 살펴요. 조용히 챙기고, 그걸 알아봐 주길 바라요.',need:'작은 배려를 알아보고 고맙다고 말해 주는 사람. 생각이 곧은 사람.',tire:'정성을 당연하게 여길 때. 서운함을 꺼낼 틈 없이 지나갈 때.',suit:0,suitT:'꾸준하고 곧은 사람이 곁에 있으면 등불이 꺼지지 않고 오래 타요.'},
+ {n:['기대어 쉬게 하는','언덕형'],lead:'쉽게 흔들리지 않는 사람이에요. 곁에 있으면 상대가 마음을 놓게 되는 힘이 있어요.',
+  love:'화려한 말보다 늘 그 자리에 있어 주는 걸로 사랑해요. 한번 품은 사람은 오래 지켜요.',need:'내 느린 속도를 재촉하지 않는 사람. 먼저 웃으며 말을 걸어 주는 사람.',tire:'빨리 답을 정하라고 몰아붙일 때. 무던함을 무관심으로 오해받을 때.',suit:1,suitT:'따뜻하게 데워 주는 사람이 있으면 단단함이 편안함으로 바뀌어요.'},
+ {n:['살뜰히 가꾸는','텃밭형'],lead:'관계를 정성껏 가꾸는 사람이에요. 함께 먹고 걷고 쉬는 생활 속에서 사랑이 자라요.',
+  love:'끼니와 날씨, 내일 일정까지 챙겨요. 둘만의 작은 습관을 만들어 가는 걸 좋아해요.',need:'내 돌봄을 고맙게 받고, 가끔은 나를 먼저 챙겨 주는 사람.',tire:'챙기기만 하고 돌려받지 못할 때. 내 공간과 일상이 마구 흐트러질 때.',suit:4,suitT:'촉촉하게 마음을 적셔 주는 사람이 있으면 내가 가꾼 것에 꽃이 피어요.'},
+ {n:['말보다 행동인','무쇠형'],lead:'좋아하면 행동으로 보여 줘요. 옳고 그름이 분명해서 내 사람을 끝까지 지키는 편이에요.',
+  love:'필요한 걸 먼저 알아채고 해결해 줘요. 의리와 책임으로 관계를 단단하게 만들어요.',need:'직설을 상처로만 받지 않고, 다정하게 말하는 법을 알려 주는 사람.',tire:'돌려 말하며 속을 떠볼 때. 약속이 가볍게 깨질 때.',suit:1,suitT:'다정하게 다듬어 주는 사람 곁에서 무딘 말이 부드러워져요.'},
+ {n:['곱게 다듬는','은반지형'],lead:'섬세하고 기준이 분명해요. 아무나 곁에 두지 않지만, 고른 사람에게는 정성을 다해요.',
+  love:'말 한마디, 선물 하나도 고르고 골라요. 둘 사이의 분위기와 예의를 소중히 여겨요.',need:'말이 깨끗하고 약속이 정확한 사람. 내 예민함을 귀하게 봐 주는 사람.',tire:'무심한 말투에 마음이 긁힐 때. 내 취향과 기준이 가볍게 취급될 때.',suit:4,suitT:'맑게 씻어 주는 사람과 있을 때 본래의 빛이 살아나요.'},
+ {n:['넓게 품는','강물형'],lead:'마음이 넓고 흐름을 타는 사람이에요. 연애에서도 서로의 자유를 지켜 주는 게 중요해요.',
+  love:'함께 낯선 곳에 가고 새로운 걸 해 보며 가까워져요. 상대의 다른 점도 넉넉히 받아들여요.',need:'내 시간을 믿고 기다려 주면서, 돌아올 자리를 지켜 주는 사람.',tire:'하나하나 확인받아야 할 때. 관계가 고여서 같은 자리만 맴돌 때.',suit:2,suitT:'생활이 단단한 사람이 둑이 되어 주면 흐름이 흩어지지 않고 깊어져요.'},
+ {n:['조용히 스며드는','이슬비형'],lead:'소리 없이 다가와 마음에 스며드는 사람이에요. 상대의 감정을 누구보다 빨리 알아채요.',
+  love:'말하지 않은 마음까지 읽고 맞춰 줘요. 둘만 아는 대화와 분위기를 소중히 여겨요.',need:'내 감정을 가볍게 넘기지 않는 사람. 기준이 분명해서 나를 헷갈리게 하지 않는 사람.',tire:'분위기가 계속 차갑게 식어 있을 때. 내가 맞춰 주는 게 당연해질 때.',suit:3,suitT:'기준이 분명한 사람 곁에서 마음이 맑아지고 흐려지지 않아요.'}];
+/* 일간별 상징(선 그림) */
+function emblem(i,c){ const a=`fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"`, f=`fill="${c}" fill-opacity=".14" stroke="${c}" stroke-width="2.4" stroke-linejoin="round"`;
+  const E=[
+   `<path ${a} d="M60 104V58M60 78l-14-12M60 70l13-11"/><path ${f} d="M60 18c18 0 30 12 30 27 0 9-5 16-12 19H42c-7-3-12-10-12-19 0-15 12-27 30-27z"/><path ${a} d="M36 104h48"/>`,
+   `<path ${a} d="M60 106V16"/><path ${a} d="M60 100c-16-6-16-18 0-22s16-18 0-22-16-18 0-22"/><path ${f} d="M48 80c-8 0-12-5-12-9 6 0 11 3 12 9zM72 58c8 0 12-5 12-9-6 0-11 3-12 9zM48 36c-8 0-12-5-12-9 6 0 11 3 12 9z"/>`,
+   `<circle cx="60" cy="58" r="17" ${f}/><g ${a}>${[0,45,90,135,180,225,270,315].map(d=>{const r=d*Math.PI/180;return `<path d="M${(60+Math.cos(r)*26).toFixed(1)} ${(58+Math.sin(r)*26).toFixed(1)}L${(60+Math.cos(r)*34).toFixed(1)} ${(58+Math.sin(r)*34).toFixed(1)}"/>`;}).join('')}</g><path ${a} d="M22 100h76"/>`,
+   `<path ${a} d="M60 12v10M50 22h20"/><path ${f} d="M44 30h32l6 10v42l-6 10H44l-6-10V40z"/><path fill="${c}" d="M60 48c6 8 8 13 8 18a8 8 0 0 1-16 0c0-5 2-10 8-18z"/><path ${a} d="M52 102h16"/>`,
+   `<path ${f} d="M12 94c14-30 28-44 44-44 14 0 22 12 30 20 8 6 14 14 22 24z"/><path ${a} d="M40 70c6-4 10-6 16-6M10 102h100"/>`,
+   `<path ${f} d="M18 98L34 52h52l16 46z"/><path ${a} d="M38 98l8-46M60 98V52M82 98l-8-46"/><path ${a} d="M60 52V30M60 38c-6-6-12-6-14-2 4 4 10 4 14 2zM60 34c6-6 12-6 14-2-4 4-10 4-14 2z"/>`,
+   `<path ${a} d="M60 14v10"/><path ${f} d="M40 84V52c0-12 9-22 20-22s20 10 20 22v32l8 8H32z"/><circle cx="60" cy="100" r="5" ${f}/>`,
+   `<circle cx="60" cy="70" r="28" ${a}/><circle cx="60" cy="70" r="21" fill="none" stroke="${c}" stroke-opacity=".4" stroke-width="1.6"/><path ${f} d="M60 22l10 10-10 12-10-12z"/>`,
+   `<path ${a} d="M14 44c12-8 22-8 32 0s22 8 32 0 22-8 30 0M14 64c12-8 22-8 32 0s22 8 32 0 22-8 30 0M14 84c12-8 22-8 32 0s22 8 32 0 22-8 30 0"/>`,
+   `<g ${a}><path d="M30 20l-6 14M54 14l-6 14M78 20l-6 14M96 30l-6 14M42 44l-6 14M70 46l-6 14"/></g><path ${f} d="M60 64c10 13 14 21 14 28a14 14 0 0 1-28 0c0-7 4-15 14-28z"/>`];
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${E[i]}</svg>`; }
+function typeOf(me){ const P=pillarsOf(me), dm=P.d[0], g=me.g==='m'?'m':'f', want=g==='m'?2:3;
+  /* 도화: 일지 · 연지 기준(도화 사주와 같은 방식) */
+  const tg=PEACH[P.d[1]], tg2=PEACH[P.y[1]], POS={y:'연지',m:'월지',d:'일지',h:'시지'};
+  const spots=[['y',P.y],['m',P.m],['d',P.d],['h',P.h]].filter(([k,p])=>p&&((p[1]===tg&&k!=='d')||(p[1]===tg2&&k!=='y'))).map(([k])=>POS[k]);
+  /* 인연의 별: 여성 관성 · 남성 재성 — 일간을 뺀 천간 + 지지 본기 */
+  let n=0; [P.y,P.m,P.h].forEach(p=>{ if(p&&S.rel(dm,stEl(p[0]))===want) n++; }); [P.y,P.m,P.d,P.h].forEach(p=>{ if(p&&S.rel(dm,S.BR_EL[p[1]])===want) n++; });
+  const dh=spots.length>0;
+  const gy=dh&&n>=3?'사람이 먼저 찾아오는 결':dh?'첫눈에 남는 결':n>=3?'인연이 자주 오가는 결':n>=1?'천천히 깊어지는 결':'혼자서도 단단한 결';
+  const ref=(dh?'사주에 도화가 있어요. 처음 만난 자리에서 인상이 오래 남는 편이라 시작이 어렵지 않아요. ':'사주에 도화가 드러나 있지 않아요. 첫인상보다 시간이 쌓일수록 매력이 보이는 쪽이에요. ')
+    +(n===0?'인연의 별도 겉으로 드러나 있지 않아서, 연애를 서두르지 않고 내 생활이 자리 잡을 때 인연이 따라오는 편이에요.':n<=2?'인연의 별은 알맞게 있어서, 마음 가는 사람이 생기면 무리 없이 이어 가는 편이에요.':'인연의 별이 많아서 주변에 사람이 자주 머물러요. 고르는 눈을 기르는 게 숙제예요.');
+  const el=stEl(dm), basis=`근거 · 일간 ${GK[dm]}${EK[el]} · 도화 ${dh?'있음('+spots.join(', ')+')':'없음'} · ${g==='m'?'재성':'관성'} ${n}개${P.h?'':' · 태어난 시 모름'}`;
+  return {i:dm,T:TYPES[dm],el,dh,n,gy,ref,basis,c:ELC[el],star:n===0?'인연의 별 숨음':'인연의 별 '+NUMW[Math.min(n,7)]}; }
+
+/* 밀랍 도장 SVG */
+function waxPath(){ const pts=[], N=28; for(let k=0;k<N;k++){ const t=k/N*Math.PI*2, r=64+Math.sin(t*5+.6)*2.6+Math.sin(t*9+1.3)*1.8+Math.cos(t*3)*1.6; pts.push([100+Math.cos(t)*r,100+Math.sin(t)*r]); }
+  let d=''; for(let k=0;k<N;k++){ const p=pts[k], q=pts[(k+1)%N], m=[(p[0]+q[0])/2,(p[1]+q[1])/2]; if(k===0){ const z=pts[N-1]; d+=`M${((z[0]+p[0])/2).toFixed(1)} ${((z[1]+p[1])/2).toFixed(1)}`; } d+=`Q${p[0].toFixed(1)} ${p[1].toFixed(1)} ${m[0].toFixed(1)} ${m[1].toFixed(1)}`; } return d+'Z'; }
+const WAX=waxPath();
+function sealArt(id){ const pet=[0,72,144,216,288].map(d=>{ const r=(d-90)*Math.PI/180; return [100+Math.cos(r)*15,100+Math.sin(r)*15]; });
+  return `<path d="${WAX}" fill="url(#${id}w)"/>
+   <circle cx="100" cy="100" r="46" fill="url(#${id}i)"/>
+   <circle cx="100" cy="100" r="46" fill="none" stroke="#7e1d15" stroke-opacity=".55" stroke-width="2"/>
+   <circle cx="100" cy="100" r="40" fill="none" stroke="#e0806f" stroke-opacity=".45" stroke-width="1.2" stroke-dasharray="2 4"/>
+   <g transform="translate(1.2 1.6)" fill="#7e1d15" fill-opacity=".55">${pet.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="10"/>`).join('')}<circle cx="100" cy="100" r="6"/></g>
+   <g fill="#c94a3c">${pet.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="10"/>`).join('')}</g>
+   <circle cx="100" cy="100" r="6" fill="#e9b26a"/>
+   <g fill="none" stroke="#f0a08f" stroke-opacity=".55" stroke-width="1.2">${pet.map(p=>`<path d="M${(p[0]-7).toFixed(1)} ${(p[1]-3).toFixed(1)}a8 8 0 0 1 6-6"/>`).join('')}</g>
+   <ellipse cx="78" cy="70" rx="16" ry="7" fill="#fff" fill-opacity=".16" transform="rotate(-32 78 70)"/>`; }
+function sealSVG(){ const id='sw', crack='100,30 93,56 106,74 95,98 108,120 97,142 104,170';
+  return `<svg viewBox="0 0 200 200" aria-hidden="true"><defs>
+    <radialGradient id="${id}w" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#d65a4a"/><stop offset=".55" stop-color="#b8352a"/><stop offset="1" stop-color="#7f1e16"/></radialGradient>
+    <radialGradient id="${id}i" cx="62%" cy="66%" r="70%"><stop offset="0" stop-color="#c2463a"/><stop offset=".7" stop-color="#a42e24"/><stop offset="1" stop-color="#8a241b"/></radialGradient>
+    <radialGradient id="${id}g" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffb070" stop-opacity=".55"/><stop offset="1" stop-color="#ffb070" stop-opacity="0"/></radialGradient>
+    <filter id="${id}b" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
+    <clipPath id="${id}L"><polygon points="0,0 100,0 ${crack} 104,200 0,200"/></clipPath>
+    <clipPath id="${id}R"><polygon points="200,0 100,0 ${crack} 104,200 200,200"/></clipPath></defs>
+    <circle class="glow" cx="100" cy="104" r="96" fill="url(#${id}g)"/>
+    <circle class="track" cx="100" cy="100" r="88" fill="none" stroke="rgba(42,33,25,.16)" stroke-width="1.5"/>
+    <circle class="ring" cx="100" cy="100" r="88" fill="none" stroke="#2a2119" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="553" stroke-dashoffset="553" transform="rotate(-90 100 100)"/>
+    <ellipse class="shd" cx="104" cy="112" rx="62" ry="58" fill="#2a2119" opacity=".32" filter="url(#${id}b)"/>
+    <g class="art"><g class="whole">${sealArt(id)}</g><g class="halfL" clip-path="url(#${id}L)">${sealArt(id)}</g><g class="halfR" clip-path="url(#${id}R)">${sealArt(id)}</g>
+    <polyline class="crk" points="${crack}" fill="none" stroke="#3a0d09" stroke-width="2.2" stroke-linejoin="round"/></g></svg>`; }
+function envSVG(){ return `<svg class="front" viewBox="0 0 100 70" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="pk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efe3cf"/><stop offset="1" stop-color="#e6d6bd"/></linearGradient></defs>
+  <path d="M0 0L50 40 100 0V70H0z" fill="url(#pk)"/><path d="M0 0L50 40 100 0" fill="none" stroke="rgba(42,33,25,.10)" stroke-width=".3"/><path d="M0 70L44 36M100 70L56 36" fill="none" stroke="rgba(42,33,25,.12)" stroke-width=".3"/><path d="M0 70L50 40 100 70z" fill="rgba(255,255,255,.14)"/></svg>`; }
+function flapSVG(){ return `<svg class="flap" viewBox="0 0 100 44" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1e6d3"/><stop offset="1" stop-color="#e4d5bc"/></linearGradient></defs><path d="M0 0H100L50 44z" fill="url(#fl)"/><path d="M0 0L50 44 100 0" fill="none" stroke="rgba(42,33,25,.16)" stroke-width=".35"/></svg>`; }
+
+const Type={ start(){ const me=loadMe(); if(!me||!me.y){ askMe('내 카드 꺼내기',()=>Type.start()); return; } Type.play(me); },
+ play(me){ const R=typeOf(me);
+  $('stage').innerHTML=`<div class="env fade-in" id="env">${envSVG()}<div class="peek"><small>나의 연애 체질</small><b>${R.T.n[1]}</b></div>${flapSVG()}
+    <button class="seal" id="seal" type="button" aria-label="도장을 길게 눌러 봉인 풀기">${sealSVG()}</button></div>
+    <p class="hint" id="hint"><em>도장을 꾹 누른 채 기다려 주세요</em><br>테두리가 다 차면 봉인이 깨져요</p>`;
+  const seal=$('seal'), ring=seal.querySelector('.ring'), L=553; let p=0, hold=false, raf=0, last=0, q=0, fin=false;
+  const draw=()=>{ ring.style.strokeDashoffset=(L*(1-p)).toFixed(1); seal.style.setProperty('--heat',(p*.9).toFixed(2)); };
+  const tick=t=>{ const dt=Math.min(.05,(t-(last||t))/1000); last=t; p+=hold?dt/1.2:-dt/0.5; p=Math.max(0,Math.min(1,p)); draw();
+    const nq=Math.floor(p*4); if(hold&&nq>q&&nq<4) vib(10); q=nq;
+    if(p>=1&&!fin){ fin=true; crack(); return; }
+    if(hold||p>0) raf=requestAnimationFrame(tick); else { raf=0; last=0; } };
+  const down=e=>{ if(fin) return; if(e.cancelable) e.preventDefault(); try{ seal.setPointerCapture(e.pointerId); }catch(_){} hold=true; seal.classList.add('hold'); if(!raf){ last=0; raf=requestAnimationFrame(tick); } };
+  const up=()=>{ hold=false; seal.classList.remove('hold'); if(!fin&&p>0&&p<1) $('hint').innerHTML='<em>조금만 더 오래 눌러 주세요</em><br>손을 떼면 테두리가 다시 줄어요'; };
+  seal.addEventListener('pointerdown',down); seal.addEventListener('pointerup',up); seal.addEventListener('pointercancel',up); seal.addEventListener('lostpointercapture',up);
+  seal.addEventListener('contextmenu',e=>e.preventDefault());
+  seal.addEventListener('keydown',e=>{ if((e.key===' '||e.key==='Enter')&&!e.repeat){ e.preventDefault(); down({pointerId:0}); } });
+  seal.addEventListener('keyup',e=>{ if(e.key===' '||e.key==='Enter') up(); });
+  function crack(){ hold=false; vib([18,40,28]); seal.classList.remove('hold'); seal.classList.add('crack'); $('hint').innerHTML='<em>봉인이 풀렸어요</em>';
+    setTimeout(()=>$('env').classList.add('open'),420);
+    setTimeout(()=>Type.show(me,R),1700); } },
+ show(me,R){ const T=R.T;
+  $('stage').innerHTML=`<article class="tcard rise" id="tcard" style="--ac:${R.c}">
+    <div class="kk"><span>나의 연애 체질</span><i>${ELW[R.el]} 기운 · ${R.star}</i></div>
+    <span class="emb">${emblem(R.i,R.c)}</span>
+    <h2>${T.n[0]}<br>${T.n[1]}</h2>
+    <p class="gyeol">${R.gy}</p>
+    <p class="lead">${T.lead}</p>
+    <dl><div><dt>이렇게 사랑해요</dt><dd>${T.love}</dd></div>
+      <div><dt>곁에 두면 좋은 사람</dt><dd>${T.need}</dd></div>
+      <div><dt>이럴 때 지쳐요</dt><dd>${T.tire}</dd></div>
+      <div><dt>잘 맞는 기운</dt><dd><b>${ELW[T.suit]} 기운</b> · ${T.suitT}</dd></div></dl>
+    <p class="ref">${R.ref}</p>
+    <p class="basis">${R.basis}</p></article>`;
+  afterBlock({k:'더 깊게 보고 싶다면',n:'도화 사주 · 태오',d:'내 사주 속 끌림과 열두 달 인연 달력',u:'dohwa.html'},
+    ()=>share(()=>Type.card(R),'obang-love-type.png','오방도감 · 연애 체질 카드',`나는 ${T.n.join(' ')}. 너는 어떤 연애 체질이야`),
+    ()=>Type.play(me)); },
+ async card(R){ await fontsReady(); const c=document.createElement('canvas'); c.width=CW; c.height=CH; const x=c.getContext('2d'), T=R.T; paper(x); head(x,'나의 연애 체질');
+  /* 상징 원판 */
+  const cx=CW/2, cy=360; let g=x.createRadialGradient(cx-40,cy-50,10,cx,cy,140); g.addColorStop(0,'#fffdf8'); g.addColorStop(1,'#ece1cd');
+  x.save(); x.shadowColor='rgba(42,33,25,.28)'; x.shadowBlur=40; x.shadowOffsetY=18; x.fillStyle=g; x.beginPath(); x.arc(cx,cy,130,0,7); x.fill(); x.restore();
+  x.strokeStyle='rgba(42,33,25,.14)'; x.lineWidth=2; x.beginPath(); x.arc(cx,cy,130,0,7); x.stroke();
+  try{ const im=await svgImg(emblem(R.i,R.c)); x.drawImage(im,cx-92,cy-92,184,184); }catch(e){}
+  x.textAlign='center'; x.fillStyle='#2a2119'; x.font=`900 66px ${SERIF}`; x.fillText(T.n[0],cx,600); x.font=`900 92px ${SERIF}`; x.fillText(T.n[1],cx,710);
+  x.fillStyle=R.c; x.font=`700 34px ${SANS}`; x.fillText(`${R.gy} · ${ELW[R.el]} 기운`,cx,778);
+  x.fillStyle='rgba(42,33,25,.16)'; x.fillRect(cx-60,816,120,2);
+  x.fillStyle='#2a2119'; x.font=`600 38px ${SERIF}`; wrap(x,T.lead,CW-260,3).forEach((l,i)=>x.fillText(l,cx,890+i*58));
+  x.fillStyle='#6b5d4f'; x.font=`700 28px ${SANS}`; x.fillText('곁에 두면 좋은 사람',cx,1046);
+  x.fillStyle='#2a2119'; x.font=`500 32px ${SANS}`; wrap(x,T.need,CW-300,2).forEach((l,i)=>x.fillText(l,cx,1094+i*46));
+  foot(x,R.basis); return await toBlob(c); } };
+
+/* =========================================================
+   2. 우리 궁합 한 줄
+   ========================================================= */
+const ELN=['나무','불','흙','쇠','물'];
+function matchOf(me,them){ const P=pillarsOf(me), Q=pillarsOf(them), a=P.d[1], b=Q.d[1], as=P.d[0], bs=Q.d[0], ea=stEl(as), eb=stEl(bs);
+  let br; if(a===b) br={k:'same',w:5,l:'배우자 자리 · 같은 글자',t:'두 사람의 배우자 자리 글자가 같아요. 연애에서 바라는 모습이 닮아 있어서 말이 잘 통해요.',bs:`일지 같은 ${JK[a]}`};
+  else if(LIUHE[a]===b) br={k:'hap',w:14,l:'배우자 자리 · 육합',t:'서로의 배우자 자리가 짝을 이뤄요. 같이 있으면 말없이도 편해지는 사이예요.',bs:`일지 ${JK[a]}${JK[b]} 육합`};
+  else if(sanhe(a,b)) br={k:'sanhe',w:9,l:'배우자 자리 · 삼합',t:'배우자 자리가 같은 쪽을 봐요. 함께할 목표가 생기면 빠르게 가까워져요.',bs:`일지 ${JK[a]}${JK[b]} 삼합`};
+  else if(chung(a,b)) br={k:'chung',w:-14,l:'배우자 자리 · 충',t:'배우자 자리가 마주 부딪혀요. 끌림이 큰 만큼 생활 리듬과 말투에서 자주 어긋날 수 있어요.',bs:`일지 ${JK[a]}${JK[b]} 충`};
+  else if(YUANJIN[a]===b) br={k:'yj',w:-9,l:'배우자 자리 · 원진',t:'가까워질수록 작은 서운함이 쌓이기 쉬워요. 서운한 일은 그날 안에 말로 풀어 주세요.',bs:`일지 ${JK[a]}${JK[b]} 원진`};
+  else br={k:'none',w:0,l:'배우자 자리 · 무난',t:'배우자 자리끼리 크게 묶이지도 부딪히지도 않아요. 둘이 함께 만드는 습관이 관계를 정해요.',bs:`일지 ${JK[a]}${JK[b]} 무난`};
+  const gh=ganHap(as,bs), st=gh?{k:'gh',w:12,l:'일간 · 천간합',t:'두 사람의 일간이 합을 이뤄요. 처음부터 묘하게 끌리고, 쉽게 잊히지 않는 사이예요.',bs:`일간 ${GK[as]}${GK[bs]} 합`}
+    :{k:'nogh',w:0,l:'일간 · 합 없음',t:'일간끼리 합은 없어요. 첫 끌림보다 대화와 시간이 둘을 이어 주는 사이예요.',bs:`일간 ${GK[as]}${GK[bs]} 합 없음`};
+  const r=(eb-ea+5)%5, A=ELN[ea], B=ELN[eb]; let el;
+  if(r===0) el={k:'same',w:4,l:'기운 · 같은 결',t:`둘 다 ${A} 기운이에요. 친구처럼 편하지만, 고집이 맞서면 둘 다 물러서지 않아요.`,bs:`같은 ${EK[ea]} 기운`};
+  else if(r===1) el={k:'give',w:6,l:'기운 · 내가 살려 줌',t:`내 ${A} 기운이 그 사람의 ${B} 기운을 살려요. 내가 챙겨 줄 때 관계가 잘 굴러가요.`,bs:`${josa(EK[ea],'이','가')} ${josa(EK[eb],'을','를')} 살림`};
+  else if(r===4) el={k:'take',w:8,l:'기운 · 그 사람이 살려 줌',t:`그 사람의 ${B} 기운이 내 ${A} 기운을 살려요. 곁에 있으면 내가 편안해지는 쪽이에요.`,bs:`${josa(EK[eb],'이','가')} ${josa(EK[ea],'을','를')} 살림`};
+  else if(r===2) el={k:'lead',w:-2,l:'기운 · 내가 이끎',t:`내 ${A} 기운이 그 사람의 ${B} 기운을 다스려요. 내가 기준을 세우게 되니, 말투를 한 번 더 고르면 좋아요.`,bs:`${josa(EK[ea],'이','가')} ${josa(EK[eb],'을','를')} 다스림`};
+  else el={k:'led',w:-2,l:'기운 · 그 사람이 이끎',t:`그 사람의 ${B} 기운이 내 ${A} 기운을 다스려요. 그 사람 기준에 맞추느라 지치지 않게 내 속도를 지켜요.`,bs:`${josa(EK[eb],'이','가')} ${josa(EK[ea],'을','를')} 다스림`};
+  const sc=50+br.w+st.w+el.w, band=sc>=64?3:sc>=50?2:1;
+  const BAND=[null,['손이 많이 감','자주 풀리지만, 다시 묶는 법을 익히면 오래 가요'],['천천히 엮임','시간을 두고 여러 번 감으면 단단해지는 매듭이에요'],['잘 엮임','애쓰지 않아도 매듭이 잘 지어지는 사이예요']];
+  let v; const bad=br.k==='chung'||br.k==='yj';
+  if(gh&&(br.k==='hap'||br.k==='sanhe')) v='처음부터 매듭이 단단하게 지어지는 사이';
+  else if(gh&&bad) v='끌리는 만큼 엉키기도 하는 사이';
+  else if(gh) v='보자마자 끌리고, 쉽게 풀리지 않는 사이';
+  else if(br.k==='hap') v='곁에 있으면 저절로 편해지는 사이';
+  else if(br.k==='sanhe') v='같은 쪽을 보며 나란히 걷는 사이';
+  else if(br.k==='same') v='바라는 모습이 닮은 사이';
+  else if(br.k==='chung') v='세게 당기면 엉키고, 천천히 풀면 길어지는 사이';
+  else if(br.k==='yj') v='가까울수록 말 한마디가 중요한 사이';
+  else v={same:'친구처럼 오래 가는 사이',give:'내가 챙길수록 단단해지는 사이',take:'곁에 두면 내가 편해지는 사이',lead:'속도를 맞추면 오래 가는 사이',led:'속도를 맞추면 오래 가는 사이'}[el.k];
+  const basis=`근거 · 내 일주 ${gzK(P.d)} · 그 사람 일주 ${gzK(Q.d)} · ${br.bs} · ${st.bs} · ${el.bs}`;
+  return {notes:[br,st,el],band,bandT:BAND[band],v,basis,sc}; }
+function knotSVG(w,h,lead){ lead=lead!==false; const st='fill="none" stroke-width="3.2" stroke-linecap="round"';
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 72" width="${w||150}" height="${h||72}" aria-hidden="true">
+  ${lead?`<path d="M2 36H48" ${st} stroke="#2a2119"/><path d="M102 36H148" ${st} stroke="#b8352a"/>`:''}
+  <ellipse cx="86" cy="36" rx="16" ry="11" ${st} stroke="#b8352a"/>
+  <ellipse cx="64" cy="36" rx="16" ry="11" ${st} stroke="#2a2119"/>
+  <path d="M71.5 31.35A16 11 0 0 1 80.53 25.66" fill="none" stroke="#f3eadb" stroke-width="7"/>
+  <path d="M71.5 31.35A16 11 0 0 1 80.53 25.66" ${st} stroke="#b8352a"/>
+</svg>`; }
+
+const Match={ start(){ const me=loadMe(), th=loadThem()||{};
+  $('stage').innerHTML=`<div class="form fade-in">
+    ${me&&me.y?'':`<div class="lab">내 생일</div>${formFields('k',{},{g:true,h:true})}<div class="sep"></div>`}
+    <div class="lab">그 사람 생일</div>${formFields('p',th,{dy:1995,dm:6})}
+    <button class="btn" id="pGo" type="button">실 두 가닥 꺼내기</button></div>
+    <p class="hint">그 사람의 태어난 시는 몰라도 돼요. 날짜만으로 봐요.</p>`;
+  if(!(me&&me.y)) bindForm('k',{}); bindForm('p',th);
+  $('pGo').onclick=()=>{ let m=loadMe(); if(!(m&&m.y)){ const o=readForm('k'); if(!o) return; saveMe(o); meLine(); m=loadMe(); }
+    const t=readForm('p'); if(!t) return; saveThem(t); vib(6); Match.play(m,t); }; },
+ play(me,th){ const W=360, H=264, cy=150;
+  $('stage').innerHTML=`<div class="loom fade-in" id="loom">
+    <span class="who l">나<small>${me.y}.${me.m}.${me.d}</small></span><span class="who r">그 사람<small>${th.y}.${th.m}.${th.d}</small></span>
+    <svg viewBox="0 0 ${W} ${H}" id="lsv">
+      <defs><filter id="tb" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation="3"/></filter>
+        <radialGradient id="spA" cx="40%" cy="35%"><stop offset="0" stop-color="#5a4a3b"/><stop offset="1" stop-color="#2a2119"/></radialGradient>
+        <radialGradient id="spB" cx="40%" cy="35%"><stop offset="0" stop-color="#d4574a"/><stop offset="1" stop-color="#8e2219"/></radialGradient></defs>
+      <path id="shA" fill="none" stroke="#2a2119" stroke-opacity=".22" stroke-width="5" filter="url(#tb)"/>
+      <path id="shB" fill="none" stroke="#2a2119" stroke-opacity=".22" stroke-width="5" filter="url(#tb)"/>
+      <path id="thA" fill="none" stroke="#2a2119" stroke-width="3.4" stroke-linecap="round"/>
+      <path id="txA" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.2" stroke-dasharray="1.6 3.2"/>
+      <path id="thB" fill="none" stroke="#b8352a" stroke-width="3.4" stroke-linecap="round"/>
+      <path id="txB" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.2" stroke-dasharray="1.6 3.2"/>
+      <circle cx="18" cy="${cy}" r="24" fill="url(#spA)"/><circle cx="18" cy="${cy}" r="24" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="1" stroke-dasharray="2 2.5"/><circle cx="18" cy="${cy}" r="6" fill="#efe5d4"/>
+      <circle cx="${W-18}" cy="${cy}" r="24" fill="url(#spB)"/><circle cx="${W-18}" cy="${cy}" r="24" fill="none" stroke="#fff" stroke-opacity=".15" stroke-width="1" stroke-dasharray="2 2.5"/><circle cx="${W-18}" cy="${cy}" r="6" fill="#efe5d4"/>
+      <circle id="tgt" cx="${W/2}" cy="${cy}" r="22" fill="none" stroke="rgba(42,33,25,.22)" stroke-width="1.2" stroke-dasharray="3 4"/>
+      <g transform="translate(${W/2-75} ${cy-38})"><g class="knot" id="knot">${knotSVG(150,72,false).replace(/^<svg[^>]*>|<\/svg>$/g,'')}</g></g>
+      <g class="h" id="hA"><circle r="26" fill="transparent"/><circle r="5" fill="#2a2119"/><circle r="11" fill="none" stroke="#2a2119" stroke-opacity=".25" stroke-width="1.2"/></g>
+      <g class="h" id="hB"><circle r="26" fill="transparent"/><circle r="5" fill="#b8352a"/><circle r="11" fill="none" stroke="#b8352a" stroke-opacity=".35" stroke-width="1.2"/></g>
+    </svg></div>
+    <p class="hint" id="lh"><em>실 끝을 끌어 가운데에서 마주 대 보세요</em><br>두 끝이 닿으면 매듭이 지어져요</p>`;
+  const sv=$('lsv'), A0=[42,cy], B0=[W-42,cy]; let a=[118,cy+38], b=[W-118,cy-30], tied=false, drag=null, sag=1;
+  const thread=(s,e,k)=>{ const mx=(s[0]+e[0])/2, my=(s[1]+e[1])/2, len=Math.hypot(e[0]-s[0],e[1]-s[1]), dip=Math.max(6,(150-len*.35))*k; return `M${s[0]} ${s[1]} Q${mx} ${my+dip} ${e[0]} ${e[1]}`; };
+  const draw=()=>{ const pa=thread(A0,a,sag), pb=thread(B0,b,sag); $('thA').setAttribute('d',pa); $('txA').setAttribute('d',pa); $('shA').setAttribute('d',pa.replace(/(\d+(\.\d+)?) (\d+(\.\d+)?)/g,(m,x,_,y)=>`${x} ${(+y+7).toFixed(1)}`));
+    $('thB').setAttribute('d',pb); $('txB').setAttribute('d',pb); $('shB').setAttribute('d',pb.replace(/(\d+(\.\d+)?) (\d+(\.\d+)?)/g,(m,x,_,y)=>`${x} ${(+y+7).toFixed(1)}`));
+    $('hA').setAttribute('transform',`translate(${a[0]} ${a[1]})`); $('hB').setAttribute('transform',`translate(${b[0]} ${b[1]})`); };
+  draw();
+  const pt=e=>{ const r=sv.getBoundingClientRect(); return [Math.max(30,Math.min(W-30,(e.clientX-r.left)/r.width*W)),Math.max(40,Math.min(H-16,(e.clientY-r.top)/r.height*H))]; };
+  const near=()=>Math.hypot(a[0]-b[0],a[1]-b[1])<34;
+  const C=[W/2,cy];
+  function tie(){ if(tied) return; tied=true; vib([14,30,22]); const sa=a.slice(), sb=b.slice(), t0=performance.now();
+    const ca=[W/2-27,cy-2], cb=[W/2+27,cy-2];
+    const step=t=>{ const k=Math.min(1,(t-t0)/520), e=1-Math.pow(1-k,3); a=[sa[0]+(ca[0]-sa[0])*e,sa[1]+(ca[1]-sa[1])*e]; b=[sb[0]+(cb[0]-sb[0])*e,sb[1]+(cb[1]-sb[1])*e]; sag=1-e*.85; draw(); if(k<1) requestAnimationFrame(step); else { $('loom').classList.add('tied'); $('hA').style.opacity=0; $('hB').style.opacity=0; $('lh').innerHTML='<em>매듭이 지어졌어요</em>'; setTimeout(()=>Match.show(me,th),1300); } };
+    requestAnimationFrame(step); }
+  const down=e=>{ if(tied) return; const p=pt(e); const da=Math.hypot(p[0]-a[0],p[1]-a[1]), db=Math.hypot(p[0]-b[0],p[1]-b[1]);
+    drag=da<=db?(da<60?'a':null):(db<60?'b':null); if(!drag){ drag='tap'; return; } try{ sv.setPointerCapture(e.pointerId); }catch(_){} vib(5); };
+  const move=e=>{ if(!drag||drag==='tap'||tied) return; const p=pt(e); if(drag==='a') a=p; else b=p; draw(); if(near()) tie(); };
+  const up=()=>{ if(drag==='tap'){ drag=null; tie(); return; } drag=null; };
+  sv.addEventListener('pointerdown',down); sv.addEventListener('pointermove',move); sv.addEventListener('pointerup',up); sv.addEventListener('pointercancel',()=>{ drag=null; }); },
+ show(me,th){ const R=matchOf(me,th);
+  $('stage').innerHTML=`<article class="mcard rise"><div class="kk">우리 궁합 한 줄</div><span class="ksvg">${knotSVG()}</span>
+    <h2>${R.v}</h2>
+    <div class="band"><span class="ks">${[1,2,3].map(k=>`<i class="${k<=R.band?'on':''}"></i>`).join('')}</span><b>${R.bandT[0]}</b><small>${R.bandT[1]}</small></div>
+    <ol class="notes">${R.notes.map((n,i)=>`<li><i>${i+1}</i><div><b>${n.l}</b><p>${n.t}</p></div></li>`).join('')}</ol>
+    <p class="basis">${R.basis}</p></article>`;
+  afterBlock({k:'두 사람을 더 깊게',n:'도화 궁합 · 태오',d:'두 사람의 끌림과 오래 가는 법',u:'gunghap.html'},
+    ()=>share(()=>Match.card(R),'obang-love-match.png','오방도감 · 우리 궁합 한 줄',`우리 궁합 한 줄, ${R.v}`),
+    ()=>Match.play(me,th)); },
+ async card(R){ await fontsReady(); const c=document.createElement('canvas'); c.width=CW; c.height=CH; const x=c.getContext('2d'); paper(x); head(x,'우리 궁합 한 줄');
+  try{ const im=await svgImg(knotSVG(150,72)); x.drawImage(im,CW/2-270,230,540,259); }catch(e){}
+  x.textAlign='center'; x.fillStyle='#2a2119'; x.font=`900 64px ${SERIF}`; const vl=wrap(x,R.v,CW-240,3); vl.forEach((l,i)=>x.fillText(l,CW/2,580+i*84));
+  let y=580+vl.length*84+30;
+  for(let k=0;k<3;k++){ const cx=CW/2-44+k*44; x.beginPath(); x.arc(cx,y,13,0,7); if(k<R.band){ x.fillStyle='#b8352a'; x.fill(); } else { x.strokeStyle='#b8352a'; x.lineWidth=3; x.stroke(); } }
+  y+=70; x.fillStyle='#b8352a'; x.font=`800 44px ${SANS}`; x.fillText(R.bandT[0],CW/2,y); y+=50; x.fillStyle='#6b5d4f'; x.font=`500 30px ${SANS}`; x.fillText(R.bandT[1],CW/2,y);
+  y+=60; x.textAlign='left'; R.notes.forEach((n,i)=>{ x.fillStyle='rgba(42,33,25,.14)'; x.fillRect(130,y,CW-260,1.5); y+=50; x.fillStyle='#9a8b7a'; x.font=`900 32px ${SERIF}`; x.fillText(String(i+1),140,y); x.fillStyle='#2a2119'; x.font=`700 31px ${SANS}`; x.fillText(n.l,190,y); y+=26; });
+  foot(x,R.basis); return await toBlob(c); } };
+
+/* =========================================================
+   3. 이번 주 연락하기 좋은 날
+   ========================================================= */
+function kstNow(){ const k=new Date(Date.now()+9*36e5); return {y:k.getUTCFullYear(),m:k.getUTCMonth()+1,d:k.getUTCDate(),hm:k.getUTCHours()*60+k.getUTCMinutes()}; }
+const HSTART=[-30,90,210,330,450,570,690,810,930,1050,1170,1290]; /* 시진 시작(분) */
+function hm(min){ min=(min+1440)%1440; const h=Math.floor(min/60), m=min%60, ap=h<12?'오전':'오후', hh=h%12===0?12:h%12; return {ap,t:`${hh}:${String(m).padStart(2,'0')}`}; }
+function winLabel(h){ const s=hm(HSTART[h]), e=hm(HSTART[h]+120); return `${s.ap} ${s.t} ~ ${e.ap===s.ap?'':e.ap+' '}${e.t}`; }
+const WHY={peach:'도화가 드는 날이라 눈길이 오래 머물러요.',hap:'내 배우자 자리와 짝을 이루는 날이라 마음이 잘 닿아요.',star:'인연의 별이 들어오는 날이라 그 사람 쪽 기운이 강해요.',
+  sik:'말이 잘 풀리는 날이라 먼저 연락하기 편해요.',sanhe:'배우자 자리와 같은 쪽을 보는 날이라 대화가 잘 이어져요.',calm:'마음이 차분한 날이라 긴 대화를 나누기 좋아요.',prom:'현실 감각이 살아나는 날이라 만날 약속을 잡기 좋아요.',plain:'크게 부딪히는 기운이 없어 가볍게 안부를 묻기 좋아요.'};
+const WLAB={peach:'도화',hap:'육합',star:'인연의 별',sik:'표현',sanhe:'삼합',calm:'차분',prom:'약속',chung:'충',yj:'원진',bi:'고집'};
+function weekOf(me){ const P=pillarsOf(me), dm=P.d[0], db=P.d[1], pe=PEACH[db], love=me.g==='m'?2:3, loveEl=(stEl(dm)+love)%5, now=kstNow(), out=[];
+  for(let i=0;i<7;i++){ const t=new Date(Date.UTC(now.y,now.m-1,now.d+i)), y=t.getUTCFullYear(), m=t.getUTCMonth()+1, d=t.getUTCDate(), wd=t.getUTCDay();
+    const D=S.dayPillar(y,m,d), ts=D[0], tb=D[1], grp=S.rel(dm,stEl(ts)), f=[]; let v=0;
+    if(grp===love){ v+=3; f.push(['star',3]); } else if(grp===1){ v+=2; f.push(['sik',2]); } else if(grp===4){ v+=1; f.push(['calm',1]); } else if(grp===2||grp===3){ v+=1; f.push(['prom',1]); } else { f.push(['bi',0]); }
+    if(tb===pe){ v+=3; f.push(['peach',3.2]); }
+    if(LIUHE[db]===tb){ v+=3; f.push(['hap',3.1]); } else if(sanhe(db,tb)){ v+=1; f.push(['sanhe',1.1]); }
+    if(chung(db,tb)){ v-=4; f.push(['chung',-4]); } if(YUANJIN[db]===tb){ v-=2; f.push(['yj',-2]); }
+    /* 2시간 창: 사시~해시 중 도화 · 육합 · 삼합 · 인연의 별 */
+    let best=null; for(let h=5;h<=11;h++){ if(i===0&&HSTART[h]<now.hm+30) continue;
+      let s=0; if(h===pe) s+=3; if(LIUHE[db]===h) s+=3; else if(sanhe(db,h)) s+=1; if(S.BR_EL[h]===loveEl) s+=1; if(LIUHE[tb]===h) s+=1; if(chung(db,h)) s-=4; if(chung(tb,h)) s-=2; s+=h>=9&&h<=10?.4:h>=6&&h<=8?.2:0;
+      if(!best||s>best[1]) best=[h,s]; }
+    const pos=f.filter(x=>x[1]>0).sort((p,q)=>q[1]-p[1]);
+    out.push({i,y,m,d,wd,ts,tb,v:best?v:-99,f,top:pos.length?pos[0][0]:'plain',h:best?best[0]:null,tg:S.tgStem(dm,ts)}); }
+  const pick=out.filter(x=>x.h!=null).slice().sort((p,q)=>q.v-p.v||p.i-q.i).slice(0,2).sort((p,q)=>p.i-q.i);
+  const rest=out.filter(x=>x.f.some(z=>z[0]==='chung')).sort((p,q)=>p.v-q.v)[0]||null;
+  return {days:out,pick,rest,weak:pick.every(x=>x.v<=1),db,pe}; }
+const dLab=x=>x.i===0?'오늘':x.i===1?'내일':`${WD[x.wd]}요일`;
+const factorLine=x=>`그날 일진 ${gzK([x.ts,x.tb])} · ${x.tg}${x.f.filter(z=>z[0]!=='bi'&&!['star','sik','calm','prom'].includes(z[0])).map(z=>' · '+WLAB[z[0]]).join('')}`;
+const Week={ start(){ const me=loadMe(); if(!me||!me.y){ askMe('이번 주 보기',()=>Week.start()); return; } Week.play(me); },
+ play(me){ const R=weekOf(me);
+  $('stage').innerHTML=`<div class="sill fade-in"><div class="strip" id="strip">${R.days.map(x=>`<div class="c" data-i="${x.i}"><small>${x.i===0?'오늘':WD[x.wd]}</small><b>${x.d}</b><em>${x.d===1||x.i===0?x.m+'월':''}</em><i class="bar"></i></div>`).join('')}
+    <div class="dim"></div><div class="sun"></div>${R.pick.map(x=>`<div class="pool" style="left:calc(${x.i}*100%/7 - 2%);width:calc(100%/7 + 4%)"></div>`).join('')}</div>
+    <div class="shade" id="shade"><span class="pull"><i></i></span><span>가림막 걷기</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div></div>
+    <p class="hint" id="wh"><em>가림막을 오른쪽으로 밀어 걷어 보세요</em><br>눌러도 열려요</p>`;
+  const sh=$('shade'); let x0=null, dx=0, open=false, moved=false;
+  const go=()=>{ if(open) return; open=true; vib(8); sh.classList.remove('drag'); sh.classList.add('gone'); const st=$('strip'); $('wh').innerHTML='<em>햇빛이 들어와요</em>';
+    setTimeout(()=>{ st.classList.add('lit','sweep'); },250);
+    setTimeout(()=>{ st.classList.add('done'); R.pick.forEach(p=>st.querySelector(`[data-i="${p.i}"]`).classList.add('best'));
+      const mx=Math.max(...R.days.map(z=>z.v)), mn=Math.min(...R.days.map(z=>z.v));
+      st.querySelectorAll('.c').forEach((c,k)=>{ const z=R.days[k]; c.querySelector('.bar').style.height=(6+((z.v-mn)/Math.max(1,mx-mn))*30).toFixed(0)+'px'; });
+      vib([10,60,10]); $('wh').innerHTML='<em>햇빛이 이틀에 머물렀어요</em>'; },2300);
+    setTimeout(()=>Week.show(me,R),3300); };
+  sh.addEventListener('pointerdown',e=>{ if(open) return; x0=e.clientX; dx=0; moved=false; sh.classList.add('drag'); try{ sh.setPointerCapture(e.pointerId); }catch(_){} });
+  sh.addEventListener('pointermove',e=>{ if(x0==null||open) return; dx=Math.max(0,e.clientX-x0); if(dx>6) moved=true; sh.style.transform=`translateX(${dx}px)`; if(dx>sh.offsetWidth*.42){ x0=null; go(); } });
+  const end=()=>{ if(x0==null||open) return; x0=null; sh.classList.remove('drag'); if(!moved||dx>sh.offsetWidth*.3) go(); else sh.style.transform=''; };
+  sh.addEventListener('pointerup',end); sh.addEventListener('pointercancel',()=>{ x0=null; sh.classList.remove('drag'); sh.style.transform=''; });
+  sh.setAttribute('role','button'); sh.tabIndex=0; sh.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } }); },
+ show(me,R){ const now=kstNow();
+  const html=`<div class="whead fade-in"><b>연락하기 좋은 이틀</b><small>${now.m}월 ${now.d}일부터 일주일</small></div>
+   <div class="days">${R.pick.map((x,k)=>`<div class="day fade-in" style="animation-delay:${k*.12}s"><div class="dd"><small>${x.i===0?'오늘':x.i===1?'내일':'이번 주'}</small><b>${x.m}.${x.d}</b><em>${WD[x.wd]}요일</em></div>
+     <div class="tt"><small>연락하기 좋은 시간</small><b>${winLabel(x.h)}</b><p>${WHY[x.top]}</p><p class="basis">${factorLine(x)} · ${HNAME[x.h]}</p></div></div>`).join('')}</div>
+   ${R.weak?'<p class="rest">이번 주는 크게 끌어당기는 날이 없어요. 그중 부딪힘이 적은 이틀을 골랐어요.</p>':''}
+   ${R.rest?`<p class="rest"><b>한 박자 쉬어 갈 날 · ${R.rest.m}월 ${R.rest.d}일 ${WD[R.rest.wd]}요일</b><br>내 배우자 자리와 부딪히는 날이라, 중요한 얘기는 하루 미뤄요.</p>`:''}
+   <p class="basis">근거 · 내 일주 ${gzK(pillarsOf(me).d)} · 도화 ${JK[R.pe]} · 날마다 그날 일진과 내 일간의 관계(십성), 도화 · 육합 · 충 · 원진을 따져 점수를 매기고 가장 높은 이틀을 골랐어요. 시간은 그날 사시부터 해시 사이에서 골랐어요.</p>`;
+  afterBlock({k:'이번 달 전체가 궁금하다면',n:'이달의 연애운 · 묘당 마담',d:'이번 달 끌림 날과 연락 시간까지',u:'myodang.html'},
+    ()=>share(()=>Week.card(me,R),'obang-love-week.png','오방도감 · 이번 주 연락하기 좋은 날',`이번 주 연락하기 좋은 날, ${R.pick.map(x=>`${x.m}월 ${x.d}일`).join(' · ')}`),
+    ()=>{ $('after').innerHTML=''; Week.play(me); },`<section class="stage" id="wOut">${html}</section>`);
+  setTimeout(()=>{ const o=$('wOut'); if(o) scrollTo({top:Math.max(0,o.getBoundingClientRect().top+scrollY-80),behavior:'smooth'}); },200); },
+ async card(me,R){ await fontsReady(); const c=document.createElement('canvas'); c.width=CW; c.height=CH; const x=c.getContext('2d'); paper(x); head(x,'이번 주 연락하기 좋은 날');
+  /* 7일 띠 + 햇빛 */
+  const L=130, Wd=(CW-260)/7, top=230, h=170;
+  x.fillStyle='#ece2d1'; x.fillRect(L,top,CW-260,h);
+  R.pick.forEach(p=>{ const cx=L+Wd*p.i+Wd/2, g=x.createRadialGradient(cx,top+h*.45,4,cx,top+h*.45,Wd*.9); g.addColorStop(0,'rgba(255,236,196,1)'); g.addColorStop(.6,'rgba(255,224,170,.7)'); g.addColorStop(1,'rgba(255,224,170,0)'); x.fillStyle=g; x.fillRect(L+Wd*p.i-Wd*.4,top,Wd*1.8,h); });
+  x.strokeStyle='rgba(42,33,25,.14)'; x.lineWidth=2; x.strokeRect(L,top,CW-260,h); for(let k=1;k<7;k++){ x.beginPath(); x.moveTo(L+Wd*k,top); x.lineTo(L+Wd*k,top+h); x.stroke(); }
+  x.textAlign='center'; R.days.forEach((d,k)=>{ const on=R.pick.some(p=>p.i===k), cx=L+Wd*k+Wd/2; x.fillStyle=on?'#b8862f':'#9a8b7a'; x.font=`700 24px ${SANS}`; x.fillText(k===0?'오늘':WD[d.wd],cx,top+50); x.fillStyle=on?'#2a2119':'rgba(42,33,25,.45)'; x.font=`900 50px ${SERIF}`; x.fillText(String(d.d),cx,top+118); });
+  let y=500; R.pick.forEach(p=>{ x.textAlign='left'; x.fillStyle='#b8862f'; x.font=`700 28px ${SANS}`; x.fillText(p.i===0?'오늘':p.i===1?'내일':'이번 주',140,y); x.fillStyle='#2a2119'; x.font=`900 76px ${SERIF}`; x.fillText(`${p.m}월 ${p.d}일 ${WD[p.wd]}요일`,140,y+86);
+    x.font=`800 40px ${SANS}`; x.fillText(winLabel(p.h),140,y+146); x.fillStyle='#6b5d4f'; x.font=`500 30px ${SANS}`; wrap(x,WHY[p.top],CW-280,2).forEach((l,i)=>x.fillText(l,140,y+196+i*42)); y+=300; });
+  foot(x,`근거 · 내 일주 ${gzK(pillarsOf(me).d)} · 그날 일진과 내 일간의 관계, 도화 · 육합 · 충으로 골랐어요`); return await toBlob(c); } };
+
+render();
+})();
+</script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obpay.js" defer></script><script src="obshare.js" defer></script>
+</body>
+</html>

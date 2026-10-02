@@ -13,6 +13,7 @@
 <link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=Song+Myung&display=swap">
 <link rel="stylesheet" href="premkit.css">
+<link rel="stylesheet" href="lovebright.css">
 <style>
 @font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
 /* 재회 사주(시온) · 다음 연애(서하) — 한 페이지에서 ?m=re | ?m=next 로 나뉜다. 무료 결과 + 결제 뒤 상세(premkit) */
@@ -27,7 +28,7 @@ body.next{--stage:#191317; --card:#221a1f; --line:rgba(255,226,214,.13); --a:#f2
 html,body{height:100%}
 body{margin:0;background:#07060a;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
 button,select,input{font-family:inherit}
-.stage{position:relative;width:100%;max-width:460px;height:100%;background:var(--stage);overflow:hidden}
+.stage{position:relative;width:100%;max-width:430px;height:100%;background:var(--stage);overflow:hidden}
 @media (min-width:700px){.stage{height:min(100%,920px);margin:auto 0;box-shadow:0 30px 80px rgba(0,0,0,.6)}}
 .scr{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;opacity:0;pointer-events:none;transition:opacity .45s}
 .scr::-webkit-scrollbar{display:none}.scr.on{opacity:1;pointer-events:auto}
@@ -57,41 +58,55 @@ select{height:46px;border:1px solid var(--line);background:#1d1a22;color:var(--i
 .ld .av{width:120px;height:120px;border-radius:50%;background:center 15%/cover;box-shadow:0 0 0 2px var(--a),0 0 40px rgba(185,212,230,.25);margin-bottom:22px;animation:br 2.2s ease-in-out infinite}
 @keyframes br{50%{transform:scale(1.04)}}
 .ld h2{font-family:var(--serif);font-size:20px;margin:0 0 6px}.ld p{margin:0;color:var(--ink-3);font-size:13.5px;min-height:20px}
-.rhero{height:260px;background:#000 center 14%/cover no-repeat;position:relative}.rhero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,8,12,.35),transparent 40%,var(--stage))}
-.rs{position:relative;margin-top:-80px;padding:0 16px calc(env(safe-area-inset-bottom,0px) + 30px)}
-.big{text-align:center;padding:10px 0 4px}
-.big small{display:block;font-size:12px;letter-spacing:.2em;color:var(--a2)}
-.big .n{display:block;font-family:var(--serif);font-weight:900;font-size:76px;line-height:1.05;color:var(--a)}
-.big .n i{font-style:normal;font-size:28px;margin-left:2px}
-.big h2{margin:6px 0 0;font-family:var(--brush);font-weight:400;font-size:30px}
-.big p{margin:8px auto 0;max-width:330px;color:var(--ink-2);font-size:14px;line-height:1.65}
-.big .hint{display:block;margin:10px auto 0;padding:7px 12px;border:1px dashed var(--line);background:none;color:var(--a2);font-size:12.5px;cursor:pointer}
-.box{margin-top:14px;background:var(--card);border:1px solid var(--line);padding:18px}
-.box h3{margin:0 0 12px;font-size:13px;letter-spacing:.06em;color:var(--a2)}
-.mm{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.mm div{padding:14px 12px;background:rgba(255,255,255,.035);border:1px solid var(--line)}
-.mm div.bad{opacity:.85}
-.mm small{display:block;font-size:11.5px;color:var(--ink-3);font-weight:700}
-.mm b{display:block;margin-top:4px;font-family:var(--serif);font-size:24px;color:var(--a)}
-.mm div.bad b{color:var(--ink-2)}
-.mm span{display:block;margin-top:4px;font-size:12.5px;color:var(--ink-2);line-height:1.5}
-.say{display:flex;gap:12px;align-items:flex-start}.say .av2{flex:none;width:46px;height:46px;border-radius:50%;background:center 15%/cover;box-shadow:0 0 0 1.5px var(--a)}
-.say small{display:block;font-size:11.5px;color:var(--a2);font-weight:700;letter-spacing:.06em}
-.say p{margin:3px 0 0;font-size:15px;line-height:1.7}
-.ev{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.ev span{font-size:11.5px;padding:3px 8px;border:1px solid var(--line);color:var(--ink-2)}
-.tl{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;align-items:end;height:110px;margin-top:6px}
-.tl div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
-.tl i{display:block;width:100%;background:linear-gradient(180deg,var(--a),rgba(255,255,255,.1));transition:height 1s cubic-bezier(.2,.8,.2,1)}
-.tl div.hi i{box-shadow:0 0 12px var(--a)}
-.tl small{font-size:10px;color:var(--ink-3)}
-.lockb{position:relative;overflow:hidden}
-.lockb .bl{filter:blur(5px);user-select:none;font-size:14px;line-height:1.7;color:var(--ink-2)}
-.lockb .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(15,12,18,.2),rgba(15,12,18,.92) 45%);text-align:center;gap:4px}
-.lockb .ov b{font-family:var(--serif);font-size:16px}.lockb .ov small{font-size:12.5px;color:var(--ink-2)}
-.pay{display:block;width:100%;height:54px;margin-top:14px;border:0;background:var(--a);color:var(--aInk);font-size:16px;font-weight:900;cursor:pointer}
-.btn2{display:block;width:100%;height:50px;margin-top:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--ink);font-size:14.5px;font-weight:700;cursor:pointer}
-#lprem .pk-sec{margin-top:12px}
-.note{font-size:11.5px;color:var(--ink-3);line-height:1.6;margin:16px 2px 0}
+/* 결과 화면 — 밝은 한지 레이어(lovebright.css) 위에 이 페이지만의 장면을 얹는다 */
+body.bright .top b{color:#2a2119}
+body.bright .ib{background:rgba(255,250,241,.82);border-color:rgba(42,33,25,.16);color:#2a2119;box-shadow:0 6px 16px -8px rgba(60,40,20,.4)}
+#sRs.lb{--line:rgba(42,33,25,.14)}
+body.next #sRs{--acc:var(--wax);--acc-ink:var(--wax)}
+body:not(.next) #sRs{--acc:var(--sage);--acc-ink:var(--sage-ink)}
+.rs{position:relative;padding:0 16px calc(env(safe-area-inset-bottom,0px) + 34px)}
+.l2-mast{position:relative;padding:calc(env(safe-area-inset-top,0px) + 62px) 16px 0;overflow:hidden}
+.l2-mh{position:relative;height:392px}
+.l2-mh .tx{position:relative;z-index:2;padding-top:22px;width:56%}
+.l2-mh .tx small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.16em;color:var(--acc-ink)}
+.l2-mh h1{margin:10px 0 0;font-family:var(--brush);font-weight:400;font-size:50px;line-height:1.04;color:var(--ink);letter-spacing:-.01em}
+.l2-mh .tx p{margin:12px 0 0;font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+.l2-mh .lb-stamp{position:absolute;z-index:3}
+.l2-mh .cutw{position:absolute;right:-34px;bottom:0;width:236px;height:392px}
+.l2-mh .cutw:before{content:"";position:absolute;left:8%;right:-10%;top:12%;bottom:0;background:radial-gradient(closest-side,rgba(255,250,240,.95),rgba(255,250,240,0));z-index:0}
+.l2-mh .lb-cut{position:relative;z-index:1;height:100%;width:auto;margin-left:auto}
+.l2-mh .fr{position:absolute;right:0;top:20px;width:170px;height:240px;transform:rotate(1.5deg)}
+.l2-mh .meta{margin-top:16px;display:grid;gap:7px}
+.l2-mh .meta div{display:flex;align-items:baseline;gap:8px;font-size:12.5px;color:var(--ink-2)}
+.l2-mh .meta b{font-family:var(--serif);font-size:15px;font-weight:900;color:var(--ink)}
+.l2-mast.re .l2-mh{height:300px}
+.l2-mast:after{content:"";position:absolute;left:16px;right:16px;bottom:0;height:1px;background:var(--line)}
+.l2-score{margin-top:22px}
+.l2-hint{display:block;margin:14px auto 0;padding:9px 14px;border:1px dashed rgba(42,33,25,.35);background:rgba(255,252,245,.7);color:var(--ink);font-size:12.5px;font-weight:700;cursor:pointer}
+.l2-map{position:relative;background:linear-gradient(180deg,#fbf7ef,#f3ead9);border:1px solid var(--line);box-shadow:inset 0 0 40px rgba(170,140,100,.12),0 20px 40px -30px rgba(60,40,20,.6)}
+.l2-map svg{display:block;width:100%;height:auto}
+.l2-map text{font-family:var(--sans)}
+.l2-pair{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;margin-bottom:16px}
+.l2-pair .p{text-align:center}
+.l2-pair .p i{display:grid;place-items:center;width:84px;height:84px;margin:0 auto;border-radius:50%;background:var(--card);border:1.5px solid var(--ink-2);font-style:normal;font-family:var(--serif);font-size:26px;font-weight:900;color:var(--ink);box-shadow:0 12px 24px -16px rgba(60,40,20,.6)}
+.l2-pair .p.me i{border-color:var(--acc);box-shadow:inset 0 0 0 4px var(--card),inset 0 0 0 5px var(--acc),0 12px 24px -16px rgba(60,40,20,.6)}
+.l2-pair .p small{display:block;margin-top:8px;font-size:12px;font-weight:700;color:var(--ink)}
+.l2-pair .p em{display:block;font-style:normal;font-size:11.5px;color:var(--ink-3);margin-top:2px}
+.l2-pair .ln{position:relative;height:2px;background:var(--acc)}
+.l2-pair .ln.neg{background:repeating-linear-gradient(90deg,var(--ink-2) 0 5px,transparent 5px 9px)}
+.l2-pair .ln span{position:absolute;left:50%;top:-22px;transform:translateX(-50%);white-space:nowrap;font-size:11px;font-weight:700;color:var(--acc-ink)}
+.l2-paid{margin-top:34px}
+#lprem.pkx{--pk-card:var(--card);--pk-line:var(--line)}
+#lprem.pkx .pk-sec{box-shadow:0 18px 36px -30px rgba(60,40,20,.55)}
+#lprem.pkx .pk-sec>h3{font-size:17px}
+#lprem.pkx .pk-card,#lprem.pkx .pk-vs div,#lprem.pkx .pk-st{background:#fffdf8}
+#lprem.pkx .pk-letter{background:#fffdf8;box-shadow:0 24px 40px -30px rgba(60,40,20,.6)}
+.l2-open{display:flex;align-items:center;gap:16px;padding:18px 16px;background:var(--card);border:1px solid var(--line);border-top:2px solid var(--ink)}
+.l2-open small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--acc-ink)}
+.l2-open b{display:block;margin-top:4px;font-family:var(--serif);font-size:18px;font-weight:900;line-height:1.4;color:var(--ink)}
+.l2-open .lb-stamp b{margin:2px 0;color:var(--paper);font-size:19px}
+#lprem.pkx .pk-letter .pk-sg i{border-radius:50%;color:#fffaf2}
+#lprem.pkx .pk-row.pk-hi .pk-a,#lprem.pkx .pk-row.pk-hi .pk-c{color:var(--acc-ink)}
 .toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translate(-50%,20px);background:rgba(20,18,24,.95);color:#fff;padding:12px 18px;font-size:13.5px;opacity:0;pointer-events:none;transition:all .3s;z-index:60;white-space:nowrap}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 </style>
@@ -117,18 +132,18 @@ select{height:46px;border:1px solid var(--line);background:#1d1a22;color:var(--i
 
   <section class="scr ld" id="sLd"><div class="av" id="ldAv"></div><h2 id="ldT"></h2><p id="ldP"></p></section>
 
-  <section class="scr" id="sRs"><div class="rhero" id="rHero"></div><div class="rs">
-    <div class="big"><small id="rK"></small><span class="n" id="rN"></span><h2 id="rT"></h2><p id="rP"></p><button class="hint" id="rHint" type="button" hidden>그 사람 생일을 넣으면 두 사람 교차까지 볼 수 있어요</button></div>
-    <div class="box"><h3 id="mmH"></h3><div class="mm" id="mm"></div></div>
-    <div class="box"><h3 id="tlH"></h3><div class="tl" id="tl"></div></div>
-    <div class="box"><div class="say"><div class="av2" id="sayAv"></div><div><small id="sayN"></small><p id="sayT"></p></div></div><div class="ev" id="ev"></div></div>
-    <div class="box lockb" id="lockL"><h3 id="lkH"></h3><div class="bl" id="lkBl"></div><div class="ov"><b id="lkT"></b><small id="lkS"></small></div></div>
-    <div id="lprem" hidden></div>
-    <button class="pay" id="payBtn" type="button"></button>
-    <button class="btn2" id="again" type="button">다시 보기</button>
-    <button class="btn2" id="toOther" type="button"></button>
-    <p class="note" id="note"></p>
-  </div></section>
+  <section class="scr lb" id="sRs"><i id="rHero" hidden></i>
+    <header class="l2-mast" id="mast"></header>
+    <div class="rs">
+      <div class="lb-score l2-score"><small class="lb-k" id="rK"></small><div id="arc"></div><span class="lb-n" id="rN"></span><div class="lb-scale" id="arcS"></div><h2 id="rT"></h2><p id="rP"></p><button class="l2-hint" id="rHint" type="button" hidden>그 사람 생일을 넣으면 두 사람 교차까지 볼 수 있어요</button></div>
+      <div id="body"></div>
+      <div class="lb-lock" id="lockL"><div class="hd"><small id="lkH"></small></div><h4 id="lkT"></h4><div class="lb-stamp is-fill seal"><small>열기 전</small><b>봉인</b></div><div class="pv"><p id="lkBl"></p></div><ul id="lkS"></ul></div>
+      <button class="lb-btn" id="payBtn" type="button"></button>
+      <div class="l2-paid" id="lprem" hidden></div>
+      <button class="lb-btn ghost" id="again" type="button">다시 보기</button>
+      <button class="lb-btn ghost" id="toOther" type="button"></button>
+      <p class="lb-fine" id="note"></p>
+    </div></section>
   <div class="toast" id="toast"></div>
 </div>
 <script src="saju.js"></script>
@@ -141,16 +156,16 @@ select{height:46px;border:1px solid var(--line);background:#1d1a22;color:var(--i
 const $=id=>document.getElementById(id), wait=ms=>new Promise(r=>setTimeout(r,ms));
 const S_=window.Saju, X=window.SajuX, K=window.PK, {GAN,JI,EL,stEl,BR_EL}=S_;
 const toast=t=>{ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1900); };
-const show=id=>{ ['sIn','sLd','sRs'].forEach(s=>$(s).classList.toggle('on',s===id)); $(id).scrollTop=0; };
+const show=id=>{ ['sIn','sLd','sRs'].forEach(s=>$(s).classList.toggle('on',s===id)); $(id).scrollTop=0; document.body.classList.toggle('bright',id==='sRs'); };
 const MODE=new URLSearchParams(location.search).get('m')==='next'?'next':'re';
 const DOW=['일','월','화','수','목','금','토'], ANI=['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
 const HOURS=['자시 (23:30~01:29)','축시 (01:30~03:29)','인시 (03:30~05:29)','묘시 (05:30~07:29)','진시 (07:30~09:29)','사시 (09:30~11:29)','오시 (11:30~13:29)','미시 (13:30~15:29)','신시 (15:30~17:29)','유시 (17:30~19:29)','술시 (19:30~21:29)','해시 (21:30~23:29)'];
 const CFG={
- re:{top:'REUNION',img:'img/sion.jpg',who:'시온',seal:'白虎',k:'재회 사주 · 白虎 시온',t:'우리, 다시<br>닿을 수 있을까',p:'두 사람 사주와 앞으로 열두 달로 보는 재회의 흐름',go:'재회 흐름 보기',ld:['헤어진 달 다시 펼치는 중…','두 사람 일지 맞대 보는 중…','다시 닿는 달 찾는 중…'],
-   pay:'14,900원 · 시온의 재회 노트 열기',lk:'시온의 재회 노트',lkT:'다시 닿는 달 · 먼저 연락해도 되는 날',lkS:'열두 달 재회 달력 · 놓아야 할 신호 · 시온의 편지',other:'다음 연애도 보기',otherGo:'love2.html?m=next',
+ re:{top:'REUNION',img:'img/sion.jpg',who:'시온',seal:'백호',k:'재회 사주 · 白虎 시온',t:'우리, 다시<br>닿을 수 있을까',p:'두 사람 사주와 앞으로 열두 달로 보는 재회의 흐름',go:'재회 흐름 보기',ld:['헤어진 달 다시 펼치는 중','두 사람 일지 맞대 보는 중','다시 닿는 달 찾는 중'],
+   pay:'14,900원 · 시온의 재회 노트 열기',lk:'시온의 재회 노트',lkT:'다시 닿는 달 · 먼저 연락해도 되는 날',lkS:'열두 달 재회 달력 · 놓아야 할 신호 · 시온의 편지',lkE:['달마다 풀이','언제 놓을지','편지 한 통'],other:'다음 연애도 보기',otherGo:'love2.html?m=next',
    style:'화자는 백호 시온(金). 건조하고 낮은 반말. 감정 과장 없이 짧게 핵심만 담백하게 말한다(~해, ~야). 존댓말(~습니다, ~십시오)은 쓰지 않는다. 위로보다 정확한 판단을 주되 무례하지 않다. 비유는 칼 · 서리 · 가을 · 정리. 그 사람의 마음은 단정하지 않고 "~쪽으로 기울어", "~일 가능성이 커"처럼 말한다.'},
- next:{top:'NEXT LOVE',img:'img/seoha.jpg',who:'서하',seal:'書荷',k:'다음 연애 · 서하',t:'다음 사람은<br>언제 올까',p:'앞으로 열두 달, 인연이 오는 때와 그 사람의 결',go:'다음 인연 보기',ld:['인연의 별 찾는 중…','열두 달 펼쳐 보는 중…','그 사람 그려 보는 중…'],
-   pay:'9,900원 · 서하의 인연 노트 열기',lk:'서하의 인연 노트',lkT:'인연이 오는 달 · 그 사람 · 만나는 장면',lkS:'열두 달 인연 달력 · 고백하기 좋은 날 · 서하의 편지',other:'재회 사주도 보기',otherGo:'love2.html?m=re',
+ next:{top:'NEXT LOVE',img:'img/seoha.jpg',who:'서하',seal:'서하',k:'다음 연애 · 서하',t:'다음 사람은<br>언제 올까',p:'앞으로 열두 달, 인연이 오는 때와 그 사람의 결',go:'다음 인연 보기',ld:['인연의 별 찾는 중','열두 달 펼쳐 보는 중','그 사람 그려 보는 중'],
+   pay:'9,900원 · 서하의 인연 노트 열기',lk:'서하의 인연 노트',lkT:'인연이 오는 달 · 그 사람 · 만나는 장면',lkS:'열두 달 인연 달력 · 고백하기 좋은 날 · 서하의 편지',lkE:['달마다 풀이','날짜까지','편지 한 통'],other:'재회 사주도 보기',otherGo:'love2.html?m=re',
    style:'화자는 오늘의 운세를 봐 주는 서하. 다정하고 차분한 반말, 친한 누나 · 언니나 친구처럼 솔직하게(남성 이용자에게는 누나처럼, 여성 이용자에게는 언니처럼). 상대의 성별을 단정하지 않고 "그 사람"이라고 부른다. 그 사람의 마음은 단정하지 않는다. 설레게 하되 과장하지 않는다.'}}[MODE];
 document.body.classList.toggle('next',MODE==='next'); document.title=MODE==='re'?'재회 사주 · 오방사주':'다음 연애 · 오방사주';
 $('topT').textContent=CFG.top; $('hero').style.backgroundImage=`url('${CFG.img}')`; $('hK').textContent=CFG.k; $('hT').innerHTML=CFG.t; $('hP').textContent=CFG.p; $('goBtn').textContent=CFG.go;
@@ -236,33 +251,179 @@ const TYPE=[{n:'곧게 자라는 나무 같은 사람',look:'키가 크고 선�
  {n:'단정하게 벼린 쇠 같은 사람',look:'깔끔한 옷차림, 눈매가 또렷한 인상',job:'IT · 법 · 의료 · 엔지니어',place:'회사, 업무 미팅, 운동하는 곳'},
  {n:'깊고 조용한 물 같은 사람',look:'말수는 적은데 눈빛이 깊은 인상',job:'연구 · 예술 · 해외 · 콘텐츠',place:'여행지, 밤 산책, 앱이나 온라인'}];
 
-/* 무료 결과 */
+/* 무료 결과 — 밝은 한지 화면. 다음 연애는 「인연 예보」, 재회는 「재회 경로 지도」 */
 const rank=()=>[...D.M].sort((a,b)=>b.wv-a.wv||a.i-b.i), lowest=()=>[...D.M].sort((a,b)=>a.wv-b.wv||a.i-b.i)[0];
 const band=i=>i>=80?4:i>=65?3:i>=50?2:i>=35?1:0;
-const ST_N={solo:{mm:'인연이 오는 달 · 쉬어 갈 달',bad:'마음을 쉬어 갈 달'},some:{mm:'썸이 깊어지는 달 · 말을 아낄 달',bad:'말을 아낄 달'},end:{mm:'마음이 다시 열리는 달 · 정리에 쓰는 달',bad:'정리에 쓰는 달'}};
+const ST_N={solo:{mm:'인연이 오는 달 · 쉬어 갈 달',bad:'마음을 쉬어 갈 달',when:'인연이 오는 때'},some:{mm:'썸이 깊어지는 달 · 말을 아낄 달',bad:'말을 아낄 달',when:'썸이 깊어지는 때'},end:{mm:'마음이 다시 열리는 달 · 정리에 쓰는 달',bad:'정리에 쓰는 달',when:'마음이 다시 열리는 때'}};
+/* 화면에는 한자를 내보내지 않는다: 간지 · 오행 글자를 한글 읽기로 */
+const HM={}; [...GAN].forEach((c,i)=>HM[c]=S_.GAN_K[i]); [...JI].forEach((c,i)=>HM[c]=S_.JI_K[i]); [...EL].forEach((c,i)=>HM[c]=S_.EL_K[i]); [...'年月日時'].forEach((c,i)=>HM[c]='년월일시'[i]);
+const kr=t=>String(t==null?'':t).replace(/[㐀-鿿]/g,c=>HM[c]||''), gzK=(s,b)=>S_.GAN_K[s]+S_.JI_K[b];
+const ELW=['나무','불','흙','쇠','물'], NUMK=['','한','두','세','네','다섯','여섯','일곱','여덟','아홉','열','열한','열두'];
+const esc=K.esc, NEG=/충|원진|형|공망/;
+/* 근거 태그 → 짧은 말(칩) · 명리 용어와 쉬운 뜻(근거 노트) */
+const WS={'일지와 합':'배우자 자리 끌림','일지와 삼합':'배우자 자리와 한 팀','도화':'사람을 끄는 기운','인연의 별':'인연의 별','일간과 천간합':'마음 맞는 기운','홍염':'은근한 끌림','역마':'움직임이 많음','일지 충':'배우자 자리 부딪힘','일지 원진':'괜한 서운함','일지 형':'작은 마찰','공망':'헛도는 기운','그 사람 일지와 합':'그 사람 자리 끌림','그 사람 일지와 충':'그 사람 자리 부딪힘','그 사람 도화':'그 사람 쪽 끌림'};
+const WT_=()=>({'일지와 합':'일지 육합(배우자 자리와 끌어당김)','일지와 삼합':'일지 삼합(배우자 자리와 한 팀으로 묶임)','도화':'도화(사람을 끄는 기운)','인연의 별':`인연의 별(${D.male?'재성':'관성'}, 인연을 뜻하는 기운)`,'일간과 천간합':'천간합(나 자신과 마음이 맞는 기운)','홍염':'홍염(은근한 끌림)','역마':'역마(이동과 변화)','일지 충':'일지 충(배우자 자리와 정면으로 부딪힘)','일지 원진':'일지 원진(괜히 서운하고 꺼려짐)','일지 형':'일지 형(마찰과 시비)','공망':'공망(비어서 헛도는 자리)','그 사람 일지와 합':'그 사람 일지와 육합','그 사람 일지와 충':'그 사람 일지와 충','그 사람 도화':'그 사람의 도화'});
+const chips=(why,max)=>why.length?`<div class="lb-chips">${why.slice(0,max||4).map(w=>`<span class="${NEG.test(w)?'neg':'pos'}">${esc(WS[w]||w)}</span>`).join('')}</div>`:'';
+const terms=why=>{ const T=WT_(); return why.map(w=>T[w]||w).join(', '); };
+const sec=(no,t,hint,body)=>`<section class="lb-sec"><div class="lb-h"><span class="lb-no">${no}</span><h3>${t}</h3>${hint?`<small>${hint}</small>`:''}</div>${body}</section>`;
+const note=(...ps)=>`<div class="lb-why"><small>근거</small>${ps.filter(Boolean).map(p=>`<p>${p}</p>`).join('')}</div>`;
+const dr=o=>`${o.start.m}.${o.start.d} ~ ${o.end.m}.${o.end.d}`;
+const LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><rect x="5" y="11" width="14" height="10"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+function isNow(o){ const n=new Date(), k=n.getFullYear()*10000+(n.getMonth()+1)*100+n.getDate(); return o.start.y*10000+o.start.m*100+o.start.d<=k&&k<=o.end.y*10000+o.end.m*100+o.end.d; }
+/* 반원 게이지 */
+function arc(v,lo,hi){ const t=Math.max(0,Math.min(1,(v-lo)/(hi-lo))), R=118, cx=150, cy=146, P=a=>[cx+R*Math.cos(a),cy-R*Math.sin(a)], a=Math.PI*(1-t), [x,y]=P(a);
+  let ticks=''; for(let k=0;k<=10;k++){ const b=Math.PI*(1-k/10), r1=R+12, r2=R+(k%5?17:21); ticks+=`<line x1="${(cx+r1*Math.cos(b)).toFixed(1)}" y1="${(cy-r1*Math.sin(b)).toFixed(1)}" x2="${(cx+r2*Math.cos(b)).toFixed(1)}" y2="${(cy-r2*Math.sin(b)).toFixed(1)}" stroke="rgba(42,33,25,${k%5?.25:.5})" stroke-width="1.2"/>`; }
+  return `<svg class="lb-arc" viewBox="0 0 300 160" aria-hidden="true"><defs><linearGradient id="arcG" x1="0" x2="1"><stop offset="0" stop-color="var(--acc)" stop-opacity=".35"/><stop offset="1" stop-color="var(--acc)"/></linearGradient></defs>${ticks}
+   <path d="M${cx-R} ${cy} A${R} ${R} 0 0 1 ${cx+R} ${cy}" fill="none" stroke="#e7dcc9" stroke-width="12"/>
+   <path d="M${cx-R} ${cy} A${R} ${R} 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)}" fill="none" stroke="url(#arcG)" stroke-width="12"/>
+   <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="var(--acc)" stroke="#fffaf1" stroke-width="3.5"/></svg>`; }
+/* 지수를 만든 근거(+/-) */
+function ptLabel(p){ const a=kr(p[0]); let m;
+  if((m=a.match(/^(\d{4})년 (.+)$/))) return `${m[1]}년의 흐름 · ${m[2]}년`;
+  if((m=a.match(/^대운 (.+)$/))) return `지금 대운 · ${m[1]}`;
+  if(a==='원국 도화') return '타고난 도화';
+  if(/^원국 인연의 별/.test(a)) return a.replace('원국','타고난');
+  if(/^원국 일지/.test(a)) return '타고난 배우자 자리';
+  return a; }
+function bars(){ const L=D.pts.filter(p=>!(D.Q&&D.crossPts.includes(p))).filter(p=>p[2]!==0||/생일 없음/.test(p[0])), mx=Math.max(1,...L.map(p=>Math.abs(p[2])));
+  return `<div class="lb-bars">${L.slice(0,8).map(p=>{ const w=Math.abs(p[2])/mx*50, neg=p[2]<0;
+    return `<div class="lb-sb"><div class="l"><b>${esc(ptLabel(p))}</b><small>${esc(kr(p[1]).replace('일간과 천간합','마음 맞는 기운'))}</small></div><div class="g">${p[2]?`<i class="${neg?'neg':''}" style="${neg?`right:50%`:`left:50%`};width:${w.toFixed(1)}%"></i>`:''}</div></div>`; }).join('')}</div>
+   <div class="lb-sb-ax"><span></span><span><em style="font-style:normal">낮춤</em><em style="font-style:normal">높임</em></span></div>`; }
+function natalTiles(){ const P=D.P, db=P.d[1], cu=D.F.cur, dh=D.F.natal.filter(x=>x.k==='도화'), AT={년주:'태어난 해',월주:'태어난 달',일주:'태어난 날',시주:'태어난 시'};
+  const sp=D.pts.find(p=>/^원국 인연의 별/.test(p[0])), jp=D.pts.find(p=>/^원국 일지/.test(p[0])), dp=D.pts.find(p=>/^대운/.test(p[0]));
+  return `<div class="lb-tiles">
+   <div><small>타고난 인연의 별</small><b>${D.stars}개</b><div class="lb-dots">${[0,1,2,3].map(k=>`<i class="${k<D.stars?'on':''}"></i>`).join('')}</div><em>${sp?esc(sp[1]):''}</em></div>
+   <div><small>배우자 자리</small><b>${S_.JI_K[db]} · ${ANI[db]}</b><em>${jp?esc(jp[1]):'태어난 날의 지지. 연애가 깊어질수록 드러나는 자리'}</em></div>
+   <div><small>타고난 도화</small><b>${dh.length?'있음':'없음'}</b><em>${dh.length?dh.map(x=>AT[x.at]).join(' · ')+'에 사람을 끄는 기운':'끌림보다 신뢰로 가까워지는 편'}</em></div>
+   <div><small>지금 대운</small><b>${cu?gzK(cu.s,cu.b):'계산 전'}</b><em>${cu?`${cu.age}세부터 열 해. `:''}${dp?esc(dp[1]):'인연 쪽으로는 크게 움직이지 않는 열 해'}</em></div></div>`; }
+/* 다음 연애 · 인연 예보 */
+const STW={s:'강함',g:'맑음',q:'고요'};
+function stOf(x,top2){ return top2.includes(x)||x.sc>=75?'s':x.sc>=62?'g':'q'; }
+function stampHtml(st,word,extra){ return `<div class="lb-stamp ${st==='s'?'is-fill':st==='q'?'is-quiet':''}" ${extra||''}><b>${word}</b></div>`; }
+function curve(top2){ const W=360,H=150, X=i=>18+i*29.5, Y=v=>124-(Math.max(30,Math.min(96,v))-30)/66*104;
+  const pts=D.M.map((x,i)=>[X(i),Y(x.sc)]); let d=`M${pts[0][0]} ${pts[0][1]}`;
+  for(let i=1;i<pts.length;i++){ const [x0,y0]=pts[i-1],[x1,y1]=pts[i], cx=(x0+x1)/2; d+=` C${cx} ${y0} ${cx} ${y1} ${x1} ${y1}`; }
+  const area=d+` L${pts[11][0]} 128 L${pts[0][0]} 128 Z`, gl=(v,t)=>`<line x1="10" x2="350" y1="${Y(v)}" y2="${Y(v)}" stroke="rgba(42,33,25,.22)" stroke-dasharray="2 4"/><text x="12" y="${Y(v)-4}" font-size="9.5" fill="#9a8b7a">${t} 선</text>`;
+  return `<svg class="lb-curve" viewBox="0 0 ${W} ${H}" aria-hidden="true"><defs><linearGradient id="cvG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--acc)" stop-opacity=".22"/><stop offset="1" stop-color="var(--acc)" stop-opacity="0"/></linearGradient></defs>
+   ${gl(75,'강함')}${gl(62,'맑음')}<path d="${area}" fill="url(#cvG)"/><path d="${d}" fill="none" stroke="var(--acc)" stroke-width="2.2"/>
+   ${D.M.map((x,i)=>{ const st=stOf(x,top2), [px,py]=pts[i]; return (st==='s'?`<circle cx="${px}" cy="${py}" r="5.5" fill="var(--acc)" stroke="#fffaf1" stroke-width="2"/><text x="${px}" y="${py-11}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--acc)">${x.o.start.m}월</text>`:`<circle cx="${px}" cy="${py}" r="3" fill="#fffaf1" stroke="${st==='g'?'var(--acc)':'#9a8b7a'}" stroke-width="1.5"/>`)+`<text x="${px}" y="145" text-anchor="middle" font-size="10" fill="#6b5d4f">${x.o.start.m}</text>`; }).join('')}</svg>`; }
+function personSvg(){ return `<svg viewBox="0 0 120 176" aria-hidden="true"><defs><linearGradient id="psG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2119" stop-opacity=".26"/><stop offset="1" stop-color="#2a2119" stop-opacity=".07"/></linearGradient>
+  <pattern id="psH" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#2a2119" stroke-opacity=".08" stroke-width="1.4"/></pattern></defs>
+  <g fill="none" stroke="var(--acc)" stroke-opacity=".2"><circle cx="60" cy="70" r="34"/><circle cx="60" cy="70" r="48"/><circle cx="60" cy="70" r="62" stroke-dasharray="3 5"/></g>
+  <path d="M60 40c-13 0-22 10-22 25 0 10 4 19 10 24l-1 11c-17 4-31 14-35 30-2 9-3 25-3 46h102c0-21-1-37-3-46-4-16-18-26-35-30l-1-11c6-5 10-14 10-24 0-15-9-25-22-25z" fill="url(#psG)"/>
+  <path d="M60 40c-13 0-22 10-22 25 0 10 4 19 10 24l-1 11c-17 4-31 14-35 30-2 9-3 25-3 46h102c0-21-1-37-3-46-4-16-18-26-35-30l-1-11c6-5 10-14 10-24 0-15-9-25-22-25z" fill="url(#psH)" stroke="#2a2119" stroke-opacity=".35" stroke-width="1"/>
+  <text x="60" y="162" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6b5d4f" letter-spacing=".08em">윤곽만 예보됨</text></svg>`; }
+function renderNext(top,lo,m1,m2,B){ const T=TYPE[D.starEl], top2=top.slice(0,2), now=new Date(), M=D.M;
+  const s3=M.slice(0,3), best=s3.some(x=>stOf(x,top2)==='s')?'s':s3.some(x=>stOf(x,top2)==='g')?'g':'q';
+  $('mast').className='l2-mast next'; $('mast').innerHTML=`<div class="lb-bar"><span>오방 인연 예보</span><span>${now.getFullYear()}. ${now.getMonth()+1}. ${now.getDate()} 발표</span></div>
+   <div class="l2-mh"><div class="tx"><small>예보관 서하</small><h1>인연<br>예보</h1><p>앞으로 열두 달,<br>인연의 날씨를<br>절기마다 짚었어.</p></div>
+    <div class="cutw"><img class="lb-cut" src="img/pop/seoha.webp" alt="서하"></div>
+    <div class="lb-anim" style="position:absolute;left:4px;bottom:22px;z-index:3"><div class="lb-stamp ${best==='s'?'is-fill':best==='q'?'is-quiet':''}" style="--sz:124px;position:relative"><small>이번 계절</small><b>${STW[best]}</b><em>${s3.map(x=>x.o.start.m).join(' · ')}월</em></div></div></div>`;
+  const W=WT_(), stTxt={solo:'',some:' 썸 타는 중이라 가까운 넉 달과 합을 더 크게 봤어요.',end:' 정리하는 중이라 처음 석 달은 낮추고 그 뒤 달을 더 크게 봤어요.'}[D.st];
+  const cal=`<div class="lb-cal lb-anim">${M.map((x,i)=>{ const st=stOf(x,top2), w=x===lo?{solo:'쉬어 가는 달',some:'말을 아낄 달',end:'정리에 쓰는 달'}[D.st]:(x.why.filter(t=>!NEG.test(t))[0]?WS[x.why.filter(t=>!NEG.test(t))[0]]:x.why[0]?WS[x.why[0]]||x.why[0]:'조용한 달');
+    return `<div class="${top2.includes(x)?'is-top':''} ${isNow(x.o)?'is-now':''}">${i===0||x.o.start.m===1?`<span class="y">${x.o.start.y}</span>`:''}<span class="m">${x.o.start.m}<i>월</i></span>${stampHtml(st,STW[st],`style="--d:${(i*.05).toFixed(2)}s"`)}<span class="w">${esc(w)}</span></div>`; }).join('')}</div>`;
+  const s1=sec('01','열두 달 인연 예보','절기 기준 월',`<p class="lb-lead">가장 센 달은 <b>${m1}월</b>, 그다음은 <b>${m2}월</b>. 도장이 진할수록 인연의 기운이 강한 달이에요.</p>${curve(top2)}${cal}
+   <div class="lb-legend"><span><i class="f"></i>강함</span><span><i></i>맑음</span><span><i class="q"></i>고요</span></div>
+   ${note(`달마다 그달 기운이 내 배우자 자리(태어난 날의 지지)와 끌어당기면 더하고, 부딪히면 뺐어요. 사람을 끄는 기운(도화), 인연의 별, 나와 마음이 맞는 기운(천간합)이 드는 달도 더했어요.${stTxt}`,`<b>${m1}월</b>은 ${esc(terms(top[0].why.filter(t=>!NEG.test(t))))||'큰 걸림이 없는 순한 흐름'}이 겹친 달이에요.`)}`);
+  const dmEl=stEl(D.P.d[0]);
+  const s2=sec('02','나타날 사람','예보 카드',`<div class="lb-person lb-anim"><div class="pic">${personSvg()}<div class="lb-stamp is-fill"><b>${ELW[D.starEl]}</b></div></div>
+   <div class="inf"><small>출현 예상 인물</small><h4>${esc(T.n)}</h4><dl><dt>오행</dt><dd>${ELW[D.starEl]}의 결 · ${S_.EL_K[D.starEl]}</dd><dt>자리</dt><dd>${esc(T.place.split(', ').slice(0,2).join(', '))}</dd>
+   <dt>인상</dt><dd class="lk">${LOCK}<span>${esc(T.look.replace(/[가-힣]/g,'○'))}</span></dd><dt>하는 일</dt><dd class="lk">${LOCK}<span>${esc(T.job.replace(/[가-힣]/g,'○'))}</span></dd></dl></div></div>
+   ${note(`인연의 별은 ${D.male?'남성에게는 내가 다루는 기운(재성)':'여성에게는 나를 다스리는 기운(관성)'}이에요. 타고난 나(일간)가 <b>${ELW[dmEl]}</b>라서, 그 기운은 <b>${ELW[D.starEl]}</b>${K.bt(ELW[D.starEl])?'이':'가'} 돼요. 다음 사람은 그 결을 띠기 쉬워요.`,'인상과 하는 일은 서하의 인연 노트에서 열려요.')}`);
+  const s3s=sec('03','언제 · 어디서','',`<div class="lb-tiles">
+   <div><small>${ST_N[D.st].when}</small><b>${top[0].o.start.y}년 ${m1}월</b><em>${dr(top[0].o)} · ${top[0].o.term}부터</em></div>
+   <div><small>한 번 더 오는 때</small><b>${top[1].o.start.y}년 ${m2}월</b><em>${dr(top[1].o)} · ${top[1].o.term}부터</em></div>
+   <div><small>만나기 쉬운 곳</small><b>${esc(T.place.split(', ')[0])}</b><em>${esc(T.place.split(', ').slice(1).join(', '))}</em></div>
+   <div><small>${ST_N[D.st].bad}</small><b>${lo.o.start.m}월</b><em>${esc(lo.why.filter(w=>NEG.test(w)).map(w=>WS[w]||w).join(' · ')||'인연의 기운이 가장 약한 달')}</em></div></div>
+   ${note(`때는 가장 센 달의 절기 구간이에요. 절기로 나뉜 한 달이라 달력의 1일과 조금 어긋나요. 곳은 인연의 별 ${ELW[D.starEl]}의 기운이 잘 드러나는 자리예요.`,lo.why.some(w=>NEG.test(w))?`<b>${lo.o.start.m}월</b>은 ${esc(terms(lo.why.filter(w=>NEG.test(w))))}이 걸린 달이에요.`:'')}`);
+  const act={solo:`${m1}월엔 들어오는 약속을 거절하지 않기`,some:`${m1}월에 내 마음을 한 번은 말하기`,end:`${m1}월 전까지 정리를 끝내 두기`}[D.st];
+  const s4=sec('04','서하의 한마디','',`<div class="lb-quote"><div class="lb-av" style="background-image:url('${CFG.img}')"></div><div><small>${CFG.who}</small><p id="sayT"></p></div></div><div class="lb-act"><small>할 일 하나</small><b>${esc(act)}</b></div>`);
+  const s5=sec('05','지수를 만든 것','',`${bars()}<div style="height:16px"></div>${natalTiles()}${note('지수는 가장 센 두 달과 좋은 달의 수, 앞으로 맞을 해의 기운, 지금 대운, 타고난 인연의 별과 도화를 더하고, 배우자 자리가 흔들리는 구조는 뺐어요. 막대가 길수록 지수에 크게 작용했어요.')}`);
+  $('body').innerHTML=s1+s2+s3s+s4+s5; }
+/* 재회 · 경로 지도 */
+function route(top,lo){ const M=D.M, dest=top[0], sec2=top[1];
+  const k=M.findIndex(x=>x.sc>=62), cool=k<0?Math.min(dest.i,3):Math.min(k,dest.i);
+  const cand=M.filter(x=>x.i<dest.i&&x.sc>=62&&!x.why.some(w=>NEG.test(w))), fw=cand[0]||null;
+  let risks=M.filter(x=>x!==dest&&x!==sec2&&x!==fw&&(x.v<=-1.5||x.why.some(w=>/충/.test(w)))).sort((a,b)=>a.v-b.v).slice(0,2);
+  if(lo!==dest&&lo.v<0&&!risks.includes(lo)) risks=[lo].concat(risks).slice(0,2);
+  const W=[{kind:'o',i:-1}]; if(cool>0) W.push({kind:'c',i:0,to:cool-1}); if(fw) W.push({kind:'f',i:fw.i,x:fw});
+  risks.forEach(x=>W.push({kind:'r',i:x.i,x})); W.push({kind:'d',i:dest.i,x:dest}); if(sec2.i>dest.i) W.push({kind:'s',i:sec2.i,x:sec2}); else if(sec2!==fw) W.push({kind:'s2',i:sec2.i,x:sec2});
+  W.sort((a,b)=>a.i-b.i||(a.kind==='c'?-1:1)); W.forEach((w,n)=>w.n=n+1); return {W,cool,dest,fw,risks}; }
+function mapSvg(R){ const M=D.M, ys=[552,416,280,144], xs=[78,180,282];
+  const P=M.map((x,i)=>{ const r=Math.floor(i/3), c=i%3; return [r%2?xs[2-c]:xs[c], ys[r]]; }), O=[30,616];
+  const seg=[]; seg.push({to:0,d:`M${O[0]} ${O[1]} C${O[0]} 585 ${O[0]+8} ${P[0][1]} ${P[0][0]} ${P[0][1]}`});
+  for(let i=1;i<12;i++){ const A=P[i-1], B=P[i]; let d;
+    if(A[1]===B[1]){ const w=i%2?9:-9; d=`M${A[0]} ${A[1]} C${A[0]+(B[0]-A[0])/3} ${A[1]+w} ${A[0]+2*(B[0]-A[0])/3} ${B[1]-w} ${B[0]} ${B[1]}`; }
+    else { const bu=A[0]>180?60:-60; d=`M${A[0]} ${A[1]} C${A[0]+bu} ${A[1]} ${B[0]+bu} ${B[1]} ${B[0]} ${B[1]}`; }
+    seg.push({to:i,d}); }
+  const di=R.dest.i, st=s=>s.to<R.cool?'cool':s.to<=di?'go':'after';
+  const SEGS=seg.map(s=>{ const t=st(s); return t==='cool'?`<path d="${s.d}" fill="none" stroke="#6b5d4f" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"/>`:t==='go'?`<path d="${s.d}" fill="none" stroke="#fffaf1" stroke-width="9"/><path d="${s.d}" fill="none" stroke="var(--acc)" stroke-width="4"/>`:`<path d="${s.d}" fill="none" stroke="rgba(42,33,25,.28)" stroke-width="1.6" stroke-dasharray="1 5" stroke-linecap="round"/>`; }).join('');
+  const wAt={}; R.W.forEach(w=>{ if(w.kind!=='c'&&w.kind!=='o') wAt[w.i]=w; });
+  const lab=(x,y,t,c,anc)=>`<text x="${x}" y="${y}" text-anchor="${anc||'middle'}" font-size="11.5" font-weight="700" fill="${c||'#2a2119'}" paint-order="stroke" stroke="#f8f2e6" stroke-width="4">${t}</text>`;
+  const nodes=M.map((x,i)=>{ const [px,py]=P[i], w=wAt[i], mo=`${x.o.start.m}월${x.o.start.m===1?` · ${x.o.start.y}`:''}${i===0?' · 지금':''}`;
+    if(w&&w.kind==='d') return `<circle cx="${px}" cy="${py}" r="34" fill="none" stroke="var(--acc)" stroke-opacity=".25" stroke-width="1"/><circle cx="${px}" cy="${py}" r="28" fill="var(--acc)" stroke="#fffaf1" stroke-width="3"/><circle cx="${px}" cy="${py}" r="23" fill="none" stroke="#fffaf1" stroke-width="1" stroke-opacity=".7"/><text x="${px}" y="${py-5}" text-anchor="middle" font-size="9" font-weight="700" fill="#fffaf1">다시 닿음</text><text x="${px}" y="${py+12}" text-anchor="middle" font-size="16" font-weight="900" fill="#fffaf1">${x.o.start.m}월</text>${lab(px,py+50,'다시 닿는 지점','var(--acc-ink)')}`;
+    let mk=`<circle cx="${px}" cy="${py}" r="4.5" fill="#fffaf1" stroke="${i<R.cool?'#6b5d4f':i<=di?'var(--acc)':'#9a8b7a'}" stroke-width="1.8"/>`;
+    if(w&&w.kind==='f') mk=`<circle cx="${px}" cy="${py}" r="12" fill="#fffaf1" stroke="var(--acc)" stroke-width="2.4"/><text x="${px}" y="${py+4}" text-anchor="middle" font-size="11" font-weight="900" fill="var(--acc-ink)">${w.n}</text>`+lab(px,py-20,'첫 연락 창','var(--acc-ink)');
+    if(w&&w.kind==='r') mk=`<rect x="${px-9}" y="${py-9}" width="18" height="18" transform="rotate(45 ${px} ${py})" fill="#2a2119"/><text x="${px}" y="${py+4}" text-anchor="middle" font-size="10.5" font-weight="900" fill="#fffaf1">${w.n}</text>`+lab(px,py-20,'위험 지점');
+    if(w&&(w.kind==='s'||w.kind==='s2')) mk=`<circle cx="${px}" cy="${py}" r="12" fill="#fffaf1" stroke="var(--acc)" stroke-width="2" stroke-dasharray="3 2.5"/><text x="${px}" y="${py+4}" text-anchor="middle" font-size="11" font-weight="900" fill="var(--acc-ink)">${w.n}</text>`+lab(px,py-20,w.kind==='s'?'두 번째 기회':'먼저 오는 창','var(--acc-ink)');
+    return mk+`<text x="${px}" y="${py+(w?27:19)}" text-anchor="middle" font-size="10.5" fill="#6b5d4f" paint-order="stroke" stroke="#f8f2e6" stroke-width="3">${mo}</text>`; }).join('');
+  const cw=R.W.find(w=>w.kind==='c'); let coolL='';
+  if(cw){ const c=Math.floor((R.cool-1)/2), [px,py]=P[c], busy=!!wAt[c]; coolL=`<g transform="translate(${px} ${busy?py+44:py-22})"><circle r="9" fill="#fffaf1" stroke="#6b5d4f" stroke-width="1.5" stroke-dasharray="2 2"/><text y="3.5" text-anchor="middle" font-size="10" font-weight="900" fill="#2a2119">${cw.n}</text>${lab(14,4,'냉각기','#6b5d4f','start')}</g>`; }
+  const ow=R.W[0], org=`<rect x="${O[0]-7}" y="${O[1]-7}" width="14" height="14" fill="#6b5d4f"/><text x="${O[0]}" y="${O[1]+4}" text-anchor="middle" font-size="9.5" font-weight="900" fill="#fffaf1">${ow.n}</text>${lab(O[0]+14,O[1]+4,`헤어진 때 · ${D.xy}.${D.xm}`,'#6b5d4f','start')}`;
+  const topo=[[300,600,70,30,-12],[120,470,90,34,8],[300,330,64,40,-20],[90,200,76,30,14],[250,70,90,26,-6]].map(([cx,cy,rx,ry,a])=>[1,.72,.46].map(f=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx*f}" ry="${ry*f}" transform="rotate(${a} ${cx} ${cy})" fill="none" stroke="var(--acc)" stroke-opacity=".16" stroke-width="1"/>`).join('')).join('');
+  let grid=''; for(let x=60;x<360;x+=60) grid+=`<line x1="${x}" x2="${x}" y1="0" y2="640" stroke="rgba(42,33,25,.05)"/>`; for(let y=40;y<640;y+=60) grid+=`<line x1="0" x2="360" y1="${y}" y2="${y}" stroke="rgba(42,33,25,.05)"/>`;
+  const comp=`<g transform="translate(326 40)"><circle r="19" fill="#fffaf1" stroke="rgba(42,33,25,.3)"/><path d="M0 -15 L5 0 L0 15 L-5 0 Z" fill="rgba(42,33,25,.15)"/><path d="M0 -15 L5 0 L-5 0 Z" fill="#2a2119"/><text y="-23" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6b5d4f">북</text></g>`;
+  return `<div class="l2-map"><svg viewBox="0 0 360 640" role="img" aria-label="지금부터 다시 닿는 지점까지의 열두 달 경로">${grid}${topo}${comp}<text x="14" y="26" font-size="10" fill="#9a8b7a">점 하나가 한 달 · 절기 기준</text>${SEGS}${org}${coolL}${nodes}</svg></div>`; }
+function renderRe(top,lo,m1,m2,B){ const now=new Date(), R=route(top,lo), el=(now.getFullYear()-D.xy)*12+(now.getMonth()+1-D.xm);
+  const elT=el>0?`헤어진 지 ${el}개월째`:el===0?'이번 달에 헤어짐':`${D.xy}년 ${D.xm}월`;
+  $('mast').className='l2-mast re'; $('mast').innerHTML=`<div class="lb-bar"><span>재회 경로 지도</span><span>시온 작성 · ${now.getFullYear()}. ${now.getMonth()+1}. ${now.getDate()}</span></div>
+   <div class="l2-mh"><div class="tx"><small>백호 시온의 지도</small><h1>재회<br>경로 지도</h1><div class="meta"><div><b>${elT}</b></div><div>경유지 <b>${R.W.length}곳</b></div><div>다시 닿는 달 <b>${m1}월</b></div></div></div>
+    <div class="lb-frame fr"><div class="in" style="background-image:url('${CFG.img}')"></div></div>
+    <div class="lb-anim" style="position:absolute;right:120px;top:210px;z-index:3"><div class="lb-stamp is-fill" style="--sz:98px;position:relative"><small>다시 닿음</small><b>${m1}월</b><em>${top[0].o.start.y}</em></div></div></div>`;
+  const W=R.W, CK={o:'출발',c:'냉각기',f:'첫 연락 창',r:'위험 지점',d:'다시 닿는 지점',s:'두 번째 기회',s2:'먼저 오는 창'};
+  const riskT=x=>{ const w=x.why; return w.includes('일지 충')?'배우자 자리와 정면으로 부딪히는 달이야. 다시 이어져도 이때 다투면 크게 번져.':w.includes('그 사람 일지와 충')?'그 사람 쪽 배우자 자리가 흔들리는 달이야. 그쪽 사정이 먼저 바빠.':w.includes('일지 원진')?'괜한 서운함이 쌓이는 달이야. 오해를 풀겠다고 긴 말을 보내지 마.':w.includes('일지 형')?'작은 마찰이 시비로 커지기 쉬운 달이야.':w.includes('공망')?'기운이 비어서 연락이 헛돌기 쉬운 달이야.':'기운이 가장 낮게 깔린 달이야. 움직이지 않는 게 길을 지키는 방법이야.'; };
+  const card=w=>{ const x=w.x; let meta='', body='', ch='';
+    if(w.kind==='o'){ meta=`${D.xy}년 ${D.xm}월`; body=`${elT}${el>0?'야':''}. 지도는 이번 절월부터 열두 달을 따라가.`; }
+    if(w.kind==='c'){ const a=D.M[0].o.start.m, b=D.M[w.to].o.start.m, n=w.to+1; meta=n>1?`${a}월 ~ ${b}월 · ${NUMK[n]} 달`:`${a}월 · 한 달`; body='기운이 낮게 깔린 구간이야. 이때 보내는 연락은 같은 이유로 다시 멀어지기 쉬워. 연락보다 내 쪽 정리가 먼저야.'; ch=chips([...new Set(D.M.slice(0,n).flatMap(m=>m.why))].filter(t=>NEG.test(t)),3); }
+    if(w.kind==='f'){ meta=`${x.o.start.m}월 · ${dr(x.o)}`; body='길이 처음 트이는 달이야. 길게 말고, 짧은 안부 한 줄이 맞는 창이야.'; ch=chips(x.why.filter(t=>!NEG.test(t)),3); }
+    if(w.kind==='r'){ meta=`${x.o.start.m}월`; body=riskT(x); ch=chips(x.why.filter(t=>NEG.test(t)),3); }
+    if(w.kind==='d'){ meta=`${x.o.start.y}년 ${x.o.start.m}월 · ${dr(x.o)}`; body=`열두 달 중 두 사람 사이가 가장 가까워지는 달이야. ${x.o.term}부터 다음 절기 전까지.`; ch=chips(x.why.filter(t=>!NEG.test(t)),4); }
+    if(w.kind==='s'||w.kind==='s2'){ meta=`${x.o.start.m}월 · ${dr(x.o)}`; body=w.kind==='s'?'첫 시도가 어긋나도 한 번 더 열리는 달이야.':'가장 센 달보다 먼저 오는, 두 번째로 가까운 달이야.'; ch=chips(x.why.filter(t=>!NEG.test(t)),3); }
+    return `<li class="${['f','d','s','s2'].includes(w.kind)?'is-acc':w.kind==='r'?'is-risk':''}"><span class="lb-o"><span>${w.n}</span></span><div class="lb-card"><div class="t"><b>${CK[w.kind]}</b><span>${meta}</span></div><p>${body}</p>${ch}</div></li>`; };
+  const s1=sec('01','지금에서 다시 닿는 지점까지','열두 달',`<p class="lb-lead">굵은 선이 <b>${m1}월</b>까지 이어지는 길이야. 점선은 연락을 쉬는 구간, 마름모는 부딪히기 쉬운 달.</p>${mapSvg(R)}
+   ${note('달마다 그달 기운이 내 배우자 자리(태어난 날의 지지)와 끌어당기는지(합), 부딪히는지(충), 괜한 서운함(원진)이 있는지로 점수를 매겼어요. 그 사람 생일이 있으면 그 사람의 배우자 자리와의 합 · 충도 더했어요. 앞 여섯 달은 조금 더 크게 봤어요.',`<b>${m1}월</b>은 ${esc(terms(top[0].why.filter(t=>!NEG.test(t))))||'큰 걸림이 없는 순한 흐름'}이 겹친 달이에요.`)}`);
+  const s2=sec('02','경유지',`${W.length}곳`,`<ol class="lb-tl">${W.map(card).join('')}</ol>`);
+  let s3='';
+  if(D.Q){ const Q=D.Q, db=D.P.d[1], main=D.crossPts.slice().sort((a,b)=>Math.abs(b[2])-Math.abs(a[2]))[0], neg=main[2]<0;
+    s3=sec('03','두 사람 사이','',`<div class="l2-pair"><div class="p me"><i>${S_.JI_K[db]}</i><small>${esc(D.me.name||'나')}</small><em>${ELW[stEl(D.P.d[0])]}의 사람 · ${ANI[db]} 자리</em></div><div class="ln ${neg?'neg':''}"><span>${esc(main[0].replace(/^두 사람 /,''))}</span></div><div class="p"><i>${S_.JI_K[Q.d[1]]}</i><small>${esc((D.pt&&D.pt.name)||'그 사람')}</small><em>${ELW[stEl(Q.d[0])]}의 사람 · ${ANI[Q.d[1]]} 자리</em></div></div>
+     <div class="lb-bars">${D.crossPts.map(p=>{ const mx=4, w=Math.abs(p[2])/mx*50, n=p[2]<0; return `<div class="lb-sb"><div class="l"><b>${esc(p[0])}</b><small>${esc(p[1])}</small></div><div class="g">${p[2]?`<i class="${n?'neg':''}" style="${n?'right:50%':'left:50%'};width:${Math.min(50,w).toFixed(1)}%"></i>`:''}</div></div>`; }).join('')}</div>
+     <div class="lb-sb-ax"><span></span><span><em style="font-style:normal">멀게</em><em style="font-style:normal">가깝게</em></span></div>
+     ${note('원 안의 글자는 두 사람의 배우자 자리(태어난 날의 지지)예요. 두 자리가 끌어당기는지(합) 부딪히는지(충) 괜한 서운함(원진)이 있는지, 타고난 나(일간)끼리 마음이 맞는지(천간합)와 서로 살려 주는지(상생)를 봤어요.')}`); }
+  else s3=sec('03','두 사람 사이','',`<div class="lb-card"><div class="t"><b>그 사람 생일이 비어 있어</b></div><p>지금 지도는 내 사주와 앞으로 열두 달로만 그렸어. 그 사람 생일을 넣으면 두 사람의 배우자 자리가 끌어당기는지, 부딪히는지까지 지도에 올라가.</p></div>`);
+  const act=[`${m1}월 전까지 내 쪽 정리부터`,`연락보다 내 쪽 정리 먼저`,`${m1}월에 한 번만 두드리기`,`${m1}월까지 기다렸다 짧은 안부 한 줄`,`${m1}월에 움직이기`][B];
+  const s4=sec('04','시온의 한마디','',`<div class="lb-quote"><div class="lb-av" style="background-image:url('${CFG.img}')"></div><div><small>${CFG.who}</small><p id="sayT"></p></div></div><div class="lb-act"><small>할 일 하나</small><b>${esc(act)}</b></div>`);
+  const s5=sec('05','가능성을 만든 것',D.Q?'두 사람 사이 말고':'',`${bars()}<div style="height:16px"></div>${natalTiles()}${note('가능성은 두 사람 사이의 관계, 가장 센 달과 좋은 달의 수, 앞으로 맞을 해와 지금 대운의 기운, 타고난 인연의 별과 도화를 더하고 부딪히는 관계는 뺐어요. 막대가 길수록 크게 작용했어요.')}`);
+  $('body').innerHTML=s1+s2+s3+s4+s5; }
 function render(){ const top=rank(), lo=lowest(), m1=top[0].o.start.m, m2=top[1].o.start.m, B=band(D.idx);
   $('rK').textContent=MODE==='re'?'재회 가능성':'다음 인연 지수'; $('rN').innerHTML=`${D.idx}<i>%</i>`;
+  $('arc').innerHTML=arc(D.idx,MODE==='re'?25:30,92); $('arcS').innerHTML=MODE==='re'?'<span>정리 쪽</span><span>다시 닿는 쪽</span>':'<span>고요</span><span>강함</span>';
   if(MODE==='re'){ $('rT').textContent=['붙잡기보다 정리 쪽으로 기울어','다시 닿기엔 바람이 약한 쪽이야','반반이야, 타이밍이 전부야','기다려 볼 근거가 있는 사이야','다시 닿을 문이 열려 있어'][B];
-    const pt=D.pts.find(p=>!/^가장 센 달/.test(p[0]))||D.pts[0]; $('rP').textContent=`가장 가까워지는 달은 ${m1}월, 그다음은 ${m2}월. ${pt[0]} · ${pt[1]}.`; }
+    const pt=D.pts.find(p=>!/^가장 센 달/.test(p[0]))||D.pts[0]; $('rP').textContent=`가장 가까워지는 달은 ${m1}월, 그다음은 ${m2}월. ${kr(pt[0])} · ${kr(pt[1])}.`; renderRe(top,lo,m1,m2,B); }
   else { const T=TYPE[D.starEl], now=new Date(), cur=top[0].o.start.y*100+top[0].o.start.m<=now.getFullYear()*100+now.getMonth()+1, when=cur?'지금':`${m1}월`;
     $('rT').textContent=D.st==='some'?`${when}, 썸이 선명해지는 때`:D.st==='end'?`${when}, 마음이 다시 열리는 때`:`${when}, 인연이 와`;
-    $('rP').textContent=['지금은 쉬어 가는 흐름이야. 나를 먼저 챙기면 다음 흐름이 더 좋아져.','인연보다 나를 다지는 쪽으로 기울어. 대신 그 달만큼은 놓치지 마.','인연의 기운은 보통이야. 기다리기보다 사람 많은 자리에 한 번 더 나가 봐.','좋은 달이 분명히 있어. 그 달엔 약속을 비워 둬.','열두 달 안에 인연의 별이 여러 번 겹쳐. 마음만 열어 두면 돼.'][B]+` 다음 사람은 ${T.n}, ${T.place}에서 만날 가능성이 커.`; }
-  const hint=$('rHint'); hint.hidden=!(MODE==='re'&&!D.Q);
-  $('mmH').textContent=MODE==='re'?'다시 닿는 달 · 조심할 달':ST_N[D.st].mm;
-  $('mm').innerHTML=top.slice(0,2).map(x=>`<div><small>${x.o.start.y}년</small><b>${x.o.start.m}월</b><span>${x.why.filter(w=>!/충|원진|형|공망/.test(w)).slice(0,2).join(' · ')||'흐름이 순한 달'}</span></div>`).join('')+`<div class="bad" style="grid-column:1/-1"><small>${MODE==='re'?'연락을 아낄 달':ST_N[D.st].bad}</small><b>${lo.o.start.m}월</b><span>${lo.why.filter(w=>/충|원진|형|공망/.test(w)).join(' · ')||'인연의 기운이 가장 약한 달'}</span></div>`;
-  $('tlH').textContent=MODE==='next'&&D.st==='some'?'앞으로 열두 달 흐름 · 가까운 달을 더 크게':MODE==='next'&&D.st==='end'?'앞으로 열두 달 흐름 · 정리 뒤 달을 더 크게':'앞으로 열두 달 흐름'; const mx=Math.max(...D.M.map(x=>x.sc));
-  $('tl').innerHTML=D.M.map(x=>`<div class="${top.slice(0,2).includes(x)?'hi':''}"><i data-h="${Math.round(x.sc/mx*86)}" style="height:2px"></i><small>${x.o.start.m}</small></div>`).join('');
-  setTimeout(()=>$('tl').querySelectorAll('i').forEach(i=>i.style.height=i.dataset.h+'px'),300);
-  $('sayAv').style.backgroundImage=`url('${CFG.img}')`; $('sayN').textContent=CFG.who;
+    $('rP').textContent=['지금은 쉬어 가는 흐름이야. 나를 먼저 챙기면 다음 흐름이 더 좋아져.','인연보다 나를 다지는 쪽으로 기울어. 대신 그 달만큼은 놓치지 마.','인연의 기운은 보통이야. 기다리기보다 사람 많은 자리에 한 번 더 나가 봐.','좋은 달이 분명히 있어. 그 달엔 약속을 비워 둬.','열두 달 안에 인연의 별이 여러 번 겹쳐. 마음만 열어 두면 돼.'][B]+` 다음 사람은 ${T.n}, ${T.place}에서 만날 가능성이 커.`; renderNext(top,lo,m1,m2,B); }
+  $('rHint').hidden=!(MODE==='re'&&!D.Q);
   $('sayT').textContent=MODE==='re'?[`미련이랑 인연은 달라. 정리하는 쪽이 결국 이겨.`,`바람이 약해. 연락보다 내 쪽 정리가 먼저야. 굳이 해 본다면 ${m1}월.`,`반반이야. ${m1}월에 한 번만 두드려 보고, 답이 없으면 거기까지.`,`${m1}월까지 기다려. 그때 짧은 안부 한 줄이면 돼.`,`문은 열려 있어. ${m1}월에 움직여. 그 전에 서두르면 같은 이유로 또 멀어져.`][B]
     :D.st==='end'?`정리 중이면 지금은 서두르지 마. ${m1}월쯤엔 다른 사람이 눈에 들어올 가능성이 커. 그때까진 나부터 챙겨.`
     :D.st==='some'?`썸이면 ${m1}월이 고비야. 그 전엔 너무 재지 말고, 그달엔 네 마음을 한 번은 말해 봐.`
     :`${m1}월엔 약속 거절하지 마. 그 자리에 그 사람이 있을 수도 있어.`;
-  $('ev').innerHTML=(D.pts.map(p=>p[0]).concat(top[0].why)).filter((t,i,a)=>a.indexOf(t)===i).slice(0,5).map(t=>`<span>${t}</span>`).join('');
   $('lkH').textContent=CFG.lk; $('lkBl').textContent=MODE==='re'?`${K.tok('{N}',D.me.name)}, 다시 닿는 날은 ○월 ○일이야. 그날은 먼저 연락해도 돼. 다만 ○월엔 연락을 아껴. 그 사람 쪽 흐름은 지금 ○○ 쪽으로 기울어 있어.`:`${K.tok('{N}',D.me.name)}, 그 사람은 ○월에 ○○에서 만나. 처음엔 별로라고 생각할 수도 있는데, 세 번째 만남에서 달라져.`;
-  $('lkT').textContent=CFG.lkT; $('lkS').textContent=CFG.lkS; $('payBtn').textContent=CFG.pay; $('payBtn').hidden=false; $('lockL').hidden=false; $('lprem').hidden=true;
+  $('lkT').textContent=CFG.lkT; $('lkS').innerHTML=CFG.lkS.split(' · ').map((t,i)=>`<li>${LOCK}${t}<em>${CFG.lkE[i]||''}</em></li>`).join(''); $('payBtn').textContent=CFG.pay; $('payBtn').hidden=false; $('lockL').hidden=false; $('lprem').hidden=true;
   $('toOther').textContent=CFG.other; $('note').textContent='체험판이에요. 원국과 월운은 실제 만세력(절기 시각)으로 계산하고, 지수는 배우자 자리(일지)와 다가올 달 · 해 · 대운의 합 · 충 · 원진, 도화, 인연의 별로 산출해요. 재회와 연애는 두 사람의 선택이 가장 큰 변수예요.';
-  $('rHero').style.backgroundImage=`url('${CFG.img}')`; show('sRs'); }
+  $('rHero').style.backgroundImage=`url('${CFG.img}')`; show('sRs'); anim(); }
+/* 도장 찍힘: 화면에 들어올 때 한 번 */
+function anim(){ const L=[...$('sRs').querySelectorAll('.lb-anim')]; if(!('IntersectionObserver' in window)){ L.forEach(e=>e.classList.add('in')); return; }
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{root:$('sRs'),threshold:.2}); L.forEach(e=>io.observe(e)); }
 
 /* 상세(결제 뒤) */
 let C=null, ST={};
@@ -274,15 +435,15 @@ function days(){ const P=D.P, Q=D.Q, out=[], st=new Date(); st.setHours(12,0,0,0
   const r=[],used=new Set(); out.sort((a,b)=>b.v-a.v||a.y-b.y||a.m-b.m).forEach(o=>{ const k=o.y*100+o.m; if(r.length<4&&!used.has(k)){ used.add(k); r.push(o); } }); return r.sort((a,b)=>a.y-b.y||a.m-b.m||a.d-b.d); }
 function draft(){ const top=rank(), T=TYPE[D.starEl], P=D.P;
   if(MODE==='re'){ const db=P.d[1], xr=D.xb==null?'':S_.isChung(D.xb,db)?'내 일지와 충이 걸린 달이라, 배우자 자리가 크게 흔들린 때였어.':S_.isHap(D.xb,db)?'내 일지와 합이 드는 달이었어. 그런데도 멀어졌다면 사주보다 상황 쪽 이유가 컸을 가능성이 커.':wonjin(D.xb,db)?'내 일지와 원진이 걸린 달이라, 서운함이 쌓이기 쉬운 때였어.':'내 일지와 크게 얽힌 달은 아니었어.';
-    return {why:[D.Q?`두 사람 사이 근거는 ${D.crossPts.map(p=>p[0]).join(', ')}. 한마디로 ${D.crossPts[0][1]}.`:'그 사람 생일 없이, 내 사주와 앞으로 열두 달로만 봤어. 그 사람 생일을 넣으면 두 사람 교차까지 볼 수 있어.',D.xb!=null?`헤어진 ${D.xy}년 ${D.xm}월은 ${JI[D.xb]}의 달이었어. ${xr}`:''].filter(Boolean),
-     months:D.M.map(x=>({title:x.sc>=70?'다시 닿는 달':x.why.some(w=>/충/.test(w))?'연락을 아낄 달':'지켜보는 달',text:`${x.o.term} 달 ${x.o.gz}. ${x.why.join(', ')||'조용히 지나가는 달.'}`,tip:x.sc>=70?'짧게 안부 한 줄':'먼저 연락하지 않기'})),
+    return {why:[D.Q?`두 사람 사이 근거는 ${D.crossPts.map(p=>p[0]).join(', ')}. 한마디로 ${D.crossPts[0][1]}.`:'그 사람 생일 없이, 내 사주와 앞으로 열두 달로만 봤어. 그 사람 생일을 넣으면 두 사람 교차까지 볼 수 있어.',D.xb!=null?`헤어진 ${D.xy}년 ${D.xm}월은 ${S_.JI_K[D.xb]}의 달이었어. ${xr}`:''].filter(Boolean),
+     months:D.M.map(x=>({title:x.sc>=70?'다시 닿는 달':x.why.some(w=>/충/.test(w))?'연락을 아낄 달':'지켜보는 달',text:`${x.o.term} 달 ${kr(x.o.gz)}. ${x.why.join(', ')||'조용히 지나가는 달.'}`,tip:x.sc>=70?'짧게 안부 한 줄':'먼저 연락하지 않기'})),
      keep:[{t:'같은 이유로 싸우지 않기',d:'헤어진 이유부터 짚고 다시 시작해.'},{t:`${top[0].o.start.m}월에 움직이기`,d:'가장 가까워지는 달이야.'},{t:'답이 없으면 한 번만',d:'두 번째 연락부터는 마음이 아니라 미련이야.'}],
      sign:['연락이 와도 사과 없이 예전 이야기만 하면, 그건 재회가 아니라 반복이야.','혼자 애쓰는 느낌이 석 달 넘게 가면 놓아.'],letter:['정리랑 재회는 같은 용기에서 나와.',`${top[0].o.start.m}월, 그때 판단해.`]}; }
   const ST_T={solo:['인연이 오는 달','약속 거절하지 않기'],some:['썸이 깊어지는 달','마음 한 번 말하기'],end:['마음이 다시 열리는 달','새 자리 한 번 나가기']}[D.st];
   return {who:[`다음 사람은 ${T.n}이야. ${T.look}.`,`일은 ${T.job} 쪽일 가능성이 커.`],
-    months:D.M.map(x=>({title:x.sc>=70?ST_T[0]:x.why.some(w=>/충/.test(w))?'마음을 쉬는 달':'천천히 데워지는 달',text:`${x.o.term} 달 ${x.o.gz}. ${x.why.join(', ')||'조용한 달이야.'}`,tip:x.sc>=70?ST_T[1]:'나부터 챙기기'})),
+    months:D.M.map(x=>({title:x.sc>=70?ST_T[0]:x.why.some(w=>/충/.test(w))?'마음을 쉬는 달':'천천히 데워지는 달',text:`${x.o.term} 달 ${kr(x.o.gz)}. ${x.why.join(', ')||'조용한 달이야.'}`,tip:x.sc>=70?ST_T[1]:'나부터 챙기기'})),
     scene:[D.st==='some'?`${top[0].o.start.m}월, 지금 썸 타는 사이가 한 걸음 가까워지기 좋은 때야. ${T.place.split(', ')[0]} 같은 자리에서 말이 트이기 쉬워.`:`${top[0].o.start.m}월, ${T.place.split(', ')[0]}에서. 처음엔 그냥 스쳐 가는데 두 번째 마주칠 때 말이 트여.`],
-    mine:[`네 일지 ${JI[P.d[1]]}는 ${S_.tgBranch(P.d[0],P.d[1])}이라, 가까워질수록 그 성향이 연애에 드러나.`],letter:[D.st==='end'?'정리는 끝까지 해. 그래야 다음 사람이 제대로 보여.':'다음 사람은 생각보다 가까이 있어.',`${top[0].o.start.m}월, 기억해 둬.`]}; }
+    mine:[`네 일지 ${S_.JI_K[P.d[1]]}${K.bt(S_.JI_K[P.d[1]])?'은':'는'} ${S_.tgBranch(P.d[0],P.d[1])}이라, 가까워질수록 그 성향이 연애에 드러나.`],letter:[D.st==='end'?'정리는 끝까지 해. 그래야 다음 사람이 제대로 보여.':'다음 사람은 생각보다 가까이 있어.',`${top[0].o.start.m}월, 기억해 둬.`]}; }
 function card(ids){ const P=D.P, gz=p=>p?GAN[p[0]]+JI[p[1]]:'모름';
   const c={화자:CFG.who,성별:D.male?'남':'여',지금상태:MODE==='next'?{solo:'솔로',some:'썸 타는 중',end:'정리하는 중'}[D.st]:'헤어진 뒤',상태별강조:MODE==='next'?{solo:'열두 달을 고르게 봄',some:'가까운 넉 달과 합(일지 · 천간합)을 더 크게 봄',end:'처음 석 달은 정리 기간으로 낮추고 그 뒤 달을 더 크게 봄'}[D.st]:'앞 여섯 달을 조금 더 크게 봄',일간:GAN[P.d[0]]+EL[stEl(P.d[0])],일지:JI[P.d[1]]+' '+S_.tgBranch(P.d[0],P.d[1]),원국:[['년주',P.y],['월주',P.m],['일주',P.d],['시주',P.h]].map(([n,p])=>n+' '+gz(p)),원국신살:D.F.natal.map(o=>o.at+' '+o.k),
     인연의별:D.male?'재성':'관성',지수:D.idx,근거:D.pts.map(p=>p[0]+' · '+p[1])};
@@ -313,19 +474,19 @@ ${card(ids)}`;
   return [{id:'core',prompt:core,check:d=>d&&Array.isArray(d.letter)},{id:'c0',prompt:cal([0,1,2,3,4,5]),check:isArr},{id:'c1',prompt:cal([6,7,8,9,10,11]),check:isArr}]; }
 function apply(id,d){ if(id==='core') Object.keys(d).forEach(k=>{ if(d[k]&&d[k].length) C[k]=d[k]; }); else d.forEach(x=>{ const i=+x.i; if(i>=0&&i<12) C.months[i]=Object.assign({},C.months[i],x); }); }
 function build(){ const nk=D.me.name||'', ps=a=>K.ps(a,nk), t=x=>K.tok(x,nk), top=rank(), hi=top.slice(0,2), lo=[lowest()];
-  const H=[`<div class="pk-st" id="lvst" hidden></div>`];
-  if(MODE==='re') H.push(K.sec('시온의 재회 노트 · 두 사람 사이',ps(C.why)+K.ev(D.pts.map(p=>p[0]))));
-  else H.push(K.sec('서하의 인연 노트 · 그 사람의 결',`<div class="pk-vs"><div><small>인연의 별</small><b>${EL[D.starEl]}</b><em>${TYPE[D.starEl].n}</em></div><div><small>만나는 곳</small><b style="font-size:15px">${TYPE[D.starEl].place.split(', ')[0]}</b><em>${TYPE[D.starEl].job}</em></div></div>`+ps(C.who)));
+  const H=[`<div class="l2-open"><div class="lb-stamp is-fill" style="--sz:74px"><small>봉인</small><b>열림</b></div><div><small>${CFG.lk}</small><b>${MODE==='re'?'다시 닿는 날까지 적어 뒀어':'그 사람이 오는 날까지 적어 뒀어'}</b></div></div>`,`<div class="pk-st" id="lvst" hidden></div>`];
+  if(MODE==='re') H.push(K.sec('시온의 재회 노트 · 두 사람 사이',ps(C.why)+K.ev(D.pts.map(p=>kr(p[0])))));
+  else H.push(K.sec('서하의 인연 노트 · 그 사람의 결',`<div class="pk-vs"><div><small>인연의 별</small><b>${ELW[D.starEl]}</b><em>${TYPE[D.starEl].n}</em></div><div><small>만나는 곳</small><b style="font-size:15px">${TYPE[D.starEl].place.split(', ')[0]}</b><em>${TYPE[D.starEl].job}</em></div></div>`+ps(C.who)));
   H.push(K.sec(MODE==='re'?'열두 달 재회 달력':'열두 달 인연 달력',`<div class="pk-acc">${D.M.map((x,i)=>{ const c=C.months[i]||{}, o=x.o, tag=hi.includes(x)?(MODE==='re'?'다시 닿음':'인연'):lo.includes(x)?'조심':'';
-    return K.row({k:'v'+i,cls:hi.includes(x)?'pk-hi':lo.includes(x)?'pk-lo':'',a:`${o.start.m}월`,asub:`${o.start.y}`,b:`<em>${o.gz}</em>${t(c.title||'')}${tag?`<span class="pk-tag">${tag}</span>`:''}`,c:x.sc,body:ps([c.text])+(c.tip?`<p class="pk-key"><b>이달 한 줄</b>${t(c.tip)}</p>`:'')+K.ev([...new Set(x.why.concat(o.ss.filter(k=>!x.why.includes(k))))])}); }).join('')}</div>`,'절기 기준 월 · 숫자는 점수'));
-  H.push(K.sec(MODE==='re'?'먼저 연락해도 되는 날':'고백하기 좋은 날',D.days.length?`<div class="pk-cards">${D.days.map(o=>`<div class="pk-card"><b>${o.m}.${o.d}<small>${o.y} · ${DOW[o.w]}요일</small></b><div><p class="pk-ct">${GAN[o.s]}${JI[o.b]}일</p><p>${o.why.join(' · ')}</p></div></div>`).join('')}</div>`:'<p class="pk-p">따로 고른 날이 없어요. 점수가 높은 달을 노리세요.</p>',MODE==='re'?'두 사람 모두 충이 없는 날':'내 일지 충이 없는 날'));
+    return K.row({k:'v'+i,cls:hi.includes(x)?'pk-hi':lo.includes(x)?'pk-lo':'',a:`${o.start.m}월`,asub:`${o.start.y}`,b:`<em>${kr(o.gz)}</em>${t(c.title||'')}${tag?`<span class="pk-tag">${tag}</span>`:''}`,c:x.sc,body:ps([c.text])+(c.tip?`<p class="pk-key"><b>이달 한 줄</b>${t(c.tip)}</p>`:'')+K.ev([...new Set(x.why.concat(o.ss.filter(k=>!x.why.includes(k))))])}); }).join('')}</div>`,'절기 기준 월 · 숫자는 점수'));
+  H.push(K.sec(MODE==='re'?'먼저 연락해도 되는 날':'고백하기 좋은 날',D.days.length?`<div class="pk-cards">${D.days.map(o=>`<div class="pk-card"><b>${o.m}.${o.d}<small>${o.y} · ${DOW[o.w]}요일</small></b><div><p class="pk-ct">${gzK(o.s,o.b)}일</p><p>${o.why.join(' · ')}</p></div></div>`).join('')}</div>`:'<p class="pk-p">따로 고른 날이 없어요. 점수가 높은 달을 노리세요.</p>',MODE==='re'?'두 사람 모두 충이 없는 날':'내 일지 충이 없는 날'));
   if(MODE==='re'){ H.push(K.sec('다시 만난다면 지킬 것',`<div class="pk-cards">${(C.keep||[]).slice(0,3).map((k,i)=>`<div class="pk-card"><b>${i+1}</b><div><p class="pk-ct">${t(k.t)}</p><p>${t(k.d)}</p></div></div>`).join('')}</div>`)); H.push(K.sec('놓아야 할 신호',ps(C.sign))); }
   else { H.push(K.sec('만나는 장면',ps(C.scene))); H.push(K.sec('연애할 때 내 패턴',ps(C.mine))); }
   H.push(K.letter(C.letter||[],{title:CFG.who+'의 편지',name:CFG.who},CFG.seal,nk));
   H.push(`<p class="pk-note" style="margin:14px 0 0">${ST.ai?`이 노트는 만세력 계산 근거만 재료로 AI가 ${CFG.who}의 말투로 쓴 글이에요. 명리 전문가 감수 전 원고예요`:`이 부분은 해석 사전으로 조립한 초안이에요. 정식 서비스에서는 같은 근거로 ${CFG.who}가 길게 써 줘요`}</p>`);
   return H.join(''); }
 function renderPrem(){ const host=$('lprem'); K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status($('lvst'),Object.assign({who:CFG.who+'가 노트'},ST)); }
-function openPrem(){ const host=$('lprem'); D.days=days(); C=K.gl(draft()); ST={}; host.className='pkx dark'; host.style.setProperty('--pk-acc','var(--a)'); host.hidden=false; K.bind(host); renderPrem();
+function openPrem(){ const host=$('lprem'); D.days=days(); C=K.gl(draft()); ST={}; host.className='pkx l2-paid'; host.style.setProperty('--pk-acc','var(--acc)'); host.hidden=false; K.bind(host); renderPrem();
   const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
   K.runAI({key:D.key,ver:'v2',parts:prompts(),apply,rerender:renderPrem,S:ST}); }
 

@@ -69,6 +69,20 @@
     '.yinBan .tx small{display:block;font-size:11px;letter-spacing:.14em;color:#e3b866;font-weight:700}',
     '.yinBan .tx b{display:block;margin-top:5px;font-family:var(--serif,serif);font-size:22px;font-weight:900;line-height:1.3}',
     '.yinBan .tx span{display:block;margin-top:5px;font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.5}',
+    '.chMini{display:flex;gap:14px;overflow-x:auto;padding:2px 16px 4px;scrollbar-width:none}',
+    '.chMini::-webkit-scrollbar{display:none}',
+    '.chM{flex:none;width:60px;border:0;padding:0;background:none;color:#fff;text-align:center;cursor:pointer;font-family:inherit}',
+    '.chM .pp{position:relative;display:block;width:60px;height:56px}',
+    '.home .chM .pp i,.chM .pp i{border-radius:50%!important}',
+    '.chM .pp i{position:absolute;top:2px;width:52px;height:52px;border-radius:50%;background:#222 center 16%/cover no-repeat;box-shadow:0 0 0 2px #0b0a0e,0 0 0 3.5px var(--c)}',
+    '.chM .pp i.a{left:4px;z-index:1}',
+    '.chM.two .pp i.a{left:0}.chM.two .pp i.b{left:20px;top:10px;width:40px;height:40px;opacity:.95;box-shadow:0 0 0 2px #0b0a0e,0 0 0 3px var(--c)}',
+    '.chM b{display:block;margin-top:6px;font-size:12px;font-weight:700;white-space:nowrap}',
+    '.chM small{display:block;margin-top:1px;font-size:10px;color:#8a8a92;white-space:nowrap}',
+    '.chM .mk{display:block;margin-top:2px;font-size:9.5px;font-weight:800;color:#e3b866}',
+    '.yinLn{display:flex;align-items:center;justify-content:space-between;margin:12px 16px 0;padding:11px 14px;border:1px solid rgba(255,240,220,.1);border-radius:14px;background:rgba(255,255,255,.03);color:#fff;font-family:inherit;width:calc(100% - 32px);cursor:pointer;text-align:left}',
+    '.yinLn span{font-size:13px;color:rgba(255,255,255,.82)}.yinLn span em{font-style:normal;color:#e3b866;font-weight:700;margin-right:6px}',
+    '.yinLn svg{flex:none;color:#e3b866}',
     '.prf{position:absolute;inset:0;z-index:64;background:#0b090d;overflow-y:auto;overscroll-behavior:contain;opacity:0;pointer-events:none;transform:translateY(16px);transition:opacity .35s,transform .45s cubic-bezier(.2,.8,.2,1)}',
     '.prf.on{opacity:1;pointer-events:auto;transform:none}',
     '.prf .pv{position:relative;height:68vh;max-height:620px;min-height:420px;background:#000 center 16%/cover no-repeat}',
@@ -113,8 +127,11 @@
     if(first){ list=list.filter(function(x){ return x!==first; }); list.unshift(first); }
     return list; }
 
+  function mini(id){ var c=C[id], m=mine(), isMine=c.el&&c.el===m;
+    var b=c.yang?'<i class="b" style="background-image:url(\''+C[id+'_y'].img+'\')"></i>':'';
+    return '<button type="button" class="chM'+(c.yang?' two':'')+'" data-c="'+(c.yang&&face()==='yin'?id+'_y':id)+'" style="--c:'+c.c+'"><span class="pp"><i class="a" style="background-image:url(\''+(c.yang&&face()==='yin'?C[id+'_y'].img:c.img)+'\')"></i>'+b+'</span><b>'+(c.yang&&face()==='yin'?C[id+'_y'].n:c.n)+'</b>'+(isMine?'<span class="mk">나의 수호신</span>':'<small>'+c.role+'</small>')+'</button>'; }
   function renderRows(){
-    var r=$('chRow'); if(r){ r.innerHTML=talkOrder().map(card).join(''); }
+    var r=$('chRow'); if(r){ var m=mine(), list=['seoha','taeo'].concat(EL).concat(['halmae']); if(m){ list=list.filter(function(x){ return x!==m; }); list.unshift(m); } r.innerHTML=list.map(mini).join(''); }
     var y=$('yinRow'); if(y){ y.innerHTML=EL.map(function(e){ return card(e+'_y'); }).join(''); }
   }
 
@@ -180,21 +197,11 @@
   function mount(){
     var talk=$('secTalk'); if(!talk) return;
     var st=document.createElement('style'); st.textContent=CSS; document.head.appendChild(st);
-    talk.innerHTML='<div class="sh"><small>캐릭터 상담</small><b>오늘은 누구한테 털어놓을래</b></div><div class="chRow" id="chRow"></div>';
-    var ys=document.createElement('section'); ys.className='hSec'; ys.id='secYin'; ys.setAttribute('data-cats','all heart love');
-    var pick=mine()||'water';
-    ys.innerHTML='<div class="sh"><small>음의 현신</small><b>같은 바람, 다른 얼굴</b></div>'+
-      '<button type="button" class="yinBan" id="yinBan" data-c="'+pick+'_y" style="background-image:url(\''+C[pick+'_y'].img+'\')"><video muted loop playsinline preload="none" data-src="'+C[pick+'_y'].v+'"></video>'+
-      '<span class="tx"><small>오방의 신 · 음의 얼굴</small><b>'+C[pick+'_y'].n+', '+C[pick].n+'의 다른 얼굴</b><span>오방의 신은 하나의 기운을 양과 음, 두 모습으로 지녀요.<br>스며드는 쪽의 다섯 얼굴을 만나 보세요.</span></span></button>'+
-      '<div class="chRow" id="yinRow"></div>';
-    talk.parentNode.insertBefore(ys, talk.nextSibling);
+    talk.innerHTML='<div class="sh"><small>캐릭터 상담</small><b>오늘은 누구한테 털어놓을래</b></div><div class="chMini" id="chRow"></div>'+
+      '<button type="button" class="yinLn" id="yinLn"><span><em>음의 현신</em>같은 기운의 여신 다섯도 만나 보기</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>';
     var mem=$('secMem'); if(mem) mem.style.display='none';
     renderRows();
-    document.addEventListener('click', function(e){ var b=e.target.closest('#chRow [data-c],#yinRow [data-c],#yinBan'); if(!b) return; e.preventDefault(); open(b.dataset.c); });
-    // 배너 영상: 보일 때만 무음 반복
-    var bn=$('yinBan'), bv=bn.querySelector('video');
-    bv.addEventListener('playing',function(){ bn.classList.add('vOn'); }); bv.addEventListener('error',function(){ bv.remove(); });
-    if('IntersectionObserver' in window) new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ if(!bv.getAttribute('src')) bv.src=bv.dataset.src; var q=bv.play(); if(q&&q.catch) q.catch(function(){}); } else { try{ bv.pause(); }catch(_){} } }); },{threshold:.35}).observe(bn);
+    document.addEventListener('click', function(e){ if(e.target.closest('#yinLn')){ e.preventDefault(); open((mine()||'water')+'_y'); return; } var b=e.target.closest('#chRow [data-c]'); if(!b) return; e.preventDefault(); open(b.dataset.c); });
     // 홈이 다시 보일 때(내 수호신 · 얼굴 선택이 바뀌었을 수 있음) 줄 다시 그림
     var home=$('home'); if(home) new MutationObserver(function(){ if(home.classList.contains('on')) renderRows(); }).observe(home,{attributes:true,attributeFilter:['class']});
     window.addEventListener('pageshow', renderRows);

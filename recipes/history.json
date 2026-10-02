@@ -44619,5 +44619,737 @@
   },
   "medias": [],
   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261001_151130_ef85588b-9447-475e-b1ad-d303a55e2c9e.png"
+ },
+ {
+  "id": "6a0b8376-4001-473c-8981-886e4ba6defa",
+  "type": "image",
+  "status": "completed",
+  "model": "seedream_v5_pro",
+  "created": 1790868302.259047,
+  "prompt": "Semi-realistic 2.5D Korean webtoon illustration, painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle texture, refined line work, cinematic rim light, strong three-dimensional volume and depth. A Korean saju master in his mid 60s, a passionate former professor: silver hair swept back with a few unruly strands falling over his forehead, a neatly trimmed short charcoal-and-silver beard, thick black horn-rimmed glasses pushed up onto his head, intense deep-set eyes, caught mid-explanation with one hand raised holding a stub of chalk, a confident half-smile. He wears a brown herringbone tweed jacket over an ivory hanbok jeogori whose white collar band (dongjeong) shows at the neck, a deep blue pocket square. Setting: a tall, cluttered private study: floor-to-ceiling shelves of stitched old books and worn hardcovers, a rolling library ladder, a large blackboard behind him covered only in abstract chalk circles, lines and arrows forming a five-element cycle diagram (no writing at all), a tall arched window pouring a beam of light where chalk dust floats. Camera: 35mm from slightly below, bookshelves converging upward for strong vertical perspective, a stack of books blurred in the near foreground, waist-up. Strong sense of depth and perspective: clear foreground, midground and background layers, converging lines, foreground objects out of focus. He must not resemble any real person. A distinctive, memorable character with a unique silhouette, not a generic grandfather. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "batch_size": 1,
+   "width": 1536,
+   "height": 2720,
+   "resolution": "2k",
+   "seed": 992446,
+   "is_inpaint": false,
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261001_152502_6a0b8376-4001-473c-8981-886e4ba6defa.png"
+ },
+ {
+  "id": "7ee00d7d-068d-4ee2-b865-9908e45d1723",
+  "type": "image",
+  "status": "completed",
+  "model": "nano_banana_2",
+  "created": 1790868302.672195,
+  "prompt": "Ultra-realistic editorial photograph, full-frame camera, 35mm lens at f/2.2, natural skin texture with pores, wrinkles and sun spots, real fabric texture, true-to-life color, cinematic but natural light, indistinguishable from a real photo. A Korean saju master in his late 60s with a sharp, cool analyst personality: very short-cropped silver buzz cut, angular face with hollow cheeks, a deep vertical crease between his brows, clean-shaven with faint silver stubble, thin gold half-moon reading glasses low on his nose, peering over them with one eyebrow slightly raised, unimpressed. He wears a black cashmere turtleneck with sleeves pushed up and a thin silver ring; long ink-stained fingers flick one bead of a worn wooden abacus. Setting: a cramped second-floor workroom above an old print shop in Euljiro, Seoul, at night: a single brass desk lamp throws a hard pool of warm light on a tabbed, dog-eared almanac and pencil-covered calculation sheets and a steel ruler; everything else sinks into deep shadow, the dark shapes of an old printing press behind him, a dusty window with blurred red and teal neon from the alley below rim-lighting his silhouette. Camera: low three-quarter angle across the desk, the abacus large and out of focus in the foreground, desk edge receding diagonally, waist-up. Strong sense of depth and perspective: clear foreground, midground and background layers, converging lines, foreground objects out of focus. He must not resemble any real person. A distinctive, memorable character with a unique silhouette, not a generic grandfather. ABSOLUTELY NO TEXT, no readable letters, no Chinese or Korean characters, no numbers, no logo, no watermark.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "input_images": [],
+   "width": 1536,
+   "height": 2752,
+   "resolution": "2k",
+   "batch_size": 1,
+   "input_image": null,
+   "application": null,
+   "surface": null
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261001_152502_7ee00d7d-068d-4ee2-b865-9908e45d1723.png"
+ },
+ {
+  "id": "b7b1d893-9190-4861-ac65-663432fc1408",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790923315.711688,
+  "prompt": "Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Azure Dragon guardian god of the East (wood element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Long light-brown wavy hair with loose wisps, a warm smile that is gentle but quietly stubborn, bright clear eyes. Outfit: a cropped modern stage jacket with a pale green hanbok jeogori collar, Azure Dragon scale embroidery on the sleeves, delicate silver vine-shaped earrings. Teal, fresh green and silver appear only on the clothes and jewelry. Background: a dark, calm, softly lit traditional Korean shrine interior with a few drifting leaves, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_b7b1d893-9190-4861-ac65-663432fc1408.png"
+ },
+ {
+  "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790923315.728773,
+  "prompt": "Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Azure Dragon guardian god of the East (wood element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Long light-brown wavy hair with loose wisps, a warm smile that is gentle but quietly stubborn, bright clear eyes. Outfit: a cropped modern stage jacket with a pale green hanbok jeogori collar, Azure Dragon scale embroidery on the sleeves, delicate silver vine-shaped earrings. Teal, fresh green and silver appear only on the clothes and jewelry. Background: a dark, calm, softly lit traditional Korean shrine interior with a few drifting leaves, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+ },
+ {
+  "id": "2bd58a6b-bfb0-4dbe-ab35-2b3ad6dc73a7",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928446.518725,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman with a different face. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Yellow Dragon guardian god of the Center (earth element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Chestnut-brown hair in a low bun held by a jade hairpin with loose strands, a bright caring smile with a slightly teasing look. Outfit: a soft ochre knit top with a long flowing hanbok-style skirt, a jade ring, a norigae tassel ornament with a golden yellow dragon motif. Ochre, cream and jade green appear only on the clothes and jewelry. Background: a dark, calm traditional Korean courtyard at dusk with warm lantern light and drifting golden grain dust, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_080726_2bd58a6b-bfb0-4dbe-ab35-2b3ad6dc73a7.png"
+ },
+ {
+  "id": "3277d845-99a8-4a80-b65d-89de31d9c753",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928446.701521,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman with a different face. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the White Tiger guardian god of the West (metal element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Silver-gray short cut, sharp elegant features, a cool composed expression with the faintest smile. Outfit: a white tailored suit jacket with a white hanbok dongjeong-style collar band, blade-shaped silver earrings, fitted gloves with a subtle white tiger stripe pattern. White, silver and gray appear only on the clothes and jewelry. Background: a dark, calm traditional Korean hall with moonlight through lattice windows and a few falling white petals, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_080726_3277d845-99a8-4a80-b65d-89de31d9c753.png"
+ },
+ {
+  "id": "3e295d27-facc-408f-b741-75e2e05c4118",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928446.476141,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman with a different face. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Vermilion Bird guardian god of the South (fire element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Short dark-brown bob with soft bangs, a calm focused gaze and a small knowing smile, warm but with clear boundaries. Outfit: a crimson silk shirt with a hanbok-style crossed collar tucked into a black high-waisted skirt, small gold candle-flame shaped earrings, a vermilion bird feather brooch. Crimson, gold and black appear only on the clothes and jewelry. Background: a dark, calm traditional Korean pavilion at night lit by a few small candle flames with floating embers, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_080726_3e295d27-facc-408f-b741-75e2e05c4118.png"
+ },
+ {
+  "id": "81f8c35e-ceb0-40e0-9404-b4e7869f976d",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928446.696105,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman with a different face. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Yellow Dragon guardian god of the Center (earth element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Chestnut-brown hair in a low bun held by a jade hairpin with loose strands, a bright caring smile with a slightly teasing look. Outfit: a soft ochre knit top with a long flowing hanbok-style skirt, a jade ring, a norigae tassel ornament with a golden yellow dragon motif. Ochre, cream and jade green appear only on the clothes and jewelry. Background: a dark, calm traditional Korean courtyard at dusk with warm lantern light and drifting golden grain dust, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_080726_81f8c35e-ceb0-40e0-9404-b4e7869f976d.png"
+ },
+ {
+  "id": "91560813-0ab6-4e99-8047-5ece283f814d",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928446.448841,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman with a different face. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the White Tiger guardian god of the West (metal element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Silver-gray short cut, sharp elegant features, a cool composed expression with the faintest smile. Outfit: a white tailored suit jacket with a white hanbok dongjeong-style collar band, blade-shaped silver earrings, fitted gloves with a subtle white tiger stripe pattern. White, silver and gray appear only on the clothes and jewelry. Background: a dark, calm traditional Korean hall with moonlight through lattice windows and a few falling white petals, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_080726_91560813-0ab6-4e99-8047-5ece283f814d.png"
+ },
+ {
+  "id": "b787763a-86cf-4274-a806-553c1dcb831a",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928446.468795,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman with a different face. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Black Tortoise guardian god of the North (water element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Long straight jet-black hair, dreamy half-lidded eyes and a soft mysterious smile. Outfit: a sheer navy-blue outer robe over a black dress, a teardrop pearl necklace, a hairpin with a black tortoise-shell pattern. Navy, black and pearl white appear only on the clothes and jewelry. Background: a dark, calm traditional Korean pond pavilion at night with mist, falling raindrops and a soft moon reflection on the water, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_080726_b787763a-86cf-4274-a806-553c1dcb831a.png"
+ },
+ {
+  "id": "e7fa8b11-aec6-4f56-b37e-cd01e6b101b2",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928446.654013,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman with a different face. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Black Tortoise guardian god of the North (water element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Long straight jet-black hair, dreamy half-lidded eyes and a soft mysterious smile. Outfit: a sheer navy-blue outer robe over a black dress, a teardrop pearl necklace, a hairpin with a black tortoise-shell pattern. Navy, black and pearl white appear only on the clothes and jewelry. Background: a dark, calm traditional Korean pond pavilion at night with mist, falling raindrops and a soft moon reflection on the water, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_080726_e7fa8b11-aec6-4f56-b37e-cd01e6b101b2.png"
+ },
+ {
+  "id": "1b9030b9-2196-48f0-8629-91f782fb6752",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928447.14698,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman with a different face. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Vermilion Bird guardian god of the South (fire element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Short dark-brown bob with soft bangs, a calm focused gaze and a small knowing smile, warm but with clear boundaries. Outfit: a crimson silk shirt with a hanbok-style crossed collar tucked into a black high-waisted skirt, small gold candle-flame shaped earrings, a vermilion bird feather brooch. Crimson, gold and black appear only on the clothes and jewelry. Background: a dark, calm traditional Korean pavilion at night lit by a few small candle flames with floating embers, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_080727_1b9030b9-2196-48f0-8629-91f782fb6752.png"
+ },
+ {
+  "id": "6ca98707-eb1c-4efa-ba7a-50640498347d",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928967.831977,
+  "prompt": "Vertical character key visual. Semi-realistic anime illustration close to realistic facial anatomy and proportions, high-end Korean webtoon key art, painterly rendering with photographic lighting, fine skin texture, clean line work. A Korean woman in her mid-twenties with a very distinctive individual face: soft oval face, droopy gentle puppy eyes, dewy glass-like pale skin, slightly parted lips, a tiny mole on her chin. Very long straight jet-black hair, damp at the ends. Expression: a soft mysterious smile, looking at the viewer through raindrops. Outfit: an oversized navy knit cardigan over a black slip dress, a teardrop pearl necklace, holding a clear umbrella. Setting: a rainy city street at night, puddles reflecting blue and white lights, raindrops in the foreground. Waist-up, slight low angle. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_081607_6ca98707-eb1c-4efa-ba7a-50640498347d.png"
+ },
+ {
+  "id": "8fe09f98-314d-420c-8f93-2614fbb33ce5",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928967.759919,
+  "prompt": "Vertical character key visual. Semi-realistic anime illustration close to realistic facial anatomy and proportions, high-end Korean webtoon key art, painterly rendering with photographic lighting, fine skin texture, clean line work. A Korean woman in her mid-twenties with a very distinctive individual face: sharp narrow monolid eyes slightly upturned, straight thin dark brows, defined cheekbones, a small beauty mole under her right eye, neutral-warm skin. Short black-brown bob with blunt straight bangs, tucked behind one ear. Expression: a faint knowing half-smile, head tilted, cupping a small candle flame in both hands near her face. Outfit: a crimson ribbed turtleneck under a cropped black leather jacket, small gold flame-shaped ear cuff. Setting: a city rooftop at blue hour, distant city lights, wind in her hair, warm candle glow lighting her face from below. Chest-up, three-quarter view. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_081607_8fe09f98-314d-420c-8f93-2614fbb33ce5.png"
+ },
+ {
+  "id": "cbe4e82f-fdbb-44bf-b053-75c26cf79004",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928967.990902,
+  "prompt": "Vertical character key visual. Semi-realistic anime illustration close to realistic facial anatomy and proportions, high-end Korean webtoon key art, painterly rendering with photographic lighting, fine skin texture, clean line work. A Korean woman in her mid-twenties with a very distinctive individual face: soft oval face, droopy gentle puppy eyes, dewy glass-like pale skin, slightly parted lips, a tiny mole on her chin. Very long straight jet-black hair with a few strands falling across her face. Expression: dreamy and far away, as if listening to something only she can hear. Outfit: a layered sheer navy dress, simple and minimal, tiny pearl drop earrings. Setting: inside an aquarium tunnel, deep blue water light rippling over her face, a sea turtle gliding past in the background. Chest-up, three-quarter view. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_081607_cbe4e82f-fdbb-44bf-b053-75c26cf79004.png"
+ },
+ {
+  "id": "e0d12bcd-000f-490b-b79c-394e43bf7aa1",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928967.760245,
+  "prompt": "Vertical character key visual. Semi-realistic anime illustration close to realistic facial anatomy and proportions, high-end Korean webtoon key art, painterly rendering with photographic lighting, fine skin texture, clean line work. A Korean woman in her mid-twenties with a very distinctive individual face: long narrow face, sharp V jawline, elongated fox-like eyes with pale gray irises, high arched brows, high nose bridge, cool pale skin, muted rose lips. Sleek platinum-silver hair slicked back. Expression: a faint confident smirk, adjusting a black leather glove with a subtle white tiger stripe pattern. Outfit: a long silver-gray structured trench coat over a black turtleneck, thin silver rings. Setting: a glass skyscraper lobby at night, cold city reflections on the glass, steel and marble. Chest-up, three-quarter view, slight high angle. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_081607_e0d12bcd-000f-490b-b79c-394e43bf7aa1.png"
+ },
+ {
+  "id": "e895d480-e8c6-4ffc-af6e-8a7d5c3c58f0",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928967.808603,
+  "prompt": "Vertical character key visual. Semi-realistic anime illustration close to realistic facial anatomy and proportions, high-end Korean webtoon key art, painterly rendering with photographic lighting, fine skin texture, clean line work. A Korean woman in her mid-twenties with a very distinctive individual face: round soft face, big round double-lidded eyes, rosy cheeks, light freckles across her nose, full soft lips, warm golden skin tone. Chestnut-brown hair in a messy low bun with a jade hairpin, baby hairs around the face. Expression: laughing openly with eyes crinkled, wagging one finger playfully as if teasing the viewer. Outfit: an oversized ochre knit vest over a crisp white shirt with rolled sleeves, a small jade ring. Setting: a bright sunlit cafe kitchen in the morning, fresh bread and glass jars of grains on wooden shelves, golden flour dust floating in the sunbeams. Waist-up. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_081607_e895d480-e8c6-4ffc-af6e-8a7d5c3c58f0.png"
+ },
+ {
+  "id": "f5ed1d56-6594-44ab-b0af-01b721b22f63",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928967.973329,
+  "prompt": "Vertical character key visual. Semi-realistic anime illustration close to realistic facial anatomy and proportions, high-end Korean webtoon key art, painterly rendering with photographic lighting, fine skin texture, clean line work. A Korean woman in her mid-twenties with a very distinctive individual face: round soft face, big round double-lidded eyes, rosy cheeks, light freckles across her nose, full soft lips, warm golden skin tone. Wavy chestnut shoulder-length hair with a small braid, a jade hair clip. Expression: a warm caring smile, hands on her hips like a big sister about to nag. Outfit: a mustard workwear jacket over a cream knit top, wide cream trousers, a small tassel charm with a golden dragon motif hanging from her belt loop. Setting: a golden rice field at sunset, wind blowing the grain, warm backlight and flying golden seeds. Three-quarter body, slight low angle. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_081607_f5ed1d56-6594-44ab-b0af-01b721b22f63.png"
+ },
+ {
+  "id": "27224e55-996f-4bf2-bf08-a7b87051dcef",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790928968.925728,
+  "prompt": "Vertical character key visual. Semi-realistic anime illustration close to realistic facial anatomy and proportions, high-end Korean webtoon key art, painterly rendering with photographic lighting, fine skin texture, clean line work. A Korean woman in her mid-twenties with a very distinctive individual face: long narrow face, sharp V jawline, elongated fox-like eyes with pale gray irises, high arched brows, high nose bridge, cool pale skin, muted rose lips. Sleek asymmetrical platinum-silver chin-length bob. Expression: cool and unimpressed, one brow slightly raised, arms crossed. Outfit: a minimal oversized white shirt, black tailored slacks, a geometric silver ear cuff shaped like a blade. Setting: a white minimalist art gallery with concrete walls, a single abstract metal sculpture, cool soft daylight, a few white petals on the floor. Waist-up, straight-on. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_081608_27224e55-996f-4bf2-bf08-a7b87051dcef.png"
+ },
+ {
+  "id": "2b1b4d8e-6699-40ef-968e-5b8f8192ecf5",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929060.486277,
+  "prompt": "Vertical character key visual. Semi-realistic anime illustration close to realistic facial anatomy and proportions, high-end Korean webtoon key art, painterly rendering with photographic lighting, fine skin texture, clean line work. A Korean woman in her mid-twenties with a very distinctive individual face: sharp narrow monolid eyes slightly upturned, straight thin dark brows, defined cheekbones, a small beauty mole under her right eye, neutral-warm skin. Short black-brown bob with blunt straight bangs. Expression: calm, unsmiling, quietly intense, chin slightly down and eyes looking up at the viewer. Outfit: an oversized black blazer over a buttoned-up crimson silk blouse, a thin gold chain necklace with a tiny flame pendant. Setting: a dim modern listening bar, a single candle burning on the counter in the foreground, warm amber bokeh, vinyl records on shelves behind. Waist-up, slight low angle. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_081740_2b1b4d8e-6699-40ef-968e-5b8f8192ecf5.png"
+ },
+ {
+  "id": "097d0ae8-96c1-47be-a517-235c490196d5",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929347.485541,
+  "prompt": "Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Yellow Dragon guardian god of the Center (earth element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light, soft luminous lighting, airy and bright, not dark. Her own distinctive beautiful face: a round soft face, big round sparkling eyes, rosy cheeks, a cute small nose, full rosy lips. Chestnut-brown hair in a loose low bun held by a long jade hairpin, soft side bangs. Expression: a bright open laugh with crinkled eyes, playfully wagging one finger like a caring friend about to nag. Outfit: a cropped cream knit cardigan tied with a long ochre jeogori ribbon, a long flowing ochre pleated skirt. Signature accessories, clearly visible: a long jade hairpin, a jade ring, and a norigae tassel ornament with a golden yellow dragon medallion hanging at her waist. Ochre, cream, gold and jade green appear only on the clothes and jewelry. Background: a softly lit traditional Korean courtyard in warm golden afternoon light with drifting golden grain dust, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082227_097d0ae8-96c1-47be-a517-235c490196d5.png"
+ },
+ {
+  "id": "9322b76c-b7d7-4e38-8bab-d555b782a5d4",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929347.747479,
+  "prompt": "Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Black Tortoise guardian god of the North (water element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light, soft luminous lighting, airy and bright, not dark. Her own distinctive beautiful face: soft droopy dreamy eyes with long lashes, a gentle oval face, dewy translucent skin, softly parted lips. Very long straight jet-black hair with a loose side braid. Expression: a dreamy, faraway soft smile, head slightly tilted as if listening to something only she can hear. Outfit: a sheer navy layered jeogori-style top with flowing sleeves over a long deep-navy silk skirt. Signature accessories, clearly visible: a teardrop pearl necklace and a hairpin with a black tortoise-shell pattern in her braid; tiny water droplets float around her raised fingertips. Navy, black and pearl white appear only on the clothes and jewelry. Background: a softly lit traditional Korean lotus pond pavilion in pale blue morning mist with gentle raindrops, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082227_9322b76c-b7d7-4e38-8bab-d555b782a5d4.png"
+ },
+ {
+  "id": "9eb339f8-8c00-44fe-b4e7-ef2bd8543e8c",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929347.472105,
+  "prompt": "Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the White Tiger guardian god of the West (metal element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light, soft luminous lighting, airy and bright, not dark. Her own distinctive beautiful face: sharp elegant almond eyes with pale gray irises, high arched brows, a high nose bridge, a defined V-line jaw, cool porcelain skin. Sleek straight silver-white chin-length hair parted to one side. Expression: cool and composed, the faintest sophisticated smirk, chin slightly raised. Outfit: a cropped white structured stage jacket with a hanbok dongjeong white collar band and small silver knot buttons, white wide trousers. Signature accessories, clearly visible: long blade-shaped silver drop earrings and fitted white gloves with a subtle white tiger stripe pattern; she touches one earring with a gloved hand. White, silver and pale gray appear only on the clothes and jewelry. Background: a bright traditional Korean shrine of pale stone and white wood in soft moonlight-white daylight with a few falling white petals, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082227_9eb339f8-8c00-44fe-b4e7-ef2bd8543e8c.png"
+ },
+ {
+  "id": "fb1d709b-db8b-42b6-804d-4303a128f15b",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929347.450317,
+  "prompt": "Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Vermilion Bird guardian god of the South (fire element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light, soft luminous lighting, airy and bright, not dark. Her own distinctive beautiful face: elegant upturned phoenix eyes, straight soft brows, small delicate lips, a slim oval face. Glossy dark-brown short bob with see-through bangs and one thin crimson streak. Expression: a calm, quiet small smile, gentle but with clear boundaries. Outfit: a cropped crimson silk stage jacket cut like a jeogori with fine gold vermilion-bird feather embroidery, a high-waisted black pleated skirt. Signature accessories, clearly visible: gold candle-flame shaped drop earrings and a gold vermilion bird feather brooch on her chest; she holds a small lit candle in one hand near her chest. Crimson, gold and black appear only on the clothes and jewelry. Background: a softly lit traditional Korean shrine interior glowing with many warm candles and drifting golden embers, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082227_fb1d709b-db8b-42b6-804d-4303a128f15b.png"
+ },
+ {
+  "id": "7cad82f3-0621-4143-b5c2-437d2d064458",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929615.711154,
+  "prompt": "Edit this image. Keep the exact same woman unchanged: identical face, pale gray eyes, sleek silver-white chin-length hair, expression, pose with her gloved hand touching the earring, white cropped jacket with dongjeong collar, white trousers, blade-shaped silver earrings, white tiger-stripe gloves, art style. Replace ONLY the background with a strongly contrasting, clean, minimal backdrop: a smooth deep sapphire-indigo twilight gradient with a large soft pale silver moon glow behind her head and a few tiny drifting silver light particles. The white outfit and silver hair must pop sharply against the deep blue, with a crisp cool silver rim light on her edges. Elegant and luminous, not gloomy. No architecture, no objects, no clutter. Same 9:16 framing, waist-up. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "9eb339f8-8c00-44fe-b4e7-ef2bd8543e8c",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082227_9eb339f8-8c00-44fe-b4e7-ef2bd8543e8c.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082655_7cad82f3-0621-4143-b5c2-437d2d064458.png"
+ },
+ {
+  "id": "983d4e12-d692-4453-aa6c-66ed76334795",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929615.166345,
+  "prompt": "Edit this image. Keep the exact same woman unchanged: identical face, eyes, hairstyle with the thin crimson streak, expression, pose, crimson jacket and black skirt, gold candle-flame earrings, feather brooch, the lit candle in her hand, art style and the lighting on her. Replace ONLY the background with a clean, minimal, simple backdrop: a smooth soft gradient glow from warm deep vermilion to amber gold, with just a few large soft out-of-focus warm bokeh lights. No architecture, no objects, no clutter, no busy details. Keep the airy luminous premium feel, the figure clearly separated from the background. Same 9:16 framing, waist-up. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "fb1d709b-db8b-42b6-804d-4303a128f15b",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082227_fb1d709b-db8b-42b6-804d-4303a128f15b.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082655_983d4e12-d692-4453-aa6c-66ed76334795.png"
+ },
+ {
+  "id": "a7382110-bc4f-4250-98fc-e9472282e775",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929615.082107,
+  "prompt": "Vertical character key visual. A Korean woman in her late twenties, a grown adult, the yin incarnation of the Yellow Dragon guardian god of the Center (earth element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light, soft luminous lighting, airy and bright. Her own distinctive beautiful mature face: a slender soft oval face with gently defined cheekbones, warm almond-shaped eyes with a calm knowing gaze, natural straight brows, a refined nose, soft lips. Mature, elegant and warm, like a dependable older sister; clearly adult, not childlike, not cute, not doll-like. Chestnut-brown hair in a sleek low chignon held by a long jade hairpin, a few loose face-framing strands. Expression: a warm reassuring closed-lip smile with softly crinkled eyes, the look of someone who says 'leave the worrying to me'. Outfit: an elegant cream silk wrap blouse with a long ochre jeogori-style ribbon tie, a long flowing ochre pleated skirt. Signature accessories, clearly visible: the long jade hairpin, a jade ring, and a norigae tassel ornament with a golden yellow dragon medallion at her waist which she lightly holds with one hand. Ochre, cream, gold and jade green appear only on the clothes and jewelry. Background: clean, minimal and simple: a smooth soft gradient of warm golden ochre afternoon light with a few large soft out-of-focus light bokeh and a few drifting golden grains. No architecture, no clutter, no busy details; the figure clearly separated from the background. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082655_a7382110-bc4f-4250-98fc-e9472282e775.png"
+ },
+ {
+  "id": "c9970463-0ae1-4ace-9458-b2334480b07a",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929615.613168,
+  "prompt": "Edit this image. Keep the exact same woman unchanged: identical face, dreamy eyes, very long black hair with the side braid and tortoise-shell hairpin, expression, head tilt, pose, sheer navy jeogori-style top and navy skirt, teardrop pearl necklace, the tiny water droplets floating around her fingertips, art style and the lighting on her. Replace ONLY the background with a clean, minimal, simple backdrop: a smooth soft gradient of pale misty aqua-blue morning light, with only a few large soft out-of-focus droplet bokeh and a faint hint of a single lotus blur at the bottom edge. No pavilion, no architecture, no clutter, no busy details; the navy figure clearly separated from the light background. Keep the airy luminous premium feel. Same 9:16 framing, waist-up. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "9322b76c-b7d7-4e38-8bab-d555b782a5d4",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082227_9322b76c-b7d7-4e38-8bab-d555b782a5d4.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082655_c9970463-0ae1-4ace-9458-b2334480b07a.png"
+ },
+ {
+  "id": "134c95f6-6544-43d3-be91-4f2d2cabef4a",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929879.461108,
+  "prompt": "Use this woman as the character reference: keep her exact face, eyes, short dark-brown bob with the thin crimson streak, crimson cropped jeogori jacket, black pleated skirt, gold candle-flame earrings, vermilion feather brooch and the lit candle in her hand. Same semi-realistic 2.5D Korean webtoon art style. Place her in a NEW, elaborate but clean cinematic scene designed for 3D parallax animation, with three clearly separated depth planes. FOREGROUND (very close to the camera, softly out of focus): a few tall lit candle flames and warm glowing embers at the lower left edge. MIDGROUND: her, waist-up, three-quarter view, body turned slightly, looking at the viewer with a calm small smile, crisp focus, warm candle key light on her face and a cool blue rim light from behind. BACKGROUND: a long traditional Korean shrine corridor of dark wooden pillars receding in strong one-point perspective to a far vanishing point, both sides lined with rows of small candle flames that become tiny bokeh in the distance; above the open end of the corridor a deep twilight indigo sky full of soft stars, linking candlelight and starlight. Volumetric warm light haze, embers floating at near, middle and far distances. Limited palette of warm amber, crimson and twilight indigo; elegant, luminous and dreamy, not dark or heavy; orderly and uncluttered. Shallow depth of field, 35mm lens, slightly low camera angle. Premium idol and game key visual quality, anatomically natural hands. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "fb1d709b-db8b-42b6-804d-4303a128f15b",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082227_fb1d709b-db8b-42b6-804d-4303a128f15b.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_083119_134c95f6-6544-43d3-be91-4f2d2cabef4a.png"
+ },
+ {
+  "id": "692d2392-c4b4-433a-bca2-7b9f131768fa",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929879.204806,
+  "prompt": "Use this woman as the character reference: keep her exact face, pale gray eyes, sleek silver-white chin-length hair, white cropped jacket with dongjeong collar, white trousers, blade-shaped silver earrings and white tiger-stripe gloves, gloved hand touching her earring, cool faint smirk. Same semi-realistic 2.5D Korean webtoon art style. Place her in a NEW, elaborate but clean cinematic scene designed for 3D parallax animation, with three clearly separated depth planes, and strong contrast so her white outfit and silver hair pop. FOREGROUND (very close to the camera, softly out of focus): silver pampas grass plumes and one sharp faceted crystal shard catching the light at the lower edge. MIDGROUND: her, waist-up, three-quarter view, chin slightly raised, looking at the viewer, crisp focus, crisp cool silver rim light outlining her. BACKGROUND: an autumn night field in the west: a sea of silver pampas grass (eoksae) receding in soft rolling layers toward a distant traditional Korean stone pagoda silhouette on a low hill, under a deep sapphire-indigo sky with a huge luminous full moon low on the horizon behind her; small faceted crystal shards float in the air at near, middle and far distances, glinting like cut gems and blade edges. Moonlit mist between the layers. Limited palette of deep sapphire, silver and white; sharp, refined and luminous, not gloomy; orderly and uncluttered. Shallow depth of field, 35mm lens, slightly low camera angle. Premium idol and game key visual quality, anatomically natural hands. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "9eb339f8-8c00-44fe-b4e7-ef2bd8543e8c",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082227_9eb339f8-8c00-44fe-b4e7-ef2bd8543e8c.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_083119_692d2392-c4b4-433a-bca2-7b9f131768fa.png"
+ },
+ {
+  "id": "a7150b0d-8de8-43d6-a5c8-634e9afaafc8",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929879.01648,
+  "prompt": "Use this woman as the character reference: keep her exact face, dreamy droopy eyes, very long jet-black hair with the side braid and tortoise-shell hairpin, sheer navy jeogori-style top and navy skirt, teardrop pearl necklace, head tilt and dreamy soft smile, tiny water droplets floating around her raised fingertips. Same semi-realistic 2.5D Korean webtoon art style. Place her in a NEW, elaborate but clean cinematic scene designed for 3D parallax animation, with three clearly separated depth planes. FOREGROUND (very close to the camera, softly out of focus): large lotus leaves holding glistening dew drops and one pale lotus bud at the lower edge. MIDGROUND: her, waist-up, three-quarter view, looking at the viewer, crisp focus, soft pale dawn light on her face and a silvery rim light. BACKGROUND: a vast still lotus pond at blue dawn in the north, its mirror-like water surface reflecting the sky and receding far into layers of drifting mist, a single small traditional Korean pavilion standing over the water far in the distance, soft fine rain falling with concentric ripples spreading on the water; water droplets suspended in the air at near, middle and far distances. Soft light rays through the mist. Limited palette of misty blue, navy and pearl white; serene, dreamy, bright and airy; orderly and uncluttered. Shallow depth of field, 35mm lens, slightly low camera angle. Premium idol and game key visual quality, anatomically natural hands. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "9322b76c-b7d7-4e38-8bab-d555b782a5d4",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082227_9322b76c-b7d7-4e38-8bab-d555b782a5d4.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_083119_a7150b0d-8de8-43d6-a5c8-634e9afaafc8.png"
+ },
+ {
+  "id": "ac318d08-74a9-48a0-bb1d-6c2429a8eefa",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790929880.457546,
+  "prompt": "Use this woman as the character reference: keep her exact mature face, warm almond eyes, chestnut low chignon with the long jade hairpin, cream silk wrap blouse with ochre ribbon tie, long ochre skirt, jade ring and the golden yellow dragon norigae she holds at her waist. She is a grown woman in her late twenties, never childlike. Same semi-realistic 2.5D Korean webtoon art style. Place her in a NEW, elaborate but clean cinematic scene designed for 3D parallax animation, with three clearly separated depth planes. FOREGROUND (very close to the camera, softly out of focus): heavy ripe golden rice stalks crossing the lower corner of the frame. MIDGROUND: her, waist-up, three-quarter view, looking at the viewer with a warm reassuring closed-lip smile, crisp focus, golden-hour backlight making a glowing rim around her hair and shoulders. BACKGROUND: she stands on the stone terrace of a traditional Korean hanok at the center of the land; behind her, layers of golden terraced rice fields step down and stretch far away in receding rows toward soft distant blue mountains, under a warm late-afternoon sky, with the curved tiled eave of the hanok framing the top edge. Long sunbeams through light haze, tiny golden grain dust floating at near, middle and far distances. Limited palette of gold, ochre, cream and jade green; abundant, warm, bright and airy; orderly and uncluttered. Shallow depth of field, 35mm lens, slightly low camera angle. Premium idol and game key visual quality, anatomically natural hands. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "a7382110-bc4f-4250-98fc-e9472282e775",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082655_a7382110-bc4f-4250-98fc-e9472282e775.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_083120_ac318d08-74a9-48a0-bb1d-6c2429a8eefa.png"
  }
 ]

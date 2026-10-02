@@ -119,9 +119,15 @@ const CH={
   water:{n:'재이',h:'玄武 · 水',img:'img/water.jpg',tag:'마음 · 나를 알기',d:'"요즘 마음이 복잡해"',acc:'#5b8ce6',el:4},
   seoha:{n:'서하',h:'살롱 주인',img:'img/seoha.jpg',tag:'무엇이든 · 올해 흐름',d:'"요즘 왜 이렇게 안 풀려?"',acc:'#e3b866'},
   taeo:{n:'태오',h:'桃花',img:'img/taeo/base.jpg',tag:'연애 · 매력 · 도화',d:'"올해 연애 언제 풀려?"',acc:'#ffb9a6'},
-  halmae:{n:'삼신 할매',h:'三神',img:'img/halmae.jpg',tag:'정통 · 이사 · 돈 · 조심할 달',d:'"조심할 달이 언제입니까?"',acc:'#d9b38c',ink:'#1a120a'}
+  halmae:{n:'삼신 할매',h:'三神',img:'img/halmae.jpg',tag:'정통 · 이사 · 돈 · 조심할 달',d:'"조심할 달이 언제입니까?"',acc:'#d9b38c',ink:'#1a120a'},
+  /* 음의 현신(여신 5): 홈 캐릭터 소개 화면에서 ?h=wood_y 등으로 들어옴. 목록 격자에는 넣지 않음 */
+  wood_y:{n:'새아',h:'靑龍 · 木 · 음',img:'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2_min.webp',tag:'다시 시작 · 버티는 힘',d:'"다시 시작해도 될까?"',acc:'#46b47f'},
+  fire_y:{n:'별하',h:'朱雀 · 火 · 음',img:'img/yin/fire.jpg',tag:'몰입 · 고백 타이밍',d:'"지금 말해도 될까?"',acc:'#ec5a43'},
+  earth_y:{n:'도담',h:'黃龍 · 土 · 음',img:'img/yin/earth.jpg',tag:'재물 · 살림 · 결혼 시기',d:'"돈은 언제 모여?"',acc:'#d3a13a'},
+  metal_y:{n:'세린',h:'白虎 · 金 · 음',img:'img/yin/metal.jpg',tag:'커리어 · 정리 · 결단',d:'"이 일, 계속해도 될까?"',acc:'#c9d1dc',ink:'#111'},
+  water_y:{n:'이슬',h:'玄武 · 水 · 음',img:'img/yin/water.jpg',tag:'속마음 · 꿈 · 직감',d:'"어젯밤 꿈이 마음에 걸려"',acc:'#5b8ce6'}
 };
-const ALIAS={seoha:'seoha',taeo:'taeo',halmae:'halmae',wood:'wood',fire:'fire',earth:'earth',metal:'metal',water:'water',haram:'wood',ian:'fire',dojun:'earth',sion:'metal',jaei:'water'};
+const ALIAS={seoha:'seoha',taeo:'taeo',halmae:'halmae',wood:'wood',fire:'fire',earth:'earth',metal:'metal',water:'water',haram:'wood',ian:'fire',dojun:'earth',sion:'metal',jaei:'water',wood_y:'wood_y',fire_y:'fire_y',earth_y:'earth_y',metal_y:'metal_y',water_y:'water_y',saea:'wood_y',byeolha:'fire_y',dodam:'earth_y',serin:'metal_y',iseul:'water_y'};
 function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2000); }
 function loadMe(){ try{ return JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){ return null; } }
 function saveMe(o){ try{ const old=loadMe()||{}; sessionStorage.setItem('me',JSON.stringify(Object.assign(old,o))); }catch(e){} }

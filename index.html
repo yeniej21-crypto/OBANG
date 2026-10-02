@@ -841,6 +841,18 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .sLogo.ob .lw{width:auto;height:36px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.7))}
 .home .logo img.lw,.logo img.lw{width:auto;height:21px;border-radius:0}
 .hMenuS .hd img.lw{width:auto;height:20px}
+
+/* 연애 상담소 입구(10/3) */
+.lhub{position:relative;display:block;margin:0 16px;min-height:300px;overflow:hidden;color:#fff;text-decoration:none;border-radius:20px}
+.lhub .bg{position:absolute;inset:0;background:url('img/pop/seoha_bg.jpg') 70% 14%/cover no-repeat;transform:scale(1.02)}
+.lhub::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,8,12,.94) 0,rgba(10,8,12,.72) 48%,rgba(10,8,12,.05) 100%)}
+.lhub .tx{position:relative;z-index:1;display:flex;flex-direction:column;padding:22px 18px;width:68%}
+.lhub small{font-size:11px;letter-spacing:.14em;color:#f3d79b;font-weight:700}
+.lhub b{margin-top:8px;font-family:var(--brush);font-weight:400;font-size:32px;line-height:1.1}
+.lhub em{margin-top:10px;font-style:normal;font-size:12.5px;line-height:1.6;color:rgba(255,255,255,.8)}
+.lhub .hjs{display:flex;flex-wrap:wrap;gap:4px;margin-top:14px}
+.lhub .hjs i{font-style:normal;font-family:var(--serif);font-weight:900;font-size:14px;width:26px;height:26px;display:grid;place-items:center;border:1px solid rgba(243,215,155,.35);color:#f3d79b}
+.lhub .go{margin-top:16px;align-self:flex-start;font-size:13px;font-weight:800;color:#1a1206;background:#e3b866;padding:8px 14px}
 </style>
 
 <div class="stage" id="stage">
@@ -963,7 +975,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <button class="it" data-m="tarot.html">무진의 타로</button>
     <button class="it" data-m="avatar.html">사주가 그린 나</button>
     <button class="it" data-m="lifetime.html">평생 사주</button>
-    <button class="it" data-m="chat.html">자유 상담</button>
+    <button class="it" data-m="love.html">연애 상담소</button><button class="it" data-m="chat.html">자유 상담</button>
     <button class="it" data-m="newyear.html">2027 신년 기획전</button>
     <button class="it" data-m="sinnyeon.html">2027 신년운세</button>
     <button class="it" data-m="noeul.html">해와 달의 운세<small>노을 · NEW</small></button>
@@ -1155,6 +1167,9 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       </div>
     </section>
 
+    <section class="hSec" id="secLoveHub" data-cats="all love heart re match">
+      <a class="lhub" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="bg"></span><span class="tx"><small>NEW · 연애 상담소</small><b>누구 때문에 왔어</b><em>솔로부터 재회, 결혼까지. 상황을 고르면 서하가 맞는 풀이로 안내해요.</em><span class="hjs" data-hj="0"><i>緣</i><i>戀</i><i>曖</i><i>愛</i><i>倦</i><i>別</i><i>回</i><i>婚</i></span><span class="go">상담소 들어가기</span></span></a>
+    </section>
     <section class="hSec" id="secDohwa" data-cats="all love match">
       <div class="sh"><small>도화 · 매력</small><b>내 사주 속 도화, 얼마나 진할까</b></div>
       <div class="hRow">
@@ -2012,12 +2027,13 @@ function opPick(y){
   opThump(false); setTimeout(()=>opThump(true),180);
 }
 let backHome=false; try{ backHome=sessionStorage.getItem('toHome')==='1'; sessionStorage.removeItem('toHome'); }catch(e){}
-if(backHome){ const t=$('opTake'); try{ t.removeAttribute('src'); t.load(); }catch(e){} showHome(); } else opStart();
+const goQ=new URLSearchParams(location.search).get('go'); if(goQ==='partner') backHome=true; /* 연애 상담소 · 캐릭터 소개에서 ?go=partner 로 들어옴 */
+if(backHome){ const t=$('opTake'); try{ t.removeAttribute('src'); t.load(); }catch(e){} showHome(); if(goQ==='partner') setTimeout(()=>{ try{ history.replaceState(null,'',location.pathname); }catch(e){} partnerStart(); },450); } else opStart();
 window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.contains('on')) showHome(); });
 })();
 </script>
 
-<script src="charhub.js?v=2"></script>
+<script src="charhub.js?v=3"></script>
 <script src="hscroll.js?v=2"></script>
 <script src="menuintro.js"></script>
 

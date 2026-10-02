@@ -44703,6 +44703,70 @@
   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
  },
  {
+  "id": "5a2c929c-b109-4255-a247-a7e9cd972246",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790923390.550774,
+  "prompt": "The woman slowly tilts her head, smiles warmly and says in Korean: \"괜찮아. 휘어도 안 꺾여.\" Voice: a young Korean woman in her mid-twenties with a bright, clear, warm voice, lightly playful, natural standard Seoul Korean, soft and intimate. Camera: slow push-in toward her face with a slight orbit to the right, creating parallax between her, the drifting leaves in the foreground and the shrine background. A warm rim light glides across her face, revealing the planes of her cheekbones and nose. Focus racks from a drifting leaf in the foreground to her eyes. Her hair strands and the leaves move gently in a soft breeze. Keep her face, outfit and art style exactly as in the image. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064310_5a2c929c-b109-4255-a247-a7e9cd972246.mp4"
+ },
+ {
+  "id": "4808cbeb-fb88-4e45-994d-d94a6540c569",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790923393.465767,
+  "prompt": "The woman slowly tilts her head, smiles warmly and says in Korean: \"괜찮아. 휘어도 안 꺾여.\" Voice: a young Korean woman in her mid-twenties with a bright, clear, warm voice, lightly playful, natural standard Seoul Korean, soft and intimate. Camera: slow push-in toward her face with a slight orbit to the right, creating parallax between her, the drifting leaves in the foreground and the shrine background. A warm rim light glides across her face, revealing the planes of her cheekbones and nose. Focus racks from a drifting leaf in the foreground to her eyes. Her hair strands and the leaves move gently in a soft breeze. Keep her face, outfit and art style exactly as in the image. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "b7b1d893-9190-4861-ac65-663432fc1408",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_b7b1d893-9190-4861-ac65-663432fc1408.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064313_4808cbeb-fb88-4e45-994d-d94a6540c569.mp4"
+ },
+ {
   "id": "2bd58a6b-bfb0-4dbe-ab35-2b3ad6dc73a7",
   "type": "image",
   "status": "completed",
@@ -45351,5 +45415,1914 @@
    }
   ],
   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_083120_ac318d08-74a9-48a0-bb1d-6c2429a8eefa.png"
+ },
+ {
+  "id": "0ece4286-18d8-44e5-9076-ef4177ce42d4",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790930381.589011,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman: her face must be clearly different from the reference woman, with a different face shape, eyes, nose, lips and hairstyle. Vertical character key visual. A Korean woman in her late twenties, a grown adult, the yin incarnation of the Yellow Dragon guardian god of the Center (earth element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Her own distinctive beautiful mature face: a slender soft oval face with gently defined cheekbones, warm almond-shaped eyes with a calm knowing gaze, natural straight brows, a refined nose, soft lips. Mature, elegant and warm like a dependable older sister; clearly adult, not childlike, not cute, not doll-like. Chestnut-brown hair in a low bun held by a jade hairpin with loose strands. A warm caring smile with a slightly teasing look. Outfit: a soft ochre knit top with a long flowing hanbok-style skirt, a jade ring, a norigae tassel ornament with a golden yellow dragon motif. Ochre, cream and jade green appear only on the clothes and jewelry. Background: a dark, calm traditional Korean courtyard at dusk with warm lantern light and drifting golden grain dust, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_083941_0ece4286-18d8-44e5-9076-ef4177ce42d4.png"
+ },
+ {
+  "id": "c3dfc614-676f-45b8-8b3c-a82be1d77403",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790930381.408866,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman: her face must be clearly different from the reference woman, with a different face shape, eyes, nose, lips and hairstyle. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Black Tortoise guardian god of the North (water element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Her own distinctive beautiful face: soft droopy dreamy eyes with long lashes, a gentle oval face, dewy translucent skin, softly parted lips. Very long straight jet-black hair with a loose side braid. Dreamy half-lidded eyes and a soft mysterious smile, head slightly tilted. Outfit: a sheer navy-blue outer robe over a black dress, a teardrop pearl necklace, a hairpin with a black tortoise-shell pattern. Navy, black and pearl white appear only on the clothes and jewelry. Background: a dark, calm traditional Korean pond pavilion at night with mist, falling raindrops and a soft moon reflection on the water, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_083941_c3dfc614-676f-45b8-8b3c-a82be1d77403.png"
+ },
+ {
+  "id": "e74f251d-3ba9-4667-9088-ce7034ed113c",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790930381.713222,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman: her face must be clearly different from the reference woman, with a different face shape, eyes, nose, lips and hairstyle. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Vermilion Bird guardian god of the South (fire element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Her own distinctive beautiful face: a slim oval face, elegant upturned phoenix eyes with single eyelids, straight soft brows, small delicate lips. Short glossy dark-brown bob with see-through bangs and one thin crimson streak. A calm focused gaze and a small knowing smile, warm but with clear boundaries. Outfit: a crimson silk shirt with a hanbok-style crossed collar tucked into a black high-waisted skirt, small gold candle-flame shaped earrings, a vermilion bird feather brooch. Crimson, gold and black appear only on the clothes and jewelry. Background: a dark, calm traditional Korean pavilion at night lit by a few small candle flames with floating embers, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_083941_e74f251d-3ba9-4667-9088-ce7034ed113c.png"
+ },
+ {
+  "id": "28a5a410-b595-4afb-b97b-2f8e9ec00c08",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790930382.997725,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman: her face must be clearly different from the reference woman, with a different face shape, eyes, nose, lips and hairstyle. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the White Tiger guardian god of the West (metal element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Her own distinctive beautiful face: sharp elegant almond eyes with pale gray irises, high arched brows, a high nose bridge, a defined V-line jaw, cool porcelain skin. Sleek silver-gray chin-length short cut parted to one side. A cool composed expression with the faintest smile. Outfit: a white tailored suit jacket with a white hanbok dongjeong-style collar band, blade-shaped silver earrings, fitted gloves with a subtle white tiger stripe pattern. White, silver and gray appear only on the clothes and jewelry. Background: a dark, calm traditional Korean hall with moonlight through lattice windows and a few falling white petals, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_083942_28a5a410-b595-4afb-b97b-2f8e9ec00c08.png"
+ },
+ {
+  "id": "51be4aef-05ff-4b68-ab15-21551d53636a",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790930881.096948,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman: her face must be clearly different from the reference woman, with a different face shape, eyes, nose, lips and hairstyle. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Black Tortoise guardian god of the North (water element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Her own distinctive beautiful face, rendered with high detail: a soft heart-shaped face with a small pointed chin, large soft droopy dreamy eyes with long lashes and clear catchlights, gently curved brows, a small nose, a full lower lip, dewy translucent skin. Very long straight jet-black hair with a neat loose side braid, glossy and finely detailed with individual strands and soft highlights, a few delicate face-framing strands. Dreamy half-lidded eyes and a soft mysterious smile, head slightly tilted. Outfit, modest and elegant: a long-sleeved black dress with a high closed neckline that fully covers her chest and shoulders, under a flowing navy-blue outer robe made of semi-opaque layered silk; nothing revealing. A teardrop pearl necklace worn over the high neckline, a hairpin with a black tortoise-shell pattern in her braid. Navy, black and pearl white appear only on the clothes and jewelry. Background: a dark, calm traditional Korean pond pavilion at night with mist, falling raindrops and a soft moon reflection on the water, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Highly polished, fully rendered finish: finely detailed eyes and hair, detailed silk texture, crisp pearl and hairpin detail. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_51be4aef-05ff-4b68-ab15-21551d53636a.png"
+ },
+ {
+  "id": "bb09b4af-4e7f-4503-93bf-993eea1d2633",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790930881.078181,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman who must NOT look like the reference woman: a different face shape, different eyes, nose, lips, hair color and hairstyle. Vertical character key visual. A Korean woman in her late twenties, a grown adult, the yin incarnation of the Yellow Dragon guardian god of the Center (earth element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Her own distinctive beautiful mature face: a longer elegant face with high defined cheekbones and a softly squared jaw, deep-set calm eyes with a gentle downward outer corner and a crisp double eyelid, thick straight dark brows, a refined straight nose, full lips, and a small beauty mark above the left corner of her lips. Mature, elegant and warm like a dependable older sister; clearly adult, not childlike, not cute. Hair: sleek straight dark cocoa-brown hair (not wavy, not light brown), center-parted and pulled into a neat low bun held by a long jade hairpin. A warm closed-lip smile with one dimple and a slightly teasing look. Outfit: a soft ochre knit top with a long flowing hanbok-style skirt, a jade ring, a norigae tassel ornament with a golden yellow dragon motif. Ochre, cream and jade green appear only on the clothes and jewelry. Background: a dark, calm traditional Korean courtyard at dusk with warm lantern light and drifting golden grain dust, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Highly polished, fully rendered finish: finely detailed eyes with catchlights, individual glossy hair strands, detailed knit texture, crisp jade and gold detail. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_bb09b4af-4e7f-4503-93bf-993eea1d2633.png"
+ },
+ {
+  "id": "d09eb6b3-2b95-4b75-8f53-6ef7429cd1da",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790930881.320309,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman: her face must be clearly different from the reference woman, with a different face shape, eyes, nose, lips and hairstyle. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the White Tiger guardian god of the West (metal element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Her own distinctive beautiful face: sharp elegant almond eyes with pale gray irises and a lifted outer corner, high arched brows, a high nose bridge, thin defined lips, a defined V-line jaw, cool porcelain skin. Sleek silver-gray chin-length short cut parted to one side, tucked behind one ear. A cool composed expression with the faintest smile. Outfit: a white tailored suit jacket with a white hanbok dongjeong-style collar band, blade-shaped silver earrings, fitted gloves with a subtle white tiger stripe pattern. White, silver and gray appear only on the clothes and jewelry. Background: a dark, calm traditional Korean hall with moonlight through lattice windows and a few falling white petals, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Highly polished, fully rendered finish: finely detailed eyes with catchlights, individual fine hair strands, crisp tailoring and fabric texture, sharp silver jewelry detail. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_d09eb6b3-2b95-4b75-8f53-6ef7429cd1da.png"
+ },
+ {
+  "id": "f50edd88-0cf9-4d26-9d08-bc782d71472b",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790930881.171478,
+  "prompt": "Use the reference image ONLY for art style, rendering, lighting and finish quality. Draw a completely different woman: her face must be clearly different from the reference woman, with a different face shape, eyes, nose, lips and hairstyle. Vertical character key visual. A Korean woman in her mid-twenties, the yin incarnation of the Vermilion Bird guardian god of the South (fire element). Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Her own distinctive beautiful face: a slim oval face with a narrow chin, elegant upturned phoenix eyes with single eyelids and a sharp outer corner, straight soft brows, a small straight nose, small delicate lips, and a tiny beauty mark just under her right eye. Short glossy dark-brown bob with see-through bangs and one thin crimson streak. A calm focused gaze and a small knowing smile, warm but with clear boundaries. Outfit: a crimson silk shirt with a hanbok-style crossed collar tucked into a black high-waisted skirt, small gold candle-flame shaped earrings, a vermilion bird feather brooch. Crimson, gold and black appear only on the clothes and jewelry. Background: a dark, calm traditional Korean pavilion at night lit by a few small candle flames with floating embers, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Highly polished, fully rendered finish: finely detailed eyes with catchlights, individual glossy hair strands, detailed silk texture, crisp jewelry detail. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "cabdc321-7f5b-47b3-9ba6-e41a246362c2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_f50edd88-0cf9-4d26-9d08-bc782d71472b.png"
+ },
+ {
+  "id": "18ed8727-9fc0-43a5-b895-897efb7e3dac",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790931622.897935,
+  "prompt": "The woman slowly lowers her gloved hand from her collar, raises her chin slightly with a faint cool smirk and says in Korean, her lips moving in precise sync with every syllable: \"칭찬은 아껴 둘게. 넌 아직 더 빛날 수 있어.\" Voice: a young Korean woman in her mid-twenties with a cool, clear, crisp voice, composed and precise, a little low, a hint of a smile audible, natural standard Seoul Korean, soft and intimate. Camera: slow push-in toward her face with a slight orbit to the right, creating parallax between falling white petals in the foreground, her, and the moonlit lattice hall background. Cool moonlight glides across her face, revealing the planes of her cheekbones and nose, her silver earrings glinting. Focus racks from a falling petal in the foreground to her eyes. Her silver hair strands move gently. Keep her face, outfit and art style exactly as in the image. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "d09eb6b3-2b95-4b75-8f53-6ef7429cd1da",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_d09eb6b3-2b95-4b75-8f53-6ef7429cd1da.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_090022_18ed8727-9fc0-43a5-b895-897efb7e3dac.mp4"
+ },
+ {
+  "id": "386c55f4-c608-4cb9-b651-c540787c9d7f",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790931622.576971,
+  "prompt": "The woman glances down at the small candle flame in her hand, then slowly lifts her eyes to the camera with a calm small smile and says in Korean, her lips moving in precise sync with every syllable: \"작아도 괜찮아. 오래 타면 돼.\" Voice: a young Korean woman in her mid-twenties with a low, calm, soft alto voice, quiet and focused, warm but with clear boundaries, unhurried, natural standard Seoul Korean, soft and intimate. Camera: slow push-in toward her face with a slight orbit to the right, creating parallax between the candle flame and floating embers in the foreground, her, and the candlelit shrine background. The warm candle light flickers and glides across her face, revealing the planes of her cheekbones and nose. Focus racks from the candle flame in the foreground to her eyes. Her hair strands move gently and embers drift upward. Keep her face, outfit and art style exactly as in the image. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "fb1d709b-db8b-42b6-804d-4303a128f15b",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_082227_fb1d709b-db8b-42b6-804d-4303a128f15b.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_090022_386c55f4-c608-4cb9-b651-c540787c9d7f.mp4"
+ },
+ {
+  "id": "babb9ce9-b2fc-4bd8-aca2-183862d59d84",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790931622.62046,
+  "prompt": "The woman slowly tilts her head, her dreamy eyes softening into a gentle mysterious smile, and says in Korean in a slow near-whisper, her lips moving in precise sync with every syllable: \"말 안 해도 알아. 스며들 듯이.\" Voice: a young Korean woman in her mid-twenties with a soft, airy, slow whispering voice, dreamy and tender, natural standard Seoul Korean, very soft and intimate as if close to a microphone. Camera: slow push-in toward her face with a slight orbit to the left, creating parallax between falling raindrops in the foreground, her, and the misty moonlit pond pavilion background. Soft moonlight glides across her face, revealing the planes of her cheekbones and nose, the pearls glinting. Focus racks from a raindrop in the foreground to her eyes. Her long hair strands and the hairpin tassel sway gently. Keep her face, outfit and art style exactly as in the image. Audio: her voice and soft rain, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "51be4aef-05ff-4b68-ab15-21551d53636a",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_51be4aef-05ff-4b68-ab15-21551d53636a.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_090022_babb9ce9-b2fc-4bd8-aca2-183862d59d84.mp4"
+ },
+ {
+  "id": "6784fe2a-8aaa-425a-99b9-ae9fbd7e236f",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790931623.311243,
+  "prompt": "The woman lightly touches the golden dragon norigae at her waist, tilts her head with a warm, slightly teasing smile and says in Korean, her lips moving in precise sync with every syllable: \"뿌린 만큼 거둬요. 걱정은 나한테 맡겨.\" Voice: a Korean woman in her late twenties with a warm, bright, mid-range voice, caring and reassuring like a dependable older sister, a little playful, natural standard Seoul Korean, soft and intimate. Camera: slow push-in toward her face with a slight orbit to the left, creating parallax between drifting golden grain dust in the foreground, her, and the lantern-lit courtyard background. Warm lantern light glides across her face, revealing the planes of her cheekbones and nose. Focus racks from a golden grain in the foreground to her eyes. Loose hair strands and the norigae tassel sway gently. Keep her face, outfit and art style exactly as in the image. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "bb09b4af-4e7f-4503-93bf-993eea1d2633",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_bb09b4af-4e7f-4503-93bf-993eea1d2633.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_090023_6784fe2a-8aaa-425a-99b9-ae9fbd7e236f.mp4"
+ },
+ {
+  "id": "83d048b1-e974-4775-897a-dec9d6d07ee7",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790932585.502812,
+  "prompt": "The woman keeps the same calm, gentle expression as in the image and speaks in Korean with small natural lip movements in precise sync with every syllable, then gives a soft blink: \"천천히 말해도 돼. 다 들려.\" Her face, eyes, smile and head angle stay almost exactly as in the image the whole time: no head tilt, no exaggerated smile, no seductive or flirtatious look, no change to her facial features. Voice: a young Korean woman in her mid-twenties with a calm, soft, clear speaking voice, gentle and serene with a slightly mysterious warmth, unhurried, natural standard Seoul Korean; not whispering, not breathy, not seductive. Camera: very slow, slight push-in straight toward her face, no orbit, gentle parallax with falling raindrops in the foreground and the misty moonlit pond pavilion behind. Soft moonlight shimmers on the pearls; a few hair strands and the hairpin tassel sway slightly. Keep her face, outfit and art style exactly as in the image. Audio: her voice and soft rain, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "51be4aef-05ff-4b68-ab15-21551d53636a",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_51be4aef-05ff-4b68-ab15-21551d53636a.png"
+   },
+   {
+    "role": "end_image",
+    "id": "51be4aef-05ff-4b68-ab15-21551d53636a",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_51be4aef-05ff-4b68-ab15-21551d53636a.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_091625_83d048b1-e974-4775-897a-dec9d6d07ee7.mp4"
+ },
+ {
+  "id": "6cdb4661-d64b-4291-990c-a74dc8c5fcb9",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790933144.408165,
+  "prompt": "The woman comes alive naturally: she breathes, her shoulders rise softly, she slowly lowers her hand from her braid, gives a gentle blink and a small warm smile, and says in Korean, her lips moving in precise sync with every syllable: \"천천히 말해도 돼. 다 들려.\" Her expression stays calm, gentle and quietly mysterious, close to the image: no exaggerated smile, no seductive or flirtatious look. Her face shape, eyes, nose and lips stay exactly the same as in the image. Voice: a young Korean woman in her mid-twenties with a calm, soft, clear speaking voice, gentle and serene with a slightly mysterious warmth, unhurried, natural standard Seoul Korean; not whispering, not breathy, not seductive. Camera: slow push-in toward her face with a slight orbit to the left, creating parallax between falling raindrops in the foreground, her, and the misty moonlit pond pavilion background. Soft moonlight glides across her face, revealing the planes of her cheekbones and nose, the pearls glinting. Focus racks from a raindrop in the foreground to her eyes. Her long hair strands, robe sleeves and the hairpin tassel sway gently in the breeze, rain falls steadily. Keep her face, outfit and art style exactly as in the image. Audio: her voice and soft rain, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "51be4aef-05ff-4b68-ab15-21551d53636a",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_51be4aef-05ff-4b68-ab15-21551d53636a.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_092544_6cdb4661-d64b-4291-990c-a74dc8c5fcb9.mp4"
+ },
+ {
+  "id": "252b2469-0bca-42cb-9215-68f6c788a59b",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790933168.601081,
+  "prompt": "Cinematic 3D depth. The woman comes alive naturally: she breathes, her shoulders rise softly, she slowly lowers her hand from her braid, gives a gentle blink and a small warm smile, and says in Korean, her lips moving in precise sync with every syllable: \"천천히 말해도 돼. 다 들려.\" Her expression stays calm, gentle and quietly mysterious, close to the image: no exaggerated smile, no seductive or flirtatious look. Her face shape, eyes, nose and lips stay exactly the same as in the image. Voice: a young Korean woman in her mid-twenties with a calm, soft, clear speaking voice, gentle and serene with a slightly mysterious warmth, unhurried, natural standard Seoul Korean; not whispering, not breathy, not seductive. Camera: a smooth dolly-in with a gentle arc to the left, strong parallax and deep perspective: large out-of-focus raindrops and a lotus leaf very close to the lens in the foreground slide past quickly, she stays sharp in the middle ground, the pond pavilion, its lanterns and the moon behind her recede and shift slowly at a different speed, layers of mist drifting between them. Soft moonlight rim-lights her hair and shoulders and glides across her face, revealing cheekbones and nose with clear light and shadow. Focus racks from a foreground raindrop to her eyes. Her long hair strands, robe sleeves and hairpin tassel sway gently, rain falls steadily with ripples on the water. Keep her face, outfit and art style exactly as in the image. Audio: her voice and soft rain, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "51be4aef-05ff-4b68-ab15-21551d53636a",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_51be4aef-05ff-4b68-ab15-21551d53636a.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_092608_252b2469-0bca-42cb-9215-68f6c788a59b.mp4"
+ },
+ {
+  "id": "4918aeeb-0555-4749-ae80-23c35cefdf13",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790933395.710813,
+  "prompt": "Cinematic 3D depth. The woman comes alive naturally and subtly: she breathes, her shoulders rise softly, she slowly lowers her hand from her braid, blinks gently, and says in Korean with a faint calm smile, her lips moving in precise sync with every syllable: \"천천히 말해도 돼. 다 들려.\" Her eyes keep their original soft, half-lidded droopy shape and size the whole time: never widen or enlarge her eyes, no big doe eyes. Her expression stays understated, calm and quietly mysterious: no exaggerated smile, no eyebrow raise, no seductive or flirtatious look. Voice: a young Korean woman in her mid-twenties with a calm, soft, clear speaking voice, gentle and serene with a slightly mysterious warmth, unhurried, natural standard Seoul Korean; not whispering, not breathy, not seductive. Camera: a smooth dolly-in with a gentle arc to the left, strong parallax and deep perspective: large out-of-focus raindrops and a lotus leaf very close to the lens in the foreground slide past quickly, she stays sharp in the middle ground, the pond pavilion, its lanterns and the moon behind her recede and shift slowly at a different speed, layers of mist drifting between them. Soft moonlight rim-lights her hair and shoulders and glides across her face, revealing cheekbones and nose with clear light and shadow. Focus racks from a foreground raindrop to her eyes. Her long hair strands, robe sleeves and hairpin tassel sway gently, rain falls steadily with ripples on the water. Keep her face, outfit and art style exactly as in the image. Audio: her voice and soft rain, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "51be4aef-05ff-4b68-ab15-21551d53636a",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_084801_51be4aef-05ff-4b68-ab15-21551d53636a.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_092955_4918aeeb-0555-4749-ae80-23c35cefdf13.mp4"
+ },
+ {
+  "id": "0af79661-bfb6-4dc1-8966-b99131d4c2d4",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790936675.748064,
+  "prompt": "Vertical character key visual. An androgynous Korean being of indeterminate gender, looks about twenty-five, an ethereal beauty that could be read equally as a man or a woman: softly defined jaw, straight refined nose, calm almond eyes with heterochromia (one warm amber, one pale silver), natural neutral brows, long lashes, no lipstick, neutral lips, a slender build. The spirit of Taegeuk, the moment before yin and yang split, who lives at dusk between day and night. Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Long loose silver-white hair flowing in the wind. Expression: serene and otherworldly, eyes half-lowered, a barely-there smile. Outfit, gender-neutral and ceremonial: layered translucent robes in deep indigo and dusk violet with wide sleeves, a long gold-embroidered stole with sun and moon motifs hanging from both shoulders, a sheer veil-like outer layer catching the light; nothing that reads as male hanbok dopo or female chima jeogori. Accessories: a slim gold circlet with a small taegeuk disc on the forehead, a gold sun earring and a silver moon earring, a ritual brass bell hanging from one hand. Background: the Korean royal Sun-Moon-Five-Peaks painting reimagined as a real dusk landscape: a red sun and a white moon side by side above five misty peaks and pine trees, waterfalls, violet clouds, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. The most mysterious and striking figure, premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102435_0af79661-bfb6-4dc1-8966-b99131d4c2d4.png"
+ },
+ {
+  "id": "3cdb8ba2-8b97-4479-b217-bc2c2f40f0f2",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790936675.747522,
+  "prompt": "Vertical character key visual. An androgynous Korean being of indeterminate gender, looks about twenty-five, an ethereal beauty that could be read equally as a man or a woman: softly defined jaw, straight refined nose, calm almond eyes with heterochromia (one warm amber, one pale silver), natural neutral brows, long lashes, no lipstick, neutral lips, a slender build with shoulders neither broad nor narrow. The spirit of Taegeuk who lives at dusk between day and night. Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Sleek jaw-length black hair with long side-swept bangs covering one eye partly, one thin silver strand. Expression: cool, calm, slightly melancholic, looking straight at the viewer. Outfit, gender-neutral and modern: a long asymmetric black stage coat with a high mandarin collar, one wide sleeve and one fitted sleeve, layered with a sheer sunset-gradient silk sash (amber to violet) draped over one shoulder, fine gold sun-and-moon embroidery along the hem; nothing that reads as male hanbok dopo or female chima jeogori. Accessories: a gold sun earring on one ear and a silver crescent moon earring on the other, thin black gloves on one hand. Background: a dusk sky where the setting sun and the rising moon appear at the same time, behind a traditional Korean shrine gate silhouette, layered mist and drifting embers, shallow depth of field. Waist-up, three-quarter view. The most mysterious and striking figure, premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102435_3cdb8ba2-8b97-4479-b217-bc2c2f40f0f2.png"
+ },
+ {
+  "id": "551d8ca3-2f90-4f46-b5ac-22f39f5d6456",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790936676.007887,
+  "prompt": "Vertical character key visual. An androgynous Korean being of indeterminate gender, looks about twenty-five, an ethereal beauty that could be read equally as a man or a woman: softly defined jaw, straight refined nose, calm almond eyes with heterochromia (one warm amber like the setting sun, one pale silver like the moon), natural neutral brows, long lashes, no lipstick, neutral lips, a slender build with shoulders neither broad nor narrow. The spirit of Taegeuk, the one that never split into yin and yang, who lives at dusk between day and night. Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Very long straight hair, black fading into silver at the ends, half tied up with a thin gold ring. Expression: serene, unreadable, the faintest knowing smile. Outfit inspired by Korean shaman ritual garments, gender-neutral: a long sleeveless kwaeja over-vest in a sunset gradient from deep vermilion to violet to midnight indigo, with fine gold taegeuk patterns, over a high-collared black inner robe with wide flowing sleeves; nothing that reads as male hanbok dopo or female chima jeogori. Accessories: a small gold sun earring on one ear and a silver crescent moon earring on the other, a thin gold taegeuk pendant. Background: a vast dusk sky where the setting sun and the rising moon appear at the same time over silhouetted mountain ridges and a traditional Korean shrine roof, violet and amber clouds, drifting embers, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. The most mysterious and striking figure, premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102436_551d8ca3-2f90-4f46-b5ac-22f39f5d6456.png"
+ },
+ {
+  "id": "6accef85-428b-4671-97aa-4ea22d3b341b",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790936912.792709,
+  "prompt": "Vertical character key visual. An androgynous Korean being of indeterminate gender, looks about twenty-two, a bright, charming beauty that could be read equally as a boy or a girl: soft oval face, lively upturned eyes with golden irises, a small playful grin, natural brows, no lipstick, slender build. The spirit of Cheoneul-gwiin, the noblest lucky star of saju, the benefactor who appears in someone's hardest moment wearing any face. Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Fluffy shoulder-length honey-blond hair with a few tiny gold star pins. Expression: mischievous and warm, a wink-ready grin, head slightly tilted. Outfit, gender-neutral and playful: an oversized cream short jacket with wide hanbok-style sleeves and a deep midnight-blue lining embroidered with small gold stars, a long midnight-blue sash with gold knot tassel (maedeup), loose dark trousers; nothing that reads as male dopo or female chima jeogori. Signature prop: holding up a glowing red-and-blue Korean silk lantern (cheongsachorong) that lights the way. Accessories: one star-shaped gold earring, a gold knot bracelet. Background: a night path in a traditional Korean village under a sky full of stars and a bright shooting star, warm lantern light reflecting on stone steps, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102832_6accef85-428b-4671-97aa-4ea22d3b341b.png"
+ },
+ {
+  "id": "ae8c8d62-c80d-4ced-bbd7-3d6deed967bc",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790936912.845481,
+  "prompt": "Vertical character key visual. An androgynous Korean being of indeterminate gender, looks about twenty-four, an elegant and luminous beauty that could be read equally as a man or a woman: refined oval face, clear almond eyes with warm gold irises, soft straight brows, a light warm smile, no lipstick, slender build. The spirit of Cheoneul-gwiin, the noblest lucky star of saju, the benefactor who appears in disguise to help. Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Medium-length straight hair in a soft gradient from dark brown to gold at the tips, tucked behind one ear. Expression: calm, kind and quietly confident, a gentle smile. Outfit, gender-neutral: a long flowing pale-gold silk robe-coat with a dark teal inner layer and asymmetric closure, fine star and auspicious cloud patterns, a gold norigae-style talisman with a star charm hanging at the waist; nothing that reads as male dopo or female chima jeogori. Signature prop: a traditional red-and-blue silk lantern (cheongsachorong) held low, its glow lighting the face from below. Accessories: small gold star earrings, a thin gold ring on one finger. Background: a quiet traditional Korean palace courtyard at night with lanterns, a sky of stars and a faint milky way, golden light motes drifting, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102832_ae8c8d62-c80d-4ced-bbd7-3d6deed967bc.png"
+ },
+ {
+  "id": "d9dc24e4-855d-4de6-8cbd-7a56c2b41cc0",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790936912.708311,
+  "prompt": "Vertical character key visual. An androgynous Korean being of indeterminate gender, looks about twenty-three, a radiant beauty that could be read equally as a man or a woman: a gentle heart-shaped face, bright round eyes with starry silver-blue irises, a cheerful closed-lip smile, natural brows, no lipstick, slender build. The spirit of Cheoneul-gwiin, the noblest lucky star in saju, the benefactor who shows up when you need help. Semi-realistic 2.5D Korean webtoon illustration style: painterly rendering on a realistic facial structure, soft cel-shaded skin with subtle natural texture, clean refined line work, cinematic rim light. Short wavy jet-black hair with one braided strand tied with a gold thread, a tiny gold star mark under one eye. Expression: friendly and knowing, like an old friend who came just in time. Outfit, gender-neutral and modern: a cropped deep-navy stage jacket with a mandarin collar covered in fine gold constellation embroidery (the Big Dipper), over a loose ivory shirt, a wide gold-knot belt with a long tassel; nothing that reads as male dopo or female chima jeogori. Signature props: holding a small glowing paper lantern shaped like a star in one hand, a ribbon of golden light trailing from it. Accessories: a gold star earring on one ear only. Background: a starry night sky over a traditional Korean stone bridge, the Big Dipper bright overhead, warm lanterns along the river, shallow depth of field. Waist-up, three-quarter view, looking at the viewer. Premium idol and game concept art quality, elegant and refined, anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102832_d9dc24e4-855d-4de6-8cbd-7a56c2b41cc0.png"
+ },
+ {
+  "id": "64c5861e-83e1-42df-bb19-eb104ee336d8",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790936975.471364,
+  "prompt": "Vertical character key visual with maximum three-dimensional realism. An androgynous Korean being of indeterminate gender, looks about twenty-two, a bright, charming beauty that could be read equally as a boy or a girl: soft oval face, lively upturned eyes with golden irises, a small playful grin, natural brows, no lipstick, slender build. The spirit of Cheoneul-gwiin, the noblest lucky star of saju, the benefactor who appears in your hardest moment wearing any face. Rendering: semi-realistic Korean webtoon character rendered with strong 3D volume and lifelike presence: sculpted facial planes with realistic light and shadow, soft subsurface scattering on skin, sparkling reflective eyes with depth, fluffy individual hair strands with highlights, fabric with real weight and folds; the warm glow of a lantern lighting the face from below and the side, a cool starlight rim light separating the figure from the night background; real camera lens depth of field with creamy bokeh; the figure feels tangible and alive. Fluffy shoulder-length honey-blond hair with a few tiny gold star pins. Expression: mischievous and warm, a wink-ready grin, head slightly tilted. Outfit, gender-neutral and playful: an oversized cream short jacket with wide hanbok-style sleeves and a midnight-blue lining embroidered with small gold stars, a long midnight-blue sash with a gold maedeup knot tassel, loose dark trousers. Signature prop: holding up a glowing red-and-blue silk lantern (cheongsachorong). Accessories: one star-shaped gold earring, a gold knot bracelet. Background: a starry night path in a traditional Korean village with a shooting star, softly out of focus. Waist-up, three-quarter view, looking at the viewer. Anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_64c5861e-83e1-42df-bb19-eb104ee336d8.png"
+ },
+ {
+  "id": "87e6f24c-b1a5-4ac5-aa78-2e4695ffa362",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790936975.377467,
+  "prompt": "Vertical character key visual with maximum three-dimensional realism. An androgynous Korean being of indeterminate gender, looks about twenty-four, an elegant and luminous beauty that could be read equally as a man or a woman: refined oval face, clear almond eyes with warm gold irises, soft straight brows, a light warm smile, no lipstick, slender build. The spirit of Cheoneul-gwiin, the noblest lucky star of saju, the benefactor who appears in disguise to help. Rendering: semi-realistic Korean webtoon character rendered with strong 3D volume and lifelike presence: sculpted facial planes with realistic light and shadow, soft subsurface scattering on skin, reflective eyes with depth, individual hair strands with highlights, silk with real sheen and folds; the warm glow of a lantern held low lighting the face from below, a cool starlight rim light separating the figure from the night background; real camera lens depth of field with creamy bokeh; the figure feels tangible and alive. Medium-length straight hair in a gradient from dark brown to gold at the tips, tucked behind one ear. Expression: calm, kind and quietly confident. Outfit, gender-neutral: a long flowing pale-gold silk robe-coat with a dark teal inner layer and asymmetric closure, fine star and auspicious cloud patterns, a gold talisman ornament with a star charm at the waist. Signature prop: a red-and-blue silk lantern (cheongsachorong) held low. Accessories: small gold star earrings. Background: a traditional Korean palace courtyard at night with lanterns and a faint milky way, softly out of focus. Waist-up, three-quarter view, looking at the viewer. Anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_87e6f24c-b1a5-4ac5-aa78-2e4695ffa362.png"
+ },
+ {
+  "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790936975.59302,
+  "prompt": "Vertical character key visual with maximum three-dimensional realism. An androgynous Korean being of indeterminate gender, looks about twenty-five, an ethereal beauty that could be read equally as a man or a woman: softly defined jaw, straight refined nose, calm almond eyes with heterochromia (one warm amber, one pale silver), natural neutral brows, long lashes, no lipstick, slender build. The spirit of Taegeuk, the moment before yin and yang split. Rendering: semi-realistic Korean webtoon character rendered with strong 3D volume and lifelike presence: sculpted facial planes with realistic light and shadow, soft subsurface scattering on skin, moist reflective eyes with depth, individual hair strands with highlights, translucent fabric layers with real depth and sheen; warm red sunlight from one side and cool white moonlight from the other modeling the face, a bright rim light separating the figure from the background; real camera lens depth of field with creamy bokeh; the figure feels tangible and alive. Long loose silver-white hair moving in the wind. Expression: serene and otherworldly, eyes half-lowered, a barely-there smile. Outfit, gender-neutral and ceremonial: layered translucent robes in deep indigo and dusk violet with wide sleeves, a long gold-embroidered stole with sun and moon motifs over both shoulders. Accessories: a slim gold circlet with a small taegeuk disc on the forehead, a gold sun earring and a silver moon earring, a brass ritual bell in one hand. Background: a real dusk landscape inspired by the Sun-Moon-Five-Peaks painting, a red sun and white moon above misty peaks and pines, softly out of focus. Waist-up, three-quarter view, looking at the viewer. The most mysterious and striking figure. Anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+ },
+ {
+  "id": "8bcef4f1-0c46-42b0-a726-4bafe3718543",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790936976.06244,
+  "prompt": "Vertical character key visual with maximum three-dimensional realism. An androgynous Korean being of indeterminate gender, looks about twenty-five, an ethereal beauty that could be read equally as a man or a woman: softly defined jaw, straight refined nose, calm almond eyes with heterochromia (one warm amber like the setting sun, one pale silver like the moon), natural neutral brows, long lashes, no lipstick, slender build with shoulders neither broad nor narrow. The spirit of Taegeuk who lives at dusk between day and night. Rendering: semi-realistic Korean webtoon character rendered with strong 3D volume and lifelike presence: sculpted facial planes with realistic light and shadow, soft subsurface scattering on skin, moist reflective eyes with depth, individual hair strands with highlights and depth, fabric with real weight, folds and sheen; a warm amber key light from the setting sun on one side of the face and a cool silver moonlight rim on the other side, clearly separating the figure from the background; real camera lens depth of field with creamy bokeh; the figure feels tangible, as if you could touch it. Very long straight hair, black fading into silver at the ends, half tied up with a thin gold ring. Expression: serene, unreadable, the faintest knowing smile. Outfit inspired by Korean shaman ritual garments, gender-neutral: a long sleeveless kwaeja over-vest in a sunset gradient from deep vermilion to violet to midnight indigo with fine gold taegeuk patterns, over a high-collared black inner robe with wide sleeves. Accessories: a gold sun earring on one ear and a silver crescent moon earring on the other, a thin gold taegeuk pendant. Background: a dusk sky with the setting sun and rising moon together over mountain ridges and a shrine roof, softly out of focus. Waist-up, three-quarter view, looking at the viewer. The most mysterious and striking figure. Anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102936_8bcef4f1-0c46-42b0-a726-4bafe3718543.png"
+ },
+ {
+  "id": "a2282a3e-acd2-45a7-848b-60c91b81bcea",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790937235.765183,
+  "prompt": "Vertical character key visual with maximum three-dimensional realism. An androgynous Korean being of indeterminate gender, looks about twenty-three, a warm, charming beauty that could be read equally as a man or a woman, with distinctly Korean East Asian features: natural-sized almond eyes with a subtle inner double eyelid and dark brown irises (not big, not doll-like), straight soft brows, a refined small nose, a light playful smile, no lipstick, slender build. The spirit of Cheoneul-gwiin, the noblest lucky star of saju, the benefactor who appears in your hardest moment wearing any face. Rendering: semi-realistic Korean webtoon character rendered with strong 3D volume and lifelike presence: sculpted facial planes with realistic light and shadow, soft subsurface scattering on skin, reflective eyes with depth, individual hair strands with highlights, fabric with real weight and folds; the warm glow of a lantern lighting the face from below and the side, a cool starlight rim light separating the figure from the night background; real camera lens depth of field with creamy bokeh; the figure feels tangible and alive. Black medium-length hair half tied up with a small gold star pin, soft loose strands around the face. Expression: friendly, mischievous, like an old friend who arrived just in time. Outfit, gender-neutral: an ivory short jacket with wide hanbok-style sleeves and a midnight-blue lining embroidered with tiny gold stars, a long midnight-blue sash with a gold maedeup knot tassel, dark loose trousers. Signature prop: holding up a glowing red-and-blue silk lantern (cheongsachorong). Accessories: one star-shaped gold earring. Background: a starry night alley in a traditional Korean hanok village with a shooting star, softly out of focus. Waist-up, three-quarter view, looking at the viewer. Anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_103355_a2282a3e-acd2-45a7-848b-60c91b81bcea.png"
+ },
+ {
+  "id": "bdc93189-c383-4249-98cc-8ded8c836c85",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790937235.967012,
+  "prompt": "Vertical character key visual with maximum three-dimensional realism. An androgynous Korean being of indeterminate gender, looks about twenty-three, a fresh, bright beauty that could be read equally as a man or a woman, with distinctly Korean East Asian features: natural-sized eyes with soft monolids and dark brown irises (not big, not doll-like), straight brows, a refined nose, a cheerful closed-lip smile, no lipstick, slender build. The spirit of Cheoneul-gwiin, the noblest lucky star of saju, the benefactor who shows up when you need help. Rendering: semi-realistic Korean webtoon character rendered with strong 3D volume and lifelike presence: sculpted facial planes with realistic light and shadow, soft subsurface scattering on skin, reflective eyes with depth, individual hair strands with highlights, fabric with real weight and folds; warm lantern light on the face, a cool starlight rim light separating the figure from the background; real camera lens depth of field with creamy bokeh; the figure feels tangible and alive. Jaw-length soft layered dark brown hair with airy bangs, one thin braid tied with gold thread. Expression: playful and warm, slight head tilt. Outfit, gender-neutral and modern: a cropped deep-navy jacket with a mandarin collar covered in fine gold Big Dipper constellation embroidery, over a loose ivory shirt, a gold-knot belt with a long tassel. Signature prop: a small glowing star-shaped paper lantern in one hand, a ribbon of golden light trailing from it. Accessories: a gold star earring on one ear only. Background: a starry night over a traditional Korean stone bridge with the Big Dipper bright overhead and lanterns along the river, softly out of focus. Waist-up, three-quarter view, looking at the viewer. Anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_103355_bdc93189-c383-4249-98cc-8ded8c836c85.png"
+ },
+ {
+  "id": "d2965793-db10-45c0-916c-a02cfe64b29f",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790937235.766221,
+  "prompt": "Vertical character key visual with maximum three-dimensional realism. An androgynous Korean being of indeterminate gender, looks about twenty-four, an elegant, luminous beauty that could be read equally as a man or a woman, with distinctly Korean East Asian features: calm natural-sized almond eyes with dark brown irises (not big, not doll-like), soft straight brows, a refined nose, a gentle warm smile, no lipstick, slender build. The spirit of Cheoneul-gwiin, the noblest lucky star of saju, the benefactor who appears in disguise to help. Rendering: semi-realistic Korean webtoon character rendered with strong 3D volume and lifelike presence: sculpted facial planes with realistic light and shadow, soft subsurface scattering on skin, reflective eyes with depth, individual hair strands with highlights, silk with real sheen and folds; the warm glow of a lantern held low lighting the face from below, a cool starlight rim light separating the figure from the night background; real camera lens depth of field with creamy bokeh; the figure feels tangible and alive. Long straight black hair in a low loose ponytail tied with a gold cord, side-parted bangs. Expression: kind and quietly confident. Outfit, gender-neutral: a long flowing pale-gold silk robe-coat with a dark teal inner layer and asymmetric closure, fine star and auspicious cloud patterns, a gold talisman ornament with a star charm at the waist. Signature prop: a red-and-blue silk lantern (cheongsachorong) held low. Accessories: small gold star earrings. Background: a traditional Korean palace courtyard at night with lanterns and a faint milky way, softly out of focus. Waist-up, three-quarter view, looking at the viewer. Anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_103355_d2965793-db10-45c0-916c-a02cfe64b29f.png"
+ },
+ {
+  "id": "68fd0504-5828-4437-aa70-c9fc5e938ff1",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790937258.919378,
+  "prompt": "Use the reference image for art style, rendering quality, three-dimensional volume, lighting, androgynous mood and level of mystery. Draw a different being with a clearly different face, hair, outfit, colors and setting. Vertical character key visual. An androgynous Korean being of indeterminate gender, looks about twenty-three, a warm and charming beauty that could be read equally as a man or a woman, distinctly Korean features: natural-sized almond eyes with dark brown irises (not big), straight soft brows, a refined nose, a light playful smile, no lipstick. The spirit of Cheoneul-gwiin, the noblest lucky star of saju, the benefactor who appears in your hardest moment wearing any face. Black medium-length hair half tied up with a small gold star pin, soft loose strands. Expression: friendly and mischievous, like an old friend who arrived just in time. Outfit, gender-neutral: an ivory and pale-gold layered robe-jacket with wide sleeves, midnight-blue lining embroidered with tiny gold stars and auspicious clouds, a long midnight-blue sash with a gold maedeup knot tassel. Signature prop: holding up a glowing red-and-blue silk lantern (cheongsachorong) whose warm light models the face from below, a cool starlight rim on hair and shoulders. Accessories: one gold star earring, a gold knot bracelet. Background: a starry night sky with a bright shooting star over the curved roofs of a traditional Korean village, softly out of focus. Waist-up, three-quarter view, looking at the viewer. Strong 3D volume and lifelike presence, real lens depth of field. Anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "551d8ca3-2f90-4f46-b5ac-22f39f5d6456",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102436_551d8ca3-2f90-4f46-b5ac-22f39f5d6456.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_103418_68fd0504-5828-4437-aa70-c9fc5e938ff1.png"
+ },
+ {
+  "id": "f0fcbdfd-9bc5-4492-b8d7-0e787426c0ac",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790937258.621568,
+  "prompt": "Use the reference image for art style, rendering quality, three-dimensional volume, lighting, androgynous mood and level of mystery. Draw a different being with a clearly different face, hair, outfit, colors and setting. Vertical character key visual. An androgynous Korean being of indeterminate gender, looks about twenty-four, a luminous beauty that could be read equally as a man or a woman, distinctly Korean features: calm natural-sized eyes with dark brown irises (not big), soft straight brows, a refined nose, a gentle knowing smile, no lipstick. The spirit of Cheoneul-gwiin, the noblest lucky star of saju, the benefactor who appears in disguise to help. Jaw-length soft layered dark brown hair with airy bangs, one thin braid tied with gold thread. Expression: kind, quietly confident, a hint of mischief. Outfit, gender-neutral and modern-traditional: a deep midnight-blue long sleeveless over-robe covered in fine gold constellation embroidery (the Big Dipper), over a high-collared ivory inner robe with wide sleeves, a gold talisman ornament with a star charm at the waist. Signature prop: a small glowing star-shaped lantern held near the chest, its warm light modeling the face, a cool silver starlight rim on the other side. Accessories: a gold star earring on one ear only. Background: a vast starry night with the Big Dipper bright overhead above a traditional Korean stone bridge and lanterns on the river, softly out of focus. Waist-up, three-quarter view, looking at the viewer. Strong 3D volume and lifelike presence, real lens depth of field. Anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "551d8ca3-2f90-4f46-b5ac-22f39f5d6456",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102436_551d8ca3-2f90-4f46-b5ac-22f39f5d6456.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_103418_f0fcbdfd-9bc5-4492-b8d7-0e787426c0ac.png"
+ },
+ {
+  "id": "0e8745bc-2627-4de5-b030-3f3a795da141",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790937300.806854,
+  "prompt": "Use the reference image for art style, rendering quality, three-dimensional volume, lighting, androgynous mood and level of cool. Draw a different being with a clearly different face, hair, outfit, colors and setting. Vertical character key visual. An androgynous Korean being of indeterminate gender, looks about twenty-three, a warm and charming beauty that could be read equally as a man or a woman, distinctly Korean features: natural-sized almond eyes with dark brown irises (not big), straight soft brows, a refined nose, a light playful smile, no lipstick. The spirit of Cheoneul-gwiin, the noblest lucky star of saju, the benefactor who appears in your hardest moment wearing any face. Black medium-length hair half tied up with a small gold star pin, soft loose strands. Expression: friendly and mischievous, like an old friend who arrived just in time. Outfit, gender-neutral and modern: a long ivory stage coat with a high collar, one wide sleeve, a midnight-blue silk sash embroidered with tiny gold stars draped over one shoulder, gold star embroidery along the hem. Signature prop: holding up a glowing red-and-blue silk lantern (cheongsachorong) whose warm light models the face, a cool starlight rim on hair and shoulders. Accessories: one gold star earring. Background: a starry night with a shooting star above a traditional Korean shrine gate silhouette, softly out of focus. Waist-up, three-quarter view, looking at the viewer. Strong 3D volume and lifelike presence, real lens depth of field. Anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "3cdb8ba2-8b97-4479-b217-bc2c2f40f0f2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102435_3cdb8ba2-8b97-4479-b217-bc2c2f40f0f2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_103500_0e8745bc-2627-4de5-b030-3f3a795da141.png"
+ },
+ {
+  "id": "87d5fb63-1950-4a08-8524-772737419c9b",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790937300.666198,
+  "prompt": "Use the reference image for art style, rendering quality, three-dimensional volume, lighting, androgynous mood and level of cool. Draw a different being with a clearly different face, hair, outfit, colors and setting. Vertical character key visual. An androgynous Korean being of indeterminate gender, looks about twenty-four, a luminous beauty that could be read equally as a man or a woman, distinctly Korean features: calm natural-sized eyes with dark brown irises (not big), soft straight brows, a refined nose, a gentle knowing smile, no lipstick. The spirit of Cheoneul-gwiin, the noblest lucky star of saju. Soft layered dark brown hair just below the jaw with airy bangs, one thin braid tied with gold thread. Expression: kind, quietly confident, a hint of mischief. Outfit, gender-neutral and modern: a cropped deep midnight-blue jacket with a mandarin collar covered in fine gold Big Dipper constellation embroidery, over a long ivory inner layer, a gold-knot belt with a long tassel. Signature prop: a small glowing star-shaped lantern held near the chest, its warm light modeling the face, a cool silver rim light on the other side. Accessories: a gold star earring on one ear only. Background: a starry night with the Big Dipper bright overhead above a traditional Korean stone bridge and lanterns on the river, softly out of focus. Waist-up, three-quarter view, looking at the viewer. Strong 3D volume and lifelike presence, real lens depth of field. Anatomically natural hands. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "3cdb8ba2-8b97-4479-b217-bc2c2f40f0f2",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102435_3cdb8ba2-8b97-4479-b217-bc2c2f40f0f2.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_103500_87d5fb63-1950-4a08-8524-772737419c9b.png"
+ },
+ {
+  "id": "0384d84f-74e6-47eb-89f4-32e3184f6811",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790939279.587128,
+  "prompt": "Cinematic, high-end, strong 3D depth and lifelike realism. The androgynous figure slowly raises the eyes to the camera, the brass ritual bell in the hand sways once and chimes softly, and says in Korean, slow and calm, lips moving in precise sync with every syllable, with a short pause at the comma: \"낮도 밤도 아닌 시간에, 당신을 기다렸어요.\" A faint mysterious smile at the end. Voice: an androgynous Korean voice that could belong to either a man or a woman, low-mid register, smooth, unhurried, quiet and mysterious, natural standard Seoul Korean, intimate as if close to a microphone; not breathy, not theatrical. Camera: a smooth slow dolly-in with a gentle arc to the right, strong parallax and deep perspective: thin wisps of violet mist and a few glowing embers drift very close to the lens in the foreground, the figure stays tack sharp in the middle ground, the red sun, the white moon, the five misty peaks and pines recede far behind and shift slowly at a different speed. Warm red sunlight models one side of the face and cool white moonlight the other, a bright rim light outlines the long silver hair; volumetric light through the mist. Focus racks from a foreground ember to the eyes. The silver hair and the translucent violet robes and gold stole flow naturally in a soft wind with real weight. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, a single soft bell chime and gentle wind, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 6,
+   "width": 2160,
+   "height": 3840,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "4k",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_110759_0384d84f-74e6-47eb-89f4-32e3184f6811.mp4"
+ },
+ {
+  "id": "5b18ba02-9266-4c1a-846d-75f71c4da0a8",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790939279.599271,
+  "prompt": "Cinematic, high-end, strong 3D depth and lifelike realism. The androgynous figure raises the glowing silk lantern a little toward the camera, tilts the head with a playful knowing grin and says in Korean, light and warm, lips moving in precise sync with every syllable, with a short pause after the first sentence: \"좋은 일은 사람 얼굴로 와. 이번엔 나야.\" Then a small wink. Voice: an androgynous youthful Korean voice that could belong to either a man or a woman, clear bright mid register, playful and warm, natural standard Seoul Korean, intimate as if close to a microphone; not high-pitched, not theatrical. Camera: a smooth dolly-in with a gentle arc to the right, strong parallax and deep perspective: golden light motes and the lantern tassel drift very close to the lens in the foreground, the figure stays tack sharp in the middle ground, the shrine gate, lanterns and the starry sky with a shooting star recede far behind and shift slowly at a different speed. The warm red-and-blue lantern light flickers and models the face from below and the side, a cool starlight rim outlines the hair and shoulders. Focus racks from a foreground light mote to the eyes. Loose hair strands, the ivory sleeves and the star-embroidered navy sash move naturally with real weight. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice and a quiet night ambience with faint wind chimes, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "0e8745bc-2627-4de5-b030-3f3a795da141",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_103500_0e8745bc-2627-4de5-b030-3f3a795da141.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_110759_5b18ba02-9266-4c1a-846d-75f71c4da0a8.mp4"
+ },
+ {
+  "id": "5b4569b1-ba16-4545-a371-7d4e45d0795d",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790939279.88389,
+  "prompt": "Cinematic, high-end, strong 3D depth and lifelike realism. The androgynous figure raises the glowing silk lantern a little toward the camera, tilts the head with a playful knowing grin and says in Korean, light and warm, lips moving in precise sync with every syllable, with a short pause after the first sentence: \"좋은 일은 사람 얼굴로 와. 이번엔 나야.\" Then a small wink. Voice: an androgynous youthful Korean voice that could belong to either a man or a woman, clear bright mid register, playful and warm, natural standard Seoul Korean, intimate as if close to a microphone; not high-pitched, not theatrical. Camera: a smooth dolly-in with a gentle arc to the left, strong parallax and deep perspective: golden light motes and the lantern tassel drift very close to the lens in the foreground, the figure stays tack sharp in the middle ground, the shrine gate, lanterns and the starry sky with a shooting star recede far behind and shift slowly at a different speed. The warm red-and-blue lantern light flickers and models the face from below and the side, a cool starlight rim outlines the hair and shoulders. Focus racks from a foreground light mote to the eyes. Loose hair strands, the ivory sleeves and the star-embroidered navy sash move naturally with real weight. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice and a quiet night ambience with faint wind chimes, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 2160,
+   "height": 3840,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "4k",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "0e8745bc-2627-4de5-b030-3f3a795da141",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_103500_0e8745bc-2627-4de5-b030-3f3a795da141.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_110759_5b4569b1-ba16-4545-a371-7d4e45d0795d.mp4"
+ },
+ {
+  "id": "ba97e928-8037-45d7-b321-908cae9c937d",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790939279.723913,
+  "prompt": "Cinematic, high-end, strong 3D depth and lifelike realism. The androgynous figure slowly raises the eyes to the camera, the brass ritual bell in the hand sways once and chimes softly, and says in Korean, slow and calm, lips moving in precise sync with every syllable, with a short pause at the comma: \"낮도 밤도 아닌 시간에, 당신을 기다렸어요.\" A faint mysterious smile at the end. Voice: an androgynous Korean voice that could belong to either a man or a woman, low-mid register, smooth, unhurried, quiet and mysterious, natural standard Seoul Korean, intimate as if close to a microphone; not breathy, not theatrical. Camera: a smooth slow dolly-in with a gentle arc to the left, strong parallax and deep perspective: thin wisps of violet mist and a few glowing embers drift very close to the lens in the foreground, the figure stays tack sharp in the middle ground, the red sun, the white moon, the five misty peaks and pines recede far behind and shift slowly at a different speed. Warm red sunlight models one side of the face and cool white moonlight the other, a bright rim light outlines the long silver hair; volumetric light through the mist. Focus racks from a foreground ember to the eyes. The silver hair and the translucent violet robes and gold stole flow naturally in a soft wind with real weight. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, a single soft bell chime and gentle wind, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 6,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_110759_ba97e928-8037-45d7-b321-908cae9c937d.mp4"
+ },
+ {
+  "id": "45cff852-1bc4-40b8-ae11-11cd57f42292",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790939923.790982,
+  "prompt": "Cinematic, high-end, strong 3D depth and lifelike realism. The figure keeps a calm, steady gaze toward the camera the whole time (no upward eye roll, no widening of the eyes), the brass ritual bell in the hand sways once and chimes softly, and says in Korean, slow and calm, lips moving in precise sync with every syllable, with a short pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" A faint mysterious smile at the end. Voice: one Korean woman, native Seoul Korean, a very deep, rich, full-bodied contralto voice with a strong warm low resonance, clearly a woman but deep and weighty; smooth and clean texture: not husky, not raspy, not breathy, not whispering; slow, calm, dignified and mysterious, every syllable clearly articulated, quiet intimate volume as if close to a microphone. Camera: a smooth slow dolly-in with a gentle arc to the right, strong parallax and deep perspective: thin wisps of violet mist and a few glowing embers drift very close to the lens in the foreground, the figure stays tack sharp in the middle ground, the red sun, the white moon, the misty peaks and pines recede far behind and shift slowly at a different speed. Warm red sunlight models one side of the face and cool white moonlight the other, a bright rim light outlines the long silver hair; volumetric light through the mist. Focus racks from a foreground ember to the eyes. The silver hair, translucent violet robes and gold stole flow naturally in a soft wind with real weight. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, one soft bell chime and gentle wind, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 6,
+   "width": 2160,
+   "height": 3840,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "4k",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_111843_45cff852-1bc4-40b8-ae11-11cd57f42292.mp4"
+ },
+ {
+  "id": "7980656a-fd94-4b5d-8258-c41384f4352c",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790939923.756772,
+  "prompt": "Cinematic, high-end, strong 3D depth and lifelike realism. The figure raises the glowing silk lantern a little toward the camera and says in Korean with a subtle, knowing half-smile, light and warm, lips moving in precise sync with every syllable, with a short pause after the first sentence: \"좋은 일은 사람 얼굴로 와. 이번엔 나야.\" Expression stays natural and understated: no wink, no exaggerated grin, no eyebrow raise. Voice: one young Korean woman, native Seoul Korean, a clear, smooth, slightly low mid-range voice with a gender-neutral, boyish feel, bright, playful and warm, clearly articulated; not husky, not breathy, not high-pitched; quiet intimate volume as if close to a microphone. Camera: a smooth dolly-in with a gentle arc to the left, strong parallax and deep perspective: golden light motes and the lantern tassel drift very close to the lens in the foreground, the figure stays tack sharp in the middle ground, the shrine gate, lanterns and the starry sky with a shooting star recede far behind and shift slowly at a different speed. The warm red-and-blue lantern light flickers and models the face from below and the side, a cool starlight rim outlines the hair and shoulders. Focus racks from a foreground light mote to the eyes. Loose hair strands, the ivory sleeves and the star-embroidered navy sash move naturally with real weight. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice and a quiet night ambience with faint wind chimes, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 2160,
+   "height": 3840,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "4k",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "0e8745bc-2627-4de5-b030-3f3a795da141",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_103500_0e8745bc-2627-4de5-b030-3f3a795da141.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_111843_7980656a-fd94-4b5d-8258-c41384f4352c.mp4"
+ },
+ {
+  "id": "9c80b8e5-e1ea-4441-a6fe-64beef467475",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790939923.858663,
+  "prompt": "Cinematic, high-end, strong 3D depth and lifelike realism. The figure keeps a calm, steady gaze toward the camera the whole time (no upward eye roll, no widening of the eyes), the brass ritual bell in the hand sways once and chimes softly, and says in Korean, slow and calm, lips moving in precise sync with every syllable, with a short pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" A faint mysterious smile at the end. Voice: one Korean woman, native Seoul Korean, a very deep, rich, full-bodied contralto voice with a strong warm low resonance, clearly a woman but deep and weighty; smooth and clean texture: not husky, not raspy, not breathy, not whispering; slow, calm, dignified and mysterious, every syllable clearly articulated, quiet intimate volume as if close to a microphone. Camera: a smooth slow dolly-in with a gentle arc to the left, strong parallax and deep perspective: thin wisps of violet mist and a few glowing embers drift very close to the lens in the foreground, the figure stays tack sharp in the middle ground, the red sun, the white moon, the misty peaks and pines recede far behind and shift slowly at a different speed. Warm red sunlight models one side of the face and cool white moonlight the other, a bright rim light outlines the long silver hair; volumetric light through the mist. Focus racks from a foreground ember to the eyes. The silver hair, translucent violet robes and gold stole flow naturally in a soft wind with real weight. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, one soft bell chime and gentle wind, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 6,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_111843_9c80b8e5-e1ea-4441-a6fe-64beef467475.mp4"
+ },
+ {
+  "id": "fa517239-f3ba-4576-aaa3-962af31e0e30",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790939924.006074,
+  "prompt": "Cinematic, high-end, strong 3D depth and lifelike realism. The figure raises the glowing silk lantern a little toward the camera and says in Korean with a subtle, knowing half-smile, light and warm, lips moving in precise sync with every syllable, with a short pause after the first sentence: \"좋은 일은 사람 얼굴로 와. 이번엔 나야.\" Expression stays natural and understated: no wink, no exaggerated grin, no eyebrow raise. Voice: one young Korean woman, native Seoul Korean, a clear, smooth, slightly low mid-range voice with a gender-neutral, boyish feel, bright, playful and warm, clearly articulated; not husky, not breathy, not high-pitched; quiet intimate volume as if close to a microphone. Camera: a smooth dolly-in with a gentle arc to the right, strong parallax and deep perspective: golden light motes and the lantern tassel drift very close to the lens in the foreground, the figure stays tack sharp in the middle ground, the shrine gate, lanterns and the starry sky with a shooting star recede far behind and shift slowly at a different speed. The warm red-and-blue lantern light flickers and models the face from below and the side, a cool starlight rim outlines the hair and shoulders. Focus racks from a foreground light mote to the eyes. Loose hair strands, the ivory sleeves and the star-embroidered navy sash move naturally with real weight. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice and a quiet night ambience with faint wind chimes, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "0e8745bc-2627-4de5-b030-3f3a795da141",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_103500_0e8745bc-2627-4de5-b030-3f3a795da141.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_111844_fa517239-f3ba-4576-aaa3-962af31e0e30.mp4"
+ },
+ {
+  "id": "53572a6c-862e-475d-8374-81af76c4fbab",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790940440.254712,
+  "prompt": "Cinematic, high-end, strong 3D depth and lifelike realism. The androgynous figure looks toward the camera with natural, living eyes (natural blinks and small eye movements), the brass ritual bell in the hand sways once and chimes softly, and says in Korean, slow and calm, lips moving in precise sync with every syllable, with a short pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" A faint mysterious smile at the end. Voice: a deep, rich, smooth voice, slow, quiet and mysterious, natural standard Seoul Korean, every syllable clearly articulated, intimate as if close to a microphone; not breathy, not theatrical. Camera: a smooth slow dolly-in with a gentle arc to the right, strong parallax and deep perspective: thin wisps of violet mist and a few glowing embers drift very close to the lens in the foreground, the figure stays tack sharp in the middle ground, the red sun, the white moon, the five misty peaks and pines recede far behind and shift slowly at a different speed. Warm red sunlight models one side of the face and cool white moonlight the other, a bright rim light outlines the long silver hair; volumetric light through the mist. Focus racks from a foreground ember to the eyes. The silver hair and the translucent violet robes and gold stole flow naturally in a soft wind with real weight. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, a single soft bell chime and gentle wind, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 6,
+   "width": 2160,
+   "height": 3840,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "4k",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_112720_53572a6c-862e-475d-8374-81af76c4fbab.mp4"
+ },
+ {
+  "id": "ac965b5b-87e4-4f70-85af-84660a38680f",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790940440.140227,
+  "prompt": "Cinematic, high-end, strong 3D depth and lifelike realism. The androgynous figure looks toward the camera with natural, living eyes (natural blinks and small eye movements), the brass ritual bell in the hand sways once and chimes softly, and says in Korean, slow and calm, lips moving in precise sync with every syllable, with a short pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" A faint mysterious smile at the end. Voice: a deep, rich, smooth voice, slow, quiet and mysterious, natural standard Seoul Korean, every syllable clearly articulated, intimate as if close to a microphone; not breathy, not theatrical. Camera: a smooth slow dolly-in with a gentle arc to the left, strong parallax and deep perspective: thin wisps of violet mist and a few glowing embers drift very close to the lens in the foreground, the figure stays tack sharp in the middle ground, the red sun, the white moon, the five misty peaks and pines recede far behind and shift slowly at a different speed. Warm red sunlight models one side of the face and cool white moonlight the other, a bright rim light outlines the long silver hair; volumetric light through the mist. Focus racks from a foreground ember to the eyes. The silver hair and the translucent violet robes and gold stole flow naturally in a soft wind with real weight. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, a single soft bell chime and gentle wind, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 6,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_112720_ac965b5b-87e4-4f70-85af-84660a38680f.mp4"
+ },
+ {
+  "id": "db1a19f6-4949-4206-b2d4-cc01cf52cc59",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790940540.930749,
+  "prompt": "Epic cinematic shot with dramatic 3D depth and perspective. A strong mountain wind sweeps in from behind: the long silver hair lifts and streams forward dramatically in flowing strands around the face, the translucent violet robes and the gold sun-and-moon stole billow with real weight. The androgynous figure slowly turns the head from a three-quarter view to face the camera with an intense, quiet, knowing gaze (natural blinks, subtle eye movement), the brass bell in the hand chimes once, and says in Korean, slow and low, lips moving in precise sync with every syllable, with a pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" Expression stays restrained and enigmatic, a faint cool smile, not sweet. Voice: a deep, rich, smooth voice, slow, quiet and mysterious, natural standard Seoul Korean, clearly articulated, intimate; not breathy, not theatrical. Camera: low angle, a slow crane up and dolly-in with an orbit to the left, very strong parallax and deep perspective: drifting mist banks and silhouetted pine needles pass very close to the lens in the foreground, embers swirl past the camera in the wind, the figure stays tack sharp, and far behind the red sun, the white moon and the layered misty peaks shift slowly, revealing depth layer by layer. Volumetric light shafts through the fog; warm red sunlight on one side of the face, cool moonlight on the other, a brilliant rim light on the windswept hair. Focus racks from foreground mist to the eyes. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, wind gusts, one soft bell chime, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 7,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_112900_db1a19f6-4949-4206-b2d4-cc01cf52cc59.mp4"
+ },
+ {
+  "id": "e816b9d0-cfbd-4ede-9983-210a56057a3e",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790940540.859919,
+  "prompt": "Epic cinematic shot with dramatic 3D depth and perspective. A strong mountain wind sweeps in: the long silver hair lifts and streams dramatically across the frame in flowing strands, the translucent violet robes and the gold sun-and-moon stole billow and ripple with real weight. The androgynous figure stands calm and powerful in the wind, looks into the camera with an intense, quiet, knowing gaze (natural blinks, subtle eye movement), the brass bell in the hand chimes once, and says in Korean, slow and low, lips moving in precise sync with every syllable, with a pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" A faint, cool smile at the end; expression stays restrained and enigmatic, not sweet. Voice: a deep, rich, smooth voice, slow, quiet and mysterious, natural standard Seoul Korean, clearly articulated, intimate; not breathy, not theatrical. Camera: starts as a medium shot and makes a sweeping dolly-in with a wide 30-degree orbit around the figure to a close-up, very strong parallax and deep perspective: dark pine branches and thick drifting mist pass close to the lens in the foreground, glowing embers and petals fly past the camera, the figure stays tack sharp, and far behind the red sun, the white moon and the five misty peaks slide slowly at a much slower speed, layers of fog between them. Volumetric god rays through the mist; warm red sunlight on one side of the face, cool moonlight on the other, a brilliant rim light on the windswept silver hair. Focus racks from a foreground ember to the eyes. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, wind gusts, one soft bell chime, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 7,
+   "width": 2160,
+   "height": 3840,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "4k",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_112900_e816b9d0-cfbd-4ede-9983-210a56057a3e.mp4"
+ },
+ {
+  "id": "69b0c293-d477-481c-8a14-c7efedebb81a",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790940592.430187,
+  "prompt": "Cinematic shot with strong 3D depth and perspective. Still air: the long silver hair stays calm and still, resting naturally, no wind; only the drifting mist and embers move. The androgynous figure looks into the camera with a calm, quiet, knowing gaze (natural blinks, subtle eye movement), the brass bell in the hand chimes once, and says in Korean, slow and low, lips moving in precise sync with every syllable, with a pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" Expression stays restrained and enigmatic, a faint cool smile, not sweet. Voice: a deep, rich, smooth voice, slow, quiet and mysterious, natural standard Seoul Korean, clearly articulated, intimate; not breathy, not theatrical. Camera: a smooth dolly-in from a medium shot to a close-up with a gentle 20-degree orbit to the left, strong parallax and deep perspective: slow drifting mist and dark pine needles pass close to the lens in the foreground, a few glowing embers float past the camera, the figure stays tack sharp, and far behind the red sun, the white moon and the layered misty peaks shift slowly at a much slower speed. Volumetric light shafts through the fog; warm red sunlight on one side of the face, cool moonlight on the other, a bright rim light outlining the silver hair. Focus racks from a foreground ember to the eyes. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, quiet mountain ambience, one soft bell chime, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 7,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_112952_69b0c293-d477-481c-8a14-c7efedebb81a.mp4"
+ },
+ {
+  "id": "eb2f58a4-1569-4c57-a1ed-2348d9bfb526",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790940592.70964,
+  "prompt": "Cinematic shot with strong 3D depth and perspective. A gentle breeze: the long silver hair moves softly and naturally, only a few strands lifting around the face and shoulders (moderate, elegant, never wild), the translucent violet robes and gold stole sway lightly. The androgynous figure looks into the camera with a calm, quiet, knowing gaze (natural blinks, subtle eye movement), the brass bell in the hand chimes once, and says in Korean, slow and low, lips moving in precise sync with every syllable, with a pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" Expression stays restrained and enigmatic, a faint cool smile, not sweet. Voice: a deep, rich, smooth voice, slow, quiet and mysterious, natural standard Seoul Korean, clearly articulated, intimate; not breathy, not theatrical. Camera: a smooth dolly-in from a medium shot to a close-up with a gentle 20-degree orbit to the right, strong parallax and deep perspective: drifting mist and dark pine needles pass close to the lens in the foreground, a few glowing embers float past the camera, the figure stays tack sharp, and far behind the red sun, the white moon and the layered misty peaks shift slowly at a much slower speed. Volumetric light shafts through the fog; warm red sunlight on one side of the face, cool moonlight on the other, a bright rim light on the silver hair. Focus racks from a foreground ember to the eyes. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, soft wind, one soft bell chime, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 7,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_112952_eb2f58a4-1569-4c57-a1ed-2348d9bfb526.mp4"
+ },
+ {
+  "id": "fa8cd1be-4803-48f9-ba65-e7103f56d7fd",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790940606.554659,
+  "prompt": "Cinematic shot with strong 3D depth and perspective. Still air: the long silver hair stays calm and still, resting naturally, no wind; only the drifting mist and embers move. The androgynous figure looks into the camera with a calm, quiet, knowing gaze (natural blinks, subtle eye movement), the brass bell in the hand chimes once, and says in Korean, slow and soft, lips moving in precise sync with every syllable, with a pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" Expression stays restrained and enigmatic, a faint cool smile. Voice: one young Korean man, native Seoul Korean, a very thin, slender, light and soft voice, high and delicate for a man, gentle and airy but clear, slow, quiet and mysterious, every syllable clearly articulated, intimate as if close to a microphone; not deep, not husky, not theatrical. Camera: a smooth dolly-in from a medium shot to a close-up with a gentle 20-degree orbit to the left, strong parallax and deep perspective: slow drifting mist and dark pine needles pass close to the lens in the foreground, a few glowing embers float past the camera, the figure stays tack sharp, and far behind the red sun, the white moon and the layered misty peaks shift slowly at a much slower speed. Volumetric light shafts through the fog; warm red sunlight on one side of the face, cool moonlight on the other, a bright rim light outlining the silver hair. Focus racks from a foreground ember to the eyes. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, quiet mountain ambience, one soft bell chime, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 7,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_113006_fa8cd1be-4803-48f9-ba65-e7103f56d7fd.mp4"
+ },
+ {
+  "id": "8dfb1444-f31c-427e-8fcd-4273c5a61b0c",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790940608.506384,
+  "prompt": "Cinematic shot with strong 3D depth and perspective. A gentle breeze: the long silver hair moves softly and naturally, only a few strands lifting around the face and shoulders (moderate and elegant, never wild), the translucent violet robes and gold stole sway lightly. The androgynous figure looks into the camera with a calm, quiet, knowing gaze (natural blinks, subtle eye movement), the brass bell in the hand chimes once, and says in Korean, slow and soft, lips moving in precise sync with every syllable, with a pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" Expression stays restrained and enigmatic, a faint cool smile. Voice: one young Korean man, native Seoul Korean, a very thin, slender, light and soft voice, high and delicate for a man, gentle and airy but clear, slow, quiet and mysterious, every syllable clearly articulated, intimate as if close to a microphone; not deep, not husky, not theatrical. Camera: a smooth dolly-in from a medium shot to a close-up with a gentle 20-degree orbit to the right, strong parallax and deep perspective: drifting mist and dark pine needles pass close to the lens in the foreground, a few glowing embers float past the camera, the figure stays tack sharp, and far behind the red sun, the white moon and the layered misty peaks shift slowly at a much slower speed. Volumetric light shafts through the fog; warm red sunlight on one side of the face, cool moonlight on the other, a bright rim light on the silver hair. Focus racks from a foreground ember to the eyes. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, soft wind, one soft bell chime, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 7,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_113008_8dfb1444-f31c-427e-8fcd-4273c5a61b0c.mp4"
+ },
+ {
+  "id": "8947feb7-69ee-4429-bf79-aadd601b796a",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790940675.774272,
+  "prompt": "Cinematic shot with strong 3D depth and perspective. A gentle breeze: the long silver hair moves softly, only a few strands lifting around the face (moderate and elegant, never wild), the translucent violet robes and gold stole sway lightly. The androgynous figure has a slightly aloof, proud and cool air: chin raised a little, eyes looking down at the camera through lowered lashes with a calm, unimpressed, knowing gaze (natural blinks, subtle eye movement), one corner of the mouth lifting into a faint, haughty half-smile at the end. The brass bell in the hand chimes once, and the figure says in Korean, slow and soft, lips moving in precise sync with every syllable, with a pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" Voice: one young Korean man, native Seoul Korean, a very thin, slender, light and soft voice, high and delicate for a man, cool and airy but clear, slow and quiet, every syllable clearly articulated, intimate as if close to a microphone; not deep, not husky, not theatrical. Camera: a smooth dolly-in from a medium shot to a close-up with a gentle 20-degree orbit to the left, slightly low angle, strong parallax and deep perspective: drifting mist and dark pine needles pass close to the lens in the foreground, a few glowing embers float past the camera, the figure stays tack sharp, and far behind the red sun, the white moon and the layered misty peaks shift slowly at a much slower speed. Volumetric light shafts through the fog; warm red sunlight on one side of the face, cool moonlight on the other, a bright rim light on the silver hair. Focus racks from a foreground ember to the eyes. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, soft wind, one soft bell chime, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 7,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_113115_8947feb7-69ee-4429-bf79-aadd601b796a.mp4"
+ },
+ {
+  "id": "b9303d72-307b-4992-befb-1ba7b67b27e2",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790940675.428813,
+  "prompt": "Cinematic shot with strong 3D depth and perspective. A gentle breeze: the long silver hair moves softly, only a few strands lifting around the face (moderate and elegant, never wild), the translucent violet robes and gold stole sway lightly. The androgynous figure looks into the camera with warm, calm eyes (natural blinks, subtle eye movement) and a soft, gentle, subtle smile that grows slightly while speaking, kind and serene. The brass bell in the hand chimes once, and the figure says in Korean, slow and soft, lips moving in precise sync with every syllable, with a pause at the comma: \"해와 달 사이에서, 기다리고 있었어요.\" Voice: one young Korean man, native Seoul Korean, a very thin, slender, light and soft voice, high and delicate for a man, gentle and airy but clear, slow and quiet, every syllable clearly articulated, intimate as if close to a microphone; not deep, not husky, not theatrical. Camera: a smooth dolly-in from a medium shot to a close-up with a gentle 20-degree orbit to the right, strong parallax and deep perspective: drifting mist and dark pine needles pass close to the lens in the foreground, a few glowing embers float past the camera, the figure stays tack sharp, and far behind the red sun, the white moon and the layered misty peaks shift slowly at a much slower speed. Volumetric light shafts through the fog; warm red sunlight on one side of the face, cool moonlight on the other, a bright rim light on the silver hair. Focus racks from a foreground ember to the eyes. Keep the face, outfit and art style exactly as in the image, highly detailed. Audio: the voice, soft wind, one soft bell chime, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 7,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_113115_b9303d72-307b-4992-befb-1ba7b67b27e2.mp4"
+ },
+ {
+  "id": "537646f9-402f-4262-adae-bb44f93e6df0",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790942686.74629,
+  "prompt": "Use the reference image for this exact character: same face, heterochromia eyes (amber and silver), long silver hair, gold taegeuk circlet, sun and moon earrings, indigo-violet translucent robes with gold sun-and-moon stole, same art style and rendering. New editorial magazine photo, close-up portrait from the chest up at night: cool silver-blue moonlight from the right, the face softly lit, eyes half-lowered then looking up, a large pale full moon behind the head, drifting mist and a few falling petals, deep indigo shadows. Quiet, mysterious, tender mood. Strong 3D volume, lifelike skin, real lens depth of field, premium fashion editorial composition with empty space at the top for a title. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_120446_537646f9-402f-4262-adae-bb44f93e6df0.png"
+ },
+ {
+  "id": "1ac1d6c0-b15d-4042-8e51-ff023a4c5c19",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790942687.218151,
+  "prompt": "Use the reference image for this exact character: same face, heterochromia eyes (amber and silver), long silver hair, gold taegeuk circlet, sun and moon earrings, indigo-violet translucent robes with gold sun-and-moon stole, same art style and rendering. New editorial magazine photo, close-up portrait from the chest up: the warm red-gold light of the setting sun falls from the left side, lighting half of the face in glowing amber while the other half falls into soft shadow, a huge blurred red sun disc behind the head, warm haze, strands of silver hair catching the light. Calm, confident, knowing gaze into the camera. Strong 3D volume, lifelike skin, real lens depth of field, premium fashion editorial composition with empty space at the top for a title. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_120447_1ac1d6c0-b15d-4042-8e51-ff023a4c5c19.png"
+ },
+ {
+  "id": "3d3306ce-679f-4413-afe0-2b45e64e2da5",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790942687.153624,
+  "prompt": "Use the reference image for this exact character: same face, heterochromia eyes, long silver hair, gold taegeuk circlet, sun and moon earrings, indigo-violet robes with gold sun-and-moon stole, same art style and rendering. New editorial wide shot: the character stands on a misty mountain ridge path, seen from behind at three-quarters, looking back over the shoulder toward the camera with a faint smile, the setting red sun on the left horizon and the rising white moon on the right, layered peaks and pine trees, long robes and silver hair moving gently, a sea of clouds below. Cinematic, vast, lonely and beautiful. Strong 3D depth and perspective, atmospheric haze, real lens depth of field. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_120447_3d3306ce-679f-4413-afe0-2b45e64e2da5.png"
+ },
+ {
+  "id": "e9a7e4c8-f31c-423a-8e3d-38307c441e73",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790942687.504981,
+  "prompt": "Use the reference image for this exact character: same face, heterochromia eyes, long silver hair, gold taegeuk circlet, sun and moon earrings, indigo-violet robes with gold sun-and-moon stole, same art style and rendering. New dramatic medium shot: the character raises the brass ritual bell high with one hand, and from the bell a beam of light splits into two streams, one warm red-gold like the sun and one cool blue-white like the moon, curving around the body in a taegeuk-like spiral, five small colored lights (green, red, yellow, white, blue) flying outward. Dusk mountain landscape with the sun and moon behind, mist. Powerful, mystical, epic. Strong 3D volume, volumetric light, real lens depth of field. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 752,
+   "height": 1344,
+   "quality": "max",
+   "resolution": "1k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_120447_e9a7e4c8-f31c-423a-8e3d-38307c441e73.png"
+ },
+ {
+  "id": "b0bfc3e4-0711-495a-8791-d9c1303ea35f",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790943036.199378,
+  "prompt": "Cinematic wide shot with deep 3D perspective. On the misty mountain ridge between the setting red sun and the rising white moon, the figure looking back over the shoulder gives a faint, quiet smile and says in Korean, slow and soft, lips moving in sync with every syllable, with a pause at the comma: \"해와 달 사이에서, 또 기다릴게요.\" Then turns away and takes one slow step along the ridge path. A gentle breeze moves the silver hair and long robes moderately. Voice: one young Korean man, native Seoul Korean, a very thin, slender, light and soft voice, high and delicate for a man, gentle and airy but clear, slow and quiet, every syllable clearly articulated, intimate; not deep, not husky, not theatrical. Camera: a slow crane up and pull back revealing the vast sea of clouds and layered peaks, strong parallax between the pine branches in the foreground, the figure, and the distant sun and moon. Atmospheric haze, volumetric light. Keep the face, outfit and art style exactly as in the image. Audio: the voice, soft wind, no music. No text, no subtitles.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 7,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "3d3306ce-679f-4413-afe0-2b45e64e2da5",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_120447_3d3306ce-679f-4413-afe0-2b45e64e2da5.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_121036_b0bfc3e4-0711-495a-8791-d9c1303ea35f.mp4"
+ },
+ {
+  "id": "b2659082-3fe3-45d3-a7b2-65d641b126d0",
+  "type": "video",
+  "status": "completed",
+  "model": "kling3_0",
+  "created": 1790943036.50558,
+  "prompt": "Epic cinematic shot with strong 3D depth. The figure rings the raised brass bell once; with the chime, the beam of light splits into two streams, warm red-gold and cool blue-white, which swirl around the figure in a slow taegeuk spiral and grow brighter, while five small colored lights (green, red, yellow, white, blue) burst outward and fly past the camera. Silver hair and robes lift gently in the energy. Camera: slow push-in with a slight upward tilt, strong parallax: glowing particles and mist pass very close to the lens, the mountains, sun and moon recede behind. Volumetric light, lens flare from the light streams. The figure does not speak, mouth closed, calm face. Keep the face, outfit and art style exactly as in the image. Audio: one deep resonant bell chime with a long shimmering tail, a soft whoosh of light, no music, no voice. No text.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "duration": 5,
+   "width": 1080,
+   "height": 1920,
+   "multi_shots": false,
+   "multi_prompt": [],
+   "sound": "on",
+   "cfg_scale": 0.5,
+   "mode": "pro",
+   "kling_elements": [],
+   "kling_element_ids": [],
+   "multi_shot_mode": "custom",
+   "reference_elements": [],
+   "enhance_prompt": false
+  },
+  "medias": [
+   {
+    "role": "start_image",
+    "id": "e9a7e4c8-f31c-423a-8e3d-38307c441e73",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_120447_e9a7e4c8-f31c-423a-8e3d-38307c441e73.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_121036_b2659082-3fe3-45d3-a7b2-65d641b126d0.mp4"
+ },
+ {
+  "id": "4ab166d9-8f92-4939-bd0a-680cbe0adf84",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943321.006634,
+  "prompt": "Use the reference image for this exact character: same face, heterochromia eyes (amber and silver), gold taegeuk circlet, sun and moon earrings, indigo-violet robes with gold sun-and-moon stole, same art style. Hair: long silver hair, sleek, smooth and neatly combed, glossy and tidy, falling straight behind the shoulders, no messy or flyaway strands. High-end fashion editorial magazine cover photo, chest-up portrait: warm red-gold light of the setting sun from the left sculpts half of the face, the other half in soft shadow, a large softly blurred red sun disc behind the head, clean minimal warm haze background. Calm, confident gaze into the camera. Flawless refined rendering, crisp details on eyes, jewelry and embroidery, strong 3D volume, lifelike skin, real lens depth of field, empty space at the top for a title. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_121521_4ab166d9-8f92-4939-bd0a-680cbe0adf84.png"
+ },
+ {
+  "id": "64f8d52b-0d9c-4381-8637-336c966f1950",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943321.115408,
+  "prompt": "Use the reference image for this exact character: same face, heterochromia eyes (amber and silver), gold taegeuk circlet, sun and moon earrings, indigo-violet robes with gold sun-and-moon stole, same art style. Hair: long silver hair, sleek, smooth and neatly combed, glossy and tidy, falling straight, no messy or flyaway strands. High-end fashion editorial magazine photo at night, chest-up portrait: cool silver-blue moonlight from the right sculpts the face, a large pale full moon softly blurred behind the head, clean deep indigo background with faint mist. Quiet, mysterious, tender expression, eyes looking into the camera. Flawless refined rendering, crisp details on eyes, jewelry and embroidery, strong 3D volume, lifelike skin, real lens depth of field, empty space at the top for a title. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_121521_64f8d52b-0d9c-4381-8637-336c966f1950.png"
+ },
+ {
+  "id": "b42865c6-3e02-47a2-a27d-302d17f45ec7",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943321.451976,
+  "prompt": "Use the reference image for this exact character: same face, heterochromia eyes, gold taegeuk circlet, sun and moon earrings, indigo-violet robes with gold sun-and-moon stole, same art style. Hair: long silver hair, sleek and neatly combed, glossy and tidy, flowing smoothly down the back, no messy strands. Cinematic editorial wide shot: the character stands on a misty mountain ridge path seen from behind at three-quarters, looking back over the shoulder toward the camera with a faint smile, the setting red sun on the left horizon and the rising white moon on the right, layered peaks and a sea of clouds below, clean and serene. Flawless refined rendering, strong 3D depth and perspective, atmospheric haze, real lens depth of field. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_121521_b42865c6-3e02-47a2-a27d-302d17f45ec7.png"
+ },
+ {
+  "id": "f7b8b6e9-839f-44a7-add1-faeb7c861c51",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943321.411185,
+  "prompt": "Use the reference image for this exact character: same face, heterochromia eyes, gold taegeuk circlet, sun and moon earrings, indigo-violet robes with gold sun-and-moon stole, same art style. Hair: long silver hair, sleek, smooth and neatly combed, glossy and tidy, no messy or flyaway strands. Elegant dramatic medium shot: the character holds the brass ritual bell raised at shoulder height, and from the bell a clean ribbon of light splits into two graceful streams, warm red-gold and cool blue-white, curving around the figure in a refined taegeuk spiral; five tiny colored lights (green, red, yellow, white, blue) float around. Clean dusk background with the sun on one side and the moon on the other, soft mist. Refined, mystical, uncluttered composition. Flawless rendering, strong 3D volume, volumetric light, real lens depth of field. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_121521_f7b8b6e9-839f-44a7-add1-faeb7c861c51.png"
+ },
+ {
+  "id": "82da18e3-afd8-41e9-b833-3e731960257a",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943632.621294,
+  "prompt": "Use the reference image for this exact character and keep the hairstyle exactly as in the reference: the same length, the same layered, airy, windswept silver-white hair with loose strands lifting around the face, the same volume and silhouette. Same face, heterochromia eyes, gold taegeuk circlet, sun and moon earrings, indigo-violet robes with gold sun-and-moon stole, same art style. Cinematic, photographic, high-end key visual. Setting: an ancient Korean pine forest on a mountainside at golden hour, tall dark pine trunks receding into deep perspective, low golden sunlight streaming through the trees from behind in long volumetric light shafts through layered mist, out-of-focus pine needles in the very near foreground, the figure in the middle ground, warm amber backlight rimming the hair and shoulders, the face modeled by soft bounced light. No visible sun disc, no moon disc, no cartoon symbols; the sun is felt only through the light. Sophisticated, mature, restrained color grading in amber, deep green and indigo. Waist-up, three-quarter view, looking at the camera with a calm knowing gaze. Strong 3D volume and atmospheric depth, real lens depth of field, flawless detail. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122032_82da18e3-afd8-41e9-b833-3e731960257a.png"
+ },
+ {
+  "id": "ba639e4d-236a-4019-88fc-932fe4ce17a0",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943632.771712,
+  "prompt": "Use the reference image for this exact character and keep the hairstyle exactly as in the reference: the same length, the same layered, airy, windswept silver-white hair with loose strands lifting around the face, the same volume and silhouette. Same face, heterochromia eyes, gold taegeuk circlet, sun and moon earrings, indigo-violet robes with gold sun-and-moon stole, same art style. Cinematic, photographic, high-end key visual at night. Setting: a long corridor of an old Korean shrine at night, dark wooden pillars and paper lattice doors receding into deep perspective, cool moonlight falling through the lattice in soft stripes across the floor and the figure, a few warm paper lanterns glowing far down the corridor as bokeh. No visible moon disc, no cartoon symbols; only real light. Sophisticated, mature, restrained color grading in deep indigo, silver and a hint of warm amber in the far lanterns. Waist-up, three-quarter view, looking at the camera with a quiet mysterious gaze. Strong 3D volume, deep perspective, real lens depth of field, flawless detail. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122032_ba639e4d-236a-4019-88fc-932fe4ce17a0.png"
+ },
+ {
+  "id": "c9902b7e-2ac3-42a7-af4f-5916d8fafc81",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943632.640286,
+  "prompt": "Use the reference image for this exact character and keep the hairstyle exactly as in the reference: the same length, the same layered, airy, windswept silver-white hair with loose strands lifting around the face, the same volume and silhouette. Same face, heterochromia eyes, gold taegeuk circlet, sun and moon earrings, indigo-violet robes with gold sun-and-moon stole, same art style. Cinematic, photographic, high-end key visual at night. Setting: a still mountain lake at night wrapped in low drifting mist, a small wooden pavilion far across the water, distant mountain silhouettes layered into deep blue haze, cool silver moonlight from above-right reflected on the water and rimming the hair; out-of-focus reeds in the very near foreground. No visible moon disc, no cartoon symbols; the moon is felt only through the light and its reflection. Sophisticated, mature, restrained color grading in deep indigo, silver and a touch of violet. Waist-up, three-quarter view, looking at the camera with a quiet mysterious gaze. Strong 3D volume and atmospheric depth, real lens depth of field, flawless detail. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122032_c9902b7e-2ac3-42a7-af4f-5916d8fafc81.png"
+ },
+ {
+  "id": "637b9bf8-569a-4ace-9089-c407d52ecb20",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943633.233627,
+  "prompt": "Use the reference image for this exact character and keep the hairstyle exactly as in the reference: the same length, the same layered, airy, windswept silver-white hair with loose strands lifting around the face, the same volume and silhouette. Same face, heterochromia eyes, gold taegeuk circlet, sun and moon earrings, indigo-violet robes with gold sun-and-moon stole, same art style. Cinematic, photographic, high-end key visual. Setting: the stone terrace of a traditional Korean mountain temple at dusk, a long row of wooden pillars and curved eaves receding into deep perspective, beyond them a vast valley of layered blue mountain ridges fading into haze, the last warm light of sunset glowing low from the side and grazing the face and hair. No visible sun disc, no moon disc, no cartoon symbols; only real light and atmosphere. Sophisticated, mature, restrained color grading in warm amber and cool slate blue. Waist-up, three-quarter view, looking at the camera with a calm knowing gaze. Strong 3D volume, deep perspective, real lens depth of field, flawless detail. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122033_637b9bf8-569a-4ace-9089-c407d52ecb20.png"
+ },
+ {
+  "id": "02c148b3-3420-47d8-ad60-211393348ec3",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943912.422217,
+  "prompt": "Same character and the same temple terrace as the first reference, now at night: the long row of wooden pillars and curved eaves recedes into deep perspective, the valley of layered mountain ridges below is filled with silver mist, cool moonlight falls from above and rims the hair and shoulders, a few warm paper lanterns glow far along the eaves as soft bokeh. No visible moon disc, no cartoon symbols; only real light. Hair: same length, layered windswept silhouette and silver-white color as the second reference, soft full voluminous locks with thicker silky strands, not wispy, not clumped. Same face, heterochromia eyes, gold taegeuk circlet, sun and moon earrings, indigo-violet robes and gold stole. Quiet, mysterious gaze into the camera. Sophisticated color grading in deep indigo and silver. Cinematic, photographic, high-end key visual, strong 3D volume, deep perspective, real lens depth of field, flawless detail. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "637b9bf8-569a-4ace-9089-c407d52ecb20",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122033_637b9bf8-569a-4ace-9089-c407d52ecb20.png"
+   },
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122512_02c148b3-3420-47d8-ad60-211393348ec3.png"
+ },
+ {
+  "id": "38b0baae-52b8-4ff8-b8ca-adebb168f850",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943912.483082,
+  "prompt": "Same character and the same temple terrace setting as the first reference, wide cinematic shot at the moment between dusk and night: the figure stands at the far edge of the stone terrace seen from behind at three-quarters, looking back over the shoulder toward the camera with a faint smile, beyond the railing a vast valley of layered mountain ridges fading into haze, the sky above split softly between the last warm amber glow on one side and the cool blue of night on the other. No visible sun or moon disc, no cartoon symbols. Hair: same layered windswept silhouette and silver-white color as the second reference, soft full voluminous locks with thicker silky strands, moving gently. Same face, gold taegeuk circlet, indigo-violet robes and gold stole. Cinematic, photographic, high-end key visual, strong 3D depth and perspective, atmospheric haze, real lens depth of field, flawless detail. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "637b9bf8-569a-4ace-9089-c407d52ecb20",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122033_637b9bf8-569a-4ace-9089-c407d52ecb20.png"
+   },
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122512_38b0baae-52b8-4ff8-b8ca-adebb168f850.png"
+ },
+ {
+  "id": "5a6dfeac-3a54-417c-870d-898b2a380c2c",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943912.403616,
+  "prompt": "Recreate the first reference image (same character, pose, composition, temple terrace setting, dusk light and color grading) with one change to the hair: keep the same length, layered windswept silhouette and silver-white color as the second reference, but render the hair as soft, full, voluminous locks with thicker, silky strands that flow in smooth wide ribbons and catch the light softly; not thin wispy strands, not clumped, not greasy. Keep the same face, heterochromia eyes, gold taegeuk circlet, sun and moon earrings, indigo-violet robes and gold stole. Cinematic, photographic, high-end key visual, strong 3D volume, deep perspective of the receding pillars and layered blue mountain ridges, real lens depth of field, flawless detail. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "637b9bf8-569a-4ace-9089-c407d52ecb20",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122033_637b9bf8-569a-4ace-9089-c407d52ecb20.png"
+   },
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122512_5a6dfeac-3a54-417c-870d-898b2a380c2c.png"
+ },
+ {
+  "id": "ddedaf6f-4b18-41c2-abca-a644b4f270df",
+  "type": "image",
+  "status": "completed",
+  "model": "gpt_image_2_5",
+  "created": 1790943912.838628,
+  "prompt": "Recreate the first reference image (same character, temple terrace setting, receding wooden pillars and curved eaves, valley of layered mountain ridges) with two changes. 1) Slightly different angle: the figure turned a little more toward the camera, a calm knowing gaze. 2) Hair: keep the same length, layered windswept silhouette and silver-white color as the second reference, rendered as soft, full, voluminous locks with thicker, silky strands flowing in smooth wide ribbons; not thin wispy strands, not clumped, not greasy. Same face, heterochromia eyes, gold taegeuk circlet, sun and moon earrings, indigo-violet robes and gold stole. Warm low dusk light grazing the face and hair. Cinematic, photographic, high-end key visual, strong 3D volume, deep perspective, real lens depth of field, flawless detail. Must not resemble any real person. ABSOLUTELY NO TEXT, no letters, no watermark, no logo.",
+  "params": {
+   "aspect_ratio": "9:16",
+   "width": 1520,
+   "height": 2688,
+   "quality": "max",
+   "resolution": "2k",
+   "model": "flare",
+   "remove_bg": false,
+   "reference_elements": []
+  },
+  "medias": [
+   {
+    "role": "image",
+    "id": "637b9bf8-569a-4ace-9089-c407d52ecb20",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122033_637b9bf8-569a-4ace-9089-c407d52ecb20.png"
+   },
+   {
+    "role": "image",
+    "id": "94574fe9-a77f-439d-8efb-3612a92b49a9",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_102935_94574fe9-a77f-439d-8efb-3612a92b49a9.png"
+   }
+  ],
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_122512_ddedaf6f-4b18-41c2-abca-a644b4f270df.png"
  }
 ]

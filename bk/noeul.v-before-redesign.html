@@ -36,134 +36,83 @@ button,select,input{font-family:inherit}
 .orb.s{background:radial-gradient(circle at 35% 35%,#ffd08a,var(--sun) 60%,#a8441c)}
 .orb.m{background:radial-gradient(circle at 35% 35%,#ffffff,var(--moon) 60%,#6c7ea8)}
 
-/* ---------- 1. 입력: 노을과의 대화 — 노을이 화면 가득, 대사는 영화 자막처럼 ---------- */
-/* 프롤로그: 웹툰처럼 내려 읽는 노을 이야기 */
-.pro{position:relative}
-.pp{height:calc(var(--sh,100vh)*.92);min-height:520px}
-.pp:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,14,.5) 0%,rgba(8,6,14,0) 22%,rgba(8,6,14,0) 52%,rgba(8,6,14,.9) 86%,var(--bg) 100%)}
-.pp.first{height:var(--sh,100vh)}
-.pp.first .ct:not(.tp){bottom:calc(env(safe-area-inset-bottom,0px) + 86px)}
-.pp .ct{position:absolute;left:22px;right:22px;bottom:30px;z-index:1}
-.pp .ct.tp{top:calc(env(safe-area-inset-top,0px) + 74px);bottom:auto}
-.nar{display:inline-block;margin:0 0 10px;padding:9px 13px;background:rgba(8,6,14,.72);border-left:2px solid var(--gold);font-family:var(--serif);font-size:14.5px;line-height:1.65;color:var(--ink)}
-.nar b{color:var(--gold2);font-weight:700}
-.nl{margin:0 0 10px;font-family:var(--bmj);font-size:24px;line-height:1.5;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.85)}
-.nl small{display:block;font-family:var(--sans);font-size:10.5px;letter-spacing:.3em;color:var(--gold);font-weight:700;margin-bottom:4px;text-shadow:none}
-.gut{padding:54px 30px;text-align:center;font-family:var(--serif);font-size:15px;line-height:1.9;color:var(--ink2)}
-.gut b{display:block;font-family:var(--brush);font-weight:400;font-size:34px;line-height:1.2;color:var(--gold2);margin-bottom:10px}
-.gut i{display:block;width:1px;height:46px;margin:0 auto 22px;background:linear-gradient(180deg,rgba(227,194,122,0),var(--gold))}
-.scrollhint{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);z-index:2;text-align:center;font-size:11px;letter-spacing:.3em;color:var(--gold);animation:hint 2.4s ease-in-out infinite}
-.scrollhint:after{content:"";display:block;width:1px;height:26px;margin:8px auto 0;background:var(--gold)}
-@keyframes hint{0%,100%{opacity:.35;transform:translateY(0)}50%{opacity:1;transform:translateY(6px)}}
-.pp .rv{transition-delay:.15s}.pp .rv+.rv{transition-delay:.55s}.pp .rv+.rv+.rv{transition-delay:.95s}
-/* 만남: 노을이 화면 가득 고정, 대사는 자막처럼 */
-.meetSec{position:relative;min-height:var(--sh,100vh)}
-.meetBg{position:sticky;top:0;height:var(--sh,100vh);margin-bottom:calc(-1 * var(--sh,100vh));overflow:hidden}
-.bgL{position:absolute;inset:0;background:#000 center 12%/cover no-repeat;opacity:0;transition:opacity 1.8s ease;transform-origin:50% 30%;animation:kb 26s ease-in-out infinite alternate}
-.bgL.on{opacity:1}
-@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.12) translateY(-1.5%)}}
-.bgSh{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(8,6,14,.5) 0%,rgba(8,6,14,0) 16%,rgba(8,6,14,0) 36%,rgba(8,6,14,.8) 60%,rgba(8,6,14,.97) 82%)}
-#sTalk>.top{position:absolute;left:0;right:0;background:none}
-.talk{position:relative;min-height:var(--sh,100vh);display:flex;flex-direction:column;justify-content:flex-end;padding:0 22px calc(env(safe-area-inset-bottom,0px) + 22px)}
-.ttl0{text-align:center;transition:opacity .8s,max-height .8s,margin .8s;max-height:200px;overflow:hidden;margin-bottom:18px}
-.ttl0.off{opacity:0;max-height:0;margin:0}
-.ttl0 small{display:block;font-size:11.5px;letter-spacing:.32em;color:var(--gold);font-weight:700}
-.ttl0 h1{margin:8px 0 0;font-family:var(--brush);font-weight:400;font-size:50px;line-height:1.05;color:#fff;text-shadow:0 4px 24px rgba(0,0,0,.7)}
-.ttl0 p{margin:6px 0 0;font-family:var(--bmj);font-size:17px;color:var(--ink2)}
-.msgs{display:flex;flex-direction:column;gap:12px}
-.ln{opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s ease,font-size .6s ease,color .6s}
-.ln.on{opacity:1;transform:none}
-.ln.n{font-family:var(--bmj);font-size:22px;line-height:1.55;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.8)}
-.ln.n.old{font-size:16px;color:rgba(243,236,223,.42)}
-.ln.n small{display:block;font-family:var(--sans);font-size:10.5px;letter-spacing:.3em;color:var(--gold);font-weight:700;margin-bottom:4px}
-.ln.n.old small{display:none}
-.ln.me{align-self:flex-end;font-size:14px;color:var(--gold2);letter-spacing:.02em}
-.ln.me:before{content:"";display:inline-block;width:18px;height:1px;background:var(--gold);vertical-align:middle;margin-right:8px;opacity:.7}
-.ln.me.old{opacity:.4}
-.ask{margin-top:18px;display:none}
+/* ---------- 1. 입력: 노을과의 대화 ---------- */
+.talk{padding:0 18px calc(env(safe-area-inset-bottom,0px) + 30px)}
+.hero0{position:relative;margin:0 -18px;height:46vh;min-height:300px;max-height:420px;background:#000 center 14%/cover no-repeat}
+.hero0:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,15,28,0) 45%,var(--bg) 98%)}
+.hero0 .ttl{position:absolute;left:0;right:0;bottom:6px;z-index:1;text-align:center}
+.hero0 small{display:block;font-size:11.5px;letter-spacing:.32em;color:var(--gold);font-weight:700}
+.hero0 h1{margin:8px 0 0;font-family:var(--brush);font-weight:400;font-size:46px;line-height:1.05;color:#fff;text-shadow:0 4px 24px rgba(0,0,0,.6)}
+.hero0 p{margin:6px 0 0;font-family:var(--bmj);font-size:17px;color:var(--ink2)}
+.msgs{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.bub{display:flex;gap:10px;align-items:flex-end;opacity:0;transform:translateY(8px);transition:all .5s}
+.bub.on{opacity:1;transform:none}
+.bub .av{flex:none;width:38px;height:38px;border-radius:50%;background:#000 50% 12%/cover;box-shadow:0 0 0 1.5px var(--gold)}
+.bub .tx{max-width:80%;padding:11px 14px;background:var(--card);border:1px solid var(--line);font-family:var(--serif);font-size:15px;line-height:1.6;font-weight:500}
+.bub.me{justify-content:flex-end}
+.bub.me .tx{background:rgba(227,194,122,.14);border-color:rgba(227,194,122,.45);font-family:var(--sans);font-size:14.5px}
+.ask{margin-top:12px;padding:14px;background:rgba(31,25,48,.85);border:1px solid var(--line);display:none}
 .ask.on{display:block;animation:up .5s ease}
 @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.field{width:100%;height:50px;border:0;border-bottom:1px solid rgba(227,194,122,.6);background:transparent;color:#fff;padding:0 2px;font-family:var(--serif);font-size:19px;outline:none;border-radius:0}
-.field::placeholder{color:rgba(207,198,182,.45)}
+.field{width:100%;height:46px;border:1px solid var(--line);background:#16121f;color:var(--ink);padding:0 12px;font-size:16px;outline:none;border-radius:0}
 .field:focus{border-color:var(--gold)}
-.seg{display:flex;border-bottom:1px solid var(--line2)}
-.seg button{flex:1;height:40px;border:0;background:none;color:var(--ink3);font-size:14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
-.seg button.on{color:var(--gold2);font-weight:700;border-bottom-color:var(--gold)}
+.seg{display:flex;border:1px solid var(--line);overflow:hidden}
+.seg button{flex:1;height:42px;border:0;background:none;color:var(--ink2);font-size:14px;cursor:pointer}
+.seg button.on{background:var(--gold);color:#1a1206;font-weight:700}
 .grid3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:6px;margin-top:8px}
-select{height:48px;border:0;border-bottom:1px solid rgba(227,194,122,.6);background:transparent;color:#fff;font-family:var(--serif);font-size:16px;padding:0 4px;width:100%;border-radius:0;-webkit-appearance:none;appearance:none}
-select option{background:#16121f;color:var(--ink)}
+select{height:46px;border:1px solid var(--line);background:#16121f;color:var(--ink);font-size:15px;padding:0 8px;width:100%;border-radius:0}
 .leap{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);margin-top:8px}
 .leap input{width:18px;height:18px;accent-color:var(--gold)}
 .leap.off{opacity:.4}
-.go{width:100%;height:52px;margin-top:16px;border:0;background:linear-gradient(90deg,#d9893f,var(--gold) 50%,#c9d0e4);color:#1a1206;font-size:15.5px;font-weight:900;letter-spacing:.04em;cursor:pointer;border-radius:0}
+.go{width:100%;height:52px;margin-top:12px;border:0;background:linear-gradient(90deg,var(--sun),var(--gold) 50%,var(--moon));color:#1a1206;font-size:15.5px;font-weight:900;letter-spacing:.04em;cursor:pointer;border-radius:0}
 .go:active{transform:scale(.985)}
 .go.ghost{background:none;border:1px solid var(--gold);color:var(--gold2);font-weight:700}
-.fine{font-size:11px;color:var(--ink3);text-align:center;margin-top:16px;line-height:1.6;opacity:.8}
+.fine{font-size:11.5px;color:var(--ink3);text-align:center;margin-top:14px;line-height:1.6}
 
 /* ---------- 2. 전환 ---------- */
 .trans{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 30px;background:#000}
 .trans video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
 .trans .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,0) 40%,rgba(0,0,0,.75))}
 .trans .in{position:relative;z-index:1;margin-top:auto;margin-bottom:calc(env(safe-area-inset-bottom,0px) + 90px)}
-.trans .tl{position:absolute;inset:0;background:#000 center 14%/cover no-repeat;opacity:0;transition:opacity 2.2s ease;transform-origin:50% 28%}
-.trans .tl.on{opacity:1;animation:tz 7s ease-out forwards}
-@keyframes tz{from{transform:scale(1.04)}to{transform:scale(1.16)}}
-.trans h2{margin:0 0 10px;font-family:var(--bmj);font-size:24px;font-weight:400;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.7)}
-.trans p{margin:0;color:var(--gold2);font-size:12px;letter-spacing:.24em;min-height:20px;transition:opacity .4s}
+.dual{position:relative;width:150px;height:150px;margin:0 auto 26px}
+.dual i{position:absolute;width:46px;height:46px;border-radius:50%;left:52px;top:52px;animation:orbit 3.2s cubic-bezier(.6,.05,.4,.95) infinite}
+.dual i.s{background:radial-gradient(circle at 35% 35%,#ffd08a,var(--sun) 60%,#a8441c);box-shadow:0 0 30px rgba(232,131,58,.6)}
+.dual i.m{background:radial-gradient(circle at 35% 35%,#fff,var(--moon) 60%,#6c7ea8);box-shadow:0 0 30px rgba(201,214,240,.5);animation-delay:-1.6s}
+@keyframes orbit{0%{transform:rotate(0deg) translateX(46px) rotate(0deg)}100%{transform:rotate(360deg) translateX(46px) rotate(-360deg)}}
+.trans h2{margin:0 0 8px;font-family:var(--bmj);font-size:22px;font-weight:400;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.7)}
+.trans p{margin:0;color:var(--ink2);font-size:13.5px;min-height:20px}
 
 /* ---------- 3. 결과(화보) ---------- */
-/* 화보 사진은 .ph 층에 깔고 스크롤에 따라 천천히 움직여(시차) 깊이를 만든다 */
-.px{position:relative;overflow:hidden;background:#000}
-.px .ph{position:absolute;left:0;right:0;top:-9%;bottom:-9%;background:#000 center 12%/cover no-repeat;will-change:transform}
-.px:after{z-index:0}
-.px .ct{z-index:1}
 .rep{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 110px)}
-.cover{height:86vh;min-height:560px;max-height:760px}
-.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,15,28,.4) 0%,rgba(18,15,28,0) 20%,rgba(18,15,28,0) 52%,rgba(18,15,28,.82) 80%,var(--bg) 100%)}
+.cover{position:relative;height:78vh;min-height:520px;max-height:700px;background:#000 center 16%/cover no-repeat}
+.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,15,28,.35) 0%,rgba(18,15,28,0) 26%,rgba(18,15,28,0) 46%,rgba(18,15,28,.85) 80%,var(--bg) 100%)}
 .cover .ct{position:absolute;left:22px;right:22px;bottom:28px;z-index:1}
 .cover small{display:block;font-size:11.5px;letter-spacing:.3em;color:var(--gold);font-weight:700}
 .cover h2{margin:10px 0 0;font-family:var(--serif);font-size:20px;font-weight:700;color:var(--ink2)}
-.cover h3{margin:2px 0 0;font-family:var(--brush);font-weight:400;font-size:58px;line-height:1.05;color:#fff;text-shadow:0 4px 28px rgba(0,0,0,.6)}
+.cover h3{margin:2px 0 0;font-family:var(--brush);font-weight:400;font-size:54px;line-height:1.05;color:#fff;text-shadow:0 4px 28px rgba(0,0,0,.6)}
 .cover .ql{margin:14px 0 0;font-family:var(--bmj);font-size:17px;line-height:1.6;color:var(--gold2)}
 .wrap{padding:0 18px}
-/* 한눈에: 낮의 나 / 밤의 나 */
-.vd{margin-top:6px}
-.vd .two{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line2)}
-.vd .two>div{background:var(--bg);padding:16px 14px 14px}
-.vd .two>div.m{text-align:right}
-.vd .two small{display:block;font-size:11px;letter-spacing:.24em;font-weight:700}
-.vd .two .s small{color:var(--sun2)} .vd .two .m small{color:var(--moon)}
-.vd .two b{display:block;margin-top:6px;font-family:var(--serif);font-size:44px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
-.vd .two .s b{color:var(--sun2)} .vd .two .m b{color:var(--moon)}
-.vd .two b sup{font-size:14px;font-weight:700;margin-left:2px;vertical-align:18px}
-.vd .two p{margin:8px 0 0;font-family:var(--serif);font-size:15px;font-weight:700;color:var(--ink)}
-.vd .two em{display:block;font-style:normal;margin-top:2px;font-size:11.5px;color:var(--ink3)}
-.bar{position:relative;height:6px;display:flex;overflow:hidden;background:#0d0a14}
-.bar i{display:block;height:100%;transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.gauge{margin-top:22px;padding:18px 16px;background:var(--card);border:1px solid var(--line)}
+.gauge .lb{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--ink2);margin-bottom:10px}
+.gauge .lb b{font-family:var(--serif);font-size:24px;font-weight:900;font-variant-numeric:tabular-nums}
+.gauge .lb .s b{color:var(--sun2)} .gauge .lb .m b{color:var(--moon)}
+.gauge .lb span{display:flex;align-items:center;gap:8px}
+.bar{position:relative;height:12px;display:flex;overflow:hidden;background:#0d0a14}
+.bar i{display:block;height:100%;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
 .bar .s{background:linear-gradient(90deg,#a8441c,var(--sun),var(--sun2));width:50%}
 .bar .m{background:linear-gradient(90deg,var(--moon2),var(--moon));width:50%}
-.ans{margin-top:26px;display:grid;gap:0;border-top:1px solid var(--line)}
-.ans>div{display:grid;grid-template-columns:76px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--line2);align-items:baseline}
-.ans small{font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--gold)}
-.ans .s small{color:var(--sun2)} .ans .m small{color:var(--moon)}
-.ans p{margin:0;font-family:var(--serif);font-size:17px;font-weight:700;line-height:1.55;color:var(--ink)}
-.ans .mt p{font-family:var(--serif);font-weight:900;font-size:26px;line-height:1.15;color:var(--gold2)}
-.ans .mt p span{display:block;font-family:var(--sans);font-size:12.5px;color:var(--ink2);margin-top:6px}
-.qt{margin:30px 4px 0;text-align:center}
-.qt p{margin:0;font-family:var(--bmj);font-size:21px;line-height:1.6;color:#fff}
-.qt p:before,.qt p:after{color:var(--gold);font-family:var(--serif)}
-.qt p:before{content:"“"} .qt p:after{content:"”"}
-.qt small{display:block;margin-top:10px;font-size:11px;letter-spacing:.32em;color:var(--gold);font-weight:700}
-.basis{margin-top:30px;padding:16px 0 4px;border-top:1px solid var(--line2)}
-.basis>small{display:block;font-size:11px;letter-spacing:.28em;color:var(--ink3);font-weight:700}
-.basis .cap{margin:10px 0 0;font-size:13px;line-height:1.75;color:var(--ink2)}
-.basis .cap b{color:var(--ink)}
-.pil{display:grid;grid-template-columns:repeat(4,1fr);margin-top:12px;border-top:1px solid var(--line2)}
+.gauge .cap{margin:12px 0 0;font-size:13.5px;line-height:1.7;color:var(--ink2)}
+.gauge .cap b{color:var(--ink)}
+.pil{display:grid;grid-template-columns:repeat(4,1fr);margin-top:14px;border-top:1px solid var(--line2)}
 .pil div{text-align:center;padding:10px 0 2px}
 .pil small{display:block;font-size:10.5px;color:var(--ink3)}
-.pil b{display:block;font-family:var(--serif);font-size:21px;font-weight:900;line-height:1.15;margin-top:4px}
-.pil b em{display:block;font-style:normal;font-size:21px}
+.pil b{display:block;font-family:var(--serif);font-size:22px;font-weight:900;line-height:1.15;margin-top:4px}
+.pil b em{display:block;font-style:normal;font-size:22px}
 .pil .me b{color:var(--gold2)}
+.say{display:flex;gap:12px;align-items:flex-start;margin-top:18px}
+.say .av{flex:none;width:44px;height:44px;border-radius:50%;background:#000 50% 12%/cover;box-shadow:0 0 0 1.5px var(--gold)}
+.say .tx{flex:1;padding:12px 14px;background:rgba(227,194,122,.08);border:1px solid var(--line);font-family:var(--serif);font-size:15px;line-height:1.7}
+.say .tx small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.2em;color:var(--gold);font-weight:700;margin-bottom:4px}
 
 /* 잠금 미리보기 */
 .lock{position:relative;margin-top:22px;border:1px solid var(--line);overflow:hidden}
@@ -179,14 +128,14 @@ select option{background:#16121f;color:var(--ink)}
 /* 장(章) */
 #prem[hidden]{display:none}
 .ch{margin-top:34px}
-.chHero{height:82vh;min-height:520px;max-height:720px}
+.chHero{position:relative;height:72vh;min-height:480px;max-height:640px;background:#000 center 14%/cover no-repeat}
 .chHero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,15,28,.0) 40%,rgba(18,15,28,.7) 78%,var(--bg) 100%)}
 .chHero .ct{position:absolute;left:22px;right:22px;bottom:22px;z-index:1}
 .chHero small{display:block;font-size:11.5px;letter-spacing:.32em;font-weight:700}
-.chHero h3{margin:8px 0 0;font-family:var(--brush);font-weight:400;font-size:56px;line-height:1.05;color:#fff;text-shadow:0 4px 28px rgba(0,0,0,.6)}
+.chHero h3{margin:8px 0 0;font-family:var(--brush);font-weight:400;font-size:50px;line-height:1.05;color:#fff;text-shadow:0 4px 28px rgba(0,0,0,.6)}
 .chHero p{margin:8px 0 0;font-family:var(--bmj);font-size:17px;line-height:1.55}
 .sunC small,.sunC p{color:var(--sun2)} .moonC small,.moonC p{color:var(--moon)}
-.lead{margin:22px 0 0;font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.55;color:#fff}
+.lead{margin:18px 0 0;font-family:var(--serif);font-size:19px;font-weight:700;line-height:1.6}
 .body{margin:12px 0 0;font-size:14.5px;line-height:1.8;color:var(--ink2)}
 .body b{color:var(--ink)}
 .chip{display:inline-block;margin:0 2px;padding:0 6px;border:1px solid var(--line);font-family:var(--serif);font-size:12px;color:var(--gold2);line-height:1.6;vertical-align:1px}
@@ -211,18 +160,19 @@ select option{background:#16121f;color:var(--ink)}
 .legend{display:flex;gap:16px;font-size:12px;color:var(--ink2);margin-top:6px}
 .legend span{display:flex;align-items:center;gap:6px}
 .legend i{display:inline-block;width:16px;height:3px}
-.toon{display:grid;gap:10px;margin-top:22px}
-.pan{height:340px}
-.pan .ph{background-position:center 8%}
-.pan:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 48%,rgba(8,6,14,.88))}
-.pan .cap{position:absolute;left:16px;right:16px;bottom:14px;z-index:1}
-.pan .cap small{display:block;font-size:11px;letter-spacing:.22em;font-weight:700;color:var(--gold)}
-.pan .cap b{display:block;font-family:var(--serif);font-weight:900;font-size:28px;line-height:1.15;color:#fff;margin-top:4px}
-.pan .cap p{margin:6px 0 0;font-size:12.5px;color:var(--ink2);line-height:1.55}
-.pan .cap q{display:block;margin-top:6px;font-family:var(--bmj);font-size:15px;color:var(--gold2);quotes:"“" "”"}
+.toon{display:grid;gap:10px;margin-top:20px}
+.pan{position:relative;height:230px;background:#000 center 20%/cover no-repeat;border:2px solid #0b0910;box-shadow:0 0 0 1px var(--line)}
+.pan:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.75))}
+.pan .bb{position:absolute;z-index:1;max-width:66%;padding:10px 12px;background:#fbf6ea;color:#1a1520;font-family:var(--serif);font-size:14px;font-weight:700;line-height:1.5}
+.pan .bb:after{content:"";position:absolute;bottom:-9px;width:0;height:0;border:9px solid transparent;border-top-color:#fbf6ea;border-bottom:0}
+.pan .bb.l{left:12px;top:14px}.pan .bb.l:after{left:22px}
+.pan .bb.r{right:12px;top:14px}.pan .bb.r:after{right:22px}
+.pan .cap{position:absolute;left:14px;right:14px;bottom:12px;z-index:1}
+.pan .cap small{display:block;font-size:11px;letter-spacing:.2em;font-weight:700;color:var(--gold)}
+.pan .cap b{display:block;font-family:var(--serif);font-size:17px;font-weight:900;color:#fff;margin-top:3px}
+.pan .cap p{margin:3px 0 0;font-size:12.5px;color:var(--ink2);line-height:1.5}
 .toon2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.toon2 .pan{height:280px}
-.toon2 .pan .cap b{font-size:22px}
+.toon2 .pan{height:200px}
 .mrows{margin-top:18px;border-top:1px solid var(--line2)}
 .mr{display:grid;grid-template-columns:36px 44px 1fr;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line2);font-size:13px}
 .mr .mm{font-weight:700}
@@ -243,14 +193,13 @@ select option{background:#16121f;color:var(--ink)}
 .talis p{margin:12px 0 0;font-family:var(--brush);font-size:30px;line-height:1.35;color:var(--gold2)}
 .talis .seal{display:inline-grid;place-items:center;width:46px;height:46px;margin-top:14px;background:#a8321f;color:#fff3e6;font-family:var(--serif);font-weight:900;font-size:13px;line-height:1.05;transform:rotate(-4deg)}
 /* 엔딩 + 카드 */
-.end{margin-top:34px;height:86vh;min-height:560px;max-height:760px}
-.end:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(18,15,28,.0) 58%,rgba(18,15,28,.6) 84%,var(--bg) 100%)}
-.end video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:0;transition:opacity 2s ease}
-.end.playing video{opacity:1}
-.end .ct{position:absolute;left:22px;right:22px;bottom:22px;z-index:2;text-align:center;font-family:var(--bmj);font-size:21px;line-height:1.6;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.7);opacity:0;transform:translateY(8px);transition:opacity 1.2s ease,transform 1.2s ease}
-.end .ct.on{opacity:1;transform:none}
-.end .snd{position:absolute;right:14px;top:14px;z-index:3;display:none;height:32px;padding:0 12px;border:1px solid rgba(241,219,164,.6);background:rgba(18,15,28,.45);color:var(--gold2);font-size:12px;cursor:pointer}
-.end .snd.on{display:block}
+.end{position:relative;margin-top:34px;height:70vh;min-height:460px;max-height:620px;background:#000 center 30%/cover no-repeat}
+.end:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,15,28,.0) 50%,var(--bg) 100%)}
+.end .ct{position:absolute;left:22px;right:22px;bottom:18px;z-index:1;font-family:var(--bmj);font-size:20px;line-height:1.6;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.7)}
+.end video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.end .ep{position:absolute;left:50%;top:44%;z-index:2;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;border:0;background:none;color:#fff;font-size:13px;font-weight:700;letter-spacing:.06em;cursor:pointer;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.end .ep i{width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(241,219,164,.85);display:grid;place-items:center;background:rgba(18,15,28,.35);font-style:normal;font-size:20px;padding-left:4px;box-sizing:border-box}
+.end.playing .ep,.end.playing .ct{opacity:0;transition:opacity .4s}
 .flip{perspective:1200px;margin:20px auto 0;width:min(78%,300px);aspect-ratio:3/4.4;cursor:pointer}
 .flip .in{position:relative;width:100%;height:100%;transition:transform .9s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
 .flip.on .in{transform:rotateY(180deg)}
@@ -286,64 +235,40 @@ select option{background:#16121f;color:var(--ink)}
   <!-- 1. 노을과의 대화(입력) -->
   <div class="scr on" id="sTalk">
     <div class="top"><button class="back" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>노을 · 太極</b><span class="tg"><i class="orb s"></i><i class="orb m"></i></span></div>
-    <!-- 프롤로그: 노을은 누구인가 -->
-    <section class="pro">
-      <div class="pp px first"><div class="ph" data-im="split"></div>
-        <div class="ct tp"><p class="nar rv">하루에 두 번, 세상이 경계를 지나는 때가 있다.</p></div>
-        <div class="ct"><p class="nar rv">해는 아직 지지 않았고<br>달은 아직 뜨지 않은 시간.</p><p class="nar rv">그 틈에만 머무는 이가 있다.</p></div>
-        <div class="scrollhint">내려서 보기</div>
+    <div class="talk">
+      <div class="hero0" id="hero0"><div class="ttl"><small>2027 · 丁未</small><h1>해와 달의 운세</h1><p>낮의 나, 밤의 나</p></div></div>
+      <div class="msgs" id="msgs"></div>
+      <div class="ask" id="aName"><input class="field" id="nm" maxlength="10" placeholder="이름 (예: 김은주)"><button class="go" id="nxName">이렇게 불러 주세요</button></div>
+      <div class="ask" id="aBirth">
+        <div class="seg" id="cSeg"><button class="on" data-v="s">양력</button><button data-v="l">음력</button></div>
+        <div class="grid3"><select id="by" aria-label="년"></select><select id="bm" aria-label="월"></select><select id="bd" aria-label="일"></select></div>
+        <label class="leap off" id="leapL"><input type="checkbox" id="leap" disabled> 윤달이에요</label>
+        <button class="go" id="nxBirth">이날 태어났어요</button>
       </div>
-      <div class="pp px"><div class="ph" data-im="cuDay"></div>
-        <div class="ct"><p class="nl rv"><small>노을</small>나는 노을이에요.</p><p class="nar rv">남자도, 여자도 아니다.<br>낮에도 밤에도 속하지 않는다.</p></div>
-      </div>
-      <div class="gut rv"><i></i><b>太極</b>오방의 신들이 다섯 빛깔로 갈라지기 전,<br>세상은 하나의 원이었다.<br>모두가 제 빛을 찾아 떠났을 때<br>갈라지지 않고 남은 단 하나.</div>
-      <div class="pp px"><div class="ph" data-im="moon"></div>
-        <div class="ct"><p class="nl rv"><small>노을</small>어느 쪽에도 서지 않아요.<br>그래서 양쪽이 다 보여요.</p></div>
-      </div>
-      <div class="pp px"><div class="ph" data-im="closed"></div>
-        <div class="ct"><p class="nl rv"><small>노을</small>사람에게도 낮과 밤이 있어요.</p><p class="nar rv"><b>낮의 나</b> 남들이 보는 나. 일과 이름, 돈과 사람.</p><p class="nar rv"><b>밤의 나</b> 나만 아는 나. 속마음과 인연, 숨은 기회.</p></div>
-      </div>
-      <div class="gut rv"><i></i><b>2027 · 丁未</b>붉은 불의 하늘과 메마른 흙의 땅.<br>그 해, 당신의 해와 달은 어떻게 뜰까.</div>
-    </section>
-
-    <!-- 만남: 노을과의 대화(입력) -->
-    <section class="meetSec" id="meet">
-      <div class="meetBg"><div class="bgL on" id="bg0"></div><div class="bgL" id="bg1"></div><div class="bgL" id="bg2"></div><div class="bgSh"></div></div>
-      <div class="talk">
-        <div class="ttl0" id="ttl0"><small>2027 · 丁未</small><h1>해와 달의 운세</h1><p>낮의 나, 밤의 나</p></div>
-        <div class="msgs" id="msgs"></div>
-        <div class="ask" id="aName"><input class="field" id="nm" maxlength="10" placeholder="이름 (예: 김은주)"><button class="go" id="nxName">이렇게 불러 주세요</button></div>
-        <div class="ask" id="aBirth">
-          <div class="seg" id="cSeg"><button class="on" data-v="s">양력</button><button data-v="l">음력</button></div>
-          <div class="grid3"><select id="by" aria-label="년"></select><select id="bm" aria-label="월"></select><select id="bd" aria-label="일"></select></div>
-          <label class="leap off" id="leapL"><input type="checkbox" id="leap" disabled> 윤달이에요</label>
-          <button class="go" id="nxBirth">이날 태어났어요</button>
-        </div>
-        <div class="ask" id="aHour"><select id="bh" aria-label="태어난 시"></select><button class="go" id="goBtn">노을에게 보여 주기</button></div>
-        <p class="fine">만세력 절기 시각을 분 단위까지 반영해 계산합니다.</p>
-      </div>
-    </section>
+      <div class="ask" id="aHour"><select id="bh" aria-label="태어난 시"></select><button class="go" id="goBtn">노을에게 보여 주기</button></div>
+      <p class="fine">만세력 절기 시각을 분 단위까지 반영해 계산합니다.</p>
+    </div>
   </div>
 
   <!-- 2. 전환 -->
   <div class="scr trans" id="sTrans">
-    <div class="tl" id="tl0"></div><div class="tl" id="tl1"></div><video id="tv" playsinline preload="none"></video><div class="sh"></div>
-    <div class="in"><h2 id="tH">당신의 해와 달을 읽는 중</h2><p id="tTx"></p></div>
+    <video id="tv" playsinline preload="none"></video><div class="sh"></div>
+    <div class="in"><div class="dual" id="dual"><i class="s"></i><i class="m"></i></div><h2 id="tH">해와 달을 나누는 중</h2><p id="tTx"></p></div>
   </div>
 
   <!-- 3. 결과 -->
   <div class="scr" id="sRep">
     <div class="top" style="position:absolute;left:0;right:0;background:none"><button class="back" id="back2" aria-label="다시 입력"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><span class="tg"><i class="orb s"></i><i class="orb m"></i></span></div>
     <div class="rep">
-      <div class="cover px" id="cover"><div class="ph" id="coverPh"></div><div class="ct"><small>2027 · 丁未 · 해와 달의 운세</small><h2 id="rWho"></h2><h3 id="rVer"></h3><p class="ql" id="rQ"></p></div></div>
+      <div class="cover" id="cover"><div class="ct"><small>2027 · 丁未 · 해와 달의 운세</small><h2 id="rWho"></h2><h3 id="rVer"></h3><p class="ql" id="rQ"></p></div></div>
       <div class="wrap">
-        <div class="vd rv">
-          <div class="two"><div class="s"><small>낮의 나</small><b id="gS">50<sup>%</sup></b><p>남들이 보는 나</p><em>일 · 이름 · 돈 · 사람</em></div><div class="m"><small>밤의 나</small><b id="gM">50<sup>%</sup></b><p>나만 아는 나</p><em>속마음 · 인연 · 숨은 기회</em></div></div>
+        <div class="gauge rv">
+          <div class="lb"><span class="s"><i class="orb s"></i>낮 <b id="gS">50</b></span><span class="m">밤 <b id="gM">50</b><i class="orb m"></i></span></div>
           <div class="bar"><i class="s" id="bS"></i><i class="m" id="bM"></i></div>
+          <p class="cap" id="gCap"></p>
+          <div class="pil" id="pil"></div>
         </div>
-        <div class="ans rv" id="ans"></div>
-        <div class="qt rv"><p id="say1"></p><small>노을</small></div>
-        <div class="basis rv"><small>노을이 읽은 근거</small><p class="cap" id="gCap"></p><div class="pil" id="pil"></div></div>
+        <div class="say rv"><div class="av" id="av1"></div><div class="tx"><small>노을</small><span id="say1"></span></div></div>
 
         <div class="lock rv" id="lock">
           <div class="bl"><div class="ph" id="lockPh"></div><p>올해 당신의 낮에는 사람과 자리가 함께 들어옵니다. 3월과 8월에 해와 달이 만나고</p><p>未 속에 숨은 세 글자 가운데 하나가 당신 쪽을 향해 있어요. 그 글자는</p></div>
@@ -368,33 +293,19 @@ const S_=window.Saju;
 const {GAN,JI,GAN_K,JI_K,EL,EL_K,BR_EL,HID,stEl}=S_;
 /* 노을 화보 · 영상 자원 — 내려받는 대로 img/ v/ 로 옮긴다(지금은 원본 주소) */
 const HF='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
-const IMG={base:'img/noeul.jpg',
-  cuDay:HF+'hf_20261002_124211_13bebaf9-a832-44b1-a420-da831d6550af.png',cuNight:HF+'hf_20261002_124211_00760b88-20eb-466d-8105-0bc8b30ca25d.png',
-  endS:HF+'hf_20261002_124211_26ac8827-40fb-466d-a0be-ec5c45b330fe.png',closed:HF+'hf_20261002_124211_d237a3ba-8bae-43ed-beea-ad9e8569534e.png',sun:HF+'hf_20261002_122512_5a6dfeac-3a54-417c-870d-898b2a380c2c.png',moon:HF+'hf_20261002_122512_02c148b3-3420-47d8-ad60-211393348ec3.png',split:HF+'hf_20261002_122512_ddedaf6f-4b18-41c2-abca-a644b4f270df.png',ridge:HF+'hf_20261002_122512_38b0baae-52b8-4ff8-b8ca-adebb168f850.png'};
-/* 전환: cfd99ec5(눈 감은 클로즈업 → 빛이 달빛으로, 무음) · 엔딩: 7c70993d + noeul_B_duo (예비 6ee5cdc6 → a6f6ebb7 업로드본) */
-const VID={trans:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/aac04120-323e-44ba-ae7f-827df907374e.mp4',end:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/35c7447e-1e04-4c81-9ebd-af7830f72268.mp4'};
+const IMG={base:'img/noeul.jpg',sun:HF+'hf_20261002_122512_5a6dfeac-3a54-417c-870d-898b2a380c2c.png',moon:HF+'hf_20261002_122512_02c148b3-3420-47d8-ad60-211393348ec3.png',split:HF+'hf_20261002_122512_ddedaf6f-4b18-41c2-abca-a644b4f270df.png',ridge:HF+'hf_20261002_122512_38b0baae-52b8-4ff8-b8ca-adebb168f850.png'};
+const VID={trans:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/8bbf9b24-f93b-4c00-bc96-36eebcc9078b.mp4',end:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/38bf7573-3af1-44d1-81e7-a98bae6884dc.mp4'};
 const HOURS=['자시 (23:30~01:29)','축시 (01:30~03:29)','인시 (03:30~05:29)','묘시 (05:30~07:29)','진시 (07:30~09:29)','사시 (09:30~11:29)','오시 (11:30~13:29)','미시 (13:30~15:29)','신시 (15:30~17:29)','유시 (17:30~19:29)','술시 (19:30~21:29)','해시 (21:30~23:29)'];
 let cal='s';
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2000); }
 function show(id){ ['sTalk','sTrans','sRep'].forEach(s=>$(s).classList.toggle('on',s===id)); $('pay').classList.toggle('on',id==='sRep'); }
-const bgi=u=>`url("${u}")`;
-function setSH(){ document.documentElement.style.setProperty('--sh',$('stage').clientHeight+'px'); }
-setSH(); addEventListener('resize',setSH);
-document.querySelectorAll('[data-im]').forEach(el=>el.style.backgroundImage=bgi(IMG[el.dataset.im]));
-$('bg0').style.backgroundImage=bgi(IMG.base); $('bg1').style.backgroundImage=bgi(IMG.cuDay); $('bg2').style.backgroundImage=bgi(IMG.cuNight);
-function bgStep(n){ ['bg0','bg1','bg2'].forEach((id,i)=>$(id).classList.toggle('on',i===n)); }
-/* 시차: 사진 층을 스크롤보다 느리게 움직여 앞뒤 깊이를 만든다 */
-function parallax(root){ let tk=0; const run=()=>{ tk=0; const rh=root.clientHeight; root.querySelectorAll('.px .ph').forEach(ph=>{ const b=ph.parentNode.getBoundingClientRect(), rt=root.getBoundingClientRect(); const c=(b.top-rt.top+b.height/2-rh/2)/rh; if(c>-1.4&&c<1.4) ph.style.transform=`translate3d(0,${(c*-7).toFixed(2)}%,0) scale(${(1.06+Math.abs(c)*.04).toFixed(3)})`; }); };
-  root.addEventListener('scroll',()=>{ if(!tk) tk=requestAnimationFrame(run); },{passive:true}); run(); return run; }
-const pxTalk=parallax($('sTalk')), pxRep=parallax($('sRep'));
+$('hero0').style.backgroundImage=`url("${IMG.base}")`;
+['av1'].forEach(id=>$(id).style.backgroundImage=`url("${IMG.base}")`);
 
 /* ---------- 1. 대화형 입력 ---------- */
-function toBottom(){ const t=$('sTalk'); t.scrollTo({top:t.scrollHeight,behavior:'smooth'}); }
-function say(t,me){ const box=$('msgs'); [...box.children].forEach(c=>c.classList.add('old')); while(box.children.length>3) box.firstChild.remove();
-  const d=document.createElement('div'); d.className='ln '+(me?'me':'n'); d.innerHTML=me?t:`<small>노을</small>${t}`; box.appendChild(d);
-  requestAnimationFrame(()=>requestAnimationFrame(()=>d.classList.add('on'))); setTimeout(toBottom,80); }
-function ask(id){ ['aName','aBirth','aHour'].forEach(a=>$(a).classList.toggle('on',a===id)); if(id) setTimeout(toBottom,140); }
+function say(t,me){ const d=document.createElement('div'); d.className='bub'+(me?' me':''); d.innerHTML=(me?'':`<div class="av" style="background-image:url('${IMG.base}')"></div>`)+`<div class="tx">${t}</div>`; $('msgs').appendChild(d); requestAnimationFrame(()=>requestAnimationFrame(()=>d.classList.add('on'))); setTimeout(()=>d.scrollIntoView({behavior:'smooth',block:'end'}),80); }
+function ask(id){ ['aName','aBirth','aHour'].forEach(a=>$(a).classList.toggle('on',a===id)); if(id) setTimeout(()=>$(id).scrollIntoView({behavior:'smooth',block:'end'}),120); }
 (function(){
   const by=$('by'),bm=$('bm'),bd=$('bd'),bh=$('bh');
   for(let y=2008;y>=1950;y--) by.add(new Option(y+'년',y,false,y===1996));
@@ -407,11 +318,9 @@ function ask(id){ ['aName','aBirth','aHour'].forEach(a=>$(a).classList.toggle('o
   let me=null; try{ me=JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){}
   if(me&&me.y){ if(me.cal==='l') $('cSeg').querySelector('[data-v="l"]').click(); by.value=me.y; fill(); bm.value=me.m; fill(); bd.value=me.d; bh.value=me.h==null?'x':me.h; if(me.name) $('nm').value=me.name; }
 })();
-let talked=false;
-async function talkStart(){ if(talked) return; talked=true; bgStep(0); await wait(300); say('여기까지 와 줬네요. 올 줄 알았어요.'); await wait(1500); say('먼저, 어떻게 불러 드리면 될까요.'); await wait(600); ask('aName'); }
-new IntersectionObserver((es,o)=>es.forEach(e=>{ if(e.isIntersecting){ o.disconnect(); talkStart(); } }),{root:$('sTalk'),threshold:.45}).observe($('meet'));
-$('nxName').onclick=async()=>{ const n=$('nm').value.trim()||'은주'; $('nm').value=n; say(n,true); ask(null); $('ttl0').classList.add('off'); bgStep(1); await wait(900); say(`${n}님. 이름에도 낮과 밤이 있어요.`); await wait(1500); say('태어난 날을 보여 주세요. 해가 어디 있었는지부터 볼게요.'); await wait(500); ask('aBirth'); };
-$('nxBirth').onclick=async()=>{ const t=`${cal==='l'?'음력 ':''}${$('by').value}년 ${$('bm').value}월 ${$('bd').value}일${$('leap').checked?' (윤달)':''}`; say(t,true); ask(null); bgStep(2); await wait(900); say('태어난 시를 알면 달이 더 또렷해져요. 몰라도 괜찮아요.'); await wait(500); ask('aHour'); };
+async function talkStart(){ await wait(400); say('해와 달 사이에 서 있었어요. 당신이 올 줄 알고.'); await wait(1100); say('먼저, 어떻게 불러 드리면 될까요.'); await wait(500); ask('aName'); }
+$('nxName').onclick=async()=>{ const n=$('nm').value.trim()||'은주'; $('nm').value=n; say(n,true); ask(null); await wait(700); say(`${n}님. 이름에도 낮과 밤이 있어요.`); await wait(1000); say('태어난 날을 보여 주세요. 해가 어디 있었는지부터 볼게요.'); await wait(400); ask('aBirth'); };
+$('nxBirth').onclick=async()=>{ const t=`${cal==='l'?'음력 ':''}${$('by').value}년 ${$('bm').value}월 ${$('bd').value}일${$('leap').checked?' (윤달)':''}`; say(t,true); ask(null); await wait(700); say('태어난 시를 알면 달이 더 또렷해져요. 몰라도 괜찮아요.'); await wait(400); ask('aHour'); };
 
 /* ---------- 계산 규칙 ---------- */
 const GROUP=['비겁','식상','재성','관성','인성'];
@@ -484,11 +393,8 @@ function calc(name,sol,h){
 /* ---------- 2. 전환 ---------- */
 async function transition(){
   show('sTrans'); const v=$('tv'), steps=['만세력을 펴는 중','해의 자리를 찾는 중','달의 자리를 찾는 중','丁未와 겹쳐 보는 중'];
-  $('tl0').style.backgroundImage=bgi(IMG.closed); $('tl1').style.backgroundImage=bgi(IMG.cuNight);
-  $('tl0').classList.remove('on'); $('tl1').classList.remove('on');
-  if(VID.trans){ v.poster=IMG.closed; v.src=VID.trans; v.muted=true; try{ await v.play(); }catch(e){ v.removeAttribute('src'); } }
-  if(!v.getAttribute('src')){ requestAnimationFrame(()=>$('tl0').classList.add('on')); setTimeout(()=>$('tl1').classList.add('on'),2000); }
-  for(const s of steps){ $('tTx').textContent=s; await wait(1000); }
+  if(VID.trans){ v.src=VID.trans; v.muted=false; try{ await v.play(); $('dual').style.display='none'; }catch(e){ v.removeAttribute('src'); } }
+  for(const s of steps){ $('tTx').textContent=s; await wait(900); }
   if(v.src&&!v.ended){ await new Promise(r=>{ v.onended=r; setTimeout(r,4500); }); }
 }
 $('goBtn').onclick=async()=>{
@@ -505,18 +411,16 @@ const VER={day:'낮이 밝은 해',night:'밤이 깊은 해',even:'해와 달이
 const QUOTE={day:'올해 당신의 해는 높이 뜹니다. 보여 주는 쪽으로 걸어가세요.',night:'올해 당신의 달은 깊어집니다. 남이 모르는 곳에서 자라는 해예요.',even:'해와 달이 나란히 뜨는 해. 겉과 속을 같이 챙기면 둘 다 얻어요.'};
 function render(){
   const r=R;
-  $('coverPh').style.backgroundImage=bgi(r.kind==='night'?IMG.moon:r.kind==='day'?IMG.sun:IMG.endS);
+  $('cover').style.backgroundImage=`url("${r.kind==='night'?IMG.moon:r.kind==='day'?IMG.sun:IMG.split}")`;
   $('rWho').textContent=`${r.name}님의 2027년은`; $('rVer').textContent=VER[r.kind]; $('rQ').textContent=QUOTE[r.kind];
-  $('gS').innerHTML=r.pS+'<sup>%</sup>'; $('gM').innerHTML=r.pM+'<sup>%</sup>';
-  const one=t=>t.split('.')[0]+'.', ms=o=>[...o].sort((a,b)=>a.m-b.m).map(x=>x.m+'월').join(', ');
-  $('ans').innerHTML=`<div class="s"><small>올해 낮</small><p>${one(DAY_TX[r.rS][r.fS?0:1])}</p></div><div class="m"><small>올해 밤</small><p>${one(NIGHT_TX[r.rB][r.fB?0:1])}</p></div><div class="mt"><small>해와 달이<br>만나는 달</small><p>${ms(r.meet)}<span>겉과 속이 같은 쪽을 보는 달. 시작과 고백은 이때.</span></p></div>`; $('bS').style.width='50%'; $('bM').style.width='50%';
+  $('gS').textContent=r.pS; $('gM').textContent=r.pM; $('bS').style.width='50%'; $('bM').style.width='50%';
   setTimeout(()=>{ $('bS').style.width=r.pS+'%'; $('bM').style.width=r.pM+'%'; },500);
   const tgS=S_.tgStem(r.dm,YS), tgB=S_.tgBranch(r.dm,YB);
   $('gCap').innerHTML=`올해의 하늘 글자 <b>丁</b>은 당신에게 <b>${tgS}</b>, 땅 글자 <b>未</b>는 <b>${tgB}</b>입니다. 드러나는 낮은 하늘 글자로, 속으로 차오르는 밤은 땅 글자와 그 안에 숨은 글자로 읽었어요.`;
   const cols=[['시',r.P.h],['일',r.P.d],['월',r.P.m],['년',r.P.y]];
   $('pil').innerHTML=cols.map((c,i)=>`<div class="${i===1?'me':''}"><small>${c[0]}${i===1?' · 나':''}</small><b>${c[1]?`${GAN[c[1][0]]}<em>${JI[c[1][1]]}</em>`:'<span style="font-size:13px;color:var(--ink3)">모름</span>'}</b></div>`).join('');
   $('say1').textContent=r.kind==='day'?`${r.nick}님은 올해 밖에서 빛나요. 그런데 밤에도 하나 숨겨 둔 게 있어요.`:r.kind==='night'?`${r.nick}님은 올해 안에서 깊어져요. 그 깊이가 낮에 무엇을 바꿀지 들려 드릴게요.`:`${r.nick}님은 올해 낮과 밤의 무게가 비슷해요. 어느 쪽을 먼저 밝힐지가 열쇠예요.`;
-  $('lockPh').style.backgroundImage=bgi(IMG.cuNight); setTimeout(pxRep,50);
+  $('lockPh').style.backgroundImage=`url("${IMG.moon}")`;
   $('prem').hidden=true; $('prem').innerHTML=''; $('lock').hidden=false; $('pay').classList.remove('done'); $('payBtn').textContent='노을의 이야기 전부 듣기';
 }
 function areasHTML(list,labels,cls){ return `<div class="areas ${cls}">${labels.map((l,i)=>`<div><small>${l}</small><p>${list[i]}</p></div>`).join('')}</div>`; }
@@ -524,35 +428,32 @@ function premHTML(){
   const r=R, tgS=S_.tgStem(r.dm,YS), tgB=S_.tgBranch(r.dm,YB);
   const dA=DAY_A[r.rS][r.fS?0:1], nA=NIGHT_A[r.rB][r.fB?0:1];
   const mName=o=>`${o.m}월`;
-  const byM=a=>[...a].sort((x,y)=>x.m-y.m); r.meet=byM(r.meet); r.cross=byM(r.cross);
-  const meetTx=r.meet.map(mName).join(', '), crossTx=r.cross.map(o=>`${o.m}월은 ${o.d>o.n?'낮':'밤'}이 앞서요`).join(', ');
+  const meetTx=r.meet.map(mName).join(', '), crossTx=r.cross.map(o=>`${o.m}월(${o.d>o.n?'낮':'밤'}이 앞섬)`).join(', ');
   let h='';
   /* 1장 */
-  h+=`<section class="ch"><div class="chHero sunC px"><div class="ph" style="background-image:url('${IMG.cuDay}')"></div><div class="ct"><small>1장 · 丁 · ${tgS}</small><h3>낮의 나</h3><p>겉으로 드러날 2027년</p></div></div><div class="wrap">
+  h+=`<section class="ch"><div class="chHero sunC rv" style="background-image:url('${IMG.sun}')"><div class="ct"><small>1장 · 丁 · ${tgS}</small><h3>낮의 나</h3><p>겉으로 드러날 2027년</p></div></div><div class="wrap">
     <p class="lead rv">${DAY_TX[r.rS][r.fS?0:1]}</p>
     <p class="body rv">올해의 하늘 글자 丁은 일간 <b>${GAN[r.dm]}</b>에게 <span class="chip">${tgS}</span>이에요. ${GROUP[r.rS]}의 기운이 낮에 서고, 당신 사주는 이 기운을 <b>${r.fS?'반기는':'버거워하는'}</b> 쪽이에요. 그래서 밖에서 일어나는 일은 ${r.fS?'밀어붙일수록 커지고':'속도를 늦출수록 지켜집니다'}.</p>
     ${areasHTML(dA,['일','평판','관계','돈의 흐름'],'sunA rv')}
     ${r.evD.map(e=>`<div class="ev rv"><b>${e[0]}</b><p>${e[1]}</p></div>`).join('')}
-    <div class="toon"><div class="pan px rv"><div class="ph" style="background-image:url('${IMG.sun}')"></div><div class="cap"><small>노을의 한마디</small><q>${r.fS?'올해는 숨지 말고 앞에 서요. 보는 눈이 당신 편이에요.':'올해 낮은 천천히 걸어요. 늦게 낸 답이 오래 남아요.'}</q></div></div></div>
   </div></section>`;
   /* 2장 */
-  h+=`<section class="ch"><div class="chHero moonC px"><div class="ph" style="background-image:url('${IMG.cuNight}')"></div><div class="ct"><small>2장 · 未 · ${tgB}</small><h3>밤의 나</h3><p>속으로 차오를 2027년</p></div></div><div class="wrap">
+  h+=`<section class="ch"><div class="chHero moonC rv" style="background-image:url('${IMG.moon}')"><div class="ct"><small>2장 · 未 · ${tgB}</small><h3>밤의 나</h3><p>속으로 차오를 2027년</p></div></div><div class="wrap">
     <p class="lead rv">${NIGHT_TX[r.rB][r.fB?0:1]}</p>
     <p class="body rv">땅 글자 未는 당신에게 <span class="chip">${tgB}</span>이고, 그 안에는 세 글자가 숨어 있어요. 겉으로는 보이지 않지만 올해 내내 속에서 움직이는 기운입니다.</p>
     <div class="hid3 rv">${r.hid.map(x=>`<div><b>${GAN[x.s]}</b><em>${x.tg}</em><span>${HID_MEAN[x.g]}</span><p>${HID_TX[x.g]}</p></div>`).join('')}</div>
     ${areasHTML(nA,['속마음','감정','숨은 인연과 기회','쉬어야 할 때'],'moonA rv')}
     ${r.evN.map(e=>`<div class="ev rv"><b>${e[0]}</b><p>${e[1]}</p></div>`).join('')}
-    <div class="toon"><div class="pan px rv"><div class="ph" style="background-image:url('${IMG.moon}')"></div><div class="cap"><small>노을의 한마디</small><q>${r.fB?'밤에 혼자 한 생각이 맞아요. 그 느낌을 믿어요.':'밤에는 결정하지 말아요. 아침이 답을 줄 거예요.'}</q></div></div></div>
   </div></section>`;
   /* 3장 */
   h+=`<section class="ch"><div class="wrap"><div class="rv" style="padding-top:6px"><small style="font-size:11.5px;letter-spacing:.32em;color:var(--gold);font-weight:700">3장</small><h3 class="ttl2">해와 달의 열두 달</h3><p class="sub2">달마다 낮(하늘 글자)과 밤(땅 글자)이 얼마나 밝은지 겹쳐 봤어요.</p></div>
     <svg class="chart rv" id="chart" viewBox="0 0 340 180" role="img" aria-label="2027년 월별 낮과 밤"></svg>
     <div class="legend rv"><span><i style="background:var(--sun)"></i>낮</span><span><i style="background:var(--moon)"></i>밤</span></div>
     <div class="toon">
-      <div class="pan px rv"><div class="ph" style="background-image:url('${IMG.split}')"></div><div class="cap"><small>만나는 달</small><b>${meetTx}</b><p>겉과 속이 같은 방향을 봐요. 큰 결정, 고백, 시작은 이 달에.</p><q>해와 달이 같은 하늘에 떠요.</q></div></div>
+      <div class="pan rv" style="background-image:url('${IMG.split}')"><div class="bb l">${meetTx}. 해와 달이 같은 하늘에 떠요.</div><div class="cap"><small>만나는 달</small><b>${meetTx}</b><p>겉과 속이 같은 방향을 봐요. 큰 결정, 고백, 시작은 이 달에.</p></div></div>
       <div class="toon2">
-        <div class="pan px rv"><div class="ph" style="background-image:url('${IMG.cuDay}')"></div><div class="cap"><small>엇갈리는 달</small><b>${r.cross.map(mName).join(', ')}</b><p>${crossTx}. 한쪽만 챙기지 마세요.</p></div></div>
-        <div class="pan px rv"><div class="ph" style="background-image:url('${IMG.closed}')"></div><div class="cap"><small>숨 고르는 달</small><b>${r.low.m}월</b><p>낮도 밤도 낮게 흘러요. 약속을 줄이세요.</p></div></div>
+        <div class="pan rv" style="background-image:url('${IMG.sun}')"><div class="bb l">겉만 바쁜 달이 있어요.</div><div class="cap"><small>엇갈리는 달</small><b>${r.cross.map(mName).join(', ')}</b><p>${crossTx}. 한쪽만 챙기지 마세요.</p></div></div>
+        <div class="pan rv" style="background-image:url('${IMG.moon}')"><div class="bb r">이 달엔 쉬어요.</div><div class="cap"><small>숨 고르는 달</small><b>${r.low.m}월</b><p>낮도 밤도 낮게 흘러요. 약속을 줄이세요.</p></div></div>
       </div>
     </div>
     <div class="mrows rv">${r.MO.map(o=>`<div class="mr ${r.meet.includes(o)?'meet':''}"><span class="mm">${o.m}월</span><span class="gz" data-hj="0">${GAN[o.mp[0]]}${JI[o.mp[1]]}</span><div class="dv"><div class="s"><i style="width:${o.d}%"></i></div><div class="m"><i style="width:${o.n}%"></i></div></div></div>`).join('')}</div>
@@ -564,10 +465,10 @@ function premHTML(){
     <div class="talis rv"><small>2027 · 노을의 부적</small><p>${T}</p><span class="seal" data-hj="0">太<br>極</span></div>
   </div></section>`;
   /* 엔딩 + 카드 */
-  h+=`<div class="end px" id="endB"><div class="ph" style="background-image:url('${IMG.endS}')"></div>${VID.end?`<video id="endV" playsinline preload="auto" src="${VID.end}"></video><button class="snd" id="endSnd" type="button">소리 켜기</button>`:''}<div class="ct" id="endT">해와 달 사이에서, 또 기다릴게요.</div></div>
+  h+=`<div class="end rv" id="endB" style="background-image:url('${IMG.ridge}')">${VID.end?`<video id="endV" playsinline preload="none" poster="${IMG.ridge}" src="${VID.end}"></video><button class="ep" id="endP" type="button"><i>&#9654;</i>노을의 마지막 말</button>`:''}<div class="ct">해와 달 사이에서, 또 기다리고 있을게요.</div></div>
   <div class="wrap"><div class="flip rv" id="flip"><div class="in">
-    <div class="face ft" style="background-image:url('${IMG.cuDay}')"><small>낮의 ${r.nick}</small><b>${GROUP[r.rS]}의 해</b><p>${DAY_TX[r.rS][r.fS?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
-    <div class="face bk" style="background-image:url('${IMG.cuNight}')"><small>밤의 ${r.nick}</small><b>${HID_MEAN[r.hid[0].g]}</b><p>${NIGHT_TX[r.rB][r.fB?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
+    <div class="face ft" style="background-image:url('${IMG.sun}')"><small>낮의 ${r.nick}</small><b>${GROUP[r.rS]}의 해</b><p>${DAY_TX[r.rS][r.fS?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
+    <div class="face bk" style="background-image:url('${IMG.moon}')"><small>밤의 ${r.nick}</small><b>${HID_MEAN[r.hid[0].g]}</b><p>${NIGHT_TX[r.rB][r.fB?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
   </div></div><p class="fliphint">카드를 누르면 밤의 내가 보여요</p></div>`;
   return h;
 }
@@ -582,25 +483,14 @@ function drawChart(){
 }
 let io=null;
 function reveal(){ if(io) io.disconnect(); io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{root:$('sRep'),threshold:.12}); document.querySelectorAll('#sRep .rv:not(.in)').forEach(el=>io.observe(el)); }
-(function(){ const o=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); o.unobserve(e.target); } }),{root:$('sTalk'),threshold:.3}); document.querySelectorAll('#sTalk .rv').forEach(el=>o.observe(el)); })();
-/* 엔딩 영상: 결제 버튼을 누를 때 소리 재생 권한을 미리 열어 두고, 화면에 들어오면 사진 위로 녹아들며 재생 */
-function unlockEnd(){ const v=$('endV'); if(!v) return; try{ v.muted=false; const p=v.play(); if(p&&p.then) p.then(()=>{ v.pause(); v.currentTime=0; }).catch(()=>{}); else { v.pause(); } }catch(e){} }
-function armEnd(){ const v=$('endV'), b=$('endB'), t=$('endT'), sb=$('endSnd'); if(!b) return;
-  if(!v){ new IntersectionObserver((es,o)=>es.forEach(e=>{ if(e.isIntersecting){ t.classList.add('on'); o.disconnect(); } }),{root:$('sRep'),threshold:.5}).observe(b); return; }
-  let played=false; v.onerror=()=>{ b.classList.remove('playing'); t.classList.add('on'); sb.classList.remove('on'); };
-  const go=async()=>{ if(played) return; played=true; v.currentTime=0; v.muted=false;
-    try{ await v.play(); }catch(e){ v.muted=true; try{ await v.play(); }catch(e2){} sb.classList.add('on'); }
-    b.classList.add('playing'); };
-  sb.onclick=()=>{ v.muted=false; sb.classList.remove('on'); if(v.paused) v.play().catch(()=>{}); };
-  v.onended=()=>{ t.classList.add('on'); b.classList.remove('playing'); };
-  new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) go(); else if(!v.paused){ v.pause(); } }),{root:$('sRep'),threshold:.6}).observe(b); }
 $('payBtn').onclick=()=>{ const pr=$('prem');
   if(!$('pay').classList.contains('done')){ pr.innerHTML=premHTML(); pr.hidden=false; $('lock').hidden=true; drawChart(); reveal(); $('pay').classList.add('done'); $('payBtn').textContent='1장부터 보기'; toast('체험판이라 결제 없이 열었어요');
     const f=$('flip'); if(f) f.onclick=()=>f.classList.toggle('on');
-    unlockEnd(); armEnd(); pxRep(); }
+    const ev=$('endV'), ep=$('endP'); if(ev&&ep){ ep.onclick=()=>{ $('endB').classList.add('playing'); ev.currentTime=0; ev.muted=false; ev.play().catch(()=>{}); }; ev.onended=()=>$('endB').classList.remove('playing'); } }
   pr.scrollIntoView({behavior:'smooth',block:'start'}); };
-$('back2').onclick=()=>{ $('msgs').innerHTML=''; $('ttl0').classList.remove('off'); show('sTalk'); talked=false; $('sTalk').scrollTop=$('meet').offsetTop; talkStart(); };
+$('back2').onclick=()=>{ $('msgs').innerHTML=''; show('sTalk'); talkStart(); };
 $('back1').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
+talkStart();
 </script>
 <script>
 /* 첫 화면 노을 인트로 */

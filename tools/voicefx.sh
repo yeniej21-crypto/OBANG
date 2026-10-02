@@ -17,6 +17,6 @@ ffmpeg -v error -y -i "$IN" -i "$IR" -filter_complex "\
 [o2]lowpass=f=5000,volume=$LAYER[lo];\
 [hi][lo]amix=inputs=2:weights='1 1':normalize=0[dry];\
 [dry]asplit=2[d1][d2];[d2][1:a]afir=dry=0:wet=1[wet];\
-[d1][wet]amix=inputs=2:weights='1 0.55':normalize=0,loudnorm=I=-18:TP=-1.5,aresample=48000[a]" \
+[d1][wet]amix=inputs=2:weights='1 0.55':normalize=0,loudnorm=I=-18:TP=-1.5,aresample=48000,aformat=channel_layouts=stereo[a]" \
 -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -ar 48000 "$OUT"
 echo "완료: $OUT ($P)"

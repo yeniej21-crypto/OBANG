@@ -428,7 +428,7 @@ const IMG={base:'img/noeul.jpg',
 /* 움직이는 칸(무음 반복 영상). 키 = IMG와 같은 이름. 비어 있으면 사진만 */
 /* 원본 클링 작업: aerial 3f807055 · hand f3407792 · eyes dd5d0a3d · taeguk 265aae92 · corridor 9ff5ad87 · profile 52b7d07a · back 26b446ef · scroll 63d7f4b0 · lantern 25ce916f · cuDay c48feb2d · cuNight 8f614767 (720 · 앞뒤 이어 붙인 10초 반복) */
 const LVB='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
-const LV={aerial:LVB+'bd287e3a-1680-46a6-9791-3ecfc44c6958.mp4',hand:LVB+'c15eec45-ece1-4106-9206-d11f50c98d15.mp4',eyes:LVB+'8f3490e3-4d21-4a96-b61f-ddbe2271f8da.mp4',taeguk:LVB+'9e840e13-5ecb-49bc-875f-d418b621cbe8.mp4',corridor:LVB+'cbae021a-27ae-4ace-946a-90579ab60d94.mp4',profile:LVB+'5c570313-d911-4875-b666-2e64e3b36e9c.mp4',back:LVB+'7f8b3e4c-e8d3-4020-b6fe-2b71653eed9a.mp4',scroll:LVB+'573d25ae-a4de-4455-acb3-1bf56dbc32c9.mp4',lantern:LVB+'82d97eb2-4e26-4782-ae3f-a74c3080e11a.mp4',cuDay:LVB+'f97d5edb-1f13-439f-abae-b28472f445b1.mp4',cuNight:LVB+'aa962a5c-78a2-4f57-8850-66ba26968cbd.mp4'};
+const LV={aerial:LVB+'bd287e3a-1680-46a6-9791-3ecfc44c6958.mp4',hand:LVB+'c15eec45-ece1-4106-9206-d11f50c98d15.mp4',eyes:LVB+'8f3490e3-4d21-4a96-b61f-ddbe2271f8da.mp4',taeguk:LVB+'9e840e13-5ecb-49bc-875f-d418b621cbe8.mp4',corridor:LVB+'cbae021a-27ae-4ace-946a-90579ab60d94.mp4',profile:LVB+'5c570313-d911-4875-b666-2e64e3b36e9c.mp4',back:LVB+'7f8b3e4c-e8d3-4020-b6fe-2b71653eed9a.mp4',scroll:LVB+'573d25ae-a4de-4455-acb3-1bf56dbc32c9.mp4',lantern:LVB+'82d97eb2-4e26-4782-ae3f-a74c3080e11a.mp4',cuDay:LVB+'f97d5edb-1f13-439f-abae-b28472f445b1.mp4',cuNight:LVB+'aa962a5c-78a2-4f57-8850-66ba26968cbd.mp4',sun:LVB+'cddb5f2b-1b20-474c-923d-5b726bb3e065.mp4',moon:LVB+'bc5c352b-2639-4be7-b57c-0cad86c7c12b.mp4',split:LVB+'beb2396a-e24f-4cc8-b804-ac2e8d80cba9.mp4'}; /* sun 875dbadb · moon 6b169ef8 · split be163fcf */
 /* 전환: cfd99ec5(눈 감은 클로즈업 → 빛이 달빛으로, 무음) · 엔딩: 7c70993d + noeul_B_duo (예비 6ee5cdc6 → a6f6ebb7 업로드본) */
 const VID={trans:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/aac04120-323e-44ba-ae7f-827df907374e.mp4',end:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/53207f93-51ca-4c38-8c9d-d513fea3cf60.mp4'}; /* 엔딩 10/2 22:20: 7c70993d를 0.82배로 느리게(화면 · 소리 함께) + noeul_B_duo + 잔향 0.7. 이전 빠른 판 35c7447e */
 const END_SUB=[[2.5,'해와 달 사이에서,'],[5.5,'또 기다릴게요.']];
@@ -623,7 +623,7 @@ function premHTML(){
     <div class="toon">
       <div class="pan px rv" data-v="back"><div class="ph" style="background-image:url('${IMG.back||IMG.split}')"></div><div class="cap"><small>만나는 달</small><b>${meetTx}</b><p>겉과 속이 같은 방향을 봐요. 큰 결정, 고백, 시작은 이 달에.</p><q>해와 달이 같은 하늘에 떠요.</q></div></div>
       <div class="toon2">
-        <div class="pan px rv"><div class="ph" style="background-image:url('${IMG.split}')"></div><div class="cap"><small>엇갈리는 달</small><b>${r.cross.map(mName).join(', ')}</b><p>${crossTx}. 한쪽만 챙기지 마세요.</p></div></div>
+        <div class="pan px rv" data-v="split"><div class="ph" style="background-image:url('${IMG.split}')"></div><div class="cap"><small>엇갈리는 달</small><b>${r.cross.map(mName).join(', ')}</b><p>${crossTx}. 한쪽만 챙기지 마세요.</p></div></div>
         <div class="pan px rv"><div class="ph" style="background-image:url('${IMG.closed}')"></div><div class="cap"><small>숨 고르는 달</small><b>${r.low.m}월</b><p>낮도 밤도 낮게 흘러요. 약속을 줄이세요.</p></div></div>
       </div>
     </div>

@@ -1,0 +1,243 @@
+<title>오방도감 · 홈 시안 B</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&display=swap">
+<script src="vidguard.js?v=1"></script>
+<style>
+/* 홈 시안 B(10/3): 얼굴 포스터를 줄이고, 얼굴 · 글자 · 사물 · 풍경이 번갈아 나오게. 캐릭터는 '오방도감' 한 줄로 접음. */
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+:root{--bg:#09080b;--card:#141117;--card2:#1b171e;--line:rgba(255,240,220,.08);--ink:#f6f1ea;--ink-2:#cfc6ba;--ink-3:#8e867c;
+  --gold:#e3b866;--gold-2:#f3d79b;--wood:#46b47f;--fire:#ec5a43;--earth:#d3a13a;--metal:#c9d1dc;--water:#5b8ce6;--paper:#f3ead9;--paperInk:#2a2119;
+  --serif:'Noto Serif KR',serif;--brush:'OBrush','Noto Serif KR',serif;--sans:'Noto Sans KR',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:#000}
+body{font-family:var(--sans);color:var(--ink);word-break:keep-all;display:flex;justify-content:center}
+.ph{width:100%;max-width:430px;min-height:100vh;background:var(--bg);padding-bottom:110px;position:relative}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+/* 머리 */
+.top{position:sticky;top:0;z-index:10;background:rgba(9,8,11,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px}
+.logo{display:flex;align-items:center;gap:8px}.logo img{display:block}.logo .m{width:26px;height:26px}.logo .w{height:21px}
+.bar .ic{display:flex;gap:18px;color:var(--ink)}
+.cat{display:flex;gap:20px;overflow-x:auto;padding:0 16px;scrollbar-width:none;border-bottom:1px solid var(--line)}
+.cat::-webkit-scrollbar{display:none}
+.cat a{flex:none;height:42px;display:flex;align-items:center;font-size:15px;font-weight:700;color:var(--ink-3);position:relative}
+.cat a.on{color:var(--ink)}.cat a.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--gold)}
+.tag{margin-left:6px;font-size:10.5px;font-weight:700;letter-spacing:.08em;color:#1a1206;background:var(--gold);padding:3px 8px;border-radius:999px}
+/* 칸 */
+.sec{padding:30px 16px 0}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+.sh small{display:block;font-size:11.5px;letter-spacing:.1em;color:#b49668;font-weight:700}
+.sh b{display:block;margin-top:5px;font-size:18px;font-weight:800;letter-spacing:-.02em}
+.sh .more{font-size:13px;color:var(--ink-3);white-space:nowrap}
+/* 1. 신년 기획전: 얼굴 포스터는 여기 한 곳만 크게 */
+.ny{display:flex;gap:10px;overflow-x:auto;margin:0 -16px;padding:0 16px;scrollbar-width:none}
+.ny::-webkit-scrollbar{display:none}
+.ny a{flex:none;position:relative;width:64%;aspect-ratio:3/4;border-radius:18px;overflow:hidden;background:#111 center 16%/cover}
+.ny a+a{width:40%}
+.ny a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(6,5,8,.92))}
+.ny .t{position:absolute;left:14px;right:12px;bottom:12px;z-index:1}
+.ny .t i{font-style:normal;display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:3px 7px;border-radius:999px;background:rgba(10,8,12,.6);border:1px solid rgba(255,255,255,.25);margin-bottom:8px}
+.ny .t i.r{background:#b8352a;border-color:transparent}
+.ny .t b{display:block;font-family:var(--brush);font-weight:400;font-size:30px;line-height:1.05}
+.ny a+a .t b{font-size:22px}
+.ny .t span{display:block;margin-top:6px;font-size:11.5px;color:rgba(255,255,255,.78)}
+/* 2. 오늘의 운세: 풍경 + 숫자, 얼굴 없음 */
+.td{position:relative;border-radius:20px;overflow:hidden;background:#0d0b10 center 30%/cover;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+.td::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,8,11,.25),rgba(9,8,11,.6) 45%,rgba(9,8,11,.96))}
+.td>*{position:relative}
+.td .ilj{position:absolute;left:auto;right:96px;top:6px;font-family:var(--serif);font-weight:900;font-size:64px;line-height:1.02;color:rgba(211,161,58,.16)}
+.td small{font-size:12px;color:var(--gold-2);font-weight:700;letter-spacing:.04em}
+.td h3{margin:6px 0 4px;font-family:var(--serif);font-size:24px;font-weight:900}
+.td p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.td .row{display:flex;gap:8px;margin-top:14px}
+.td .ch{flex:1;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);padding:9px 10px}
+.td .ch em{display:block;font-style:normal;font-size:10.5px;color:var(--ink-3)}
+.td .ch b{display:flex;align-items:center;gap:6px;margin-top:3px;font-size:14px}
+.td .ch b i{width:10px;height:10px;border-radius:50%;background:var(--earth)}
+.td .sc{position:absolute;right:16px;top:16px;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--gold) 0 69%,rgba(255,255,255,.12) 69% 100%)}
+.td .sc::before{content:"";position:absolute;inset:4px;border-radius:50%;background:#100d12}
+.td .sc span{position:relative;text-align:center;font-family:var(--serif);font-size:22px;font-weight:900;line-height:1}
+.td .sc span small{display:block;font-family:var(--sans);font-size:9.5px;color:var(--ink-3);font-weight:500;margin-top:2px}
+/* 3. 고민 고르기: 글자 타일 */
+.ws{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ws a{position:relative;aspect-ratio:1/1.06;border-radius:16px;background:var(--card);border:1px solid var(--line);padding:12px 10px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.ws a .hj{font-family:var(--serif);font-weight:900;font-size:34px;line-height:1;color:var(--c)}
+.ws a b{font-size:14px;font-weight:800}
+.ws a small{display:block;margin-top:2px;font-size:10.5px;color:var(--ink-3)}
+.ws a::after{content:"";position:absolute;right:-18px;top:-18px;width:64px;height:64px;border-radius:50%;background:var(--c);opacity:.08}
+/* 4. 연애 상담소: 큰 그림 하나 + 목록 */
+.lv{border-radius:20px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+.lv .hd{position:relative;display:block;aspect-ratio:16/10;background:#111 center 14%/cover}
+.lv .hd::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,8,12,.92),rgba(10,8,12,.35) 62%,rgba(10,8,12,0))}
+.lv .hd .t{position:absolute;left:16px;top:0;bottom:0;z-index:1;display:flex;flex-direction:column;justify-content:center;width:62%}
+.lv .hd .t i{font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:var(--gold-2)}
+.lv .hd .t b{margin-top:6px;font-family:var(--serif);font-size:21px;font-weight:900;line-height:1.3}
+.lv .hd .t span{margin-top:6px;font-size:12px;color:var(--ink-2);line-height:1.5}
+.lv .hd .t em{font-style:normal;margin-top:10px;font-size:13px;font-weight:800;color:var(--gold)}
+.li{display:flex;align-items:center;gap:12px;padding:13px 16px;border-top:1px solid var(--line)}
+.li .av{flex:none;width:42px;height:42px;border-radius:50%;background:#222 center 16%/cover;box-shadow:0 0 0 1.5px var(--c,rgba(255,255,255,.2))}
+.li .tx{flex:1;min-width:0}
+.li .tx b{display:block;font-size:14.5px;font-weight:700}
+.li .tx small{display:block;margin-top:2px;font-size:12px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li .pr{flex:none;font-size:13px;font-weight:800;color:var(--gold-2)}
+.li .pr.s{color:var(--ink-3);font-weight:600}
+/* 5. 세계관 책: 장소 그림 */
+.bk{position:relative;display:block;border-radius:20px;overflow:hidden;min-height:170px;background:#0d0b10 center 38%/cover;padding:18px}
+.bk::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,8,11,.95),rgba(9,8,11,.5) 60%,rgba(9,8,11,.1))}
+.bk>*{position:relative}
+.bk .pp{position:absolute;right:-6px;bottom:-14px;width:52%;max-width:210px}
+.bk small{font-size:11.5px;color:var(--gold-2);font-weight:700;letter-spacing:.06em}
+.bk b{display:block;margin-top:8px;font-family:var(--brush);font-weight:400;font-size:30px;line-height:1.15}
+.bk span{display:block;margin-top:8px;font-size:12.5px;color:var(--ink-2)}
+/* 6. 오방도감: 캐릭터는 한 줄로 */
+.dg{display:block;border-radius:20px;background:linear-gradient(180deg,#17131a,#100d12);border:1px solid var(--line);padding:16px}
+.dg .pr{display:flex;justify-content:space-between;margin-top:4px}
+.dg .p{display:flex;flex-direction:column;align-items:center;gap:6px}
+.dg .pp{position:relative;width:58px;height:40px}
+.dg .pp i{position:absolute;top:0;width:40px;height:40px;border-radius:50%;background:#222 center 16%/cover;box-shadow:0 0 0 2px #120f14}
+.dg .pp i:first-child{left:0;z-index:1}.dg .pp i:last-child{right:0}
+.dg .p em{font-style:normal;font-family:var(--serif);font-weight:900;font-size:13px;color:var(--c)}
+.dg .go{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-2)}
+.dg .go b{color:var(--gold-2);font-weight:700}
+/* 7. 정통: 도장 글자 목록 */
+.jt{border-radius:20px;overflow:hidden;background:var(--paper);color:var(--paperInk)}
+.jt .li{border-top-color:rgba(42,33,25,.1)}
+.jt .li:first-child{border-top:0}
+.jt .li .sl{flex:none;width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:20px;color:#fff;background:var(--c)}
+.jt .li .tx small{color:#7a6c5c}
+.jt .li .pr{color:#8a2d22}
+.jt .li .pr.s{color:#8b7d6c}
+/* 8. 묘당 */
+.mc{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:0 16px;scrollbar-width:none}
+.mc::-webkit-scrollbar{display:none}
+.mc a{flex:none;width:92px}
+.mc a span{display:block;width:92px;height:92px;border-radius:16px;background:#222 center/cover}
+.mc a b{display:block;margin-top:7px;font-size:12.5px;font-weight:700}
+.mc a small{display:block;font-size:10.5px;color:var(--ink-3)}
+/* 9. 무료 */
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fr a{border-radius:16px;overflow:hidden;background:var(--paper);color:var(--paperInk)}
+.fr a span{display:block;aspect-ratio:16/11;background:#eee center/cover}
+.fr a b{display:block;padding:10px 12px 2px;font-size:14px;font-weight:800}
+.fr a small{display:block;padding:0 12px 12px;font-size:11.5px;color:#7a6c5c}
+.ft{margin-top:36px;text-align:center;font-size:11.5px;color:var(--ink-3);line-height:1.7}
+.ft a{color:var(--gold-2);text-decoration:underline;text-underline-offset:3px}
+/* 아래 탭 */
+.tb{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:430px;height:64px;padding-bottom:env(safe-area-inset-bottom,0px);display:grid;grid-template-columns:repeat(5,1fr);background:rgba(16,13,18,.96);border-top:1px solid var(--line);z-index:20}
+.tb a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10.5px;color:var(--ink-3)}
+.tb a.on{color:var(--gold-2)}
+.tb svg{width:22px;height:22px}
+</style>
+</head>
+<body>
+<div class="ph">
+  <div class="top">
+    <div class="bar"><div class="logo"><img class="m" src="img/brand/odg_mark.webp" alt=""><img class="w" src="img/brand/odg_word_h.webp" alt="오방도감"><span class="tag">시안 B</span></div>
+      <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div></div>
+    <nav class="cat"><a class="on">전체</a><a>신년</a><a>연애</a><a>정통</a><a>무료</a><a>오방도감</a></nav>
+  </div>
+
+  <section class="sec">
+    <div class="sh"><div><small>2027 정미년 · 신년 기획전</small><b>새해를 묻는 열 가지 길</b></div><a class="more" href="newyear.html">모두 보기</a></div>
+    <div class="ny">
+      <a href="sinnyeon.html" style="background-image:url('img/halmae.jpg')"><span class="t"><i class="r">대표</i><b>2027<br>신년 운세</b><span>삼신 할매의 열두 달</span></span></a>
+      <a href="noeul.html" style="background-image:url('img/noeul.jpg')"><span class="t"><i>특별</i><b>해와 달의<br>운세</b><span>노을, 낮과 밤의 나</span></span></a>
+      <a href="myeongri.html" style="background-image:url('img/soheon.jpg')"><span class="t"><i>정통</i><b>명리<br>감정서</b><span>소헌 선생</span></span></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <a class="td" href="today.html" style="background-image:radial-gradient(90% 70% at 80% 0%,rgba(211,161,58,.28),rgba(211,161,58,0) 60%),linear-gradient(160deg,#1a1520,#0d0b10)"><span class="ilj">庚<br>戌</span>
+      <div class="sc"><span>69<small>총운</small></span></div>
+      <small>오늘의 운세 · 10.3 토 · 경술일</small>
+      <h3>욕심이 앞서는 날</h3>
+      <p>하나만 정리하면 나머지가 따라와요.</p>
+      <div class="row"><div class="ch"><em>행운 색</em><b><i></i>노랑</b></div><div class="ch"><em>방향</em><b>가운데</b></div><div class="ch"><em>숫자</em><b>5 · 10</b></div></div>
+    </a>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><div><small>무엇이 궁금해서 왔어</small><b>지금 고민부터 골라 봐</b></div></div>
+    <div class="ws">
+      <a href="#love" style="--c:var(--fire)"><span class="hj">緣</span><span><b>연애</b><small>언제 · 어떤 사람</small></span></a>
+      <a href="love2.html?m=re" style="--c:var(--water)"><span class="hj">回</span><span><b>재회</b><small>다시 닿을까</small></span></a>
+      <a href="#love" style="--c:var(--metal)"><span class="hj">心</span><span><b>속마음</b><small>그 사람 지금</small></span></a>
+      <a href="career.html" style="--c:var(--earth)"><span class="hj">財</span><span><b>일과 돈</b><small>버틸까 옮길까</small></span></a>
+      <a href="sinnyeon.html" style="--c:var(--gold)"><span class="hj">年</span><span><b>올해 운</b><small>2027 열두 달</small></span></a>
+      <a href="chat.html" style="--c:var(--wood)"><span class="hj">話</span><span><b>털어놓기</b><small>캐릭터 상담</small></span></a>
+    </div>
+  </section>
+
+  <section class="sec" id="love">
+    <div class="sh"><div><small>연애 상담소</small><b>서하가 먼저 들어 줄게</b></div><a class="more">모두 보기</a></div>
+    <div class="lv">
+      <a class="hd" href="love2.html?m=next" style="background-image:url('img/seoha.jpg')"><span class="t"><i>대표 · 연애 정밀 감정서</i><b>내 연애 설명서</b><span>연애 체질부터 인연의 10년, 열두 달 날짜까지</span><em>24,900원</em></span></a>
+      <a class="li" href="index.html" style="--c:var(--metal)"><span class="av" style="background-image:url('img/sion.jpg')"></span><span class="tx"><b>그 사람 속마음</b><small>시온의 은거울 · 보낼 문장 3안까지</small></span><span class="pr">19,900원</span></a>
+      <a class="li" href="love2.html?m=re" style="--c:var(--water)"><span class="av" style="background-image:url('img/water.jpg')"></span><span class="tx"><b>재회 감정서</b><small>재이 · 다시 연락해도 되는 날</small></span><span class="pr">19,900원</span></a>
+      <a class="li" href="dohwa.html" style="--c:#ffb9a6"><span class="av" style="background-image:url('img/taeo/base.jpg')"></span><span class="tx"><b>도화 사주</b><small>태오 · 내 사주 속 끌림</small></span><span class="pr">14,900원</span></a>
+      <a class="li" href="gunghap.html" style="--c:#ffb9a6"><span class="av" style="background-image:url('img/dohwa/pair.jpg'),url('img/taeo/base.jpg')"></span><span class="tx"><b>도화 궁합</b><small>두 사람의 끌림과 오래 감</small></span><span class="pr">14,900원</span></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <a class="bk" href="book.html" style="background-image:url('img/shrine.jpg');background-position:center 58%"><small>오방도감 세계관 · 무료</small><b>팔자에<br>신이 들었다</b><span>빈칸 하나에, 신 다섯이 줄을 섰다</span></a>
+  </section>
+
+  <section class="sec">
+    <a class="dg" href="index.html">
+      <div class="sh" style="margin-bottom:12px"><div><small>오방도감</small><b>다섯 신, 열 개의 얼굴</b></div></div>
+      <div class="pr">
+        <span class="p" style="--c:var(--wood)"><span class="pp"><i style="background-image:url('img/wood.jpg')"></i><i style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2_min.webp')"></i></span><em>木</em></span>
+        <span class="p" style="--c:var(--fire)"><span class="pp"><i style="background-image:url('img/fire.jpg')"></i><i style="background-image:url('img/yin/fire.jpg')"></i></span><em>火</em></span>
+        <span class="p" style="--c:var(--earth)"><span class="pp"><i style="background-image:url('img/earth.jpg')"></i><i style="background-image:url('img/yin/earth.jpg')"></i></span><em>土</em></span>
+        <span class="p" style="--c:var(--metal)"><span class="pp"><i style="background-image:url('img/sion.jpg')"></i><i style="background-image:url('img/yin/metal.jpg')"></i></span><em>金</em></span>
+        <span class="p" style="--c:var(--water)"><span class="pp"><i style="background-image:url('img/water.jpg')"></i><i style="background-image:url('img/yin/water.jpg')"></i></span><em>水</em></span>
+      </div>
+      <div class="go"><span>내 수호신 · 상담 · 소개 영상</span><b>도감 열기</b></div>
+    </a>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><div><small>정통</small><b>올해 내 사주, 제대로 한번</b></div></div>
+    <div class="jt">
+      <a class="li" href="lifetime.html" style="--c:#6b3a2a"><span class="sl">命</span><span class="tx"><b>평생 사주</b><small>대운 10년씩, 타고난 그릇</small></span><span class="pr">39,000원</span></a>
+      <a class="li" href="myeongri.html" style="--c:#2f4f7a"><span class="sl">鑑</span><span class="tx"><b>2027 명리 감정서</b><small>소헌 선생 · 근거를 하나씩</small></span><span class="pr">19,900원</span></a>
+      <a class="li" href="taegil.html" style="--c:#8a6a1e"><span class="sl">吉</span><span class="tx"><b>택일</b><small>이사 · 계약 · 고백, 그날이 길한지</small></span><span class="pr">9,900원</span></a>
+      <a class="li" href="newyear.html" style="--c:#3c6b4e"><span class="sl">卦</span><span class="tx"><b>2027 토정비결</b><small>옛 방식 그대로</small></span><span class="pr s">11월 오픈</span></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><div><small>한밤의 묘당 · 990원 한 질문</small><b>고양이가 봐 줄게</b></div><a class="more" href="myodang.html">들어가기</a></div>
+    <div class="mc">
+      <a href="myodang.html"><span style="background-image:url('img/cat/madam.jpg')"></span><b>마담</b><small>이달의 연애운</small></a>
+      <a href="myodang.html"><span style="background-image:url('img/cat/wood.jpg')"></span><b>연락 올까</b><small>이번 주</small></a>
+      <a href="myodang.html"><span style="background-image:url('img/cat/water.jpg')"></span><b>꿈해몽</b><small>어젯밤 꿈</small></a>
+      <a href="myodang.html"><span style="background-image:url('img/cat/fire.jpg')"></span><b>금전운</b><small>이달</small></a>
+      <a href="myodang.html"><span style="background-image:url('img/cat/metal.jpg')"></span><b>속마음</b><small>한 줄</small></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><div><small>무료</small><b>매일 하나씩</b></div><a class="more" href="free.html">무료 존</a></div>
+    <div class="fr">
+      <a href="ppopgi.html"><span style="background-image:url('img/mini/tong.jpg')"></span><b>오방 뽑기</b><small>하루 한 번, 오늘의 괘</small></a>
+      <a href="bujeok.html"><span style="background-image:url('img/card/wood_love.jpg');background-position:center 30%"></span><b>부적 카드</b><small>모자란 기운 채우기</small></a>
+      <a href="dangbeon.html"><span style="background-image:url('img/stamp/earth_cheer.webp')"></span><b>출석 도장</b><small>오늘의 당번</small></a>
+      <a href="free.html"><span style="background-image:url('img/free/color.jpg')"></span><b>퍼스널 컬러</b><small>사주로 보는 내 색</small></a>
+    </div>
+  </section>
+
+  <p class="ft">홈 시안 B · 지금 홈과 비교해 보세요<br><a href="./">지금 홈으로</a></p>
+
+  <nav class="tb">
+    <a class="on"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/></svg>홈</a>
+    <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 18l1.4-3.6A7.5 7.5 0 1 1 8.6 18z"/></svg>상담</a>
+    <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg>미션</a>
+    <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="9" width="16" height="11" rx="1"/><path d="M3 9h18v-3H3zM12 6v14"/></svg>무료</a>
+    <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>보관함</a>
+  </nav>
+</div>
+</body>
+</html>

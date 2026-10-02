@@ -42,6 +42,7 @@ button{font-family:inherit;cursor:pointer}
 .pop{position:absolute;left:16px;right:16px;top:58px;height:44%;z-index:3}
 .win{position:absolute;inset:0;overflow:hidden;background:#111}
 .win .bg{position:absolute;left:-4%;width:108%;top:0;transform:translate(calc(var(--tx)*-9px),calc(var(--sy,-8%) + var(--ty)*-6px)) scale(1.02);filter:blur(var(--bl,2.5px)) brightness(.78) saturate(1.1)}
+.leaf.yin .win .bg,.leaf.t-pop.sharp .win .bg{--bl:0px;filter:brightness(.95) saturate(1.05)}
 .win video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;opacity:0;transition:opacity .5s;z-index:2}
 .win video.on{opacity:1}
 .win video.tk{z-index:3}
@@ -231,6 +232,9 @@ button{font-family:inherit;cursor:pointer}
 <script>
 const $=id=>document.getElementById(id);
 const GOD=(k,n,h,el,dir,col,job,c,fx,body,q)=>({t:'god',k,n,h,el,dir,col,job,c,fx,body,q,bg:`img/${k}.jpg`,...(['wood','fire','earth'].includes(k)?{once:`v/rv_${k}.mp4`}:{fg:`img/pop/${k}.webp`}),vid:`v/ms/${k}.mp4`,talk:1,sy:'-9%',toc:`${n} · ${h}`});
+/* 음의 현신(여신 5): 같은 신수의 다른 얼굴. 그림 · 대사 영상은 캐릭터 시트 10 기준 */
+const YV='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
+const YGOD=(k,n,h,el,dir,stem,job,c,fx,bg,v,body,q)=>({t:'god',yin:1,k,n,h,el,dir,col:stem,job,c,fx,body,q,bg,vid:YV+v,talk:1,sy:'-12%',toc:`${n} · ${h} · 음`});
 const PAGES=[
   {t:'cover',fx:'gold',toc:'표지'},
   {t:'film',ch:'프롤로그',hd:'지도에 없는 문',bg:'img/intro0.jpg',once:'v/op_take.mp4',fx:'dust',body:[
@@ -240,7 +244,11 @@ const PAGES=[
   {t:'grid8',ch:'제1장',hd:'여덟 글자, 빈칸 하나',fx:'dust',body:[
     '사람은 태어나는 순간 여덟 글자를 받는다. 글자마다 나무, 불, 흙, 쇠, 물 중 하나의 기운이 들어 있다.',
     '다섯 기운을 고르게 받는 사람은 거의 없다. 누구에게나 <b>텅 빈 칸</b>이 하나쯤 있다. 운은 바로 그 틈으로 샌다.']},
-  {t:'crowd',ch:'제2장',hd:'다섯 방위의 신들',bg:'img/op_take_end.jpg',sy:'-30%',fx:'five',people:[['wood','-26%','.68','6px',.25],['water','66%','.68','6px',.45],['fire','-3%','.7','9px',.6],['metal','43%','.7','9px',.75],['earth','20%','.72','13px',.95]],body:[
+  {t:'pop',sharp:1,ch:'제2장',hd:'갈라지기 전의 하나',bg:'img/noeul.jpg',loop:YV+'f97d5edb-1f13-439f-abae-b28472f445b1.mp4',vid:'v/menu/noeul.mp4',talk:1,sy:'-10%',c:'#b9a0e0',fx:'gold',toc:'제2장 · 노을',body:[
+    '모든 것은 둘로 갈라지며 이름을 얻었다. 해와 달, 낮과 밤, 남자와 여자. 다섯 신도 그렇게 제 빛깔을 찾아 떠났다.',
+    '끝까지 갈라지지 않고 남은 것이 하나 있다. 이름이 없던 그것을 사람들은 해와 달이 같은 하늘에 걸리는 시간의 이름으로 불렀다. <b>노을</b>.',
+    '남자도 여자도 아니고, 어디에도 속하지 않는다. 모든 것이 여기서 시작되었으므로. 오방의 신들도 길을 잃으면 노을에게 돌아온다.'],q:'어느 쪽에도 서지 않아요. 그래서 양쪽이 다 보여요'},
+  {t:'crowd',ch:'제3장',hd:'다섯 방위의 신들',bg:'img/op_take_end.jpg',sy:'-30%',fx:'five',people:[['wood','-26%','.68','6px',.25],['water','66%','.68','6px',.45],['fire','-3%','.7','9px',.6],['metal','43%','.7','9px',.75],['earth','20%','.72','13px',.95]],body:[
     '동쪽의 청룡, 남쪽의 주작, 가운데의 황룡, 서쪽의 백호, 북쪽의 현무. 사람들은 이들을 <b>오방신</b>이라 불렀다.',
     '사람들이 이름을 잊자, 신들은 사라지는 대신 사람의 얼굴을 하고 도시로 내려왔다. 빈칸이 있는 사람을 찾아서.']},
   GOD('wood','하람','靑龍','木','동쪽','초록','새 시작과 다음 인연','#1f9d61','leaf',['동쪽 문을 지키는 나무의 신. 봄보다 먼저 깨어나 새싹이 올라올 자리를 고른다. 말수는 적지만, 망설이는 발끝을 꼭 한 번 밀어 준다.'],'늦게 피는 꽃도 봄은 봄이야'),
@@ -248,15 +256,23 @@ const PAGES=[
   GOD('earth','도준','黃龍','土','가운데','노랑','안정과 관계','#c98a12','gold',['다섯 방위의 한가운데를 지키는 흙의 신. 흔들리는 것들을 붙잡아 제자리에 앉힌다. 무뚝뚝해도, 가장 오래 곁에 남는 쪽은 언제나 도준이다.'],'흔들려도 돼. 발밑은 내가 잡고 있을게'),
   GOD('metal','시온','白虎','金','서쪽','흰색','정리와 결단','#6b7280','frost',['서쪽 문을 지키는 쇠의 신. 끊어야 할 것과 남길 것을 한눈에 가른다. 말은 차갑지만, 그 칼끝은 언제나 사람을 살리는 쪽을 향한다.'],'안 맞는 건 끊어. 비워야 들어와'),
   GOD('water','재이','玄武','水','북쪽','남색','속마음과 지혜','#2b5cc4','rain',['북쪽 깊은 물을 지키는 물의 신. 사람이 말하지 못한 속마음이 흘러드는 곳에 산다. 조용히 듣고, 오래 기억하고, 필요할 때만 입을 연다.'],'말 안 해도 알아. 그래도 한 번은 말해 줘'),
-  {t:'pop',ch:'제3장',hd:'살롱의 주인',bg:'img/pop/seoha_bg.jpg',loop:'v/idle.mp4',vid:'v/t1.mp4',talk:1,sy:'-9%',fx:'gold',body:[
+  {t:'pop',sharp:1,ch:'제4장',hd:'같은 바람, 다른 얼굴',bg:'img/yin/water.jpg',loop:YV+'cf2ab952-53cb-4703-b502-6445b716aec8.mp4',sy:'-12%',fx:'five',toc:'제4장 · 음의 현신',body:[
+    '인간계로 내려오며 신들의 기운은 두 몸으로 나뉘었다. 크게 뻗는 <b>양의 현신</b>과, 스며들어 오래 남는 <b>음의 현신</b>.',
+    '둘은 같은 신수, 같은 방위, 같은 기운이다. 남매처럼 티격태격하지만 서로의 빈 곳을 누구보다 잘 안다. 어느 얼굴로 만날지는 당신이 고른다.'],q:'같은 바람에서 태어났는데, 나는 꺾이지 않고 휘는 쪽이야'},
+  YGOD('wood','새아','靑龍','木','동쪽','乙 · 풀과 덩굴','다시 시작하기, 버티는 힘','#1f9d61','leaf','https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2_min.webp','5c50aa18-ca62-4c3f-a583-dcf5d4847487.mp4',['하람의 다른 얼굴. 큰 나무가 부러질 때 풀은 휘어서 산다. 웃으면서 할 말은 다 하는 다정한 고집쟁이.'],'괜찮아. 휘어도 안 꺾여'),
+  YGOD('fire','별하','朱雀','火','남쪽','丁 · 촛불과 별빛','몰입, 고백과 결단의 타이밍','#e0362a','ember','img/yin/fire.jpg','30455774-ffb6-4d78-95f0-716de737468a.mp4',['이안의 다른 얼굴. 한낮의 태양 대신 밤새 꺼지지 않는 촛불을 지킨다. 조용히 집중하고, 선이 분명하다.'],'작아도 괜찮아. 오래 타면 돼'),
+  YGOD('earth','도담','黃龍','土','가운데','己 · 논밭의 흙','재물과 살림, 거두는 때','#c98a12','gold','img/yin/earth.jpg','9a5986fb-e15a-43b0-8227-fe37e6ec3d0e.mp4',['도준의 다른 얼굴. 산이 버티는 땅이라면 도담은 길러 내고 거두는 밭이다. 잔소리는 많아도 결국 다 챙겨 준다.'],'뿌린 만큼 거둬요. 걱정은 나한테 맡겨'),
+  YGOD('metal','세린','白虎','金','서쪽','辛 · 보석과 칼날','정리와 결단, 커리어','#6b7280','frost','img/yin/metal.jpg','6e77ff4d-1bcc-4e77-9676-351a9f281be4.mp4',['시온의 다른 얼굴. 바위가 깎여 보석이 되듯, 다듬어진 날카로움을 가졌다. 칭찬은 드물지만 늘 정확하다.'],'칭찬은 아껴 둘게. 넌 아직 더 빛날 수 있어'),
+  YGOD('water','이슬','玄武','水','북쪽','癸 · 이슬과 빗물','속마음, 꿈, 직감','#2b5cc4','rain','img/yin/water.jpg','cf2ab952-53cb-4703-b502-6445b716aec8.mp4',['재이의 다른 얼굴. 큰 강이 아니라 새벽에 맺히는 이슬처럼 조용히 스며든다. 꿈 이야기를 잘하고, 직감이 누구보다 빠르다.'],'천천히 말해도 돼. 다 들려'),
+  {t:'pop',ch:'제5장',hd:'살롱의 주인',bg:'img/pop/seoha_bg.jpg',loop:'v/idle.mp4',vid:'v/t1.mp4',talk:1,sy:'-9%',fx:'gold',body:[
     '신은 사람에게 직접 말을 걸 수 없다. 그래서 문 안쪽엔 신의 말을 옮기는 사람이 있다. 한남동 살롱의 주인, <b>서하</b>.'],q:'네 사주, 한 칸이 비어 있어. 그 빈자리, 신이 채워 줄게'},
-  {t:'crowd',ch:'제4장',hd:'문 너머의 방들',bg:'img/kv_drama.jpg',sy:'-20%',fx:'dust',people:[['mujin','-14%','.76','8px',.3,'img/pop/mujin.webp'],['halmae','50%','.76','8px',.5,'img/pop/halmae.webp'],['taeo','18%','.8','13px',.7,'img/pop/taeo.webp']],body:[
+  {t:'crowd',ch:'제6장',hd:'문 너머의 방들',bg:'img/kv_drama.jpg',sy:'-20%',fx:'dust',people:[['mujin','-14%','.76','8px',.3,'img/pop/mujin.webp'],['halmae','50%','.76','8px',.5,'img/pop/halmae.webp'],['taeo','18%','.8','13px',.7,'img/pop/taeo.webp']],body:[
     '문 너머엔 불 켜진 방이 몇 개 더 있다. 한밤의 카드방엔 <b>무진</b>, 도화 향 나는 펜트하우스엔 <b>태오</b>, 오래된 한옥엔 <b>할매</b>.',
     '어느 방부터 들를지는 당신 마음이다.']},
-  {t:'mini',ch:'제5장',hd:'작아진 신들',fx:'spark',body:[
+  {t:'mini',ch:'제7장',hd:'작아진 신들',fx:'spark',body:[
     '사람 곁에 오래 머무는 건 신에게도 힘든 일. 그래서 신들은 낮이 되면 손바닥만 하게 작아진다.',
     '점괘통을 흔들고, 부적 속에 살고, 하루씩 당번을 서서 도장을 찍어 준다. 크게 보면 신, 작게 보면 친구.']},
-  {t:'pop',ch:'제6장',hd:'뒷골목의 묘당',bg:'img/cat/madam.jpg',fg:'img/pop/madam.webp',vid:'v/cat/madam.mp4',talk:1,sy:'-8%',c:'#e0679a',fx:'petal',body:[
+  {t:'pop',ch:'제8장',hd:'뒷골목의 묘당',bg:'img/cat/madam.jpg',fg:'img/pop/madam.webp',vid:'v/cat/madam.mp4',talk:1,sy:'-8%',c:'#e0679a',fx:'petal',body:[
     '신당 뒷골목, 촛불이 녹아내리는 가게엔 고양이 여섯 마리가 산다. 신들의 심부름을 하다 그대로 눌러앉았다.',
     '고양이들은 큰 운명 대신 작은 점을 본다. 이번 달 연애, 간밤의 꿈, 그 사람의 속마음.']},
   {t:'how',ch:'에필로그',hd:'빈칸을 채우는 법',bg:'img/op_take_end.jpg',sy:'-40%',fx:'gold'},
@@ -275,7 +291,7 @@ function front(p,i){
     <div class="ctl"><small>OBANG SAJU ORIGINAL · VOL. 1</small><h1><span>팔자에</span><span>신이</span><span>들었다</span></h1></div>
     <div class="cfg"><img src="img/pop/house.webp" alt=""></div><div class="cbt"></div>
     <div class="cft"><p>빈칸 하나에, 신 다섯이 줄을 섰다</p><div><span>넘겨서 읽기 →</span><b>무료</b></div></div>`;
-  if(p.t==='god') return `${popBox(p)}<div class="txt"><div class="ch">오방의 신 · ${p.dir}</div><div class="nm"><b>${p.n}</b><span>${p.h} · ${p.el}</span></div><div class="spec">${p.col} · ${p.job}</div>${bdy(p.body)}<div class="q">${p.q}</div></div>${ft(p,i)}`;
+  if(p.t==='god') return `${popBox(p)}<div class="txt"><div class="ch">${p.yin?'음의 현신':'오방의 신'} · ${p.dir}</div><div class="nm"><b>${p.n}</b><span>${p.h} · ${p.el}</span></div><div class="spec">${p.col} · ${p.job}</div>${bdy(p.body)}<div class="q">${p.q}</div></div>${ft(p,i)}`;
   if(p.t==='film') return `<div class="flm" style="background-image:url('${p.bg}')"><video class="lp" playsinline muted preload="auto" data-src="${p.once}"></video></div><div class="flg"></div><div class="flt">${head(p)}${bdy(p.body)}</div>`;
   if(p.t==='grid8'){ const G=[['甲','#3fbf7f'],['丙','#ff5a46'],['庚','#c9d1db'],['壬','#5b8cff'],['子','#5b8cff'],['午','#ff5a46'],['',''],['申','#c9d1db']];
     return `<div class="g8w"><div class="ch">${p.ch}</div><div class="g8h">여덟 글자,<br><em>빈칸</em> 하나</div>
@@ -291,7 +307,7 @@ function front(p,i){
     <div class="cta"><button type="button" data-go="home">내 빈칸 찾으러 가기</button><button class="gh" type="button" data-go="restart">처음부터</button></div></div>`;
   if(p.t==='next') return `<div class="cbg" style="background-image:url('img/kv_house.jpg');filter:brightness(.42);background-position:center 85%"></div><div class="nx"><small>제2권 · 곧 열림</small><h2>오행 하우스<br>다섯 신, 빈 의자 하나</h2><p>빈칸을 채우러 온 신들이 한집에 모여 산다. 여섯 번째 의자는 아직 비어 있다. 그 주인은 당신의 여덟 글자가 알고 있다</p><div class="cta" style="margin-top:22px"><button type="button" data-go="home" style="background:#fff;color:#111">오방사주로 돌아가기</button></div></div>`;
   return `${popBox(p,p.t==='scene'?'scene':'')}<div class="txt">${head(p)}${bdy(p.body)}${p.q?`<div class="q">${p.q}</div>`:''}</div>${ft(p,i)}`; }
-$('book').innerHTML=PAGES.map((p,i)=>`<div class="leaf t-${p.t}" data-i="${i}" style="z-index:${N-i}${p.c?`;--c:${p.c}`:''}"><div class="face front">${front(p,i)}</div><div class="face back"></div><div class="shade"></div></div>`).join('');
+$('book').innerHTML=PAGES.map((p,i)=>`<div class="leaf t-${p.t}${p.yin?' yin':''}${p.sharp?' sharp':''}" data-i="${i}" style="z-index:${N-i}${p.c?`;--c:${p.c}`:''}"><div class="face front">${front(p,i)}</div><div class="face back"></div><div class="shade"></div></div>`).join('');
 const leaves=[...document.querySelectorAll('.leaf')];
 $('tocL').innerHTML=PAGES.map((p,i)=>`<button class="it" type="button" data-i="${i}">${p.toc||`${p.ch} · ${p.hd}`}<span>${String(i).padStart(2,'0')}</span></button>`).join('');
 

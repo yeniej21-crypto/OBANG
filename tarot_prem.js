@@ -1,5 +1,6 @@
 /* 무진의 타로 프리미엄 — 켈틱 크로스 10장 · 3개월 흐름 (결제 뒤 풀이 아래에 이어짐)
-   카드: 22장 메이저를 암호학 난수로 다시 섞어 열 장 · 정역 무작위. 뜻은 tarot_data.js(라이더-웨이트 표준)에서만.
+   카드: 78장(메이저 22 · 마이너 56)을 암호학 난수로 섞어 펼친 리본에서 손님이 직접 열 장 · 정역 무작위. 뜻은 tarot_data.js · tarot_minor.js(라이더-웨이트 표준)에서만.
+   고르기 화면: tarot_deck.js의 리본 덱 엔진(TarotDeck.ribbon)을 무료 풀이와 같이 쓰고, 위에 켈틱 크로스 자리판을 둔다.
    시기: tarot_read.js 골든 던 대응. → AI(무진 문체) · 없으면 카드 사전으로 조립한 초안 */
 (function(){
 const $=id=>document.getElementById(id); const K=window.PK;
@@ -27,7 +28,7 @@ const RULE=`[문체 규칙 · 오방사주 타로 마스터 무진]
 - 문장은 짧게, 한 문장 45자 안팎.
 [공통 규칙]
 - 아래 펼침 카드에 있는 카드 · 자리 · 방향 · 뜻만 근거로 쓴다. 카드에 없는 사건이나 숫자를 지어내지 않는다.
-- 열 장은 질문자가 22장 중에서 직접 고른 카드다. '당신이 고른 카드'라는 감각을 살린다.
+- 열 장은 질문자가 78장 중에서 직접 고른 카드다. '당신이 고른 카드'라는 감각을 살린다.
 - 카드 이름을 문장에 자연스럽게 넣는다. 질문이 있으면 질문에 답하는 방향으로 읽는다.
 - 타로를 처음 보는 사람도 알게 쉽게 쓴다. 단락마다 결론을 먼저, 카드 근거는 뒤에. 자리 이름(장애물 · 뿌리 등)은 처음 나올 때 무슨 자리인지 짧게 풀어 준다. 추상적인 말 대신 일상 장면으로.
 - 건강 · 투자 · 법률은 단정하지 않는다. 물음표, 느낌표, 말줄임표, 이모지를 쓰지 않는다.
@@ -60,20 +61,75 @@ function build(){ const ps=a=>K.ps(a,''), t=x=>K.esc(x);
   return H.join(''); }
 function render(){ K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status(host.querySelector('#trst'),Object.assign({who:'무진이 열 장 풀이'},ST));
   host.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>{ const r=host.querySelector(`.pk-row[data-k="r${b.dataset.z}"]`); if(r){ r.classList.add('open'); r.scrollIntoView({behavior:'smooth',block:'center'}); } }); }
-/* 열 장 직접 고르기: 22장을 뒷면으로 깔고, 고른 순서대로 켈틱 크로스 자리에 놓는다 */
-function pick(){ const deck=deal22(); let got=[];
-  const draw=()=>{ host.innerHTML=`<div class="pk-sec tp-pick"><h3>열 장을 직접 골라요<i>${got.length} / 10</i></h3>
-    <p class="pk-p">${O.q?`“${K.esc(O.q)}”, `:''}이 질문을 한 번 더 떠올리고 손이 가는 카드를 한 장씩 눌러요. 고른 순서대로 현재부터 결과까지 열 자리에 놓여요.</p>
+/* ---------- 열 장 직접 고르기 ----------
+   카드방 장면 위에 78장 리본 덱(무료와 같은 엔진) + 켈틱 크로스 자리판. 저절로 두 번 리플로 섞인 뒤 리본으로 펼쳐진다.
+   고른 순서대로 현재부터 결과까지 자리에 날아가 놓이고, 되돌리기 · 남은 카드 다시 섞기 · 닫았다가 이어서 고르기가 된다. */
+const TD=window.TarotDeck;
+/* 자리판 좌표(가로 398 기준). 가운데 십자: 현재 위에 장애물이 가로로 겹치고, 위 목표 · 아래 뿌리 · 왼쪽 지나간 일 · 오른쪽 가까운 미래.
+   오른쪽 기둥: 아래에서 위로 나 · 주변 · 희망과 두려움 · 결과 */
+const TW=398, TH=282, CX=126, CY=140, DX=92, DY=86, SX=282, SG=70;
+const SLOT=[[CX,CY],[CX,CY,1],[CX,CY-DY],[CX,CY+DY],[CX-DX,CY],[CX+DX,CY],[SX,CY+SG*1.5],[SX,CY+SG*.5],[SX,CY-SG*.5],[SX,CY-SG*1.5]];
+let PK=null;
+/* 풀이 칸으로 스크롤: scrollIntoView는 overflow:hidden인 무대까지 밀어 올리므로, 가장 가까운 스크롤 칸만 움직인다 */
+function into(){ const sc=host.closest('.scroll'); if(!sc){ host.scrollIntoView({block:'start'}); return; }
+  const y=host.getBoundingClientRect().top-sc.getBoundingClientRect().top+sc.scrollTop-64; sc.scrollTo({top:Math.max(0,y),behavior:TD.reduced()?'auto':'smooth'}); }
+const XSVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+function pick(){ if(!PK) PK=picker(); PK.show(); summary(); }
+/* 결제 칸 자리: 고르기 화면을 닫았을 때 보이는 요약 + 이어서 고르기 */
+function summary(){ if(!PK) return; const got=PK.got();
+  host.innerHTML=`<div class="pk-sec tp-pick"><h3>열 장을 직접 골라요<i>${got.length} / 10</i></h3>
+    <p class="pk-p">${O.q?`“${K.esc(O.q)}”, `:''}일흔여덟 장을 펼쳐 둔 카드방에서 고른 순서대로 현재부터 결과까지 열 자리에 놓여요.</p>
     <div class="tp-slots">${POS.map((p,k)=>`<div class="${k<got.length?'on':''}${k===got.length?' now':''}"><span></span><small>${k+1} ${p[0]}</small></div>`).join('')}</div>
-    <div class="tp-fan">${deck.map((x,k)=>`<button type="button" data-p="${k}" class="${got.includes(k)?'used':''}" aria-label="카드 ${k+1}"></button>`).join('')}</div>
-    <button class="tp-go" type="button" ${got.length<10?'disabled':''}>${got.length<10?`${POS[got.length][0]} 자리 카드를 골라요`:'열 장 펼치기'}</button></div>`;
-    host.querySelectorAll('.tp-fan button').forEach(b=>b.onclick=()=>{ const k=+b.dataset.p; if(got.length>=10||got.includes(k)) return; got.push(k); draw(); });
-    host.querySelector('.tp-go').onclick=()=>{ if(got.length<10) return; O.cc=got.map(k=>deck[k]); D=O.cc; reveal(); }; };
-  draw(); }
-function deal22(){ const d=window.TAROT.map(c=>c.n); for(let i=d.length-1;i>0;i--){ const j=rnd(i+1); [d[i],d[j]]=[d[j],d[i]]; } return d.map(n=>({n,rv:rnd(100)<30})); }
+    <button class="tp-go" type="button">${got.length?'이어서 고르기':'카드 고르러 가기'}</button></div>`;
+  host.querySelector('.tp-go').onclick=()=>PK.show(); }
+function picker(){ const stage=host.closest('.stage')||document.body, F=TD.sfx, key=O.picked;
+  const rnd=TD.rnd, deck=window.TAROT.map(c=>({n:c.n,rv:false}));
+  const mix=()=>{ const idx=deck.map((_,i)=>i).filter(i=>!got.includes(i)), vals=idx.map(i=>deck[i].n);
+    for(let i=vals.length-1;i>0;i--){ const j=rnd(i+1); [vals[i],vals[j]]=[vals[j],vals[i]]; } idx.forEach((i,k)=>{ deck[i]={n:vals[k],rv:rnd(100)<30}; }); };
+  let got=[], landed=[], busy=true, open=false;
+  const el=document.createElement('div'); el.className='tpk'; el.hidden=true; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); el.setAttribute('aria-label','켈틱 크로스 열 장 고르기');
+  el.innerHTML=`<div class="tpk-area"></div>
+    <div class="tpk-hd"><button class="ib tpk-x" type="button" aria-label="닫기">${XSVG}</button><b>켈틱 크로스 열 장</b><span class="tpk-n" aria-hidden="true"><em>0</em> / 10</span></div>
+    <div class="tpk-g" aria-live="polite"><b></b><small></small></div>
+    <div class="tpk-tray" aria-hidden="true">${SLOT.map((p,k)=>`<div class="tpk-s${p[2]?' x':''}${k>=6?' r':''}" style="left:${p[0]}px;top:${p[1]}px"><span>${k+1}</span>${k===1?'':`<i>${k===0?'<u data-k="0">1 현재</u> · <u data-k="1">2 장애물</u>':`<u data-k="${k}">${k+1} ${POS[k][0]}</u>`}</i>`}</div>`).join('')}</div>
+    <div class="tpk-ft"><button class="tpk-un" type="button">되돌리기</button><button class="tpk-re" type="button">다시 섞기</button><button class="tpk-go" type="button" disabled></button></div>`;
+  stage.appendChild(el);
+  const $$=s=>el.querySelector(s), area=$$('.tpk-area'), tray=$$('.tpk-tray'), slots=[...el.querySelectorAll('.tpk-s')];
+  let trayB=0, footT=0;
+  function fit(){ const W=el.clientWidth, H=el.clientHeight, g=$$('.tpk-g'), top=(g.offsetTop+g.offsetHeight||104)+10, f=Math.max(.7,Math.min(1.12,(W-24)/TW,(H-top-(H<720?292:330))/TH));
+    tray.style.transform=`translateX(-50%) scale(${f.toFixed(3)})`; tray.style.top=top+'px'; trayB=top+TH*f; footT=$$('.tpk-ft').offsetTop+20; }
+  const slotT=k=>({el:slots[k].firstElementChild,rz:SLOT[k][2]?90:0,z:k});
+  const RB=TD.ribbon(area,{count:deck.length,hideOnLand:true,
+    label:'카드 줄. 좌우 화살표로 넘기고 Enter로 가운데 카드를 골라요',
+    layout:G=>{ fit(); const ry=Math.min(footT-G.ch*.62-6,trayB+(footT-trayB)*.6); G.ry=Math.max(trayB+G.ch*.7,ry); G.sy=G.ry-8; },
+    pick:(c,i)=>{ if(got.length>=10||busy) return null; const k=got.length; got.push(i); landed[k]=false; TD.preload(window.TAROT[deck[i].n]); paint(); return slotT(k); },
+    onLand:(c,i)=>{ const k=got.indexOf(i); if(k>=0) landed[k]=true; paint(); if(got.length===10&&landed.every(Boolean)){ F.chime(523,.12); } }});
+  function paint(){ const k=got.length; $$('.tpk-n em').textContent=k;
+    slots.forEach((s,j)=>{ s.classList.toggle('on',j<k&&!!landed[j]); s.classList.toggle('now',j===k&&!busy); });
+    el.querySelectorAll('.tpk-tray u').forEach(u=>{ const j=+u.dataset.k; u.className=j<k?'on':j===k&&!busy?'now':''; });
+    const g=$$('.tpk-g');
+    if(busy){ g.querySelector('b').textContent='카드를 섞고 있어요'; g.querySelector('small').textContent='질문을 한 번 더 마음속으로 떠올려요'; }
+    else if(k<10){ const tip=k?'끌리는 카드를 위로 밀어 올려요':'좌우로 넘기다가 위로 밀어 올려요'; g.querySelector('b').textContent=`${k+1}번째 자리 · ${POS[k][0]}`; g.querySelector('small').textContent=`${POS[k][1]} · ${tip}`; }
+    else { g.querySelector('b').textContent='열 장이 다 놓였어요'; g.querySelector('small').textContent='펼치면 무진이 자리마다 한 장씩 읽어요'; }
+    $$('.tpk-un').disabled=busy||!k; $$('.tpk-re').disabled=busy||k>=10;
+    const go=$$('.tpk-go'); go.disabled=k<10||!landed.every(Boolean); go.textContent=k<10?`${10-k}장 더 골라요`:'열 장 펼치기'; }
+  $$('.tpk-un').onclick=()=>{ if(busy||!got.length||RB.phase()!=='pick') return; const k=got.length-1, i=got.pop(); landed.length=k; RB.unpick(i,slotT(k)); paint(); F.tick(.06); };
+  $$('.tpk-re').onclick=async()=>{ if(busy||got.length>=10||RB.phase()!=='pick') return; busy=true; paint(); mix(); await RB.reshuffle(2); busy=false; paint(); };
+  $$('.tpk-go').onclick=()=>{ if(got.length<10||!landed.every(Boolean)) return; O.cc=got.map(i=>Object.assign({},deck[i])); D=O.cc; PK.kill(); PK=null; reveal(); setTimeout(into,80); };
+  $$('.tpk-x').onclick=()=>{ hide(); summary(); into(); const b=host.querySelector('.tp-go'); if(b) try{ b.focus({preventScroll:true}); }catch(e){} };
+  el.addEventListener('keydown',e=>{ if(e.key==='Escape'){ e.preventDefault(); $$('.tpk-x').onclick(); } });
+  function hide(){ open=false; el.classList.remove('on'); stage.classList.remove('tpk-on'); if(window.ROOM) ROOM.stop(); setTimeout(()=>{ if(!open) el.hidden=true; },420); }
+  let first=true;
+  async function show(){ if(open) return; open=true; el.hidden=false; stage.classList.add('tpk-on'); stage.scrollTop=0; if(window.ROOM){ ROOM.start(); ROOM.mode('pick'); }
+    requestAnimationFrame(()=>el.classList.add('on')); try{ F.ctx(); }catch(e){}
+    if(first){ first=false; busy=true; paint(); mix(); await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))); fit(); RB.stack(false); await RB.riffles(2); busy=false; RB.spread(); paint(); F.chime(523,.1); }
+    else { fit(); RB.relayout(); paint(); }
+    try{ area.focus({preventScroll:true}); }catch(e){} }
+  const onRs=()=>{ if(open){ fit(); RB.relayout(); } }; addEventListener('resize',onRs);
+  return {show,key,got:()=>got.slice(),kill(){ if(open) hide(); RB.destroy(); el.remove(); removeEventListener('resize',onRs); }}; }
 function reveal(){ C=draft(); ST={}; render(); host.querySelectorAll('.pk-deck span').forEach((e,k)=>{ e.style.animationDelay=(k*0.12)+'s'; e.classList.add('tp-flip'); });
   const f=host.querySelector('.pk-row'); if(f) f.classList.add('open');
   K.runAI({key:'tarot-'+(O.q||O.topic)+'-'+D.map(x=>x.n+(x.rv?'r':'')).join('.'),ver:'v2',parts:prompts(),apply,rerender:render,S:ST}); }
-window.TarotPrem={open(el,o){ if(!el||!o||!window.TAROT) return false; host=el; O=o; host.className='pkx dark'; host.style.setProperty('--pk-acc','var(--gold)'); host.hidden=false; K.bind(host);
+window.TarotPrem={open(el,o){ if(!el||!o||!window.TAROT) return false; if(PK&&(host!==el||PK.key!==o.picked)){ PK.kill(); PK=null; } host=el; O=o; host.className='pkx dark'; host.style.setProperty('--pk-acc','var(--gold)'); host.hidden=false; K.bind(host);
   if(o.cc&&o.cc.length===10){ D=o.cc; reveal(); } else pick(); return true; }};
 })();

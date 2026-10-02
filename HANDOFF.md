@@ -633,3 +633,4 @@
   주의: 작업 원본은 이 scratchpad(proto · bk · HANDOFF), /home/claude/obang-src는 source 브랜치 복제본, /home/claude/obang은 배포 저장소(배포 때 비워짐).
 - 2026-10-03 00:30 · 은주: 신년 기획전 랜딩(newyear.html)에 노을이 없음 → ① 맨 위 진행자 줄: 태오 빼고 노을을 할매 다음 두 번째로(6명 유지, 촘촘해지지 않게) ② '대표' 아래 새 '특별' 칸: 정사각 큰 카드(움직이는 썸네일 v/poster/noeul.mp4, '특별 · 경계의 존재 노을', '2027 해와 달의 운세', 990원) ③ 탭에 '특별' 추가 ④ '나에게 맞는 신년' 고르기에 '정통 말고, 나를 새로 보고 싶다면 → 해와 달의 운세'. 데이터는 newyear_data.js에 cat 'special' 한 줄. 백업 bk/newyear.v-before-noeul.html · bk/newyear_data.v-before-noeul.js.
 - 같은 때 은주 질문: 홈 '이용 후기'는 체험판 예시일 뿐, 기능 설계 · 개발 안 됨 → 구매 인증 후기로 설계 제안(답변 참고, 결정 대기).
+- 2026-10-03 00:25 · 은주 결정: 홈 '이용 후기'(체험판 예시 2개) 삭제. 서하 · 이안 홈 둘 다. 후기는 오픈 때 화면에 공개하지 않고, 결과 끝 별점 + 한 줄만 비공개로 모으는 방향 제안(공개 동의 함께 받기, 오픈 2~4주 뒤 메뉴당 20개쯤 쌓이면 공개 검토). 백업 bk/seoha-salon.v122-before-noreview.html · bk/ian-salon.v7-before-noreview.html.

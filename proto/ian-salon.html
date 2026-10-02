@@ -1207,7 +1207,7 @@ function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTi
 /* ---------- form setup ---------- */
 (function(){
   const by=$('by'),bm=$('bm'),bd=$('bd'),bh=$('bh');
-  for(let y=2008;y>=1960;y--) by.add(new Option(y+'년',y,false,y===1996));
+  for(let y=2008;y>=1950;y--) by.add(new Option(y+'년',y,false,y===1996));
   for(let m=1;m<=12;m++) bm.add(new Option(m+'월',m,false,m===5));
   const fillD=()=>{const n=new Date(+by.value,+bm.value,0).getDate(),cur=+bd.value||14;bd.innerHTML='';for(let d=1;d<=n;d++) bd.add(new Option(d+'일',d,false,d===Math.min(cur,n)));};
   fillD(); by.onchange=fillD; bm.onchange=fillD;
@@ -1291,7 +1291,7 @@ Object.assign(LINES,{e1:['그 사람 얘기?','…생일 줘봐.'],e2:['흠.','�
 Object.assign(FALLBACK_DUR,{e1:3.4,e2:5.5,e3:4.7}); POSTER.sion='img/sion.jpg';
 (function(){
   const py=$('py'),pm=$('pm'),pd=$('pd');
-  for(let y=2008;y>=1960;y--) py.add(new Option(y+'년',y,false,y===1994));
+  for(let y=2008;y>=1950;y--) py.add(new Option(y+'년',y,false,y===1994));
   for(let m=1;m<=12;m++) pm.add(new Option(m+'월',m,false,m===3));
   const fill=()=>{const n=new Date(+py.value,+pm.value,0).getDate(),cur=+pd.value||8;pd.innerHTML='';for(let d=1;d<=n;d++) pd.add(new Option(d+'일',d,false,d===Math.min(cur,n)));};
   fill(); py.onchange=fill; pm.onchange=fill;
@@ -1674,7 +1674,7 @@ function opStart(){
   $('opSls').innerHTML=OP_COL.map(([h,e,c,img,src])=>`<div class="opSl" style="--c:${c};background-image:url('${img}')"><video muted playsinline preload="none" data-src="${src}"></video><span><b>${e}</b><em>${h}</em></span></div>`).join('');
   $('opEmb').innerHTML=Array.from({length:16},()=>`<i style="left:${Math.random()*100}%;--dx:${(Math.random()*80-40).toFixed(0)}px;animation-duration:${(6+Math.random()*6).toFixed(1)}s;animation-delay:${(-Math.random()*10).toFixed(1)}s;transform:scale(${(.5+Math.random()).toFixed(2)})"></i>`).join('');
   $('opDots').innerHTML=OP_COL.map(([h,e,c])=>`<i style="--c:${c}">${e}</i>`).join('');
-  const sel=$('opYr'); sel.innerHTML='<option value="" selected disabled>태어난 해를 골라줘</option>'; for(let y=2008;y>=1975;y--) sel.add(new Option(y+'년생',y));
+  const sel=$('opYr'); sel.innerHTML='<option value="" selected disabled>태어난 해를 골라줘</option>'; for(let y=2008;y>=1950;y--) sel.add(new Option(y+'년생',y));
   const sls=[...$('opSls').children], vids=sls.map(x=>x.querySelector('video'));
   /* 신당 영상이 먼저 다 받아진 뒤에 수호신 영상을 받는다 */
   const slLoad=()=>vids.forEach(v=>{ if(!v.getAttribute('src')){ v.preload='auto'; v.src=v.dataset.src; } }); { const ot=$('opTake'); if(ot.readyState>=4) slLoad(); else { ot.addEventListener('canplaythrough',slLoad,{once:true}); ot.addEventListener('error',slLoad,{once:true}); setTimeout(slLoad,6000); } }

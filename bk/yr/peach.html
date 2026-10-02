@@ -485,7 +485,7 @@ function defaultCity(){ let tz=''; try{ tz=Intl.DateTimeFormat().resolvedOptions
 function askDate(){ return new Promise(res=>{
   const ms=MON.map((m,i)=>`<option value="${i+1}"${i===4?' selected':''}>${m}</option>`).join('');
   const ds=[];for(let d=1;d<=31;d++) ds.push(`<option${d===14?' selected':''}>${d}</option>`);
-  const ys=[];for(let y=2008;y>=1950;y--) ys.push(`<option${y===1996?' selected':''}>${y}</option>`);
+  const ys=[];for(let y=2008;y>=1960;y--) ys.push(`<option${y===1996?' selected':''}>${y}</option>`);
   const dc=defaultCity(); const cs=CITIES.map((c,i)=>`<option value="${i}"${i===dc?' selected':''}>${c[0]}</option>`).join('');
   ask(`<div class="card"><span class="lbl">Birthday</span><div class="sels us"><select id="dm" aria-label="Month">${ms}</select><select id="dd" aria-label="Day">${ds.join('')}</select><select id="dy" aria-label="Year">${ys.join('')}</select></div>
   <span class="lbl">Birthplace (city or the closest one)</span><select class="city" id="dc">${cs}</select>

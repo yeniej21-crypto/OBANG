@@ -186,7 +186,7 @@ function form(el,title,idx,pre){
    <select data-k="h" style="margin-top:6px"></select>`;
   const Y=el.querySelector('[data-k=y]'),M=el.querySelector('[data-k=m]'),D=el.querySelector('[data-k=d]'),H=el.querySelector('[data-k=h]');
   const dy=pre&&pre.y||(idx===1?1996:1994), dm=pre&&pre.m||(idx===1?5:3), dd=pre&&pre.d||(idx===1?14:8);
-  for(let y=2008;y>=1950;y--) Y.add(new Option(y+'년',y,false,y===dy));
+  for(let y=2008;y>=1955;y--) Y.add(new Option(y+'년',y,false,y===dy));
   for(let m=1;m<=12;m++) M.add(new Option(m+'월',m,false,m===dm));
   const fill=()=>{ const n=new Date(+Y.value,+M.value,0).getDate(); const cur=+D.value||dd; D.innerHTML=''; for(let d=1;d<=31;d++) if(d<=Math.max(n,30)) D.add(new Option(d+'일',d,false,d===Math.min(cur,31))); };
   fill(); Y.onchange=fill; M.onchange=fill;

@@ -262,7 +262,7 @@ let gender='f', cal='s';
 /* ---------- form ---------- */
 (function(){
   const by=$('by'),bm=$('bm'),bd=$('bd'),bh=$('bh');
-  for(let y=2008;y>=1950;y--) by.add(new Option(y+'년',y,false,y===1996));
+  for(let y=2008;y>=1955;y--) by.add(new Option(y+'년',y,false,y===1996));
   for(let m=1;m<=12;m++) bm.add(new Option(m+'월',m,false,m===5));
   const fill=()=>{ const n=cal==='s'?new Date(+by.value,+bm.value,0).getDate():30, cur=+bd.value||14; bd.innerHTML=''; for(let d=1;d<=n;d++) bd.add(new Option(d+'일',d,false,d===Math.min(cur,n)));
     const can=cal==='l'&&S_.hasLeap(+by.value,+bm.value); $('leap').disabled=!can; if(!can) $('leap').checked=false; $('leapL').classList.toggle('off',!can); };

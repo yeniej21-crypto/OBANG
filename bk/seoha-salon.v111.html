@@ -994,16 +994,12 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .wry .wyQ{margin:2px 0 10px;font-size:14px;line-height:1.6}
 .wry .wyQ b{font-weight:700}
 .wry .wyB{display:flex;flex-wrap:wrap;gap:8px}
-.wry .wyB button{border:1px solid currentColor;background:none;color:inherit;border-radius:0;padding:8px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
-.home .wyS{padding-top:0}
-.home .wyBar{display:flex;gap:12px;align-items:flex-start;margin:0 16px;padding:12px 14px;border:1px solid rgba(243,214,168,.22);background:rgba(255,240,220,.04)}
-.home .wyAv{flex:none;width:38px;height:38px;border-radius:50%;background:#222 url('img/seoha.jpg') center 18%/cover}
-.home .wyTx{min-width:0;flex:1}
-.home .wyTx b{display:block;font-size:12px;font-weight:700;color:#f3d6a8;letter-spacing:.02em}
-.home .wyTx p{margin:3px 0 8px;font-size:13px;line-height:1.5;color:rgba(255,246,236,.86);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.home .wyCh{display:flex;gap:6px;flex-wrap:wrap}
-.home .wyCh button{border:1px solid rgba(243,214,168,.45);background:none;color:#fff3e6;border-radius:0;padding:6px 10px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
-.home .wyCh button.ask{background:#f3d6a8;color:#2a1a12;border-color:#f3d6a8}
+.wry .wyB button{border:1px solid currentColor;background:none;color:inherit;border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.home .wyL{margin:-4px 18px 12px;font-size:13.5px;line-height:1.6;color:rgba(255,246,236,.82)}
+.home .wyL i{font-style:normal;color:#f3d6a8}
+.home .wyRow .pc{width:43%;max-width:200px}
+.home .wyRow .pc.wyAsk{background:linear-gradient(160deg,#3a2a24,#1a1214);border:0;color:#fff;font-family:inherit;text-align:center}
+.home .wyRow .pc.wyAsk .ct{bottom:auto;top:50%;transform:translateY(-50%)}
 </style>
   <div class="home" id="home">
     <div class="hHead">
@@ -1024,7 +1020,9 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       </div>
     </section>
     <section class="hSec wyS" id="secWry" data-cats="all" hidden>
-      <div class="wyBar"><span class="wyAv"></span><div class="wyTx"><b id="wyT"></b><p id="wyL"></p><div class="wyCh" id="wyRow"></div></div></div>
+      <div class="sh"><small>서하가 골라 둔 방</small><b id="wyT"></b></div>
+      <p class="wyL" id="wyL"></p>
+      <div class="hRow wyRow" id="wyRow"></div>
     </section>
 
     <section class="tday" id="tday" data-cats="all gaeun">
@@ -1432,8 +1430,8 @@ function renderWry(){ const w=loadWry(), d=w&&(WRY[w.tag]||(w.text?WRY['그냥 �
   const tag=w.tag||'네 이야기';
   if(box){ box.hidden=false; box.innerHTML=`<h4>네 고민 <em>· ${tag}</em></h4><p class="wyQ">${said}${d.l}</p><div class="wyB">${d.m.map(k=>`<button type="button" data-wm="${k}">${WM[k][0]}</button>`).join('')}<button type="button" data-wm="ask">서하에게 바로 묻기</button></div>`;
     box.querySelectorAll('[data-wm]').forEach(b=>b.onclick=()=>b.dataset.wm==='ask'?askSeoha():goWm(b.dataset.wm)); }
-  if(sec){ sec.hidden=false; $('wyT').textContent=`서하가 골라 둔 방 · ${tag}`; $('wyL').textContent=d.l;
-    $('wyRow').innerHTML=d.m.map(k=>`<button type="button" data-wm="${k}">${WM[k][0]}</button>`).join('')+`<button type="button" class="ask" data-wm="ask">서하에게 묻기</button>`;
+  if(sec){ sec.hidden=false; $('wyT').textContent=`네 고민 · ${tag}`; $('wyL').innerHTML=(w.text?`<i>“${w.text.replace(/[<>&]/g,'')}”</i> `:'')+d.l;
+    $('wyRow').innerHTML=d.m.map(k=>`<div class="pc" data-wm="${k}" role="button" tabindex="0" style="background-image:url('${WM[k][2]}')"><div class="ct"><span class="tt">${WM[k][0]}</span><span class="st">${WM[k][1]}</span></div></div>`).join('')+`<button class="pc wyAsk" type="button" data-wm="ask"><span class="ct"><span class="tt">서하에게<br>바로 묻기</span></span></button>`;
     $('wyRow').querySelectorAll('[data-wm]').forEach(b=>b.onclick=()=>b.dataset.wm==='ask'?askSeoha():goWm(b.dataset.wm)); } }
 $('worryGo').onclick=()=>{ saveWry(); afterWorry(); };
 $('worrySkip').onclick=afterWorry;

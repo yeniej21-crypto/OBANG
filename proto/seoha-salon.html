@@ -1589,7 +1589,7 @@ const P_REL={
   '헤어짐':['후회 안 한다고 말하고 다녀.','그 말을 제일 많이 하는 사람이 그 사람이야.']};
 let hostName=null;
 function asSion(on){ if(on){ hostName=hostName||$('who').textContent; $('who').textContent='시온'; } else if(hostName){ $('who').textContent=hostName; } }
-async function partnerStart(){
+async function partnerStart(){ goPage('heart.html'); return; /* 10/3: 몰입형 정식판 heart.html로 이동(아래 옛 흐름은 보관) */
   homeOff(); subMode(true); $('result').classList.remove('on'); asSion(true); fetchClip('e2'); fetchClip('e3');
   await play('e1',{posterKey:'sion',next:'e2'}); panel('pPartner'); bgm(BGM_LV.idle,1);
 }

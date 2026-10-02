@@ -792,7 +792,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
         <div><dt>말투</dt><dd>돌려 말하지 않는다. 반말이지만 끝까지 네 편이다.</dd></div>
         <div><dt>다시 만나는 곳</dt><dd>오늘의 운세 · 다음 연애 · 서하의 상담</dd></div>
       </dl>
-      <div class="hxa"><button type="button" data-x>닫기</button></div>
+      <div class="hxa"><button type="button" class="hxbook" id="hsBook">세계관 책에서 더 읽기</button><button type="button" data-x>닫기</button></div>
     </div>
   </div>
   <div class="sub" id="sub" aria-live="polite"><span class="who" id="who">서하</span><div id="subLines"></div></div>
@@ -1192,7 +1192,7 @@ document.title=HOST.title; $('brandT').textContent=HOST.brand; $('who').textCont
   $('hostInfo').addEventListener('click',e=>{ e.stopPropagation(); open(); });
   sh.addEventListener('click',e=>e.stopPropagation()); sh.addEventListener('pointerdown',e=>e.stopPropagation());
   sh.querySelectorAll('[data-x]').forEach(x=>x.addEventListener('click',close));
-  /* 10/2: 인트로 시트의 '세계관 책' 버튼 삭제(인트로 이탈 방지) */
+  $('hsBook').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} location.href='book.html#p=9'; };
   window.openHostInfo=open; })();
 $('c1a').textContent=HOST.c1a; $('c1b').textContent=HOST.c1b; document.querySelector('#pWorry h3').textContent=HOST.worry; $('ctaPay').textContent=HOST.pay; document.querySelector('.start .kicker').textContent=HOST.kicker; document.querySelector('.start p').textContent=HOST.lead;
 const GODS={

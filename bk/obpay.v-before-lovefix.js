@@ -7,8 +7,8 @@ const file=(location.pathname.split('/').pop()||'index.html'), q=new URLSearchPa
 const isHome=!!document.getElementById('op')&&!!document.getElementById('home');
 const $=id=>document.getElementById(id);
 const P={
- 'dohwa.html':{btn:'payBtn',name:'도화 사주 · 태오의 도화 편지',who:'태오',desc:'앞으로 열두 달 인연 달력 · 끌리는 사람 · 도화 살리는 법 · 음성 편지',price:14900,was:19800,img:'img/taeo/base.jpg',after:()=>$('payNow')&&$('payNow').click()},
- 'gunghap.html':{btn:'payBtn',name:'도화 궁합 · 둘의 인연 타이밍',who:'태오',desc:'앞으로 열두 달 둘의 흐름 · 먼저 연락할 달 · 조심할 달',price:14900,img:'img/taeo/base.jpg'},
+ 'dohwa.html':{btn:'payBtn',name:'도화 사주 · 태오의 도화 편지',who:'태오',desc:'2027 인연 달력 · 끌리는 사람 · 도화 살리는 법 · 음성 편지',price:14900,was:19800,img:'img/taeo/base.jpg',after:()=>$('payNow')&&$('payNow').click()},
+ 'gunghap.html':{btn:'payBtn',name:'도화 궁합 · 둘의 인연 타이밍',who:'태오',desc:'둘의 2027 열두 달 · 먼저 연락할 달 · 조심할 달',price:14900,img:'img/taeo/base.jpg'},
  'love2.html':q.get('m')==='next'?{btn:'payBtn',name:'다음 연애 · 서하의 인연 노트',who:'서하',desc:'인연이 오는 달 · 그 사람 · 만나는 장면 · 서하의 편지',price:9900,img:'img/seoha.jpg'}
    :{btn:'payBtn',name:'재회 사주 · 시온의 재회 노트',who:'시온',desc:'다시 닿는 시기 · 열두 달 흐름 · 먼저 연락해도 되는 날',price:14900,img:'img/sion.jpg'},
  'myeongri.html':{btn:'payBtn',name:'소헌 선생의 2027 명리 감정서',who:'명리관 소헌 선생',desc:'열두 달 월운 감정 · 영역별 감정 · 권고 · 길일표 · 감정서 저장',price:19900,was:29000,img:'img/soheon.jpg',skip:()=>$('pay')&&$('pay').classList.contains('done')},

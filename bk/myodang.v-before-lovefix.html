@@ -237,14 +237,14 @@ window.addEventListener('popstate',()=>{ if(!location.hash&&cur) lobby(); });
 function showRes(h,catLine){ const r=$('res'); r.innerHTML=h; r.className='res on'; if(catLine) say(catLine); setTimeout(()=>$('sRead').scrollTo({top:r.offsetTop-$('bub').offsetHeight-90,behavior:'smooth'}),80); }
 
 /* 생일 입력(없을 때만) */
-function birthForm(needG){ const m=me()||{}; const ys=[]; for(let y=today.getFullYear()-19;y>=1950;y--) ys.push(y); /* 연애운 상품: 만 19세 이상만 */
+function birthForm(needG){ const m=me()||{}; const ys=[]; for(let y=today.getFullYear()-12;y>=1950;y--) ys.push(y);
   return `<div class="lab">생일을 알려 줘 <small style="color:var(--ink3);font-weight:500">양력</small></div><div class="bd">
   <select id="bY">${ys.map(y=>`<option ${+m.y===y||(!m.y&&y===1995)?'selected':''}>${y}</option>`).join('')}</select>
   <select id="bM">${[...Array(12)].map((_,i)=>`<option value="${i+1}" ${+m.m===i+1?'selected':''}>${i+1}월</option>`).join('')}</select>
   <select id="bD">${[...Array(31)].map((_,i)=>`<option value="${i+1}" ${+m.d===i+1?'selected':''}>${i+1}일</option>`).join('')}</select>
   <select id="bG"><option value="f" ${m.g!=='m'?'selected':''}>여</option><option value="m" ${m.g==='m'?'selected':''}>남</option></select></div>`; }
-function readBirth(){ const y=$('bY'); if(!y) return; const mo=+$('bM').value; setMe({y:+y.value,m:mo,d:Math.min(+$('bD').value,new Date(+y.value,mo,0).getDate()),g:$('bG').value,cal:'s',h:null}); }
-const hasMe=()=>{ const m=me(); return !!myP()&&+m.y<=today.getFullYear()-19; }; /* 저장된 생일이 만 19세 미만이면 다시 받는다 */
+function readBirth(){ const y=$('bY'); if(!y) return; setMe({y:+y.value,m:+$('bM').value,d:+$('bD').value,g:$('bG').value,cal:'s',h:null}); }
+const hasMe=()=>!!myP();
 
 /* ───── 마담 도화 · 이달의 연애운 ───── */
 const DOHWA={2:3,6:3,10:3, 8:9,0:9,4:9, 5:6,9:6,1:6, 11:0,3:0,7:0}; // 寅午戌→卯 申子辰→酉 巳酉丑→午 亥卯未→子

@@ -157,7 +157,7 @@ select{height:46px;border-radius:0;border:1px solid var(--line);background:#1b14
     <div class="box"><h3>오행 겹쳐 보기</h3><div class="el5" id="el5"></div><div class="lgd"><span><i style="background:#ff8fa6"></i><span id="lgA"></span></span><span><i style="background:#7ea6ff"></i><span id="lgB"></span></span></div><p class="elTx" id="elTx"></p></div>
     <div class="box"><h3>이렇게 봤어</h3><div id="pts"></div></div>
     <div class="box"><h3>태오가</h3><div class="say"><div class="av2" style="background-image:url('img/taeo/base.jpg')"></div><p id="say"></p></div></div>
-    <div class="box lockb" id="lockG"><h3>앞으로 열두 달, 둘의 인연 타이밍</h3><div class="bl">둘의 도화가 동시에 열리는 달은 ○월과 ○월이야. 이 두 달에 먼저 연락하는 쪽이 관계를 끌고 가게 돼. 싸우기 쉬운 달은 ○월, 그땐 말보다 만남이 먼저야.</div><div class="ov"><b>둘이 가까워지는 달 · 멀어지는 달</b><small>월별 타이밍 · 먼저 연락해도 되는 날</small></div></div>
+    <div class="box lockb" id="lockG"><h3>둘의 2027 인연 타이밍</h3><div class="bl">둘의 도화가 동시에 열리는 달은 ○월과 ○월이야. 이 두 달에 먼저 연락하는 쪽이 관계를 끌고 가게 돼. 싸우기 쉬운 달은 ○월, 그땐 말보다 만남이 먼저야.</div><div class="ov"><b>둘이 가까워지는 달 · 멀어지는 달</b><small>월별 타이밍 · 먼저 연락해도 되는 날</small></div></div>
     <div id="gprem" hidden></div>
     <div class="btns"><button class="pri" id="payBtn">14,900원 · 둘의 인연 타이밍 열기</button><button id="invBtn">다른 사람에게 궁합 신청하기</button><button id="myBtn">나도 내 도화 보러 가기</button></div>
   </div></div>
@@ -182,17 +182,7 @@ const dec=s=>{ try{ s=s.replace(/-/g,'+').replace(/_/g,'/'); return JSON.parse(d
 const SAVED=(()=>{ try{ return JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){ return null; } })();
 const saveMe=o=>{ try{ const old=SAVED||JSON.parse(sessionStorage.getItem('me')||'null')||{}; sessionStorage.setItem('me',JSON.stringify(Object.assign({},old,o))); }catch(e){} };
 const SP=SAVED&&SAVED.y?{n:SAVED.name||'',g:SAVED.g||'f',c:SAVED.cal||'s',y:SAVED.y,m:SAVED.m,d:SAVED.d,h:SAVED.h==null?-1:SAVED.h}:null;
-/* 궁합 신청 링크: 생일 대신 궁합 계산에 필요한 여덟 글자(천간 · 지지 번호)와 성별 · 이름만 담는다.
-   새 형식 {v:2,n,g,p:[년간,년지,월간,월지,일간,일지,시간,시지]} (시를 모르면 -1). 예전 형식(생년월일)도 읽는다 */
-const packP=P=>[P.y,P.m,P.d,P.h||[-1,-1]].flatMap(x=>x);
-function unpackP(a){ if(!Array.isArray(a)||a.length!==8||!a.every(Number.isInteger)) return null; const pr=i=>[a[i],a[i+1]], ok=([g,b])=>g>=0&&g<10&&b>=0&&b<12&&g%2===b%2;
-  const y=pr(0),m=pr(2),d=pr(4),h=a[6]<0?null:pr(6); if(![y,m,d].every(ok)||(h&&!ok(h))) return null; return {y,m,d,h}; }
-const cleanN=n=>String(n||'').replace(/[<>&"']/g,'').slice(0,10)||'그 사람';
-function fromLink(o){ if(!o) return null;
-  if(o.v===2){ const P=unpackP(o.p); return P?{n:cleanN(o.n),g:o.g==='m'?'m':'f',P,old:false}:null; }
-  if(o.y&&o.m&&o.d){ const g=o.g==='m'?'m':'f'; const P=toP({y:+o.y,m:+o.m,d:+o.d,c:o.c,h:o.h==null?-1:+o.h}); return P?{n:cleanN(o.n),g,P,old:true}:null; }
-  return null; }
-const q=new URLSearchParams(location.search); const ME=q.get('me')?dec(q.get('me')):null; let FROM=null;
+const q=new URLSearchParams(location.search); const FROM=q.get('f')?dec(q.get('f')):null; const ME=q.get('me')?dec(q.get('me')):null;
 function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2200); }
 function form(el,title,idx,pre){
   el.innerHTML=`<h3><i>${idx}</i>${title}</h3><input class="field" data-k="n" maxlength="10" placeholder="이름" value="${pre&&pre.n?pre.n:''}">
@@ -203,22 +193,18 @@ function form(el,title,idx,pre){
   const dy=pre&&pre.y||(idx===1?1996:1994), dm=pre&&pre.m||(idx===1?5:3), dd=pre&&pre.d||(idx===1?14:8);
   for(let y=2008;y>=1950;y--) Y.add(new Option(y+'년',y,false,y===dy));
   for(let m=1;m<=12;m++) M.add(new Option(m+'월',m,false,m===dm));
-  /* 날 수는 연 · 월에 맞춘다(양력 2월 30일 같은 날 막기). 음력은 30일까지, 없는 날은 계산 때 다시 확인 */
-  const lunar=()=>{ const b=el.querySelector('.seg[data-k=c] .on'); return b&&b.dataset.v==='l'; };
-  const fill=()=>{ const n=lunar()?30:new Date(+Y.value,+M.value,0).getDate(); const cur=+D.value||dd; D.innerHTML=''; for(let d=1;d<=n;d++) D.add(new Option(d+'일',d,false,d===Math.min(cur,n))); };
+  const fill=()=>{ const n=new Date(+Y.value,+M.value,0).getDate(); const cur=+D.value||dd; D.innerHTML=''; for(let d=1;d<=31;d++) if(d<=Math.max(n,30)) D.add(new Option(d+'일',d,false,d===Math.min(cur,31))); };
   fill(); Y.onchange=fill; M.onchange=fill;
   H.add(new Option('태어난 시 모름','x',!(pre&&pre.h!=null&&pre.h>=0))); HOURS.forEach((h,i)=>H.add(new Option(h,i,false,pre&&pre.h===i)));
-  el.querySelectorAll('.seg').forEach(sg=>sg.querySelectorAll('button').forEach(b=>b.onclick=()=>{ sg.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); if(sg.dataset.k==='c') fill(); }));
-  if(pre&&pre.c==='l') fill();
+  el.querySelectorAll('.seg').forEach(sg=>sg.querySelectorAll('button').forEach(b=>b.onclick=()=>sg.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))));
 }
 function read(el){ const g=k=>el.querySelector(`[data-k=${k}]`); const seg=k=>el.querySelector(`.seg[data-k=${k}] .on`).dataset.v;
   return {n:g('n').value.trim()||'나',g:seg('g'),c:seg('c'),y:+g('y').value,m:+g('m').value,d:+g('d').value,h:g('h').value==='x'?-1:+g('h').value}; }
-function lockedCard(el,title,idx,p){ el.classList.add('locked'); el.innerHTML=`<h3><i>${idx}</i>${title}</h3><div class="lk">${p.n} · ${p.g==='m'?'남성':'여성'} · ${p.old?'생년월일은 화면에 보이지 않게 계산돼요':'링크에는 생일 대신 사주 글자만 담겨요'}</div>`; }
-FROM=q.get('f')?fromLink(dec(q.get('f'))):null;
+function lockedCard(el,title,idx,p){ el.classList.add('locked'); el.innerHTML=`<h3><i>${idx}</i>${title}</h3><div class="lk">${p.n} · ${p.g==='m'?'남성':'여성'} · 생년월일은 비공개로 계산돼요</div>`; }
 if(FROM){ $('inv').hidden=false; $('inv').innerHTML=`<b>${FROM.n}</b>님이 너랑 <b>도화 궁합</b>을 보고 싶대. 네 생일만 넣으면, 둘이 얼마나 끌리는지 바로 보여줄게.`;
   $('hT').textContent=`${FROM.n}님이 궁합을 신청했어`; form($('wA'),'나',1,SP); lockedCard($('wB'),'신청한 사람',2,FROM); }
 else { form($('wA'),'나',1,ME||SP); form($('wB'),'그 사람',2,null); }
-function toP(o){ if(o.P) return o.P; let s={y:o.y,m:o.m,d:o.d}; if(o.c==='l'){ const c=Sj.lunarToSolar(o.y,o.m,o.d,false); if(c) s=c; } return Sj.pillars(s.y,s.m,s.d,o.h>=0?o.h:null); }
+function toP(o){ let s={y:o.y,m:o.m,d:o.d}; if(o.c==='l'){ const c=Sj.lunarToSolar(o.y,o.m,o.d,false); if(c) s=c; } return Sj.pillars(s.y,s.m,s.d,o.h>=0?o.h:null); }
 function compat(A,B,a,b){
   const ea=stEl(A.d[0]), eb=stEl(B.d[0]); const gen=(x,z)=>(x+1)%5===z, ctl=(x,z)=>(x+2)%5===z;
   const chA=[A.y,A.m,A.d,A.h].filter(Boolean).map(p=>p[1]), chB=[B.y,B.m,B.d,B.h].filter(Boolean).map(p=>p[1]);
@@ -274,9 +260,9 @@ $('goBtn').onclick=async()=>{
   setTimeout(()=>{ $('b1').style.width=R.pull+'%'; $('b2').style.width=R.stay+'%'; const t0=performance.now(); (function f(t){ const p=Math.min(1,(t-t0)/1500); $('sc').textContent=Math.round(R.total*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(f); })(t0); },200);
   window._me=a; window.GHF={a,b,R}; $('lockG').hidden=false; $('payBtn').hidden=false; $('gprem').hidden=true;
 };
-$('invBtn').onclick=async()=>{ const me=window._me||read($('wA')); const url=new URL('gunghap.html?f='+enc({v:2,n:me.n,g:me.g,p:packP(toP(me))}),location.href).href;
+$('invBtn').onclick=async()=>{ const me=window._me||read($('wA')); const url=new URL('gunghap.html?f='+enc(me),location.href).href;
   try{ if(navigator.share){ await navigator.share({title:'도화 궁합',text:`${me.n}님이 너랑 도화 궁합을 보고 싶대`,url}); return; } }catch(e){ if(e&&e.name==='AbortError') return; }
-  try{ await navigator.clipboard.writeText(url); toast('신청 링크를 복사했어요. 생일은 안 담겨요'); }catch(e){ prompt('이 링크를 보내세요',url); } };
+  try{ await navigator.clipboard.writeText(url); toast('궁합 신청 링크를 복사했어요'); }catch(e){ prompt('이 링크를 보내세요',url); } };
 $('myBtn').onclick=()=>{ location.href='dohwa.html'; };
 $('payBtn').onclick=()=>{ if(window.GunghapPrem&&GunghapPrem.open()){ $('lockG').hidden=true; $('payBtn').hidden=true; setTimeout(()=>$('gprem').scrollIntoView({behavior:'smooth',block:'start'}),60); } else toast('체험판이라 결제는 여기까지예요'); };
 $('back').onclick=()=>{ if($('sRs').classList.contains('on')&&!FROM){ ['sIn','sLd','sRs'].forEach(s=>$(s).classList.toggle('on',s==='sIn')); return; } if(history.length>1) history.back(); else location.href='./'; };

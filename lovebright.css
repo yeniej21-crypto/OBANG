@@ -184,6 +184,22 @@
 .lb-lock li svg{flex:none;width:15px;height:15px;color:var(--acc)}
 .lb-lock li em{margin-left:auto;font-style:normal;font-size:11.5px;font-weight:500;color:var(--ink-3)}
 
+/* 그림 판: SVG 장면(가지 · 지도 · 관계선)을 올리는 종이 판. 위쪽에서 부드러운 빛 */
+.lb-board{position:relative;background:linear-gradient(180deg,#fdf9f2,#f5ecdd);border:1px solid var(--line);box-shadow:inset 0 0 44px rgba(170,140,100,.12),0 22px 40px -32px rgba(60,40,20,.6);overflow:hidden}
+.lb-board:before{content:"";position:absolute;left:-10%;right:-10%;top:-40%;height:80%;background:radial-gradient(closest-side,rgba(255,253,248,.95),rgba(255,253,248,0));pointer-events:none}
+.lb-board svg{position:relative;display:block;width:100%;height:auto}
+.lb-board text{font-family:var(--sans)}
+.lb-legend i.r{border-width:1.5px}
+.lb-legend i.h{border-radius:0;border:1px solid rgba(42,33,25,.3);background:repeating-linear-gradient(135deg,rgba(42,33,25,.18) 0 2px,transparent 2px 4px)}
+.lb-legend i.d{border:0;border-radius:0;width:9px;height:9px;margin:0 2px;transform:rotate(45deg);background:var(--ink)}
+
+/* 잠금 띠: 무료 화면의 그림 위에 얹어, 내용은 결제 뒤에 열린다는 것을 조용히 알린다 */
+.lb-veiled{position:relative;padding-bottom:58px}
+.lb-veil{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;align-items:center;gap:10px;padding:12px 12px 12px 14px;background:linear-gradient(180deg,rgba(250,244,234,.86),rgba(250,244,234,.97));border-top:1px solid var(--line);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.lb-veil svg{flex:none;width:15px;height:15px;color:var(--acc)}
+.lb-veil span{flex:1;min-width:0;font-size:13px;font-weight:700;line-height:1.45;color:var(--ink)}
+.lb-veil button{flex:none;height:36px;padding:0 12px;border:1px solid var(--acc);background:var(--acc);color:#fffaf2;font-family:var(--sans);font-size:12.5px;font-weight:700;cursor:pointer}
+
 /* 버튼 */
 .lb-btn{display:flex;align-items:center;justify-content:center;width:100%;height:56px;margin-top:12px;border:0;background:var(--acc);color:#fffaf2;font-family:var(--sans);font-size:16px;font-weight:900;cursor:pointer;box-shadow:0 14px 26px -16px color-mix(in srgb,var(--acc) 80%,#000),inset 0 1px 0 rgba(255,255,255,.18)}
 .lb-btn.ghost{height:50px;background:transparent;color:var(--ink);border:1px solid rgba(42,33,25,.3);font-size:14.5px;font-weight:700;box-shadow:none}

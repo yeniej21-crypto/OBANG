@@ -18,6 +18,7 @@ const P={
  'taegil.html':{btn:'payBtn',name:'택일 · 정밀 택일',who:'월하',desc:'좋은 날의 시간대 · 방향 · 함께할 사람까지',price:9900,img:'img/taegil.jpg'},
  'tarot.html':{btn:'payBtn',name:'무진의 타로 · 전체 풀이',who:'무진',desc:'켈틱 크로스 10장 · 3개월 흐름',price:9900,img:'img/tarot/mujin.jpg'},
  'heart':{btn:'payBtn',name:'시온의 은거울 리포트',who:'시온',desc:'그 사람의 연애 방식 · 요즘 왜 그럴까 · 앞으로 석 달 · 보낼 문장 세 가지 · 다시 볼 날',price:19900,img:'img/sion.jpg'},
+ 'redthread':{btn:'payBtn',name:'붉은 실 궁합 · 월하의 혼서',who:'월하',desc:'두 사람이 엮이는 방식 · 부딪히는 지점과 푸는 법 · 결혼 · 동거 시기 창 · 앞으로 5년 실의 흐름 · 월하의 한 줄 혼서',price:19900,img:'img/taegil.jpg'},
  'obgh.html':{btn:'pay',name:'오방 궁합 · 다섯 신의 편지',who:'오방신',desc:'다섯 신과의 궁합 전체 · 신의 편지',price:9900,img:'img/intro0.jpg'},
  'home':{btn:'payGo',name:'그 사람 속마음 · 시온의 리포트',who:'시온',desc:'속마음 전문 · 다시 닿는 시기 · 열두 달 흐름 · 개운 처방',price:29000,was:39000,img:'img/sion.jpg',after:()=>ObPay.toast('체험판이라 리포트는 여기까지예요. 정식 오픈 때 열려요')}
 };

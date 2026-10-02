@@ -997,15 +997,16 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .wry .wyQ b{font-weight:700}
 .wry .wyB{display:flex;flex-wrap:wrap;gap:8px}
 .wry .wyB button{border:1px solid currentColor;background:none;color:inherit;border-radius:0;padding:8px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
-.home .wyS{padding-top:0}
-.home .wyBar{display:flex;gap:12px;align-items:flex-start;margin:0 16px;padding:12px 14px;border:1px solid rgba(243,214,168,.22);background:rgba(255,240,220,.04)}
-.home .wyAv{flex:none;width:38px;height:38px;border-radius:50%;background:#222 url('img/seoha.jpg') center 18%/cover}
-.home .wyTx{min-width:0;flex:1}
-.home .wyTx b{display:block;font-size:12px;font-weight:700;color:#f3d6a8;letter-spacing:.02em}
-.home .wyTx p{margin:3px 0 8px;font-size:13px;line-height:1.5;color:rgba(255,246,236,.86);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.home .wyCh{display:flex;gap:6px;flex-wrap:wrap}
-.home .wyCh button{border:1px solid rgba(243,214,168,.45);background:none;color:#fff3e6;border-radius:0;padding:6px 10px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
-.home .wyCh button.ask{background:#f3d6a8;color:#2a1a12;border-color:#f3d6a8}
+.home .wyS{padding:0}
+.home .wyB2{display:flex;margin:36px 16px 40px;background:#1d171c;box-shadow:inset 3px 0 0 #f3d6a8;cursor:pointer}
+.home .wyB2 .im{flex:none;width:104px;min-height:132px;background:#222 center 20%/cover}
+.home .wyB2 .tx{padding:16px 16px 14px;min-width:0}
+.home .wyB2 .chip{display:inline-block;position:static;font-size:11px;font-weight:700;color:#2a1a12;background:#f3d6a8;padding:3px 8px;border-radius:0;letter-spacing:0}
+.home .wyB2 b{display:block;margin-top:8px;font-size:18px;line-height:1.35;color:#fff6ec}
+.home .wyB2 p{margin:4px 0 12px;font-size:13px;line-height:1.5;color:rgba(255,246,236,.7)}
+.home .wyB2 .go{display:flex;gap:14px}
+.home .wyB2 .go button{border:0;background:none;padding:0;font:inherit;font-size:13px;font-weight:700;color:rgba(255,246,236,.55);cursor:pointer}
+.home .wyB2 .go button:first-child{color:#f3d6a8}
 </style>
   <div class="home" id="home">
     <div class="hHead">
@@ -1026,7 +1027,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       </div>
     </section>
     <section class="hSec wyS" id="secWry" data-cats="all" hidden>
-      <div class="wyBar"><span class="wyAv"></span><div class="wyTx"><b id="wyT"></b><p id="wyL"></p><div class="wyCh" id="wyRow"></div></div></div>
+      <div class="wyB2" id="wyB2"><span class="im" id="wyIm"></span><div class="tx"><span class="chip" id="wyT"></span><b id="wyH"></b><p id="wyL"></p><div class="go"><button type="button" id="wyGo">바로 보기 ›</button><button type="button" id="wyAsk">서하에게 묻기</button></div></div></div>
     </section>
 
     <section class="tday" id="tday" data-cats="all gaeun">
@@ -1411,16 +1412,16 @@ $('c1a').onclick=()=>afterChoice('t1a');
 $('c1b').onclick=()=>afterChoice('t1b');
 $('birthGo').onclick=afterBirth;
 const WRY={
- '그 사람 마음':{l:'그 사람 속은 시온이 제일 잘 봐. 요즘 그 사람 기운부터 비춰 보자.',m:['partner','tarot'],q:['그 사람이 요즘 나를 어떻게 생각하는지 봐줘','먼저 연락해도 되는 때 알려줘']},
- '재회':{l:'다시 이어질지는 둘의 흐름이 언제 겹치는지로 봐. 시온한테 먼저 가 봐.',m:['re','partner'],q:['그 사람이랑 다시 이어질 수 있을지 봐줘','연락하기 좋은 달 알려줘']},
- '새 인연':{l:'인연이 들어오는 달이 따로 있어. 그 달부터 짚어 줄게.',m:['next','dohwa'],q:['올해 인연이 들어오는 달 알려줘','나랑 잘 맞는 사람 느낌 알려줘']},
- '결혼':{l:'결혼은 둘의 합이랑 배우자 자리를 같이 봐야 해.',m:['gh','life'],q:['내 결혼 시기 흐름 봐줘','배우자 자리에 어떤 사람이 맞는지 알려줘']},
- '일 · 이직':{l:'움직일 때랑 버틸 때가 따로 있어. 도준이 그 판을 제일 잘 읽어.',m:['career','mr'],q:['이직하기 좋은 때 알려줘','나한테 맞는 일 스타일 알려줘']},
- '돈 · 재물':{l:'돈이 들어오는 길은 사주마다 달라. 올해 그 길이 어디로 나는지부터 보자.',m:['career','sn'],q:['올해 돈이 들어오는 달 알려줘','돈 새는 습관 짚어줘']},
- '시험 · 합격':{l:'날을 잘 고르는 것도 실력이야. 월하한테 좋은 날부터 받아 둬.',m:['taegil','career'],q:['시험 보기 좋은 날 흐름 알려줘','집중이 잘 되는 시기 알려줘']},
- '건강':{l:'무리하면 안 되는 달부터 알아 두자. 미리 알면 덜 지쳐.',m:['sn','today'],q:['올해 무리하면 안 되는 달 알려줘','기운 채우는 생활 습관 알려줘']},
- '올해 운':{l:'2027년 열두 달, 좋은 달이랑 조심할 달부터 보자.',m:['sn','mr'],q:['올해 가장 좋은 달 알려줘','올해 조심할 것 하나만 짚어줘']},
- '그냥 내 사주':{l:'타고난 판부터 차근히 보자. 그게 제일 정확해.',m:['life','mr'],q:['내 사주 한 줄로 요약해줘','내가 제일 빛나는 자리 알려줘']}};
+ '그 사람 마음':{s:'시온이 요즘 그 사람 기운을 비춰 줘.',l:'그 사람 속은 시온이 제일 잘 봐. 요즘 그 사람 기운부터 비춰 보자.',m:['partner','tarot'],q:['그 사람이 요즘 나를 어떻게 생각하는지 봐줘','먼저 연락해도 되는 때 알려줘']},
+ '재회':{s:'시온이 둘의 흐름을 같이 봐.',l:'다시 이어질지는 둘의 흐름이 언제 겹치는지로 봐. 시온한테 먼저 가 봐.',m:['re','partner'],q:['그 사람이랑 다시 이어질 수 있을지 봐줘','연락하기 좋은 달 알려줘']},
+ '새 인연':{s:'인연이 들어오는 달부터 짚어 줄게.',l:'인연이 들어오는 달이 따로 있어. 그 달부터 짚어 줄게.',m:['next','dohwa'],q:['올해 인연이 들어오는 달 알려줘','나랑 잘 맞는 사람 느낌 알려줘']},
+ '결혼':{s:'둘의 합이랑 배우자 자리를 같이 봐.',l:'결혼은 둘의 합이랑 배우자 자리를 같이 봐야 해.',m:['gh','life'],q:['내 결혼 시기 흐름 봐줘','배우자 자리에 어떤 사람이 맞는지 알려줘']},
+ '일 · 이직':{s:'도준이 움직일 때를 읽어 줘.',l:'움직일 때랑 버틸 때가 따로 있어. 도준이 그 판을 제일 잘 읽어.',m:['career','mr'],q:['이직하기 좋은 때 알려줘','나한테 맞는 일 스타일 알려줘']},
+ '돈 · 재물':{s:'올해 돈길이 어디로 나는지부터.',l:'돈이 들어오는 길은 사주마다 달라. 올해 그 길이 어디로 나는지부터 보자.',m:['career','sn'],q:['올해 돈이 들어오는 달 알려줘','돈 새는 습관 짚어줘']},
+ '시험 · 합격':{s:'월하가 좋은 날부터 골라 줘.',l:'날을 잘 고르는 것도 실력이야. 월하한테 좋은 날부터 받아 둬.',m:['taegil','career'],q:['시험 보기 좋은 날 흐름 알려줘','집중이 잘 되는 시기 알려줘']},
+ '건강':{s:'무리하면 안 되는 달부터 알아 두자.',l:'무리하면 안 되는 달부터 알아 두자. 미리 알면 덜 지쳐.',m:['sn','today'],q:['올해 무리하면 안 되는 달 알려줘','기운 채우는 생활 습관 알려줘']},
+ '올해 운':{s:'좋은 달이랑 조심할 달부터.',l:'2027년 열두 달, 좋은 달이랑 조심할 달부터 보자.',m:['sn','mr'],q:['올해 가장 좋은 달 알려줘','올해 조심할 것 하나만 짚어줘']},
+ '그냥 내 사주':{s:'타고난 판부터 차근히.',l:'타고난 판부터 차근히 보자. 그게 제일 정확해.',m:['life','mr'],q:['내 사주 한 줄로 요약해줘','내가 제일 빛나는 자리 알려줘']}};
 const WM={partner:['그 사람 속마음','시온 · 은거울','img/w1.jpg','partner'],tarot:['무진의 타로','무진','img/tarot/poster.jpg','tarot.html'],re:['재회 사주','시온','img/w2.jpg','love2.html?m=re'],next:['다음 연애','서하','img/seoha.jpg','love2.html?m=next'],dohwa:['도화 사주','태오','img/taeo/base.jpg','dohwa.html'],gh:['도화 궁합','태오','img/taeo/wink.jpg','gunghap.html'],life:['평생 사주','현암','img/jeongtong.jpg','lifetime.html'],career:['커리어 사주','도준','img/earth.jpg','career.html'],mr:['2027 명리 감정서','소헌 선생','img/soheon.jpg','myeongri.html'],sn:['2027 신년운세','삼신 할매','img/halmae.jpg','sinnyeon.html'],taegil:['택일','월하','img/taegil.jpg','taegil.html'],today:['오늘의 운세','서하','img/seoha.jpg','today.html']};
 function loadWry(){ try{ return JSON.parse(localStorage.getItem('obWorry')||'null'); }catch(e){ return null; } }
 function saveWry(){ const c=[...$('chips').querySelectorAll('.chip')].find(x=>x.getAttribute('aria-pressed')==='true'); const w={tag:c?c.textContent.trim():'',text:($('worryText').value||'').trim(),at:Date.now()};
@@ -1431,12 +1432,12 @@ function renderWry(){ const w=loadWry(), d=w&&(WRY[w.tag]||(w.text?WRY['그냥 �
   const box=$('rWry'), sec=$('secWry');
   if(!d){ if(box) box.hidden=true; if(sec) sec.hidden=true; return; }
   const said=w.text?`<b>“${w.text.replace(/[<>&]/g,'')}”</b> `:'';
-  const tag=w.tag||'네 이야기';
-  if(box){ box.hidden=false; box.innerHTML=`<h4>네 고민 <em>· ${tag}</em></h4><p class="wyQ">${said}${d.l}</p><div class="wyB">${d.m.map(k=>`<button type="button" data-wm="${k}">${WM[k][0]}</button>`).join('')}<button type="button" data-wm="ask">서하에게 바로 묻기</button></div>`;
+  const tag=w.tag||'내 이야기';
+  if(box){ box.hidden=false; box.innerHTML=`<h4>내 고민 <em>· ${tag}</em></h4><p class="wyQ">${said}${d.l}</p><div class="wyB">${d.m.map(k=>`<button type="button" data-wm="${k}">${WM[k][0]}</button>`).join('')}<button type="button" data-wm="ask">서하에게 바로 묻기</button></div>`;
     box.querySelectorAll('[data-wm]').forEach(b=>b.onclick=()=>b.dataset.wm==='ask'?askSeoha():goWm(b.dataset.wm)); }
-  if(sec){ sec.hidden=false; $('wyT').textContent=`서하가 골라 둔 방 · ${tag}`; $('wyL').textContent=d.l;
-    $('wyRow').innerHTML=d.m.map(k=>`<button type="button" data-wm="${k}">${WM[k][0]}</button>`).join('')+`<button type="button" class="ask" data-wm="ask">서하에게 묻기</button>`;
-    $('wyRow').querySelectorAll('[data-wm]').forEach(b=>b.onclick=()=>b.dataset.wm==='ask'?askSeoha():goWm(b.dataset.wm)); } }
+  if(sec){ sec.hidden=false; const m0=d.m[0];
+    $('wyIm').style.backgroundImage=`url('${WM[m0][2]}')`; $('wyT').textContent=`내 고민 · ${tag}`; $('wyH').textContent=`${WM[m0][0]}부터 보자`; $('wyL').textContent=d.s||'';
+    $('wyGo').onclick=e=>{ e.stopPropagation(); goWm(m0); }; $('wyAsk').onclick=e=>{ e.stopPropagation(); askSeoha(); }; $('wyB2').onclick=()=>goWm(m0); } }
 $('worryGo').onclick=()=>{ saveWry(); afterWorry(); };
 $('worrySkip').onclick=afterWorry;
 /* ---------- partner reading (Sion) ---------- */

@@ -119,6 +119,22 @@ select option{background:#16121f;color:var(--ink)}
 .px .ph video.lv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:inherit;opacity:0;transition:opacity 1.4s ease}
 .px .ph video.lv.on{opacity:1}
 .pp.s{height:calc(var(--sh,100vh)*.62);min-height:380px}
+/* 칸과 칸이 딱 끊기지 않게: 위아래 가장자리를 투명하게 녹이고 서로 겹쳐 디졸브처럼 이어지게 */
+:root{--ov:84px}
+.pro .pp{--mk:linear-gradient(180deg,transparent 0,#000 var(--ov),#000 calc(100% - var(--ov)),transparent 100%);-webkit-mask-image:var(--mk);mask-image:var(--mk);margin-top:calc(-1 * var(--ov))}
+.pro .pp.first{--mk:linear-gradient(180deg,#000 0,#000 calc(100% - var(--ov)),transparent 100%);margin-top:0}
+.pro .pp .ct{bottom:calc(var(--ov) + 14px)}
+.pro .pp .ct.tp{top:calc(env(safe-area-inset-top,0px) + 74px)}
+.pro .pp.first .ct:not(.tp){bottom:calc(env(safe-area-inset-bottom,0px) + var(--ov) + 56px)}
+.pro .pp.first .scrollhint{bottom:calc(var(--ov) + 4px)}
+.pro .gut{position:relative;z-index:1;margin-top:calc(-.6 * var(--ov));padding-top:20px}
+.pro .gut+.pp{margin-top:calc(-.5 * var(--ov))}
+.pp:after{background:linear-gradient(180deg,rgba(8,6,14,.35) 0%,rgba(8,6,14,0) 24%,rgba(8,6,14,0) 50%,rgba(8,6,14,.7) 82%,rgba(8,6,14,.85) 100%)!important}
+.chHero{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 110px);mask-image:linear-gradient(180deg,transparent 0,#000 110px);margin-top:-40px!important}
+.pan{--mk:linear-gradient(180deg,transparent 0,#000 46px,#000 calc(100% - 46px),transparent 100%);-webkit-mask-image:var(--mk);mask-image:var(--mk)}
+.toon{gap:0}.toon>.pan+.toon2,.toon2{margin-top:-30px}
+.toon2 .pan{--mk:radial-gradient(120% 80% at 50% 45%,#000 55%,transparent 100%)}
+.end{--mk:linear-gradient(180deg,transparent 0,#000 120px,#000 calc(100% - 100px),transparent 100%);-webkit-mask-image:var(--mk);mask-image:var(--mk)}
 .pp.m{height:calc(var(--sh,100vh)*.78);min-height:460px}
 .px .ct{z-index:1}
 .rep{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 110px)}
@@ -256,6 +272,18 @@ select option{background:#16121f;color:var(--ink)}
 .end.playing video{opacity:1}
 .end .ct{position:absolute;left:22px;right:22px;bottom:22px;z-index:2;text-align:center;font-family:var(--bmj);font-size:21px;line-height:1.6;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.7);opacity:0;transform:translateY(8px);transition:opacity 1.2s ease,transform 1.2s ease}
 .end .ct.on{opacity:1;transform:none}
+.end .sub{position:absolute;left:20px;right:20px;bottom:120px;z-index:2;text-align:center;font-family:var(--bmj);font-size:22px;line-height:1.5;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.9);opacity:0;transition:opacity .9s ease}
+.end .sub.on{opacity:1}
+.fin{height:calc(var(--sh,100vh)*.9);min-height:540px;margin:-60px -18px 0;--mk:linear-gradient(180deg,transparent 0,#000 140px,#000 calc(100% - 120px),transparent 100%);-webkit-mask-image:var(--mk);mask-image:var(--mk)}
+.fin:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(8,6,14,.15),rgba(8,6,14,.7) 75%)}
+.fin .ct{position:absolute;left:24px;right:24px;top:50%;transform:translateY(-50%);z-index:1;text-align:center}
+.fin small{display:block;font-size:11px;letter-spacing:.36em;color:var(--gold);font-weight:700}
+.fin b{display:block;margin-top:14px;font-family:var(--brush);font-weight:400;font-size:46px;line-height:1.15;color:#fff;text-shadow:0 4px 30px rgba(0,0,0,.7)}
+.fin p{margin:16px 0 0;font-family:var(--bmj);font-size:17px;line-height:1.7;color:var(--ink)}
+.fin em{display:block;margin-top:18px;font-style:normal;font-size:11px;letter-spacing:.4em;color:var(--gold2)}
+.cardH{text-align:center;margin-top:10px}
+.cardH small{display:block;font-size:11px;letter-spacing:.3em;color:var(--gold);font-weight:700}
+.cardH b{display:block;margin-top:6px;font-family:var(--serif);font-size:19px;font-weight:700;color:var(--ink)}
 .end .snd{position:absolute;right:14px;top:14px;z-index:3;display:none;height:32px;padding:0 12px;border:1px solid rgba(241,219,164,.6);background:rgba(18,15,28,.45);color:var(--gold2);font-size:12px;cursor:pointer}
 .end .snd.on{display:block}
 .flip{perspective:1200px;margin:20px auto 0;width:min(78%,300px);aspect-ratio:3/4.4;cursor:pointer}
@@ -395,7 +423,8 @@ const IMG={base:'img/noeul.jpg',
 const LVB='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
 const LV={aerial:LVB+'bd287e3a-1680-46a6-9791-3ecfc44c6958.mp4',hand:LVB+'c15eec45-ece1-4106-9206-d11f50c98d15.mp4',eyes:LVB+'8f3490e3-4d21-4a96-b61f-ddbe2271f8da.mp4',taeguk:LVB+'9e840e13-5ecb-49bc-875f-d418b621cbe8.mp4',corridor:LVB+'cbae021a-27ae-4ace-946a-90579ab60d94.mp4',profile:LVB+'5c570313-d911-4875-b666-2e64e3b36e9c.mp4',back:LVB+'7f8b3e4c-e8d3-4020-b6fe-2b71653eed9a.mp4',scroll:LVB+'573d25ae-a4de-4455-acb3-1bf56dbc32c9.mp4',lantern:LVB+'82d97eb2-4e26-4782-ae3f-a74c3080e11a.mp4',cuDay:LVB+'f97d5edb-1f13-439f-abae-b28472f445b1.mp4',cuNight:LVB+'aa962a5c-78a2-4f57-8850-66ba26968cbd.mp4'};
 /* 전환: cfd99ec5(눈 감은 클로즈업 → 빛이 달빛으로, 무음) · 엔딩: 7c70993d + noeul_B_duo (예비 6ee5cdc6 → a6f6ebb7 업로드본) */
-const VID={trans:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/aac04120-323e-44ba-ae7f-827df907374e.mp4',end:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/35c7447e-1e04-4c81-9ebd-af7830f72268.mp4'};
+const VID={trans:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/aac04120-323e-44ba-ae7f-827df907374e.mp4',end:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/53207f93-51ca-4c38-8c9d-d513fea3cf60.mp4'}; /* 엔딩 10/2 22:20: 7c70993d를 0.82배로 느리게(화면 · 소리 함께) + noeul_B_duo + 잔향 0.7. 이전 빠른 판 35c7447e */
+const END_SUB=[[2.5,'해와 달 사이에서,'],[5.5,'또 기다릴게요.']];
 const HOURS=['자시 (23:30~01:29)','축시 (01:30~03:29)','인시 (03:30~05:29)','묘시 (05:30~07:29)','진시 (07:30~09:29)','사시 (09:30~11:29)','오시 (11:30~13:29)','미시 (13:30~15:29)','신시 (15:30~17:29)','유시 (17:30~19:29)','술시 (19:30~21:29)','해시 (21:30~23:29)'];
 let cal='s';
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
@@ -597,8 +626,9 @@ function premHTML(){
     <div class="talis rv"><small>2027 · 노을의 부적</small><p>${T}</p><span class="seal" data-hj="0">太<br>極</span></div>
   </div></section>`;
   /* 엔딩 + 카드 */
-  h+=`<div class="end px" id="endB"><div class="ph" style="background-image:url('${IMG.endS}')"></div>${VID.end?`<video id="endV" playsinline preload="auto" src="${VID.end}"></video><button class="snd" id="endSnd" type="button">소리 켜기</button>`:''}<div class="ct" id="endT">해와 달 사이에서, 또 기다릴게요.</div></div>
-  <div class="wrap"><div class="flip rv" id="flip"><div class="in">
+  h+=`<div class="end px" id="endB"><div class="ph" style="background-image:url('${IMG.endS}')"></div>${VID.end?`<video id="endV" playsinline preload="auto" src="${VID.end}"></video><button class="snd" id="endSnd" type="button">소리 켜기</button><div class="sub" id="endSub"></div>`:''}<div class="ct" id="endT">해와 달 사이에서, 또 기다릴게요.</div></div>
+  <div class="fin px" data-v="aerial"><div class="ph" style="background-image:url('${IMG.aerial}')"></div><div class="ct rv"><small>2027 · 丁未</small><b>해와 달 사이에서</b><p>${r.nick}님의 낮과 밤이<br>같은 하늘에 걸리기를.</p><em>노을</em></div></div>
+  <div class="wrap"><div class="cardH rv"><small>노을이 남긴 두 장</small><b>앞은 낮의 나, 뒤는 밤의 나</b></div><div class="flip rv" id="flip"><div class="in">
     <div class="face ft" style="background-image:url('${IMG.cuDay}')"><small>낮의 ${r.nick}</small><b>${GROUP[r.rS]}의 해</b><p>${DAY_TX[r.rS][r.fS?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
     <div class="face bk" style="background-image:url('${IMG.cuNight}')"><small>밤의 ${r.nick}</small><b>${HID_MEAN[r.hid[0].g]}</b><p>${NIGHT_TX[r.rB][r.fB?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
   </div></div><p class="fliphint">카드를 누르면 밤의 내가 보여요</p></div>`;
@@ -625,7 +655,8 @@ function armEnd(){ const v=$('endV'), b=$('endB'), t=$('endT'), sb=$('endSnd'); 
     try{ await v.play(); }catch(e){ v.muted=true; try{ await v.play(); }catch(e2){} sb.classList.add('on'); }
     b.classList.add('playing'); };
   sb.onclick=()=>{ v.muted=false; sb.classList.remove('on'); if(v.paused) v.play().catch(()=>{}); };
-  v.onended=()=>{ t.classList.add('on'); b.classList.remove('playing'); };
+  const sub=$('endSub'); let last=''; v.ontimeupdate=()=>{ if(!sub) return; let cur=''; END_SUB.forEach(x=>{ if(v.currentTime>=x[0]) cur=x[1]; }); if(cur!==last){ last=cur; sub.classList.remove('on'); setTimeout(()=>{ sub.textContent=cur; if(cur) sub.classList.add('on'); },300); } };
+  v.onended=()=>{ if(sub) sub.classList.remove('on'); last=''; t.classList.add('on'); };
   new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) go(); else if(!v.paused){ v.pause(); } }),{root:$('sRep'),threshold:.6}).observe(b); }
 $('payBtn').onclick=()=>{ const pr=$('prem');
   if(!$('pay').classList.contains('done')){ pr.innerHTML=premHTML(); pr.hidden=false; $('lock').hidden=true; drawChart(); reveal(); $('pay').classList.add('done'); $('payBtn').textContent='1장부터 보기'; toast('체험판이라 결제 없이 열었어요');

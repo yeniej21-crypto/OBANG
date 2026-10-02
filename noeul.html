@@ -228,9 +228,12 @@ select option{background:#16121f;color:var(--ink)}
 .toon2 .pan{height:280px}
 .toon2 .pan .cap b{font-size:22px}
 .mrows{margin-top:18px;border-top:1px solid var(--line2)}
-.mr{display:grid;grid-template-columns:36px 44px 1fr;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line2);font-size:13px}
+.mr{display:grid;grid-template-columns:38px 54px 1fr;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line2);font-size:13px}
 .mr .mm{font-weight:700}
-.mr .gz{font-family:var(--serif);font-weight:900;color:var(--ink2)}
+.mr .gz{font-family:var(--serif);font-weight:700;font-size:14px;color:var(--ink);line-height:1.25}
+.mr .gz small{display:block;font-size:11px;font-weight:500;color:var(--ink3);letter-spacing:.04em}
+.mr .tx{font-size:12.5px;color:var(--ink2);margin-bottom:5px}
+.mr.meet .tx{color:var(--gold2);font-weight:700}
 .mr .dv{display:grid;gap:4px}
 .mr .dv div{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink3)}
 .mr .dv i{display:block;height:5px}
@@ -582,7 +585,10 @@ function premHTML(){
         <div class="pan px rv"><div class="ph" style="background-image:url('${IMG.closed}')"></div><div class="cap"><small>숨 고르는 달</small><b>${r.low.m}월</b><p>낮도 밤도 낮게 흘러요. 약속을 줄이세요.</p></div></div>
       </div>
     </div>
-    <div class="mrows rv">${r.MO.map(o=>`<div class="mr ${r.meet.includes(o)?'meet':''}"><span class="mm">${o.m}월</span><span class="gz" data-hj="0">${GAN[o.mp[0]]}${JI[o.mp[1]]}</span><div class="dv"><div class="s"><i style="width:${o.d}%"></i></div><div class="m"><i style="width:${o.n}%"></i></div></div></div>`).join('')}</div>
+    <div class="mrows rv">${r.MO.map(o=>{ const mt=r.meet.includes(o), lw=r.low===o, g=o.d-o.n;
+      const tx=mt?'해와 달이 만나는 달. 시작하기 좋아요':lw?'숨 고르는 달. 약속을 줄이세요':g>=8?'낮이 밝은 달. 밖에서 움직이세요':g<=-8?'밤이 깊은 달. 안을 챙기세요':'낮과 밤이 고르게 흘러요';
+      return `<div class="mr ${mt?'meet':''}"><span class="mm">${o.m}월</span><span class="gz">${GAN_K[o.mp[0]]}${JI_K[o.mp[1]]}월<small data-hj="0">${GAN[o.mp[0]]}${JI[o.mp[1]]}</small></span><div><div class="tx">${tx}</div><div class="dv"><div class="s"><i style="width:${o.d}%"></i></div><div class="m"><i style="width:${o.n}%"></i></div></div></div></div>`; }).join('')}</div>
+    <div class="legend rv" style="margin-top:10px"><span><i style="background:var(--sun)"></i>낮(겉으로 드러나는 일)</span><span><i style="background:var(--moon)"></i>밤(속마음과 인연)</span></div>
   </div></section>`;
   /* 4장 */
   const T=TALIS[r.kind][r.fS?0:1];

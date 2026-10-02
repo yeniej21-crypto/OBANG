@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="vidguard.js?v=1"></script>
 <title>오방사주 · 서하의 살롱</title>
 <meta name="description" content="다섯 신이 읽어 주는 나의 사주">
 <meta property="og:type" content="website"><meta property="og:site_name" content="오방사주">
@@ -462,8 +463,9 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .mission p{margin:6px 0 0;font-family:var(--serif);font-size:18px;font-weight:700;line-height:1.5;filter:blur(4px);user-select:none}
 .mission .lock{font-size:12px;color:var(--ink-3);margin-top:8px}
 .actions{display:grid;gap:10px;margin-top:18px}
-.resHome{position:sticky;bottom:0;z-index:5;margin:18px -16px 0;padding:22px 16px 14px;background:linear-gradient(180deg,rgba(9,7,11,0),rgba(9,7,11,.92) 34%,#09070b)}
-.resHome .choice{box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.resHome{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);z-index:5;display:flex;justify-content:flex-end;margin:18px 0 0;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+.resHome.on{opacity:1;transform:none}
+.resHome button{pointer-events:auto;display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 15px 0 12px;border-radius:999px;border:1px solid rgba(227,184,102,.45);background:rgba(14,11,16,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--gold-2);font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.02em;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.4)}
 .note{font-size:11.5px;color:var(--ink-3);text-align:center;margin-top:14px;line-height:1.5}
 .toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 90px);transform:translateX(-50%);z-index:60;background:rgba(0,0,0,.8);color:#fff;font-size:14px;padding:10px 16px;border-radius:999px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1}
@@ -803,7 +805,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
         <p class="note">체험판이라 결제와 알림 신청은 실제로 진행되지 않아요.</p>
       </div>
     </div>
-    <div class="resHome"><button type="button" class="choice primary" id="ctaHomeBar">홈에서 다양한 사주 보기</button></div>
+    <div class="resHome" id="resHome"><button type="button" id="ctaHomeBar"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/></svg>홈 둘러보기</button></div>
   </div>
 
   <div class="hMenuS" id="hMenuS"><div class="in"><div class="hd"><img src="img/brand/mark.svg" alt=""><b>오방사주</b></div>
@@ -830,7 +832,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   <div class="op" id="op" aria-label="오방사주 오프닝">
     <video class="opTake" id="opTake" muted playsinline preload="auto" poster="img/op_take_0.jpg" src="v/op_take.mp4"></video><div id="opSls"></div><div class="opVig"></div><div class="opSmoke"></div><div class="opFl" id="opFl"></div><div class="opRing" id="opRing"></div>
     <svg class="opMark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" stroke-width="2.4"/><path d="M28 29 H72" stroke-width="5.2"/><path d="M47 29 L41 71" stroke-width="5.2"/><path d="M33 49 H64 L61 71" stroke-width="5.2"/><path d="M22 71 H78" stroke-width="5.2"/></svg>
-    <div class="opGate"><b>문을 두드려</b><small>🔊 소리를 켜고 화면을 눌러줘</small></div><div class="opCap" id="opCap">다섯 신이 깨어난다</div>
+    <div class="opGate"><b>문을 두드려</b><small>소리를 켜고 화면을 눌러줘</small></div><div class="opCap" id="opCap">다섯 신이 깨어난다</div>
     <div class="opEnd"><div class="bgS"></div><div class="bgF"></div><div class="bgG"></div><div class="emb" id="opEmb"></div><div class="opDots" id="opDots"></div><h2>네 사주,<br>한 칸이 비어 있어.</h2><p>그 빈자리, 신이 채워줄게.</p><div class="opRes" id="opRes"></div></div>
     <div class="opPick"><select class="opYr" id="opYr" aria-label="태어난 해"></select><button class="opGo" id="opGo" disabled>내 빈칸 찾으러 들어가기</button><button class="opHome" id="opHome">이미 수호신이 있어요 · 홈으로</button></div>
     <button class="opX" id="opX">건너뛰기</button>
@@ -843,7 +845,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <button class="choice primary" id="enter">안으로 들어가기</button>
     <button class="link" id="skipStory">스토리 건너뛰기</button>
     <button class="link" id="goHome" style="font-size:15px;font-weight:600;color:var(--ink-2)">이미 수호신이 있어요 · 홈으로</button>
-    <div class="snd">🔊 소리를 켜고 들어가세요</div>
+    <div class="snd">소리를 켜고 들어가세요</div>
     <div class="load"><div class="lb"><i id="loadbar"></i></div><span id="loadtxt">영상 준비 중 0%</span></div>
   </div>
 
@@ -1615,6 +1617,7 @@ $('backBtn').onclick=()=>{
 };
 if($('ctaHome')) $('ctaHome').onclick=showHome;
 $('ctaHomeBar').onclick=showHome;
+(()=>{ const rh=$('resHome'), rs=$('result'); if(rh&&rs) rs.addEventListener('scroll',()=>rh.classList.toggle('on',rs.scrollTop>240),{passive:true}); })();
 $('goHome').onclick=async()=>{ await unlock(); showHome(); };
 document.querySelectorAll('[data-home]').forEach(b=>b.onclick=showHome);
 $('subGo').onclick=()=>toast('체험판: 7일 무료 체험이 시작됩니다');

@@ -1,14 +1,12 @@
 /* 2027 신년 기획전 라인업 — 홈 '신년 기획전' 줄과 newyear.html 랜딩이 같이 쓰는 한 곳.
    새 신년 메뉴를 열면 여기 한 줄만 고치면 된다(status 'soon' → 'open', url 넣기).
-   cat: hero(대표) · special(특별, 정통 아님) · jt(정통) · f990(분야별 990원) · free(무료) · more(함께 보면 좋은)
+   cat: hero(대표) · jt(정통) · f990(분야별 990원) · free(무료) · more(함께 보면 좋은)
    home: 홈 기획전 줄에 보일 순서(없으면 안 보임). 홈에는 다섯 장 + '모두 보기'. */
 window.NY27={
   title:'2027 정미년 신년 기획전',
   items:[
    {id:'halmae',cat:'hero',home:1,name:'삼신 할매의 정통 신년운세',short:'신년 운세',who:'삼신 할매',img:'img/halmae.jpg',vid:'v/poster/halmae.mp4',url:'sinnyeon.html',status:'open',price:'19,900원',
     line:'열두 달 총운 · 분야별 운 · 조심할 날까지, 가장 길고 꼼꼼한 풀이',what:'한 해 전체의 총운',for:'신년운세를 처음 제대로 보는 사람, 부모님 선물',get:'열두 달 상세 풀이 · 할매의 편지'},
-   {id:'noeul',cat:'special',name:'2027 해와 달의 운세',short:'해와 달의 운세',who:'경계의 존재 노을',img:'img/noeul.jpg',vid:'v/poster/noeul.mp4',url:'noeul.html',status:'open',price:'990원',
-    line:'낮도 밤도 아닌 노을이 당신의 낮과 밤을 함께 읽어요',what:'남들이 보는 나와 나만 아는 나',for:'정통 풀이 말고 나를 새로 보고 싶은 사람',get:'낮 · 밤 비율 · 열두 달의 낮과 밤'},
    {id:'soheon',cat:'jt',home:2,name:'소헌 선생의 2027 명리 감정서',short:'명리 감정서',who:'명리관 소헌 선생',img:'img/soheon.jpg',vid:'v/poster/soheon.mp4',url:'myeongri.html',status:'open',price:'19,900원',
     line:'대운 · 세운 · 월운을 근거로 하나씩 짚어 쓰는 문서형 감정서',what:'풀이마다 근거를 짚는 감정',for:'왜 그렇게 나왔는지까지 알고 싶은 사람',get:'관인 찍힌 감정서 저장 · 세 번 묻기'},
    {id:'hyeonam',cat:'jt',home:4,name:'현암의 대운 속 2027',short:'대운 속 2027',who:'명리 대가 현암',img:'img/jeongtong.jpg',url:'',status:'soon',open:'11월 오픈',price:'9,900원',

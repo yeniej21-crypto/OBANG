@@ -72,10 +72,6 @@ button{font-family:inherit}
 .feat .row{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid rgba(244,236,225,.18)}
 .feat .row span{font-size:12.5px;color:var(--ink-2)}
 .feat .row strong{font-size:15px;font-weight:900;color:var(--gold)}
-.feat.sp{aspect-ratio:1/1;background-position:center 16%}
-.feat.sp video{object-position:center 16%}
-.feat.sp .ft b{font-size:34px}
-.feat.sp .badge{background:none;border:1px solid rgba(232,190,120,.7);color:var(--gold)}
 .feat .row em{font-style:normal;font-size:13.5px;font-weight:700}
 
 /* 정통 목록 */
@@ -142,10 +138,9 @@ button{font-family:inherit}
    <div class="hx"><span class="yr"><span class="sl" data-hj="0">丁<br>未</span>2027 정미년 · 신년 기획전</span>
     <h1>새해를 묻는<br><em>열 가지</em> 길</h1></div>
   </section>
-  <nav class="tabs" id="tabs"><button class="on" data-t="sFeat">대표</button><button data-t="sSp">특별</button><button data-t="sJt">정통</button><button data-t="sPick">고르기</button><button data-t="sF990">990원</button><button data-t="sFree">무료</button><button data-t="sMore">함께</button></nav>
+  <nav class="tabs" id="tabs"><button class="on" data-t="sFeat">대표</button><button data-t="sJt">정통</button><button data-t="sPick">고르기</button><button data-t="sF990">990원</button><button data-t="sFree">무료</button><button data-t="sMore">함께</button></nav>
 
   <section class="sec" id="sFeat"><div class="sh"><b>대표</b></div><div id="feat"></div></section>
-  <section class="sec" id="sSp"><div class="sh"><b>특별</b></div><div id="sp"></div></section>
   <section class="sec" id="sJt"><div class="sh"><b>정통 신년</b></div><div class="jt" id="jt"></div></section>
   <section class="sec" id="sPick"><div class="sh"><b>나에게 맞는 신년</b></div>
    <div class="pickr" id="pickr"></div>
@@ -164,19 +159,16 @@ const $=id=>document.getElementById(id);
 const D=window.NY27, IT=D.items, by=c=>IT.filter(x=>x.cat===c), get=id=>IT.find(x=>x.id===id);
 function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2000); }
 /* 히어로 진행자 줄 */
-['halmae','noeul','soheon','hyeonam','wolha','seoha'].forEach((id,i)=>{ const x=get(id); const e=document.createElement('i'); e.style.backgroundImage=`url('${x.img}')`; e.style.animationDelay=(i*.09)+'s'; $('cast').appendChild(e); });
+['halmae','soheon','hyeonam','wolha','seoha','taeo'].forEach((id,i)=>{ const x=get(id); const e=document.createElement('i'); e.style.backgroundImage=`url('${x.img}')`; e.style.animationDelay=(i*.09)+'s'; $('cast').appendChild(e); });
 /* 대표 */
 const h=by('hero')[0];
 $('feat').innerHTML=`<button class="feat" data-id="${h.id}" style="background-image:url('${h.img}')">${h.vid?`<video muted loop playsinline preload="none" src="${h.vid}"></video>`:''}<div class="ft"><b>${h.name}</b><p>${h.line}</p><div class="row"><span>${h.who}</span><strong>${h.price}</strong></div></div></button>`;
-/* 특별: 노을(정통 아님, 대표 바로 아래) */
-const sp=by('special')[0];
-if(sp) $('sp').innerHTML=`<button class="feat sp" data-id="${sp.id}" style="background-image:url('${sp.img}')">${sp.vid?`<video muted loop playsinline preload="none" src="${sp.vid}"></video>`:''}<div class="ft"><span class="badge">특별 · ${sp.who}</span><b>${sp.name}</b><p>${sp.line}</p><div class="row"><span>정통 풀이와 다른, 나의 두 얼굴</span><strong>${sp.price}</strong></div></div></button>`;
-document.querySelectorAll('.feat').forEach(f=>{ const v=f.querySelector('video'); if(!v) return; v.addEventListener('playing',()=>f.classList.add('vOn')); v.addEventListener('error',()=>v.remove());
-  if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const p=v.play(); if(p) p.catch(()=>{}); } else v.pause(); }),{threshold:.3}).observe(f); });
+(()=>{ const f=document.querySelector('.feat'), v=f.querySelector('video'); if(!v) return; v.addEventListener('playing',()=>f.classList.add('vOn')); v.addEventListener('error',()=>v.remove());
+  if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const p=v.play(); if(p) p.catch(()=>{}); } else v.pause(); }),{threshold:.3}).observe(f); })();
 /* 정통 */
 $('jt').innerHTML=by('jt').map(x=>`<button class="it ${x.status}" data-id="${x.id}"><span class="ph" style="background-image:url('${x.img}')"></span><span class="tx"><small>${x.who}</small><b>${x.name}</b><p>${x.line}</p><span class="ft"><strong>${x.price}</strong><em>${x.status==='open'?'지금 보기':x.open+' · 알림 받기'}</em></span></span><span class="pk">추천</span></button>`).join('');
 /* 고르기 · 비교 */
-const PICK=[['처음 제대로 보는 신년운세라면','halmae'],['왜 그렇게 나왔는지 근거까지','soheon'],['올해보다 앞으로 몇 년의 큰 그림','hyeonam'],['좋은 날짜를 미리 받아 두고 싶다면','wolha'],['옛 방식 그대로의 신년 점','tojeong'],['정통 말고, 나를 새로 보고 싶다면','noeul']];
+const PICK=[['처음 제대로 보는 신년운세라면','halmae'],['왜 그렇게 나왔는지 근거까지','soheon'],['올해보다 앞으로 몇 년의 큰 그림','hyeonam'],['좋은 날짜를 미리 받아 두고 싶다면','wolha'],['옛 방식 그대로의 신년 점','tojeong']];
 $('pickr').innerHTML=PICK.map(([q,id])=>`<button data-p="${id}">${q}<span>${get(id).short}</span></button>`).join('');
 $('pickr').onclick=e=>{ const b=e.target.closest('button'); if(!b) return; $('pickr').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); document.querySelectorAll('.it,.feat').forEach(x=>x.classList.toggle('pick',x.dataset.id===b.dataset.p));
   const t=document.querySelector(`[data-id="${b.dataset.p}"]`); if(t) $('scr').scrollTo({top:t.getBoundingClientRect().top-$('scr').getBoundingClientRect().top+$('scr').scrollTop-110,behavior:'smooth'}); };
@@ -195,7 +187,7 @@ document.addEventListener('click',e=>{ const b=e.target.closest('[data-id]'); if
 /* 탭 · 위 막대 */
 const scr=$('scr'), tabs=$('tabs');
 tabs.onclick=e=>{ const b=e.target.closest('button'); if(!b) return; const t=$(b.dataset.t); scr._lock=Date.now(); tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); scr.scrollTo({top:t.offsetTop-100,behavior:'smooth'}); };
-scr.addEventListener('scroll',()=>{ $('top').classList.toggle('sc',scr.scrollTop>40); if(scr._lock&&Date.now()-scr._lock<900) return; let cur='sFeat'; ['sFeat','sSp','sJt','sPick','sF990','sFree','sMore'].forEach(id=>{ if($(id).offsetTop-120<=scr.scrollTop) cur=id; });
+scr.addEventListener('scroll',()=>{ $('top').classList.toggle('sc',scr.scrollTop>40); if(scr._lock&&Date.now()-scr._lock<900) return; let cur='sFeat'; ['sFeat','sJt','sPick','sF990','sFree','sMore'].forEach(id=>{ if($(id).offsetTop-120<=scr.scrollTop) cur=id; });
   tabs.querySelectorAll('button').forEach(x=>{ const on=x.dataset.t===cur; if(on&&!x.classList.contains('on')){ x.classList.add('on'); tabs.scrollTo({left:x.offsetLeft-18,behavior:'smooth'}); } else if(!on) x.classList.remove('on'); }); },{passive:true});
 $('back').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
 if(location.hash){ const t=$(location.hash.slice(1)); if(t) setTimeout(()=>scr.scrollTo({top:t.offsetTop-100}),60); }

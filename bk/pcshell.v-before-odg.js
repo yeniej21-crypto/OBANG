@@ -25,7 +25,7 @@ html.pcw.pcx .pcs{display:flex}
 html.pcHide .pcs{opacity:0;pointer-events:none}
 .pcNav{right:calc(50% + 254px);width:190px;padding:28px 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--pcLine) transparent}
 .pcLogo{display:flex;align-items:center;gap:10px;margin:0 0 22px;padding:0 14px}
-.pcLogo img{width:28px;height:28px}.pcLogo img.lw{width:auto;height:24px}
+.pcLogo img{width:28px;height:28px}
 .pcLogo b{font-family:"Noto Serif KR",serif;font-weight:900;font-size:21px;letter-spacing:-.01em;color:var(--pcHi)}
 .pcNav h6{margin:14px 0 3px;padding:0 14px;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--pcDim)}
 .pcNav a{display:block;padding:6px 14px;font-size:14px;font-weight:500;border-left:2px solid transparent;transition:color .2s,background .2s}
@@ -56,7 +56,7 @@ function build(){
              :{pcInk:'rgba(52,40,28,.72)',pcHi:'#2a2018',pcDim:'rgba(52,40,28,.45)',pcGold:'#9a6b2a',pcHov:'rgba(0,0,0,.04)',pcLine:'rgba(52,40,28,.12)'};
   for(const k in T) R.setProperty('--'+k,T[k]);
   const nav=document.createElement('nav'); nav.className='pcs pcNav'; nav.setAttribute('aria-label','전체 메뉴'); nav.dataset.hj='0';
-  let h=`<a class="pcLogo" href="./" data-home="1"><img src="img/brand/odg_mark.webp" alt=""><img class="lw" src="img/brand/odg_word_h${dark?'':'_ink'}.webp" alt="오방도감"></a>`;
+  let h=`<a class="pcLogo" href="./" data-home="1"><img src="img/brand/${dark?'mark-light':'mark'}.svg" alt=""><b>오방사주</b></a>`;
   NAV.forEach(([t,L])=>{ if(t) h+=`<h6>${t}</h6>`; L.forEach(([n,u,k])=>{ h+=`<a href="${u}"${k?' data-home="1"':''} class="${active(u)?'on':''}">${n}</a>`; }); });
   nav.innerHTML=h;
   nav.addEventListener('click',e=>{ const a=e.target.closest('a'); if(!a) return; try{ sessionStorage.setItem('toHome','1'); }catch(_){}

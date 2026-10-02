@@ -827,7 +827,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   <!-- worry -->
   <div class="panel" id="pWorry">
     <div class="sheet">
-      <h3>오늘은 뭐가 궁금해서 왔어?</h3>
+      <h3>오늘은 뭐가 궁금해서 왔어?</h3><p class="wyWhy">고른 걸로 네 방부터 꾸며 둘게.</p>
       <div class="chips" id="chips">
         <button class="chip" aria-pressed="false">그 사람 마음</button>
         <button class="chip" aria-pressed="false">재회</button>
@@ -859,6 +859,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
           <div><b>매일 아침 미션</b><span>그 기운을 채우는 색 · 방향 · 행동을 하루 하나씩 보내 줘요.</span></div>
           <div><b>언제든 다시</b><span>카드는 홈 맨 위에 남아서 오늘의 운세와 함께 다시 볼 수 있어요.</span></div>
         </div>
+        <div class="sec wry" id="rWry" hidden></div>
         <div class="sec"><h4>나의 명식</h4><div class="pillars" id="rPillars"></div></div>
         <div class="sec"><h4>오행 밸런스</h4><div class="bars" id="rBars"></div></div>
         <div class="sec"><div class="mission"><div class="k">내일 08:00 · 첫 개운 미션</div><p id="rMission"></p><div class="lock">알림을 켜면 아침에 열립니다</div></div></div>
@@ -989,6 +990,19 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   </div>
 
   <!-- main home -->
+  <style>
+.wyWhy{margin:2px 0 10px;font-size:12.5px;opacity:.72}
+.wry h4 em{font-style:normal;opacity:.7;font-weight:500}
+.wry .wyQ{margin:2px 0 10px;font-size:14px;line-height:1.6}
+.wry .wyQ b{font-weight:700}
+.wry .wyB{display:flex;flex-wrap:wrap;gap:8px}
+.wry .wyB button{border:1px solid currentColor;background:none;color:inherit;border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.home .wyL{margin:-4px 18px 12px;font-size:13.5px;line-height:1.6;color:rgba(255,246,236,.82)}
+.home .wyL i{font-style:normal;color:#f3d6a8}
+.home .wyRow .pc{width:43%;max-width:200px}
+.home .wyRow .pc.wyAsk{background:linear-gradient(160deg,#3a2a24,#1a1214);border:0;color:#fff;font-family:inherit;text-align:center}
+.home .wyRow .pc.wyAsk .ct{bottom:auto;top:50%;transform:translateY(-50%)}
+</style>
   <div class="home" id="home">
     <div class="hHead">
       <div class="hBar"><div class="logo"><img src="img/brand/mark.svg" alt=""><b>오방사주</b></div>
@@ -1004,8 +1018,13 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
         <div class="pc lockc nyL" data-ny="sJt" role="button" tabindex="0" style="background-image:url('img/seoha.jpg')"><span class="chip">무료 · 11월</span><div class="ct"><span class="yr">2027</span><span class="tt">맛보기</span><span class="st">서하가 써 주는 올해의 한 단어</span></div></div>
         <div class="pc lockc nyL" data-ny="sJt" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><span class="chip">11월 오픈</span><div class="ct"><span class="tt">대운 속 2027</span><span class="st">현암, 10년 흐름 속 올해</span></div></div>
         <div class="pc lockc nyL" data-ny="sJt" role="button" tabindex="0" style="background-image:url('img/tojeong.jpg')"><span class="chip">11월 오픈</span><div class="ct"><span class="tt">토정비결</span><span class="st">144괘로 읽는 한 해</span></div></div>
-        <button class="pc nyEnd" id="nyEnd" type="button"><span class="ct"><span class="tt">열 가지<br>모두 보기</span><span class="st">정통 다섯 · 990원 넷 · 무료 하나</span><span class="go">기획전으로</span></span></button>
+        <button class="pc nyEnd" id="nyEnd" type="button"><span class="ct"><span class="tt">열 가지<br>모두 보기</span><span class="go">기획전으로</span></span></button>
       </div>
+    </section>
+    <section class="hSec wyS" id="secWry" data-cats="all" hidden>
+      <div class="sh"><small>서하가 골라 둔 방</small><b id="wyT"></b></div>
+      <p class="wyL" id="wyL"></p>
+      <div class="hRow wyRow" id="wyRow"></div>
     </section>
 
     <section class="tday" id="tday" data-cats="all gaeun">
@@ -1031,7 +1050,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <section class="hSec" id="secJt" data-cats="all jt tg">
       <div class="sh"><small>정통</small><b>올해 내 사주, 제대로 한번 볼까</b></div>
       <div class="hRow">
-        <button class="pc nyGo" id="nyJt" type="button"><span class="nyS" data-hj="0">丁<br>未</span><span class="ct"><span class="yr">2027</span><span class="tt">신년 정통 다섯</span><span class="st">할매 · 소헌 선생 · 현암 · 토정 · 월하</span><span class="go">신년 기획전에서 보기</span></span></button>
+        <button class="pc nyGo" id="nyJt" type="button"><span class="nyS" data-hj="0">丁<br>未</span><span class="ct"><span class="yr">2027</span><span class="tt">신년 정통</span><span class="st">할매 · 소헌 선생 · 현암 · 토정 · 월하</span><span class="go">신년 기획전에서 보기</span></span></button>
         <div class="pc" id="cTaegil" data-vid="v/poster/taegil.mp4" role="button" tabindex="0" style="background-image:url('img/taegil.jpg')"><div class="ct"><span class="tt">택일</span><span class="st">이사·계약·고백, 그날이 길한지</span></div></div>
         <div class="pc" id="cLife" data-vid="v/poster/lifetime.mp4" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><div class="ct"><span class="tt">평생 사주</span><span class="st">대운 10년 흐름과 타고난 그릇</span></div></div>
       </div>
@@ -1381,7 +1400,7 @@ function showResult(){ subMode(true);
   const max=Math.max(...S.cnt,1), names=['목(木)','화(火)','토(土)','금(金)','수(水)'];
   $('rBars').innerHTML=S.cnt.map((c,i)=>`<div class="bar ${EL_KEYS[i]===S.low?'low':''}" style="--c:${EL_COL[i]}"><span class="lbl">${names[i]}</span><div class="t"><i data-w="${Math.max(c/max*100,4)}"></i></div><span class="v">${c}</span></div>`).join('');
   $('rMission').textContent=g.mission;
-  $('result').classList.add('on'); bgm(BGM_LV.result,1.5);
+  renderWry(); $('result').classList.add('on'); bgm(BGM_LV.result,1.5);
   setTimeout(()=>$('rBars').querySelectorAll('i').forEach(i=>i.style.width=i.dataset.w+'%'),60);
 }
 $('enter').onclick=async()=>{ await unlock(); startStory(); };
@@ -1389,7 +1408,34 @@ $('skipStory').onclick=async()=>{ await unlock(); $('start').classList.add('off'
 $('c1a').onclick=()=>afterChoice('t1a');
 $('c1b').onclick=()=>afterChoice('t1b');
 $('birthGo').onclick=afterBirth;
-$('worryGo').onclick=afterWorry;
+const WRY={
+ '그 사람 마음':{l:'그 사람 속은 시온이 제일 잘 봐. 요즘 그 사람 기운부터 비춰 보자.',m:['partner','tarot'],q:['그 사람이 요즘 나를 어떻게 생각하는지 봐줘','먼저 연락해도 되는 때 알려줘']},
+ '재회':{l:'다시 이어질지는 둘의 흐름이 언제 겹치는지로 봐. 시온한테 먼저 가 봐.',m:['re','partner'],q:['그 사람이랑 다시 이어질 수 있을지 봐줘','연락하기 좋은 달 알려줘']},
+ '새 인연':{l:'인연이 들어오는 달이 따로 있어. 그 달부터 짚어 줄게.',m:['next','dohwa'],q:['올해 인연이 들어오는 달 알려줘','나랑 잘 맞는 사람 느낌 알려줘']},
+ '결혼':{l:'결혼은 둘의 합이랑 배우자 자리를 같이 봐야 해.',m:['gh','life'],q:['내 결혼 시기 흐름 봐줘','배우자 자리에 어떤 사람이 맞는지 알려줘']},
+ '일 · 이직':{l:'움직일 때랑 버틸 때가 따로 있어. 도준이 그 판을 제일 잘 읽어.',m:['career','mr'],q:['이직하기 좋은 때 알려줘','나한테 맞는 일 스타일 알려줘']},
+ '돈 · 재물':{l:'돈이 들어오는 길은 사주마다 달라. 올해 그 길이 어디로 나는지부터 보자.',m:['career','sn'],q:['올해 돈이 들어오는 달 알려줘','돈 새는 습관 짚어줘']},
+ '시험 · 합격':{l:'날을 잘 고르는 것도 실력이야. 월하한테 좋은 날부터 받아 둬.',m:['taegil','career'],q:['시험 보기 좋은 날 흐름 알려줘','집중이 잘 되는 시기 알려줘']},
+ '건강':{l:'무리하면 안 되는 달부터 알아 두자. 미리 알면 덜 지쳐.',m:['sn','today'],q:['올해 무리하면 안 되는 달 알려줘','기운 채우는 생활 습관 알려줘']},
+ '올해 운':{l:'2027년 열두 달, 좋은 달이랑 조심할 달부터 보자.',m:['sn','mr'],q:['올해 가장 좋은 달 알려줘','올해 조심할 것 하나만 짚어줘']},
+ '그냥 내 사주':{l:'타고난 판부터 차근히 보자. 그게 제일 정확해.',m:['life','mr'],q:['내 사주 한 줄로 요약해줘','내가 제일 빛나는 자리 알려줘']}};
+const WM={partner:['그 사람 속마음','시온 · 은거울','img/w1.jpg','partner'],tarot:['무진의 타로','무진','img/tarot/poster.jpg','tarot.html'],re:['재회 사주','시온','img/w2.jpg','love2.html?m=re'],next:['다음 연애','서하','img/seoha.jpg','love2.html?m=next'],dohwa:['도화 사주','태오','img/taeo/base.jpg','dohwa.html'],gh:['도화 궁합','태오','img/taeo/wink.jpg','gunghap.html'],life:['평생 사주','현암','img/jeongtong.jpg','lifetime.html'],career:['커리어 사주','도준','img/earth.jpg','career.html'],mr:['2027 명리 감정서','소헌 선생','img/soheon.jpg','myeongri.html'],sn:['2027 신년운세','삼신 할매','img/halmae.jpg','sinnyeon.html'],taegil:['택일','월하','img/taegil.jpg','taegil.html'],today:['오늘의 운세','서하','img/seoha.jpg','today.html']};
+function loadWry(){ try{ return JSON.parse(localStorage.getItem('obWorry')||'null'); }catch(e){ return null; } }
+function saveWry(){ const c=[...$('chips').querySelectorAll('.chip')].find(x=>x.getAttribute('aria-pressed')==='true'); const w={tag:c?c.textContent.trim():'',text:($('worryText').value||'').trim(),at:Date.now()};
+  if(!w.tag&&!w.text) return; try{ localStorage.setItem('obWorry',JSON.stringify(w)); }catch(e){} }
+function goWm(k){ const m=WM[k]; if(!m) return; if(m[3]==='partner') return partnerStart(); goPage(m[3]); }
+function askSeoha(){ const w=loadWry(); try{ sessionStorage.setItem('obAskQ',JSON.stringify({text:w&&w.text||'',q:(w&&WRY[w.tag]||{}).q||[]})); }catch(e){} goPage('chat.html?h=seoha'); }
+function renderWry(){ const w=loadWry(), d=w&&(WRY[w.tag]||(w.text?WRY['그냥 내 사주']:null));
+  const box=$('rWry'), sec=$('secWry');
+  if(!d){ if(box) box.hidden=true; if(sec) sec.hidden=true; return; }
+  const said=w.text?`<b>“${w.text.replace(/[<>&]/g,'')}”</b> `:'';
+  const tag=w.tag||'네 이야기';
+  if(box){ box.hidden=false; box.innerHTML=`<h4>네 고민 <em>· ${tag}</em></h4><p class="wyQ">${said}${d.l}</p><div class="wyB">${d.m.map(k=>`<button type="button" data-wm="${k}">${WM[k][0]}</button>`).join('')}<button type="button" data-wm="ask">서하에게 바로 묻기</button></div>`;
+    box.querySelectorAll('[data-wm]').forEach(b=>b.onclick=()=>b.dataset.wm==='ask'?askSeoha():goWm(b.dataset.wm)); }
+  if(sec){ sec.hidden=false; $('wyT').textContent=`네 고민 · ${tag}`; $('wyL').innerHTML=(w.text?`<i>“${w.text.replace(/[<>&]/g,'')}”</i> `:'')+d.l;
+    $('wyRow').innerHTML=d.m.map(k=>`<div class="pc" data-wm="${k}" role="button" tabindex="0" style="background-image:url('${WM[k][2]}')"><div class="ct"><span class="tt">${WM[k][0]}</span><span class="st">${WM[k][1]}</span></div></div>`).join('')+`<button class="pc wyAsk" type="button" data-wm="ask"><span class="ct"><span class="tt">서하에게<br>바로 묻기</span></span></button>`;
+    $('wyRow').querySelectorAll('[data-wm]').forEach(b=>b.onclick=()=>b.dataset.wm==='ask'?askSeoha():goWm(b.dataset.wm)); } }
+$('worryGo').onclick=()=>{ saveWry(); afterWorry(); };
 $('worrySkip').onclick=afterWorry;
 /* ---------- partner reading (Sion) ---------- */
 Object.assign(V,{e1:'v/sion/e1.mp4',e2:'v/sion/e2.mp4',e3:'v/sion/e3.mp4'});
@@ -1528,7 +1574,7 @@ function renderFort(){
   $('hFortN').innerHTML=`${v}<small>총운</small>`; $('hFortR').style.setProperty('--p',v);
 }
 function renderHome(){
-  ensureS(); renderFort(); const g=GODS[S.low];
+  ensureS(); renderFort(); try{ renderWry(); }catch(e){} const g=GODS[S.low];
   $('hMis').style.setProperty('--c',g.c);
   $('hMisAv').style.backgroundImage=`url("img/${S.low}.jpg")`;
   /* 첫 화면 벤토: 채울 기운의 미니 수호신 + 행운 색·방향·숫자 */
@@ -1599,8 +1645,8 @@ $('cPartner').onclick=()=>partnerStart();
 $('tBal').onclick=()=>showGauge();
 document.querySelectorAll('[data-go]').forEach(e=>e.onclick=()=>{ if(e.dataset.go==='partner') partnerStart(); else { fetchClip('m_'+S.low); openMission(); } });
 document.querySelectorAll('.lockc').forEach(e=>e.onclick=()=>toast('정식 오픈 때 열려요'));
-['nyAll','nyEnd','nyJt'].forEach(id=>{ const e=$(id); if(e) e.onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(_){} location.href='newyear.html'+(id==='nyJt'?'#sJt':''); }; });
-document.querySelectorAll('.nyL').forEach(e=>e.onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(_){} location.href='newyear.html#'+e.dataset.ny; });
+['nyAll','nyEnd','nyJt'].forEach(id=>{ const e=$(id); if(e) e.onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(_){} location.href='newyear.html'; }; });
+document.querySelectorAll('.nyL').forEach(e=>e.onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(_){} location.href='newyear.html'; });
 $('hBell').onclick=()=>{ if(S&&S.low) memberStart(); else toast('수호신을 먼저 만나면 아침 미션을 받을 수 있어요'); }; const toIntro=()=>{ try{ sessionStorage.removeItem('toHome'); }catch(e){} location.reload(); };
 $('hMenu').onclick=()=>$('hMenuS').classList.add('on');
 $('hMenuS').onclick=e=>{ if(e.target.id==='hMenuS') $('hMenuS').classList.remove('on'); const b=e.target.closest('[data-m]'); if(!b) return; $('hMenuS').classList.remove('on'); if(b.dataset.m==='intro') toIntro(); else if(b.dataset.m==='arch') archOpen(); else goPage(b.dataset.m); };

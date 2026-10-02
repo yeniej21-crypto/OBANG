@@ -190,7 +190,7 @@ function open(opts){
   const setLim=()=>{ lim.textContent=used<FREE?`체험판 무료 질문 ${FREE-used}번 남음`:''; };
   el.querySelector('.ak-x').onclick=()=>{ if(ctl) ctl.abort(); el.classList.remove('on'); setTimeout(()=>el.remove(),300); };
   bubble('b',per.welcome(u.nick||u.name)); setSug(opts.starters||per.chips); setLim();
-  inp.oninput=()=>btn.disabled=!inp.value.trim(); btn.disabled=true;
+  inp.oninput=()=>btn.disabled=!inp.value.trim(); btn.disabled=true; if(opts.prefill){ inp.value=opts.prefill; btn.disabled=false; }
   inp.onkeydown=e=>{ if(e.key==='Enter'&&!e.isComposing) send(inp.value); }; btn.onclick=()=>send(inp.value);
   function paywall(){ const w=document.createElement('div'); w.className='ak-paw'; w.innerHTML=`<b>${per.name}${josa(per.name,'과','와')} 더 이야기하기</b><small>대화권 10회 3,900원 · 무제한 월 9,900원</small><button>대화권 받기</button>`; w.querySelector('button').onclick=()=>{ w.querySelector('small').textContent='체험판이라 결제는 여기까지예요'; }; el.insertBefore(w,el.querySelector('.ak-in')); inp.disabled=true; btn.disabled=true; sug.innerHTML=''; }
   const show=t=>{ const i=t.indexOf('[['); return (i>=0?t.slice(0,i):t).trim(); };

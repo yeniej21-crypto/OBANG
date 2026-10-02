@@ -441,18 +441,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .result{position:absolute;inset:0;z-index:35;overflow-y:auto;background:linear-gradient(180deg,#120e14,#09070b);opacity:0;pointer-events:none;transition:opacity .6s;padding:calc(env(safe-area-inset-top,0px) + 64px) 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
 .result.on{opacity:1;pointer-events:auto}
 .card{border-radius:24px;overflow:hidden;border:1px solid rgba(227,184,102,.35);background:#141016;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.card .hero{position:relative;aspect-ratio:4/5;background:#000 center 18%/cover no-repeat;transition:background-image .6s}
-.card .hero .fv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;opacity:0;transition:opacity .8s;z-index:0}
-.card .hero .fv.on{opacity:1}
-.card .hero .fsub{position:absolute;left:18px;right:18px;bottom:96px;z-index:1;text-align:center;font-family:var(--serif);font-size:18px;line-height:1.5;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.9);opacity:0;transition:opacity .5s}
-.card .hero .fsub.on{opacity:1}
-.card .hero .faceSw{position:absolute;right:12px;top:60px;z-index:2;text-align:right}
-.card .hero .faceSw small{display:block;font-size:10px;letter-spacing:.18em;color:rgba(243,230,200,.85);margin-bottom:6px;text-shadow:0 1px 6px rgba(0,0,0,.8)}
-.card .hero .faceSw div{display:inline-flex;border:1px solid rgba(243,214,168,.5);background:rgba(10,8,12,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.card .hero .faceSw button{border:0;background:none;color:rgba(243,230,200,.7);padding:6px 10px;cursor:pointer;font-family:inherit;line-height:1.15}
-.card .hero .faceSw button b{display:block;font-size:13px;font-weight:700}
-.card .hero .faceSw button em{display:block;font-style:normal;font-size:9.5px;letter-spacing:.06em;opacity:.8}
-.card .hero .faceSw button.on{background:var(--gold);color:#1a1206}
+.card .hero{position:relative;aspect-ratio:4/5;background:#000 center 18%/cover no-repeat}
 .card .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(20,16,22,1) 100%)}
 .card .hero .tag{position:absolute;left:16px;top:16px;z-index:1;font-size:11px;letter-spacing:.24em;font-weight:700;color:#1a1206;background:var(--gold);padding:5px 10px;border-radius:999px}
 .card .hero .nm{position:absolute;left:18px;bottom:14px;z-index:1}
@@ -879,8 +868,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 
   <div class="result" id="result">
     <div class="card">
-      <div class="hero" id="rHero"><span class="tag">나의 수호신 카드</span><button type="button" class="heroShare" id="ctaShare" aria-label="수호신 카드 공유하기"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6h14v-6"/></svg></button><video class="fv" id="faceV" playsinline preload="none"></video><div class="fsub" id="faceSub"></div><div class="nm"><small id="rGod"></small><b id="rName"></b></div>
-        <div class="faceSw" id="faceSw" aria-label="같은 기운의 두 얼굴"><small>같은 기운, 두 얼굴</small><div><button type="button" data-f="yang" class="on"><b id="fsYang"></b><em id="fsYangS" data-hj="0"></em></button><button type="button" data-f="yin"><b id="fsYin"></b><em id="fsYinS" data-hj="0"></em></button></div></div></div>
+      <div class="hero" id="rHero"><span class="tag">나의 수호신 카드</span><button type="button" class="heroShare" id="ctaShare" aria-label="수호신 카드 공유하기"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6h14v-6"/></svg></button><div class="nm"><small id="rGod"></small><b id="rName"></b></div></div>
       <div class="body">
         <div class="sec gwhy"><h4>수호신 카드</h4>
           <div><b>빈칸을 채우는 신</b><span>내 사주 여덟 글자 가운데 비어 있는 기운을 맡은 신이에요.</span></div>
@@ -1261,31 +1249,6 @@ const GODS={
   metal:{h:'白虎',n:'시온',el:'金',dir:'서쪽',c:'var(--metal)',label:'금(金)',desc:'서쪽을 지키는 백호 · 정리와 결단',mission:'오늘, 안 맞는 약속 하나 끊어. 비워야 들어와.'},
   water:{h:'玄武',n:'재이',el:'水',dir:'북쪽',c:'var(--water)',label:'수(水)',desc:'북쪽을 지키는 현무 · 속마음과 지혜',mission:'물 한 잔 먼저 마셔. 그리고 오늘 하루, 세 줄만 적어.'}};
 const ORDER=['wood','fire','earth','metal','water'];
-/* 음의 현신(여신 5): 같은 신수 · 같은 기운의 다른 얼굴. 성별로 배정하지 않고 이용자가 고른다(10/2 결정). 캐릭터 시트 10 · 설정 07 */
-const YIN_V='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
-const YIN={
-  wood:{n:'새아',st:'乙',ys:'甲',img:'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2_min.webp',v:YIN_V+'5c50aa18-ca62-4c3f-a583-dcf5d4847487.mp4',line:'괜찮아. 휘어도 안 꺾여.'},
-  fire:{n:'별하',st:'丁',ys:'丙',img:'img/yin/fire.jpg',v:YIN_V+'30455774-ffb6-4d78-95f0-716de737468a.mp4',line:'작아도 괜찮아. 오래 타면 돼.'},
-  earth:{n:'도담',st:'己',ys:'戊',img:'img/yin/earth.jpg',v:YIN_V+'9a5986fb-e15a-43b0-8227-fe37e6ec3d0e.mp4',line:'뿌린 만큼 거둬요. 걱정은 나한테 맡겨.'},
-  metal:{n:'세린',st:'辛',ys:'庚',img:'img/yin/metal.jpg',v:YIN_V+'6e77ff4d-1bcc-4e77-9676-351a9f281be4.mp4',line:'칭찬은 아껴 둘게. 넌 아직 더 빛날 수 있어.'},
-  water:{n:'이슬',st:'癸',ys:'壬',img:'img/yin/water.jpg',v:YIN_V+'cf2ab952-53cb-4703-b502-6445b716aec8.mp4',line:'천천히 말해도 돼. 다 들려.'}};
-function faceOf(){ try{ return localStorage.getItem('obFace')==='yin'?'yin':'yang'; }catch(e){ return 'yang'; } }
-function godImg(k){ return faceOf()==='yin'?YIN[k].img:`img/${k}.jpg`; }
-function godName(k){ return faceOf()==='yin'?YIN[k].n:GODS[k].n; }
-function applyFace(f,withVoice){ const k=S.low, g=GODS[k], y=YIN[k], h=$('rHero'), v=$('faceV'), sub=$('faceSub');
-  try{ localStorage.setItem('obFace',f); }catch(e){}
-  $('faceSw').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.f===f));
-  $('fsYang').textContent=g.n; $('fsYangS').textContent='양 · '+y.ys; $('fsYin').textContent=y.n; $('fsYinS').textContent='음 · '+y.st;
-  const img=f==='yin'?y.img:`img/${k}.jpg`; h.style.backgroundImage=`url("${img}")`;
-  if(window.Depth3D){ Depth3D.unmount(h); Depth3D.unholo(h); if(f==='yang') Depth3D.mount(h,{src:img,pos:[.5,.18]}); }
-  $('rGod').textContent=`${g.h} · ${g.el} · ${g.dir}`+(f==='yin'?' · 음의 현신':''); $('rName').textContent=`나의 수호신, ${f==='yin'?y.n:g.n}`;
-  v.pause(); v.classList.remove('on'); sub.classList.remove('on');
-  if(f==='yin'&&withVoice){ v.src=y.v; v.poster=img; v.muted=false; v.currentTime=0; const p=v.play(); if(p&&p.catch) p.catch(()=>{ v.muted=true; v.play().catch(()=>{}); });
-    v.onplaying=()=>{ v.classList.add('on'); setTimeout(()=>{ sub.textContent=y.line; sub.classList.add('on'); },500); };
-    v.onended=()=>{ sub.classList.remove('on'); setTimeout(()=>v.classList.remove('on'),600); }; }
-  try{ refreshFaceSpots(); }catch(e){} }
-function refreshFaceSpots(){ if(!S||!S.low) return; const im=`url("${godImg(S.low)}")`;
-  ['preAv','ovLock','notiPic','hMisAv'].forEach(id=>{ const e=$(id); if(e) e.style.backgroundImage=im; }); }
 
 /* ---------- saju (simplified solar calc) ---------- */
 const STEM='甲乙丙丁戊己庚辛壬癸', BR='子丑寅卯辰巳午未申酉戌亥';
@@ -1456,8 +1419,9 @@ async function afterWorry(){
 function subMode(on){ $('stage').classList.toggle('subm',on); if(on) $('stage').classList.remove('homeMode'); }
 function showResult(){ subMode(true);
   const g=GODS[S.low];
-  applyFace(faceOf(),false);
-  $('faceSw').querySelectorAll('button').forEach(b=>b.onclick=e=>{ e.stopPropagation(); applyFace(b.dataset.f,true); });
+  $('rHero').style.backgroundImage=`url("img/${S.low}.jpg")`;
+  if(window.Depth3D){ const h=$('rHero'); Depth3D.unmount(h); Depth3D.unholo(h); Depth3D.mount(h,{src:`img/${S.low}.jpg`,pos:[.5,.18]}); }
+  $('rGod').textContent=`${g.h} · ${g.el} · ${g.dir}`; $('rName').textContent=`나의 수호신, ${g.n}`;
   $('rPillars').innerHTML=S.P.map(p=>`<div><div class="l">${p.l}</div><div class="c">${p.s===null?'<span style="color:var(--ink-3)">?</span>':`<span style="color:${EL_COL[STEM_EL[p.s]]}">${STEM[p.s]}</span><br><span style="color:${EL_COL[BR_EL[p.b]]}">${BR[p.b]}</span>`}</div></div>`).join('');
   const max=Math.max(...S.cnt,1), names=['목(木)','화(火)','토(土)','금(金)','수(水)'];
   $('rBars').innerHTML=S.cnt.map((c,i)=>`<div class="bar ${EL_KEYS[i]===S.low?'low':''}" style="--c:${EL_COL[i]}"><span class="lbl">${names[i]}</span><div class="t"><i data-w="${Math.max(c/max*100,4)}"></i></div><span class="v">${c}</span></div>`).join('');
@@ -1564,9 +1528,9 @@ const wait=ms=>new Promise(r=>setTimeout(r,ms));
 const iga=n=>{ const c=n.charCodeAt(n.length-1)-0xAC00; return n+((c>=0&&c%28)?'이':'가'); };
 function memberStart(){
   const g=GODS[S.low]; fetchClip('m_'+S.low);
-  $('preAv').style.backgroundImage=`url("${godImg(S.low)}")`;
-  $('preTx').innerHTML=`내일 아침 8시,<br>${iga(godName(S.low))} 첫 개운 미션 보낼게.`;
-  if(window.ObNotify){ ObNotify.ask({title:'아침 미션 받기',img:godImg(S.low),head:`내일 아침 8시, ${godName(S.low)}의 첫 개운 미션`,sub:'어디로 보낼지 골라 줘'}).then(v=>{ if(v) nextMorning(); }); return; }
+  $('preAv').style.backgroundImage=`url("img/${S.low}.jpg")`;
+  $('preTx').innerHTML=`내일 아침 8시,<br>${iga(g.n)} 첫 개운 미션 보낼게.`;
+  if(window.ObNotify){ ObNotify.ask({title:'아침 미션 받기',img:`img/${S.low}.jpg`,head:`내일 아침 8시, ${g.n}의 첫 개운 미션`,sub:'어디로 보낼지 골라 줘'}).then(v=>{ if(v) nextMorning(); }); return; }
   ov('ovPre');
 }
 async function nextMorning(){
@@ -1574,14 +1538,14 @@ async function nextMorning(){
   const t=$('nightT'); t.textContent='07:59'; await wait(1100); t.textContent='08:00'; await wait(800);
   const d=new Date(Date.now()+864e5), W='일월화수목금토';
   $('lockD').textContent=`${d.getMonth()+1}월 ${d.getDate()}일 ${W[d.getDay()]}요일`;
-  $('ovLock').style.backgroundImage=`url("${godImg(S.low)}")`; $('notiPic').style.backgroundImage=`url("${godImg(S.low)}")`;
-  $('notiN').textContent=godName(S.low); $('notiM').textContent=MS[S.low].push; $('noti').classList.remove('on');
+  $('ovLock').style.backgroundImage=`url("img/${S.low}.jpg")`; $('notiPic').style.backgroundImage=`url("img/${S.low}.jpg")`;
+  $('notiN').textContent=g.n; $('notiM').textContent=MS[S.low].push; $('noti').classList.remove('on');
   ov('ovLock'); await wait(900); $('noti').classList.add('on');
 }
 async function openMission(){
   const g=GODS[S.low]; ov(null); homeOff(); subMode(true); hostName=hostName||$('who').textContent; $('who').textContent=g.n;
   await play('m_'+S.low,{posterKey:'m_'+S.low}); clearSubs();
-  $('mK').textContent=`오늘의 개운 미션 · ${godName(S.low)} (${g.el})`; $('mTx').textContent=g.mission; panel('pMission'); bgm(BGM_LV.idle,1);
+  $('mK').textContent=`오늘의 개운 미션 · ${g.n} (${g.el})`; $('mTx').textContent=g.mission; panel('pMission'); bgm(BGM_LV.idle,1);
 }
 function showGauge(){
   panel(null); subMode(true); const g=GODS[S.low], idx=EL_KEYS.indexOf(S.low);
@@ -1589,7 +1553,7 @@ function showGauge(){
   const names=['목(木)','화(火)','토(土)','금(金)','수(水)'], cnt=S.cnt.slice(), max=Math.max(...cnt,1)+1;
   $('gBars').innerHTML=cnt.map((c,i)=>`<div class="bar ${i===idx?'low':''}" style="--c:${EL_COL[i]}"><span class="lbl">${names[i]}</span><div class="t"><i data-w="${Math.max(c/max*100,4)}"></i></div><span class="v">${c}${i===idx?'<em class="gUp">+0.2</em>':''}</span></div>`).join('');
   $('gStreak').innerHTML=['1일','2','3','4','5','6','7'].map((x,i)=>`<span class="${i===0?'on':''}">${i===0?'✓':x}</span>`).join('');
-  $('gStreakTx').textContent=`7일 채우면 ${godName(S.low)}의 음성 편지가 열려.`;
+  $('gStreakTx').textContent=`7일 채우면 ${g.n}의 음성 편지가 열려.`;
   const base=new Date(Date.now()+18*864e5), yy=base.getFullYear(), m=base.getMonth();
   $('kd1').textContent=`${m+1}월 17일`; $('kd2').textContent=`${m+1}월 22일`;
   $('calH').textContent=`${m+1}월 기운 캘린더`;
@@ -1613,7 +1577,6 @@ $('gSub').onclick=()=>{ ov('ovSub'); $('ovSub').scrollTop=0; bgm(BGM_LV.result,1
 /* ---------- main home ---------- */
 Object.assign(V,{halmae:'v/halmae.mp4'}); LINES.halmae=['왔구나.','…네 내년 열두 달,','이 할미가 다 봐 뒀다.','섣달에 보자.']; FALLBACK_DUR.halmae=8; POSTER.halmae='img/halmae.jpg';
 function ensureS(){ if(!S) S=calc(1996,5,14,6); }
-window.__obTest={card:k=>{ ensureS(); if(k) S.low=k; showResult(); }}; /* 자동 점검용(화면 동작 없음) */
 function homeOff(){ $('home').classList.remove('on'); $('tabs').classList.remove('on'); $('toTop').classList.remove('on'); $('stage').classList.remove('homeMode'); }
 
 /* ---------- 오늘의 운세 위젯 (today.html과 같은 규칙) ---------- */
@@ -1638,12 +1601,12 @@ function renderFort(){
 function renderHome(){
   ensureS(); renderFort(); try{ renderWry(); }catch(e){} const g=GODS[S.low];
   $('hMis').style.setProperty('--c',g.c);
-  $('hMisAv').style.backgroundImage=`url("${godImg(S.low)}")`;
+  $('hMisAv').style.backgroundImage=`url("img/${S.low}.jpg")`;
   /* 첫 화면 벤토: 채울 기운의 미니 수호신 + 행운 색·방향·숫자 */
   { const L={wood:['초록','#3f9f6e','동쪽','3 · 8'],fire:['빨강','#e0553f','남쪽','2 · 7'],earth:['노랑','#d3a13a','가운데','5 · 10'],metal:['흰색','#e9ecf1','서쪽','4 · 9'],water:['남색','#2f4f9a','북쪽','1 · 6']}[S.low];
     $('tday').style.setProperty('--c',g.c); $('hMisAv').style.backgroundImage=`url("img/mini/${S.low}.jpg")`; $('bjGo').querySelector('.cardT').style.backgroundImage=`url('img/card/${S.low}.jpg')`; try{ sessionStorage.setItem('obLow',JSON.stringify({k:S.low,cnt:S.cnt})); }catch(e){}
     $('hLuck').innerHTML=`<small>행운 · 채울 기운 ${g.el}</small><div class="lk"><i style="background:${L[1]}"></i><b>${L[0]}</b></div><dl><div><dt>방향</dt><dd>${L[2]}</dd></div><div><dt>숫자</dt><dd>${L[3]}</dd></div></dl>`; }
-  $('hMisK').innerHTML=`오늘의 개운 · <em>${godName(S.low)} ${g.el}</em>`; $('hMisT').textContent=g.mission;
+  $('hMisK').innerHTML=`오늘의 개운 · <em>${g.n} ${g.el}</em>`; $('hMisT').textContent=g.mission;
   const max=Math.max(...S.cnt,1), names='木火土金水';
   $('hG').innerHTML=S.cnt.map((c,i)=>`<div class="${EL_KEYS[i]===S.low?'low':''}" style="--c:${EL_COL[i]};--w:${Math.max(c/max*100,6)}%"><b>${names[i]}</b><i></i></div>`).join('');
   $('hMem').innerHTML=ORDER.map(k=>{const m=GODS[k];return `<button class="om ${k===S.low?'mine':''}" data-el="${k}" style="--c:${m.c}"><span style="background-image:url('img/${k}.jpg')"></span><b>${m.n}</b><small>${m.h} · ${m.el}</small></button>`;}).join('');

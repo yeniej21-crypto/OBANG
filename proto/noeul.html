@@ -71,12 +71,13 @@ button,select,input{font-family:inherit}
 #sTalk>.top{position:absolute;left:0;right:0;background:none}
 .talk{position:relative;min-height:var(--sh,100vh);display:flex;flex-direction:column;justify-content:flex-end;padding:0 22px calc(env(safe-area-inset-bottom,0px) + 22px)}
 .ttl0{text-align:center;transition:opacity .8s,max-height .8s,margin .8s;max-height:200px;overflow:hidden;margin-bottom:18px}
-.ttl0.off{opacity:.18}
+.ttl0.off{opacity:0;max-height:0;margin:0}
 .ttl0 small{display:block;font-size:11.5px;letter-spacing:.32em;color:var(--gold);font-weight:700}
 .ttl0 h1{margin:8px 0 0;font-family:var(--brush);font-weight:400;font-size:50px;line-height:1.05;color:#fff;text-shadow:0 4px 24px rgba(0,0,0,.7)}
 .ttl0 p{margin:6px 0 0;font-family:var(--bmj);font-size:17px;color:var(--ink2)}
 .msgs{display:flex;flex-direction:column;gap:12px}
-.ln{opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s ease,font-size .6s ease,color .6s}
+.ln{opacity:0;transform:translateY(10px);max-height:220px;overflow:hidden;transition:opacity .9s ease,transform .9s ease,font-size .6s ease,color .6s,max-height .7s ease .25s,margin .7s ease .25s}
+.ln.gone{opacity:0!important;max-height:0;margin:0!important;transition:opacity .45s ease,max-height .7s ease .3s,margin .7s ease .3s}
 .ln.on{opacity:1;transform:none}
 .ln.n{font-family:var(--bmj);font-size:22px;line-height:1.55;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.8)}
 .ln.n.old{font-size:16px;color:rgba(243,236,223,.42)}
@@ -85,7 +86,7 @@ button,select,input{font-family:inherit}
 .ln.me{align-self:flex-end;font-size:14px;color:var(--gold2);letter-spacing:.02em}
 .ln.me:before{content:"";display:inline-block;width:18px;height:1px;background:var(--gold);vertical-align:middle;margin-right:8px;opacity:.7}
 .ln.me.old{opacity:.4}
-.ln.old2{opacity:.22!important}
+
 .ask{margin-top:18px;display:none}
 .ask.on{display:block;animation:up .5s ease}
 @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -324,7 +325,10 @@ select option{background:#16121f;color:var(--ink)}
 .outro{margin:26px 0 0;display:grid;gap:10px}
 .outro .go{margin-top:0}
 .outro .ghost2{height:48px;border:1px solid var(--line);background:none;color:var(--ink2);font-size:14px;font-weight:700;cursor:pointer}
-.obs-btn{color:var(--gold2)!important;border-color:rgba(227,194,122,.55)!important;margin-top:24px!important}
+.inv{margin-top:26px;padding:18px 0 4px;text-align:center;border-top:1px solid var(--line2)}
+.inv p{margin:0;font-family:var(--bmj);font-size:17px;color:var(--ink)}
+.inv button{margin-top:12px;height:46px;padding:0 22px;border:1px solid rgba(227,194,122,.6);background:linear-gradient(90deg,rgba(227,194,122,.14),rgba(227,194,122,.04));color:var(--gold2);font-size:14.5px;font-weight:700;cursor:pointer}
+.outro .lnk{border:0;height:40px;color:var(--ink3);font-weight:500;text-decoration:underline;text-underline-offset:4px}
 #sndB .x{display:none}#sndB.off .x{display:block}#sndB.off .w{display:none}
 .top .tg{display:none}
 .end .snd{position:absolute;right:14px;top:14px;z-index:3;display:none;height:32px;padding:0 12px;border:1px solid rgba(241,219,164,.6);background:rgba(18,15,28,.45);color:var(--gold2);font-size:12px;cursor:pointer}
@@ -432,6 +436,7 @@ select option{background:#16121f;color:var(--ink)}
         <div class="qt rv"><p id="say1"></p><small>노을</small></div>
         <div class="basis rv"><small>노을이 읽은 근거</small><p class="cap" id="gCap"></p><div class="pil" id="pil"></div></div>
 
+        <div class="inv rv"><p>낮의 나와 밤의 나, 친구는 어떻게 나올까요.</p><button type="button" id="invite1">친구에게 이 운세 보내기</button></div>
         <div class="lock rv" id="lock">
           <div class="bl"><div class="ph" id="lockPh"></div><p>올해 당신의 낮에는 사람과 자리가 함께 들어옵니다. 3월과 8월에 해와 달이 만나고</p><p>未 속에 숨은 세 글자 가운데 하나가 당신 쪽을 향해 있어요. 그 글자는</p></div>
           <div class="ov"><b>노을이 펼쳐 줄 이야기</b><ul><li>1장 · 낮의 나: 일, 평판, 관계, 돈의 흐름</li><li>2장 · 밤의 나: 속마음, 감정, 숨은 인연과 기회</li><li>3장 · 해와 달의 열두 달: 만나는 달과 엇갈리는 달</li><li>4장 · 노을의 처방과 올해의 부적</li><li>낮과 밤 앞뒤 카드</li></ul></div>
@@ -500,7 +505,9 @@ armLoops($('sTalk'));
 
 /* ---------- 1. 대화형 입력 ---------- */
 function toBottom(){ const t=$('sTalk'); t.scrollTo({top:t.scrollHeight,behavior:'smooth'}); }
-function say(t,me){ const box=$('msgs'); [...box.children].forEach(c=>{ if(c.classList.contains('old')) c.classList.add('old2'); c.classList.add('old'); });
+function say(t,me){ const box=$('msgs'), kids=[...box.children].filter(c=>!c.classList.contains('gone')), last=kids[kids.length-1];
+  /* 지금 말과 바로 앞 한 줄만 남기고, 나머지는 부드럽게 접어서 지움(얼굴 위에 지난 글자가 비치지 않게) */
+  kids.forEach(c=>{ if(c===last){ c.classList.add('old'); } else { c.classList.add('gone'); setTimeout(()=>c.remove(),1200); } });
   const d=document.createElement('div'); d.className='ln '+(me?'me':'n'); d.innerHTML=me?t:`<small>노을</small>${t}`; box.appendChild(d);
   requestAnimationFrame(()=>requestAnimationFrame(()=>d.classList.add('on'))); setTimeout(toBottom,80); }
 function ask(id){ ['aName','aBirth','aHour'].forEach(a=>$(a).classList.toggle('on',a===id)); if(id) setTimeout(toBottom,140); }
@@ -736,7 +743,7 @@ function premHTML(){
     <div class="face ft" style="background-image:url('${IMG.cuDay}')"><small>낮의 ${r.nick}</small><b>${GROUP[r.rS]}의 해</b><p>${DAY_TX[r.rS][r.fS?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
     <div class="face bk" style="background-image:url('${IMG.cuNight}')"><small>밤의 ${r.nick}</small><b>${HID_MEAN[r.hid[0].g]}</b><p>${NIGHT_TX[r.rB][r.fB?0:1].split('.')[0]}.</p><em>2027 해와 달의 운세 · 노을</em></div>
   </div></div><p class="fliphint">카드를 누르면 밤의 내가 보여요</p>
-    <div class="outro"><button class="go" id="shareMine" type="button">내 낮과 밤 카드 보내기</button><button class="ghost2" id="toHome" type="button">다른 신들의 운세 보러 가기</button></div></div>`;
+    <div class="outro"><button class="go" id="invite2" type="button">친구에게 이 운세 보내기</button><button class="ghost2" id="shareMine" type="button">내 낮과 밤 카드 이미지로 저장 · 공유</button><button class="ghost2 lnk" id="toHome" type="button">다른 신들의 운세 보러 가기</button></div></div>`;
   return h;
 }
 function drawChart(){
@@ -767,13 +774,15 @@ $('payBtn').onclick=()=>{ const pr=$('prem');
   if(!$('pay').classList.contains('done')){ pr.innerHTML=premHTML(); pr.hidden=false; $('lock').hidden=true; drawChart(); reveal(); $('pay').classList.add('done'); $('payBtn').textContent='1장부터 보기'; toast('체험판이라 결제 없이 열었어요');
     const f=$('flip'); if(f) f.onclick=()=>f.classList.toggle('on');
     unlockEnd(); armEnd(); armLoops($('sRep')); pxRep(); if(window.BGM) BGM.watch();
-    $('shareMine').onclick=()=>{ if(!window.ObShare) return; const r=R; ObShare.open({menu:'해와 달의 운세',kicker:`2027 · 낮의 ${r.nick} · 밤의 ${r.nick}`,big:String(r.pS),unit:'% 낮',head:`${GROUP[r.rS]}의 해, ${HID_MEAN[r.hid[0].g]}`,sub:`${DAY_TX[r.rS][r.fS?0:1].split('.')[0]}. ${NIGHT_TX[r.rB][r.fB?0:1].split('.')[0]}.`,img:'img/noeul.jpg'}); };
-    $('toHome').onclick=()=>{ location.href='./'; };
+    $('shareMine').onclick=()=>{ if(!window.ObShare) return; const r=R; ObShare.open({sheetHead:'내 낮과 밤 카드',sheetNote:'내 결과 카드 이미지예요. 저장해서 스토리에 올리거나 친구에게 보낼 수 있어요.',menu:'해와 달의 운세',kicker:`2027 · 낮의 ${r.nick} · 밤의 ${r.nick}`,big:String(r.pS),unit:'% 낮',head:`${GROUP[r.rS]}의 해, ${HID_MEAN[r.hid[0].g]}`,sub:`${DAY_TX[r.rS][r.fS?0:1].split('.')[0]}. ${NIGHT_TX[r.rB][r.fB?0:1].split('.')[0]}.`,img:'img/noeul.jpg'}); };
+    $('toHome').onclick=()=>{ location.href='./'; }; $('invite2').onclick=invite;
     /* 맨 끝에 오면 아래 고정 버튼을 내려 끝 화면을 가리지 않게 */
     new IntersectionObserver(es=>es.forEach(e=>$('pay').classList.toggle('on',!e.isIntersecting)),{root:$('sRep'),threshold:.1}).observe(document.querySelector('.outro')); }
   pr.scrollIntoView({behavior:'smooth',block:'start'}); };
 $('back2').onclick=()=>{ $('msgs').innerHTML=''; $('ttl0').classList.remove('off'); show('sTalk'); talked=false; $('sTalk').scrollTop=$('meet').offsetTop; talkStart(); };
-$('shrB').onclick=()=>{ if(window.ObShare) ObShare.sheet({src:'img/og/noeul.jpg',name:'noeul.jpg',head:'이 운세 공유하기',title:'해와 달의 운세 · 오방사주',text:'남자도 여자도, 낮도 밤도 아닌 노을이 읽어 주는 2027 낮의 나와 밤의 나'}); };
+/* 공유는 '친구에게 이 운세를 보내는 것(초대)'이 기본. 내 결과 카드는 맨 끝에서만 따로 */
+function invite(){ if(window.ObShare) ObShare.sheet({src:'img/og/noeul.jpg',name:'noeul.jpg',invite:true,head:'친구에게 이 운세 보내기',title:'해와 달의 운세 · 오방사주',text:'노을이 읽어 주는 2027 낮의 나와 밤의 나. 너도 봐 봐',note:'친구는 링크로 바로 들어와 자기 생일로 낮과 밤을 볼 수 있어요. 내 결과는 보내지지 않아요. 정식 오픈 뒤에는 친구가 들어오면 둘 다 할인 쿠폰을 받아요.'}); }
+$('shrB').onclick=invite; $('invite1').onclick=invite;
 /* 공유 링크로 들어온 사람: 첫 컷에 한 줄 */
 try{ if(new URLSearchParams(location.search).get('ref')==='share'){ const tp=document.querySelector('.pp.first .ct.tp'); if(tp) tp.insertAdjacentHTML('afterbegin','<span class="fromF">친구가 보낸 이야기</span>'); } }catch(e){}
 $('back1').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };

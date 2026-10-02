@@ -21,7 +21,6 @@ const CFG={
  'taegil.html':{before:()=>$('lockT'),ready:()=>T('oT'),data:()=>({menu:'택일',kicker:T('oK'),head:T('oT'),sub:T('oS'),img:'img/taegil.jpg'})},
  'gunghap.html':{before:()=>$('lockG'),ready:()=>T('scT'),data:()=>({menu:'도화 궁합',kicker:`${T('nA')} × ${T('nB')} · 도화 궁합`,big:T('sc'),unit:'점',head:T('scT'),sub:T('say'),img:'img/taeo/base.jpg'})},
  'tarot.html':{before:()=>$('lockR'),ready:()=>T('vBig'),data:()=>({menu:'무진의 타로',kicker:T('rKick'),head:T('vBig'),sub:T('vLine'),img:'img/tarot/mujin.jpg'})},
- 'noeul.html':{before:()=>$('lock'),ready:()=>T('rVer'),data:()=>({menu:'해와 달의 운세',kicker:'2027 해와 달의 운세 · 노을',big:T('gM').replace('%',''),unit:'% 밤',head:`${T('rWho')} ${T('rVer')}`,sub:T('say1'),img:'img/noeul.jpg'})},
  'home':{before:()=>$('ctaShare'),replace:true,ready:()=>T('rName'),data:()=>({menu:'수호신 카드',kicker:'나의 수호신 · '+T('rGod'),head:T('rName'),sub:T('rMission'),img:BG('rHero')})}
 };
 
@@ -65,6 +64,10 @@ function build(){ el=document.createElement('div'); el.className='obs'; el.datas
 function close(){ if(el) el.classList.remove('on'); }
 async function toBlob(o){ if(o.blob) return o.blob; if(o.src){ const r=await fetch(o.src); return await r.blob(); } return null; }
 async function sheet(o){ if(!el) build(); cur=Object.assign({name:'obang-card.png',title:'오방사주',text:'',url:shareUrl()},o); cur.blob=await toBlob(o); el.querySelector('.hd b').textContent=o.head||'결과 공유하기';
+  /* 초대(이 운세를 친구에게): 이미지 저장 대신 링크만, 안내 문구도 초대용 */
+  el.querySelector('[data-save]').hidden=!!o.invite; el.querySelector('.row').style.gridTemplateColumns=o.invite?'1fr':'';
+  el.querySelector('[data-send]').lastChild.textContent=o.invite?'카톡 · 인스타로 친구에게 보내기':'카톡 · 인스타로 보내기';
+  el.querySelector('.nt').textContent=o.note||'공유한 링크로 친구가 들어오면 할인 쿠폰을 드려요. 쿠폰은 정식 오픈 때부터 적용돼요.';
   const img=el.querySelector('.pv img'); img.src=o.src||URL.createObjectURL(cur.blob); el.querySelector('.pv').hidden=!cur.blob;
   requestAnimationFrame(()=>el.classList.add('on')); }
 function done(){ try{ window.dispatchEvent(new CustomEvent('obshare:done',{detail:{key:file}})); }catch(e){} }
@@ -94,7 +97,7 @@ async function card(d){ const W=1080,H=1920,c=document.createElement('canvas'); 
   try{ const mk=await loadImg('img/brand/mark.svg'); x.drawImage(mk,L,1822,42,42); }catch(e){}
   x.textAlign='right'; x.fillStyle='#8f857c'; x.font=`500 26px ${SANS}`; x.fillText(location.host||'',W-L,1856);
   return await new Promise(r=>c.toBlob(r,'image/png')); }
-async function open(d){ toast('공유 카드를 만드는 중이에요'); const b=await card(d); sheet({blob:b,name:`obang-${(d.menu||'card').replace(/\s/g,'')}.png`,title:`오방사주 · ${d.menu||''}`,text:d.head?`${d.head}`:''}); }
+async function open(d){ toast('공유 카드를 만드는 중이에요'); const b=await card(d); sheet({blob:b,name:`obang-${(d.menu||'card').replace(/\s/g,'')}.png`,title:`오방사주 · ${d.menu||''}`,text:d.head?`${d.head}`:'',head:d.sheetHead,note:d.sheetNote}); }
 
 /* ---------- 자동 버튼 ---------- */
 function attach(){ const key=isHome?'home':file, C=CFG[key]; if(!C) return;

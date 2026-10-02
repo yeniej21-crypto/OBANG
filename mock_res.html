@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>결과 화면 시안 · 오방도감</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Archivo+Black&display=swap">
+<style>
+:root{--bg:#fff;--bg2:#f4f4f2;--ink:#111;--ink2:#555;--ink3:#8a8a8a;--line:#e3e3e3;--red:#a12a1f;--hl:#a12a1f;--hlt:#fff}
+body.vb{--bg:#fbf0bf;--bg2:#f6e59a;--ink:#141210;--ink2:#4a443a;--ink3:#7d745f;--line:rgba(20,18,16,.16);--red:#b3261c;--hl:#141210;--hlt:#fbf0bf}
+*{box-sizing:border-box;border-radius:0}
+html,body{margin:0;background:#d9d9d9}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);word-break:keep-all;-webkit-font-smoothing:antialiased;display:flex;justify-content:center}
+.pg{width:100%;max-width:430px;background:var(--bg);min-height:100vh;overflow:hidden}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;height:48px;padding:0 16px;background:var(--bg);border-bottom:1px solid var(--line)}
+.top b{font-size:12px;font-weight:900;letter-spacing:.02em}
+.top span{font-size:11px;color:var(--ink3)}
+.top svg{width:18px;height:18px}
+
+/* 첫 화면 */
+.hero{position:relative}
+.hero .ph{aspect-ratio:4/5;background:url('img/seoha.jpg') center 16%/cover no-repeat}
+.hero .cap{padding:18px 16px 26px}
+.kick{display:flex;gap:8px;align-items:center;font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:.02em}
+.kick i{width:5px;height:5px;background:var(--red);border-radius:50%}
+h1{margin:12px 0 0;font-size:26px;line-height:1.22;font-weight:900;letter-spacing:-.045em}
+.hl{display:inline;background:var(--hl);color:var(--hlt);padding:0 6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.lead{margin:12px 0 0;font-size:13.5px;line-height:1.6;color:var(--ink2);letter-spacing:-.01em}
+
+/* 띠 */
+.band{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;height:34px;display:flex;align-items:center}
+.vb .band{background:var(--ink);color:var(--bg)}
+.band div{display:inline-block;font-family:'Archivo Black',sans-serif;font-size:11px;letter-spacing:.22em;animation:mq 22s linear infinite;padding-left:16px}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* 지수 */
+.score{display:flex;align-items:flex-end;justify-content:space-between;padding:26px 16px 22px;border-bottom:1px solid var(--line)}
+.score .n{font-family:'Archivo Black',sans-serif;font-size:76px;line-height:.82;letter-spacing:-.05em}
+.score .n small{font-size:22px;margin-left:2px}
+.score .t{text-align:right;font-size:12px;line-height:1.5;color:var(--ink2)}
+.score .t b{display:block;font-size:15px;color:var(--ink);font-weight:900;letter-spacing:-.03em}
+.meter{height:3px;background:var(--line);margin:0 16px;position:relative;top:-1px}
+.meter i{position:absolute;left:0;top:0;bottom:0;width:76%;background:var(--red)}
+
+/* 장 */
+.sec{padding:34px 16px 30px;border-bottom:1px solid var(--line)}
+.no{font-family:'Archivo Black',sans-serif;font-size:44px;line-height:.9;color:var(--red);letter-spacing:-.04em}
+.vb .no{display:none}
+.lab{margin-top:14px;font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:.04em}
+.vb .lab{margin-top:0;color:var(--red)}
+h2{margin:6px 0 0;font-size:19px;line-height:1.3;font-weight:900;letter-spacing:-.04em}
+.tx{margin:10px 0 0;font-size:13px;line-height:1.6;color:var(--ink2);letter-spacing:-.01em}
+.tx b{color:var(--ink);font-weight:700}
+.why{margin-top:14px;padding-top:10px;border-top:1px solid var(--line);font-size:11.5px;line-height:1.55;color:var(--ink3)}
+.why b{color:var(--ink2);font-weight:700;margin-right:6px}
+
+/* 열두 달: 상자 대신 막대 한 줄 */
+.yr{margin-top:20px}
+.bars{display:flex;align-items:flex-end;gap:3px;height:96px}
+.bars i{flex:1;background:var(--ink);opacity:.14;position:relative}
+.bars i.s{opacity:1;background:var(--red)}
+.bars i.g{opacity:.55}
+.mo{display:flex;gap:3px;margin-top:6px}
+.mo span{flex:1;text-align:center;font-size:10px;color:var(--ink3);font-weight:500}
+.mo span.s{color:var(--red);font-weight:900}
+.mo span.y{position:relative}
+.pick{display:flex;margin-top:18px;border-top:2px solid var(--ink)}
+.pick div{flex:1;padding:12px 0 0}
+.pick div+div{padding-left:14px;border-left:1px solid var(--line)}
+.pick small{display:block;font-size:11px;color:var(--ink3);font-weight:700}
+.pick b{display:block;margin-top:4px;font-size:22px;font-weight:900;letter-spacing:-.04em}
+.pick em{display:block;margin-top:2px;font-style:normal;font-size:11.5px;color:var(--ink2)}
+
+/* 사람 */
+.who{margin-top:18px;display:flex;gap:14px;align-items:stretch}
+.who .el{flex:none;width:92px;background:var(--red);color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:10px}
+.vb .who .el{background:var(--ink);color:var(--bg)}
+.who .el small{font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.8}
+.who .el b{font-size:40px;font-weight:900;line-height:1}
+.who ul{margin:0;padding:0;list-style:none;flex:1}
+.who li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:12.5px}
+.who li:first-child{padding-top:0}
+.who li span{color:var(--ink3)}
+.who li b{font-weight:700;text-align:right}
+.who li.lk b{color:transparent;text-shadow:0 0 7px var(--ink3)}
+
+/* 한마디 */
+.say{background:var(--ink);color:#fff;padding:34px 16px 30px}
+.vb .say{background:var(--red)}
+.say .lab{color:rgba(255,255,255,.55);margin:0}
+.say p{margin:10px 0 0;font-size:21px;line-height:1.38;font-weight:900;letter-spacing:-.045em}
+.say .do{margin-top:18px;padding-top:12px;border-top:1px solid rgba(255,255,255,.22);font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.78)}
+.say .do b{color:#fff}
+
+/* 잠금 */
+.lock{padding:30px 16px 34px}
+.lock h2{margin-top:0}
+.lock ol{margin:14px 0 0;padding:0;list-style:none;border-top:2px solid var(--ink)}
+.lock li{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px;font-weight:700}
+.lock li span{font-size:11px;color:var(--ink3);font-weight:500}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:52px;margin-top:18px;border:0;background:var(--ink);color:var(--bg);font:inherit;font-size:14.5px;font-weight:900;letter-spacing:-.02em}
+.btn.o{background:none;color:var(--ink);border:1.5px solid var(--ink);margin-top:8px;height:48px;font-size:13.5px}
+.price{display:flex;justify-content:space-between;margin-top:14px;font-size:12px;color:var(--ink2)}
+.price b{font-size:16px;color:var(--ink);font-weight:900}
+.foot{padding:0 16px 40px;font-size:10.5px;line-height:1.6;color:var(--ink3)}
+.sw{position:fixed;right:12px;bottom:12px;z-index:9;display:flex;background:#111}
+.sw a{color:#fff;font-size:12px;font-weight:700;padding:10px 12px;text-decoration:none}
+.sw a.on{background:#a12a1f}
+</style>
+</head>
+<body>
+<div class="pg">
+  <div class="top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M15 18l-6-6 6-6"/></svg><b>서하의 인연 예보</b><span>10. 3</span></div>
+
+  <div class="hero">
+    <div class="ph"></div>
+    <div class="cap">
+      <div class="kick"><i></i>다음 연애 · 1996년생 은주</div>
+      <h1>앞으로 열두 달 중<br><span class="hl">6월에 인연이 와</span></h1>
+      <p class="lead">좋은 달이 분명히 있어. 그 달엔 약속을 비워 둬. 다음 사람은 환하게 타오르는 불 같은 사람, 공연장이나 사진 찍는 자리에서 만날 가능성이 커.</p>
+    </div>
+  </div>
+
+  <div class="band"><div>NEXT LOVE FORECAST &nbsp;•&nbsp; SEOHA SALON &nbsp;•&nbsp; NEXT LOVE FORECAST &nbsp;•&nbsp; SEOHA SALON &nbsp;•&nbsp; NEXT LOVE FORECAST &nbsp;•&nbsp; SEOHA SALON &nbsp;•&nbsp;</div></div>
+
+  <div class="score"><div class="n">76<small>%</small></div><div class="t"><b>다음 인연 지수</b>맑음 단계 · 열두 달 평균보다 높아</div></div>
+  <div class="meter"><i></i></div>
+
+  <section class="sec">
+    <div class="no">01</div>
+    <div class="lab">열두 달 인연 예보</div>
+    <h2>가장 센 달은 6월, 그다음은 7월</h2>
+    <p class="tx">막대가 높을수록 인연의 기운이 강한 달이야. <b>4월</b>은 괜히 서운함이 쌓이는 달이라 쉬어 가.</p>
+    <div class="yr">
+      <div class="bars"><i style="height:30%"></i><i style="height:26%"></i><i class="g" style="height:58%"></i><i style="height:34%"></i><i style="height:40%"></i><i style="height:22%"></i><i style="height:36%"></i><i style="height:44%"></i><i class="s" style="height:100%"></i><i class="s" style="height:86%"></i><i style="height:38%"></i><i class="g" style="height:62%"></i></div>
+      <div class="mo"><span>10</span><span>11</span><span>12</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span class="s">6</span><span class="s">7</span><span>8</span><span>9</span></div>
+    </div>
+    <div class="pick">
+      <div><small>인연이 오는 때</small><b>2027년 6월</b><em>6.6 망종부터 7.6까지</em></div>
+      <div><small>한 번 더 오는 때</small><b>7월</b><em>7.7 소서부터 8.7까지</em></div>
+    </div>
+    <p class="why"><b>근거</b>6월은 인연의 별(나를 다스리는 기운)과 나와 맞는 기운이 겹친 달이에요. 달은 절기로 나눠서 달력의 1일과 조금 어긋나요.</p>
+  </section>
+
+  <section class="sec">
+    <div class="no">02</div>
+    <div class="lab">나타날 사람</div>
+    <h2>환하게 타오르는 <span class="hl">불 같은 사람</span></h2>
+    <div class="who">
+      <div class="el"><small>기운</small><b>불</b></div>
+      <ul>
+        <li><span>만나는 곳</span><b>공연장 · 파티</b></li>
+        <li><span>먼저 보이는 것</span><b>웃음소리</b></li>
+        <li class="lk"><span>인상</span><b>눈매가 길고 또렷</b></li>
+        <li class="lk"><span>하는 일</span><b>사람 앞에 서는 일</b></li>
+      </ul>
+    </div>
+    <p class="why"><b>근거</b>여성에게 인연의 별은 나를 다스리는 기운이에요. 타고난 내가 쇠라서, 그 기운은 불이 돼요.</p>
+  </section>
+
+  <section class="say">
+    <div class="lab">서하의 한마디</div>
+    <p>6월엔 약속 거절하지 마.<br>그 자리에 그 사람이 있을 수도 있어.</p>
+    <div class="do"><b>할 일 하나</b> &nbsp;6월에 들어오는 약속은 피곤해도 한 번은 나가기</div>
+  </section>
+
+  <section class="lock">
+    <div class="lab" style="margin:0 0 6px">서하의 인연 노트</div>
+    <h2>여기부터는 서하가<br>따로 적어 줄게</h2>
+    <ol>
+      <li>그 사람의 인상과 하는 일<span>잠김</span></li>
+      <li>6월 중 가장 좋은 날 세 개<span>잠김</span></li>
+      <li>열두 달 하나씩 풀어 쓴 편지<span>잠김</span></li>
+    </ol>
+    <div class="price"><span>한 번 결제 · 보관함에 저장</span><b>9,900원</b></div>
+    <button class="btn" type="button">인연 노트 열기 →</button>
+    <button class="btn o" type="button">친구에게 보내기</button>
+  </section>
+  <p class="foot">진행자는 AI로 만든 가상의 캐릭터예요. 풀이는 만세력 계산을 바탕으로 하며, 사람의 마음이나 행동을 단정하지 않아요.</p>
+</div>
+<div class="sw"><a href="?v=a" id="va">A 흰색</a><a href="?v=b" id="vb">B 노랑</a></div>
+<script>
+const v=new URLSearchParams(location.search).get('v')==='b'?'b':'a';
+document.body.classList.toggle('vb',v==='b'); document.getElementById('v'+v).classList.add('on');
+</script>
+</body>
+</html>

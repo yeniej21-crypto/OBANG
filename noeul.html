@@ -50,7 +50,7 @@ button,select,input{font-family:inherit}
 .pp.first .ct:not(.tp){bottom:calc(env(safe-area-inset-bottom,0px) + 86px)}
 .pp .ct{position:absolute;left:22px;right:22px;bottom:30px;z-index:1}
 .pp .ct.tp{top:calc(env(safe-area-inset-top,0px) + 74px);bottom:auto}
-.nar{display:inline-block;margin:0 0 10px;padding:9px 13px;background:rgba(8,6,14,.72);border-left:2px solid var(--gold);font-family:var(--serif);font-size:14.5px;line-height:1.65;color:var(--ink)}
+.nar{display:inline-block;margin:0 0 10px;padding:10px 34px 10px 14px;background:linear-gradient(90deg,rgba(8,6,14,.82) 0%,rgba(8,6,14,.55) 60%,rgba(8,6,14,0) 100%);border-left:1px solid rgba(227,194,122,.85);font-family:var(--serif);font-size:14.5px;line-height:1.65;color:var(--ink)}
 .nar b{color:var(--gold2);font-weight:700}
 .nl{margin:0 0 10px;font-family:var(--bmj);font-size:24px;line-height:1.5;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.85)}
 .nl small{display:block;font-family:var(--sans);font-size:10.5px;letter-spacing:.3em;color:var(--gold);font-weight:700;margin-bottom:4px;text-shadow:none}
@@ -67,11 +67,11 @@ button,select,input{font-family:inherit}
 .bgL{position:absolute;inset:0;background:#000 center 12%/cover no-repeat;opacity:0;transition:opacity 1.8s ease;transform-origin:50% 30%;animation:kb 26s ease-in-out infinite alternate}
 .bgL.on{opacity:1}
 @keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.12) translateY(-1.5%)}}
-.bgSh{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(8,6,14,.5) 0%,rgba(8,6,14,0) 16%,rgba(8,6,14,0) 36%,rgba(8,6,14,.8) 60%,rgba(8,6,14,.97) 82%)}
+.bgSh{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,var(--bg) 0%,rgba(8,6,14,.55) 9%,rgba(8,6,14,0) 16%,rgba(8,6,14,0) 36%,rgba(8,6,14,.8) 60%,rgba(8,6,14,.97) 82%)}
 #sTalk>.top{position:absolute;left:0;right:0;background:none}
 .talk{position:relative;min-height:var(--sh,100vh);display:flex;flex-direction:column;justify-content:flex-end;padding:0 22px calc(env(safe-area-inset-bottom,0px) + 22px)}
 .ttl0{text-align:center;transition:opacity .8s,max-height .8s,margin .8s;max-height:200px;overflow:hidden;margin-bottom:18px}
-.ttl0.off{opacity:0;max-height:0;margin:0}
+.ttl0.off{opacity:.18}
 .ttl0 small{display:block;font-size:11.5px;letter-spacing:.32em;color:var(--gold);font-weight:700}
 .ttl0 h1{margin:8px 0 0;font-family:var(--brush);font-weight:400;font-size:50px;line-height:1.05;color:#fff;text-shadow:0 4px 24px rgba(0,0,0,.7)}
 .ttl0 p{margin:6px 0 0;font-family:var(--bmj);font-size:17px;color:var(--ink2)}
@@ -85,6 +85,7 @@ button,select,input{font-family:inherit}
 .ln.me{align-self:flex-end;font-size:14px;color:var(--gold2);letter-spacing:.02em}
 .ln.me:before{content:"";display:inline-block;width:18px;height:1px;background:var(--gold);vertical-align:middle;margin-right:8px;opacity:.7}
 .ln.me.old{opacity:.4}
+.ln.old2{opacity:.22!important}
 .ask{margin-top:18px;display:none}
 .ask.on{display:block;animation:up .5s ease}
 @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -121,7 +122,7 @@ select option{background:#16121f;color:var(--ink)}
 .px{position:relative;overflow:hidden;background:#000}
 .px .ph{position:absolute;left:0;right:0;top:-3.5%;bottom:-3.5%;background:#000 center 12%/cover no-repeat;will-change:transform}
 .px:after{z-index:0}
-.stage:before{content:"";position:absolute;inset:0;z-index:40;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.stage:before{content:"";position:absolute;inset:0;z-index:40;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 .px .ph video.lv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center var(--fy,18%);opacity:0;transition:opacity 1.4s ease}
 .px .ph video.lv.on{opacity:1}
 .pp.s{height:calc(var(--sh,100vh)*.62);min-height:380px}
@@ -137,7 +138,7 @@ select option{background:#16121f;color:var(--ink)}
 .pro .gut+.pp{margin-top:calc(-.5 * var(--ov))}
 .pp:after{background:linear-gradient(180deg,rgba(8,6,14,.35) 0%,rgba(8,6,14,0) 24%,rgba(8,6,14,0) 50%,rgba(8,6,14,.7) 82%,rgba(8,6,14,.85) 100%)!important}
 .chHero{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 110px);mask-image:linear-gradient(180deg,transparent 0,#000 110px);margin-top:-40px!important}
-.pan{--mk:linear-gradient(180deg,transparent 0,#000 46px,#000 calc(100% - 46px),transparent 100%);-webkit-mask-image:var(--mk);mask-image:var(--mk)}
+.pan{--mk:linear-gradient(180deg,transparent 0,#000 90px,#000 calc(100% - 90px),transparent 100%);-webkit-mask-image:var(--mk);mask-image:var(--mk)}
 .toon{gap:0}.toon>.pan+.toon2,.toon2{margin-top:-30px}
 .toon>.pan{height:calc(var(--sh,100vh)*.82);min-height:520px;margin:0 -18px}
 #prem .toon>.pan{margin:0 -18px}
@@ -218,16 +219,35 @@ select option{background:#16121f;color:var(--ink)}
 .chHero h3{margin:8px 0 0;font-family:var(--brush);font-weight:400;font-size:56px;line-height:1.05;color:#fff;text-shadow:0 4px 28px rgba(0,0,0,.6)}
 .chHero p{margin:8px 0 0;font-family:var(--bmj);font-size:17px;line-height:1.55}
 .sunC small,.sunC p{color:var(--sun2)} .moonC small,.moonC p{color:var(--moon)}
+.kick{margin:22px 0 0;font-size:12px;letter-spacing:.2em;font-weight:700;color:var(--sun2)}
+.kick.m{color:var(--moon)}
+.kick+.lead{margin-top:8px}
+.why{margin-top:16px;padding:14px 0 2px 16px;border-left:1px solid rgba(227,194,122,.5);background:linear-gradient(90deg,rgba(227,194,122,.08),rgba(227,194,122,0) 70%)}
+.why small{display:block;font-size:10.5px;letter-spacing:.3em;color:var(--gold);font-weight:700;margin-bottom:6px}
+.why p{margin:0 0 10px;font-size:13.5px;line-height:1.75;color:var(--ink2)}
+.why b{color:var(--ink)}
+.todo{margin-top:18px;padding:16px 16px 6px;background:linear-gradient(180deg,rgba(232,131,58,.12),rgba(232,131,58,0))}
+.todo.m{background:linear-gradient(180deg,rgba(143,164,207,.14),rgba(143,164,207,0))}
+.todo small{display:block;font-size:11px;letter-spacing:.24em;font-weight:700;color:var(--sun2);margin-bottom:8px}
+.todo.m small{color:var(--moon)}
+.todo ol{margin:0;padding-left:18px}
+.todo li{margin:0 0 10px;font-size:14px;line-height:1.6;color:var(--ink)}
+.pals{margin-top:18px}
+.pals>small{display:block;font-size:11px;letter-spacing:.14em;color:var(--moon);font-weight:700;margin-bottom:8px}
+.pals div{padding:12px 0 12px 14px;border-left:1px solid rgba(201,214,240,.4);background:linear-gradient(90deg,rgba(201,214,240,.07),rgba(201,214,240,0) 70%);margin-bottom:8px}
+.pals b{display:block;font-size:12px;color:var(--moon);letter-spacing:.06em}
+.pals p{margin:4px 0 0;font-size:13.5px;line-height:1.7;color:var(--ink)}
+.ans p span{display:block;margin-top:4px;font-family:var(--sans);font-size:13px;font-weight:500;line-height:1.6;color:var(--ink2)}
 .lead{margin:22px 0 0;font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.55;color:#fff}
 .body{margin:12px 0 0;font-size:14.5px;line-height:1.8;color:var(--ink2)}
 .body b{color:var(--ink)}
 .chip{display:inline-block;margin:0 2px;padding:0 6px;border:1px solid var(--line);font-family:var(--serif);font-size:12px;color:var(--gold2);line-height:1.6;vertical-align:1px}
-.areas{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:16px;background:var(--line2);border:1px solid var(--line2)}
-.areas div{background:var(--bg2);padding:13px 12px}
+.areas{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:16px;background:linear-gradient(180deg,rgba(223,230,245,.14),rgba(223,230,245,0))}
+.areas div{background:linear-gradient(180deg,rgba(27,21,40,.96),rgba(18,15,28,.96));padding:13px 12px}
 .areas small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em}
 .sunA small{color:var(--sun2)} .moonA small{color:var(--moon)}
 .areas p{margin:5px 0 0;font-size:13px;line-height:1.6;color:var(--ink2)}
-.ev{margin-top:14px;padding:13px 14px;border-left:2px solid var(--gold);background:rgba(227,194,122,.06)}
+.ev{margin-top:14px;padding:13px 14px;border-left:1px solid rgba(227,194,122,.7);background:linear-gradient(90deg,rgba(227,194,122,.1),rgba(227,194,122,0) 75%)}
 .ev b{display:block;font-size:12px;color:var(--gold);letter-spacing:.06em;margin-bottom:4px}
 .ev p{margin:0;font-size:13.5px;line-height:1.7;color:var(--ink)}
 .hid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
@@ -467,7 +487,7 @@ function bgStep(n){ ['bg0','bg1','bg2'].forEach((id,i)=>{ const el=$(id), on=i==
     v.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%;opacity:0;transition:opacity 1.6s'; v.addEventListener('playing',()=>v.style.opacity=1); el.appendChild(v); }
   if(v){ if(on){ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); } else setTimeout(()=>{ if(!el.classList.contains('on')) v.pause(); },1800); } }); }
 /* 시차: 사진 층을 스크롤보다 느리게 움직여 앞뒤 깊이를 만든다 */
-function parallax(root){ let tk=0; const run=()=>{ tk=0; const rh=root.clientHeight; root.querySelectorAll('.px .ph').forEach(ph=>{ const b=ph.parentNode.getBoundingClientRect(), rt=root.getBoundingClientRect(); const c=(b.top-rt.top+b.height/2-rh/2)/rh; if(c>-1.4&&c<1.4) ph.style.transform=`translate3d(0,${(c*-3).toFixed(2)}%,0) scale(${(1.02+Math.abs(c)*.02).toFixed(3)})`; }); };
+function parallax(root){ let tk=0; const run=()=>{ tk=0; const rh=root.clientHeight; root.querySelectorAll('.px .ph').forEach(ph=>{ const b=ph.parentNode.getBoundingClientRect(), rt=root.getBoundingClientRect(); const c=(b.top-rt.top+b.height/2-rh/2)/rh; if(c>-1.4&&c<1.4) ph.style.transform=`translate3d(0,${(c*-2.4).toFixed(2)}%,0) scale(1.03)`; }); };
   root.addEventListener('scroll',()=>{ if(!tk) tk=requestAnimationFrame(run); },{passive:true}); run(); return run; }
 const pxTalk=parallax($('sTalk')), pxRep=parallax($('sRep'));
 /* 화면에 들어온 칸만 영상 재생, 벗어나면 멈춤. 사진 위로 서서히 녹아들게 */
@@ -480,7 +500,7 @@ armLoops($('sTalk'));
 
 /* ---------- 1. 대화형 입력 ---------- */
 function toBottom(){ const t=$('sTalk'); t.scrollTo({top:t.scrollHeight,behavior:'smooth'}); }
-function say(t,me){ const box=$('msgs'); [...box.children].forEach(c=>c.classList.add('old')); while(box.children.length>3) box.firstChild.remove();
+function say(t,me){ const box=$('msgs'); [...box.children].forEach(c=>{ if(c.classList.contains('old')) c.classList.add('old2'); c.classList.add('old'); });
   const d=document.createElement('div'); d.className='ln '+(me?'me':'n'); d.innerHTML=me?t:`<small>노을</small>${t}`; box.appendChild(d);
   requestAnimationFrame(()=>requestAnimationFrame(()=>d.classList.add('on'))); setTimeout(toBottom,80); }
 function ask(id){ ['aName','aBirth','aHour'].forEach(a=>$(a).classList.toggle('on',a===id)); if(id) setTimeout(toBottom,140); }
@@ -532,6 +552,49 @@ const NIGHT_A={ /* 속마음 · 감정 · 숨은 인연과 기회 · 쉬어야 �
  2:[['나만 아는 계획이 생겨요','안정감이 커지는 해','일로 만난 사람과 깊어져요','통장 정리하는 날을 쉼으로'],['돈이 마음을 흔들어요','불안이 숫자로 와요','계산이 앞서면 인연이 멀어져요','걱정이 많을 땐 걷기부터']],
  3:[['스스로에게 엄격해지는 힘','흔들리지 않는 마음','믿음직한 사람이 다가와요','약속을 줄여야 할 때를 알아요'],['인정받고 싶은 마음이 커요','긴장이 오래 남아요','어려운 상대에게 끌릴 수 있어요','책임감 때문에 쉬지 못해요']],
  4:[['직감과 꿈이 또렷해져요','혼자 있는 시간이 편안해요','글, 공부 모임에서 인연이 와요','잠과 차 한 잔이 처방이에요'],['생각이 꼬리를 물어요','걱정이 잠을 줄여요','기대는 마음이 인연을 흐려요','휴대폰을 먼저 내려놓으세요']]};
+/* ===== 해석 근거 데이터 (10/2 은주: 근거 있는 해석, 인사이트, 그래서 어떻게) =====
+   낮 = 올해 하늘 글자 丁이 일간에게 무엇인가(십성) / 밤 = 땅 글자 未(본기 己)가 무엇인가 + 지장간 · 궁위 관계 */
+const jong=w=>{ const c=w.charCodeAt(w.length-1); return c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28!==0; }, IEYO=w=>w+(jong(w)?'이에요':'예요'), EN=w=>w+(jong(w)?'은':'는');
+const DM_IMG=['큰 나무','풀과 덩굴','한낮의 태양','촛불과 별빛','큰 산','논밭의 흙','바위와 쇠','보석과 칼날','큰 강과 바다','이슬과 빗물'];
+const DAY_PIC=['같은 불끼리 만나 곁에 사람이 모이는 모양','내 안의 것이 촛불이 되어 밖으로 빛나는 모양','촛불을 손에 쥐고 다스리는 모양','촛불이 나를 달구어 단련하는 모양','촛불이 나를 데워 주고 밝혀 주는 모양'];
+const DTG={
+ '비견':{t:'내 편이 늘어나는 해',c:'올해 바깥에서는 나와 닮은 사람들이 모입니다. 동료, 친구, 같은 목표를 가진 사람이 곁에 서요.',g:'혼자 하던 일을 함께하면 판이 커집니다. 이름을 걸고 독립하거나 팀을 꾸리기 좋은 해예요.',h:'같은 자리를 노리는 사람도 함께 옵니다. 내 몫을 처음부터 분명히 해 두지 않으면 공이 흩어져요.',d:['함께할 사람을 고르는 기준부터 적어 두세요','돈과 역할은 시작 전에 문서로 나누세요']},
+ '겁재':{t:'승부가 걸리는 해',c:'경쟁자가 또렷해지고, 남보다 먼저 움직여야 할 순간이 옵니다.',g:'밀어붙이는 힘이 실력으로 바뀌어요. 이직, 도전, 경쟁처럼 겨루는 일에서 이깁니다.',h:'돈이 사람 때문에 새기 쉬운 해예요. 보증, 동업, 빌려주는 돈은 올해만큼은 멀리하세요.',d:['이기고 싶은 판 하나만 정해 집중하세요','지갑을 여는 결정은 하루 묵히세요']},
+ '식신':{t:'재주가 밥이 되는 해',c:'말하고 만들고 보여 주는 일이 바깥에서 인정받습니다. 여유와 먹을 복도 따라와요.',g:'좋아서 하던 일이 수입으로 이어집니다. 부업, 콘텐츠, 손으로 만드는 일을 시작하기 좋아요.',h:'벌여 놓은 일이 많아 끝맺음이 약해지기 쉬워요. 즐거운 일만 하다 중요한 일이 밀립니다.',d:['하나를 끝까지 완성해서 보여 주세요','몸을 쓰는 루틴 하나로 리듬을 지키세요']},
+ '상관':{t:'판을 바꾸는 말의 해',c:'익숙한 방식에 질문을 던지고 내 생각을 밖으로 꺼내게 됩니다. 표현력과 기술이 날카로워져요.',g:'틀을 깨는 생각이 통합니다. 기획, 발표, 창작, 개선 제안에서 존재감이 커져요.',h:'윗사람이나 규칙과 부딪히기 쉬워요. 맞는 말도 말투 때문에 손해를 보는 해입니다.',d:['불만은 대안과 함께 말하세요','계약서와 공문은 한 번 더 읽고 보내세요']},
+ '편재':{t:'판이 커지는 돈의 해',c:'움직이는 만큼 돈과 기회가 따라오는 해예요. 사람과 거래가 늘고 활동 반경이 넓어집니다.',g:'영업, 새 거래처, 투자처럼 바깥으로 뻗는 일이 성과로 돌아옵니다.',h:'들어오는 만큼 나가는 흐름이에요. 크게 벌이려다 감당 못 할 판을 키우지 않게 조심하세요.',d:['수입이 생기면 정해 둔 비율을 바로 떼어 두세요','큰 투자는 두 사람 이상에게 검증받으세요']},
+ '정재':{t:'차곡차곡 쌓이는 해',c:'성실하게 관리한 만큼 돌려받는 해예요. 고정 수입, 저축, 살림의 기반이 단단해집니다.',g:'꾸준함이 신뢰가 되고 신뢰가 돈이 됩니다. 연봉 협상, 계약 갱신에 유리해요.',h:'지켜야 할 것이 많아 마음이 무거워져요. 아끼는 데만 몰두하면 기회를 놓칩니다.',d:['돈의 흐름을 한 장에 정리해 보세요','작게라도 나를 위한 지출 하나는 남겨 두세요']},
+ '편관':{t:'압박이 실력이 되는 해',c:'어렵고 무거운 일이 맡겨지는 해예요. 시험대에 오르지만, 버텨 낸 만큼 권한이 생깁니다.',g:'위기 대응, 책임자 역할에서 진가가 드러나요. 큰 프로젝트를 이끄는 자리로 이어집니다.',h:'긴장과 압박이 몸으로 오기 쉬운 해예요. 무리한 일정과 다툼을 피하고 검진을 챙기세요.',d:['맡을 일과 거절할 일을 처음에 가르세요','잠과 운동 시간을 일정표에 먼저 넣으세요']},
+ '정관':{t:'이름이 붙는 해',c:'직함, 자격, 공식적인 자리가 생기는 해예요. 사람들이 당신을 믿고 맡깁니다.',g:'승진, 합격, 계약처럼 공인받는 일이 풀려요. 규칙 안에서 움직일수록 결과가 좋습니다.',h:'책임과 체면이 무거워지는 해예요. 다 잘하려다 지치기 쉬우니 기준을 조금 낮춰도 됩니다.',d:['맡을 자리 하나를 골라 제대로 해내세요','약속한 기한은 꼭 지키세요. 올해는 신뢰가 곧 성과예요']},
+ '편인':{t:'남다른 감이 통하는 해',c:'남들이 못 보는 것을 보는 감각이 살아나요. 특별한 공부, 기술, 깊은 관심사가 자랍니다.',g:'자격증, 전문 분야, 연구처럼 깊이 파는 일에서 길이 열려요.',h:'생각이 많아지고 혼자 고립되기 쉬운 해예요. 시작만 하고 결과를 미루는 습관을 조심하세요.',d:['배운 것을 결과물 하나로 묶어 보세요','믿을 만한 사람에게 계획을 말해 두세요']},
+ '정인':{t:'도움이 들어오는 해',c:'윗사람, 스승, 기관의 도움이 따르는 해예요. 문서, 계약, 공부가 내 편이 됩니다.',g:'시험, 학위, 자격, 집 문서가 순조로워요. 배운 것이 곧 인정으로 이어집니다.',h:'도움에 기대다 스스로 정하는 힘이 약해질 수 있어요. 받는 만큼 움직여야 합니다.',d:['중요한 서류는 올해 안에 정리하세요','배움에 쓸 예산을 미리 정해 두세요']}};
+const NTG={
+ '비견':{t:'나를 지키는 마음',c:'속으로 나답게 살고 싶다는 마음이 강해집니다. 남의 기준보다 내 기준이 중요해져요.',g:'흔들리던 자존감이 단단해집니다. 혼자 있는 시간이 오히려 힘이 돼요.',h:'고집이 늘어 가까운 사람과 부딪힐 수 있어요. 지키는 것과 닫는 것을 구분하세요.',d:['혼자만의 시간을 일주일에 한 번 정해 두세요','서운한 마음은 쌓기 전에 짧게 말하세요']},
+ '겁재':{t:'속에서 끓는 경쟁심',c:'겉으론 담담해도 속에서는 남과 나를 재는 마음이 커집니다.',g:'그 마음이 나를 움직이는 연료가 됩니다. 미뤄 둔 목표에 다시 불이 붙어요.',h:'비교가 피로로 쌓이는 해예요. 남의 속도를 보는 순간 내 리듬이 무너집니다.',d:['휴대폰을 끄는 시간을 정하세요','이긴 기억보다 해낸 기록을 남기세요']},
+ '식신':{t:'하고 싶은 게 차오르는 마음',c:'속에서 무언가를 만들고 싶은 마음이 자랍니다. 취미, 요리, 글처럼 손이 가는 일이 위로가 돼요.',g:'몰래 시작한 일이 나중에 길이 됩니다. 마음의 여유가 표정에도 드러나요.',h:'편한 것만 찾고 싶어지는 마음도 함께 와요. 미루는 것이 쉬는 것은 아닙니다.',d:['작은 창작 하나를 매주 이어 가세요','먹는 것으로 스트레스를 풀고 있지 않은지 살피세요']},
+ '상관':{t:'말하지 못한 감정',c:'속에 할 말이 쌓이고 감정의 파도가 커지는 해예요. 예민함이 곧 재능이기도 합니다.',g:'그 감정을 글, 음악, 기획으로 옮기면 남이 못 만드는 것을 만듭니다.',h:'참다가 한 번에 터지기 쉬워요. 밤늦게 쓴 메시지는 아침에 다시 읽으세요.',d:['감정 일기를 짧게라도 쓰세요','고백이나 이별 같은 큰 말은 하루를 넘기고 하세요']},
+ '편재':{t:'몰래 키우는 큰 그림',c:'속으로 큰 그림을 그리게 됩니다. 돈, 독립, 새로운 삶에 대한 계산이 시작돼요.',g:'남들이 모르는 기회를 먼저 알아봅니다. 숨은 인연이 돈이 되는 길을 열어 줘요.',h:'마음이 이리저리 흩어지고 충동적으로 움직이기 쉬워요.',d:['떠오른 계획을 한 곳에 모아 적으세요','큰돈이 걸린 결정은 한 계절 지켜본 뒤에 하세요']},
+ '정재':{t:'조용히 쌓이는 안정',c:'속으로 안정과 질서를 원하게 됩니다. 정리하고 모으는 일에서 마음의 평화를 얻어요.',g:'아무도 모르게 모은 것이 남는 해예요. 마음도 통장도 단단해집니다.',h:'불안이 돈 걱정으로 바뀌어 잠을 줄일 수 있어요.',d:['한 달에 한 번 나만의 정산일을 만드세요','걱정은 숫자로 적으면 작아집니다']},
+ '편관':{t:'스스로를 몰아붙이는 마음',c:'속에서 나를 다그치는 목소리가 커집니다. 잘해야 한다는 압박을 스스로에게 겁니다.',g:'그 긴장이 집중력으로 바뀌면 오래 미룬 결심을 지켜 냅니다.',h:'마음의 짐이 몸으로 오기 쉬워요. 어깨, 위장, 잠을 먼저 살피세요.',d:['하루에 한 번 아무것도 하지 않는 시간을 두세요','나에게 하는 말을 친구에게 하듯 바꿔 보세요']},
+ '정관':{t:'흔들리지 않으려는 마음',c:'속으로 바르고 반듯하게 살고 싶은 마음이 강해집니다. 책임감이 마음의 중심에 섭니다.',g:'믿음직한 사람과 깊어지는 인연이 있어요. 관계에 무게가 실리는 해입니다.',h:'체면과 규칙에 갇혀 진짜 마음을 숨기기 쉬워요.',d:['원하는 것을 한 문장으로 말해 보세요','완벽하지 않아도 되는 일을 하나 정하세요']},
+ '편인':{t:'깊어지는 직감',c:'속으로 직감이 예민해지는 해예요. 꿈, 첫 느낌, 혼자 하는 생각이 자꾸 맞아떨어집니다.',g:'남들이 못 보는 것을 보는 눈이 생겨요. 공부와 사색이 큰 무기가 됩니다.',h:'생각이 꼬리를 물어 밤을 붙잡기 쉬워요. 고립감이 오면 사람을 만나세요.',d:['떠오른 느낌을 바로 메모하세요','잠드는 시간부터 지키세요']},
+ '정인':{t:'기댈 곳이 생기는 마음',c:'속으로 누군가의 보살핌과 이해를 받는 해예요. 마음이 편안해지고 배움이 즐거워집니다.',g:'어른, 스승, 가족에게서 위로가 옵니다. 마음 공부가 깊어져요.',h:'기대는 마음이 커지면 스스로 서는 힘이 약해질 수 있어요.',d:['고마운 사람에게 먼저 연락하세요','배우고 싶던 것 하나를 등록하세요']}};
+const PAL={y:['년지','바깥 세상과 집안의 뿌리'],m:['월지','일터와 사회적 기반'],d:['일지','나의 속마음과 가장 가까운 사람'],h:['시지','앞날과 내가 만들어 낼 결과물']};
+function palaceNotes(P){ const out=[];
+  [['y',P.y],['m',P.m],['d',P.d],['h',P.h]].forEach(([k,p])=>{ if(!p) return; const b=p[1], nm=PAL[k], at=`${nm[0]} ${JI[b]}(${nm[1]})`, J=jong(nm[1]), wa=at+(J?'과':'와'), nn=at+(J?'은':'는');
+    if(b===7) out.push(['같은 기운',`${at}에 이미 未가 있어요. 그 자리의 일이 올해 두 배로 커집니다.`]);
+    else if(S_.isHap(7,b)) out.push(['午未 합',`올해의 未가 ${wa} 손을 잡아요. 그 자리에서 반가운 결속과 도움이 생깁니다.`]);
+    else if(S_.isChung(7,b)) out.push(['丑未 충',`올해의 未가 ${wa} 정면으로 부딪혀요. 이동, 변화, 정리가 일어나는 자리입니다. 미리 준비하면 묵은 것을 털어 내는 계기가 돼요.`]);
+    else if(S_.isHyung(7,b)) out.push(['丑戌未 형',`올해의 未가 ${wa} 형(刑)을 이뤄요. 서류, 약속, 건강에서 작은 마찰이 생기기 쉬우니 확인을 두 번 하세요.`]);
+    else if(b===0) out.push(['子未 원진',`올해의 未와 ${nn} 원진 관계예요. 이유 없이 서운해지는 감정이 올라올 수 있어요. 감정의 출처를 먼저 살피세요.`]);
+    else if(b===11||b===3) out.push(['亥卯未 삼합',`올해의 未가 ${wa} 어울려 나무(木)의 기운을 모아요. 그 자리에서 새로 자라나는 일이 생깁니다.`]); });
+  return out; }
+function balanceNotes(P){ const c=S_.elCount(P), out=[];
+  if(c[1]===0) out.push('사주에 불(火)이 한 글자도 없어요. 2027년은 비어 있던 불이 하늘에서 들어오는 해라, 표현하고 드러나는 일이 처음으로 제자리를 찾습니다.');
+  else if(c[1]>=3) out.push('이미 불(火)이 많은 사주에 丁의 불이 더해져요. 의욕이 넘치는 만큼 과열을 조심하고, 물(水)처럼 식혀 주는 휴식을 일정에 넣으세요.');
+  if(c[2]===0) out.push('사주에 흙(土)이 없어 늘 발 디딜 땅이 아쉬웠어요. 未의 흙이 들어와 생활과 마음의 기반이 잡히는 해입니다.');
+  else if(c[2]>=3) out.push('흙(土)이 이미 많은 사주에 未가 더해져 마음이 무거워지기 쉬워요. 고이지 않게 몸과 일을 움직이는 것이 처방입니다.');
+  return out; }
 const HID_MEAN=['숨은 동료','숨은 재능','숨은 돈','숨은 자리','숨은 도움'];
 const HID_TX=['곁에서 나를 받쳐 줄 사람이 올해 안쪽에 있어요.','아직 꺼내지 않은 재주가 올해 자라요.','드러나지 않게 모이는 돈과 기회가 있어요.','조용히 나를 지켜보는 자리가 있어요.','보이지 않게 도와주는 손이 있어요.'];
 const COL=['초록','붉은색','노란색','흰색','남색'], DIR=['동쪽','남쪽','가운데','서쪽','북쪽'], NIGHT_ACT=['창문을 열고 식물에 물을 주세요','작은 초 하나를 켜고 10분만 적어 보세요','내일 입을 옷을 미리 개어 두세요','책상 위 물건 하나를 버리세요','물 한 잔을 마시고 꿈 노트를 펴 두세요'];
@@ -599,7 +662,8 @@ function render(){
   $('rWho').textContent=`${r.name}님의 2027년은`; $('rVer').textContent=VER[r.kind]; $('rQ').textContent=QUOTE[r.kind];
   $('gS').innerHTML=r.pS+'<sup>%</sup>'; $('gM').innerHTML=r.pM+'<sup>%</sup>';
   const one=t=>t.split('.')[0]+'.', ms=o=>[...o].sort((a,b)=>a.m-b.m).map(x=>x.m+'월').join(', ');
-  $('ans').innerHTML=`<div class="s"><small>올해 낮</small><p>${one(DAY_TX[r.rS][r.fS?0:1])}</p></div><div class="m"><small>올해 밤</small><p>${one(NIGHT_TX[r.rB][r.fB?0:1])}</p></div><div class="mt"><small>해와 달이<br>만나는 달</small><p>${ms(r.meet)}<span>겉과 속이 같은 쪽을 보는 달. 시작과 고백은 이때.</span></p></div>`; $('bS').style.width='50%'; $('bM').style.width='50%';
+  const tS=S_.tgStem(r.dm,YS), tB=S_.tgBranch(r.dm,YB);
+  $('ans').innerHTML=`<div class="s"><small>올해 낮</small><p>${DTG[tS].t}<span>${one(DTG[tS].c)}</span></p></div><div class="m"><small>올해 밤</small><p>${NTG[tB].t}<span>${one(NTG[tB].c)}</span></p></div><div class="mt"><small>해와 달이<br>만나는 달</small><p>${ms(r.meet)}<span>겉과 속이 같은 쪽을 보는 달. 시작과 고백은 이때.</span></p></div>`; $('bS').style.width='50%'; $('bM').style.width='50%';
   setTimeout(()=>{ $('bS').style.width=r.pS+'%'; $('bM').style.width=r.pM+'%'; },500);
   const tgS=S_.tgStem(r.dm,YS), tgB=S_.tgBranch(r.dm,YB);
   $('gCap').innerHTML=`올해의 하늘 글자 <b>丁</b>은 당신에게 <b>${tgS}</b>, 땅 글자 <b>未</b>는 <b>${tgB}</b>입니다. 드러나는 낮은 하늘 글자로, 속으로 차오르는 밤은 땅 글자와 그 안에 숨은 글자로 읽었어요.`;
@@ -613,25 +677,34 @@ function areasHTML(list,labels,cls){ return `<div class="areas ${cls}">${labels.
 function premHTML(){
   const r=R, tgS=S_.tgStem(r.dm,YS), tgB=S_.tgBranch(r.dm,YB);
   const dA=DAY_A[r.rS][r.fS?0:1], nA=NIGHT_A[r.rB][r.fB?0:1];
+  const D=DTG[tgS], N=NTG[tgB], bal=balanceNotes(r.P), pal=palaceNotes(r.P);
   const mName=o=>`${o.m}월`;
   const byM=a=>[...a].sort((x,y)=>x.m-y.m); r.meet=byM(r.meet); r.cross=byM(r.cross);
   const meetTx=r.meet.map(mName).join(', '), crossTx=r.cross.map(o=>`${o.m}월은 ${o.d>o.n?'낮':'밤'}이 앞서요`).join(', ');
   let h='';
   /* 1장 */
   h+=`<section class="ch" data-z="1"><div class="chHero sunC px" data-v="cuDay"><div class="ph" style="background-image:url('${IMG.cuDay}')"></div><div class="ct"><small>1장 · 丁 · ${tgS}</small><h3>낮의 나</h3><p>겉으로 드러날 2027년</p></div></div><div class="wrap">
-    <p class="lead rv">${DAY_TX[r.rS][r.fS?0:1]}</p>
-    <p class="body rv">올해의 하늘 글자 丁은 일간 <b>${GAN[r.dm]}</b>에게 <span class="chip">${tgS}</span>이에요. ${GROUP[r.rS]}의 기운이 낮에 서고, 당신 사주는 이 기운을 <b>${r.fS?'반기는':'버거워하는'}</b> 쪽이에요. 그래서 밖에서 일어나는 일은 ${r.fS?'밀어붙일수록 커지고':'속도를 늦출수록 지켜집니다'}.</p>
+    <p class="kick rv">${tgS} · ${D.t}</p>
+    <p class="lead rv">${D.c}</p>
+    <div class="why rv"><small>근거</small><p>당신의 일간은 <b>${GAN[r.dm]}</b>, ${IEYO(DM_IMG[r.dm])}. 2027년의 하늘 글자 <b>丁</b>은 촛불과 별빛이고, 둘이 만나면 ${DAY_PIC[r.rS]}이 됩니다. 명리로는 <span class="chip">${tgS}</span>, ${GROUP[r.rS]}의 기운이에요.</p><p>당신 사주는 <b>${r.st.label}</b>이라 ${r.st.strong?'힘이 남는 쪽이고, 그 힘을 쓰고 드러내는 기운을 반겨요':'힘을 보태 주는 기운이 필요한 쪽이에요'}. 그래서 올해의 ${EN(tgS)} <b>${r.fS?'기회로 쓰기 좋은':'부담으로 오기 쉬운'}</b> 기운입니다.</p></div>
+    <p class="body rv">${r.fS?D.g:D.h}</p>
+    ${bal.length?`<div class="ev rv"><b>오행의 균형</b><p>${bal[0]}</p></div>`:''}
     ${areasHTML(dA,['일','평판','관계','돈의 흐름'],'sunA rv')}
+    <div class="todo rv"><small>그래서 올해 낮에는</small><ol>${D.d.map(x=>`<li>${x}</li>`).join('')}<li>${meetTx}에 큰 결정과 시작을 몰아 두세요. 해와 달이 같은 쪽을 보는 달이에요.</li></ol></div>
     ${r.evD.map(e=>`<div class="ev rv"><b>${e[0]}</b><p>${e[1]}</p></div>`).join('')}
     <div class="toon"><div class="pan px rv" data-v="scroll"><div class="ph" style="background-image:url('${IMG.scroll||IMG.sun}')"></div><div class="cap"><small>노을의 한마디</small><q>${r.fS?'올해는 숨지 말고 앞에 서요. 보는 눈이 당신 편이에요.':'올해 낮은 천천히 걸어요. 늦게 낸 답이 오래 남아요.'}</q></div></div></div>
   </div></section>`;
   /* 2장 */
   h+=`<section class="ch" data-z="2"><div class="chHero moonC px" data-v="cuNight"><div class="ph" style="background-image:url('${IMG.cuNight}')"></div><div class="ct"><small>2장 · 未 · ${tgB}</small><h3>밤의 나</h3><p>속으로 차오를 2027년</p></div></div><div class="wrap">
-    <p class="lead rv">${NIGHT_TX[r.rB][r.fB?0:1]}</p>
-    <p class="body rv">땅 글자 未는 당신에게 <span class="chip">${tgB}</span>이고, 그 안에는 세 글자가 숨어 있어요. 겉으로는 보이지 않지만 올해 내내 속에서 움직이는 기운입니다.</p>
+    <p class="kick rv m">${tgB} · ${N.t}</p>
+    <p class="lead rv">${N.c}</p>
+    <div class="why rv"><small>근거</small><p>땅 글자 <b>未</b>는 한여름 끝의 메마른 흙이자, 나무를 품고 저장하는 창고예요. 당신에게는 <span class="chip">${tgB}</span>이고, 안에는 <b>己 丁 乙</b> 세 글자가 숨어 있어요. 겉으로 보이지 않지만 올해 내내 속에서 움직이는 기운입니다.</p></div>
+    <p class="body rv">${r.fB?N.g:N.h}</p>
     <div class="hid3 rv">${r.hid.map(x=>`<div><b>${GAN[x.s]}</b><em>${x.tg}</em><span>${HID_MEAN[x.g]}</span><p>${HID_TX[x.g]}</p></div>`).join('')}</div>
+    ${pal.length?`<div class="pals rv"><small>올해의 未가 당신 사주의 어느 자리를 건드리나</small>${pal.map(e=>`<div><b>${e[0]}</b><p>${e[1]}</p></div>`).join('')}</div>`:`<div class="ev rv"><b>조용한 자리</b><p>올해의 未는 당신 사주의 네 자리와 부딪히거나 묶이지 않아요. 속의 변화가 겉의 사건으로 번지지 않고, 마음 안에서 천천히 익는 해입니다.</p></div>`}
+    ${bal[1]?`<div class="ev rv"><b>오행의 균형</b><p>${bal[1]}</p></div>`:''}
     ${areasHTML(nA,['속마음','감정','숨은 인연과 기회','쉬어야 할 때'],'moonA rv')}
-    ${r.evN.map(e=>`<div class="ev rv"><b>${e[0]}</b><p>${e[1]}</p></div>`).join('')}
+    <div class="todo rv m"><small>그래서 올해 밤에는</small><ol>${N.d.map(x=>`<li>${x}</li>`).join('')}<li>${r.low.m}월은 낮도 밤도 낮게 흘러요. 그 달엔 약속을 줄이고 나를 돌보세요.</li></ol></div>
     <div class="toon"><div class="pan px rv" data-v="lantern"><div class="ph" style="background-image:url('${IMG.lantern||IMG.moon}')"></div><div class="cap"><small>노을의 한마디</small><q>${r.fB?'밤에 혼자 한 생각이 맞아요. 그 느낌을 믿어요.':'밤에는 결정하지 말아요. 아침이 답을 줄 거예요.'}</q></div></div></div>
   </div></section>`;
   /* 3장 */
@@ -639,7 +712,7 @@ function premHTML(){
     <svg class="chart rv" id="chart" viewBox="0 0 340 180" role="img" aria-label="2027년 월별 낮과 밤"></svg>
     <div class="legend rv"><span><i style="background:var(--sun)"></i>낮</span><span><i style="background:var(--moon)"></i>밤</span></div>
     <div class="toon">
-      <div class="pan px rv" data-v="back"><div class="ph" style="background-image:url('${IMG.back||IMG.split}')"></div><div class="cap"><small>만나는 달</small><b>${meetTx}</b><p>겉과 속이 같은 방향을 봐요. 큰 결정, 고백, 시작은 이 달에.</p><q>해와 달이 같은 하늘에 떠요.</q></div></div>
+      <div class="pan px rv" data-v="back"><div class="ph" style="background-image:url('${IMG.back||IMG.split}')"></div><div class="cap"><small>만나는 달</small><b>${meetTx}</b><p>${r.meet.map(o=>`${o.m}월(${GAN_K[o.mp[0]]}${JI_K[o.mp[1]]}월)은 하늘이 ${S_.tgStem(r.dm,o.mp[0])}, 땅이 ${S_.tgBranch(r.dm,o.mp[1])}`).join(' · ')}. 겉과 속이 같은 쪽을 보는 달이라 큰 결정, 고백, 시작은 이때.</p><q>해와 달이 같은 하늘에 떠요.</q></div></div>
       <div class="toon2">
         <div class="pan px rv" data-v="split"><div class="ph" style="background-image:url('${IMG.split}')"></div><div class="cap"><small>엇갈리는 달</small><b>${r.cross.map(mName).join(', ')}</b><p>${crossTx}. 한쪽만 챙기지 마세요.</p></div></div>
         <div class="pan px rv"><div class="ph" style="background-image:url('${IMG.closed}')"></div><div class="cap"><small>숨 고르는 달</small><b>${r.low.m}월</b><p>낮도 밤도 낮게 흘러요. 약속을 줄이세요.</p></div></div>

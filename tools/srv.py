@@ -1,5 +1,7 @@
-import http.server
+import http.server,functools,sys
 class H(http.server.SimpleHTTPRequestHandler):
-    extensions_map={**http.server.SimpleHTTPRequestHandler.extensions_map,'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8'}
+    def guess_type(self,path):
+        t=super().guess_type(path)
+        return t+'; charset=utf-8' if t.startswith(('text/','application/javascript')) else t
     def log_message(self,*a): pass
-http.server.ThreadingHTTPServer(('',8766),H).serve_forever()
+http.server.ThreadingHTTPServer(('',8766),functools.partial(H,directory=sys.argv[1])).serve_forever()

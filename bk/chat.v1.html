@@ -168,8 +168,7 @@ function pick(k){
 }
 function openChat(k){
   const c=CH[k], me=loadMe(); if(!window.AskChat||!me) return;
-  let aq=null; try{ aq=JSON.parse(sessionStorage.getItem('obAskQ')||'null'); sessionStorage.removeItem('obAskQ'); }catch(e){}
-  AskChat.open({persona:k,theme:'dark',root:$('stage'),avatar:c.img,acc:c.acc,accInk:c.ink||'#fff',prefill:aq&&aq.text||'',starters:aq&&aq.q&&aq.q.length?aq.q:undefined,user:{name:me.name,nick:nickOf(me.name),gender:me.g||'f',solar:solarOf(me),hour:me.h==null?-1:+me.h},tier:'quick'});
+  AskChat.open({persona:k,theme:'dark',root:$('stage'),avatar:c.img,acc:c.acc,accInk:c.ink||'#fff',user:{name:me.name,nick:nickOf(me.name),gender:me.g||'f',solar:solarOf(me),hour:me.h==null?-1:+me.h},tier:'quick'});
 }
 $('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
 renderSel();

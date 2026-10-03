@@ -166,22 +166,29 @@ a{color:inherit;text-decoration:none}
 .fb .gut{position:absolute;left:50%;top:0;bottom:0;width:18px;margin-left:-9px;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(70,45,20,.38) 45%,rgba(70,45,20,.38) 55%,rgba(0,0,0,0));z-index:5;pointer-events:none}
 .fb .rib{position:absolute;left:calc(50% + 4px);top:-8px;width:6px;height:calc(100% + 34px);z-index:6;background:linear-gradient(90deg,#7e1714,#c8372d,#7e1714);clip-path:polygon(0 0,100% 0,100% 100%,50% 94%,0 100%);transform-origin:50% 0;animation:rib 4s ease-in-out infinite;pointer-events:none}
 @keyframes rib{50%{transform:rotate(1.5deg)}}
-/* 넘어가는 한 장: 앞면은 지금 오른쪽 쪽, 뒷면은 다음 왼쪽 쪽. 넘어가는 동안 앞은 어두워지고 뒤는 밝아진다 */
-.fb .lf{position:absolute;right:0;top:0;width:50%;height:100%;transform-origin:0 50%;transform-style:preserve-3d;z-index:4;display:none}
-.fb .lf .fpg{width:100%;left:0;right:auto;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.fb .lf .bk{transform:rotateY(180deg)}
-.fb .lf .fpg::before{content:"";position:absolute;inset:0;z-index:3;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(0,0,0,0));opacity:0}
-.fb .lf.go{display:block;animation:fturn 1.2s cubic-bezier(.45,.05,.25,1) forwards}
-.fb .lf.go .fr::before{animation:fdk 1.2s ease-in forwards}
-.fb .lf.go .bk::before{opacity:.8;animation:flt 1.2s ease-out forwards}
-@keyframes fturn{0%{transform:rotateY(0)}100%{transform:rotateY(-180deg)}}
-@keyframes fdk{to{opacity:1}}
-@keyframes flt{to{opacity:0}}
+/* 넘어가는 한 장(10/4 수정): 3D 회전 대신 앞면이 접히듯 좁아졌다가(오른쪽 → 가운데) 뒷면이 펼쳐지는(가운데 → 왼쪽) 방식.
+   종이끼리 겹쳐 깨지는 현상이 없고, 넘어가는 동안 그늘과 들린 종이 그림자가 따라간다 */
+.fb .lf{position:absolute;inset:0;z-index:4;display:none;pointer-events:none}
+.fb .lf .fr{right:0;transform-origin:0 50%}
+.fb .lf .bk{left:0;transform-origin:100% 50%;transform:scaleX(0)}
+.fb .lf .fpg::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none}
+.fb .lf .fr::before{background:linear-gradient(90deg,rgba(40,25,10,.55),rgba(40,25,10,.05));opacity:0}
+.fb .lf .bk::before{background:linear-gradient(270deg,rgba(40,25,10,.5),rgba(40,25,10,.05));opacity:.9}
+.fb .lf.flip{display:block}
+.fb .lf.flip .fr{animation:frT .58s cubic-bezier(.55,0,.85,.55) forwards;box-shadow:6px 0 14px rgba(0,0,0,.25)}
+.fb .lf.flip .fr::before{animation:fade1 .58s ease-in forwards}
+.fb .lf.flip .bk{animation:bkT .62s cubic-bezier(.15,.45,.45,1) .56s forwards;box-shadow:-6px 0 14px rgba(0,0,0,.22)}
+.fb .lf.flip .bk::before{animation:fade0 .62s ease-out .56s forwards}
+@keyframes frT{0%{transform:scaleX(1) skewY(0)}100%{transform:scaleX(.02) skewY(-5deg)}}
+@keyframes bkT{0%{transform:scaleX(.02) skewY(5deg)}100%{transform:scaleX(1) skewY(0)}}
+@keyframes fade1{to{opacity:1}}
+@keyframes fade0{to{opacity:0}}
 .F .side{position:relative;z-index:8;flex:1;min-width:0;padding:0 12px 0 4px}
 .F .side small{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--gold)}
 .F .side h3{margin:6px 0 0;font-family:var(--brush);font-weight:400;font-size:25px;line-height:1.08}
 .F .side .now{margin:12px 0 0;padding-top:10px;border-top:1px solid rgba(227,184,102,.25);font-size:10.5px;line-height:1.5;color:rgba(255,255,255,.6)}
 .F .side .now b{display:block;margin-top:2px;font-size:12.5px;color:#fff;transition:opacity .4s}
+.F .side .ds{margin:10px 0 0;padding-top:10px;border-top:1px solid rgba(227,184,102,.25);font-size:11.5px;line-height:1.55;color:rgba(255,255,255,.72)}
 .F .side .go{margin-top:12px;font-size:12px;padding:8px 10px;white-space:nowrap}
 .F .bt{position:relative;display:flex;justify-content:space-between;align-items:center;padding:0 16px 14px}
 .F .bt .chips{margin:0}.F .bt .chips i{white-space:nowrap}
@@ -191,11 +198,11 @@ a{color:inherit;text-decoration:none}
 <div class="sh" style="margin-top:6px"><small>세계관 책 배너 시안</small><b>홈에 들어갈 세 가지 안</b></div>
 <p class="note">모두 누르면 개정판 책(미리보기)으로 가요. 홈의 다른 칸과 같은 폭 · 같은 검은 바탕 기준.</p>
 
-<div class="lbl new">최종 다듬기안 · 새 안 1 발전<b>펼친 책 배너(실감 · 임팩트 영상 · 책 본문)</b><span>가죽 표지 · 금박 테두리 · 쌓인 종이 단면 · 붉은 책갈피 끈 · 접힌 자리 그늘. 4초마다 한 장이 넘어가고(넘길 때 종이에 그늘이 졌다 풀림), 왼쪽 쪽엔 진짜 책처럼 장 이름 · 본문 · 쪽 번호, 오른쪽 쪽엔 인쇄된 그림처럼 임팩트 있는 영상. 누르면 지금 펼쳐진 그 쪽부터 책이 열림.</span></div>
+<div class="lbl new">최종 다듬기안 · 새 안 1 발전<b>펼친 책 배너(실감 · 임팩트 영상 · 책 본문)</b><span>가죽 표지 · 금박 테두리 · 쌓인 종이 단면 · 붉은 책갈피 끈 · 접힌 자리 그늘. 4초마다 한 장이 넘어가고(넘길 때 종이에 그늘이 졌다 풀림), 왼쪽 쪽엔 진짜 책처럼 장 이름 · 본문 · 쪽 번호, 오른쪽 쪽엔 인쇄된 그림처럼 임팩트 있는 영상. 누르면 늘 처음(표지)부터 열림.</span></div>
 <div class="sh"><small>처음이라면, 이 책부터</small><b>오방도감의 세계를 한 권으로</b></div>
-<a class="F" id="F" href="book_v6.html"><div class="row"><div class="bw"><div class="fb"><div class="shd"></div><div class="cvr"></div><div class="stk"></div><div class="fpg l" id="FL"></div><div class="fpg r" id="FR"></div><div class="lf" id="FF"><div class="fpg fr" id="FFf"></div><div class="fpg l bk" id="FFb"></div></div><i class="gut"></i><i class="rib"></i></div></div>
-  <div class="side"><small>세계관 책 · 제1권</small><h3>팔자에<br>신이 들었다</h3><div class="now">지금 펼친 쪽<b id="Fnow">프롤로그 · 지도에 없는 문</b></div><i class="go">이 쪽 펼치기</i></div></div>
-  <div class="bt"><span class="chips"><i>무료</i><i>35쪽</i><i>영상 · 목소리</i></span><span class="pd" id="Fpd"></span></div></a>
+<a class="F" id="F" href="book_v6.html#p=0"><div class="row"><div class="bw"><div class="fb"><div class="shd"></div><div class="cvr"></div><div class="stk"></div><div class="fpg l" id="FL"></div><div class="fpg r" id="FR"></div><div class="lf" id="FF"><div class="fpg fr" id="FFf"></div><div class="fpg l bk" id="FFb"></div></div><i class="gut"></i><i class="rib"></i></div></div>
+  <div class="side"><small>오방도감 세계관</small><h3>팔자에<br>신이 들었다</h3><p class="ds">오방도감의 신과 손님들이 어디서 왔는지, 왜 당신의 빈칸에 앉는지 들려주는 세계관 책</p><b id="Fnow" hidden></b><i class="go">처음부터 펼치기</i></div></div>
+  <div class="bt"><span class="chips"><i>무료</i></span><span class="pd" id="Fpd"></span></div></a>
 <p class="note" style="margin-top:26px">아래는 앞선 시안들</p>
 <div class="lbl new">새 안 1 · B안 발전형<b>펼친 책이 한 장씩 넘어가는 배너</b><span>가로로 긴 배너. 왼쪽 3분의 2에 펼친 책, 오른쪽 3분의 1에 설명. 4초마다 종이가 한 장 넘어가고, 넘길 때마다 오른쪽 쪽에 다른 인물의 영상이 펼쳐진다(노을 · 하람 · 흑매 · 세린 · 도준 · 그믐 · 별하 · 서하).</span></div>
 <div class="sh"><small>처음이라면, 이 책부터</small><b>오방도감의 세계를 한 권으로</b></div>
@@ -279,11 +286,11 @@ const onView=(el,start,stop)=>new IntersectionObserver(es=>es.forEach(e=>e.isInt
   const right=k=>{ const [ch,t,s,,img,,c,n]=P[k]; return `<div class="pic" style="background-image:url('${img}')"></div><div class="cap"><b>${t}</b><span>${n+1}</span></div>`; };
   const vid=(el,k)=>{ const pic=el.querySelector('.pic'); const v=document.createElement('video'); v.setAttribute('muted',''); v.muted=true; v.setAttribute('playsinline',''); v.playsInline=true; v.loop=true; v.preload='auto'; v.src=P[k][5]; v.onplaying=()=>v.classList.add('on'); pic.appendChild(v); v.play().catch(()=>{}); };
   let k=0, tm=null, run=false;
-  const meta=()=>{ now.textContent=P[k][0]+' · '+P[k][1]; box.href='book_v6.html#p='+P[k][7]; [...pd.children].forEach((x,j)=>x.classList.toggle('on',j===k)); };
+  const meta=()=>{ now.textContent=P[k][0]+' · '+P[k][1]; [...pd.children].forEach((x,j)=>x.classList.toggle('on',j===k)); };
   L.innerHTML=left(0); R.innerHTML=right(0); vid(R,0); meta();
-  const turn=()=>{ const n=(k+1)%P.length; Ff.innerHTML=right(k); Fb.innerHTML=left(n); F.classList.remove('go'); void F.offsetWidth; F.classList.add('go');
+  const turn=()=>{ const n=(k+1)%P.length; Ff.innerHTML=right(k); Fb.innerHTML=left(n); F.classList.remove('flip'); void F.offsetWidth; F.classList.add('flip');
     R.innerHTML=right(n); vid(R,n);
-    setTimeout(()=>{ k=n; L.innerHTML=left(k); F.classList.remove('go'); meta(); },1200); };
+    setTimeout(()=>{ k=n; L.innerHTML=left(k); F.classList.remove('flip'); meta(); },1200); };
   onView(box,()=>{ if(run) return; run=true; tm=setInterval(turn,4400); const v=R.querySelector('video'); v&&v.play().catch(()=>{}); },()=>{ run=false; clearInterval(tm); const v=R.querySelector('video'); v&&v.pause(); }); })();
 /* A: 장면 다섯 장(정지 그림이 먼저 깔리고, 그 위에 영상)을 4초마다 서서히 바꾼다. 화면에 보일 때만 돈다 */
 (()=>{ const HFm='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_';

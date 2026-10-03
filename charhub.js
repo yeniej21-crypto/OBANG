@@ -127,9 +127,9 @@
     if(first){ list=list.filter(function(x){ return x!==first; }); list.unshift(first); }
     return list; }
 
-  function mini(id){ var c=C[id], m=mine(), isMine=c.el&&c.el===m;
-    var b=c.yang?'<i class="b" style="background-image:url(\''+C[id+'_y'].img+'\')"></i>':'';
-    return '<button type="button" class="chM'+(c.yang?' two':'')+'" data-c="'+(c.yang&&face()==='yin'?id+'_y':id)+'" style="--c:'+c.c+'"><span class="pp"><i class="a" style="background-image:url(\''+(c.yang&&face()==='yin'?C[id+'_y'].img:c.img)+'\')"></i>'+b+'</span><b>'+(c.yang&&face()==='yin'?C[id+'_y'].n:c.n)+'</b>'+(isMine?'<span class="mk">나의 수호신</span>':'<small>'+c.role+'</small>')+'</button>'; }
+  function mini(id){ var c=C[id], m=mine(), isMine=c.el&&c.el===m, sy=!!(c.yang&&isMine&&face()==='yin'), k=sy?id+'_y':id, f=C[k];
+    var b=c.yang?'<i class="b" style="background-image:url(\''+(sy?c.img:C[id+'_y'].img)+'\')"></i>':'';
+    return '<button type="button" class="chM'+(c.yang?' two':'')+'" data-c="'+k+'" style="--c:'+c.c+'"><span class="pp"><i class="a" style="background-image:url(\''+f.img+'\')"></i>'+b+'</span><b>'+f.n+'</b>'+(isMine?'<span class="mk">나의 수호신</span>':'<small>'+c.role+'</small>')+'</button>'; }
   function renderRows(){
     var r=$('chRow'); if(r){ var m=mine(), list=['seoha','taeo'].concat(EL).concat(['halmae']); if(m){ list=list.filter(function(x){ return x!==m; }); list.unshift(m); } r.innerHTML=list.map(mini).join(''); }
     var y=$('yinRow'); if(y){ y.innerHTML=EL.map(function(e){ return card(e+'_y'); }).join(''); }

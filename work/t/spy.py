@@ -4,7 +4,7 @@ async def main():
     async with async_playwright() as p:
         b=await p.chromium.launch(); pg=await (await b.new_context(viewport={'width':390,'height':844})).new_page()
         await pg.add_init_script("try{sessionStorage.setItem('toHome','1');}catch(e){}")
-        await pg.goto('http://localhost:8812/seoha-salon.html'); await pg.wait_for_timeout(2500); await pg.wait_for_timeout(1200); renderW=await pg.evaluate("try{renderWry();1}catch(e){String(e)}"); print('rw',renderW)
+        await pg.goto('http://localhost:8812/home_v2.html'); await pg.wait_for_timeout(2500); await pg.wait_for_timeout(1200); renderW=await pg.evaluate("try{renderWry();1}catch(e){String(e)}"); print('rw',renderW)
         secs=await pg.evaluate("[...document.querySelectorAll('#home > section, #home > div')].filter(s=>!s.hidden&&s.offsetHeight>0).map(s=>[s.id||'-',s.offsetTop])")
         for sid,top in secs:
             await pg.evaluate(f"document.getElementById('home').scrollTop={top}-120"); await pg.wait_for_timeout(250)

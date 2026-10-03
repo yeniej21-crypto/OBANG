@@ -56,7 +56,7 @@
   if(!op) return;
   var BL=[], CX=[], el=null, timer=0, done=false, FORCE=false;
   /* 소리가 중심인 화면은 막히기 전이라도 처음 들어오면 문을 띄운다 */
-  var SND=/(avatar|book|free|lovemini|noeul|obgh|ppopgi|sinnyeon|sinnyeon_v2|meokmul)\.html$/;
+  var SND=/(avatar|book|free|lovemini|noeul|obgh|ppopgi|sinnyeon|sinnyeon_v2|meokmul|heukmae|geumeum|samjae)\.html$/;
   function act(){ try{ return !!(navigator.userActivation&&navigator.userActivation.hasBeenActive); }catch(e){ return false; } }
   function no(){ try{ return sessionStorage.getItem('obSnd')==='0'; }catch(e){ return false; } }
   P.play=function(){ var m=this, r=op.apply(m,arguments);

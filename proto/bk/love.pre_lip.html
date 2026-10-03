@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <script src="early.js?v=5"></script>
-<meta name="robots" content="noindex"><title>연애 상담소 · 오방도감</title>
+<title>연애 상담소 · 오방도감</title>
 <meta name="description" content="서하가 먼저 들어 주는 연애 상담소">
 <meta property="og:type" content="website"><meta property="og:site_name" content="오방도감">
 <meta property="og:title" content="연애 상담소 · 서하"><meta property="og:description" content="누구 때문에 왔어. 서하가 먼저 들어 줄게">
@@ -228,10 +228,6 @@ button{font-family:inherit;color:inherit}
   </section>
 
   <section class="sec">
-    <div class="sgx" data-sg="heuk" data-k="그림자 손님" data-h="둘 사이, 조심할 때도 알아 두기" style="margin:0"></div>
-  </section>
-
-  <section class="sec">
     <div class="sh"><small>상담소 사람들</small><b>누구한테 털어놓을래</b></div>
     <div class="ppl" id="ppl"></div>
   </section>
@@ -257,7 +253,7 @@ addEventListener('scroll',()=>$('top').classList.toggle('sc',scrollY>200),{passi
 /* ---------- 1. 들어서는 장면: 문이 열리며 서하 ---------- */
 const sc=$('scene'), sv=$('sv');
 /* v4: 문이 열리면 서하가 뾰로롱 → 귀여운 서하가 말을 건다(자동 재생, 소리는 버튼으로) */
-const VT='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/16276615-1faa-4c46-bb99-00182b738caf.mp4', VS='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/7da5996c-34ef-4cd1-bbb8-26038034c0f6.mp4', LINES=[[0.5,'연애 고민 있지.'],[2.9,'다 얘기해 봐.'],[4.4,'내가 들어 줄게.']];
+const VT='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/16276615-1faa-4c46-bb99-00182b738caf.mp4', VS='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/b2d7ab7f-f9ca-40f4-b89f-725c3001bcc0.mp4', LINES=[[0.5,'연애 고민 있지.'],[2.9,'다 얘기해 봐.'],[4.4,'내가 들어 줄게.']];
 sv.remove();
 function fxVid(src,muted){ const v=document.createElement('video'); v.className='fx'; v.playsInline=true; v.setAttribute('playsinline',''); v.muted=muted; v.preload='auto'; v.src=src; sc.insertBefore(v,$('cute')); v.addEventListener('playing',()=>v.classList.add('on')); return v; }
 let vt=null, vs=null, talking=false;
@@ -422,6 +418,5 @@ $('ppl').onclick=e=>{ const b=e.target.closest('[data-c]'); if(!b) return; if(wi
 </script>
 <script src="charhub.js?v=6"></script>
 <script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obpay.js" defer></script>
-<script src="shadow.js?v=1" defer></script>
 </body>
 </html>

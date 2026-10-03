@@ -1258,6 +1258,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="sh"><small>일 · 커리어</small><b>나, 여기서 버티는 게 맞을까</b></div>
       <div class="hRow">
         <div class="pc" id="cCareer" role="button" tabindex="0" style="background-image:url('img/earth.jpg');background-position:center 14%"><span class="chip new">NEW</span><div class="ct"><span class="yr">2027</span><span class="tt">커리어 사주</span><span class="st">내 일 유형과 움직일 달</span></div></div>
+        <div class="pc" id="cCool" role="button" tabindex="0" style="background-image:url('img/earth.jpg');background-position:center 22%"><span class="chip new">NEW</span><div class="ct"><span class="tt">이직 쿨타임</span><span class="st">옮길까, 버틸까 · 무료</span></div></div>
         <div class="pc" id="cToday" role="button" tabindex="0" style="background-image:url('img/seoha.jpg');background-position:center 14%"><div class="ct"><span class="tt">오늘의 운세</span><span class="st">매일 아침 바뀌는 나의 하루</span></div></div>
       </div>
     </section>
@@ -1823,7 +1824,7 @@ if($('featNoeul')){ const fe=$('featNoeul'), fv=fe.querySelector('video'); fe.on
   new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ if(!fv.getAttribute('src')) fv.src=fv.dataset.src; const p=fv.play(); if(p) p.catch(()=>{}); } else { try{ fv.pause(); }catch(_){} } }),{threshold:.3}).observe(fe); }
 $('hFort').onclick=()=>goPage('today.html'); $('tdH').onclick=()=>goPage('today.html');
 $('cToday').onclick=()=>goPage('today.html');
-$('cCareer').onclick=()=>goPage('career.html');
+$('cCareer').onclick=()=>goPage('career.html'); if($('cCool')) $('cCool').onclick=()=>goPage('cooltime.html');
 $('cTarot').onclick=()=>goPage('tarot.html'); $('cTarot1').onclick=()=>goPage('meokmul.html'); /* 10/3 무료 한 장 = 먹물 */
 $('cGlobal').onclick=()=>goPage('peach.html');
 document.querySelectorAll('#hChat [data-h]').forEach(b=>b.onclick=()=>goPage('chat.html?h='+b.dataset.h));
@@ -2096,7 +2097,7 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.con
 </script>
 
 <script>window.CH_BAND=2</script>
-<script src="charhub.js?v=8"></script>
+<script src="charhub.js?v=9"></script>
 <script src="hscroll.js?v=2"></script>
 <script src="menuintro.js"></script>
 

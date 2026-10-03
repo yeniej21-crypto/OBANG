@@ -46,11 +46,6 @@ button,select,input{font-family:inherit}
 .hero{position:relative;height:330px;border-radius:0;overflow:hidden;background:#000 center 12%/cover no-repeat;margin-bottom:14px}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,9,12,0) 38%,rgba(8,9,12,.94))}
 .hero div{position:absolute;left:18px;right:18px;bottom:18px;z-index:1}
-.hero .hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 14%;opacity:0;transition:opacity .6s}.hero .hv.on{opacity:1}
-.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(10,8,6,.9) 100%);pointer-events:none}
-.ctl{display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:13px 14px;text-decoration:none;color:inherit;background:linear-gradient(90deg,rgba(214,169,87,.16),rgba(255,255,255,.03));box-shadow:inset 0 0 0 1px rgba(214,169,87,.4)}
-.ctl i{flex:none;font-style:normal;font-family:var(--serif);font-size:13px;font-weight:900;color:#1a120b;background:#e0b25a;padding:5px 7px}
-.ctl span{flex:1;min-width:0}.ctl b{display:block;font-size:15px}.ctl small{display:block;margin-top:2px;font-size:12px;color:var(--ink-2)}
 .hero small{font-size:11px;letter-spacing:.24em;color:var(--acc-2);font-weight:700}
 .hero h1{margin:6px 0 8px;font-family:var(--serif);font-size:26px;font-weight:900;line-height:1.3}
 .hero p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
@@ -164,7 +159,7 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
   <div class="scr on" id="sIn">
     <div class="top"><button class="ib" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>커리어 사주</b><span class="tag">黃龍 · 도준</span></div>
     <div class="wrap">
-      <div class="hero" style="background-image:url('img/earth.jpg')"><video class="hv" src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/f9512e9a-7f19-480a-be0b-5aa3ba0f3867.mp4" muted autoplay loop playsinline preload="auto"></video><div><small>CAREER · 일 사주 리포트</small><h1>스펙 말고,<br>타고난 판부터 보자</h1><p>"어디서 일해야 네가 제일 비싸지는지,<br>언제 움직여야 하는지. <b>내가 정리해줄게.</b>"</p></div></div>
+      <div class="hero" style="background-image:url('img/earth.jpg')"><div><small>CAREER · 일 사주 리포트</small><h1>스펙 말고,<br>타고난 판부터 보자</h1><p>"어디서 일해야 네가 제일 비싸지는지,<br>언제 움직여야 하는지. <b>내가 정리해줄게.</b>"</p></div></div>
       <div class="card"><h3>지금 나는</h3><div class="chipset" id="sit"><button class="on" data-v="work">직장인</button><button data-v="move">이직 준비</button><button data-v="job">취준생</button><button data-v="free">프리랜서·창업</button><button data-v="study">학생</button></div></div>
       <div class="card"><h3>이름 (선택) · 성별</h3><input type="text" id="nm" maxlength="8" placeholder="예) 은주"><div class="seg" id="gSeg" style="margin-top:8px"><button class="on" data-v="f">여자</button><button data-v="m">남자</button></div></div>
       <div class="card"><h3>생년월일</h3>
@@ -172,7 +167,6 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
         <div class="g3"><select id="by" aria-label="년"></select><select id="bm" aria-label="월"></select><select id="bd" aria-label="일"></select></div>
         <select id="bh" aria-label="태어난 시" style="margin-top:6px"></select></div>
       <button class="go" id="goBtn">내 커리어 사주 보기</button>
-      <a class="ctl" href="cooltime.html"><i>NEW</i><span><b>이직 쿨타임 · 옮길까, 버틸까</b><small>1분 진단 · 앞으로 12달 이직 달력 · 무료</small></span></a>
       <p class="fine">십성 구조로 적성을, 오행으로 업계를, 2027년 월운으로 움직일 때를 봅니다.</p>
     </div>
   </div>
@@ -212,7 +206,6 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
 
       <div class="lock" id="lockC"><b>2027 커리어 로드맵 전체 열기</b><ul><li>달별 액션 플랜 (지원·면접·협상 타이밍)</li><li>면접·입사일 택일 (시간대까지)</li><li>연봉 협상에서 먹히는 한 문장</li></ul><button class="go" id="payBtn">19,900원 · 로드맵 받기</button></div>
       <div id="cprem" hidden></div>
-      <a class="ctl" href="cooltime.html"><i>NEW</i><span><b>이직 쿨타임 · 옮길까, 버틸까</b><small>1분 진단 · 앞으로 12달 이직 달력 · 무료</small></span></a>
       <div class="cta"><button class="go sub" id="askBtn">도준에게 커리어 고민 직접 묻기</button><button class="go sub" id="tgBtn">면접·계약 날짜 잡기 (택일)</button></div>
       <p class="note">체험판입니다. 원국은 실제 만세력(절기 시각 계산)으로 세우고, 적성은 일간 기준 십성 분포(월지 가중), 업계는 신강·신약에 따른 도움 오행, 2027년 월별 운은 월운 십성과 일지·월지의 합·충으로 자동 산출합니다.</p>
     </div>
@@ -390,6 +383,5 @@ MenuIntro.play({src:'v/menu/career.mp4',poster:'img/earth.jpg',who:'도준 · �
 <script src="depth3d.js"></script>
 <script>window.Depth3D&&setTimeout(()=>Depth3D.watch('.hero,#heroP,.ch,#sLoad'),200);</script>
 <script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
-<script>(function(){ const v=document.querySelector(".hero .hv"); if(!v) return; v.addEventListener("playing",()=>v.classList.add("on"),{once:true}); const p=v.play(); if(p&&p.catch) p.catch(()=>{}); })();</script>
 </body>
 </html>

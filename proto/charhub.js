@@ -226,7 +226,7 @@
   function mount(){
     var talk=$('secTalk'); if(!talk) return;
     css();
-    var stk=['seoha','taeo','fire','halmae'].map(function(k){ return '<i style="background-image:url(\''+C[k].img+'\')"></i>'; }).join('');
+    var stk=['seoha','earth','water','taeo'].map(function(k){ return '<i style="background-image:url(\''+C[k].img+'\')"></i>'; }).join('');
     var rowHTML=window.CH_BAND===2?'<button type="button" class="chBan" id="chBan"><span class="stk">'+stk+'</span><span class="tx"><small>캐릭터 상담</small><b>캐릭터별 1:1 상담</b><em>고민에 맞는 상대를 골라요</em></span><span class="go" aria-hidden="true"></span></button>':window.CH_BAND?'<div class="chBand" id="chBand"><div class="chTrack" id="chBandT"></div></div>':'<div class="chMini" id="chRow"></div>';
     talk.innerHTML=(window.CH_BAND===2?'':'<div class="sh"><small>캐릭터 상담</small><b>오늘은 누구한테 털어놓을래</b></div>')+rowHTML+
       '<button type="button" class="yinLn" id="yinLn"><span><em>음의 현신</em>같은 기운의 여신 다섯도 만나 보기</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>';

@@ -104,7 +104,8 @@ const CLIP={
   good:{v:D2+'27f73901-d81f-4488-b04c-2e481e19eb80.mp4',t:'오, 좋은 거 나왔다. 이번 주는 네 편이야'},
   care:{v:D2+'3e43ab6d-5c1d-45ed-8439-cedbb35954a5.mp4',t:'음. 듣기 좋은 말은 아니야. 그래도 들어'},
   more:{v:D2+'e0a78569-23a2-492c-8124-08ea7c8a7662.mp4',t:'한 장으로는 여기까지. 깊게 보려면 무진 카드방'},
-  again:{v:'',t:'오늘 카드는 이미 뽑았어. 내일 또 와'}
+  again:{v:D2+'1a5191e3-961c-4134-afee-c470296002eb.mp4',t:'오늘 기회는 끝났어. 같은 걸 두 번 물으면 카드가 삐져. 내일 또 와'},
+  again2:{v:D2+'8c06e2f1-2f3f-478c-a61c-3eff4a1f8b80.mp4',t:'또 왔어. 오늘 기회는 끝났어. 내일 또 와'}
 };
 $('vw').style.backgroundImage="url('"+POSTER+"')";
 const muted=()=>{ try{ return sessionStorage.getItem('obSnd')==='0'; }catch(e){ return false; } };
@@ -152,7 +153,7 @@ $('fan').addEventListener('click',e=>{ const b=e.target.closest('.cd'); if(b) pi
 $('rdy').onclick=reveal;
 /* 시작 */
 const hr=today.getHours(), first=!S.n;
-if(S.d===dk){ $('fan').style.display='none'; $('hd').querySelector('p').textContent='오늘 뽑은 카드예요. 내일 새 카드가 기다려요.'; fill(S); $('slot').classList.add('on'); $('flip').classList.add('on'); shown=true; $('res').classList.add('on','show'); say('again'); }
+if(S.d===dk){ $('fan').style.display='none'; $('hd').querySelector('p').textContent='오늘 뽑은 카드예요. 내일 새 카드가 기다려요.'; fill(S); $('slot').classList.add('on'); $('flip').classList.add('on'); shown=true; $('res').classList.add('on','show'); /* 하루 한 번: 다시 들어오면 먹물이 직접 말해 줌(두 가지 중 하나) */ say(((S.rv2=(S.rv2||0)+1)%2)?'again':'again2'); save(); }
 else { $('fan').classList.add('wait');
   say(first?'first':((hr>=23||hr<4)?'night':'back')).then(ok=>{ $('fan').classList.remove('wait'); if(ok&&!$('fan').classList.contains('done')) say('pick'); }); }
 $('goMujin').onclick=()=>{ location.href='tarot.html'; };

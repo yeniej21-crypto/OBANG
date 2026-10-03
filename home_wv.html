@@ -67,7 +67,7 @@
 .home .bkS .bookC .tg i{font-style:normal;font-size:10.5px;font-weight:700;padding:3px 6px;color:#e3b866;box-shadow:inset 0 0 0 1px rgba(227,184,102,.5)}
 .home .bkS .bkN{margin:10px 18px 0;font-size:12.5px;line-height:1.55;color:var(--ink3,#8f8475)}
 </style>
-<title>오방사주 · 서하의 살롱</title>
+<meta name="robots" content="noindex"><title>오방사주 · 서하의 살롱</title>
 <meta name="description" content="다섯 신이 읽어 주는 나의 사주">
 <meta property="og:type" content="website"><meta property="og:site_name" content="오방사주">
 <meta property="og:title" content="오방사주"><meta property="og:description" content="다섯 신이 읽어 주는 나의 사주">
@@ -2140,6 +2140,38 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.con
 
 <script>window.CH_BAND=2</script>
 <script src="charhub.js?v=9"></script><script src="bookbanner.js?v=1" defer></script>
+<style>
+/* 세계관 입구 시안(10/4): ?wv=a 머리 옆 칩 · b 맨 위 얇은 띠 · c 분류 탭 첫 칸 */
+.wvLab{position:fixed;left:50%;top:6px;transform:translateX(-50%);z-index:9999;background:#ff5a46;color:#fff;font-size:11px;font-weight:900;padding:3px 8px;pointer-events:none}
+.hHead .hIc .wvA{width:auto!important;min-width:0!important;flex-direction:row!important;white-space:nowrap}
+.wvA{display:inline-flex!important;align-items:center;gap:5px;height:30px;padding:0 10px 0 8px;margin-right:6px;border:0;background:rgba(227,184,102,.14);box-shadow:inset 0 0 0 1px rgba(227,184,102,.55);color:#f0d9a2;font:inherit;font-size:12px;font-weight:800;cursor:pointer;animation:wvGlow 2.8s ease-in-out infinite}
+.wvA svg{width:16px;height:16px}
+@keyframes wvGlow{50%{box-shadow:inset 0 0 0 1px rgba(227,184,102,.9),0 0 14px rgba(227,184,102,.35)}}
+.wvB{display:flex;align-items:center;gap:12px;margin:4px 16px 2px;padding:10px 12px;text-decoration:none;color:#fff;background:linear-gradient(90deg,rgba(227,184,102,.16),rgba(227,184,102,.04) 70%);box-shadow:inset 0 0 0 1px rgba(227,184,102,.4)}
+.wvB .ic{position:relative;flex:none;width:34px;height:24px;perspective:200px}
+.wvB .ic i{position:absolute;top:0;width:50%;height:100%;background:#f3e8d3;box-shadow:inset 0 0 0 1px rgba(90,60,30,.3)}
+.wvB .ic i:first-child{left:0;transform:rotateY(14deg);transform-origin:100% 50%}
+.wvB .ic i:nth-child(2){right:0;transform:rotateY(-14deg);transform-origin:0 50%}
+.wvB .ic i:nth-child(3){right:0;transform-origin:0 50%;background:#e9dcc2;animation:wvTurn 3.2s ease-in-out infinite}
+@keyframes wvTurn{0%,40%{transform:rotateY(-14deg)}75%,100%{transform:rotateY(-166deg)}}
+.wvB .ic::after{content:"";position:absolute;left:50%;top:-2px;width:3px;height:30px;margin-left:2px;background:#c8372d}
+.wvB .t{flex:1;min-width:0}
+.wvB small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.06em;color:#e3b866}
+.wvB b{display:block;margin-top:2px;font-size:14px;font-weight:800}
+.wvB .ar{flex:none;font-size:11.5px;font-weight:800;color:#1a130c;background:#e3b866;padding:6px 9px}
+.pills .wvC{position:relative;color:#f0d9a2!important;box-shadow:inset 0 0 0 1px rgba(227,184,102,.55);background:rgba(227,184,102,.1)!important;padding-left:20px!important}
+.pills .wvC::before{content:"";position:absolute;left:9px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%!important;background:#e3b866;animation:wvDot 1.6s ease-in-out infinite}
+@keyframes wvDot{50%{opacity:.3}}
+</style>
+<script>
+(function(){ const V=(new URLSearchParams(location.search).get('wv')||'b').toLowerCase(); const go=()=>{ location.href='book.html#p=0'; };
+  const lab=document.createElement('div'); lab.className='wvLab'; lab.textContent='세계관 입구 시안 '+V.toUpperCase(); document.body.appendChild(lab);
+  if(V==='a'){ const ic=document.querySelector('.hHead .hIc'); const b=document.createElement('button'); b.className='wvA'; b.type='button'; b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 6c-2-1.5-5-2-8-1.5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5v-13c-3-.5-6 0-8 1.5z"/><path d="M12 6v13"/></svg>세계관'; b.onclick=go; ic.insertBefore(b,ic.firstChild); }
+  if(V==='b'){ const h=document.querySelector('.hHead'); const a=document.createElement('a'); a.className='wvB'; a.href='book.html#p=0'; a.innerHTML='<span class="ic"><i></i><i></i><i></i></span><span class="t"><small>처음이라면, 세계관부터</small><b>팔자에 신이 들었다</b></span><span class="ar">무료로 펼치기</span>'; h.parentNode.insertBefore(a,h.nextSibling); }
+  if(V==='c'){ const p=document.getElementById('pills'); const b=document.createElement('button'); b.className='wvC'; b.type='button'; b.textContent='세계관'; b.addEventListener('click',e=>{ e.stopPropagation(); e.preventDefault(); go(); },true); p.insertBefore(b,p.firstChild); }
+})();
+</script>
+
 <script src="hscroll.js?v=2"></script>
 <script src="menuintro.js"></script>
 

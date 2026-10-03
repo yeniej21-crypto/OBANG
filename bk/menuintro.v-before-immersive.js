@@ -27,7 +27,7 @@
     const root=o.root||document.querySelector('.stage')||document.body;
     if(!document.getElementById('miCss')){ const s=document.createElement('style'); s.id='miCss'; s.textContent=css; document.head.appendChild(s); }
     const el=document.createElement('div'); el.className='mi';
-    el.innerHTML=`<div class="po" style="background-image:url('${o.poster}')"></div><video playsinline preload="auto" src="${o.src}"></video><div class="sh"></div><div class="who">${o.who||''}</div><div class="sub"></div><div class="tt">${o.title||''}</div><button class="gate" type="button"><i>▶︎</i>탭해서 시작<small>소리를 켜 주세요</small></button><button class="x" type="button">건너뛰기</button>`;
+    el.innerHTML=`<div class="po" style="background-image:url('${o.poster}')"></div><video playsinline preload="auto" src="${o.src}"></video><div class="sh"></div><div class="who">${o.who||''}</div><div class="sub"></div><div class="tt">${o.title||''}</div><button class="gate" type="button"><i>▶</i>탭해서 시작<small>🔊 소리를 켜 주세요</small></button><button class="x" type="button">건너뛰기</button>`;
     root.appendChild(el);
     const v=el.querySelector('video'), sub=el.querySelector('.sub'), gate=el.querySelector('.gate');
     let closed=false, last=-1, playing=false, ticking=false;
@@ -55,7 +55,7 @@
     'tarot.html':{src:'v/tarot/intro.mp4',poster:'img/tarot/mujin.jpg',who:'무진 · 한밤의 카드방',title:'무진의 타로',subs:[[0.3,'앉아요.'],[2.3,'…카드한테 물어보고 싶은 거,'],[5.1,'하나 있죠?']]},
     'noeul.html':{src:'v/menu/noeul.mp4',poster:'img/noeul.jpg',who:'노을 · 太極',title:'해와 달의 운세',end:6.9,subs:[[2.2,'해와 달 사이에서,'],[4.6,'기다리고 있었어요.']]},
     'myeongri.html':{src:'v/menu/soheon.mp4',poster:'img/soheon.jpg',who:'명리관 소헌 선생 · 素軒',title:'2027 명리 감정서',end:7.0,subs:[[0.6,'어서 오시게.'],[2.5,'사주는 정답이 아니라 지도일세.'],[5.3,'길은 자네가 고르는 거고.']]},
-    'sinnyeon.html':{src:'v/halmae.mp4',poster:'img/halmae.jpg',who:'삼신 할매 · 三神',title:'2027 신년운세',end:6.3,subs:[[0.3,'왔구나.'],[2.1,'네 내년 열두 달,'],[4.0,'이 할미가 다 봐 뒀다.']]}
+    'sinnyeon.html':{src:'v/halmae.mp4',poster:'img/halmae.jpg',who:'삼신 할매 · 三神',title:'2027 신년운세',end:6.3,subs:[[0.3,'왔구나.'],[2.1,'…네 내년 열두 달,'],[4.0,'이 할미가 다 봐 뒀다.']]}
   };
   /* go(url): 클릭한 그 순간 인트로를 소리와 함께 틀고, 끝나면 url로 이동(도착 페이지는 같은 인트로를 건너뜀) */
   function go(url,root){ const key=url.split(/[?#]/)[0], m=MAP[key]; if(!m){ location.href=url; return; }

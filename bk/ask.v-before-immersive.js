@@ -129,7 +129,7 @@ const PERSONA={
   earth_y:{name:'도담',rules:`너는 "도담"이야. 중앙을 지키는 황룡(土)의 음의 얼굴로, 도준과 같은 기운에서 나온 20대 후반 여자야. 己(기름진 밭)처럼 길러 내고 거둬들이는 사람. 챙겨 주는 실속파로 돈과 살림 감각이 좋고, 잔소리마저 다정해. 존댓말과 반말 사이를 오가며 말하고, 재물 · 살림 · 결혼 시기를 현실적으로 짚어 줘.`,len:'3~5문장',welcome:n=>`${n}, 왔어요. 뿌린 만큼 거둬요. 걱정은 나한테 맡겨.`,chips:['돈은 언제 모여?','이직해도 될까?','나 어떤 일이 맞아?']},
   metal_y:{name:'세린',rules:`너는 "세린"이야. 서쪽을 지키는 백호(金)의 음의 얼굴로, 시온과 같은 기운에서 나온 20대 중반 여자야. 辛(보석)처럼 다듬어진 날카로움. 세련된 완벽주의자로 칭찬은 드물지만 정확해. 짧고 서늘한 반말로 말하고, 정리 · 결단 · 커리어를 냉정하지만 아끼는 마음으로 짚어 줘.`,len:'2~4문장',welcome:n=>`${n}. 칭찬은 아껴 둘게. 뭘 정리하고 싶어.`,chips:['정리해야 할 관계가 있을까?','재회 가능성 있어?','그 사람 속마음이 궁금해']},
   water_y:{name:'이슬',rules:`너는 "이슬"이야. 북쪽을 지키는 현무(水)의 음의 얼굴로, 재이와 같은 기운에서 나온 20대 중반 여자야. 癸(빗물 · 이슬)처럼 조용히 스며드는 사람. 직관이 빠르고 꿈 이야기를 잘하는 몽환형으로, 속삭이듯 느린 반말을 써. 먼저 마음을 들어 주고, 속마음 · 꿈 · 직감을 사주로 짚어 줘.`,len:'3~5문장',welcome:n=>`${n}. 천천히 말해도 돼. 다 들려.`,chips:['요즘 마음이 복잡해','나 어떤 사람이야?','조심할 달이 언제야?']},
-  halmae:{name:'삼신 할매',rules:`너는 "삼신 할매"야. 사람의 명을 오래 지켜본 할머니로, 사용자를 이름으로 부르며 "~거라", "~느니라"처럼 차분하고 진지한 반말로 말해. 겁주거나 단정하지 말고 담담하게 짚어줘.`,len:'4~6문장',welcome:n=>`${n}${josa(n,'아','야')}, 궁금한 걸 물어보거라. 네 사주에 적힌 만큼만 말해주마.`,chips:['올해 이사해도 되겠습니까','돈은 언제 모입니까','조심할 달은 언제입니까']}
+  halmae:{name:'삼신 할매',rules:`너는 "삼신 할매"야. 사람의 명을 오래 지켜본 할머니로, 사용자를 이름으로 부르며 "~거라", "~느니라"처럼 차분하고 진지한 반말로 말해. 겁주거나 단정하지 말고 담담하게 짚어줘.`,len:'4~6문장',welcome:n=>`${n}${josa(n,'아','야')}, 궁금한 걸 물어보거라. 네 사주에 적힌 만큼만 말해주마.`,chips:['올해 이사해도 되겠습니까?','돈은 언제 모입니까?','조심할 달이 언제입니까?']}
 };
 function rulesText(per,u,F){
   return `${per.rules}
@@ -206,7 +206,7 @@ function open(opts){
       if(ids.length){ const box=document.createElement('div'); box.className='ak-ev'; ids.slice(0,3).forEach(id=>{ const f=byId[id]; const c=document.createElement('button'); c.textContent=f.label; c.onclick=()=>{ let x=b.querySelector('.ak-evx'); if(!x){ x=document.createElement('div'); x.className='ak-evx'; b.appendChild(x); } x.textContent=f.text; scroll(); }; box.appendChild(c); }); b.appendChild(box); }
       used++; setLim(); setSug(sg?sg.split('|').map(s=>s.trim()).filter(Boolean):[]); if(used>=FREE) paywall(); }
   async function viaServer(){ if(SRV_OFF||/^(localhost|127\.)/.test(location.hostname)||location.protocol==='file:') return 'skip';
-    busy=true; const b=bubble('b',''); b.innerHTML='<span class="ak-think">사주 펼쳐보는 중</span>';
+    busy=true; const b=bubble('b',''); b.innerHTML='<span class="ak-think">사주 펼쳐보는 중…</span>';
     try{ const r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:rulesText(per,u,F)},...turns.slice(-8)]})});
       if(r.ok&&(r.headers.get('content-type')||'').includes('text/plain')&&r.body){ const rd=r.body.getReader(), dc=new TextDecoder(); let t='';
         for(;;){ const {done:fin,value}=await rd.read(); if(fin) break; t+=dc.decode(value,{stream:true}); const sh=show(t); if(sh) b.textContent=sh; scroll(); }
@@ -226,13 +226,13 @@ function open(opts){
     inp.value=''; btn.disabled=true; setSug([]); bubble('u',q); turns.push({role:'user',content:q});
     const fn=await avail();
     if(!fn&&(await viaServer())==='ok') return;
-    if(!fn){ turns.pop(); const b0=bubble('b',''); b0.innerHTML='<span class="ak-think">사주 펼쳐보는 중</span>'; await new Promise(r=>setTimeout(r,900));
+    if(!fn){ turns.pop(); const b0=bubble('b',''); b0.innerHTML='<span class="ak-think">사주 펼쳐보는 중…</span>'; await new Promise(r=>setTimeout(r,900));
       const d=demoAnswer(opts.persona,q,CTX,u); if(d&&BRO&&window.HJ&&HJ.bro) d.t=HJ.bro(d.t);
       if(!d){ b0.className='ak-m sys'; b0.textContent='체험판 예시 모드에서는 추천 질문에만 답해요. 정식 버전에서는 무엇이든 물어볼 수 있어요.'; setSug(opts.starters||per.chips); return; }
       b0.textContent=''; const tag=document.createElement('div'); tag.style.cssText='font-size:10.5px;letter-spacing:.1em;color:var(--ak-ink3);margin-bottom:4px'; tag.textContent='예시 답변'; b0.appendChild(tag); b0.appendChild(document.createTextNode(d.t));
       const box=document.createElement('div'); box.className='ak-ev'; [...new Set(d.ev)].filter(x=>byId[x]).slice(0,3).forEach(x=>{ const f=byId[x]; const c=document.createElement('button'); c.textContent=f.label; c.onclick=()=>{ let e=b0.querySelector('.ak-evx'); if(!e){ e=document.createElement('div'); e.className='ak-evx'; b0.appendChild(e); } e.textContent=f.text; scroll(); }; box.appendChild(c); }); b0.appendChild(box);
       used++; setLim(); setSug((opts.starters||per.chips).filter(x=>x!==q)); if(used>=FREE) paywall(); scroll(); return; }
-    busy=true; const b=bubble('b',''); b.innerHTML='<span class="ak-think">사주 펼쳐보는 중</span>';
+    busy=true; const b=bubble('b',''); b.innerHTML='<span class="ak-think">사주 펼쳐보는 중…</span>';
     ctl=new AbortController();
     const input=[{role:'user',content:rulesText(per,u,F)},...turns.slice(-8)];
     const tools=[{name:'calcOther',description:'다른 사람의 생년월일로 사주를 계산해 사용자와의 궁합 근거(일간 관계, 일지 합충, 도화)를 돌려준다. 사용자가 상대의 생년월일을 말했을 때만 쓴다.',inputSchema:{type:'object',properties:{year:{type:'integer'},month:{type:'integer'},day:{type:'integer'},lunar:{type:'boolean'},leap:{type:'boolean'},hour:{type:'integer',description:'0=자시…11=해시, 모르면 생략'}},required:['year','month','day']},execute:(inp)=>calcOther({P},inp)}];

@@ -468,7 +468,7 @@ const ART={
     open:CF2+'86d35ded-7518-4b8b-a550-c974a6d0e1f0.mp4',     /* once: 봉인 깨짐 → 덮개 → 편지 올라옴 */
     unfold:CF2+'dabccc7d-efd4-4ec4-9268-89f05fd6e364.mp4',   /* once: 접힌 편지가 펴짐 */
     ending:CF2+'f7363840-8dcf-4726-8203-4773a3551f0d.mp4' }, /* loop */
-  bgm:'a/yeonseo_bgm.mp3'
+  bgm:''
 };
 ART.hero=ART.img.hero; ART.ending=ART.img.ending;
 
@@ -589,8 +589,8 @@ const AUD=(()=>{ let ctx=null, mus=null, fx=null, nb=null, buf=null, src=null, l
     if(!src&&!buf&&el&&el.paused){ const p=el.play(); if(p&&p.catch) p.catch(()=>{}); }
     ramp(ducked?VOL*.45:VOL,2.5); }
   /* 디코딩이 안 되는 브라우저는 audio 요소를 같은 게인에 물려 반복 */
-  function fallbackEl(){ if(el) return; try{ el=new Audio(ART.bgm); el.loop=true; el.preload='auto'; ctx.createMediaElementSource(el).connect(mus); }catch(e){ el=null; } if(el&&soundOn&&entered) run(); }
-  function load(){ if(buf||loading||el) return; loading=true;
+  function fallbackEl(){ if(el||!ART.bgm) return; try{ el=new Audio(ART.bgm); el.loop=true; el.preload='auto'; ctx.createMediaElementSource(el).connect(mus); }catch(e){ el=null; } if(el&&soundOn&&entered) run(); }
+  function load(){ if(!ART.bgm||buf||loading||el) return; loading=true;
     fetch(ART.bgm).then(r=>{ if(!r.ok) throw new Error('bgm'); return r.arrayBuffer(); })
       .then(ab=>new Promise((res,rej)=>{ try{ const p=ctx.decodeAudioData(ab,res,rej); if(p&&p.catch) p.catch(rej); }catch(e){ rej(e); } }))
       .then(b=>{ buf=b; loading=false; if(soundOn&&entered) run(); })

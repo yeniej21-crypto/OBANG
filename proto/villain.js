@@ -22,7 +22,7 @@ const V={
 const K=(window.VIL&&window.VIL.k)||'heuk', C=V[K];
 window.VIL_CONF=V;
 /* 영상 주소는 생성 뒤 채운다(villain.js 한 곳) */
-const VID={heuk:{enter:D2+'9d07049a-9f0b-45e3-9547-21f1841ad87d.mp4',talk:D2+'9f27c028-9c38-42c9-9761-4dae731db20e.mp4'},geum:{enter:D2+'c046140c-d852-47b8-9472-52acd1fa393c.mp4',talk:D2+'a826d10b-84dc-4210-89af-afaaa102a05a.mp4'},sam:{enter:D2+'9ac5edd8-b3bb-4fee-b064-025be7356f3c.mp4',talk:D2+'a0af08be-6524-4836-b882-7a32404a1ad8.mp4'}};
+const VID={heuk:{enter:D2+'9d07049a-9f0b-45e3-9547-21f1841ad87d.mp4',talk:D2+'a62f2756-99cd-4698-ae62-27e670c7ff87.mp4'},geum:{enter:D2+'c046140c-d852-47b8-9472-52acd1fa393c.mp4',talk:D2+'a826d10b-84dc-4210-89af-afaaa102a05a.mp4'},sam:{enter:D2+'9ac5edd8-b3bb-4fee-b064-025be7356f3c.mp4',talk:D2+'a0af08be-6524-4836-b882-7a32404a1ad8.mp4'}};
 ['heuk','geum','sam'].forEach(k=>{ const u=VID[k]; V[k].enter=u.enter.includes('__')?'':u.enter; V[k].talk=u.talk.includes('__')?'':u.talk; });
 
 const toast=t=>{ let e=$('toast'); if(!e){ e=document.createElement('div'); e.id='toast'; e.className='toast'; document.body.appendChild(e); } e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1800); };

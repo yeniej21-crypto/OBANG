@@ -184,11 +184,9 @@ a{color:inherit;text-decoration:none}
 #sLet{background:linear-gradient(180deg,#efe3cd,#eadcc3 40%,#e8d9bf);--pw:min(calc(100vw - 28px),396px)}
 #sLet .desk{position:absolute;left:0;right:0;top:0;height:1400px;pointer-events:none;background:linear-gradient(122deg,rgba(255,242,210,.7),rgba(255,242,210,0) 55%)}
 .lw{position:relative;z-index:1;padding:calc(env(safe-area-inset-top,0px) + 68px) 0 0}
-.pp{--u:calc(var(--pw)*var(--k,1));position:relative;width:var(--pw);min-height:calc(var(--pw)*1910/1080);margin:0 auto;padding:calc(var(--pw)*.205) calc(var(--pw)*.15) calc(var(--pw)*.2);font-family:var(--pen);color:var(--pink);
+.pp{position:relative;width:var(--pw);min-height:calc(var(--pw)*1910/1080);margin:0 auto;padding:calc(var(--pw)*.205) calc(var(--pw)*.15) calc(var(--pw)*.2);font-family:var(--pen);color:var(--pink);
   box-shadow:18px 26px 34px -20px rgba(70,44,20,.5),2px 3px 6px rgba(70,44,20,.12);isolation:isolate}
-.pp:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#fbf6ea,#f4ead6)}
-.stage.ok-paper .pp:before{background:none;border-style:solid;border-color:transparent;border-image-source:var(--imPaper);border-image-slice:330 150 470 150 fill;border-image-repeat:stretch;
-  border-image-width:calc(var(--pw)*330/1080) calc(var(--pw)*150/1080) calc(var(--pw)*470/1080) calc(var(--pw)*150/1080)}
+.pp:before{content:"";position:absolute;inset:0;z-index:-1;background:var(--imPaper) center/100% 100% no-repeat,linear-gradient(180deg,#fbf6ea,#f4ead6)}
 .stage:not(.ok-paper) .pp:before{background:
   linear-gradient(#b7c8ad,#b7c8ad) 50% 3.2%/88% 2px no-repeat,linear-gradient(#b7c8ad,#b7c8ad) 50% 96.8%/88% 2px no-repeat,
   linear-gradient(#b7c8ad,#b7c8ad) 6% 50%/2px 93.6% no-repeat,linear-gradient(#b7c8ad,#b7c8ad) 94% 50%/2px 93.6% no-repeat,
@@ -197,23 +195,23 @@ a{color:inherit;text-decoration:none}
 .pp.p2{margin-top:-6px;transform:rotate(.7deg)}
 .pp.p2:before{transform:scaleX(-1)}
 .pp>*{position:relative}
-.pp .t1{font-size:calc(var(--u)*.092);line-height:1.1;max-width:60%}
-.pp .t2{margin-top:4px;font-size:calc(var(--u)*.054);line-height:1.3;color:#7a6450;max-width:50%}
-.pp .k{margin-top:calc(var(--u)*.085);font-size:calc(var(--u)*.066);line-height:1.2}
-.pp .m{font-size:calc(var(--u)*.13);line-height:1.08;color:var(--pred);letter-spacing:-.01em}
-.pp .m2{font-size:calc(var(--u)*.084);line-height:1.2}
-.pp .p{margin-top:calc(var(--u)*.03);font-size:calc(var(--u)*.066);line-height:1.34}
-.pp .h{margin-top:calc(var(--u)*.075);font-size:calc(var(--u)*.06);line-height:1.2;color:var(--psage)}
+.pp .t1{font-size:calc(var(--pw)*.092);line-height:1.1;max-width:60%}
+.pp .t2{margin-top:4px;font-size:calc(var(--pw)*.054);line-height:1.3;color:#7a6450;max-width:50%}
+.pp .k{margin-top:calc(var(--pw)*.085);font-size:calc(var(--pw)*.066);line-height:1.2}
+.pp .m{font-size:calc(var(--pw)*.13);line-height:1.08;color:var(--pred);letter-spacing:-.01em}
+.pp .m2{font-size:calc(var(--pw)*.084);line-height:1.2}
+.pp .p{margin-top:calc(var(--pw)*.03);font-size:calc(var(--pw)*.066);line-height:1.34}
+.pp .h{margin-top:calc(var(--pw)*.075);font-size:calc(var(--pw)*.06);line-height:1.2;color:var(--psage)}
 .pp .h:first-child{margin-top:0}
 .pp .h:after{content:"";display:block;width:calc(var(--pw)*.12);height:1.5px;margin-top:3px;background:rgba(95,125,88,.55);transform:rotate(-1.5deg)}
-.pp .b{margin-top:calc(var(--u)*.02);font-size:calc(var(--u)*.078);line-height:1.22}
-.pp .qt{margin-top:calc(var(--u)*.025);font-size:calc(var(--u)*.088);line-height:1.22}
-.pp .nt{margin-top:4px;font-size:calc(var(--u)*.05);line-height:1.3;color:#8a7560}
-.pp .rn{margin-top:calc(var(--u)*.02);font-size:calc(var(--u)*.063);line-height:1.34}
+.pp .b{margin-top:calc(var(--pw)*.02);font-size:calc(var(--pw)*.078);line-height:1.22}
+.pp .qt{margin-top:calc(var(--pw)*.025);font-size:calc(var(--pw)*.088);line-height:1.22}
+.pp .nt{margin-top:4px;font-size:calc(var(--pw)*.05);line-height:1.3;color:#8a7560}
+.pp .rn{margin-top:calc(var(--pw)*.02);font-size:calc(var(--pw)*.063);line-height:1.34}
 .pp .rn em{font-style:normal;color:var(--pred)}
-.pp .dt{margin-top:calc(var(--u)*.08);text-align:right;padding-right:calc(var(--pw)*.17);font-size:calc(var(--u)*.052);color:#8a7560}
-.pp .sg{margin-top:2px;text-align:right;font-size:calc(var(--u)*.088);line-height:1.15;padding-right:calc(var(--pw)*.17)}
-.pp .ov{margin-top:calc(var(--u)*.04);font-size:calc(var(--u)*.05);color:#8a7560}
+.pp .dt{margin-top:calc(var(--pw)*.08);text-align:right;padding-right:calc(var(--pw)*.17);font-size:calc(var(--pw)*.052);color:#8a7560}
+.pp .sg{margin-top:2px;text-align:right;font-size:calc(var(--pw)*.088);line-height:1.15;padding-right:calc(var(--pw)*.17)}
+.pp .ov{margin-top:calc(var(--pw)*.04);font-size:calc(var(--pw)*.05);color:#8a7560}
 /* 우표 · 소인 · 봉랍 */
 .stp{position:absolute;right:calc(var(--pw)*.12);top:calc(var(--pw)*.125);width:calc(var(--pw)*.205);aspect-ratio:4/5;transform:rotate(4deg);mix-blend-mode:multiply;z-index:2;
   background:var(--imStamps) var(--sp,0 0)/400% 300% no-repeat;filter:brightness(1.07) contrast(1.04)}
@@ -224,10 +222,6 @@ a{color:inherit;text-decoration:none}
 .wxs{position:absolute;right:calc(var(--pw)*-.01);top:calc(var(--pw)*-.045);width:calc(var(--pw)*.19);height:calc(var(--pw)*.19);border-radius:50%;mix-blend-mode:multiply;transform:rotate(-8deg);filter:brightness(1.07) contrast(1.04);
   background:var(--imSeals) var(--sl,0 0)/500% 100% no-repeat}
 .stage:not(.ok-seals) .wxs{background:radial-gradient(circle at 36% 30%,#e06b5c,#b8352a 45%,#7d1a12);transform:scale(.72) rotate(-8deg)}
-/* 바탕을 걷어 낸 그림: 섞지 않고 종이 위에 붙인다(얇은 그림자) */
-.stage.key-stamps .stp,.stage.key-stamps .mrow .th.st{mix-blend-mode:normal;filter:drop-shadow(1px 2px 1.5px rgba(70,44,20,.28))}
-.stage.key-seals .wxs,.stage.key-seals .mrow .th.sl{mix-blend-mode:normal;filter:drop-shadow(2px 3px 2.5px rgba(70,30,15,.3))}
-.stage.key-seals .seal i{mix-blend-mode:normal;filter:none}
 .sgw{position:relative}
 /* 잉크가 번지듯 한 줄씩 */
 .ink{opacity:0;filter:blur(1.4px);-webkit-mask-image:linear-gradient(90deg,#000 40%,transparent 60%);mask-image:linear-gradient(90deg,#000 40%,transparent 60%);-webkit-mask-size:250% 100%;mask-size:250% 100%;-webkit-mask-position:100% 0;mask-position:100% 0;
@@ -238,7 +232,6 @@ a{color:inherit;text-decoration:none}
 .why{position:relative;width:var(--pw);margin:30px auto 0;padding:20px 18px 18px;background:rgba(251,247,238,.9);border:1px solid var(--line);box-shadow:12px 18px 28px -20px rgba(70,44,20,.45)}
 .why>small{display:block;font-size:10.5px;letter-spacing:.26em;color:var(--psage);font-weight:700}
 .why h3{margin:6px 0 0;font-family:var(--serif);font-size:18px;font-weight:700}
-.why .wst{margin:4px 0 0;font-size:12.5px;color:var(--ink-2)}
 .yr{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:14px}
 .yr div{position:relative;height:40px;background:rgba(200,149,90,var(--a,.08));border:1px solid rgba(42,33,25,.08)}
 .yr div.b1{border-color:var(--ink);background:rgba(255,232,180,.95);box-shadow:0 0 14px rgba(255,220,150,.8)}
@@ -281,7 +274,7 @@ a{color:inherit;text-decoration:none}
 .tk li span{flex:none;width:22px;font-family:var(--serif);font-weight:700;font-size:13px;color:var(--honey)}
 .tk li b{font-size:14.5px;font-weight:700;filter:blur(4px);-webkit-user-select:none;user-select:none}
 .tk li i{margin-left:auto;flex:none;width:12px;height:14px;position:relative;border:1.5px solid var(--ink-3);border-top-width:0;top:3px}
-.tk li i:before{content:"";position:absolute;left:1px;right:1px;top:-8px;height:8px;border:1.5px solid var(--ink-3);border-bottom:0}
+.tk li i:before{content:"";position:absolute;left:1px;right:1px;top:-8px;height:8px;border:1.5px solid var(--ink-3);border-bottom:0;border-radius:6px 6px 0 0}
 .price{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;font-size:13px;color:var(--ink-2)}
 .price b{font-family:var(--serif);font-size:22px;color:var(--ink)}
 .thick .acts{margin-top:0}
@@ -490,31 +483,7 @@ const stage=$('stage');
 document.querySelectorAll('[data-img]').forEach(el=>{ el.style.backgroundImage=`url('${ART.img[el.dataset.img]}')`; });
 document.querySelectorAll('video[data-v]').forEach(v=>{ v.poster=ART.img[v.dataset.p]; v.muted=true; v.playsInline=true; v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline',''); });
 stage.style.setProperty('--imPaper',`url('${ART.img.paper}')`); stage.style.setProperty('--imStamps',`url('${ART.img.stamps}')`); stage.style.setProperty('--imSeals',`url('${ART.img.seals}')`);
-const plainLoad=k=>{ const i=new Image(); i.onload=()=>stage.classList.add('ok-'+k); i.src=ART.img[k]; };
-plainLoad('paper');
-/* 우표 · 봉랍 그림은 크림 바탕 위에 있다. 그림을 읽을 수 있으면(CORS) 가장자리에서 이어진 바탕만 투명하게 걷어 내고,
-   못 읽으면 multiply로 바탕을 지운다. 걷어 낸 그림은 공유 카드에도 그대로 쓴다. */
-const KEYED={};
-function keySprite(img,cols,rows){ const W=img.naturalWidth, H=img.naturalHeight; if(!W||!H) return null;
-  const c=document.createElement('canvas'); c.width=W; c.height=H; const x=c.getContext('2d',{willReadFrequently:true}); x.drawImage(img,0,0);
-  const d=x.getImageData(0,0,W,H), p=d.data, cw=Math.floor(W/cols), ch=Math.floor(H/rows), T0=14, T1=46, seen=new Uint8Array(W*H), q=new Int32Array(W*H);
-  const cl=v=>v<0?0:v>255?255:v;
-  for(let r=0;r<rows;r++) for(let cc=0;cc<cols;cc++){ const x0=cc*cw, y0=r*ch, x1=cc===cols-1?W:x0+cw, y1=r===rows-1?H:y0+ch;
-    let br=0,bg=0,bb=0,n=0; [[x0+3,y0+3],[x1-13,y0+3],[x0+3,y1-13],[x1-13,y1-13]].forEach(([sx,sy])=>{ for(let yy=sy;yy<sy+10;yy++) for(let xx=sx;xx<sx+10;xx++){ const i=(yy*W+xx)*4; br+=p[i]; bg+=p[i+1]; bb+=p[i+2]; n++; } });
-    br/=n; bg/=n; bb/=n;
-    const dist=i=>Math.max(Math.abs(p[i]-br),Math.abs(p[i+1]-bg),Math.abs(p[i+2]-bb));
-    let h=0,t=0; const push=(xx,yy)=>{ const k=yy*W+xx; if(seen[k]||dist(k*4)>T1) return; seen[k]=1; q[t++]=k; };
-    for(let xx=x0;xx<x1;xx++){ push(xx,y0); push(xx,y1-1); } for(let yy=y0;yy<y1;yy++){ push(x0,yy); push(x1-1,yy); }
-    while(h<t){ const k=q[h++], xx=k%W, yy=(k/W)|0; if(xx>x0) push(xx-1,yy); if(xx<x1-1) push(xx+1,yy); if(yy>y0) push(xx,yy-1); if(yy<y1-1) push(xx,yy+1); }
-    for(let yy=y0;yy<y1;yy++) for(let xx=x0;xx<x1;xx++){ const k=yy*W+xx; if(!seen[k]) continue; const i=k*4, dd=dist(i); let a=dd<=T0?0:(dd-T0)/(T1-T0); a=a*a*(3-2*a);
-      if(a<.04){ p[i+3]=0; continue; }
-      p[i]=cl((p[i]-br*(1-a))/a); p[i+1]=cl((p[i+1]-bg*(1-a))/a); p[i+2]=cl((p[i+2]-bb*(1-a))/a); p[i+3]=Math.round(a*255); } }
-  x.putImageData(d,0,0); return c; }
-const idle=f=>{ if(window.requestIdleCallback) requestIdleCallback(f,{timeout:2500}); else setTimeout(f,400); };
-[['stamps',4,3],['seals',5,1]].forEach(([k,cols,rows])=>{ const i=new Image(); i.crossOrigin='anonymous';
-  i.onload=()=>idle(()=>{ let c=null; try{ c=keySprite(i,cols,rows); }catch(e){ c=null; } if(!c){ plainLoad(k); return; }
-    try{ c.toBlob(b=>{ if(!b){ plainLoad(k); return; } KEYED[k]=c; stage.style.setProperty(k==='stamps'?'--imStamps':'--imSeals',`url('${URL.createObjectURL(b)}')`); stage.classList.add('ok-'+k,'key-'+k); },'image/png'); }catch(e){ plainLoad(k); } });
-  i.onerror=()=>plainLoad(k); i.src=ART.img[k]+'?k=1'; });
+['paper','stamps','seals'].forEach(k=>{ const i=new Image(); i.onload=()=>stage.classList.add('ok-'+k); i.src=ART.img[k]; });
 const stampPos=m=>{ const i=(m-1)%12, c=i%4, r=(i/4)|0; return `${(c/3*100).toFixed(4)}% ${(r/2*100).toFixed(4)}%`; };
 const sealPos=el=>`${(el/4*100).toFixed(4)}% 0%`;
 
@@ -532,9 +501,6 @@ function solarOf(o){ if(o.cal==='l'){ const s=S.lunarToSolar(+o.y,+o.m,+o.d,fals
 const gzK=p=>GAN_K[p[0]]+JI_K[p[1]];
 
 /* ---------- 해석 사전 ---------- */
-/* 열두 달 우표 그림(우표 그림 순서 그대로) */
-const STAMP_N=['눈 덮인 소나무와 동백','매화','개나리와 진달래','벚꽃','모란','수국','연꽃','나팔꽃','코스모스','감과 단풍','억새와 국화','눈 내린 한옥'];
-const RO=w=>{ const c=String(w).charCodeAt(String(w).length-1)-0xAC00, b=c%28; return w+(c>=0&&c<11172&&b!==0&&b!==8?'으로':'로'); };
 const SIT=['혼자인 지 오래','썸 비슷한 게 있어','막 헤어졌어','그냥 궁금해'];
 const SIT_R=['오래 비워 둔 자리엔 편지가 더 잘 들어와.','그 사람이 보낸 편지일 수도 있겠다. 같이 보자.','아직 아플 때지. 그래도 다음 편지는 벌써 오고 있어.','궁금한 마음이 제일 좋은 시작이야.'];
 const TRIG=[
@@ -688,7 +654,6 @@ function askDate(){ return new Promise(res=>{ const a=$('ask'), saved=loadMe()||
     if(o.cal==='l'&&!S.lunarToSolar(o.y,o.m,o.d,false)){ toast('없는 음력 날짜야'); return; }
     a.classList.remove('on'); vib(6); res(o); }; }); }
 async function interview(){ A={}; $('msgs').innerHTML=''; const saved=loadMe()||{}; vPrime('drawers');
-  try{ document.fonts.load('400 30px "Nanum Pen Script"','너에게 이 편지는 년 월에 도착해 연서당에서 하람').catch(()=>{}); }catch(e){}
   await wait(500); say('왔구나. 여긴 아직 안 온 편지를 먼저 받아 두는 곳이야.'); await wait(1900);
   say(saved.y?'몇 가지만 확인할게. 생일부터.':'몇 가지만 물어볼게. 생일부터 알려 줘.');
   const d=await askDate(); say(dateLabel(d),true); await wait(800);
@@ -776,7 +741,7 @@ function postmark(o){ return `<svg class="pmk" viewBox="0 0 100 100" aria-hidden
    <path d="M-40 34C-30 28 -20 40 -10 34S8 28 16 34M-40 46C-30 40 -20 52 -10 46S8 40 16 46M-40 58C-30 52 -20 64 -10 58S8 52 16 58" fill="none" stroke="#3b2c1f" stroke-width="2" transform="translate(-2 0)"/></svg>`; }
 function todayLabel(){ const n=new Date(); return `${n.getFullYear()}년 ${n.getMonth()+1}월 ${n.getDate()}일`; }
 function renderLetter(){ const r=R, o=r.best, el=stEl(o.ms), g=o.g, fl=FIRST[g][parseInt(r.key,36)%2], sec=r.second, c=EL_C[el];
-  $('pg1').innerHTML=`<div class="stp" style="--sp:${stampPos(o.m)};--ec:${c[0]};--ec2:${c[1]}" role="img" aria-label="${o.m}월 우표, ${STAMP_N[o.m-1]}"><b>${o.m}월</b></div>${postmark(o)}
+  $('pg1').innerHTML=`<div class="stp" style="--sp:${stampPos(o.m)};--ec:${c[0]};--ec2:${c[1]}" role="img" aria-label="${o.m}월 우표"><b>${o.m}월</b></div>${postmark(o)}
     <div class="t1 ink">너에게,</div>
     <div class="t2 ink">${esc(SIT[A.sit])} · ${GAN_K[r.dm]}${JI_K[r.db]}일생</div>
     <div class="k ink">이 편지는</div>
@@ -798,7 +763,7 @@ function renderLetter(){ const r=R, o=r.best, el=stEl(o.ms), g=o.g, fl=FIRST[g][
     <div class="dt ink">${todayLabel()}</div>
     <div class="sgw"><div class="sg ink">연서당에서, 하람</div><i class="wxs" style="--sl:${sealPos(el)}" role="img" aria-label="${EL_N[el]}의 봉랍"></i></div>`;
   const lv=o2=>o2.sc>0?Math.min(.85,.14+o2.sc*.09):.06;
-  $('why').innerHTML=`<small>편지 밖에 적어 둔 메모</small><h3>왜 ${o.m}월인지</h3><p class="wst">우표는 ${o.m}월의 ${RO(STAMP_N[o.m-1])} 골랐어.</p>
+  $('why').innerHTML=`<small>편지 밖에 적어 둔 메모</small><h3>왜 ${o.m}월인지</h3>
      <div class="yr">${r.months.map(m=>`<div class="${m===o?'b1':m===sec&&sec.sc>0?'b2':''}${m.sc<0?' neg':''}" style="--a:${lv(m).toFixed(2)}"><span>${m.m}</span></div>`).join('')}</div>
      <div class="yrl"><span>${ym(r.months[0])}</span><span>${ym(r.months[11])}</span></div>
      <div class="lg"><span><i class="l1"></i>편지가 오는 달</span>${sec.sc>0?'<span><i class="l2"></i>두 번째 서랍</span>':''}<span><i class="l3"></i>부딪히는 달</span></div>
@@ -818,12 +783,7 @@ function inks(){ if(inkIO) inkIO.disconnect(); const all=[...$('sLet').querySele
   const flush=()=>{ tm=0; q.sort((a,b)=>all.indexOf(a)-all.indexOf(b)).forEach((el,k)=>{ el.style.transitionDelay=(k*.2).toFixed(2)+'s'; el.classList.add('in'); setTimeout(()=>el.classList.add('done'),2000+k*200); }); q=[]; };
   inkIO=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ q.push(e.target); inkIO.unobserve(e.target); } }); if(q.length&&!tm) tm=setTimeout(flush,60); },{root:$('sLet'),threshold:.6});
   all.forEach(el=>{ el.classList.remove('in','done'); el.style.transitionDelay=''; inkIO.observe(el); }); }
-/* 편지지 한 장에 맞추기: 글이 넘치면 글씨를 조금씩 줄여 종이가 늘어나지 않게(그래도 넘치면 9조각 종이가 늘어난다) */
-function fitPages(){ ['pg1','pg2'].forEach(id=>{ const p=$(id); if(!p||!p.firstElementChild) return; let k=1; p.style.setProperty('--k','1');
-  const nat=()=>p.getBoundingClientRect().width*1910/1080;
-  for(let n=0;n<10&&p.scrollHeight>nat()+1&&k>.8;n++){ k=+(k-.025).toFixed(3); p.style.setProperty('--k',String(k)); } }); }
-let fitT=0; addEventListener('resize',()=>{ clearTimeout(fitT); fitT=setTimeout(()=>{ if(R&&cur==='sLet') fitPages(); },200); });
-function toLetter(fromVideo){ renderLetter(); fitPages(); try{ document.fonts.load('400 30px "Nanum Pen Script"','편지는 도착해').then(()=>{ if(cur==='sLet') fitPages(); }).catch(()=>{}); }catch(e){} $('sLet').querySelectorAll('.rv').forEach(el=>el.classList.remove('in')); $('sLet').scrollTop=0;
+function toLetter(fromVideo){ renderLetter(); $('sLet').querySelectorAll('.rv').forEach(el=>el.classList.remove('in')); $('sLet').scrollTop=0;
   show('sLet'); archive(); setTimeout(()=>{ inks(); reveals(); },fromVideo&&!RM?500:300); }
 $('sLet').addEventListener('scroll',()=>{ $('top').classList.toggle('sc',$('sLet').scrollTop>60); },{passive:true});
 
@@ -832,10 +792,7 @@ function notify(title,head,sub){ if(window.ObNotify) ObNotify.ask({title,img:ART
 $('notiBtn').onclick=()=>{ const o=R.best; notify('편지 오는 달 알림',ym(o),'그달 첫날 아침에 하람이 알려 줄게요'); };
 $('thickBtn').onclick=()=>toast('곧 열려요');
 $('thickNoti').onclick=()=>notify('두꺼운 편지 알림','두꺼운 편지가 열리면','제일 먼저 하람이 알려 줄게요');
-function invite(){ if(!window.ObShare){ toast('공유 준비 중이야'); return; }
-  const o={name:'yeonseo.jpg',invite:true,head:'이 편지, 친구도 받아 보게',title:'곧 받을 편지 · 하람의 연서당',text:'하람이 열두 달 서랍 중 내 편지가 올 달을 찾아 줘. 너도 봐 봐',note:'친구는 링크로 바로 들어와 자기 생일로 서랍을 열 수 있어요. 내 결과는 보내지지 않아요.'};
-  /* 하람 그림을 못 받으면 사이트 안의 대표 그림으로 */
-  Promise.resolve(ObShare.sheet(Object.assign({src:ART.hero},o))).catch(()=>{ try{ const r=ObShare.sheet(Object.assign({src:'img/og/home.jpg'},o)); if(r&&r.catch) r.catch(()=>toast('공유 준비 중이야')); }catch(e){ toast('공유 준비 중이야'); } }); }
+function invite(){ if(window.ObShare) ObShare.sheet({src:ART.hero,name:'yeonseo.jpg',invite:true,head:'이 편지, 친구도 받아 보게',title:'곧 받을 편지 · 하람의 연서당',text:'하람이 열두 달 서랍 중 내 편지가 올 달을 찾아 줘. 너도 봐 봐',note:'친구는 링크로 바로 들어와 자기 생일로 서랍을 열 수 있어요. 내 결과는 보내지지 않아요.'}); else toast('공유 준비 중이야'); }
 
 /* ---------- 공유: 편지지 · 우표 · 봉랍으로 그린 편지 한 장(1080x1920). 그림을 못 쓰면 원래 초대 공유로 ---------- */
 function imgCors(src){ return new Promise((res,rej)=>{ const i=new Image(); i.crossOrigin='anonymous'; i.onload=()=>res(i); i.onerror=()=>rej(new Error('img')); i.src=src+(src.indexOf('?')<0?'?':'&')+'cv=share'; setTimeout(()=>rej(new Error('slow')),8000); }); }
@@ -844,19 +801,15 @@ async function letterCard(){ const r=R, o=r.best, el=stEl(o.ms), g=o.g, fl=FIRST
   const W=1080,H=1920, c=document.createElement('canvas'); c.width=W; c.height=H; const x=c.getContext('2d');
   const PEN='"Nanum Pen Script","Gaegu",serif', SERIF='"Noto Serif KR",serif', SANS='"Noto Sans KR",sans-serif';
   try{ await Promise.all(['400 80px "Nanum Pen Script"','700 40px "Noto Serif KR"','500 30px "Noto Sans KR"'].map(f=>document.fonts.load(f))); }catch(e){}
-  const paper=await imgCors(ART.img.paper); const st=KEYED.stamps||await imgCors(ART.img.stamps).catch(()=>null), se=KEYED.seals||await imgCors(ART.img.seals).catch(()=>null);
-  const stK=!!KEYED.stamps&&st===KEYED.stamps, seK=!!KEYED.seals&&se===KEYED.seals;
+  const paper=await imgCors(ART.img.paper); const st=await imgCors(ART.img.stamps).catch(()=>null), se=await imgCors(ART.img.seals).catch(()=>null);
   const bg=x.createLinearGradient(0,0,W,H); bg.addColorStop(0,'#f4e8d2'); bg.addColorStop(1,'#e6d4b6'); x.fillStyle=bg; x.fillRect(0,0,W,H);
   const lt=x.createLinearGradient(0,0,W*.7,H*.6); lt.addColorStop(0,'rgba(255,240,205,.75)'); lt.addColorStop(1,'rgba(255,240,205,0)'); x.fillStyle=lt; x.fillRect(0,0,W,H);
   const PX=100, PY=86, PW=880, PH=Math.round(PW*1910/1080);
   x.save(); x.shadowColor='rgba(70,44,20,.35)'; x.shadowBlur=40; x.shadowOffsetX=18; x.shadowOffsetY=26; x.drawImage(paper,PX,PY,PW,PH); x.restore();
-  if(st){ const i=o.m-1, cW=(st.naturalWidth||st.width)/4, cH=(st.naturalHeight||st.height)/3, cx=(i%4)*cW, cy=((i/4)|0)*cH, sw=176, sh=220, sx=PX+PW-PW*.12-sw, sy=PY+PW*.11;
-    x.save(); x.translate(sx+sw/2,sy+sh/2); x.rotate(4*Math.PI/180);
-    if(stK){ x.shadowColor='rgba(70,44,20,.3)'; x.shadowBlur=4; x.shadowOffsetX=2; x.shadowOffsetY=4; }
-    else { x.globalCompositeOperation='multiply'; x.filter='brightness(1.07) contrast(1.04)'; }
-    x.drawImage(st,cx,cy,cW,cH,-sw/2,-sh/2,sw,sh); x.restore();
-    x.save(); x.translate(sx+sw/2,sy+sh/2); x.rotate(4*Math.PI/180); x.fillStyle='#3a2a1c'; x.font=`700 30px ${SERIF}`; x.textAlign='right'; x.fillText(`${o.m}월`,sw/2-sw*.13,sh/2-sh*.09); x.restore(); }
   x.globalCompositeOperation='multiply';
+  if(st){ const i=o.m-1, cx=(i%4)*400, cy=((i/4)|0)*500, sw=176, sh=220, sx=PX+PW-PW*.12-sw, sy=PY+PW*.11;
+    x.save(); x.translate(sx+sw/2,sy+sh/2); x.rotate(4*Math.PI/180); x.filter='brightness(1.07) contrast(1.04)'; x.drawImage(st,cx,cy,400,500,-sw/2,-sh/2,sw,sh); x.filter='none';
+    x.fillStyle='#3a2a1c'; x.font=`700 30px ${SERIF}`; x.textAlign='right'; x.fillText(`${o.m}월`,sw/2-sw*.13,sh/2-sh*.09); x.restore(); }
   x.save(); x.translate(PX+PW*.62,PY+PW*.3); x.rotate(-12*Math.PI/180); x.strokeStyle='rgba(59,44,31,.55)'; x.fillStyle='rgba(59,44,31,.6)'; x.lineWidth=4;
   x.beginPath(); x.arc(0,0,80,0,Math.PI*2); x.stroke(); x.lineWidth=2; x.beginPath(); x.arc(0,0,64,0,Math.PI*2); x.stroke();
   x.textAlign='center'; x.font=`700 24px ${SERIF}`; x.fillText('연서당',0,-6); x.font=`500 21px ${SANS}`; x.fillText(`${o.y}.${String(o.m).padStart(2,'0')}`,0,26); x.restore();
@@ -872,10 +825,7 @@ async function letterCard(){ const r=R, o=r.best, el=stEl(o.ms), g=o.g, fl=FIRST
   x.font=`400 58px ${PEN}`; wrapLines(x,`계기는 ${TRIG[g].t}`,TW,2).forEach(l=>{ x.fillText(l,L,y); y+=70; });
   const sy=Math.min(y+140,PY+PH-PW*.34);
   x.textAlign='right'; x.font=`400 76px ${PEN}`; const sgR=PX+PW-PW*.16; x.fillText('연서당에서, 하람',sgR,sy); const sgL=sgR-x.measureText('연서당에서, 하람').width;
-  if(se){ const sW=(se.naturalWidth||se.width)/5, sH=se.naturalHeight||se.height; x.save(); x.translate(Math.max(L+70,sgL-86),sy-24); x.rotate(-8*Math.PI/180);
-    if(seK){ x.shadowColor='rgba(70,30,15,.32)'; x.shadowBlur=6; x.shadowOffsetX=3; x.shadowOffsetY=5; }
-    else { x.globalCompositeOperation='multiply'; x.filter='brightness(1.07) contrast(1.04)'; }
-    x.drawImage(se,el*sW,0,sW,sH,-78,-78,156,156); x.restore(); }
+  if(se){ x.globalCompositeOperation='multiply'; x.save(); x.translate(Math.max(L+70,sgL-86),sy-24); x.rotate(-8*Math.PI/180); x.filter='brightness(1.07) contrast(1.04)'; x.drawImage(se,el*360,0,360,360,-78,-78,156,156); x.restore(); x.globalCompositeOperation='source-over'; }
   x.textAlign='left'; x.fillStyle='#2a2119'; x.font=`700 40px ${SERIF}`; x.fillText('곧 받을 편지 · 하람의 연서당',PX,PY+PH+92);
   x.fillStyle='#6b5d4f'; x.font=`500 29px ${SANS}`; x.fillText('생일 하나로 내 편지가 오는 달 찾아보기',PX,PY+PH+140);
   x.textAlign='right'; x.fillStyle='#9a8a78'; x.font=`500 26px ${SANS}`; x.fillText('오방도감',PX+PW,PY+PH+140);

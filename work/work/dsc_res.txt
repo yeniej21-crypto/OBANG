@@ -1,0 +1,11 @@
+  <div class="result sc" id="result">
+    <section class="op" id="op">
+      <div class="po" id="opPo"></div>
+      <div class="ot"><small id="rName"></small><h1 id="rType"></h1><p><span id="rDesc"></span>. 아래로 내리면 태오가 보낸 게 와 있어</p></div>
+    </section>
+    <div class="th" id="th" aria-live="polite"></div>
+    <p class="foot"><span id="rFine"></span><br>진행자는 AI로 만든 가상의 캐릭터예요.</p>
+    <div hidden><span id="rIdx"></span><span id="rSay"></span><button id="ghBtn" type="button"></button><button id="shareBtn" type="button"></button><button id="askBtn" type="button"></button></div>
+  </div>
+  <button class="skipB" id="skipBtn" type="button">건너뛰기</button>
+  <div class="rbar" id="rbar"><button class="in" id="replyBtn" type="button">태오에게 답장하기</button><button class="go" id="replyGo" type="button" aria-label="태오에게 답장하기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a1213" stroke-width="2.4" stroke-linecap="square"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>

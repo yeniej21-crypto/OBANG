@@ -1,0 +1,175 @@
+/* ---------- 도화 결과: 화면에는 한자 대신 한글 읽기 ---------- */
+/* 결과 장면에 쓰는 그림 · 영상. 영상 주소가 비어 있으면 그림만 보여 준다 */
+const ART={heroVideo:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/072e71cf-b54f-4905-9ce8-d36dfbb78b9a.mp4',heroPoster:'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_002113_2a0e60f9-d0f8-4381-a50b-0cef89fca01f_min.webp',selfie:'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_002113_bcdfc96c-2d84-41ce-be7e-a35f0c5d1dde_min.webp',selfieVideo:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/76207a49-6902-44da-9753-604e36b08da7.mp4',blossom:'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_002700_d58b03aa-2601-441a-9b1e-ac03754b4b5d_min.webp',blossomVideo:'',calendar:'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_002659_dd35cbb8-84e8-4168-a00c-759010ac3ee2_min.webp',sprig:'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_002113_20009321-127b-4223-94c7-2d5f6218440b_min.webp',sprigVideo:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/f149f53c-9342-4017-ac1e-5ab52b693ede.mp4'};
+const POSN={y:['태어난 해','집안 자리'],m:['태어난 달','사회 자리'],d:['태어난 날','배우자 자리'],h:['태어난 시','자녀 자리']};
+const ELW=['나무','불','흙','쇠','물'], TTI_L=['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
+const LOCKI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><rect x="5" y="11" width="14" height="10"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+const gzK=p=>GAN_K[p[0]]+JI_K[p[1]], f1=n=>(+n).toFixed(1), bt=w=>{ const c=w.charCodeAt(w.length-1)-0xAC00; return c>=0&&c<11172&&c%28>0; };
+const STG=['봉오리','움트는 중','반쯤 핌','활짝 핌','만개'];
+const stageOf=v=>v<55?0:v<65?1:v<75?2:v<85?3:4, mStage=v=>v>=80?4:v>=70?3:v>=60?2:v>=50?1:0;
+const {bloom,limb,cub,nearX}=window.LBB;
+/* 편지 · 열두 달 개화 가지 */
+function monthsSvg(CAL,neutral){ const M=CAL.months, top=neutral?null:CAL.top[0], main=limb([[-6,118],[110,130],[240,88],[368,100]],8.5,2.4,160); let fl='',gl='',lab='';
+  M.forEach((o,i)=>{ const x=24+i*28.36, n=nearX(main.pts,x), st=neutral?0:mStage(o.love), r=neutral?8:[7,8,11,13,15.5][st], s=i%2?1:-1, isT=o===top;
+    const by=n[1]-3, cy=st>=3?n[1]-r*.8:by;
+    if(st<3) fl+=bloom(n[0]+s*1.5,by,r,st,{rot:s*12}); else fl+=bloom(n[0],cy,r,st,{rot:s*9});
+    if(isT){ gl+=`<circle cx="${f1(n[0])}" cy="${f1(cy)}" r="36" fill="url(#lbbGlow)"/>`; lab+=`<text x="${f1(Math.min(338,n[0]))}" y="${f1(cy-r-9)}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#a13f2c">가장 크게</text>`; }
+    const hp=!neutral&&o.br.some(q=>q.at==='일지'&&(q.k==='육합'||q.k==='삼합')), ch=!neutral&&o.br.some(q=>q.at==='일지'&&q.k==='충'), pk=!neutral&&o.ss.includes('도화');
+    lab+=`<text x="${f1(n[0])}" y="154" text-anchor="middle" font-size="11" font-weight="${isT?900:500}" fill="${isT?'#a13f2c':'#6b5d4f'}">${o.start.m}</text>`;
+    if(i===0||o.start.m===1) lab+=`<text x="${f1(n[0])}" y="139" text-anchor="middle" font-size="8.5" fill="#9a8b7a">${i===0?'지금':o.start.y}</text>`;
+    lab+=pk?`<circle cx="${f1(n[0])}" cy="167" r="3.6" fill="#ff8fa3"/>`:hp?`<circle cx="${f1(n[0])}" cy="167" r="3.4" fill="none" stroke="#ff8fa3" stroke-width="1.4"/>`:ch?`<rect x="${f1(n[0]-3)}" y="164" width="6" height="6" transform="rotate(45 ${f1(n[0])} 167)" fill="#a9a6a2"/>`:''; });
+  return `<svg viewBox="0 0 360 176" role="img" aria-label="앞으로 열두 달, 달마다 피는 정도를 꽃으로 그린 그림">${gl}${main.svg}${fl}${lab}</svg>`; }
+const HONGYEOM={0:6,1:6,2:2,3:7,4:4,5:4,6:10,7:9,8:0,9:8};
+
+/* ---------- 결과 장면 엔진: 태오가 새벽에 보낸 메시지 ---------- */
+const RM=(()=>{ try{ return matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){ return false; } })();
+const STOP={};
+let RUN=0, NSAY=0, FAST=false, PEND=new Set(), ASKP=null, PAID=false, lastWho='', TCLK=null;
+function sleep(ms){ return new Promise(r=>{ if(FAST||ms<=0) return r(); const o={r}; o.t=setTimeout(()=>{ PEND.delete(o); r(); },ms); PEND.add(o); }); }
+function flushPend(){ PEND.forEach(o=>{ clearTimeout(o.t); o.r(); }); PEND.clear(); }
+const clk=()=>{ const h=Math.floor(TCLK.m/60)%24, m=TCLK.m%60, h12=h%12||12; return `${h12}:${String(m).padStart(2,'0')}`; };
+const ampm=()=>{ const h=Math.floor(TCLK.m/60)%24; return (h<12?'오전 ':'오후 ')+clk(); };
+function tick(n=1){ TCLK.m+=n; }
+/* 화면에 보일 때만 도는 무음 반복 영상 */
+let VIO=null;
+function vidWatch(v){ if(!v||v.__w) return; v.__w=1; v.muted=true; v.defaultMuted=true; v.setAttribute('muted',''); v.loop=true; v.playsInline=true; v.setAttribute('playsinline','');
+  v.addEventListener('playing',()=>v.classList.add('on')); v.addEventListener('error',()=>v.remove());
+  if(!('IntersectionObserver' in window)){ if(!v.src&&v.dataset.src) v.src=v.dataset.src; const p=v.play(); if(p) p.catch(()=>{}); return; }
+  if(!VIO) VIO=new IntersectionObserver(es=>es.forEach(e=>{ const x=e.target; if(e.isIntersecting){ if(!x.getAttribute('src')&&x.dataset.src) x.src=x.dataset.src; try{ const p=x.play(); if(p) p.catch(()=>{}); }catch(_){} } else { try{ x.pause(); }catch(_){} } }),{root:$('result'),threshold:.3});
+  VIO.observe(v); }
+const bgs=(...u)=>u.filter(Boolean).map(x=>`url('${x}')`).join(',');
+function media(src,poster,fb,cls,cap){ return `<div class="ph ${cls||''}" style="background-image:${bgs(poster,fb)||'none'}">${src?`<video class="mv" muted loop playsinline preload="none" data-src="${src}"${poster?` poster="${poster}"`:''}></video>`:''}${cap?`<span class="cap">${cap}</span>`:''}</div>`; }
+function why(t){ return `<button class="why" type="button" aria-expanded="false" data-why>왜 그렇게 봤냐면</button><div class="whyT">${t}</div>`; }
+/* 사용자가 대화를 따라 내려오고 있을 때만 새 메시지 쪽으로 부드럽게 */
+function following(){ const sc=$('result'), th=$('th'); const end=th.getBoundingClientRect().bottom-sc.getBoundingClientRect().top; return end<=sc.clientHeight+160; }
+function follow(el,was){ if(FAST||!was) return; const sc=$('result'), bar=$('rbar').offsetHeight+18; const b=el.getBoundingClientRect().bottom-sc.getBoundingClientRect().top; if(b>sc.clientHeight-bar) sc.scrollTo({top:sc.scrollTop+b-(sc.clientHeight-bar),behavior:RM?'auto':'smooth'}); }
+function row(who,html,opt){ const th=$('th'), was=following(); const first=who!==lastWho; lastWho=who; const r=document.createElement('div');
+  r.className='row'+(who==='me'?' me':'')+(first?' first':'');
+  r.innerHTML=who==='me'?`<span class="tm">${clk()}</span><div class="col">${html}</div>`:`<i class="av" aria-hidden="true"></i><div class="col"><div class="nm">태오</div>${html}</div><span class="tm">${clk()}</span>`;
+  if(opt&&opt.typing) r.querySelector('.tm').remove();
+  th.appendChild(r); broDom(r); r.querySelectorAll('video').forEach(vidWatch);
+  if(FAST||RM) r.classList.add('on'); else requestAnimationFrame(()=>r.classList.add('on'));
+  follow(r,was); return r; }
+async function typing(ms){ if(FAST) return; const keep=lastWho; const r=row('t','<div class="bub typing" aria-label="태오가 입력 중"><i></i><i></i><i></i></div>',{typing:1}); await sleep(ms); if(!r.isConnected) return; r.remove(); lastWho=keep; }
+function mkSay(g){ return async(html,ms)=>{ if(g!==RUN) throw STOP; await typing(Math.max(600,Math.min(1100,ms||(600+html.replace(/<[^>]+>/g,'').length*9)))); if(g!==RUN) throw STOP; if(++NSAY%2===0) tick(); return row('t',html); }; }
+function mkAsk(g){ return opts=>new Promise((res,rej)=>{ if(g!==RUN) return rej(STOP); const done=i=>{ ASKP=null; q.remove(); row('me',`<div class="bub">${opts[i]}</div>`); res(i); };
+  const q=document.createElement('div'); q.className='qr'; q.innerHTML=opts.map((o,i)=>`<button type="button" data-i="${i}">${o}</button>`).join('');
+  if(FAST){ done(0); return; }
+  const was=following(); $('th').appendChild(q); broDom(q); requestAnimationFrame(()=>q.classList.add('on')); follow(q,was);
+  q.onclick=e=>{ const b=e.target.closest('button'); if(b) done(+b.dataset.i); }; ASKP=done; }); }
+function whenSeen(el){ return new Promise(r=>{ if(FAST||!('IntersectionObserver' in window)) return r(); const io=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ io.disconnect(); r(); } },{root:$('result'),threshold:0}); io.observe(el); }); }
+function skipAll(){ FAST=true; $('skipBtn').classList.remove('on'); flushPend(); if(ASKP) ASKP(0); }
+
+let SC=null;
+const ASKQ=['그 사람이랑 잘 될까','올해 연애 언제 풀려','나 어떤 사람한테 약해'];
+async function showResult(){
+  const br=[R.y[1],R.m[1],R.d[1]].concat(R.h?[R.h[1]]:[]);
+  const tg=target(R.d[1]), tg2=target(R.y[1]), spots=peachSpots(R), peachN=spots.length;
+  const hong=br.includes(HONGYEOM[R.d[0]]), dm=R.d[0], loveG=S.bro?2:3;
+  const rel=(el)=>(el-Math.floor(dm/2)+5)%5, BREL=[4,2,0,0,2,1,1,2,3,3,2,4];
+  const stars=[R.y[0],R.m[0]].concat(R.h?[R.h[0]]:[]).filter(x=>rel(Math.floor(x/2))===loveG).length+br.filter(b=>rel(BREL[b])===loveG).length;
+  /* 도화 지수: 이름과 무관. 원국의 실제 도화 · 홍염 · 인연의 별로만 */
+  const pP=14*Math.min(peachN,2), pH=hong?8:0, pS=stars===0?-4:stars<=2?6:3, pD=spots.some(k=>k==='d'||k==='h')?4:0, raw=50+pP+pH+pS+pD;
+  const score=Math.max(42,Math.min(96,raw));
+  const T=TYPES[tg];
+  RES={T,score,peachN};
+  const hongAt=['y','m','d','h'].filter(k=>R[k]&&R[k][1]===HONGYEOM[dm]), stg=stageOf(score);
+  const me=Math.floor(dm/2), gw=S.bro?(me+2)%5:(me+3)%5, sk=(me+1)%5;
+  let CAL=null; try{ CAL=window.DohwaPrem&&DohwaPrem.calc(); }catch(e){ CAL=null; }
+  SC={T,score,stg,tg,tg2,spots,peachN,hong,hongAt,dm,me,gw,sk,stars,pP,pH,pS,pD,raw,CAL};
+  /* 첫 장면 */
+  $('rName').textContent=`${S.nick} 누나 사주, 태오가 펼쳐 봄`;
+  $('rType').textContent=T.n; $('rDesc').textContent=T.d;
+  $('opPo').style.backgroundImage=bgs(ART.heroPoster,IMG.base);
+  const op=$('op'); op.querySelectorAll('video').forEach(v=>v.remove());
+  if(ART.heroVideo){ const v=document.createElement('video'); v.className='mv'; v.preload='metadata'; v.dataset.src=ART.heroVideo; if(ART.heroPoster) v.poster=ART.heroPoster; op.insertBefore(v,op.querySelector('.ot')); vidWatch(v); }
+  /* 보관함 · 공유가 읽는 값 */
+  $('rIdx').textContent=score; $('rSay').textContent=T.s.replace(/\s*…\s*/g,', ');
+  $('rFine').textContent='체험판이에요. 원국과 월운은 실제 만세력(절기 시각)으로 계산하고, 도화 지수는 원국의 도화 · 홍염 · 인연의 별 자리로만 산출해요. 이름은 계산에 쓰지 않아요. 인연은 결국 두 사람의 선택이 가장 큰 변수예요.';
+  broDom($('result')); stage.classList.remove('load','push'); stage.classList.add('res'); $('result').scrollTop=0;
+  bgm(.2,1.5);
+  runScene();
+}
+async function runScene(){
+  const g=++RUN; FAST=RM; flushPend(); if(ASKP){ const a=ASKP; ASKP=null; try{ a(0); }catch(e){} }
+  const th=$('th'); th.innerHTML=''; lastWho='';
+  const now=new Date(), h=now.getHours(), real=h>=21||h<4;
+  TCLK={m:real?h*60+now.getMinutes():72};
+  th.innerHTML=`<div class="day">오늘 ${h>=21?'밤':'새벽'} ${clk()}</div>`;
+  const say=mkSay(g), ask=mkAsk(g), C=SC, T=C.T, nick=S.nick;
+  const an=b=>TTI_L[b], cntW=['','하나','둘','셋','넷'];
+  try{
+    await whenSeen(th); if(g!==RUN) return;
+    if(!FAST) $('skipBtn').classList.add('on');
+    await sleep(500);
+    await say('<div class="bub">누나 자고 있으면 아침에 봐</div>',700);
+    await say('<div class="bub">사주 펼쳐 봤는데 이거 좀 봐</div>',800);
+    /* 1. 메모 화면: 네 자리, 도화 자리에 빨간 동그라미 */
+    const PENS=['M10 17c1-11 44-15 54-6 8 7-6 15-25 15S1 24 6 12','M8 14c4-9 46-12 55-3 7 8-9 14-27 15S3 22 9 11','M12 18c-1-10 40-15 52-8 9 6-3 15-24 15S0 23 7 13'];
+    let pc=0; const rows=['y','m','d','h'].map(k=>{ const p=R[k], lab={y:'해',m:'달',d:'날',h:'시'}[k];
+      if(!p) return `<div class="ln no"><span>${lab}</span><b class="gz">모름</b><em>시간 모름</em></div>`;
+      const hit=C.spots.includes(k);
+      return `<div class="ln${hit?' hit':''}"><span>${lab}</span><b class="gz">${gzK(p)}${hit?`<svg viewBox="0 0 70 30" preserveAspectRatio="none" aria-hidden="true"><path d="${PENS[pc++%3]}" fill="none" stroke="#c23a3a" stroke-width="1.7" stroke-linecap="round"/></svg>`:''}</b><em>${an(p[1])} · ${POSN[k][1]}</em></div>`; }).join('');
+    const hitA=[...new Set(C.spots.map(k=>an(R[k][1])))];
+    const pen=C.peachN?`${hitA.join(' · ')} 자리에 도화 ${cntW[C.peachN]||C.peachN}`:'원국엔 도화가 없어';
+    const pen2=C.hong?`${[...new Set(C.hongAt.map(k=>an(R[k][1])))].join(' · ')} 자리엔 홍염`:'';
+    tick();
+    await say(`<div class="memo" role="img" aria-label="메모 앱에 적은 사주 네 자리"><div class="h"><span>메모</span><span>${ampm()}</span></div><b class="t">${nick} 누나 ${R.h?'여덟':'여섯'} 글자</b>${rows}<div class="ln pn"><b class="pen">${pen}</b>${pen2?`<b class="pen s">${pen2}</b>`:''}</div></div>`,1000);
+    /* 2. 유형 설명 */
+    const where=C.spots.map(k=>POSN[k][0]).join(' · ');
+    if(C.peachN) await say(`<div class="bub">빨간 동그라미 친 데 봐. ${where} 자리에 도화가 ${cntW[C.peachN]||C.peachN} 있어. 사람 끄는 글자</div>`,900);
+    else await say(`<div class="bub">원국엔 도화가 없어. 근데 없는 게 아니라 아직 안 들어온 거야<br>해마다, 달마다 누나 도화 글자가 들어오는 때가 있거든. 그때 피는 쪽이야</div>`,1000);
+    const kw=T.t.map(t=>t.replace(/^#/,'').replace(/_/g,' ')).join(', ');
+    const whyType=`도화 글자는 태어난 날의 지지와 태어난 해의 지지가 속한 무리마다 하나씩 정해져 있어요. 누나는 날 기준 <b>${JI_K[C.tg]}</b>(${an(C.tg)})${C.tg2!==C.tg?`, 해 기준 <b>${JI_K[C.tg2]}</b>(${an(C.tg2)})`:', 해 기준도 같은 글자'}예요. 네 자리 지지 가운데 이 글자와 같은 곳에 동그라미를 쳤어요. 기준이 된 자리 자신은 세지 않아요. 유형 이름은 날 기준 글자로 정해요.<br>홍염은 타고난 나(태어난 날의 천간 ${GAN_K[C.dm]})마다 정해진 글자 <b>${JI_K[HONGYEOM[C.dm]]}</b>(${an(HONGYEOM[C.dm])})${bt(an(HONGYEOM[C.dm]))?'이에요':'예요'}. ${C.hong?'원국에 이 글자가 있어요.':'원국에는 이 글자가 없어요.'}`;
+    await say(`<div class="bub">누나 도화 글자는 <b>${an(C.tg)}</b>${C.tg2!==C.tg?`, 태어난 해로 보면 <b>${an(C.tg2)}</b>`:''}. 그래서 누나는 <b>${T.n}</b><br>${T.d}이야. 키워드로 치면 ${kw}</div>`+why(whyType),1100);
+    await say(`<div class="bub">${T.s.replace(/\s*…\s*/g,', ')}</div>`,1100);
+    const a1=await ask(['나 그런 편이긴 해','처음 듣는 얘긴데']);
+    await say(`<div class="bub">${a1?'원래 본인이 제일 늦게 알아. 그래서 내가 말해 주는 거고':'그치. 옆에서 보면 다 보여'}</div>`,800);
+    /* 3. 도화 지수 */
+    const L1=['아직 봉오리야','막 움트는 중이야','반쯤 핀 거야','거의 활짝 폈어','이미 활짝 핀 쪽이야'][C.stg];
+    const L2=C.stg<2?'피는 건 이제부터라는 뜻이기도 하고':C.stg===2?'아직 다 안 폈다는 뜻이기도 하고':'핀 꽃은 언제 보여 주느냐가 더 중요해';
+    const parts=[`원국 도화 ${C.peachN}곳 ${C.pP?'+'+C.pP:'0'}`,`홍염 ${C.hong?'+8':'없음 0'}`,`인연의 별 ${C.stars}개 ${C.pS>0?'+':'−'}${Math.abs(C.pS)}`,`날 · 시 자리의 도화 ${C.pD?'+4':'0'}`].join(', ');
+    const whyIdx=`지수는 이름과 상관없이 원국만으로 계산했어요. 50에서 시작해서 ${parts}.${C.raw!==C.score?` 더한 값 ${C.raw}은 42에서 96 사이로 맞췄어요.`:''}<br>인연의 별은 ${S.bro?'남성에게 내가 다루는 기운(재성)':'여성에게 나를 다스리는 기운(관성)'}이에요. 한두 개면 6을 더하고, 세 개 넘게 몰리면 3을 더하고, 없으면 4를 뺐어요.`;
+    const ib=await say(`<div class="bub">도화 지수 <b>${C.score}</b>. ${L1}<div class="gg" aria-hidden="true"><i></i></div><div class="gs" aria-hidden="true"><span>0</span><span>${STG[C.stg]}</span><span>100</span></div>${L2}</div>`+why(whyIdx),900);
+    const gi=ib.querySelector('.gg i'); if(gi) setTimeout(()=>gi.style.width=C.score+'%',FAST?0:350);
+    /* 4. 셀카 영상 */
+    await say(media(ART.selfieVideo,ART.selfie,IMG.chin,'','')+'',800);
+    await say('<div class="bub">자기 전에 찍은 거. 그냥 보라고</div>',700);
+    /* 5. 끌리는 사람 · 곁에 남는 사람 */
+    await say('<div class="bub">근데 누나, 이게 재밌는 게<br>누나가 끌리는 사람이랑 누나 곁에 남는 사람이 달라</div>',1000);
+    const blur=t=>t.replace(/[가-힣]/g,'○');
+    const whyTwo=`타고난 나(태어난 날의 천간 ${GAN_K[C.dm]})는 <b>${ELW[C.me]}</b>${bt(ELW[C.me])?'이에요':'예요'}. ${S.bro?`${ELW[C.me]}${bt(ELW[C.me])?'이':'가'} 이기는 ${ELW[C.gw]}${bt(ELW[C.gw])?'이':'가'} 남성에게 인연의 별(재성)이라`:`${ELW[C.me]}${bt(ELW[C.me])?'을':'를'} 이기는 ${ELW[C.gw]}${bt(ELW[C.gw])?'이':'가'} 여성에게 인연의 별(관성)이라`} 그 결의 사람에게 마음이 가기 쉬워요. ${ELW[C.me]}${bt(ELW[C.me])?'이':'가'} 낳는 ${ELW[C.sk]}${bt(ELW[C.sk])?'은':'는'} 내가 표현하고 베푸는 기운이라, 그 결의 사람이 먼저 다가와 곁에 머물기 쉬워요. 두 사람의 성격은 편지에서 열려요.`;
+    await say(`<div class="two"><div><small>누나가 끌리는</small><b>${ELW[C.gw]} 같은 사람</b><em>인연의 별</em><p class="lk" aria-hidden="true">${blur(EL_P[C.gw])}</p></div><div><small>누나 곁에 남는</small><b>${ELW[C.sk]} 같은 사람</b><em>표현과 베풂</em><p class="lk" aria-hidden="true">${blur(EL_P[C.sk])}</p></div></div>`+why(whyTwo),1000);
+    const a2=await ask(['둘이 뭐가 달라','그럼 누구 만나야 돼']);
+    await say(`<div class="bub">${a2?'그건 누나가 고르는 거지. 대신 둘이 어떻게 다른지는 따로 써 뒀어':'그건 길어서 따로 써 뒀어. 여기다 다 보내면 누나 잠 못 자'}</div>`,900);
+    /* 6. 복숭아꽃 사진 */
+    await say(media(ART.blossomVideo,ART.blossom,'','wide bl',''),800);
+    const hw=[...new Set(C.hongAt.map(k=>POSN[k][0]))].join(' · ');
+    await say(`<div class="bub">${C.peachN?`오는 길에 찍었어. 누나 도화는 이미 ${where} 자리에 피어 있어${C.hong?`<br>홍염도 ${hw} 자리에 같이 있어서 색이 진한 편이고`:''}`:`오는 길에 찍었어. 누나 도화는 아직 봉오리야<br>${an(C.tg)} 기운이 들어오는 때를 기다리는 중${C.hong?`. 대신 ${hw} 자리에 홍염이 있어서 은근히 눈에 띄는 쪽이고`:''}`}</div>`,1000);
+    await say(`<div class="bub">${C.stars?`인연의 별도 원국에 ${C.stars}개 떠 있어`:'인연의 별은 원국엔 안 보여. 운에서 들어올 때 반짝이는 타입'}</div>`,800);
+    /* 7. 잠긴 달력 · 음성 */
+    await say('<div class="bub">그리고 앞으로 열두 달 달력도 찍어 봤는데</div>',900);
+    let rg=''; if(C.CAL&&C.CAL.months&&C.CAL.months.length){ const a=C.CAL.months[0].start, z=C.CAL.months[C.CAL.months.length-1].start; rg=`${a.y}. ${a.m} ~ ${z.y}. ${z.m}`; }
+    await say(`<div class="cal"><div class="im" style="background-image:${bgs(ART.calendar)||'none'}"></div>${rg?`<span class="rg">${rg}</span>`:''}<div class="veil">${LOCKI}<b>누나 제일 예쁜 달은 봉인</b><small>편지 열면 보여</small></div></div>`,900);
+    await say(`<div class="voice" aria-label="잠긴 음성 메시지"><span class="pl">${LOCKI.replace('<svg ','<svg width="13" height="13" ')}</span><span class="wv"></span><small>0:41</small></div>`,700);
+    await say('<div class="bub">음성도 남겨 뒀어. 편지랑 같이 열려</div>',700);
+    /* 8. 결제 */
+    const PR=(window.ObPay&&ObPay.products&&ObPay.products['dohwa.html'])||{price:14900,was:19800}, won=n=>n.toLocaleString('ko-KR')+'원';
+    const LST=[['열두 달 개화 달력 · 가장 크게 피는 달','열두 달'],['달마다의 이야기와 고백하기 좋은 날','날짜까지'],['끌리는 사람, 오래 남는 사람','두 갈래'],['도화 살리는 색 · 향 · 시간 · 장소','네 가지'],['조심해야 할 인연','일지 기준'],['태오의 음성 편지','두 편']];
+    const pr=await say(`<div class="bub">${PAID?'편지는 열려 있어. 다시 보고 싶으면 여기':'다 열어 보고 싶으면 이거'}</div><div class="act"><div class="pr">${PR.was?`<s>${won(PR.was)}</s>`:''}<b>${won(PR.price)}</b><span>오늘만 첫 풀이 할인</span></div><button type="button" data-pay>${PAID?'태오가 보낸 긴 편지 다시 열기':'태오의 도화 편지 열기'}</button><button class="g" type="button" data-gh>그 사람과 도화 궁합 보기</button><button class="g" type="button" data-share>내 도화 카드 공유하기</button><ul>${LST.map(l=>`<li>${LOCKI}${l[0]}<em>${l[1]}</em></li>`).join('')}</ul></div>`,900);
+    pr.querySelector('[data-pay]').onclick=()=>{ if(PAID) openLetter(); else $('payBtn').click(); };
+    pr.querySelector('[data-gh]').onclick=()=>$('ghBtn').click();
+    pr.querySelector('[data-share]').onclick=()=>$('shareBtn').click();
+    /* 9. 마지막 영상 */
+    await say(media(ART.sprigVideo,ART.sprig,IMG.wink,'',''),900);
+    await say('<div class="bub">누나 도화 피면 나한테도 얘기해 줘</div>',900);
+    /* 묻기: 추천 질문 */
+    if(g!==RUN) return;
+    const q=document.createElement('div'); q.className='qr ask on';
+    q.innerHTML=ASKQ.map(x=>`<button type="button" data-q="${x}">${x}</button>`).join(''); q.onclick=e=>{ const b=e.target.closest('button'); if(b) openAsk(b.dataset.q); };
+    const was=following(); th.appendChild(q); broDom(q); follow(q,was);
+  }catch(e){ if(e!==STOP) console.error(e); }
+  if(g===RUN) $('skipBtn').classList.remove('on');
+}
+/* 왜 그렇게 봤냐면 */
+document.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('[data-why]'); if(!b) return; const t=b.nextElementSibling, on=!t.classList.contains('on'); t.classList.toggle('on',on); b.setAttribute('aria-expanded',on?'true':'false'); });

@@ -113,39 +113,32 @@ button{font-family:inherit;color:inherit}
 .ai{margin:34px 16px 0;text-align:center;font-size:11px;color:var(--ink-3);line-height:1.6}
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(-50%);z-index:80;background:rgba(0,0,0,.85);color:#fff;font-size:14px;padding:10px 16px;border-radius:999px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1}
-/* 연서당의 작은 편지들(10/3): 하람의 연서당 문간 배너 + 무료 미니 세 가지(하람 그림 · 보일 때만 영상). 모서리 없음, 원격 그림이 안 열리면 볕 든 종이색 + 선 그림 */
-.ysf{position:relative;display:block;height:228px;margin-bottom:10px;overflow:hidden;color:#2a2119;text-decoration:none;background:radial-gradient(90% 80% at 85% 10%,#fff0ce,rgba(255,240,206,0) 60%),linear-gradient(160deg,#f3e3c4,#dcc196);box-shadow:0 18px 30px -18px rgba(0,0,0,.8);transition:transform .15s}
-.ysf .im{position:absolute;inset:0;overflow:hidden}
-.ysf .im .pi,.ysf .im video{position:absolute;top:0;bottom:0;right:0;width:72%;height:100%;object-fit:cover;object-position:center 30%;background:center 30%/cover no-repeat}
-.ysf .im .pi{animation:ysBr 20s ease-in-out infinite alternate;transform-origin:60% 30%}
-@keyframes ysBr{from{transform:scale(1.02)}to{transform:scale(1.08)}}
-.ysf .im video{opacity:0;transition:opacity 1s}
-.ysf .im video.on{opacity:1}
-.ysf .im:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f6f0e6 0,#f6f0e6 30%,rgba(246,240,230,.86) 46%,rgba(246,240,230,0) 70%),linear-gradient(118deg,rgba(255,226,170,.32),rgba(255,226,170,0) 46%)}
-.ysf .tx{position:absolute;left:16px;top:18px;bottom:16px;width:54%;display:flex;flex-direction:column}
+/* 무료로 가볍게(10/3): 무료 연애 미니 세 가지로 가는 종이 카드. 모서리 없음, 그림은 CSS/SVG */
+.ysf{position:relative;display:block;height:200px;margin-bottom:10px;overflow:hidden;color:#2a2119;text-decoration:none;background:#efe5d4;box-shadow:0 18px 30px -18px rgba(0,0,0,.8)}
+.ysf .im{position:absolute;right:0;top:0;bottom:0;width:58%;background:url('img/wood.jpg') center 18%/cover no-repeat}
+.ysf .im:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f6f0e6 0,rgba(246,240,230,.6) 30%,rgba(246,240,230,0) 62%),linear-gradient(200deg,rgba(255,226,170,.35),rgba(255,226,170,0) 50%)}
+.ysf .tx{position:absolute;left:16px;top:18px;bottom:16px;width:62%;display:flex;flex-direction:column}
 .ysf small{font-size:11px;font-weight:700;letter-spacing:.1em;color:#b8352a}
 .ysf b{margin-top:6px;font-size:22px;font-weight:900;letter-spacing:-.03em;line-height:1.25}
 .ysf em{margin-top:6px;font-style:normal;font-size:13px;line-height:1.55;color:#6b5d4f}
-.ysf i{margin-top:auto;align-self:flex-start;font-style:normal;font-size:13px;font-weight:800;padding:10px 14px;background:#2a2119;color:#f6f0e6;box-shadow:6px 8px 16px -8px rgba(60,38,18,.6)}
+.ysf i{margin-top:auto;align-self:flex-start;font-style:normal;font-size:13px;font-weight:800;padding:9px 14px;background:#2a2119;color:#f6f0e6}
 .ysf:active{transform:scale(.985)}
 .mini{display:grid;gap:8px}
-.mini a{position:relative;display:flex;align-items:center;gap:14px;min-height:116px;padding:8px 14px 8px 8px;border-radius:0;background:linear-gradient(118deg,#fbf7ef 0,#f6f0e6 45%,#ece2d0 100%);color:#2a2119;text-decoration:none;box-shadow:0 14px 24px -16px rgba(0,0,0,.7);transition:transform .15s}
+.mini a{position:relative;display:flex;align-items:center;gap:14px;min-height:96px;padding:10px 14px 10px 10px;border-radius:0;background:linear-gradient(118deg,#fbf7ef 0,#f6f0e6 45%,#ece2d0 100%);color:#2a2119;text-decoration:none;box-shadow:0 14px 24px -16px rgba(0,0,0,.7);transition:transform .15s}
 .mini a:active{transform:scale(.985)}
-.mini .pic{flex:none;width:86px;height:100px;display:grid;place-items:center;background:radial-gradient(90% 70% at 20% 10%,#fff0ce,rgba(255,240,206,0) 60%),#efe5d4;box-shadow:inset 0 0 0 1px rgba(42,33,25,.1),4px 6px 12px -6px rgba(60,38,18,.45);overflow:hidden;position:relative}
+.mini .pic{flex:none;width:76px;height:76px;display:grid;place-items:center;background:#efe5d4;box-shadow:inset 0 0 0 1px rgba(42,33,25,.1);overflow:hidden;position:relative}
 .mini .pic svg{display:block}
-.mini .pic .hr,.mini .pic video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;background:center 30%/cover no-repeat}
-.mini .pic video{opacity:0;transition:opacity .9s}
-.mini .pic video.on{opacity:1}
-.mini .pic:after{content:"";position:absolute;inset:0;background:linear-gradient(118deg,rgba(255,226,170,.28),rgba(255,226,170,0) 50%);pointer-events:none}
 .mini .tx{flex:1;min-width:0}
-.mini .tx small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;color:#9a8b7a}
+.mini .tx small{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:#9a8b7a}
 .mini .tx b{display:block;margin-top:3px;font-size:16px;font-weight:800;letter-spacing:-.02em;color:#2a2119}
 .mini .tx em{display:block;margin-top:3px;font-style:normal;font-size:12.5px;line-height:1.5;color:#6b5d4f}
 .mini .ar{flex:none;color:#9a8b7a}
-.mini .wk{position:absolute;inset:18px 8px;display:grid;grid-template-columns:repeat(7,1fr);background:#e6d9c3;box-shadow:inset 0 0 0 1px rgba(42,33,25,.12)}
+.mini .wk{position:absolute;inset:14px 6px;display:grid;grid-template-columns:repeat(7,1fr);background:#e6d9c3;box-shadow:inset 0 0 0 1px rgba(42,33,25,.12)}
 .mini .wk i{border-left:1px solid rgba(42,33,25,.12)}.mini .wk i:first-child{border-left:0}
 .mini .wk i.on{background:radial-gradient(70% 60% at 50% 45%,#fff3d9,rgba(255,230,180,.75) 55%,rgba(255,230,180,0))}
-@media (prefers-reduced-motion:reduce){.ysf .im .pi{animation:none}}
+.mini .wk::after{content:"";position:absolute;top:-30%;bottom:-30%;left:-30%;width:40%;transform:skewX(-14deg);background:linear-gradient(90deg,rgba(255,236,196,0),rgba(255,236,196,.7),rgba(255,236,196,0));animation:miniSun 4.5s ease-in-out infinite}
+@keyframes miniSun{0%{left:-40%;opacity:0}15%{opacity:1}70%{opacity:1}85%,100%{left:110%;opacity:0}}
+@media (prefers-reduced-motion:reduce){.mini .wk::after{animation:none;opacity:0}}
 </style>
 </head>
 <body>
@@ -167,12 +160,12 @@ button{font-family:inherit;color:inherit}
   </section>
 
   <section class="sec" id="secMini">
-    <div class="sh"><small>무료 · 하람이 써 주는</small><b>연서당의 작은 편지들</b><p>생일만 있으면 바로 나와요. 마음에 들면 친구에게 카드로 보내요.</p></div>
-    <a class="ysf" href="yeonseo.html"><span class="im"><span class="pi" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_002112_ac4bb635-6498-4664-b753-dbc9bf75f580_min.webp')"></span><video class="yv" muted loop playsinline preload="none" poster="https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_002112_ac4bb635-6498-4664-b753-dbc9bf75f580_min.webp" data-src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/afe7cc7d-6fc5-4558-b4f2-84766b9405be.mp4"></video></span><span class="tx"><small>하람의 연서당 · 새로 열었어요</small><b>볕 드는 편지 가게<br>곧 받을 편지</b><em>열두 서랍 중 햇빛이 멈추는 달, 다음 인연의 편지가 와요</em><i>연서당 들어가기</i></span></a>
+    <div class="sh"><small>무료 · 한 번 눌러 보기</small><b>무료로 가볍게</b><p>생일만 있으면 바로 나와요. 마음에 들면 친구에게 카드로 보내요.</p></div>
+    <a class="ysf" href="yeonseo.html"><span class="im"></span><span class="tx"><small>새로 열었어요 · 무료</small><b>하람의 연서당<br>곧 받을 편지</b><em>열두 서랍 중 햇빛이 멈추는 달, 다음 인연의 편지가 와요</em><i>서랍 열어 보기</i></span></a>
     <div class="mini">
-      <a href="lovemini.html?t=type"><span class="pic"><svg viewBox="0 0 76 76" width="62" height="62" aria-hidden="true"><defs><radialGradient id="mnW" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#d65a4a"/><stop offset=".55" stop-color="#b8352a"/><stop offset="1" stop-color="#7f1e16"/></radialGradient><filter id="mnB"><feGaussianBlur stdDeviation="2.4"/></filter></defs><ellipse cx="40" cy="43" rx="25" ry="23" fill="#2a2119" opacity=".3" filter="url(#mnB)"/><path d="M38 12c6 0 9 3 13 4s8 4 9 9 4 8 3 13-1 9-4 12-6 8-11 9-8 3-13 2-8-2-12-5-7-6-8-11-3-8-1-13 2-9 6-12 7-6 12-7z" fill="url(#mnW)"/><circle cx="38" cy="38" r="17" fill="#a42e24" stroke="#7e1d15" stroke-opacity=".6"/><g fill="#c94a3c"><circle cx="38" cy="32" r="4"/><circle cx="43.7" cy="36.1" r="4"/><circle cx="41.5" cy="42.9" r="4"/><circle cx="34.5" cy="42.9" r="4"/><circle cx="32.3" cy="36.1" r="4"/></g><circle cx="38" cy="38" r="2.4" fill="#e9b26a"/><ellipse cx="30" cy="25" rx="7" ry="3" fill="#fff" fill-opacity=".18" transform="rotate(-32 30 25)"/></svg><span class="hr" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_514adb66-edf2-4b3a-ba17-e308bd4054cd_min.webp')"></span><video class="yv" muted loop playsinline preload="none" poster="https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_514adb66-edf2-4b3a-ba17-e308bd4054cd_min.webp" data-src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/84f23237-3cec-4dfc-8dc7-3c80143618f5.mp4"></video></span><span class="tx"><small>놋쇠 도장을 꾹 누르면</small><b>봉랍 체질 카드</b><em>봉랍 색으로 읽는 나의 연애 체질</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
-      <a href="lovemini.html?t=match"><span class="pic"><svg viewBox="0 0 76 76" width="76" height="76" aria-hidden="true"><path d="M-2 46C10 46 14 38 22 38" fill="none" stroke="#2a2119" stroke-width="2.4" stroke-linecap="round"/><path d="M78 30C66 30 62 38 54 38" fill="none" stroke="#b8352a" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="44" cy="38" rx="10" ry="7" fill="none" stroke="#b8352a" stroke-width="2.4"/><ellipse cx="32" cy="38" rx="10" ry="7" fill="none" stroke="#2a2119" stroke-width="2.4"/><path d="M36.5 32.4A10 7 0 0 1 41.6 31.2" fill="none" stroke="#efe5d4" stroke-width="5"/><path d="M36.5 32.4A10 7 0 0 1 41.6 31.2" fill="none" stroke="#b8352a" stroke-width="2.4"/></svg><span class="hr" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_f02f9001-2006-4921-a162-31f21cc2a7b2_min.webp')"></span><video class="yv" muted loop playsinline preload="none" poster="https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_f02f9001-2006-4921-a162-31f21cc2a7b2_min.webp" data-src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/e7c3ba39-f646-4cc8-84a2-97909678a209.mp4"></video></span><span class="tx"><small>붉은 실과 먹색 실을 묶으면</small><b>실 묶기 궁합</b><em>두 사람의 생일로 보는 매듭의 결</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
-      <a href="lovemini.html?t=week"><span class="pic"><span class="wk"><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i></span><span class="hr" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_ac7dda5b-c926-4efc-a637-71ffe9186cec_min.webp')"></span><video class="yv" muted loop playsinline preload="none" poster="https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_ac7dda5b-c926-4efc-a637-71ffe9186cec_min.webp" data-src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/6b588327-4646-414d-aec3-c248a6a3e037.mp4"></video></span><span class="tx"><small>대나무 발을 걷으면</small><b>햇빛 일주일</b><em>이번 주 연락하기 좋은 이틀과 시간</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+      <a href="lovemini.html?t=type"><span class="pic"><svg viewBox="0 0 76 76" width="62" height="62" aria-hidden="true"><defs><radialGradient id="mnW" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#d65a4a"/><stop offset=".55" stop-color="#b8352a"/><stop offset="1" stop-color="#7f1e16"/></radialGradient><filter id="mnB"><feGaussianBlur stdDeviation="2.4"/></filter></defs><ellipse cx="40" cy="43" rx="25" ry="23" fill="#2a2119" opacity=".3" filter="url(#mnB)"/><path d="M38 12c6 0 9 3 13 4s8 4 9 9 4 8 3 13-1 9-4 12-6 8-11 9-8 3-13 2-8-2-12-5-7-6-8-11-3-8-1-13 2-9 6-12 7-6 12-7z" fill="url(#mnW)"/><circle cx="38" cy="38" r="17" fill="#a42e24" stroke="#7e1d15" stroke-opacity=".6"/><g fill="#c94a3c"><circle cx="38" cy="32" r="4"/><circle cx="43.7" cy="36.1" r="4"/><circle cx="41.5" cy="42.9" r="4"/><circle cx="34.5" cy="42.9" r="4"/><circle cx="32.3" cy="36.1" r="4"/></g><circle cx="38" cy="38" r="2.4" fill="#e9b26a"/><ellipse cx="30" cy="25" rx="7" ry="3" fill="#fff" fill-opacity=".18" transform="rotate(-32 30 25)"/></svg></span><span class="tx"><small>도장을 깨면</small><b>연애 체질 카드</b><em>내 일간으로 읽은 사랑하는 방식</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+      <a href="lovemini.html?t=match"><span class="pic"><svg viewBox="0 0 76 76" width="76" height="76" aria-hidden="true"><path d="M-2 46C10 46 14 38 22 38" fill="none" stroke="#2a2119" stroke-width="2.4" stroke-linecap="round"/><path d="M78 30C66 30 62 38 54 38" fill="none" stroke="#b8352a" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="44" cy="38" rx="10" ry="7" fill="none" stroke="#b8352a" stroke-width="2.4"/><ellipse cx="32" cy="38" rx="10" ry="7" fill="none" stroke="#2a2119" stroke-width="2.4"/><path d="M36.5 32.4A10 7 0 0 1 41.6 31.2" fill="none" stroke="#efe5d4" stroke-width="5"/><path d="M36.5 32.4A10 7 0 0 1 41.6 31.2" fill="none" stroke="#b8352a" stroke-width="2.4"/></svg></span><span class="tx"><small>실을 묶으면</small><b>우리 궁합 한 줄</b><em>두 사람의 생일로 보는 매듭의 결</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+      <a href="lovemini.html?t=week"><span class="pic"><span class="wk"><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i></span></span><span class="tx"><small>햇빛이 머무는</small><b>이번 주 연락하기 좋은 날</b><em>이틀과 두 시간, 근거까지</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
     </div>
   </section>
 
@@ -352,18 +345,6 @@ const PPL=[['seoha','서하','상담소 주인','img/seoha.jpg','var(--gold)'],[
 $('ppl').innerHTML=PPL.map(([k,n,s,img,c])=>`<button type="button" data-c="${k}" style="--c:${c}"><i style="background-image:url('${img}')"></i><b>${n}</b><small>${s}</small></button>`).join('');
 $('ppl').onclick=e=>{ const b=e.target.closest('[data-c]'); if(!b) return; if(window.ObChar) ObChar.open(b.dataset.c); else go('chat.html?h='+b.dataset.c); };
 })();
-</script>
-<script>
-/* 연서당의 작은 편지들: 하람 영상은 화면에 보일 때만 소리 없이 재생, 실패하면 그림만 남김 */
-(()=>{ const vs=[...document.querySelectorAll('#secMini video.yv')]; if(!vs.length) return;
-  let rm=false; try{ rm=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
-  const play=v=>{ if(!v.getAttribute('src')&&v.dataset.src) v.src=v.dataset.src; try{ const p=v.play(); if(p) p.catch(()=>{}); }catch(_){} };
-  vs.forEach(v=>{ v.muted=true; v.defaultMuted=true; v.loop=true; v.playsInline=true; v.setAttribute('muted',''); v.setAttribute('playsinline','');
-    v.addEventListener('playing',()=>v.classList.add('on')); v.addEventListener('error',()=>v.remove()); });
-  if(rm) return;
-  if(!('IntersectionObserver' in window)){ vs.forEach(play); return; }
-  const io=new IntersectionObserver(es=>es.forEach(e=>{ const v=e.target; if(!v.isConnected){ io.unobserve(v); return; } if(e.isIntersecting) play(v); else { try{ v.pause(); }catch(_){} } }),{threshold:.25});
-  vs.forEach(v=>io.observe(v)); })();
 </script>
 <script src="charhub.js?v=3"></script>
 <script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obpay.js" defer></script>

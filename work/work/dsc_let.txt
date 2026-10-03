@@ -1,0 +1,6 @@
+  <div class="letter lb dk" id="letter">
+    <header class="lh">
+      <div class="in lp" id="lp"></div><video id="vL" playsinline preload="auto"></video><div class="ls" id="ls"></div>
+      <button class="lx" id="lClose" type="button" aria-label="대화로 돌아가기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="lt"><small>도화 편지 · 봉인 열림</small><h2>태오가 보낸 긴 편지</h2><p id="lTo"></p></div>
+    </header>

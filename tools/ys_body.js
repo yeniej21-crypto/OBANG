@@ -1,0 +1,371 @@
+/* 그림 자리 채우기 · 편지지 · 우표 · 봉랍이 실제로 들어왔는지(안 들어오면 종이 · 색 우표로 대신) */
+const stage=$('stage');
+document.querySelectorAll('[data-img]').forEach(el=>{ el.style.backgroundImage=`url('${ART.img[el.dataset.img]}')`; });
+document.querySelectorAll('video[data-v]').forEach(v=>{ v.poster=ART.img[v.dataset.p]; v.muted=true; v.playsInline=true; v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline',''); });
+stage.style.setProperty('--imPaper',`url('${ART.img.paper}')`); stage.style.setProperty('--imStamps',`url('${ART.img.stamps}')`); stage.style.setProperty('--imSeals',`url('${ART.img.seals}')`);
+['paper','stamps','seals'].forEach(k=>{ const i=new Image(); i.onload=()=>stage.classList.add('ok-'+k); i.src=ART.img[k]; });
+const stampPos=m=>{ const i=(m-1)%12, c=i%4, r=(i/4)|0; return `${(c/3*100).toFixed(4)}% ${(r/2*100).toFixed(4)}%`; };
+const sealPos=el=>`${(el/4*100).toFixed(4)}% 0%`;
+
+/* ---------- 사주 도구 (heart.html과 같은 표) ---------- */
+const PEACH={8:9,0:9,4:9, 2:3,6:3,10:3, 5:6,9:6,1:6, 11:0,3:0,7:0}; /* 일지 삼합 → 도화 */
+const LIUHE=[1,0,11,10,9,8,7,6,5,4,3,2];
+const YUANJIN=[7,6,9,8,11,10,1,0,3,2,5,4];
+const GROUP=['비겁','식상','재성','관성','인성'];
+const GROUP_P=['나와 같은 기운','내가 내보내는 기운','내가 다루는 기운','나를 다잡는 기운','나를 채우는 기운'];
+const EL_N=['나무','불','흙','쇠','물'];
+const EL_C=[['#86a383','#5f7d5c'],['#cf7a5f','#a5503a'],['#d1a66d','#a87a45'],['#a99f8f','#7c7264'],['#7896a6','#4f6f80']];
+const HNAME=['자시','축시','인시','묘시','진시','사시','오시','미시','신시','유시','술시','해시'];
+const HOURS=['23:30~01:29','01:30~03:29','03:30~05:29','05:30~07:29','07:30~09:29','09:30~11:29','11:30~13:29','13:30~15:29','15:30~17:29','17:30~19:29','19:30~21:29','21:30~23:29'];
+function solarOf(o){ if(o.cal==='l'){ const s=S.lunarToSolar(+o.y,+o.m,+o.d,false); if(s) return s; } return {y:+o.y,m:+o.m,d:+o.d}; }
+const gzK=p=>GAN_K[p[0]]+JI_K[p[1]];
+
+/* ---------- 해석 사전 ---------- */
+const SIT=['혼자인 지 오래','썸 비슷한 게 있어','막 헤어졌어','그냥 궁금해'];
+const SIT_R=['오래 비워 둔 자리엔 편지가 더 잘 들어와.','그 사람이 보낸 편지일 수도 있겠다. 같이 보자.','아직 아플 때지. 그래도 다음 편지는 벌써 오고 있어.','궁금한 마음이 제일 좋은 시작이야.'];
+const TRIG=[
+ {t:'친구를 통해서',p:'가까운 친구나 동료가 다리를 놓는 쪽이야. 여럿이 모인 자리, 친구가 같이 가자고 끌고 간 약속에서 시작될 가능성이 커.'},
+ {t:'내가 뭔가 보여 주는 자리에서',p:'네가 말하고, 만들고, 올린 것에 누군가 먼저 반응해 오는 쪽이야. 발표, 취미 모임, 네 글이나 사진 아래에서 시작될 수 있어.'},
+ {t:'일이나 돈이 오가는 자리에서',p:'일로 만난 사람, 거래나 부탁이 오가는 자리에서 인연이 섞여 들어오는 흐름이야. 처음엔 용건으로 시작해서 용건 밖의 얘기로 번져.'},
+ {t:'소개나 공식적인 자리에서',p:'누군가의 소개, 회사나 모임처럼 격식 있는 자리에서 만나는 쪽이야. 첫인상이 단정하고 조금 어색할 수 있는데, 그게 나쁜 신호는 아니야.'},
+ {t:'배우거나 쉬는 자리에서',p:'수업, 책, 전시, 혼자 쉬러 간 곳처럼 조용한 자리에서 닿는 쪽이야. 말보다 같이 머문 시간이 먼저 쌓여.'}];
+const FIRST=[['얘기 많이 들었어요. 드디어 보네요.','다음엔 우리끼리도 한번 봐요.'],['올리신 거 잘 봤어요. 계속 생각나더라고요.','그거 어떻게 하신 건지 듣고 싶어요.'],['일 끝나고 시간 괜찮으면 커피 한잔 해요.','덕분에 일이 쉽게 풀렸어요. 제가 살게요.'],['말씀 많이 들었어요. 생각보다 편하시네요.','오늘 자리, 덕분에 덜 어색했어요.'],['이 책, 저도 좋아하는 거예요.','여기 자주 오시나 봐요. 저도 그래요.']];
+const KEEP=['친구 약속은 웬만하면 나가.','보여 줄 걸 하나 만들어 둬.','일하는 자리에서 너무 딱딱하게 굴지 마.','소개는 거절하지 말고 한 번은 받아 봐.','배우고 싶던 걸 하나 시작해 둬.'];
+const KEEP_W=['편지를 들고 올 사람이 친구 옆자리에 있을 가능성이 커서야.','편지를 쓸 사람은 네가 내놓은 걸 보고 먼저 다가올 쪽이라서야.','편지가 용건처럼 생긴 모습으로 올 수 있어서야.','편지가 누군가의 손을 한 번 거쳐서 올 쪽이라서야.','편지를 쓸 사람과 같은 자리에 오래 머물러야 닿는 쪽이라서야.'];
+const SIT_K=['오래 혼자였던 리듬을 너무 단단히 잠그지만 마.','지금 썸에 서둘러 결론 내지 마. 그 사람이 보낸 편지일 수도, 아닐 수도 있어.','그달 전까지는 마음부터 비워 둬. 빈자리가 있어야 새 편지가 들어와.','궁금한 만큼만 열어 둬. 그거면 충분해.'];
+
+/* ---------- 계산: 앞으로 열두 달 중 편지가 닿을 달 ---------- */
+function compute(me){ const s=solarOf(me), P=S.pillars(s.y,s.m,s.d,me.h==null||me.h===''?null:+me.h);
+  const dm=P.d[0], db=P.d[1], myEl=stEl(dm), male=me.g==='m', loveEl=male?(myEl+2)%5:(myEl+3)%5, pe=PEACH[db];
+  const now=new Date(); let y=now.getFullYear(), m=now.getMonth()+1; if(now.getDate()>20){ m++; if(m>12){ m=1; y++; } }
+  const months=[];
+  for(let i=0;i<12;i++){ const mp=S.monthPillarAt(y,m,15), ms=mp[0], mb=mp[1];
+    const f={peach:mb===pe, hap:LIUHE[db]===mb, star:stEl(ms)===loveEl, chung:S.isChung(mb,db), yj:YUANJIN[db]===mb};
+    const sc=(f.peach?3:0)+(f.hap?3:0)+(f.star?2:0)-(f.chung?3:0)-(f.yj?2:0);
+    months.push({i,y,m,mp,ms,mb,f,sc,g:S.rel(dm,stEl(ms))}); m++; if(m>12){ m=1; y++; } }
+  const pickBest=list=>list.reduce((a,b)=>b.sc>a.sc?b:a); /* 같은 점수면 앞선 달 */
+  const best=pickBest(months), second=pickBest(months.filter(o=>o!==best));
+  const key=hash(JSON.stringify([me.cal,me.y,me.m,me.d,me.h,me.g,A.sit,months[0].y,months[0].m]));
+  return {me,P,dm,db,myEl,male,loveEl,pe,months,best,second,key}; }
+const ym=o=>`${o.y}년 ${o.m}월`;
+function leadOf(o){ return o.f.peach?'네가 사람 눈에 잘 띄는 달이야.':o.f.hap?'가까이 올 자리가 열리는 달이야.':o.f.star?'인연의 별이 뜨는 달이야.':'부딪히는 기운 없이 조용히 열리는 달이야.'; }
+function shortOf(o){ return o.f.peach?'도화가 피는 달':o.f.hap?'일지와 짝을 이루는 달':o.f.star?'인연의 별이 뜨는 달':'부딪히는 기운이 없는 달'; }
+function evidence(){ const r=R, o=r.best, ms=o.ms, mb=o.mb, G=GAN_K[ms], B=JI_K[mb], D=JI_K[r.db], out=[];
+  out.push(`네 일주는 ${GAN_K[r.dm]}${JI_K[r.db]}, 그달은 ${G}${B}월이야. 그달 천간 ${J(G,'은','는')} ${EL_N[stEl(ms)]}, 지지 ${J(B,'은','는')} ${EL_N[BR_EL[mb]]}의 기운.`);
+  if(o.f.peach) out.push(`그달 지지 ${J(B,'이','가')} 네 도화 글자야. 네 일지 ${D} 기준으로 사람 눈에 잘 띄는 글자가 그달에 들어와.`);
+  if(o.f.hap) out.push(`그달 지지 ${J(B,'이','가')} 네 일지 ${J(D,'과','와')} 짝을 이뤄(육합). 일지는 가까운 사람이 들어오는 자리야.`);
+  if(o.f.star) out.push(`그달 천간 ${J(G,'은','는')} ${EL_N[stEl(ms)]} 기운이고, ${r.male?'남자':'여자'} 사주에서 이 기운이 인연의 별(${r.male?'재성':'관성'})이야.`);
+  if(o.f.chung) out.push(`다만 그달 지지가 네 일지 ${J(D,'과','와')} 부딪혀(충). 반가워도 속도는 천천히.`);
+  if(o.f.yj) out.push(`다만 그달 지지와 네 일지 사이에 원진이 있어. 작은 서운함은 그날 풀어.`);
+  if(o.sc<=0) out.push('열두 달 중 크게 끌어당기는 달이 없어서, 부딪히는 기운이 가장 적은 가까운 달을 골랐어.');
+  out.push(`그달 천간은 네 일간 ${GAN_K[r.dm]} 기준으로 ${GROUP[o.g]}(${GROUP_P[o.g]})이라서, 계기를 ${TRIG[o.g].t.replace(/에서$|을 통해서$|를 통해서$/,'')} 쪽으로 읽었어.`);
+  return out; }
+
+/* ---------- 소리: 왈츠 배경 음악(Web Audio로 끊김 없이 반복, 아이폰도 음량 조절) + 종이 · 봉랍 · 서랍 소리(합성, 작게) ---------- */
+let soundOn=true; try{ soundOn=sessionStorage.getItem('ysSnd')!=='off'; }catch(e){}
+let entered=false;
+const AUD=(()=>{ let ctx=null, mus=null, fx=null, nb=null, buf=null, src=null, loading=false, ducked=false, el=null; const VOL=.35;
+  function init(){ if(ctx) return true; const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false; try{ ctx=new AC(); }catch(e){ return false; }
+    mus=ctx.createGain(); mus.gain.value=0; mus.connect(ctx.destination); fx=ctx.createGain(); fx.gain.value=.8; fx.connect(ctx.destination);
+    const len=ctx.sampleRate*1.2; nb=ctx.createBuffer(1,len,ctx.sampleRate); const d=nb.getChannelData(0); for(let i=0;i<len;i++) d[i]=Math.random()*2-1;
+    return true; }
+  function ramp(v,t){ if(!ctx) return; const n=ctx.currentTime; mus.gain.cancelScheduledValues(n); mus.gain.setValueAtTime(mus.gain.value,n); mus.gain.linearRampToValueAtTime(v,n+t); }
+  function run(){ if(!ctx||!soundOn) return;
+    if(!src&&buf){ src=ctx.createBufferSource(); src.buffer=buf; src.loop=true; src.connect(mus); try{ src.start(); }catch(e){} }
+    if(!src&&!buf&&el&&el.paused){ const p=el.play(); if(p&&p.catch) p.catch(()=>{}); }
+    ramp(ducked?VOL*.45:VOL,2.5); }
+  /* 디코딩이 안 되는 브라우저는 audio 요소를 같은 게인에 물려 반복 */
+  function fallbackEl(){ if(el) return; try{ el=new Audio(ART.bgm); el.loop=true; el.preload='auto'; ctx.createMediaElementSource(el).connect(mus); }catch(e){ el=null; } if(el&&soundOn&&entered) run(); }
+  function load(){ if(buf||loading||el) return; loading=true;
+    fetch(ART.bgm).then(r=>{ if(!r.ok) throw new Error('bgm'); return r.arrayBuffer(); })
+      .then(ab=>new Promise((res,rej)=>{ try{ const p=ctx.decodeAudioData(ab,res,rej); if(p&&p.catch) p.catch(rej); }catch(e){ rej(e); } }))
+      .then(b=>{ buf=b; loading=false; if(soundOn&&entered) run(); })
+      .catch(()=>{ loading=false; fallbackEl(); }); }
+  function noise(dur,type,freq,q,gain,at,delay){ if(!soundOn||!ctx) return; const n=ctx.currentTime+(delay||0), s=ctx.createBufferSource(), f=ctx.createBiquadFilter(), g=ctx.createGain();
+    s.buffer=nb; f.type=type; f.frequency.value=freq; f.Q.value=q; g.gain.setValueAtTime(0,n); g.gain.linearRampToValueAtTime(gain,n+(at||.005)); g.gain.exponentialRampToValueAtTime(.0001,n+dur);
+    s.connect(f); f.connect(g); g.connect(fx); s.start(n,Math.random()*.5); s.stop(n+dur+.05); }
+  function tone(freq,dur,gain,delay,type){ if(!soundOn||!ctx) return; const n=ctx.currentTime+(delay||0), os=ctx.createOscillator(), g=ctx.createGain(); os.type=type||'sine'; os.frequency.value=freq;
+    g.gain.setValueAtTime(0,n); g.gain.linearRampToValueAtTime(gain,n+.01); g.gain.exponentialRampToValueAtTime(.0001,n+dur); os.connect(g); g.connect(fx); os.start(n); os.stop(n+dur+.05); }
+  return {
+    start(){ if(!soundOn||!init()) return; const r=ctx.resume(); if(r&&r.catch) r.catch(()=>{}); load(); run(); },
+    off(){ ramp(0,.8); if(el) setTimeout(()=>{ if(!soundOn&&el) el.pause(); },900); },
+    duck(d){ ducked=d; if(ctx&&soundOn) ramp(d?VOL*.45:VOL,d?.7:2.2); },
+    sleep(){ if(ctx&&ctx.state==='running'){ const p=ctx.suspend(); if(p&&p.catch) p.catch(()=>{}); } },
+    wake(){ if(ctx&&soundOn&&entered){ const p=ctx.resume(); if(p&&p.catch) p.catch(()=>{}); } },
+    chime(){ tone(1046.5,2.4,.03); tone(1568,1.6,.016,.05); },
+    slide(){ noise(.55,'lowpass',420,.7,.18,.08); noise(.3,'bandpass',1400,1.2,.025,.05,.1); },
+    tick(){ noise(.04,'bandpass',3200,2,.045); },
+    crack(){ noise(.16,'bandpass',2600,.8,.26,.002); noise(.12,'bandpass',1800,1,.18,.002,.07); tone(92,.22,.1,0,'sine'); },
+    paper(){ for(let i=0;i<5;i++) noise(.16+Math.random()*.1,'bandpass',2600+Math.random()*1800,.6,.04+Math.random()*.03,.02,i*.11); } }; })();
+function sndUI(){ $('snd').classList.toggle('off',!soundOn); }
+sndUI();
+$('snd').onclick=()=>{ soundOn=!soundOn; try{ sessionStorage.setItem('ysSnd',soundOn?'on':'off'); }catch(e){} sndUI(); if(soundOn){ entered=true; AUD.start(); } else AUD.off(); };
+/* 들어선 뒤에는 어떤 터치든 오디오를 깨운다(아이폰이 멈춰 둔 경우) */
+document.addEventListener('pointerdown',()=>{ if(entered&&soundOn) AUD.start(); },{passive:true});
+
+/* ---------- 영상: 화면에 보일 때만 재생, 다음 장면은 미리 받아 두기, 안 되면 그림이 남는다 ---------- */
+const vEl=n=>document.querySelector(`video[data-v="${n}"]`);
+function vPrime(n){ if(RM) return; const v=vEl(n); if(!v||v.getAttribute('src')) return; v.preload='auto'; v.src=ART.vid[n]; try{ v.load(); }catch(e){} }
+function vLoop(n){ if(RM) return; const v=vEl(n); if(!v) return; vPrime(n); v.loop=true; v.muted=true;
+  v.onplaying=()=>v.classList.add('on'); v.onerror=()=>v.classList.remove('on');
+  try{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} }
+function vPause(n){ const v=vEl(n); if(v&&!v.paused){ try{ v.pause(); }catch(e){} } }
+/* 한 번 재생: 끝나면 마지막 장면을 잡고 있는다. 6초 안에 시작을 못 하면(또는 길이보다 오래 걸리면) 그냥 넘어간다 */
+function vOnce(n,onStart){ return new Promise(res=>{ if(RM) return res(false); const v=vEl(n); if(!v) return res(false);
+  let done=false, a=0, b=0;
+  const fin=ok=>{ if(done) return; done=true; clearTimeout(a); clearTimeout(b); v.onended=v.onerror=v.onplaying=null; res(ok); };
+  vPrime(n); v.loop=false; v.muted=true; try{ if(v.currentTime>0) v.currentTime=0; }catch(e){}
+  v.onended=()=>fin(true); v.onerror=()=>fin(false);
+  v.onplaying=()=>{ v.classList.add('on'); clearTimeout(a); if(onStart){ try{ onStart(); }catch(e){} onStart=null; }
+    const d=isFinite(v.duration)&&v.duration>0?v.duration:6; clearTimeout(b); b=setTimeout(()=>fin(true),Math.max(6000,(d+.8)*1000)); };
+  a=setTimeout(()=>fin(false),6000);
+  try{ const p=v.play(); if(p&&p.catch) p.catch(()=>fin(false)); }catch(e){ fin(false); } }); }
+
+/* ---------- 화면 전환 ---------- */
+let cur='sIn', heroOn=false;
+const LOOP={sIn:'hero',sTalk:'counter',sDrw:'drawers',sSeal:'envelope'};
+function show(id){ cur=id; ['sIn','sTalk','sDrw','sSeal','sLet'].forEach(s=>$(s).classList.toggle('on',s===id)); $('top').classList.toggle('t',id!=='sIn'); $('top').classList.remove('sc');
+  Object.keys(LOOP).forEach(s=>{ if(s!==id) setTimeout(()=>{ if(cur!==s) vPause(LOOP[s]); },1000); });
+  if(id!=='sLet') vPause('ending');
+  if(LOOP[id]&&(id!=='sIn'||heroOn)) vLoop(LOOP[id]); }
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){ AUD.sleep(); Object.values(LOOP).concat('ending').forEach(vPause); return; }
+  AUD.wake(); if(LOOP[cur]&&(cur!=='sIn'||heroOn)) vLoop(LOOP[cur]); if(cur==='sLet'&&endSeen) vLoop('ending'); });
+$('back').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
+try{ if(new URLSearchParams(location.search).get('ref')==='share') $('itx').insertAdjacentHTML('afterbegin','<span class="from">친구가 보낸 편지</span>'); }catch(e){}
+
+/* ---------- 1. 들어서기 ---------- */
+let started=false;
+async function enter(withSound){ if(started) return; started=true; entered=true; soundOn=withSound; try{ sessionStorage.setItem('ysSnd',soundOn?'on':'off'); }catch(e){} sndUI();
+  if(soundOn) AUD.start(); $('itx').classList.add('out'); vib(8);
+  vPrime('hero'); vPrime('counter');
+  AUD.duck(true); const ok=await vOnce('door',()=>AUD.slide()); if(!ok) AUD.slide(); AUD.duck(false);
+  heroOn=true; $('sIn').classList.add('hero'); vLoop('hero');
+  await wait(RM?60:ok?500:900); $('itx2').classList.add('on'); }
+$('start').onclick=()=>enter(true);
+$('startMute').onclick=()=>enter(false);
+$('goIn').onclick=()=>{ if(cur!=='sIn') return; vib(6); show('sTalk'); interview(); };
+if(!RM) vPrime('door');
+
+/* ---------- 2. 대화 ---------- */
+let A={}, R=null;
+function toBottom(){ const t=$('talk'); t.scrollTo({top:t.scrollHeight,behavior:'smooth'}); }
+function say(t,me){ const box=$('msgs'), kids=[...box.children].filter(c=>!c.classList.contains('gone')), last=kids[kids.length-1];
+  kids.forEach(c=>{ if(c===last) c.classList.add('old'); else { c.classList.add('gone'); setTimeout(()=>c.remove(),1200); } });
+  const d=document.createElement('div'); d.className='ln '+(me?'me':'n'); d.innerHTML=me?esc(t):`<small>하람</small>${esc(t)}`; box.appendChild(d);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>d.classList.add('on'))); setTimeout(toBottom,80); }
+function askChips(list,pre){ return new Promise(res=>{ const a=$('ask'); a.innerHTML=`<div class="chips">${list.map((t,i)=>`<button type="button" data-i="${i}" class="${i===pre?'pre':''}">${esc(t)}</button>`).join('')}</div>`; a.classList.add('on'); setTimeout(toBottom,120);
+  a.onclick=e=>{ const b=e.target.closest('[data-i]'); if(!b) return; a.onclick=null; a.classList.remove('on'); vib(6); res(+b.dataset.i); }; }); }
+function dateLabel(o){ return `${o.cal==='l'?'음력 ':''}${o.y}년 ${o.m}월 ${o.d}일${o.h!=null&&o.h!==''?' · '+HNAME[+o.h]:''}`; }
+function askDate(){ return new Promise(res=>{ const a=$('ask'), saved=loadMe()||{}, has=!!saved.y;
+  const yNow=new Date().getFullYear(), ys=[]; for(let y=yNow-19;y>=1950;y--) ys.push(y);
+  const dy=+saved.y||1996, cal=saved.cal==='l'?'l':'s', hh=saved.h==null||saved.h===''?'':+saved.h;
+  a.innerHTML=`<div class="pick">
+    ${has?'<p class="note">전에 적어 둔 생일로 채워 뒀어. 맞는지만 봐 줘.</p>':''}
+    <div class="seg" id="kCal"><button type="button" data-v="s" class="${cal==='s'?'on':''}">양력</button><button type="button" data-v="l" class="${cal==='l'?'on':''}">음력</button></div>
+    <div class="g3"><select id="kY" aria-label="태어난 해">${ys.map(y=>`<option value="${y}" ${y===dy?'selected':''}>${y}년</option>`).join('')}</select><select id="kM" aria-label="태어난 달">${Array.from({length:12},(_,i)=>`<option value="${i+1}" ${(+saved.m||3)===i+1?'selected':''}>${i+1}월</option>`).join('')}</select><select id="kD" aria-label="태어난 날"></select></div>
+    <select id="kH" aria-label="태어난 시"><option value="">태어난 시 모름</option>${HNAME.map((n,i)=>`<option value="${i}" ${hh===i?'selected':''}>${n} ${HOURS[i]}</option>`).join('')}</select>
+    <button class="go" id="kGo" type="button">${has?'이 생일 맞아':'이 생일로 할게'}</button></div>`;
+  const fillD=()=>{ const y=+$('kY').value, m=+$('kM').value, n=new Date(y,m,0).getDate(), c=+$('kD').value||+saved.d||15; $('kD').innerHTML=Array.from({length:n},(_,i)=>`<option value="${i+1}" ${Math.min(c,n)===i+1?'selected':''}>${i+1}일</option>`).join(''); };
+  fillD(); $('kY').onchange=$('kM').onchange=fillD;
+  $('kCal').querySelectorAll('button').forEach(b=>b.onclick=()=>$('kCal').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)));
+  a.classList.add('on'); setTimeout(toBottom,140); a.onclick=null;
+  $('kGo').onclick=()=>{ const o={cal:$('kCal').querySelector('.on').dataset.v,y:+$('kY').value,m:+$('kM').value,d:+$('kD').value,h:$('kH').value===''?null:+$('kH').value};
+    if(o.cal==='l'&&!S.lunarToSolar(o.y,o.m,o.d,false)){ toast('없는 음력 날짜야'); return; }
+    a.classList.remove('on'); vib(6); res(o); }; }); }
+async function interview(){ A={}; $('msgs').innerHTML=''; const saved=loadMe()||{}; vPrime('drawers');
+  await wait(500); say('왔구나. 여긴 아직 안 온 편지를 먼저 받아 두는 곳이야.'); await wait(1900);
+  say(saved.y?'몇 가지만 확인할게. 생일부터.':'몇 가지만 물어볼게. 생일부터 알려 줘.');
+  const d=await askDate(); say(dateLabel(d),true); await wait(800);
+  const s=solarOf(d), P=S.pillars(s.y,s.m,s.d,null); say(`${GAN_K[P.d[0]]}${JI_K[P.d[1]]}일생이구나. 기억해 둘게.`); await wait(1500);
+  say('편지 쓸 사람을 찾으려면 하나 더. 너는 여자야, 남자야.');
+  const g=await askChips(['여자','남자'],saved.g==='m'?1:saved.g==='f'?0:-1); d.g=g?'m':'f'; say(g?'남자':'여자',true); saveMe(d); A.me=Object.assign({},loadMe()||{},d); await wait(800);
+  say('알겠어. 마지막으로, 요즘은 어때.');
+  A.sit=await askChips(SIT); say(SIT[A.sit],true); await wait(800);
+  say(SIT_R[A.sit]); await wait(1900);
+  R=compute(A.me); say('됐어. 서랍 쪽으로 가 보자.'); await wait(1500); toDrawers(); }
+
+/* ---------- 3. 열두 달 서랍: 서랍 벽 영상 + 유리판 달력(볕이 멈춘 칸 = 계산한 달) ---------- */
+let litReady=false, opening=false;
+function buildDrawers(){ $('grid').innerHTML=R.months.map(o=>`<button class="mc${o===R.best?' tg':''}" type="button" data-i="${o.i}" aria-label="${ym(o)} 서랍"><b>${o.m}월</b><small>${o.y}</small></button>`).join('');
+  const a=R.months[0], z=R.months[11]; $('gY').textContent=`${a.y}.${String(a.m).padStart(2,'0')} – ${z.y}.${String(z.m).padStart(2,'0')}`; }
+function cellBox(i){ const c=$('grid').children[i]; return {x:c.offsetLeft,y:c.offsetTop,w:c.offsetWidth,h:c.offsetHeight}; }
+async function toDrawers(){ litReady=false; opening=false; buildDrawers(); $('sDrw').classList.remove('lit'); $('dBt').classList.remove('on'); $('dH').textContent='';
+  $('dT').innerHTML='볕이 지나가는 걸 봐.<br>멈추는 서랍에 네 편지가 있어.';
+  const sun=$('sun'); sun.style.transition='none'; sun.style.opacity='0'; void sun.offsetWidth; sun.style.transition='';
+  show('sDrw'); vPrime('envelope'); vPrime('open'); await wait(RM?100:1300); sweep(); }
+async function sweep(){ const sun=$('sun'), b=R.best, others=[...R.months].filter(o=>o!==b&&o.sc>0).sort((x,y)=>y.sc-x.sc||x.i-y.i).slice(0,3);
+  let path=others.map(o=>o.i); if(path.length<3){ [1,6,10,3,8].forEach(i=>{ if(path.length<3&&i!==b.i&&!path.includes(i)) path.push(i); }); }
+  path.push(b.i);
+  const pt=i=>{ const c=cellBox(i); return {x:c.x-c.w*.2,y:c.y-c.h*.2,w:c.w*1.4,h:c.h*1.4}; };
+  const st0=cellBox(0), big={x:st0.x-st0.w*1.2,y:st0.y-st0.h*.8,w:st0.w*2.4,h:st0.h*2.4};
+  const kf=p=>({transform:`translate3d(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px,0)`,width:p.w.toFixed(1)+'px',height:p.h.toFixed(1)+'px'});
+  const frames=[Object.assign(kf(big),{opacity:0,offset:0})]; let total=900+path.length*1050, t=900;
+  frames.push(Object.assign(kf(big),{opacity:1,offset:t/total*.6}));
+  path.forEach((i,k)=>{ const p=pt(i), last=k===path.length-1, grow=last?1:1+(path.length-1-k)*.18, pp={x:p.x-(p.w*(grow-1))/2,y:p.y-(p.h*(grow-1))/2,w:p.w*grow,h:p.h*grow};
+    t+=last?1150:700; frames.push(Object.assign(kf(pp),{opacity:1,offset:Math.min(1,t/total)})); if(!last){ t+=350; frames.push(Object.assign(kf(pp),{opacity:1,offset:Math.min(1,t/total)})); } });
+  frames[frames.length-1].offset=1;
+  const fin=Object.assign({},frames[frames.length-1]); delete fin.offset;
+  if(RM){ Object.assign(sun.style,fin); }
+  else { const an=sun.animate(frames,{duration:t,easing:'ease-in-out',fill:'forwards'}); await an.finished.catch(()=>{}); Object.assign(sun.style,fin); try{ an.cancel(); }catch(e){} }
+  $('sDrw').classList.add('lit'); $('grid').children[b.i].classList.add('lit'); sun.style.opacity='0';
+  AUD.duck(true); AUD.chime(); setTimeout(()=>AUD.duck(false),1800); vib([8,30,12]);
+  $('dT').innerHTML=`볕이 멈췄어.<br>${ym(b)} 서랍이야.`; $('dH').textContent='볕이 든 칸을 눌러 서랍을 열어 봐';
+  litReady=true; setTimeout(()=>$('dBt').classList.add('on'),700); }
+$('grid').addEventListener('click',e=>{ const c=e.target.closest('.mc'); if(!c) return; if(!litReady){ return; }
+  if(+c.dataset.i!==R.best.i){ c.classList.remove('nope'); void c.offsetWidth; c.classList.add('nope'); vib(5); $('dH').textContent='그 서랍은 아직 비어 있어. 볕이 든 쪽이야'; return; }
+  openDrawer(); });
+$('dGo').onclick=openDrawer;
+async function openDrawer(){ if(!litReady||opening) return; opening=true; const c=$('grid').children[R.best.i];
+  $('dBt').classList.remove('on'); $('dH').textContent=''; AUD.slide(); vib(10); c.classList.add('pull');
+  await wait(RM?80:800); toSeal(); }
+
+/* ---------- 4. 봉투: 봉랍을 길게 눌러 떼기 → 봉인 깨지는 영상 → 펼치는 영상 ---------- */
+let holdP=0, holding=false, holdRaf=0, broken=false, lastTick=0;
+function toSeal(){ broken=false; holdP=0; holding=false; const seal=$('seal'), el=stEl(R.best.ms);
+  seal.className='seal'; seal.querySelectorAll('i').forEach(i=>{ i.style.backgroundImage='var(--imSeals)'; i.style.backgroundSize='500% 100%'; i.style.backgroundPosition=sealPos(el); }); ring(0);
+  $('sw').classList.remove('busy'); $('sSeal').classList.remove('unf'); ['open','unfold'].forEach(n=>{ const v=vEl(n); if(v){ v.classList.remove('on'); try{ v.pause(); if(v.currentTime>0) v.currentTime=0; }catch(e){} } });
+  $('sK').textContent=`${EL_N[el]}의 봉랍`;
+  $('sT').innerHTML=`${R.best.m}월 서랍에서 꺼냈어.<br>봉랍을 꾹 누르고 있어 봐.`; $('sH').textContent='누르는 동안 테두리가 차올라'; $('sSkip').hidden=false;
+  show('sSeal'); vPrime('unfold'); vPrime('ending'); }
+function ring(p){ const f=$('sRing'); if(f) f.style.strokeDashoffset=String(301.6*(1-Math.min(1,p))); }
+function holdLoop(t0){ const step=now=>{ if(broken) return; const dt=Math.min(64,now-t0); t0=now;
+    holdP=Math.max(0,Math.min(1,holdP+(holding?dt/1500:-dt/700))); ring(holdP);
+    if(holding&&now-lastTick>140){ lastTick=now; vib(4); AUD.tick(); }
+    $('sH').textContent=holding?(holdP<.5?'그대로':'거의 다 됐어'):'누르는 동안 테두리가 차올라';
+    if(holdP>=1){ breakSeal(); return; }
+    if(holding||holdP>0) holdRaf=requestAnimationFrame(step); else holdRaf=0; };
+  cancelAnimationFrame(holdRaf); holdRaf=requestAnimationFrame(step); }
+const sealEl=$('seal');
+/* 봉랍뿐 아니라 봉투 화면 어디를 눌러도 차오른다 */
+$('sSeal').addEventListener('pointerdown',e=>{ if(broken||cur!=='sSeal'||e.target.closest('#sSkip')) return; e.preventDefault(); holding=true; sealEl.classList.add('hold'); try{ e.target.setPointerCapture(e.pointerId); }catch(_){} holdLoop(performance.now()); });
+['pointerup','pointercancel','lostpointercapture'].forEach(t=>$('sSeal').addEventListener(t,()=>{ holding=false; sealEl.classList.remove('hold'); }));
+$('sSeal').addEventListener('contextmenu',e=>e.preventDefault());
+sealEl.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); breakSeal(); } });
+$('sSkip').onclick=()=>breakSeal();
+async function breakSeal(){ if(broken) return; broken=true; holding=false; cancelAnimationFrame(holdRaf); ring(1); const seal=$('seal');
+  $('sSkip').hidden=true; $('sH').textContent='';
+  seal.classList.add('crk'); AUD.crack(); vib([18,40,26]); AUD.duck(true); await wait(RM?50:300);
+  seal.classList.add('brk'); $('sT').innerHTML='떨어졌어.<br>편지 꺼낼게.'; await wait(RM?50:650);
+  $('sw').classList.add('busy');
+  const ok1=await vOnce('open',()=>vPause('envelope'));
+  $('sSeal').classList.add('unf');
+  const ok2=await vOnce('unfold',()=>AUD.paper());
+  if(!ok2){ AUD.paper(); await wait(RM?300:1300); }
+  else await wait(250);
+  AUD.duck(false); toLetter(ok1||ok2); }
+
+/* ---------- 5. 편지: 생성 편지지 두 장 + 손글씨 ---------- */
+function postmark(o){ return `<svg class="pmk" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34" fill="none" stroke="#3b2c1f" stroke-width="2"/><circle cx="50" cy="50" r="27" fill="none" stroke="#3b2c1f" stroke-width="1"/>
+   <text x="50" y="46" text-anchor="middle" font-size="10" font-family="Noto Serif KR,serif" font-weight="700" fill="#3b2c1f">연서당</text><text x="50" y="60" text-anchor="middle" font-size="9" font-family="Noto Sans KR,sans-serif" fill="#3b2c1f">${o.y}.${String(o.m).padStart(2,'0')}</text>
+   <path d="M-40 34C-30 28 -20 40 -10 34S8 28 16 34M-40 46C-30 40 -20 52 -10 46S8 40 16 46M-40 58C-30 52 -20 64 -10 58S8 52 16 58" fill="none" stroke="#3b2c1f" stroke-width="2" transform="translate(-2 0)"/></svg>`; }
+function todayLabel(){ const n=new Date(); return `${n.getFullYear()}년 ${n.getMonth()+1}월 ${n.getDate()}일`; }
+function renderLetter(){ const r=R, o=r.best, el=stEl(o.ms), g=o.g, fl=FIRST[g][parseInt(r.key,36)%2], sec=r.second, c=EL_C[el];
+  $('pg1').innerHTML=`<div class="stp" style="--sp:${stampPos(o.m)};--ec:${c[0]};--ec2:${c[1]}" role="img" aria-label="${o.m}월 우표"><b>${o.m}월</b></div>${postmark(o)}
+    <div class="t1 ink">너에게,</div>
+    <div class="t2 ink">${esc(SIT[A.sit])} · ${GAN_K[r.dm]}${JI_K[r.db]}일생</div>
+    <div class="k ink">이 편지는</div>
+    <div class="m ink">${o.y}년 ${o.m}월에</div>
+    <div class="m2 ink">도착해.</div>
+    <div class="p ink">${esc(leadOf(o))} ${esc(gzK(o.mp))}월, ${EL_N[el]}의 기운이 도는 달이야.</div>
+    <div class="h ink">하나, 어떤 계기로</div>
+    <div class="b ink">${esc(TRIG[g].t)}</div>
+    <div class="p ink">${esc(TRIG[g].p)}</div>
+    <div class="ov ink">뒷장에 이어서</div>`;
+  $('pg2').innerHTML=`<div class="h ink">둘, 그 사람의 첫마디</div>
+    <div class="qt ink">“${esc(fl)}”</div>
+    <div class="nt ink">먼저 꺼낼 법한 말이야. 꼭 이 말은 아닐 수 있어.</div>
+    <div class="h ink">셋, 그때까지 하나만 지켜</div>
+    <div class="b ink">${esc(KEEP[g])}</div>
+    <div class="p ink">${esc(KEEP_W[g])} ${esc(SIT_K[A.sit])}</div>
+    <div class="h ink">혹시 그달을 놓치면</div>
+    <div class="rn ink">두 번째로 볕이 오래 머문 서랍은 <em>${ym(sec)}</em>. ${sec.sc>0?esc(shortOf(sec))+'이라 한 번 더 기회가 와.':'크게 끌어당기는 달은 아니지만 부딪히는 기운도 적은 달이야.'}</div>
+    <div class="dt ink">${todayLabel()}</div>
+    <div class="sgw"><div class="sg ink">연서당에서, 하람</div></div>
+    <i class="wxs" style="--sl:${sealPos(el)}" role="img" aria-label="${EL_N[el]}의 봉랍"></i>`;
+  const lv=o2=>o2.sc>0?Math.min(.85,.14+o2.sc*.09):.06;
+  $('why').innerHTML=`<small>편지 밖에 적어 둔 메모</small><h3>왜 ${o.m}월인지</h3>
+     <div class="yr">${r.months.map(m=>`<div class="${m===o?'b1':m===sec&&sec.sc>0?'b2':''}${m.sc<0?' neg':''}" style="--a:${lv(m).toFixed(2)}"><span>${m.m}</span></div>`).join('')}</div>
+     <div class="yrl"><span>${ym(r.months[0])}</span><span>${ym(r.months[11])}</span></div>
+     <div class="lg"><span><i class="l1"></i>편지가 오는 달</span>${sec.sc>0?'<span><i class="l2"></i>두 번째 서랍</span>':''}<span><i class="l3"></i>부딪히는 달</span></div>
+     <div class="ev"><small>근거</small><ul>${evidence().map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`;
+  $('mTh0').style.backgroundPosition=sealPos(r.myEl);
+  $('endP').textContent=`${ym(o)}에 편지가 닿으면, 그땐 네 말로 답해 줘. 나는 여기서 서랍을 닦아 두고 있을게.`;
+  $('notiBtn').textContent=`${o.m}월에 알림 받기`; }
+let rvIO=null, inkIO=null, endIO=null, endSeen=false;
+function reveals(){ if(rvIO) rvIO.disconnect(); rvIO=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); rvIO.unobserve(e.target); } }),{root:$('sLet'),threshold:.08}); $('sLet').querySelectorAll('.rv:not(.in)').forEach(el=>rvIO.observe(el));
+  /* 엔딩 영상: 가까워지면 받아 두고, 보일 때만 재생 */
+  if(endIO) endIO.disconnect(); endSeen=false;
+  endIO=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ endSeen=true; vLoop('ending'); } else { endSeen=false; vPause('ending'); } }),{root:$('sLet'),rootMargin:'120px 0px'}); endIO.observe($('end')); }
+/* 잉크: 화면에 들어온 줄부터 차례로 번져 나온다 */
+function inks(){ if(inkIO) inkIO.disconnect(); const all=[...$('sLet').querySelectorAll('.ink')];
+  if(RM){ all.forEach(el=>el.classList.add('in','done')); return; }
+  let q=[], tm=0;
+  const flush=()=>{ tm=0; q.sort((a,b)=>all.indexOf(a)-all.indexOf(b)).forEach((el,k)=>{ el.style.transitionDelay=(k*.2).toFixed(2)+'s'; el.classList.add('in'); setTimeout(()=>el.classList.add('done'),2000+k*200); }); q=[]; };
+  inkIO=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ q.push(e.target); inkIO.unobserve(e.target); } }); if(q.length&&!tm) tm=setTimeout(flush,60); },{root:$('sLet'),threshold:.6});
+  all.forEach(el=>{ el.classList.remove('in','done'); el.style.transitionDelay=''; inkIO.observe(el); }); }
+function toLetter(fromVideo){ renderLetter(); $('sLet').querySelectorAll('.rv').forEach(el=>el.classList.remove('in')); $('sLet').scrollTop=0;
+  show('sLet'); archive(); setTimeout(()=>{ inks(); reveals(); },fromVideo&&!RM?500:300); }
+$('sLet').addEventListener('scroll',()=>{ $('top').classList.toggle('sc',$('sLet').scrollTop>60); },{passive:true});
+
+/* ---------- 6. 하람 엔딩 · 두꺼운 편지 ---------- */
+function notify(title,head,sub){ if(window.ObNotify) ObNotify.ask({title,img:ART.hero,head,sub}); else toast(`${head}, 기억해 둘게`); }
+$('notiBtn').onclick=()=>{ const o=R.best; notify('편지 오는 달 알림',ym(o),'그달 첫날 아침에 하람이 알려 줄게요'); };
+$('thickBtn').onclick=()=>toast('곧 열려요');
+$('thickNoti').onclick=()=>notify('두꺼운 편지 알림','두꺼운 편지가 열리면','제일 먼저 하람이 알려 줄게요');
+function invite(){ if(window.ObShare) ObShare.sheet({src:ART.hero,name:'yeonseo.jpg',invite:true,head:'이 편지, 친구도 받아 보게',title:'곧 받을 편지 · 하람의 연서당',text:'하람이 열두 달 서랍 중 내 편지가 올 달을 찾아 줘. 너도 봐 봐',note:'친구는 링크로 바로 들어와 자기 생일로 서랍을 열 수 있어요. 내 결과는 보내지지 않아요.'}); else toast('공유 준비 중이야'); }
+
+/* ---------- 공유: 편지지 · 우표 · 봉랍으로 그린 편지 한 장(1080x1920). 그림을 못 쓰면 원래 초대 공유로 ---------- */
+function imgCors(src){ return new Promise((res,rej)=>{ const i=new Image(); i.crossOrigin='anonymous'; i.onload=()=>res(i); i.onerror=()=>rej(new Error('img')); i.src=src+(src.indexOf('?')<0?'?':'&')+'cv=share'; setTimeout(()=>rej(new Error('slow')),8000); }); }
+function wrapLines(x,t,w,max){ const out=[]; let line=''; for(const ch of [...String(t||'')]){ const n=line+ch; if(x.measureText(n).width>w&&line){ const sp=line.lastIndexOf(' '); if(sp>0&&ch!==' '){ out.push(line.slice(0,sp)); line=line.slice(sp+1)+ch; } else { out.push(line); line=ch.trim()?ch:''; } if(out.length>=max) break; } else line=n; } if(out.length<max&&line) out.push(line); return out; }
+async function letterCard(){ const r=R, o=r.best, el=stEl(o.ms), g=o.g, fl=FIRST[g][parseInt(r.key,36)%2];
+  const W=1080,H=1920, c=document.createElement('canvas'); c.width=W; c.height=H; const x=c.getContext('2d');
+  const PEN='"Nanum Pen Script","Gaegu",serif', SERIF='"Noto Serif KR",serif', SANS='"Noto Sans KR",sans-serif';
+  try{ await Promise.all(['400 80px "Nanum Pen Script"','700 40px "Noto Serif KR"','500 30px "Noto Sans KR"'].map(f=>document.fonts.load(f))); }catch(e){}
+  const paper=await imgCors(ART.img.paper); const st=await imgCors(ART.img.stamps).catch(()=>null), se=await imgCors(ART.img.seals).catch(()=>null);
+  const bg=x.createLinearGradient(0,0,W,H); bg.addColorStop(0,'#f4e8d2'); bg.addColorStop(1,'#e6d4b6'); x.fillStyle=bg; x.fillRect(0,0,W,H);
+  const lt=x.createLinearGradient(0,0,W*.7,H*.6); lt.addColorStop(0,'rgba(255,240,205,.75)'); lt.addColorStop(1,'rgba(255,240,205,0)'); x.fillStyle=lt; x.fillRect(0,0,W,H);
+  const PX=100, PY=86, PW=880, PH=Math.round(PW*1910/1080);
+  x.save(); x.shadowColor='rgba(70,44,20,.35)'; x.shadowBlur=40; x.shadowOffsetX=18; x.shadowOffsetY=26; x.drawImage(paper,PX,PY,PW,PH); x.restore();
+  x.globalCompositeOperation='multiply';
+  if(st){ const i=o.m-1, cx=(i%4)*400, cy=((i/4)|0)*500, sw=176, sh=220, sx=PX+PW-PW*.12-sw, sy=PY+PW*.11;
+    x.save(); x.translate(sx+sw/2,sy+sh/2); x.rotate(4*Math.PI/180); x.drawImage(st,cx,cy,400,500,-sw/2,-sh/2,sw,sh);
+    x.fillStyle='#3a2a1c'; x.font=`700 30px ${SERIF}`; x.textAlign='right'; x.fillText(`${o.m}월`,sw/2-sw*.13,sh/2-sh*.09); x.restore(); }
+  x.save(); x.translate(PX+PW*.62,PY+PW*.3); x.rotate(-12*Math.PI/180); x.strokeStyle='rgba(59,44,31,.55)'; x.fillStyle='rgba(59,44,31,.6)'; x.lineWidth=4;
+  x.beginPath(); x.arc(0,0,80,0,Math.PI*2); x.stroke(); x.lineWidth=2; x.beginPath(); x.arc(0,0,64,0,Math.PI*2); x.stroke();
+  x.textAlign='center'; x.font=`700 24px ${SERIF}`; x.fillText('연서당',0,-6); x.font=`500 21px ${SANS}`; x.fillText(`${o.y}.${String(o.m).padStart(2,'0')}`,0,26); x.restore();
+  x.globalCompositeOperation='source-over';
+  const L=PX+PW*.15, TW=PW*.7; let y=PY+PW*.3; x.textAlign='left'; x.fillStyle='#3d2a1c';
+  x.font=`400 86px ${PEN}`; x.fillText('너에게,',L,y); y+=150;
+  x.font=`400 66px ${PEN}`; x.fillText('이 편지는',L,y); y+=118;
+  x.fillStyle='#a8382b'; x.font=`400 124px ${PEN}`; x.fillText(`${o.y}년 ${o.m}월에`,L,y); y+=96;
+  x.fillStyle='#3d2a1c'; x.font=`400 84px ${PEN}`; x.fillText('도착해.',L,y); y+=96;
+  x.font=`400 58px ${PEN}`; wrapLines(x,leadOf(o),TW,2).forEach(l=>{ x.fillText(l,L,y); y+=70; }); y+=50;
+  x.fillStyle='#5f7d58'; x.font=`400 56px ${PEN}`; x.fillText('그 사람의 첫마디',L,y); y+=16; x.fillRect(L,y,110,2); y+=84;
+  x.fillStyle='#3d2a1c'; x.font=`400 72px ${PEN}`; wrapLines(x,`“${fl}”`,TW,3).forEach(l=>{ x.fillText(l,L,y); y+=84; }); y+=44;
+  x.font=`400 58px ${PEN}`; wrapLines(x,`계기는 ${TRIG[g].t}`,TW,2).forEach(l=>{ x.fillText(l,L,y); y+=70; });
+  const sy=Math.max(y+70,PY+PH-PW*.32);
+  x.textAlign='right'; x.font=`400 76px ${PEN}`; x.fillText('연서당에서, 하람',PX+PW-PW*.16,sy);
+  if(se){ x.globalCompositeOperation='multiply'; x.save(); x.translate(PX+PW*.3,sy-30); x.rotate(-8*Math.PI/180); x.drawImage(se,el*360,0,360,360,-90,-90,180,180); x.restore(); x.globalCompositeOperation='source-over'; }
+  x.textAlign='left'; x.fillStyle='#2a2119'; x.font=`700 40px ${SERIF}`; x.fillText('곧 받을 편지 · 하람의 연서당',PX,PY+PH+92);
+  x.fillStyle='#6b5d4f'; x.font=`500 29px ${SANS}`; x.fillText('생일 하나로 내 편지가 오는 달 찾아보기',PX,PY+PH+140);
+  x.textAlign='right'; x.fillStyle='#9a8a78'; x.font=`500 26px ${SANS}`; x.fillText('오방도감',PX+PW,PY+PH+140);
+  return await new Promise((res,rej)=>{ try{ c.toBlob(b=>b?res(b):rej(new Error('blob')),'image/png'); }catch(e){ rej(e); } }); }
+let sharing=false;
+async function shareLetter(){ if(sharing) return; if(!window.ObShare){ toast('공유 준비 중이야'); return; } sharing=true; const o=R.best;
+  toast('편지를 한 장 옮겨 적는 중이야'); let blob=null; try{ blob=await letterCard(); }catch(e){ blob=null; }
+  sharing=false;
+  if(!blob){ invite(); return; }
+  ObShare.sheet({blob,name:'yeonseo-letter.png',head:'이 편지, 친구도 받아 보게',title:'곧 받을 편지 · 하람의 연서당',text:`하람이 찾아 준 내 편지는 ${o.y}년 ${o.m}월에 온대. 너도 서랍 열어 봐`,note:'그림에는 편지가 오는 달과 첫마디만 담겨요. 생일은 보내지지 않고, 친구는 링크로 자기 편지를 열 수 있어요.'}); }
+$('shareBtn').onclick=shareLetter;
+$('again').onclick=()=>{ $('sLet').scrollTop=0; show('sTalk'); interview(); };
+
+/* ---------- 보관함 저장 (archive.js와 같은 형식) ---------- */
+function archive(){ try{ const r=R, o=r.best, it={id:'yeonseo|'+r.key,k:'yeonseo',menu:'곧 받을 편지',h:`${ym(o)}에 오는 편지`,s:'',sub:`${SIT[A.sit]} · ${TRIG[o.g].t}`,
+    lines:[TRIG[o.g].p,FIRST[o.g][parseInt(r.key,36)%2]],img:new URL(ART.hero,location.href).href,url:location.href.split('#')[0],me:A.me,form:null,re:false,at:Date.now()};
+  const KEY='obArch'; let a=[]; for(const st of ['localStorage','sessionStorage']){ try{ const v=window[st].getItem(KEY); if(v){ a=JSON.parse(v)||[]; break; } }catch(e){} }
+  a=a.filter(x=>x.id!==it.id); a.unshift(it); const s=JSON.stringify(a.slice(0,40)); ['localStorage','sessionStorage'].forEach(st=>{ try{ window[st].setItem(KEY,s); }catch(e){} }); }catch(e){} }
+
+/* 점검용: window.__ys로 계산 결과를 본다 */
+window.__ys={compute:me=>{ const keep=A.sit; A.sit=A.sit||0; const o=compute(me); A.sit=keep; return o; }};
+})();

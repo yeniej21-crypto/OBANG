@@ -52,6 +52,20 @@
 .home .jbFun .jg b{margin-top:6px;font-size:12px;font-weight:800;white-space:nowrap}
 .home .jbFun .jg small{margin-top:1px;font-size:10px;color:#8f8475}
 .home .jbFun .jn{margin:10px 0 0;font-size:10.5px;line-height:1.5;color:#8f8475}
+
+/* 10/3 22:40 세계관 책 배너 원래 크기(개정판) */
+.home .bkS .sh small{color:#e3b866}
+.home .bkS .bookC{height:244px;margin:34px 18px 0}
+.home .bkS .bookC .bg:after{background:linear-gradient(90deg,rgba(10,7,5,.94) 0%,rgba(10,7,5,.78) 46%,rgba(10,7,5,.12) 100%)}
+.home .bkS .bookC .grp{position:absolute;right:-6px;bottom:0;width:60%;height:118%;pointer-events:none;z-index:1}
+.home .bkS .bookC .grp img{position:absolute;bottom:0;left:var(--x);height:100%;width:auto;transform:scale(var(--s));transform-origin:50% 100%;filter:drop-shadow(0 12px 16px rgba(0,0,0,.55))}
+.home .bkS .bookC .grp img:nth-child(1){filter:drop-shadow(0 12px 16px rgba(0,0,0,.55)) brightness(.8)}
+.home .bkS .bookC .tx{width:56%;top:20px;bottom:18px}
+.home .bkS .bookC b{font-size:34px;margin-top:8px}
+.home .bkS .bookC .tx>em{display:block;margin-top:9px;font-style:normal;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.78)}
+.home .bkS .bookC .tg{display:flex;gap:4px;margin-top:10px}
+.home .bkS .bookC .tg i{font-style:normal;font-size:10.5px;font-weight:700;padding:3px 6px;color:#e3b866;box-shadow:inset 0 0 0 1px rgba(227,184,102,.5)}
+.home .bkS .bkN{margin:10px 18px 0;font-size:12.5px;line-height:1.55;color:var(--ink3,#8f8475)}
 </style>
 <title>오방사주 · 서하의 살롱</title>
 <meta name="description" content="다섯 신이 읽어 주는 나의 사주">
@@ -1046,6 +1060,12 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     </section>
 
 
+    <!-- 10/3 22:40 은주: 세계관 책을 원래 크기로, 눌러 보고 싶게 문구 + 위로(노을 띠 다음). 개정판 35쪽 -->
+    <section class="hSec bkS" id="secBook" data-cats="all">
+      <div class="sh"><small>처음이라면, 이 책부터</small><b>오방도감의 세계를 한 권으로</b></div>
+      <button class="bookC" id="bookGo" type="button"><span class="bg" style="background-image:url('img/intro0.jpg')"></span><span class="grp"><img src="/.netlify/images?url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_39PvKg67WRq5T66HczulEDxUKSm%2Fhf_20261003_131035_b7d3e905-856a-469e-976a-3d5ce5b23068.png&amp;w=420&amp;fm=webp&amp;q=80" alt="" style="--x:-2%;--s:.9" loading="lazy"><img src="/.netlify/images?url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_39PvKg67WRq5T66HczulEDxUKSm%2Fhf_20261003_131030_809e9f44-288c-4eaa-bdec-7d5abd261339.png&amp;w=420&amp;fm=webp&amp;q=80" alt="" style="--x:36%;--s:1" loading="lazy"></span><span class="tx"><small>세계관 책 · 제1권 · 무료</small><b>팔자에<br>신이 들었다</b><em>신 열 명과 그림자 손님 셋,<br>그리고 당신의 빈칸 이야기</em><span class="tg"><i>35쪽</i><i>목소리</i><i>팝업북</i></span><i class="go">책 펼쳐 보기 →</i></span></button>
+      <p class="bkN">수호신이 왜 내 빈칸에 오는지 알고 나면, 오늘의 운세가 다르게 읽혀요.</p>
+    </section>
     <section class="hSec" id="secJt" data-cats="all jt tg">
       <div class="sh"><small>정통</small><b>올해 내 사주, 제대로 한번 볼까</b></div>
       <div class="hRow">
@@ -1135,10 +1155,6 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="oRow" id="hMem"></div>
     </section>
 
-    <!-- 콘텐츠 · 세계관 (10/3 은주: 세계관 책 · 사주가 그린 나는 아래로, 퀄리티 끌어올린 뒤 다시 위로 검토) -->
-    <section class="hSec" id="secBook" data-cats="all">
-      <button class="bookC" id="bookGo" type="button"><span class="bg" style="background-image:url('img/intro0.jpg')"></span><img class="pp" src="img/pop/house.webp" alt="" loading="lazy"><span class="tx"><small>오방사주 세계관 · 무료</small><b>팔자에<br>신이 들었다</b><em>빈칸 하나에,<br>신 다섯이 줄을 섰다</em><i class="go">책 펼쳐 보기 →</i></span></button>
-    </section>
     <div class="myChar" id="hMyChar" role="button" tabindex="0" data-cats="all gaeun love" data-d3="img/avatar/fire_f.jpg" data-d3pos=".5 .16"><span class="chip new">NEW</span><div class="t"><small>사주가 그린 나</small><b id="hMyT">여덟 글자가 그린<br>내 모습</b><span>옷·빛·곁에 설 수호신까지<br>사주가 정해 줘요</span></div></div>
     <!-- 해외판 미리보기: 10/3 은주 지시로 숨김. 해외 진출 때 hidden만 지우면 복구 -->
     <section class="hSec" id="secGlobal" data-cats="all" hidden>

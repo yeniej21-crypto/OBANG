@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex">
+<title>세계관 책 배너 시안 · 오방도감</title>
+<link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&family=Noto+Serif+KR:wght@700&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-display:swap}
+:root{--brush:'OBrush','Noto Sans KR',serif;--gold:#e3b866}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;color:#fff;font-family:'Noto Sans KR',system-ui,sans-serif;word-break:keep-all;background:linear-gradient(180deg,#110e12 0%,#0c0a0e 45%,#0a090c 100%)}
+.wrap{max-width:430px;margin:0 auto;padding:22px 0 80px}
+.lbl{margin:34px 18px 12px;font-size:12px;font-weight:900;letter-spacing:.12em;color:#ff8a7a}
+.lbl b{display:block;margin-top:4px;font-size:17px;letter-spacing:0;color:#fff}
+.lbl span{display:block;margin-top:5px;font-size:12.5px;font-weight:500;letter-spacing:0;line-height:1.55;color:rgba(255,255,255,.6)}
+.sh{margin:0 18px 12px}.sh small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.14em;color:var(--gold)}.sh b{display:block;margin-top:6px;font-size:19px;font-weight:800}
+a{color:inherit;text-decoration:none}
+.go{display:inline-flex;align-items:center;gap:6px;font-style:normal;font-size:13px;font-weight:900;padding:9px 14px;background:var(--gold);color:#1a130c}
+.go::after{content:"";width:7px;height:7px;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg)}
+.chips{display:flex;gap:4px;margin-top:10px}
+.chips i{font-style:normal;font-size:10.5px;font-weight:800;padding:3px 7px;color:var(--gold);box-shadow:inset 0 0 0 1px rgba(227,184,102,.5)}
+
+/* A. 영상이 넘어가는 시네마 배너 */
+.A{position:relative;display:block;margin:0 18px;height:clamp(380px,112vw,470px);overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(227,184,102,.3)}
+.A video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;opacity:0;transition:opacity 1.2s}
+.A video.on{opacity:1}
+.A::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,.2) 48%,rgba(0,0,0,.92) 88%);pointer-events:none}
+.A .who{position:absolute;left:16px;top:14px;z-index:2;font-size:11px;font-weight:800;letter-spacing:.1em;color:rgba(255,255,255,.8);transition:opacity .5s}
+.A .who b{color:var(--gold)}
+.A .tx{position:absolute;left:18px;right:18px;bottom:20px;z-index:2}
+.A .tx small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.12em;color:var(--gold)}
+.A .tx h3{margin:8px 0 0;font-family:var(--brush);font-weight:400;font-size:46px;line-height:1.05}
+.A .tx p{margin:10px 0 14px;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.8)}
+.A .row{display:flex;align-items:center;justify-content:space-between}
+.A .dots{display:flex;gap:5px}.A .dots i{width:16px;height:2px;background:rgba(255,255,255,.3)}.A .dots i.on{background:#fff}
+
+/* B. 책 한 권이 놓여 있는 배너 */
+.B{position:relative;display:flex;align-items:center;gap:6px;margin:0 18px;height:300px;padding:0 16px 0 10px;overflow:hidden;background:radial-gradient(80% 90% at 30% 60%,#3a2618,#120c09 70%);box-shadow:0 0 0 1px rgba(227,184,102,.3)}
+.B .stg{position:relative;flex:none;width:52%;height:100%;perspective:900px;display:grid;place-items:center}
+.bk{position:relative;width:132px;height:196px;transform-style:preserve-3d;transform:rotateY(28deg) rotateX(6deg);animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{transform:rotateY(20deg) rotateX(4deg) translateY(-6px)}}
+.bk .cv{position:absolute;inset:0;overflow:hidden;background:#000;transform:translateZ(14px);box-shadow:inset 3px 0 0 rgba(255,255,255,.12)}
+.bk .cv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;filter:brightness(.75)}
+.bk .cv::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.75) 85%),linear-gradient(90deg,rgba(0,0,0,.35),rgba(0,0,0,0) 14%)}
+.bk .cv b{position:absolute;left:12px;right:8px;top:12px;z-index:1;font-family:var(--brush);font-weight:400;font-size:27px;line-height:1.04}
+.bk .cv small{position:absolute;left:12px;bottom:10px;z-index:1;font-size:8.5px;font-weight:800;letter-spacing:.14em;color:var(--gold)}
+.bk .sp{position:absolute;left:0;top:0;width:28px;height:100%;background:linear-gradient(90deg,#1a110b,#4a2f18 50%,#1a110b);transform-origin:0 50%;transform:translateZ(14px) rotateY(90deg)}
+.bk .pg{position:absolute;left:100%;top:3px;bottom:3px;width:28px;background:repeating-linear-gradient(90deg,#efe6d4 0 1px,#d4c6ab 1px 2px);transform-origin:0 50%;transform:translateZ(14px) rotateY(90deg)}
+.bk .sd{position:absolute;left:-10px;right:-30px;bottom:-24px;height:24px;background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.65),rgba(0,0,0,0));transform:translateZ(-20px) rotateX(90deg)}
+/* 표지 모서리가 살짝 들렸다 놓였다(넘겨 보라는 손짓) */
+.bk .cn{position:absolute;right:0;bottom:0;width:30px;height:30px;transform:translateZ(15px);background:linear-gradient(135deg,rgba(0,0,0,0) 50%,#efe6d4 51%,#c9bb9c 100%);transform-origin:100% 100%;animation:cn 3.2s ease-in-out infinite;box-shadow:-3px -3px 6px rgba(0,0,0,.35)}
+@keyframes cn{0%,60%,100%{transform:translateZ(15px) scale(.2)}75%{transform:translateZ(15px) scale(1)}}
+.B .tx{flex:1;min-width:0}
+.B .tx small{display:block;font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--gold)}
+.B .tx h3{margin:6px 0 0;font-family:var(--brush);font-weight:400;font-size:30px;line-height:1.1}
+.B .tx p{margin:8px 0 12px;font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.75)}
+
+/* C. 얼굴 열셋이 늘어선 띠 + 목소리 미리 듣기 */
+.C{position:relative;display:block;margin:0 18px;padding:18px 0 18px;overflow:hidden;background:#07060a;box-shadow:0 0 0 1px rgba(227,184,102,.3)}
+.C .tt{display:block;padding:0 18px}
+.C .tt small{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--gold)}
+.C .tt h3{margin:6px 0 0;font-family:var(--brush);font-weight:400;font-size:38px;line-height:1.08}
+.C .tt p{margin:8px 0 0;font-size:13px;line-height:1.6;color:rgba(255,255,255,.75)}
+.C .belt{display:block;position:relative;margin:16px 0 14px;height:150px;overflow:hidden}
+.C .trk{position:absolute;left:0;top:0;bottom:0;display:flex;gap:6px;animation:mv 40s linear infinite}
+@keyframes mv{to{transform:translateX(-50%)}}
+.C .trk div{flex:none;width:100px;height:150px;background:#111 center 18%/cover no-repeat;position:relative}
+.C .trk div::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.85))}
+.C .trk div span{position:absolute;left:8px;bottom:6px;z-index:1;font-family:var(--brush);font-size:18px}
+.C .trk div i{position:absolute;left:0;right:0;top:0;height:3px;background:var(--c);z-index:1}
+.C .ft{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 18px}
+.C .say{display:flex;align-items:center;gap:8px;height:38px;padding:0 14px 0 6px;border:0;border-radius:19px;background:rgba(255,255,255,.1);color:#fff;font:inherit;font-size:12.5px;font-weight:800;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);cursor:pointer}
+.C .say i{width:26px;height:26px;border-radius:50%;background:#b9a0e0 url('img/noeul.jpg') center 20%/cover}
+.C .say.on{box-shadow:inset 0 0 0 1px #b9a0e0}
+.note{margin:8px 18px 0;font-size:12px;line-height:1.55;color:rgba(255,255,255,.55)}
+</style></head>
+<body><div class="wrap">
+<div class="sh" style="margin-top:6px"><small>세계관 책 배너 시안</small><b>홈에 들어갈 세 가지 안</b></div>
+<p class="note">모두 누르면 개정판 책(미리보기)으로 가요. 홈의 다른 칸과 같은 폭 · 같은 검은 바탕 기준.</p>
+
+<div class="lbl">A안<b>영상이 넘어가는 시네마 배너</b><span>책 속 영상(노을 · 흑매 · 세린 · 그믐 · 도준)이 4초마다 바뀌며 소리 없이 흐른다. 홈에서 가장 눈에 띄고, 책 안의 몰입감을 그대로 미리 보여 줌.</span></div>
+<div class="sh"><small>처음이라면, 이 책부터</small><b>오방도감의 세계를 한 권으로</b></div>
+<a class="A" id="A" href="book_v6.html"><span class="who" id="Aw">지금 보이는 사람 · <b>노을</b></span>
+  <div class="tx"><small>세계관 책 · 제1권 · 무료</small><h3>팔자에 신이 들었다</h3><p>신 열 명과 그림자 손님 셋.<br>당신의 빈칸에 누가 앉게 될지, 먼저 만나 보세요.</p>
+  <div class="row"><i class="go">책 펼치기</i><span class="dots" id="Ad"></span></div></div></a>
+
+<div class="lbl">B안<b>책 한 권이 놓여 있는 배너</b><span>진짜 책처럼 생긴 입체 책이 천천히 떠 있고, 표지 속 노을이 움직인다. 표지 모서리가 살짝 들렸다 놓이며 넘겨 보라고 손짓함. 차분하고 고급스러운 쪽.</span></div>
+<div class="sh"><small>처음이라면, 이 책부터</small><b>오방도감의 세계를 한 권으로</b></div>
+<a class="B" href="book_v6.html"><div class="stg"><div class="bk"><div class="sp"></div><div class="pg"></div><div class="cv"><video muted loop playsinline autoplay preload="auto" src="v/poster/noeul.mp4"></video><b>팔자에<br>신이<br>들었다</b><small>OBANG · VOL. 1</small></div><div class="cn"></div><div class="sd"></div></div></div>
+  <div class="tx"><small>세계관 책 · 무료</small><h3>팔자에<br>신이 들었다</h3><p>35쪽 · 영상과 목소리로 읽는 책. 손으로 넘기면 종이가 넘어가요.</p><i class="go">펼쳐 보기</i></div></a>
+
+<div class="lbl">C안<b>얼굴이 흐르는 띠 + 목소리 미리 듣기</b><span>책에 나오는 얼굴 열셋이 천천히 흘러가고, '목소리 듣기'를 누르면 노을이 바로 말을 건다. 소리로 호기심을 거는 쪽.</span></div>
+<div class="sh"><small>처음이라면, 이 책부터</small><b>오방도감의 세계를 한 권으로</b></div>
+<div class="C"><a href="book_v6.html" class="tt"><small>세계관 책 · 제1권 · 무료</small><h3>팔자에 신이 들었다</h3><p>빈칸 하나에, 신 다섯이 줄을 섰다.<br>그리고 그 틈을 노리는 그림자 손님 셋.</p></a>
+  <a class="belt" href="book_v6.html"><div class="trk" id="Ct"></div></a>
+  <div class="ft"><button class="say" id="Cs" type="button"><i></i>노을 목소리 듣기</button><a class="go" href="book_v6.html">책 펼치기</a></div>
+  <video id="Cv" playsinline preload="none" src="v/menu/noeul.mp4" style="display:none"></video></div>
+</div>
+<script>
+const D2='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
+/* A: 영상 두 장을 번갈아 겹쳐 4초마다 바꾼다(화면에 보일 때만) */
+(()=>{ const L=[['노을','v/poster/noeul.mp4'],['흑매',D2+'9d07049a-9f0b-45e3-9547-21f1841ad87d.mp4'],['세린',D2+'6e77ff4d-1bcc-4e77-9676-351a9f281be4.mp4'],['그믐',D2+'c046140c-d852-47b8-9472-52acd1fa393c.mp4'],['도준','v/rv_earth.mp4?v=2']];
+  const box=document.getElementById('A'), w=document.getElementById('Aw'), d=document.getElementById('Ad'); d.innerHTML=L.map(()=>'<i></i>').join('');
+  const vs=[0,1].map(()=>{ const v=document.createElement('video'); v.muted=true; v.playsInline=true; v.setAttribute('playsinline',''); v.loop=true; v.preload='auto'; box.insertBefore(v,box.firstChild); return v; });
+  let k=0,t=0,run=false,tm=null;
+  const show=()=>{ const v=vs[t], [n,u]=L[k]; v.src=u; v.currentTime=0; v.play().catch(()=>{}); v.oncanplay=null; v.addEventListener('playing',()=>{ v.classList.add('on'); vs[1-t].classList.remove('on'); },{once:true});
+    w.innerHTML='지금 보이는 사람 · <b>'+n+'</b>'; [...d.children].forEach((x,j)=>x.classList.toggle('on',j===k)); t=1-t; k=(k+1)%L.length; };
+  new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting&&!run){ run=true; show(); tm=setInterval(show,4200); } else if(!e.isIntersecting&&run){ run=false; clearInterval(tm); vs.forEach(v=>v.pause()); } }),{threshold:.3}).observe(box); })();
+/* C: 얼굴 띠(두 번 이어 붙여 끊김 없이) + 목소리 */
+(()=>{ const F=[['노을','img/noeul.jpg','#b9a0e0'],['하람','img/wood.jpg','#1f9d61'],['이안','img/fire.jpg','#e0362a'],['도준','img/earth.jpg?v=2','#c98a12'],['시온','img/metal.jpg','#9aa3b0'],['재이','img/water.jpg?v=2','#3a6ad4'],['흑매','https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_101836_ccb27e8d-f3d5-430a-975b-c64a04d3c7cf_min.webp','#a8283a'],['새아','https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2_min.webp','#1f9d61'],['별하','img/yin/fire.jpg','#e0362a'],['도담','img/yin/earth.jpg','#c98a12'],['세린','img/yin/metal.jpg','#9aa3b0'],['이슬','img/yin/water.jpg','#3a6ad4'],['그믐','https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_102005_5906aacf-085d-40b2-acda-136da797f5cc_min.webp','#3b5a9a']];
+  const h=F.map(([n,u,c])=>`<div style="background-image:url('${u}');--c:${c}"><i></i><span>${n}</span></div>`).join(''); document.getElementById('Ct').innerHTML=h+h;
+  const b=document.getElementById('Cs'), v=document.getElementById('Cv');
+  b.onclick=()=>{ if(!v.paused){ v.pause(); b.classList.remove('on'); return; } v.currentTime=0; v.play().then(()=>b.classList.add('on')).catch(()=>{}); v.onended=()=>b.classList.remove('on'); }; })();
+</script>
+</body></html>

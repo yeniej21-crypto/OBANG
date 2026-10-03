@@ -124,12 +124,6 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
 .lock .bl{filter:blur(1.5px) brightness(.7);opacity:.85;height:120px;border-radius:0;background:#000 center 20%/cover no-repeat}
 .lock .cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;background:linear-gradient(180deg,rgba(21,18,24,.2),rgba(21,18,24,.85))}
 .lock .cta b{font-size:15px}.lock .cta small{font-size:12.5px;color:var(--ink-2)}
-.lock.live .bl{filter:none;opacity:1;height:auto;aspect-ratio:4/5;position:relative;background:#000}
-.lock.live .bl video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%}
-.lock.live .bl .isub{position:absolute;left:16px;right:16px;bottom:64px;text-align:center;font-family:'Song Myung','Noto Serif KR',serif;font-size:19px;line-height:1.5;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.95);opacity:0;transition:opacity .35s}
-.lock.live .bl .isub.on{opacity:1}
-.lock.live .cta{inset:auto 0 0 0;padding:14px 16px 16px;flex-direction:row;justify-content:space-between;background:linear-gradient(180deg,rgba(21,18,24,0),rgba(21,18,24,.85))}
-.lock.live .cta b,.lock.live .cta small{display:none}
 .pay{height:46px;border:0;border-radius:0;background:linear-gradient(180deg,#f0cf85,#d6a64f);color:#1a120a;font-weight:900;font-size:14.5px;padding:0 20px;cursor:pointer}
 .foot{margin-top:14px;text-align:center;font-size:11.5px;color:var(--ink-3);line-height:1.6}
 .tv{position:absolute;inset:0;z-index:88;background:#000;opacity:0;pointer-events:none;transition:opacity .5s}
@@ -356,17 +350,6 @@ function talk(){ const key=`${K[A.dm]}_${A.g}`, T=TALK[key]; if(!T){ toast('미�
 const tvClose=()=>{ const v=$('tvV'); try{ v.pause(); }catch(e){} $('tv').classList.remove('on'); };
 $('tvX').onclick=$('tvX2').onclick=tvClose; $('tvPay').onclick=talk;
 $('payBtn').onclick=talk;
-/* 10/3 은주: 누르지 않아도 바로 재생 — 결과 화면의 '움직이고 말하는 내 캐릭터' 칸이 화면에 들어오면 그 자리에서 목소리 · 자막과 함께 재생, 벗어나면 멈춤 */
-(function(){ const box=$('lockBl').closest('.box'); let io=null;
-  function arm(){ if(!A) return; const T=TALK[`${K[A.dm]}_${A.g}`]; if(!T) return; box.classList.add('live');
-    $('lockBl').innerHTML=`<video playsinline preload="auto" poster="${IMG}" src="${T.src}"></video><div class="isub"></div>`;
-    const v=$('lockBl').querySelector('video'), sub=$('lockBl').querySelector('.isub'); let last=-1, done=false;
-    const tick=()=>{ let i=-1; T.subs.forEach((c,j)=>{ if(v.currentTime>=c[0]) i=j; }); if(i!==last){ last=i; sub.classList.remove('on'); if(i>=0) setTimeout(()=>{ sub.textContent=T.subs[i][1]; sub.classList.add('on'); },90); } if(!v.paused&&!v.ended) requestAnimationFrame(tick); };
-    v.onplay=()=>requestAnimationFrame(tick); v.onended=()=>{ sub.classList.remove('on'); done=true; $('payBtn').textContent='다시 보기'; };
-    $('payBtn').textContent='소리 켜고 다시 보기';
-    if(io) io.disconnect(); io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting&&!done&&v.paused){ v.muted=false; v.play().catch(()=>{ v.muted=true; v.play().catch(()=>{}); }); } else if(!e.isIntersecting&&!v.paused) v.pause(); }),{threshold:.6}); io.observe(box);
-    $('payBtn').onclick=()=>{ done=false; last=-1; v.currentTime=0; v.muted=false; v.play().catch(()=>{}); $('payBtn').textContent='다시 보기'; }; }
-  const nx=$('rvNext').onclick; $('rvNext').onclick=()=>{ nx(); setTimeout(arm,60); }; })();
 $('again').onclick=()=>{ prefill(A&&A.me); show('sIn'); };
 $('goBtn').onclick=()=>{ const me={name:$('nm').value.trim(),g:gender,cal,y:+$('by').value,m:+$('bm').value,d:+$('bd').value,h:$('bh').value==='x'?null:+$('bh').value}; saveMe(me); reveal(me); };
 (function(){ const me=loadMe(); if(me&&me.y){ prefill(me); reveal(me); } })();

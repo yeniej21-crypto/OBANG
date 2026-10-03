@@ -40,6 +40,13 @@ const css=`
 .sgx .wide .tx{right:auto;width:72%;top:50%;bottom:auto;transform:translateY(-50%)}
 .sgx .wide .tx b{font-size:27px;white-space:nowrap}
 .sgx .wide .tx i{font-size:12.5px}
+.sgx .slim{display:flex;align-items:center;gap:13px;padding:11px 14px 11px 11px;text-decoration:none;color:#f3ecdf;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 22%,transparent) 0%,rgba(20,16,22,.6) 50%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 40%,transparent)}
+.sgx .slim .pic{flex:none;width:52px;height:52px;border-radius:50%;background:#111 center 22%/cover no-repeat;box-shadow:0 0 0 1px color-mix(in srgb,var(--c2) 50%,transparent);filter:saturate(.75) brightness(.85)}
+.sgx .slim .t{flex:1;min-width:0}
+.sgx .slim small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--c2)}
+.sgx .slim b{display:block;margin-top:3px;font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sgx .slim em{display:block;margin-top:2px;font-style:normal;font-size:12px;color:rgba(243,236,223,.6)}
+.sgx .slim .ar{flex:none;width:8px;height:8px;border-top:1.8px solid var(--c2);border-right:1.8px solid var(--c2);transform:rotate(45deg)}
 `;
 function ensureCss(){ if(document.getElementById('sgxCss')) return; const s=document.createElement('style'); s.id='sgxCss'; s.textContent=css; document.head.appendChild(s); }
 function card(k,cls){ const g=G[k];
@@ -62,6 +69,7 @@ function build(el){ if(el.dataset.done) return; el.dataset.done='1';
   const kk=el.dataset.k||'NEW · 그림자 손님', hh=el.dataset.h||'운의 틈에 숨어 있는 손님들';
   let h=`<div class="sgh"><small>${kk}</small><b>${hh}</b></div>`;
   if(mode==='all'){ const [a,...rest]=ORDER; h+=card(a,'big'); for(let i=0;i<rest.length;i+=2) h+=`<div class="row">${rest.slice(i,i+2).map(k=>card(k,'half')).join('')}</div>`; }
+  else if(el.dataset.size==='slim'){ h=''; h+=mode.split(',').filter(k=>G[k]).map(k=>{ const g=G[k]; return `<a class="slim" href="${g.href}" style="--c:${g.c};--c2:${g.c2}"><i class="pic" style="background-image:url('${g.img}')"></i><span class="t"><small>그림자 손님 · ${g.n}</small><b>${g.t}</b><em>${g.s} · 무료</em></span><span class="ar"></span></a>`; }).join(''); el.innerHTML=h; return; }
   else h+=mode.split(',').filter(k=>G[k]).map(k=>card(k,'wide')).join('<div style="height:8px"></div>');
   el.innerHTML=h; el.querySelectorAll('a.c').forEach(watch);
 }

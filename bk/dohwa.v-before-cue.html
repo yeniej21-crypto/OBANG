@@ -216,16 +216,6 @@ video.layer.on{opacity:1}
 .sc .row.on{opacity:1}
 .npill{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 84px);z-index:32;transform:translate(-50%,10px);opacity:0;pointer-events:none;height:40px;padding:0 18px;border:1px solid rgba(255,182,193,.5);border-radius:0;background:rgba(20,18,24,.94);color:#ffd9de;font-size:14px;font-weight:700;letter-spacing:.01em;transition:opacity .3s,transform .3s;cursor:pointer}
 .npill.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
-.npill{display:inline-flex;align-items:center;gap:10px;white-space:nowrap}
-.npill .dots{display:inline-flex;gap:3px}
-.npill .dots i{width:5px;height:5px;border-radius:50%;background:#ffb6c1;animation:sctp 1s infinite}
-.npill .dots i:nth-child(2){animation-delay:.15s}.npill .dots i:nth-child(3){animation-delay:.3s}
-.npill:not(.ty) .dots{display:none}
-.tmore{display:flex;align-items:center;gap:10px;margin:14px 0 0 38px;height:20px;font-size:13px;color:var(--sc-ink2);opacity:0;transition:opacity .4s}
-.tmore.on{opacity:1}
-.tmore .dots{display:inline-flex;gap:3px}
-.tmore .dots i{width:5px;height:5px;border-radius:50%;background:var(--sc-ink2);animation:sctp 1s infinite}
-.tmore .dots i:nth-child(2){animation-delay:.15s}.tmore .dots i:nth-child(3){animation-delay:.3s}
 .sc .row .av{flex:none;width:30px;height:30px;border-radius:50%;background:#26262c url('img/taeo/base.jpg') center 18%/cover;visibility:hidden}
 .sc .row.first{margin-top:12px}
 .sc .row.first .av{visibility:visible}
@@ -578,12 +568,11 @@ video.layer.on{opacity:1}
       <div class="ot"><small id="rName"></small><h1 id="rType"></h1><p><span id="rDesc"></span>. 아래로 내리면 태오가 보낸 게 와 있어</p></div>
     </section>
     <div class="th" id="th" aria-live="polite"></div>
-    <div class="tmore" id="thMore" aria-hidden="true"><i class="dots"><i></i><i></i><i></i></i>태오가 이어서 보내는 중</div>
     <p class="foot"><span id="rFine"></span><br>진행자는 AI로 만든 가상의 캐릭터예요.</p>
     <div hidden><span id="rIdx"></span><span id="rSay"></span><button id="ghBtn" type="button"></button><button id="shareBtn" type="button"></button><button id="askBtn" type="button"></button></div>
   </div>
   <button class="skipB" id="skipBtn" type="button">건너뛰기</button>
-  <button class="npill" id="nPill" type="button"><i class="dots" aria-hidden="true"><i></i><i></i><i></i></i><span id="nPillT">태오 메시지 이어 보기</span></button>
+  <button class="npill" id="nPill" type="button">태오 메시지 이어 보기</button>
   <div class="rbar" id="rbar"><button class="in" id="replyBtn" type="button">태오에게 답장하기</button><button class="go" id="replyGo" type="button" aria-label="태오에게 답장하기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a1213" stroke-width="2.4" stroke-linecap="square"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
   <div class="pay" id="pay">
     <div class="pr"><s>19,800원</s><b>14,900원</b><span>· 오늘만 첫 풀이 할인</span></div>
@@ -916,15 +905,12 @@ function row(who,html,opt){ const th=$('th'), was=following(); const first=who!=
   if(opt&&opt.typing) r.querySelector('.tm').remove();
   th.appendChild(r); broDom(r); r.querySelectorAll('video').forEach(vidWatch);
   if(FAST||RM) r.classList.add('on'); else requestAnimationFrame(()=>r.classList.add('on'));
-  follow(r,was); pillSoon(); return r; }
-async function typing(ms){ if(FAST) return; TYP=true; pillSoon(); const keep=lastWho; const r=row('t','<div class="bub typing" aria-label="태오가 입력 중"><i></i><i></i><i></i></div>',{typing:1}); await sleep(ms); TYP=false; pillSoon(); if(!r.isConnected) return; r.remove(); lastWho=keep; }
+  follow(r,was); return r; }
+async function typing(ms){ if(FAST) return; const keep=lastWho; const r=row('t','<div class="bub typing" aria-label="태오가 입력 중"><i></i><i></i><i></i></div>',{typing:1}); await sleep(ms); if(!r.isConnected) return; r.remove(); lastWho=keep; }
 /* 읽는 사람이 위로 올라가 있으면 멈추고 기다린다(아래 '이어 보기'로 내려오면 계속) */
-let FWAIT=null, SCN=false, TYP=false, pT=0;
-function updPill(){ pT=0; const p=$('nPill'); if(!p) return; const show=SCN&&!FAST&&!following(); p.classList.toggle('on',show); p.classList.toggle('ty',TYP); const m=$('thMore'); if(m) m.classList.toggle('on',SCN&&!FAST&&!TYP&&!ASKP); $('nPillT').textContent=TYP?'태오가 메시지 보내는 중':'태오 메시지 이어 보기'; }
-const pillSoon=()=>{ if(!pT) pT=requestAnimationFrame(updPill); };
-$('result').addEventListener('scroll',pillSoon,{passive:true});
-function waitFollow(g){ if(FAST||following()) return Promise.resolve(); pillSoon();
-  return new Promise(res=>{ const sc=$('result'); const f=()=>{ if(FAST||g!==RUN||following()){ sc.removeEventListener('scroll',f); FWAIT=null; res(); } }; FWAIT=f; sc.addEventListener('scroll',f,{passive:true}); }); }
+let FWAIT=null;
+function waitFollow(g){ if(FAST||following()) return Promise.resolve(); const sc=$('result'), pill=$('nPill'); pill.classList.add('on');
+  return new Promise(res=>{ const f=()=>{ if(FAST||g!==RUN||following()){ sc.removeEventListener('scroll',f); pill.classList.remove('on'); FWAIT=null; res(); } }; FWAIT=f; sc.addEventListener('scroll',f,{passive:true}); }); }
 function readMs(html){ if(/class="(ph|memo|cal|voice|two|act)/.test(html)) return 2400; const n=html.replace(/<button[\s\S]*?<\/button>|<div class="whyT">[\s\S]*?<\/div>/g,'').replace(/<[^>]+>/g,'').trim().length; return Math.max(1400,Math.min(5200,900+n*62)); }
 function mkSay(g){ return async(html,ms,onShow)=>{ if(g!==RUN) throw STOP; await waitFollow(g); if(g!==RUN) throw STOP;
   await typing(Math.max(700,Math.min(1300,ms||(700+html.replace(/<[^>]+>/g,'').length*9)))); if(g!==RUN) throw STOP; if(++NSAY%2===0) tick(); const r=row('t',html); if(onShow) try{ onShow(r); }catch(e){}
@@ -933,7 +919,7 @@ function mkAsk(g){ return opts=>new Promise((res,rej)=>{ if(g!==RUN) return rej(
   const q=document.createElement('div'); q.className='qr'; q.innerHTML=opts.map((o,i)=>`<button type="button" data-i="${i}">${o}</button>`).join('');
   if(FAST){ done(0); return; }
   const was=following(); $('th').appendChild(q); broDom(q); requestAnimationFrame(()=>q.classList.add('on')); follow(q,was);
-  q.onclick=e=>{ const b=e.target.closest('button'); if(b) done(+b.dataset.i); }; ASKP=done; pillSoon(); }); }
+  q.onclick=e=>{ const b=e.target.closest('button'); if(b) done(+b.dataset.i); }; ASKP=done; }); }
 function whenSeen(el){ return new Promise(r=>{ if(FAST||!('IntersectionObserver' in window)) return r(); const io=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ io.disconnect(); r(); } },{root:$('result'),threshold:0}); io.observe(el); }); }
 function skipAll(){ FAST=true; $('skipBtn').classList.remove('on'); flushPend(); if(FWAIT) FWAIT(); if(ASKP) ASKP(0); }
 $('nPill').onclick=()=>{ const sc=$('result'); sc.scrollTo({top:sc.scrollHeight,behavior:RM?'auto':'smooth'}); };
@@ -977,7 +963,6 @@ async function runScene(){
   const say=mkSay(g), ask=mkAsk(g), C=SC, T=C.T, nick=S.nick;
   const an=b=>TTI_L[b], cntW=['','하나','둘','셋','넷'];
   try{
-    SCN=true; pillSoon();
     await whenSeen(th); if(g!==RUN) return;
     if(!FAST) $('skipBtn').classList.add('on');
     await sleep(500);
@@ -1047,7 +1032,7 @@ async function runScene(){
     q.innerHTML=ASKQ.map(x=>`<button type="button" data-q="${x}">${x}</button>`).join(''); q.onclick=e=>{ const b=e.target.closest('button'); if(b) openAsk(b.dataset.q); };
     const was=following(); th.appendChild(q); broDom(q); follow(q,was);
   }catch(e){ if(e!==STOP) console.error(e); }
-  if(g===RUN){ $('skipBtn').classList.remove('on'); SCN=false; TYP=false; pillSoon(); }
+  if(g===RUN) $('skipBtn').classList.remove('on');
 }
 /* 왜 그렇게 봤냐면 */
 document.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('[data-why]'); if(!b) return; const t=b.nextElementSibling, on=!t.classList.contains('on'); t.classList.toggle('on',on); b.setAttribute('aria-expanded',on?'true':'false'); });
@@ -1058,11 +1043,11 @@ function loadImg(src){ return new Promise((r,j)=>{ const i=new Image(); i.onload
 function spaced(ctx,t,x,y,sp,align){ const w=[...t].reduce((a,c)=>a+ctx.measureText(c).width+sp,-sp); let cx=align==='center'?x-w/2:x; for(const c of t){ ctx.fillText(c,cx,y); cx+=ctx.measureText(c).width+sp; } }
 function rr(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
 async function makeCard(){
-  const W=1080,CH=1920, c=document.createElement('canvas'); c.width=W; c.height=CH; const x=c.getContext('2d');
+  const W=1080,H=1920, c=document.createElement('canvas'); c.width=W; c.height=H; const x=c.getContext('2d');
   try{ await Promise.all(['900 120px "Noto Serif KR"','700 40px "Noto Sans KR"','500 40px "Noto Sans KR"','italic 700 200px "Cormorant Garamond"'].map(f=>document.fonts.load(f))); }catch(e){}
-  x.fillStyle='#0c0a0e'; x.fillRect(0,0,W,CH);
+  x.fillStyle='#0c0a0e'; x.fillRect(0,0,W,H);
   try{ const im=await loadImg(IMG.base); const sc=W/im.width; const ih=im.height*sc; x.drawImage(im,0,-60,W,ih); }catch(e){}
-  let g=x.createLinearGradient(0,0,0,CH); g.addColorStop(0,'rgba(12,10,14,.55)'); g.addColorStop(.12,'rgba(12,10,14,0)'); g.addColorStop(.40,'rgba(12,10,14,.05)'); g.addColorStop(.58,'rgba(12,10,14,.86)'); g.addColorStop(.68,'#0c0a0e'); g.addColorStop(1,'#0c0a0e'); x.fillStyle=g; x.fillRect(0,0,W,CH);
+  let g=x.createLinearGradient(0,0,0,H); g.addColorStop(0,'rgba(12,10,14,.55)'); g.addColorStop(.12,'rgba(12,10,14,0)'); g.addColorStop(.40,'rgba(12,10,14,.05)'); g.addColorStop(.58,'rgba(12,10,14,.86)'); g.addColorStop(.68,'#0c0a0e'); g.addColorStop(1,'#0c0a0e'); x.fillStyle=g; x.fillRect(0,0,W,H);
   const SANS='"Noto Sans KR","Apple SD Gothic Neo",sans-serif', SERIF='"Noto Serif KR","Nanum Myeongjo",serif';
   x.textBaseline='alphabetic'; x.fillStyle='#ffd9cc'; x.font=`700 34px ${SANS}`; spaced(x,'오방사주 · 도화 사주',80,120,8,'left');
   x.textAlign='left';

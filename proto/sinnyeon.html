@@ -812,7 +812,7 @@ const hourText=()=>$('bh').value==='x'?'시는 몰라요':HOURS[+$('bh').value].
 /* ---------- 1. 방: 할매와의 대화 ---------- */
 let talked=false;
 async function talkStart(){ if(talked) return; talked=true; await wait(RM?100:500);
-  say('msgs','왔구나. 섣달 그믐밤이다.'); await wait(1500); say('msgs','이리 와서 화롯가에 앉거라.'); await wait(500); ask('aSit'); }
+  say('msgs','섣달 그믐밤이다.'); await wait(1300); say('msgs','이리 와서 할미 곁에 앉거라.'); await wait(500); ask('aSit'); }
 $('nxSit').onclick=async()=>{ entered=true; AMB.start(); ask(null); $('ttl0').classList.add('off'); await wait(500);
   const me=loadMe();
   if(me&&me.y&&me.name){ say('msgs',`또 왔구나, ${esc(voc(nickOf(me.name)))}.`); await wait(1400); say('msgs','지난번에 일러 준 그대로 보마. 다른 사람이면 새로 일러 다오.'); await wait(400); ask('aBack'); }

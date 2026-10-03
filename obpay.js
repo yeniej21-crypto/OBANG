@@ -11,7 +11,7 @@ const P={
  'gunghap.html':{btn:'payBtn',name:'도화 궁합 · 둘의 인연 타이밍',who:'태오',desc:'앞으로 열두 달 둘의 흐름 · 먼저 연락할 달 · 조심할 달',price:14900,img:'img/taeo/base.jpg'},
  'love2.html':q.get('m')==='next'?{btn:'payBtn',name:'다음 연애 · 서하의 인연 노트',who:'서하',desc:'인연이 오는 달 · 그 사람 · 만나는 장면 · 서하의 편지',price:9900,img:'img/seoha.jpg'}
    :{btn:'payBtn',name:'재회 사주 · 시온의 재회 노트',who:'시온',desc:'다시 닿는 시기 · 열두 달 흐름 · 먼저 연락해도 되는 날',price:14900,img:'img/sion.jpg'},
- 'myeongri.html':{btn:'payBtn',name:'소헌 선생의 2027 명리 감정서',who:'명리관 소헌 선생',desc:'열두 달 월운 감정 · 영역별 감정 · 권고 · 길일표 · 감정서 저장',price:19900,was:29000,img:'img/soheon.jpg',skip:()=>$('pay')&&$('pay').classList.contains('done')},
+ /* myeongri.html은 화면이 직접 ObPay.open을 부르고 결제 뒤 봉투 열기 연출을 함(10/4 v2) */
  'sinnyeon.html':{btn:'payBtn',name:'2027 신년운세 · 할매의 열두 달',who:'삼신 할매',desc:'열두 달 상세 풀이 · 분야별 운 · 조심할 날',price:19900,was:29000,img:'img/halmae.jpg',skip:()=>$('pay')&&$('pay').classList.contains('done')},
  'lifetime.html':{btn:'payBtn',name:'평생 사주 · 현암의 상세 풀이',who:'현암',desc:'열 해씩 펼친 대운 · 재물 · 일 · 인연의 평생 결',price:39000,was:59000,img:'img/jeongtong.jpg',skip:()=>$('pay')&&$('pay').classList.contains('done')},
  'career.html':{btn:'payBtn',name:'커리어 사주 · 도준의 2027 로드맵',who:'도준',desc:'달별 액션 플랜 · 면접 · 입사일 택일',price:19900,img:'img/earth.jpg?v=2'},

@@ -34,15 +34,20 @@ const PIL=me=>{ const s=solarOf(me); return S.pillars(s.y,s.m,s.d,me.h==null||me
 /* ---------- 1. 등장 ---------- */
 function hero(){ const h=$('vh'); h.querySelector('.po').src=C.still;
   h.querySelector('.nm').innerHTML=`<small>${C.tag}</small><h1>${C.name}</h1><p>${C.line}</p>`;
-  const v1=$('v1'), v2=$('v2'), snd=$('snd');
-  const loop=()=>{ if(!C.enter) return; v1.src=C.enter; v1.loop=true; v1.muted=true; v1.onplaying=()=>v1.classList.add('on'); v1.play().catch(()=>{}); };
-  const talk=muted=>{ if(!C.talk){ loop(); return; } v2.src=C.talk; v2.muted=muted; v2.onplaying=()=>v2.classList.add('on');
-    v2.onended=()=>{ v2.classList.remove('on'); loop(); };
-    v2.play().catch(()=>{ if(!v2.muted){ v2.muted=true; v2.play().catch(loop); const on=()=>{ document.removeEventListener('pointerdown',on,true); if(!v2.ended){ v2.muted=false; snd.classList.add('on'); } }; document.addEventListener('pointerdown',on,true); } else loop(); }); };
-  /* 들어오면 입체 영상 한 번 → 대사(소리) → 다시 입체 영상 반복 */
-  if(C.enter){ v1.src=C.enter; v1.loop=false; v1.muted=true; v1.onplaying=()=>v1.classList.add('on'); v1.onended=()=>talk(false); v1.play().catch(()=>talk(false)); setTimeout(()=>{ if(v1.paused&&!v2.src) talk(false); },7000); }
-  else talk(false);
-  snd.onclick=()=>{ snd.classList.add('on'); try{ v2.pause(); }catch(e){} v1.onended=null; talk(false); };
+  /* 10/3 21:00 은주: 음성이 너무 늦게 나와 사람들이 이미 내려감 → 대사 영상(입체 움직임 포함)을 들어오자마자 소리 없이 바로 재생,
+     '소리 켜고 들어가기'나 첫 터치에 소리 켬(1초 넘게 지났으면 처음부터). 대사가 끝나면 등장 영상 반복 */
+  const v1=$('v1'), v2=$('v2'), snd=$('snd'); let sndOn=false;
+  const loop=()=>{ if(!C.enter) return; if(!v1.src) v1.src=C.enter; v1.loop=true; v1.muted=true; v1.onplaying=()=>{ v1.classList.add('on'); v2.classList.remove('on'); }; v1.play().catch(()=>{}); };
+  const kick=()=>{ const p=v2.play(); if(p&&p.catch) p.catch(e=>{ if(e&&e.name==='NotAllowedError'&&!v2.muted){ v2.muted=true; sndOn=false; v2.play().catch(loop); } else if(!(e&&e.name==='NotAllowedError')) loop(); }); };
+  const up=force=>{ if(!C.talk||(sndOn&&!force)) return; let off=false; try{ off=sessionStorage.getItem('obSnd')==='0'; }catch(e){} if(off&&!force) return;
+    sndOn=true; snd.classList.add('on'); v1.pause(); v1.classList.remove('on'); v2.classList.add('on'); v2.muted=false; if(force||v2.ended||v2.currentTime>1){ try{ v2.currentTime=0; }catch(e){} } kick(); };
+  if(C.talk){ v2.src=C.talk; v2.muted=true; v2.onplaying=()=>v2.classList.add('on'); v2.onended=()=>loop();
+    let act=false; try{ act=!!(navigator.userActivation&&navigator.userActivation.hasBeenActive); }catch(e){} if(act){ v2.muted=false; sndOn=true; snd.classList.add('on'); }
+    kick(); if(C.enter){ setTimeout(()=>{ v1.src=C.enter; v1.preload='auto'; },1500); }
+    window.addEventListener('obsound',()=>up(false));
+    document.addEventListener('pointerdown',function f(e){ if(e.target.closest('#snd')) return; document.removeEventListener('pointerdown',f,true); setTimeout(()=>up(false),260); },true); }
+  else loop();
+  snd.onclick=()=>up(true);
 }
 
 /* ---------- 2. 입력 ---------- */

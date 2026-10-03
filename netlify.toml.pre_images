@@ -60,6 +60,3 @@
   to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/973c6842-5193-4fad-ad4a-998223011543.mp4"
   status = 302
   force = true
-
-[images]
-  remote_images = ["https://d8j0ntlcm91z4\\.cloudfront\\.net/.*", "https://d2ol7oe51mr4n9\\.cloudfront\\.net/.*"]

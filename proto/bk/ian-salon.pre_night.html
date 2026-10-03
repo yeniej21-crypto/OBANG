@@ -1,27 +1,7 @@
 <script src="vidguard.js?v=1"></script>
 <script>/* 10/3: 오프닝 직전에 시작 화면 글자가 잠깐 비치던 문제 — 오프닝으로 시작하는 방문이면 첫 그림부터 검은 오프닝 판만 보이게(opStart가 걷어 냄, 4초 안전장치) */
 (function(){ var back=false; try{ back=sessionStorage.getItem('toHome')==='1'||/[?&]go=partner/.test(location.search); }catch(e){} if(back) return; var d=document.documentElement; d.classList.add('op-pre'); setTimeout(function(){ d.classList.remove('op-pre'); },4000); })();</script>
-<style>html.op-pre .stage>*:not(.op){visibility:hidden!important}html.op-pre .stage{background:#050407!important}html.op-pre .op{display:block}html.op-pre body>.pcNav,html.op-pre body>.pcSide{visibility:hidden}/* ===== 10/3 21:00 시안: 악역은 홈에 크게 두지 않음 ===== */
-/* A. 오늘 밤 손님: 오늘의 운세 아래 얇은 한 줄. 수호신이 귀띔하는 말투, 악역 얼굴은 작은 동그라미 속 그림자 */
-.home .ngtS{padding:4px 16px 2px}
-.home .ngt{position:relative;display:flex;align-items:center;gap:13px;padding:11px 14px 11px 11px;text-decoration:none;color:#f3ecdf;background:linear-gradient(90deg,rgba(var(--nr),.20) 0%,rgba(20,16,22,.6) 46%,rgba(20,16,22,.6) 100%);box-shadow:inset 0 0 0 1px rgba(var(--nr),.32)}
-.home .ngt .pic{position:relative;flex:none;width:52px;height:52px;border-radius:50%!important;overflow:hidden;box-shadow:0 0 0 1.5px rgba(10,8,12,.9),0 0 0 2.5px rgba(var(--nr),.7)}
-.home .ngt .pic i,.home .ngt .pic video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#111 center 22%/cover no-repeat;filter:saturate(.7) brightness(.8);border-radius:50%!important}
-.home .ngt .pic video{opacity:0;transition:opacity .6s}.home .ngt .pic video.on{opacity:1}
-.home .ngt .tx{flex:1;min-width:0}
-.home .ngt small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.08em;color:rgba(var(--nr2),1)}
-.home .ngt b{display:block;margin-top:3px;font-size:15px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.home .ngt em{display:block;margin-top:2px;font-style:normal;font-size:12px;color:rgba(243,236,223,.62)}
-.home .ngt .arr{flex:none;width:8px;height:8px;border-top:1.8px solid rgba(var(--nr2),1);border-right:1.8px solid rgba(var(--nr2),1);transform:rotate(45deg)}
-/* B. 흔적: 연애 상담소 배너 끝에 검은 실 한 가닥 */
-.home .lhubS{position:relative}
-.home .thr{position:absolute;right:30px;top:20px;z-index:3;display:flex;flex-direction:column;align-items:center;text-decoration:none;transform-origin:50% 0;animation:thrSw 4.5s ease-in-out infinite}
-.home .thr svg{width:22px;height:66px}
-.home .thr span{margin-top:2px;font-size:10px;font-weight:700;color:rgba(240,165,173,.85);white-space:nowrap;opacity:0;transition:opacity .4s}
-.home .thr:hover span,.home .thr.on span{opacity:1}
-@keyframes thrSw{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
-@media (prefers-reduced-motion:reduce){.home .thr{animation:none}}
-</style>
+<style>html.op-pre .stage>*:not(.op){visibility:hidden!important}html.op-pre .stage{background:#050407!important}html.op-pre .op{display:block}html.op-pre body>.pcNav,html.op-pre body>.pcSide{visibility:hidden}</style>
 <title>오방사주 · 서하의 살롱</title>
 <meta name="description" content="다섯 신이 읽어 주는 나의 사주">
 <meta property="og:type" content="website"><meta property="og:site_name" content="오방사주">
@@ -1006,7 +986,6 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       </div>
     </section>
 
-    <section class="ngtS" id="secNight" data-cats="all gaeun love heart"><a class="ngt" id="ngt" href="heukmae.html"><span class="pic"><i id="ngtI"></i><video id="ngtV" muted loop playsinline preload="none"></video></span><span class="tx"><small id="ngtK"></small><b id="ngtB"></b><em id="ngtE"></em></span><span class="arr" aria-hidden="true"></span></a></section>
     <section class="fz band" id="fz" data-cats="all gaeun love heart">
       <div class="sh fzH"><small>FREE · 로그인 없이 30초</small><b id="fzH">심심할 땐, 사주로 놀자</b><button class="fzAll" id="fzAll" type="button">모두 보기</button></div>
       <button class="ppg" id="ppgGo" type="button"><span class="tg" style="background-image:url('img/mini/tong.jpg')"></span><span class="tx"><small>NEW · 하루 한 번</small><b>오방 뽑기</b><em>통을 흔들면, 오늘의 괘가 톡</em></span><span class="mm" id="ppgMm"></span></button>
@@ -1019,9 +998,9 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="sh"><small>정통</small><b>올해 내 사주, 제대로 한번 볼까</b></div>
       <div class="hRow">
         <div class="pc" data-kv="halmae" data-vid="v/poster/halmae.mp4" role="button" tabindex="0" style="background-image:url('img/halmae.jpg')"><div class="ct"><span class="yr">2027</span><span class="tt">신년 운세</span><span class="st">삼신 할매가 열두 달을 읽는다</span></div></div>
-        <div class="pc" id="cLife" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><div class="ct"><span class="tt">평생 사주</span><span class="st">대운 10년 흐름과 타고난 그릇</span></div></div>
         <div class="pc" id="cNoeul" data-vid="v/poster/noeul.mp4" role="button" tabindex="0" style="background-image:url('img/noeul.jpg');background-position:center 15%"><span class="chip new">NEW</span><div class="ct"><span class="yr">2027</span><span class="tt">해와 달의 운세</span><span class="st">노을, 낮의 나와 밤의 나</span></div></div>
         <div class="pc" id="cTaegil" data-vid="v/poster/taegil.mp4" role="button" tabindex="0" style="background-image:url('img/taegil.jpg')"><div class="ct"><span class="tt">택일</span><span class="st">이사·계약·고백, 그날이 길한지</span></div></div>
+        <div class="pc" id="cLife" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><div class="ct"><span class="tt">평생 사주</span><span class="st">대운 10년 흐름과 타고난 그릇</span></div></div>
         <div class="pc lockc" role="button" tabindex="0" style="background-image:url('img/tojeong.jpg')"><span class="chip">준비 중</span><div class="ct"><span class="tt">토정비결</span><span class="st">144괘로 읽는 한 해</span></div></div>
       </div>
     </section>
@@ -1035,7 +1014,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     </section>
 
     <section class="hSec band lhubS" id="secLoveHub" data-cats="all love heart re match">
-      <a class="lhub v3" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 서하의 상담실</small><b>연애 상담소</b><em>누구 때문에 왔어<br>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span></a><a class="thr" id="thr" href="heukmae.html" aria-label="검은 실 · 흑매"><svg viewBox="0 0 40 120" aria-hidden="true"><path d="M22 0 C 20 26, 30 40, 18 62 S 14 92, 24 104" fill="none" stroke="#120c10" stroke-width="2.2" stroke-linecap="round"/><path d="M22 0 C 20 26, 30 40, 18 62 S 14 92, 24 104" fill="none" stroke="rgba(192,57,43,.55)" stroke-width=".8" stroke-linecap="round"/><circle cx="24" cy="106" r="4.2" fill="#a8283a"/></svg><span>누가 실을 섞었지</span></a>
+      <a class="lhub v3" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 서하의 상담실</small><b>연애 상담소</b><em>누구 때문에 왔어<br>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span></a>
     </section>
     <section class="hSec" id="secDohwa" data-cats="all love match">
       <div class="sh"><small>도화 · 매력</small><b>내 사주 속 도화, 얼마나 진할까</b></div>
@@ -1813,28 +1792,8 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.con
 })();
 </script>
 
-<script>window.CH_BAND=2</script>
-<script src="charhub.js?v=8"></script>
+<script src="charhub.js?v=6"></script>
 <script src="hscroll.js?v=2"></script>
 <script src="menuintro.js"></script>
 
 <script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
-<script>
-/* 시안 A: 오늘 밤 손님 고르기. 그믐밤 앞뒤(음력 27일~1일)는 그믐, 1~2월 · 12월이나 내 띠가 내년 삼재면 삼재, 나머지는 흑매. ?ng=heuk|geum|sam 으로 미리 보기 */
-(function(){ const D2='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/', CF='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_';
-  const N={heuk:{href:'heukmae.html',img:CF+'101836_ccb27e8d-f3d5-430a-975b-c64a04d3c7cf_min.webp',v:D2+'9d07049a-9f0b-45e3-9547-21f1841ad87d.mp4',r:'168,40,58',r2:'240,165,173',k:'오늘 밤 손님 · 서하의 귀띔',b:'문 밖에 흑매가 서성여',e:'둘 사이 조심할 때, 무료로 미리 보기'},
-    geum:{href:'geumeum.html',img:CF+'102005_5906aacf-085d-40b2-acda-136da797f5cc_min.webp',v:D2+'c046140c-d852-47b8-9472-52acd1fa393c.mp4',r:'59,90,154',r2:'184,200,238',k:'오늘 밤 손님 · 노을의 귀띔',b:'곧 그믐밤, 그믐이 걸어 다녀',e:'내 빈칸이 어딘지 무료로 확인해 두기'},
-    sam:{href:'samjae.html',img:CF+'102844_e93d3f57-cfef-45d4-ad1d-668f8f7cf23a_min.webp',v:D2+'9ac5edd8-b3bb-4fee-b064-025be7356f3c.mp4',r:'106,74,168',r2:'203,184,240',k:'오늘 밤 손님 · 할매의 귀띔',b:'삼남매가 지붕 위에 앉았구나',e:'내년이 내 삼재인지 무료로 보기'}};
-  function pick(){ const q=new URLSearchParams(location.search).get('ng'); if(N[q]) return q;
-    const t=new Date(); try{ const L=window.Saju&&Saju.solarToLunar(t.getFullYear(),t.getMonth()+1,t.getDate()); if(L&&(L.d>=27||L.d===1)) return 'geum'; }catch(e){}
-    const m=t.getMonth()+1; let me=null; try{ me=JSON.parse(sessionStorage.getItem('me')||localStorage.getItem('obMe')||'null'); }catch(e){}
-    if(me&&me.y){ const tb=((+me.y-4)%12+12)%12, g=[[8,0,4],[5,9,1],[2,6,10],[11,3,7]].findIndex(x=>x.includes(tb)), yrs=[[2,3,4],[11,0,1],[8,9,10],[5,6,7]][g], ny=((t.getFullYear()+1-4)%12+12)%12; if(yrs&&yrs.includes(ny)&&(m>=11||m<=2)) return 'sam'; }
-    if(m===12||m<=2) return 'sam'; return 'heuk'; }
-  const k=pick(), n=N[k], a=document.getElementById('ngt'); if(!a) return;
-  a.href=n.href; a.style.setProperty('--nr',n.r); a.style.setProperty('--nr2',n.r2);
-  document.getElementById('ngtI').style.backgroundImage="url('"+n.img+"')";
-  document.getElementById('ngtK').textContent=n.k; document.getElementById('ngtB').textContent=n.b; document.getElementById('ngtE').textContent=n.e;
-  const v=document.getElementById('ngtV'); try{ if(!(navigator.connection&&navigator.connection.saveData)&&'IntersectionObserver' in window){ new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ if(!v.src){ v.src=n.v; v.addEventListener('playing',()=>v.classList.add('on'),{once:true}); } v.play().catch(()=>{}); } else v.pause(); }),{threshold:.4}).observe(a); } }catch(e){}
-  const th=document.getElementById('thr'); if(th){ th.addEventListener('pointerenter',()=>th.classList.add('on')); setTimeout(()=>th.classList.add('on'),2500); }
-})();
-</script>

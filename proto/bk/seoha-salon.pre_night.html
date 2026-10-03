@@ -1,27 +1,7 @@
 <script src="vidguard.js?v=1"></script>
 <script>/* 10/3: 오프닝 직전에 시작 화면 글자가 잠깐 비치던 문제 — 오프닝으로 시작하는 방문이면 첫 그림부터 검은 오프닝 판만 보이게(opStart가 걷어 냄, 4초 안전장치) */
 (function(){ var back=false; try{ back=sessionStorage.getItem('toHome')==='1'||/[?&]go=partner/.test(location.search); }catch(e){} if(back) return; var d=document.documentElement; d.classList.add('op-pre'); setTimeout(function(){ d.classList.remove('op-pre'); },4000); })();</script>
-<style>html.op-pre .stage>*:not(.op){visibility:hidden!important}html.op-pre .stage{background:#050407!important}html.op-pre .op{display:block}html.op-pre body>.pcNav,html.op-pre body>.pcSide{visibility:hidden}/* ===== 10/3 21:00 시안: 악역은 홈에 크게 두지 않음 ===== */
-/* A. 오늘 밤 손님: 오늘의 운세 아래 얇은 한 줄. 수호신이 귀띔하는 말투, 악역 얼굴은 작은 동그라미 속 그림자 */
-.home .ngtS{padding:4px 16px 2px}
-.home .ngt{position:relative;display:flex;align-items:center;gap:13px;padding:11px 14px 11px 11px;text-decoration:none;color:#f3ecdf;background:linear-gradient(90deg,rgba(var(--nr),.20) 0%,rgba(20,16,22,.6) 46%,rgba(20,16,22,.6) 100%);box-shadow:inset 0 0 0 1px rgba(var(--nr),.32)}
-.home .ngt .pic{position:relative;flex:none;width:52px;height:52px;border-radius:50%!important;overflow:hidden;box-shadow:0 0 0 1.5px rgba(10,8,12,.9),0 0 0 2.5px rgba(var(--nr),.7)}
-.home .ngt .pic i,.home .ngt .pic video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#111 center 22%/cover no-repeat;filter:saturate(.7) brightness(.8);border-radius:50%!important}
-.home .ngt .pic video{opacity:0;transition:opacity .6s}.home .ngt .pic video.on{opacity:1}
-.home .ngt .tx{flex:1;min-width:0}
-.home .ngt small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.08em;color:rgba(var(--nr2),1)}
-.home .ngt b{display:block;margin-top:3px;font-size:15px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.home .ngt em{display:block;margin-top:2px;font-style:normal;font-size:12px;color:rgba(243,236,223,.62)}
-.home .ngt .arr{flex:none;width:8px;height:8px;border-top:1.8px solid rgba(var(--nr2),1);border-right:1.8px solid rgba(var(--nr2),1);transform:rotate(45deg)}
-/* B. 흔적: 연애 상담소 배너 끝에 검은 실 한 가닥 */
-.home .lhubS{position:relative}
-.home .thr{position:absolute;right:30px;top:20px;z-index:3;display:flex;flex-direction:column;align-items:center;text-decoration:none;transform-origin:50% 0;animation:thrSw 4.5s ease-in-out infinite}
-.home .thr svg{width:22px;height:66px}
-.home .thr span{margin-top:2px;font-size:10px;font-weight:700;color:rgba(240,165,173,.85);white-space:nowrap;opacity:0;transition:opacity .4s}
-.home .thr:hover span,.home .thr.on span{opacity:1}
-@keyframes thrSw{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
-@media (prefers-reduced-motion:reduce){.home .thr{animation:none}}
-</style>
+<style>html.op-pre .stage>*:not(.op){visibility:hidden!important}html.op-pre .stage{background:#050407!important}html.op-pre .op{display:block}html.op-pre body>.pcNav,html.op-pre body>.pcSide{visibility:hidden}</style>
 <title>오방사주 · 서하의 살롱</title>
 <meta name="description" content="다섯 신이 읽어 주는 나의 사주">
 <meta property="og:type" content="website"><meta property="og:site_name" content="오방사주">
@@ -68,7 +48,9 @@ button{font-family:inherit}
 .stage.subm .brand{display:none}
 .stage.subm .backB{display:inline-flex}
 .stage.subm .top{z-index:60}
-.brand{font-family:var(--serif);font-weight:900;letter-spacing:.18em;font-size:13px;color:var(--gold-2);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.brand{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:4px 2px;cursor:pointer;font-family:var(--brush);font-weight:400;letter-spacing:.02em;font-size:18px;line-height:1;color:var(--gold-2);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.brand i{display:inline-grid;width:15px;height:15px;opacity:.75}
+.brand i svg{width:15px;height:15px}
 .tbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--glass-line);background:var(--glass);backdrop-filter:blur(8px);color:var(--ink);display:grid;place-items:center;cursor:pointer}
 .tbtn svg{width:18px;height:18px}
 .tgroup{display:flex;gap:8px}
@@ -100,6 +82,9 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{border:1px solid var(--glass-line);background:rgba(0,0,0,.3);color:var(--ink);border-radius:999px;padding:11px 16px;font-size:15px;cursor:pointer}
 .chip[aria-pressed=true]{background:rgba(227,184,102,.25);border-color:var(--gold);color:var(--gold-2);font-weight:700}
+.gseg{margin-top:8px}
+.gseg.need{border-color:var(--gold);animation:gNeed .5s 2}
+@keyframes gNeed{50%{border-color:rgba(227,184,102,.2)}}
 .hint{font-size:12px;color:var(--ink-3);margin-top:8px;line-height:1.5}
 
 
@@ -120,7 +105,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .op.s2 .opMark{opacity:0}
 .opTake{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3;opacity:0;transition:opacity .7s;pointer-events:none;background:#050407}
 .op.take .opTake{opacity:1}
-.opEnd{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top,0px) + 30vh) 24px 0;opacity:0;pointer-events:none;transition:opacity .8s;background:#050407;overflow:hidden}
+.opEnd{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 24px) 24px calc(env(safe-area-inset-bottom,0px) + 230px);opacity:0;pointer-events:none;transition:opacity .8s;background:#050407;overflow:hidden}
 .opEnd .bgS{position:absolute;inset:-4%;background:url('img/op_take_end.jpg') center 55%/cover no-repeat;filter:saturate(1.1) contrast(1.05);transform:scale(1.12);transition:transform 9s ease-out}
 .op.s3 .opEnd .bgS{transform:scale(1)}
 .opEnd .bgF{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,4,7,.55) 0%,rgba(5,4,7,.62) 30%,rgba(5,4,7,.78) 60%,rgba(5,4,7,.95) 85%),radial-gradient(ellipse at 50% 38%,rgba(5,4,7,0),rgba(5,4,7,.55) 70%)}
@@ -317,12 +302,12 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .hMenuS .hd{display:flex;align-items:center;gap:8px;margin-bottom:18px}
 .hMenuS .hd img{width:26px;height:26px}
 .hMenuS .hd b{font-family:var(--serif);font-size:18px;color:#E9D3A4;font-weight:700}
+.hMenuS button.it[hidden]{display:none!important}
 .hMenuS button.it{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;color:#f2f2f4;font-size:15px;padding:13px 4px;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;text-align:left;font-family:var(--sans)}
 .hMenuS button.it small{margin-left:auto;font-size:11.5px;color:#8e8e96}
 .hMenuS button.it.hi{color:var(--gold-2);font-weight:700}
 /* 보관함 */
 .arch{position:absolute;inset:0;z-index:58;background:#0b0a0e;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(18px);transition:opacity .35s,transform .35s cubic-bezier(.2,.8,.2,1)}
-.hMenuS button.it[hidden]{display:none!important}
 .arch.on{opacity:1;pointer-events:auto;transform:none}
 .arch .ah{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 8px}
 .arch .ah button.bk{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:#fff;display:grid;place-items:center;cursor:pointer}
@@ -461,7 +446,11 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .result{position:absolute;inset:0;z-index:35;overflow-y:auto;background:linear-gradient(180deg,#120e14,#09070b);opacity:0;pointer-events:none;transition:opacity .6s;padding:calc(env(safe-area-inset-top,0px) + 64px) 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
 .result.on{opacity:1;pointer-events:auto}
 .card{border-radius:24px;overflow:hidden;border:1px solid rgba(227,184,102,.35);background:#141016;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.card .hero{position:relative;aspect-ratio:4/5;background:#000 center 18%/cover no-repeat}
+.card .hero{position:relative;aspect-ratio:4/5;background:#000 center 18%/cover no-repeat;transition:background-image .6s}
+.card .hero .fv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;opacity:0;transition:opacity .8s;z-index:0}
+.card .hero .fv.on{opacity:1}
+.card .hero .fsub{position:absolute;left:18px;right:18px;bottom:96px;z-index:1;text-align:center;font-family:var(--serif);font-size:18px;line-height:1.5;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.9);opacity:0;transition:opacity .5s}
+.card .hero .fsub.on{opacity:1}
 .card .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(20,16,22,1) 100%)}
 .card .hero .tag{position:absolute;left:16px;top:16px;z-index:1;font-size:11px;letter-spacing:.24em;font-weight:700;color:#1a1206;background:var(--gold);padding:5px 10px;border-radius:999px}
 .card .hero .nm{position:absolute;left:18px;bottom:14px;z-index:1}
@@ -469,6 +458,10 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .card .hero .nm b{font-family:var(--serif);font-size:30px;font-weight:900}
 .card .body{padding:6px 18px 20px}
 .sec{margin-top:18px}
+.gwhy>div{display:grid;grid-template-columns:108px 1fr;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.08);font-size:13.5px;line-height:1.55}
+.gwhy>div:last-child{border-bottom:1px solid rgba(255,255,255,.08)}
+.gwhy b{font-weight:700;color:var(--gold-2);font-size:13px}
+.gwhy span{color:var(--ink-2)}
 .sec h4{margin:0 0 10px;font-size:12px;letter-spacing:.2em;color:var(--ink-3);font-weight:700}
 .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
 .pillars div{border-radius:12px;background:rgba(255,255,255,.04);padding:8px 0 6px}
@@ -488,6 +481,33 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .resHome{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);z-index:5;display:flex;justify-content:flex-end;margin:18px 0 0;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
 .resHome.on{opacity:1;transform:none}
 .resHome button{pointer-events:auto;display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 15px 0 12px;border-radius:999px;border:1px solid rgba(227,184,102,.45);background:rgba(14,11,16,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--gold-2);font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.02em;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+.resHome button svg{flex:none}
+.twin{display:flex;align-items:center;gap:12px;width:100%;margin:14px 0 2px;padding:12px 12px 12px 12px;border:1px solid rgba(227,184,102,.28);background:linear-gradient(90deg,rgba(227,184,102,.08),rgba(227,184,102,0));color:var(--ink);font-family:inherit;text-align:left;cursor:pointer}
+.twin i{flex:none;width:44px;height:44px;border-radius:50%;background:#000 center 18%/cover no-repeat;border:1px solid rgba(227,184,102,.5)}
+.twin span{flex:1;min-width:0}
+.twin b{display:block;font-size:14px;font-weight:700;line-height:1.35}
+.twin em{display:block;margin-top:2px;font-style:normal;font-size:12px;color:var(--ink-3);letter-spacing:.02em}
+.twin svg{flex:none;color:var(--gold-2)}
+.twinS{position:absolute;inset:0;z-index:62;display:flex;align-items:flex-end;background:rgba(5,4,7,.6);opacity:0;pointer-events:none;transition:opacity .35s}
+.twinS.on{opacity:1;pointer-events:auto}
+.twinS .in{width:100%;max-height:92%;overflow-y:auto;background:linear-gradient(180deg,#19131b,#0d0a0f);border-top:1px solid rgba(227,184,102,.35);padding:22px 18px calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateY(24px);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.twinS.on .in{transform:none}
+.twinS .k{font-size:11px;letter-spacing:.22em;color:var(--gold-2);font-weight:700}
+.twinS h3{margin:8px 0 10px;font-family:var(--serif);font-size:24px;font-weight:900;line-height:1.3}
+.twinS p{margin:0;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.twinS .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 14px}
+.twinS .pair button{position:relative;aspect-ratio:3/4;border:1px solid rgba(255,255,255,.14);background:#000 center 18%/cover no-repeat;padding:0;cursor:pointer;font-family:inherit;color:#fff;text-align:left;overflow:hidden}
+.twinS .pair button::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(8,6,10,.94) 100%)}
+.twinS .pair button.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.twinS .pair .cap{position:absolute;left:10px;right:10px;bottom:10px;z-index:1}
+.twinS .pair .cap small{display:block;font-size:10.5px;letter-spacing:.12em;color:var(--gold-2);font-weight:700}
+.twinS .pair .cap b{display:block;margin-top:2px;font-family:var(--serif);font-size:21px;font-weight:900}
+.twinS .pair .cap em{display:block;margin-top:3px;font-style:normal;font-size:12px;line-height:1.45;color:rgba(255,255,255,.82)}
+.twinS .pair .now{position:absolute;left:8px;top:8px;z-index:1;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:#1a1206;background:var(--gold);padding:3px 8px;display:none}
+.twinS .pair button.cur .now{display:block}
+.twinS .nt{font-size:12px;color:var(--ink-3);line-height:1.6;margin:0 0 14px}
+.twinS .go{width:100%}
+.twinS .x{display:block;width:100%;margin-top:8px;padding:12px;border:0;background:none;color:var(--ink-3);font-family:inherit;font-size:14px;cursor:pointer}
 .note{font-size:11.5px;color:var(--ink-3);text-align:center;margin-top:14px;line-height:1.5}
 .toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 90px);transform:translateX(-50%);z-index:60;background:rgba(0,0,0,.8);color:#fff;font-size:14px;padding:10px 16px;border-radius:999px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1}
@@ -751,6 +771,59 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .home .bMis p{margin-top:2px;font-size:13px;line-height:1.45}
 .home .tday+.band{margin-top:18px}
 
+/* 멤버십 목록 표시 */
+.subList li i{width:6px;height:6px;margin-top:8px;background:var(--gold);border-radius:0}
+/* 세로가 짧은 노트북 화면 */
+@media (min-width:700px) and (max-height:800px){.opEnd{padding-top:calc(env(safe-area-inset-top,0px) + 17vh)}}
+@media (min-width:700px) and (max-height:680px){.opEnd{padding-top:calc(env(safe-area-inset-top,0px) + 9vh)}.opEnd h2{font-size:38px!important}.opEnd p{font-size:18px}.opRes{margin-top:10px}}
+
+/* 서하 소개 시트 */
+.hxw{position:absolute;inset:0;z-index:120;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;pointer-events:none;transition:opacity .25s}
+.hxw.on{opacity:1;pointer-events:auto}
+.hxb{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+.hxp{position:relative;background:#141117;border-top:1px solid rgba(227,184,102,.35);padding:20px 20px calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateY(20px);transition:transform .3s;color:var(--ink)}
+.hxw.on .hxp{transform:none}
+.hxh{display:grid;grid-template-columns:84px 1fr;gap:14px;align-items:start}
+.hxh i{display:block;width:84px;height:106px;background:#000 center 18%/cover no-repeat}
+.hxh small{display:block;font-size:11.5px;letter-spacing:.06em;color:var(--gold-2)}
+.hxh b{display:block;margin-top:4px;font-family:var(--brush);font-weight:400;font-size:30px;line-height:1.1;color:#fff}
+.hxh p{margin:8px 0 0;font-size:14px;line-height:1.6;color:var(--ink-2)}
+.hxd{margin:16px 0 0}
+.hxd div{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.08);font-size:13.5px;line-height:1.55}
+.hxd div:last-child{border-bottom:1px solid rgba(255,255,255,.08)}
+.hxd dt{font-weight:700;color:var(--gold-2);font-size:13px}
+.hxd dd{margin:0;color:var(--ink-2)}
+.hxa{display:flex;gap:8px;margin-top:16px}
+.hxa button{flex:1;height:48px;border:1px solid rgba(255,255,255,.18);background:transparent;color:var(--ink);font-size:14.5px;font-weight:700;cursor:pointer}
+.hxa .hxbook{border-color:var(--gold);color:var(--gold-2)}
+
+/* ---------- 2027 신년 기획전 (맨 위) ---------- */
+.home .hSec.ny{margin-top:14px;padding:22px 0 26px;background:linear-gradient(180deg,#2a1311 0%,#1d1210 55%,rgba(20,17,23,0) 100%)}
+.home .ny .sh small{color:#e0a46a}
+.home .ny .sh b{font-size:19px}
+.home .ny .fzAll{color:#e9c9a0;bottom:14px}
+.home .nyRow .pc{width:43%;max-width:200px}
+.home .nyRow .pc.nyHero{width:58%;max-width:260px}
+/* 노을 대표 배너(홈 맨 위) */
+.home .ftS{padding-top:6px}
+.home .feat{position:relative;margin:0 16px;height:min(62vw,300px);min-height:230px;overflow:hidden;background:#000;cursor:pointer;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.home .feat video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 16%}
+.home .feat .fsh{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,8,14,.92) 0%,rgba(10,8,14,.6) 42%,rgba(10,8,14,0) 72%),linear-gradient(0deg,rgba(10,8,14,.55),rgba(10,8,14,0) 40%)}
+.home .feat .fct{position:absolute;left:18px;bottom:18px;right:30%;z-index:1;color:#fff}
+.home .feat small{display:block;font-size:10.5px;letter-spacing:.24em;color:#E9C98B;font-weight:700}
+.home .feat b{display:block;margin-top:8px;font-family:'OBrush','Noto Serif KR',serif;font-weight:400;font-size:34px;line-height:1.1;text-shadow:0 3px 18px rgba(0,0,0,.7)}
+.home .feat p{margin:8px 0 0;font-size:12.5px;line-height:1.6;color:rgba(243,235,222,.85)}
+.home .feat .fgo{display:inline-block;margin-top:12px;padding:8px 12px;border:1px solid rgba(233,201,139,.7);font-size:12.5px;font-weight:700;color:#F1DBA4}
+.home .nyRow .pc .tt{font-size:26px!important}
+.home .nyRow .pc.nyHero .tt{font-size:31px!important}
+.home .nyRow .pc .st{font-size:11.5px}
+.home .nyRow .pc .chip.nyB{background:#c0392b;border-color:#c0392b;color:#fff3e6}
+.home .ny .nyH{position:relative}
+.home .pc.nyEnd,.home .pc.nyGo{border:0;padding:0;font-family:inherit;color:#fff;background:linear-gradient(160deg,#7d1c17 0%,#3a1512 55%,#1a1214 100%);text-align:center}
+.home .pc.nyEnd .ct,.home .pc.nyGo .ct{bottom:auto;top:50%;transform:translateY(-50%)}
+.home .pc.nyEnd .go,.home .pc.nyGo .go{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#f3d6a8;border-bottom:1px solid rgba(243,214,168,.5);padding-bottom:2px}
+.home .pc.nyGo .nyS{position:absolute;right:14px;top:14px;display:grid;place-items:center;width:34px;height:34px;background:#c0392b;color:#fff3e6;font-family:var(--serif);font-weight:900;font-size:11px;line-height:1.05;transform:rotate(-4deg)}
+
 /* 오방도감 로고(10/3 시안 적용: 붓글씨 워드마크 + 五 원형 표장). 원본 assets_raw/brand/ */
 .opMark.ob{width:min(64vw,250px);height:auto;top:41%;display:flex;flex-direction:column;align-items:center;gap:20px;filter:none}
 .opMark.ob img{display:block;stroke:none}
@@ -805,7 +878,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   <div class="shade"></div>
 
   <div class="top">
-    <div class="brand">SEOHA · SALON</div>
+    <button class="brand" id="hostInfo" type="button" aria-label="서하 소개 보기"><span id="brandT">서하의 살롱</span><i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="6.6"/><path d="M8 7.2v4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".6" fill="currentColor" stroke="none"/></svg></i></button>
     <button class="backB" id="backBtn" aria-label="홈으로 돌아가기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>홈</button>
     <div class="tgroup">
       <button class="tbtn" id="muteBtn" aria-label="소리 끄기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path id="waves" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
@@ -813,6 +886,17 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     </div>
   </div>
 
+  <div class="hxw" id="hostSheet" aria-hidden="true"><div class="hxb" data-x></div>
+    <div class="hxp" role="dialog" aria-label="서하 소개">
+      <div class="hxh"><i id="hsImg"></i><div><small>한남동 · 이름 없는 살롱의 주인</small><b>윤서하</b><p>신의 말을 사람의 말로 옮기는 사람. 빈칸이 있는 사람만 이 문을 찾아온다.</p></div></div>
+      <dl class="hxd">
+        <div><dt>하는 일</dt><dd>사주 여덟 글자에서 비어 있는 기운을 찾아, 그 자리를 채울 수호신을 붙여 준다.</dd></div>
+        <div><dt>말투</dt><dd>돌려 말하지 않는다. 반말이지만 끝까지 네 편이다.</dd></div>
+        <div><dt>다시 만나는 곳</dt><dd>오늘의 운세 · 다음 연애 · 서하의 상담</dd></div>
+      </dl>
+      <div class="hxa"><button type="button" data-x>닫기</button></div>
+    </div>
+  </div>
   <div class="sub" id="sub" aria-live="polite"><span class="who" id="who">서하</span><div id="subLines"></div></div>
 
   <!-- choices after line 1 -->
@@ -834,6 +918,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
         <select id="bh" aria-label="태어난 시간"></select>
         <div class="seg" role="group" aria-label="양력 음력"><button id="solar" aria-pressed="true">양력</button><button id="lunar" aria-pressed="false">음력</button></div>
       </div>
+      <div class="seg gseg" id="gSeg" role="group" aria-label="성별"><button id="gF" type="button" aria-pressed="false">여성</button><button id="gM" type="button" aria-pressed="false">남성</button></div>
       <p class="hint">체험판은 입력값으로 간이 명식을 계산합니다. 음력 변환은 정식 버전에서 지원합니다.</p>
     </div>
     <button class="choice primary" id="birthGo">알려주기</button>
@@ -842,12 +927,18 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   <!-- worry -->
   <div class="panel" id="pWorry">
     <div class="sheet">
-      <h3>누구 때문에 왔어?</h3>
+      <h3>오늘은 뭐가 궁금해서 왔어?</h3><p class="wyWhy">고른 걸로 네 방부터 꾸며 둘게.</p>
       <div class="chips" id="chips">
         <button class="chip" aria-pressed="false">그 사람 마음</button>
         <button class="chip" aria-pressed="false">재회</button>
         <button class="chip" aria-pressed="false">새 인연</button>
+        <button class="chip" aria-pressed="false">결혼</button>
         <button class="chip" aria-pressed="false">일 · 이직</button>
+        <button class="chip" aria-pressed="false">돈 · 재물</button>
+        <button class="chip" aria-pressed="false">시험 · 합격</button>
+        <button class="chip" aria-pressed="false">건강</button>
+        <button class="chip" aria-pressed="false">올해 운</button>
+        <button class="chip" aria-pressed="false">그냥 내 사주</button>
       </div>
       <input type="text" id="worryText" placeholder="직접 말하기 (선택)" style="margin-top:10px" maxlength="60">
     </div>
@@ -861,8 +952,16 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 
   <div class="result" id="result">
     <div class="card">
-      <div class="hero" id="rHero"><span class="tag">나의 수호신 카드</span><button type="button" class="heroShare" id="ctaShare" aria-label="수호신 카드 공유하기"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6h14v-6"/></svg></button><div class="nm"><small id="rGod"></small><b id="rName"></b></div></div>
+      <div class="hero" id="rHero"><span class="tag">나의 수호신 카드</span><button type="button" class="heroShare" id="ctaShare" aria-label="수호신 카드 공유하기"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6h14v-6"/></svg></button><video class="fv" id="faceV" playsinline preload="none"></video><div class="fsub" id="faceSub"></div><div class="nm"><small id="rGod"></small><b id="rName"></b></div>
+</div>
       <div class="body">
+        <button type="button" class="twin" id="twinB"><i id="twinAv"></i><span><b id="twinT"></b><em id="twinE"></em></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        <div class="sec gwhy"><h4>수호신 카드</h4>
+          <div><b>빈칸을 채우는 신</b><span>내 사주 여덟 글자 가운데 비어 있는 기운을 맡은 신이에요.</span></div>
+          <div><b>매일 아침 미션</b><span>그 기운을 채우는 색 · 방향 · 행동을 하루 하나씩 보내 줘요.</span></div>
+          <div><b>언제든 다시</b><span>카드는 홈 맨 위에 남아서 오늘의 운세와 함께 다시 볼 수 있어요.</span></div>
+        </div>
+        <div class="sec wry" id="rWry" hidden></div>
         <div class="sec"><h4>나의 명식</h4><div class="pillars" id="rPillars"></div></div>
         <div class="sec"><h4>오행 밸런스</h4><div class="bars" id="rBars"></div></div>
         <div class="sec"><div class="mission"><div class="k">내일 08:00 · 첫 개운 미션</div><p id="rMission"></p><div class="lock">알림을 켜면 아침에 열립니다</div></div></div>
@@ -876,6 +975,13 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     </div>
     <div class="resHome" id="resHome"><button type="button" id="ctaHomeBar"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/></svg>홈 둘러보기</button></div>
   </div>
+  <div class="twinS" id="twinS" aria-hidden="true"><div class="in">
+    <div class="k" id="twinK"></div><h3 id="twinH"></h3><p id="twinP"></p>
+    <div class="pair" id="twinPair"></div>
+    <p class="nt">고른 얼굴은 수호신 카드와 아침 미션, 알림, 홈 화면에 함께 나와요. 언제든 다시 바꿀 수 있어요.</p>
+    <button type="button" class="choice primary go" id="twinGo"></button>
+    <button type="button" class="x" id="twinX">닫기</button>
+  </div></div>
 
   <div class="hMenuS" id="hMenuS"><div class="in"><div class="hd"><img src="img/brand/odg_mark.webp" alt=""><img class="lw" src="img/brand/odg_word_h.webp" alt="오방도감"></div>
     <button class="it hi" data-m="intro">처음부터 다시 보기<small id="hMenuHost">서하의 살롱</small></button>
@@ -885,9 +991,11 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <button class="it" data-m="tarot.html">무진의 타로</button>
     <button class="it" data-m="avatar.html">사주가 그린 나</button>
     <button class="it" data-m="lifetime.html">평생 사주</button>
-    <button class="it" data-m="love.html">연애 상담소</button><button class="it" data-m="chat.html">자유 상담</button>
+    <button class="it" data-m="love.html">연애 상담소</button><button class="it" data-m="obgh.html">오방 궁합</button><button class="it" data-m="chat.html">자유 상담</button>
+    <button class="it" data-m="newyear.html">2027 신년 기획전</button>
     <button class="it" data-m="sinnyeon.html">2027 신년운세</button>
     <button class="it" data-m="noeul.html">해와 달의 운세<small>노을 · NEW</small></button>
+    <button class="it" data-m="myeongri.html">2027 명리 감정서</button>
     <button class="it" data-m="peach.html" hidden>English · Peach Blossom</button>
     <button class="it" data-m="arch">보관함<small id="hMenuArch"></small></button>
   </div></div>
@@ -963,7 +1071,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   <div class="ov night" id="ovNight"><div><small>다음 날</small><b id="nightT">07:59</b></div></div>
   <div class="ov lockS" id="ovLock"><div class="in"><div class="dt" id="lockD"></div><div class="tm">8:00</div>
     <div class="noti" id="noti" role="button" tabindex="0"><div class="pic" id="notiPic"><i>五</i></div><div class="tx"><div class="r1"><b id="notiN"></b><span>지금</span></div><p id="notiM"></p></div></div></div>
-    <div class="hint2">알림을 눌러보세요</div></div>
+    <div class="hint2">내일 아침 이렇게 도착해요 · 눌러 보기</div></div>
   <div class="panel" id="pMission"><div class="sheet mcard"><div class="k" id="mK"></div><p id="mTx"></p><button class="choice primary" id="mDone">완료했어</button></div><button class="link" id="mLater">나중에 할게</button></div>
   <div class="ov gaugeS" id="ovGauge">
     <div class="gH"><small>개운 1일차</small><b id="gTitle"></b></div>
@@ -971,17 +1079,17 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <div class="gBox"><h4>연속 개운</h4><div class="streak" id="gStreak"></div><p class="hint" id="gStreakTx"></p></div>
     <div class="gBox"><h4 id="calH"></h4><div class="cal" id="gCal"></div>
       <div class="keyday"><div><span>🔒 연락운이 가장 강한 날</span><em id="kd1"></em></div><div><span>🔒 말조심해야 하는 날</span><em id="kd2"></em></div></div></div>
-    <button class="choice primary" id="gSub" style="margin-top:16px">중요한 날 미리 알림 받기</button>
+    <button class="choice primary" id="gSub" style="margin-top:16px">멤버십으로 매달 받기</button>
     <button class="link homeLink" data-home="1">홈으로</button>
   </div>
   <div class="ov subS" id="ovSub">
     <div class="gH"><small>개운 멤버십</small><b>사주는 보는 게 아니라,<br>매일 바꾸는 거야.</b></div>
     <ul class="subList">
-      <li><i>☀️</i>매일 아침 수호신의 개운 미션</li>
-      <li><i>📈</i>기운 게이지 · 월말 기운 리포트</li>
-      <li><i>🔔</i>중요한 날 전날 밤 미리 알림</li>
-      <li><i>🎧</i>수호신 음성 편지 · 현신 컷 해금</li>
-      <li><i>💬</i>서하에게 직접 묻기</li>
+      <li><i></i>매달 1일, 수호신의 이달 편지(이달 운 · 좋은 날 · 조심할 날)</li>
+      <li><i></i>매일 아침 개운 미션 · 당번 도장 전부 열림</li>
+      <li><i></i>매달 엽전 지급, 상세 풀이와 교환</li>
+      <li><i></i>서하와 수호신에게 매일 묻기</li>
+      <li><i></i>중요한 날 전날 카카오톡으로 안내</li>
     </ul>
     <div class="subPrice"><b>월 9,900원</b><span>첫 7일 무료</span></div>
     <button class="choice primary" id="subGo">7일 무료로 시작하기</button>
@@ -990,12 +1098,51 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   </div>
 
   <!-- main home -->
+  <style>
+.wyWhy{margin:2px 0 10px;font-size:12.5px;opacity:.72}
+.wry h4 em{font-style:normal;opacity:.7;font-weight:500}
+.wry .wyQ{margin:2px 0 10px;font-size:14px;line-height:1.6}
+.wry .wyQ b{font-weight:700}
+.wry .wyB{display:flex;flex-wrap:wrap;gap:8px}
+.wry .wyB button{border:1px solid currentColor;background:none;color:inherit;border-radius:0;padding:8px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.home .wyS{padding:0}
+.home .wyHd{display:flex;align-items:center;gap:11px;margin:30px 16px 12px}
+.home .wyHd i{flex:none;width:34px;height:34px;border-radius:50%!important;background:#222 center 18%/cover;box-shadow:0 0 0 1.5px #f3d6a8,0 0 14px rgba(243,214,168,.35)}
+.home .wyHd small{display:block;font-size:11px;font-weight:800;letter-spacing:.14em;color:#f3d6a8}
+.home .wyHd b{display:block;margin-top:0;font-size:16px;font-weight:700;color:#fff6ec}
+.home .wyB2{display:flex;margin:0 16px 40px;background:linear-gradient(120deg,rgba(243,214,168,.16),rgba(29,23,28,0) 55%),#1d171c;border:1px solid rgba(243,214,168,.55);box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 4px rgba(243,214,168,.06);cursor:pointer}
+.home .wyB2 .im{flex:none;width:104px;min-height:132px;background:#222 center 20%/cover}
+.home .wyB2 .tx{padding:16px 16px 14px;min-width:0}
+.home .wyB2 .chip{display:inline-block;position:static;font-size:11px;font-weight:700;color:#2a1a12;background:#f3d6a8;padding:3px 8px;border-radius:0;letter-spacing:0}
+.home .wyB2 b{display:block;margin-top:8px;font-size:18px;line-height:1.35;color:#fff6ec}
+.home .wyB2 p{margin:4px 0 12px;font-size:13px;line-height:1.5;color:rgba(255,246,236,.7)}
+.home .wyB2 .go{display:flex;gap:14px}
+.home .wyB2 .go button{border:0;background:none;padding:0;font:inherit;font-size:13px;font-weight:700;color:rgba(255,246,236,.55);cursor:pointer}
+.home .wyB2 .go button:first-child{color:#f3d6a8}
+</style>
   <div class="home" id="home">
     <div class="hHead">
       <div class="hBar"><div class="logo"><img src="img/brand/odg_mark.webp" alt=""><img class="lw" src="img/brand/odg_word_h.webp" alt="오방도감"></div>
         <div class="hIc"><button id="hBell" aria-label="알림"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button><button id="hMenu" aria-label="메뉴"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div>
-      <div class="pills" id="pills"><button class="on" data-c="all">전체</button><button data-c="ny">신년</button><button data-c="jt">정통</button><button data-c="tg">택일</button><button data-c="tarot">타로</button><button data-c="love">연애</button><button data-c="gaeun">개운</button><button data-c="job">커리어</button><button data-c="re">재회</button><button data-c="heart">속마음</button><button data-c="match">궁합</button></div>
+      <div class="pills" id="pills"><button class="on" data-c="all">전체</button><button data-c="ny">신년</button><button data-c="jt">정통</button><button data-c="tg">택일</button><button data-c="tarot">타로</button><button data-c="love">연애</button><button data-c="gaeun">개운</button><button data-c="job">커리어</button></div>
     </div>
+
+    <section class="hSec ny" id="secNY" data-cats="all ny jt">
+      <div class="sh nyH"><small>2027 정미년 · 신년 기획전</small><b>새해를 묻는 열 가지 길</b><button class="fzAll" id="nyAll" type="button">모두 보기</button></div>
+      <div class="hRow nyRow">
+        <div class="pc nyHero" data-kv="halmae" data-vid="v/poster/halmae.mp4" role="button" tabindex="0" style="background-image:url('img/halmae.jpg')"><span class="chip nyB">대표</span><div class="ct"><span class="yr">2027</span><span class="tt">신년 운세</span><span class="st">삼신 할매의 열두 달</span></div></div>
+        <div class="pc" id="cNoeul" data-vid="v/poster/noeul.mp4" role="button" tabindex="0" style="background-image:url('img/noeul.jpg')"><span class="chip">특별</span><div class="ct"><span class="yr">2027</span><span class="tt">해와 달의 운세</span><span class="st">노을, 낮의 나와 밤의 나</span></div></div>
+        <div class="pc" id="cMyeongri" data-vid="v/poster/soheon.mp4" role="button" tabindex="0" style="background-image:url('img/soheon.jpg')"><span class="chip">정통</span><div class="ct"><span class="yr">2027</span><span class="tt">명리 감정서</span><span class="st">근거를 짚는 소헌 선생</span></div></div>
+        <div class="pc lockc nyL" data-ny="sJt" role="button" tabindex="0" style="background-image:url('img/seoha.jpg')"><span class="chip">무료 · 11월</span><div class="ct"><span class="yr">2027</span><span class="tt">맛보기</span><span class="st">서하가 써 주는 올해의 한 단어</span></div></div>
+        <div class="pc lockc nyL" data-ny="sJt" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><span class="chip">11월 오픈</span><div class="ct"><span class="tt">대운 속 2027</span><span class="st">현암, 10년 흐름 속 올해</span></div></div>
+        <div class="pc lockc nyL" data-ny="sJt" role="button" tabindex="0" style="background-image:url('img/tojeong.jpg')"><span class="chip">11월 오픈</span><div class="ct"><span class="tt">토정비결</span><span class="st">144괘로 읽는 한 해</span></div></div>
+        <button class="pc nyEnd" id="nyEnd" type="button"><span class="ct"><span class="tt">열 가지<br>모두 보기</span><span class="go">기획전으로</span></span></button>
+      </div>
+    </section>
+    <section class="hSec wyS" id="secWry" data-cats="all" hidden>
+      <div class="wyHd"><i id="wyAv"></i><div><b id="wyWho">골라 둔 방</b></div></div>
+      <div class="wyB2" id="wyB2"><span class="im" id="wyIm"></span><div class="tx"><span class="chip" id="wyT"></span><b id="wyH"></b><p id="wyL"></p><div class="go"><button type="button" id="wyGo">바로 보기 ›</button><button type="button" id="wyAsk">서하에게 묻기</button></div></div></div>
+    </section>
 
     <section class="tday" id="tday" data-cats="all gaeun">
       <div class="tdH" id="tdH" role="button" tabindex="0"><small id="hFortK">오늘의 운세</small><h2 id="hFortT"></h2><p id="hFortS"></p></div>
@@ -1006,23 +1153,28 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       </div>
     </section>
 
-    <section class="ngtS" id="secNight" data-cats="all gaeun love heart"><a class="ngt" id="ngt" href="heukmae.html"><span class="pic"><i id="ngtI"></i><video id="ngtV" muted loop playsinline preload="none"></video></span><span class="tx"><small id="ngtK"></small><b id="ngtB"></b><em id="ngtE"></em></span><span class="arr" aria-hidden="true"></span></a></section>
     <section class="fz band" id="fz" data-cats="all gaeun love heart">
       <div class="sh fzH"><small>FREE · 로그인 없이 30초</small><b id="fzH">심심할 땐, 사주로 놀자</b><button class="fzAll" id="fzAll" type="button">모두 보기</button></div>
       <button class="ppg" id="ppgGo" type="button"><span class="tg" style="background-image:url('img/mini/tong.jpg')"></span><span class="tx"><small>NEW · 하루 한 번</small><b>오방 뽑기</b><em>통을 흔들면, 오늘의 괘가 톡</em></span><span class="mm" id="ppgMm"></span></button>
       <button class="ppg bjg" id="bjGo" type="button"><span class="tg cardT" style="background-image:url('img/card/wood.jpg')"></span><span class="tx"><small>NEW · 하루 한 장 무료</small><b>오늘의 부적 카드</b><em>모자란 기운이 사는 부적, 모아 보기</em></span><span class="mm"><i class="st">홀로</i></span></button>
+      <!-- 무료 아이콘 줄: 10/3 은주 지시로 홈에서는 숨김(모두 보기 안에 다 있음). 복구 = hidden 지우기 -->
       <div class="fzRow" id="fzRow" hidden></div>
     </section>
 
+    <section class="hSec ftS" id="secFeat" data-cats="all">
+      <div class="feat" id="featNoeul" role="button" tabindex="0" aria-label="해와 달의 운세 보기">
+        <video muted loop playsinline preload="none" poster="img/noeul.jpg" data-src="v/poster/noeul.mp4"></video>
+        <div class="fsh"></div>
+        <div class="fct"><small>특별 운세 · 경계의 존재 노을</small><b>해와 달의 운세</b><p>낮도 밤도 아닌 노을이<br>당신의 낮과 밤을 함께 읽어요</p><span class="fgo">노을 만나러 가기</span></div>
+      </div>
+    </section>
 
     <section class="hSec" id="secJt" data-cats="all jt tg">
       <div class="sh"><small>정통</small><b>올해 내 사주, 제대로 한번 볼까</b></div>
       <div class="hRow">
-        <div class="pc" data-kv="halmae" data-vid="v/poster/halmae.mp4" role="button" tabindex="0" style="background-image:url('img/halmae.jpg')"><div class="ct"><span class="yr">2027</span><span class="tt">신년 운세</span><span class="st">삼신 할매가 열두 달을 읽는다</span></div></div>
-        <div class="pc" id="cLife" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><div class="ct"><span class="tt">평생 사주</span><span class="st">대운 10년 흐름과 타고난 그릇</span></div></div>
-        <div class="pc" id="cNoeul" data-vid="v/poster/noeul.mp4" role="button" tabindex="0" style="background-image:url('img/noeul.jpg');background-position:center 15%"><span class="chip new">NEW</span><div class="ct"><span class="yr">2027</span><span class="tt">해와 달의 운세</span><span class="st">노을, 낮의 나와 밤의 나</span></div></div>
+        <button class="pc nyGo" id="nyJt" type="button"><span class="nyS" data-hj="0">丁<br>未</span><span class="ct"><span class="yr">2027</span><span class="tt">신년 정통</span><span class="st">할매 · 소헌 선생 · 현암 · 토정 · 월하</span><span class="go">신년 기획전에서 보기</span></span></button>
         <div class="pc" id="cTaegil" data-vid="v/poster/taegil.mp4" role="button" tabindex="0" style="background-image:url('img/taegil.jpg')"><div class="ct"><span class="tt">택일</span><span class="st">이사·계약·고백, 그날이 길한지</span></div></div>
-        <div class="pc lockc" role="button" tabindex="0" style="background-image:url('img/tojeong.jpg')"><span class="chip">준비 중</span><div class="ct"><span class="tt">토정비결</span><span class="st">144괘로 읽는 한 해</span></div></div>
+        <div class="pc" id="cLife" data-vid="v/poster/lifetime.mp4" role="button" tabindex="0" style="background-image:url('img/jeongtong.jpg')"><div class="ct"><span class="tt">평생 사주</span><span class="st">대운 10년 흐름과 타고난 그릇</span></div></div>
       </div>
     </section>
 
@@ -1035,12 +1187,15 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     </section>
 
     <section class="hSec band lhubS" id="secLoveHub" data-cats="all love heart re match">
-      <a class="lhub v3" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 서하의 상담실</small><b>연애 상담소</b><em>누구 때문에 왔어<br>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span></a><a class="thr" id="thr" href="heukmae.html" aria-label="검은 실 · 흑매"><svg viewBox="0 0 40 120" aria-hidden="true"><path d="M22 0 C 20 26, 30 40, 18 62 S 14 92, 24 104" fill="none" stroke="#120c10" stroke-width="2.2" stroke-linecap="round"/><path d="M22 0 C 20 26, 30 40, 18 62 S 14 92, 24 104" fill="none" stroke="rgba(192,57,43,.55)" stroke-width=".8" stroke-linecap="round"/><circle cx="24" cy="106" r="4.2" fill="#a8283a"/></svg><span>누가 실을 섞었지</span></a>
+      <a class="lhub v3" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 서하의 상담실</small><b>연애 상담소</b><em>누구 때문에 왔어<br>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span></a>
     </section>
-    <section class="hSec" id="secDohwa" data-cats="all love match">
-      <div class="sh"><small>도화 · 매력</small><b>내 사주 속 도화, 얼마나 진할까</b></div>
+    <section class="hSec" id="secDohwa" data-cats="all love match re heart">
+      <div class="sh"><small>연애 · 대표 메뉴</small><b>연애, 지금 제일 궁금한 거</b></div>
       <div class="hRow">
         <div class="pc" id="cDohwa" data-vid="v/poster/dohwa.mp4" role="button" tabindex="0" style="background-image:url('img/taeo/base.jpg');background-position:center 20%"><span class="chip new">NEW</span><div class="ct"><span class="tt">도화 사주</span><span class="st">태오가 몰래 봐주는 나의 매력</span></div></div>
+        <div class="pc" id="cPartner" data-vid="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/3d178870-dde3-4414-9358-89c221d457e7.mp4" role="button" tabindex="0" style="background-image:url('https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/96ece9bc-bb47-4995-a4cc-fc7babf4523c.jpg');background-position:center 18%"><div class="ct"><span class="tt">그 사람 속마음</span><span class="st">은거울에 비친, 그의 요즘</span></div></div>
+        <div class="pc" id="cRe" role="button" tabindex="0" style="background-image:url('img/w2.jpg')"><span class="chip new">NEW</span><div class="ct"><span class="yr">2027</span><span class="tt">재회 사주</span><span class="st">우리, 다시 닿을 수 있을까</span></div></div>
+        <div class="pc" id="cNext" role="button" tabindex="0" style="background-image:url('img/seoha.jpg')"><span class="chip new">NEW</span><div class="ct"><span class="tt">다음 연애</span><span class="st">언제, 어디서, 어떤 사람과</span></div></div>
         <div class="pc" id="cGh" role="button" tabindex="0" style="background-image:url('img/taeo/wink.jpg');background-position:center 20%"><span class="chip new">NEW</span><div class="ct"><span class="tt">도화 궁합</span><span class="st">그 사람, 내 도화에 걸렸을까</span></div></div>
       </div>
     </section>
@@ -1078,22 +1233,10 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       </div>
     </section>
 
-    <section class="hSec" id="secRe" data-cats="all heart re">
-      <div class="sh"><small>속마음 · 재회</small><b>그 사람, 지금 무슨 생각할까</b></div>
-      <div class="hRow">
-        <div class="pc" id="cPartner" data-vid="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/3d178870-dde3-4414-9358-89c221d457e7.mp4" role="button" tabindex="0" style="background-image:url('https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/96ece9bc-bb47-4995-a4cc-fc7babf4523c.jpg');background-position:center 18%"><div class="ct"><span class="tt">그 사람 속마음</span><span class="st">은거울에 비친, 그의 요즘</span></div></div>
-        <div class="pc lockc" role="button" tabindex="0" style="background-image:url('img/w2.jpg')"><span class="chip">준비 중</span><div class="ct"><span class="yr">2027</span><span class="tt">재회 사주</span><span class="st">우리, 다시 닿을 수 있을까</span></div></div>
-      </div>
-    </section>
-
-    <section class="hSec" id="secLove" data-cats="all love match">
-      <div class="sh"><small>연애 · 궁합</small><b>다음 사람은 언제 올까</b></div>
-      <div class="hRow">
-        <div class="pc lockc" role="button" tabindex="0" style="background-image:url('img/seoha.jpg')"><span class="chip">준비 중</span><div class="ct"><span class="tt">다음 연애</span><span class="st">언제, 어디서, 어떤 사람과</span></div></div>
+    <!-- 오방 궁합: 10/3 홈에서 숨김(전체 메뉴 · 이안 소개의 오방 궁합 보기에서 열림) -->
+    <div hidden id="hideKeep">
         <div class="pc" id="cObgh" role="button" tabindex="0" style="background-image:url('img/fire.jpg')"><div class="ct"><span class="tt">오방 궁합</span><span class="st">다섯 신 중, 나랑 맞는 단 한 명</span></div></div>
-      </div>
-    </section>
-
+    </div>
     <section class="hSec band" id="secMem" data-cats="all gaeun match">
       <div class="sh"><small>나의 수호신</small><b>나를 지키는 오방</b></div>
       <div class="oRow" id="hMem"></div>
@@ -1122,8 +1265,8 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="sh"><b>지금 많이 보는 상담</b></div>
       <div class="rank">
         <div class="rk" data-go="partner"><span class="th" style="background-image:url('img/w3.jpg')"></span><em>1</em><div><b>그 사람 속마음</b><small>연락 안 오는 진짜 이유</small></div></div>
-        <div class="rk" id="rkObgh"><span class="th" style="background-image:url('img/kv_house.jpg')"></span><em>2</em><div><b>오방 궁합 순위</b><small>다섯 신과 나의 궁합 점수</small></div></div>
-        <div class="rk lockc"><span class="th" style="background-image:url('img/kv_drama.jpg')"></span><em>3</em><div><b>재회 사주</b><small>다시 연락이 닿는 달</small></div></div>
+        <div class="rk" id="rkObgh" hidden><span class="th" style="background-image:url('img/kv_house.jpg')"></span><em>2</em><div><b>오방 궁합 순위</b><small>다섯 신과 나의 궁합 점수</small></div></div>
+        <div class="rk" id="rkRe"><span class="th" style="background-image:url('img/w2.jpg')"></span><em>2</em><div><b>재회 사주</b><small>다시 연락이 닿는 달</small></div></div>
       </div>
     </section>
 
@@ -1148,21 +1291,31 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 <script>
 (()=>{
 const $=id=>document.getElementById(id);
-const HOST=/*HOST*/{id:'ian',name:'이안',intro:'v/ian/intro.mp4',introPoster:'img/ian_intro0.jpg',kicker:'서울 어느 옥상 · 이름 없는 정자',lead:'정자 안에서 누군가 기다리고 있다.',
-  title:'오방사주 · 이안의 살롱',brand:'IAN · SALON',clips:'v/ian/',poster:'img/ian.jpg',
-  c1a:'(여기 어디지…?)',c1b:'(말없이 앉는다)',worry:'요즘 제일 걸리는 거, 말해봐.',pay:'이안의 상담 이어서 보기 · 29,000원',
-  lines:{t1:['왔네.','기다리고 있었어.','이리 와서 앉아.'],t1a:['네 운명 알아보는 데야.','내 말 잘 들으면…','바꿀 수도 있고.'],t1b:['말 잘 듣네.','마음에 들어.'],
-    t2:['태어난 날이랑 시간 알려줘.','시간은 몰라도 돼.'],t3:['…역시.','너, 한쪽 기운이','텅 비어 있어.'],t4:['요즘 제일 걸리는 거,','솔직하게 말해봐.'],
-    t5:['비어 있는 그 기운,','채워줄 녀석이 있어.','불러볼게.'],t6:['이제 걔가 네 편이야.','내일 아침부터 미션 보낼 거니까,','알림 켜 둬.']},
-  dur:{t1:4.8,t1a:5,t1b:2.9,t2:4.8,t3:3.8,t4:3.7,t5:5.5,t6:6}}/*/HOST*/;
+const HOST=/*HOST*/{id:'seoha',name:'서하',intro:'v/intro.mp4',introPoster:'img/intro0.jpg',kicker:'한남동 · 이름 없는 살롱',lead:'문 너머에서 누군가 기다리고 있다.',title:'오방사주 · 서하의 살롱',brand:'서하의 살롱',clips:'v/',poster:'img/seoha.jpg',
+  c1a:'(여기 어디지…?)',c1b:'네… (조심스럽게 앉는다)',worry:'오늘은 뭐가 궁금해서 왔어?',pay:'서하의 상담 이어서 보기 · 29,000원',
+  lines:{t1:['왔네.','문 닫고, 이리 와 앉아.'],t1a:['사주 보는 데야.','긴장 풀어. 안 잡아먹어.'],t1b:['말 잘 듣네.','그런 애가 운도 잘 풀려.'],
+    t2:['생년월일이랑 태어난 시간.','모르면 모른다고 해.'],t3:['흠…','너 요즘 혼자 참는 거 많지.','얼굴에 다 써 있어.'],t4:['그래서.','오늘은 뭐가 궁금해서 왔어?'],
+    t5:['네 사주에 빠진 기운이 하나 있네.','그걸 채워줄 애를 붙여줄게.'],t6:['내일 아침 여덟 시,','그 아이가 첫 개운 미션을 보낼 거야.','알림 켜 둬.']},
+  cue:{t4:[0.4,1.62]},
+  dur:{t1:3.6,t1a:4.9,t1b:4.4,t2:4.6,t3:5.6,t4:3.5,t5:6.3,t6:6.5}}/*/HOST*/;
 const H=HOST.clips;
 const V={intro:HOST.intro,t1:H+'t1.mp4',t1a:H+'t1a.mp4',t1b:H+'t1b.mp4',t2:H+'t2.mp4',t3:H+'t3.mp4',t4:H+'t4.mp4',t5:H+'t5.mp4',t6:H+'t6.mp4',idle:H+'idle.mp4',
   rv_wood:'v/rv_wood.mp4',rv_fire:'v/rv_fire.mp4',rv_earth:'v/rv_earth.mp4',rv_metal:'v/rv_metal.mp4',rv_water:'v/rv_water.mp4'};
 const LINES=HOST.lines;
+const CUE=HOST.cue||{}; /* 줄마다 시작 초(말소리 기준). 줄 수가 같을 때만 쓰고, 없으면 글자 수 비례 */
 const FALLBACK_DUR=Object.assign({intro:6,idle:5,rv:5},HOST.dur);
 const POSTER={host:HOST.poster};
 // host-specific copy
-document.title=HOST.title; document.querySelector('.brand').textContent=HOST.brand; $('who').textContent=HOST.name;
+document.title=HOST.title; $('brandT').textContent=HOST.brand; $('who').textContent=HOST.name;
+
+/* 서하 소개: 왼쪽 위 이름표를 누르면 아래에서 시트 */
+(function(){ const sh=$('hostSheet'); if(!sh) return; const open=()=>{ $('hsImg').style.backgroundImage=`url('${HOST.poster||'img/seoha.jpg'}')`; sh.classList.add('on'); sh.setAttribute('aria-hidden','false'); };
+  const close=()=>{ sh.classList.remove('on'); sh.setAttribute('aria-hidden','true'); };
+  $('hostInfo').addEventListener('click',e=>{ e.stopPropagation(); open(); });
+  sh.addEventListener('click',e=>e.stopPropagation()); sh.addEventListener('pointerdown',e=>e.stopPropagation());
+  sh.querySelectorAll('[data-x]').forEach(x=>x.addEventListener('click',close));
+  /* 10/2: 인트로 시트의 '세계관 책' 버튼 삭제(인트로 이탈 방지) */
+  window.openHostInfo=open; })();
 $('c1a').textContent=HOST.c1a; $('c1b').textContent=HOST.c1b; document.querySelector('#pWorry h3').textContent=HOST.worry; document.querySelector('.start .kicker').textContent=HOST.kicker; document.querySelector('.start p').textContent=HOST.lead;
 const GODS={
   wood:{h:'靑龍',n:'하람',el:'木',dir:'동쪽',c:'var(--wood)',label:'목(木)',desc:'동쪽을 지키는 청룡 · 새 시작과 다음 인연',mission:'초록색 하나 걸치고, 동쪽으로 딱 10분만 걸어.'},
@@ -1171,6 +1324,50 @@ const GODS={
   metal:{h:'白虎',n:'시온',el:'金',dir:'서쪽',c:'var(--metal)',label:'금(金)',desc:'서쪽을 지키는 백호 · 정리와 결단',mission:'오늘, 안 맞는 약속 하나 끊어. 비워야 들어와.'},
   water:{h:'玄武',n:'재이',el:'水',dir:'북쪽',c:'var(--water)',label:'수(水)',desc:'북쪽을 지키는 현무 · 속마음과 지혜',mission:'물 한 잔 먼저 마셔. 그리고 오늘 하루, 세 줄만 적어.'}};
 const ORDER=['wood','fire','earth','metal','water'];
+/* 음의 현신(여신 5): 같은 신수 · 같은 기운의 다른 얼굴. 성별로 배정하지 않고 이용자가 고른다(10/2 결정). 캐릭터 시트 10 · 설정 07 */
+const YIN_V='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
+const YIN={
+  wood:{n:'새아',st:'乙',ys:'甲',img:'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2_min.webp',v:YIN_V+'5c50aa18-ca62-4c3f-a583-dcf5d4847487.mp4',line:'괜찮아. 휘어도 안 꺾여.'},
+  fire:{n:'별하',st:'丁',ys:'丙',img:'img/yin/fire.jpg',v:YIN_V+'30455774-ffb6-4d78-95f0-716de737468a.mp4',line:'작아도 괜찮아. 오래 타면 돼.'},
+  earth:{n:'도담',st:'己',ys:'戊',img:'img/yin/earth.jpg',v:YIN_V+'9a5986fb-e15a-43b0-8227-fe37e6ec3d0e.mp4',line:'뿌린 만큼 거둬요. 걱정은 나한테 맡겨.'},
+  metal:{n:'세린',st:'辛',ys:'庚',img:'img/yin/metal.jpg',v:YIN_V+'6e77ff4d-1bcc-4e77-9676-351a9f281be4.mp4',line:'칭찬은 아껴 둘게. 넌 아직 더 빛날 수 있어.'},
+  water:{n:'이슬',st:'癸',ys:'壬',img:'img/yin/water.jpg',v:YIN_V+'cf2ab952-53cb-4703-b502-6445b716aec8.mp4',line:'천천히 말해도 돼. 다 들려.'}};
+function faceOf(){ try{ return localStorage.getItem('obFace')==='yin'?'yin':'yang'; }catch(e){ return 'yang'; } }
+function godImg(k){ return faceOf()==='yin'?YIN[k].img:`img/${k}.jpg`; }
+function godName(k){ return faceOf()==='yin'?YIN[k].n:GODS[k].n; }
+function applyFace(f,withVoice){ const k=S.low, g=GODS[k], y=YIN[k], h=$('rHero'), v=$('faceV'), sub=$('faceSub');
+  try{ localStorage.setItem('obFace',f); }catch(e){}
+  const o=f==='yin'?{n:g.n,img:`img/${k}.jpg`}:{n:y.n,img:y.img};
+  $('twinAv').style.backgroundImage=`url("${o.img}")`; $('twinT').textContent=`${f==='yin'?y.n:g.n}에게는 또 하나의 얼굴이 있어요`; $('twinE').textContent=`같은 ${TW_BEAST[k]}(${g.el}) · ${o.n}`;
+  const img=f==='yin'?y.img:`img/${k}.jpg`; h.style.backgroundImage=`url("${img}")`;
+  if(window.Depth3D){ Depth3D.unmount(h); Depth3D.unholo(h); if(f==='yang') Depth3D.mount(h,{src:img,pos:[.5,.18]}); }
+  $('rGod').textContent=`${g.h} · ${g.el} · ${g.dir}`+(f==='yin'?' · 음의 현신':''); $('rName').textContent=`나의 수호신, ${f==='yin'?y.n:g.n}`;
+  v.pause(); v.classList.remove('on'); sub.classList.remove('on');
+  if(f==='yin'&&withVoice){ v.src=y.v; v.poster=img; v.muted=false; v.currentTime=0; const p=v.play(); if(p&&p.catch) p.catch(()=>{ v.muted=true; v.play().catch(()=>{}); });
+    v.onplaying=()=>{ v.classList.add('on'); setTimeout(()=>{ sub.textContent=y.line; sub.classList.add('on'); },500); };
+    v.onended=()=>{ sub.classList.remove('on'); setTimeout(()=>v.classList.remove('on'),600); }; }
+  try{ refreshFaceSpots(); }catch(e){} }
+/* 두 얼굴 소개 창: 같은 신수의 양(드러나는) · 음(스며드는) 얼굴. 천간 상징(甲 큰 나무 · 乙 덩굴 등)에 근거 */
+const TW_BEAST={wood:'청룡',fire:'주작',earth:'황룡',metal:'백호',water:'현무'};
+const TW={wood:[['甲','큰 나무','곧게 뻗어 길을 내는 얼굴'],['乙','덩굴','휘어도 다시 일어서는 얼굴']],
+  fire:[['丙','한낮의 해','환하게 앞을 비추는 얼굴'],['丁','등불','곁에서 오래 타는 얼굴']],
+  earth:[['戊','큰 산','흔들리지 않게 받치는 얼굴'],['己','기름진 밭','품어서 키워 내는 얼굴']],
+  metal:[['庚','무쇠','단번에 끊어 내는 얼굴'],['辛','보석','다듬어 빛나게 하는 얼굴']],
+  water:[['壬','큰 물','깊고 멀리 흐르는 얼굴'],['癸','빗물','조용히 스며드는 얼굴']]};
+let twPick='yang';
+function twJ(w,a,b){ const c=w.charCodeAt(w.length-1)-0xAC00; return w+(c>=0&&c<11172&&c%28>0?a:b); }
+function openTwin(){ const k=S.low, g=GODS[k], y=YIN[k], t=TW[k], cur=faceOf(); twPick=cur;
+  $('twinK').textContent=`${g.dir}을 지키는 ${TW_BEAST[k]} · ${g.label}`;
+  $('twinH').textContent=`같은 ${TW_BEAST[k]}, 다른 얼굴`;
+  $('twinP').textContent=`${twJ(g.n,'과','와')} ${twJ(y.n,'은','는')} 같은 ${TW_BEAST[k]}의 기운에서 나온 두 얼굴이에요. 오방의 신은 하나의 기운을 드러나는 양의 얼굴과 스며드는 음의 얼굴, 두 모습으로 지녀요. 지켜 주는 힘은 같고, 곁에 있는 방식만 달라요.`;
+  const tile=(f,n,img,[hj,img2,tr])=>`<button type="button" data-f="${f}" class="${f===cur?'on cur':''}" style="background-image:url('${img}')"><span class="now">지금 함께하는 얼굴</span><span class="cap"><small>${f==='yang'?'양의 얼굴':'음의 얼굴'} · ${hj} ${img2}</small><b>${n}</b><em>${tr}</em></span></button>`;
+  $('twinPair').innerHTML=tile('yang',g.n,`img/${k}.jpg`,t[0])+tile('yin',y.n,y.img,t[1]);
+  $('twinPair').querySelectorAll('button').forEach(b=>b.onclick=()=>{ twPick=b.dataset.f; $('twinPair').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); twGoTxt(); });
+  twGoTxt(); $('twinS').classList.add('on'); $('twinS').setAttribute('aria-hidden','false'); }
+function twGoTxt(){ const k=S.low, n=twPick==='yin'?YIN[k].n:GODS[k].n; $('twinGo').textContent=twPick===faceOf()?`${n}${twJ(n,'과','와').slice(n.length)} 계속 함께하기`:`${n}${(c=>c>=0&&c<11172&&c%28>0&&c%28!==8?'으로':'로')(n.charCodeAt(n.length-1)-0xAC00)} 바꾸기`; }
+function closeTwin(){ $('twinS').classList.remove('on'); $('twinS').setAttribute('aria-hidden','true'); }
+function refreshFaceSpots(){ if(!S||!S.low) return; const im=`url("${godImg(S.low)}")`;
+  ['preAv','ovLock','notiPic','hMisAv'].forEach(id=>{ const e=$(id); if(e) e.style.backgroundImage=im; }); }
 
 /* ---------- saju (simplified solar calc) ---------- */
 const STEM='甲乙丙丁戊己庚辛壬癸', BR='子丑寅卯辰巳午未申酉戌亥';
@@ -1236,10 +1433,10 @@ function subs(key){
   return lines.map(t=>{const p=document.createElement('p');p.textContent=t;box.appendChild(p);return p;});
 }
 function clearSubs(){ $('subLines').innerHTML=''; $('who').classList.remove('on'); }
-function schedule(els,dur,tok){
+function schedule(els,dur,tok,cue){
   if(!els.length) return;
   const total=els.reduce((a,e)=>a+e.textContent.length,0), span=Math.max(dur-0.45,1.2);
-  let t=0.08; els.forEach((e,i)=>{ const at=t; setTimeout(()=>{ if(tok!==cancelTok) return; if(i>0) els[i-1].style.display='none'; e.classList.add('on'); },at*1000); t+=span*(e.textContent.length/total); });
+  let t=0.08; els.forEach((e,i)=>{ const at=(cue&&cue.length===els.length)?cue[i]:t; setTimeout(()=>{ if(tok!==cancelTok) return; if(i>0) els[i-1].style.display='none'; e.classList.add('on'); },at*1000); t+=span*(e.textContent.length/total); });
 }
 function play(key,{loop=false,posterKey='host',showSubs=true,next=null}={}){
   const tok=++cancelTok;
@@ -1252,7 +1449,7 @@ function play(key,{loop=false,posterKey='host',showSubs=true,next=null}={}){
     const els=showSubs?subs(key):(clearSubs(),[]);
     const fallback=()=>{ // clip unavailable: still + timed subs
       setPoster(POSTER[posterKey]||null); front.classList.remove('on'); back.classList.remove('on');
-      const d=FALLBACK_DUR[key.startsWith('rv_')?'rv':key]||5; schedule(els,d,tok);
+      const d=FALLBACK_DUR[key.startsWith('rv_')?'rv':key]||5; schedule(els,d,tok,CUE[key]);
       if(!loop) setTimeout(()=>{ if(tok===cancelTok) finish(); },d*1000); else finish();
     };
     if(!v._ready) return fallback();
@@ -1262,7 +1459,7 @@ function play(key,{loop=false,posterKey='host',showSubs=true,next=null}={}){
     v.classList.add('on'); front.classList.remove('on'); setPoster(null);
     const old=front; front=v; back=old;
     setTimeout(()=>{ if(back!==old) return; old.pause(); if(next && tok===cancelTok) old._p=prep(old,next); },FADE+60);
-    schedule(els,v.duration||5,tok);
+    schedule(els,v.duration||5,tok,CUE[key]);
     if(loop) return finish();
     v.onended=()=>{ if(front===v) finish(); };
     const tick=()=>{ if(done||tok!==cancelTok) return; if(v.ended||(v.duration&&v.currentTime>=v.duration-LEAD)) return finish(); requestAnimationFrame(tick); };
@@ -1285,6 +1482,8 @@ function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTi
   HN.forEach((h,i)=>bh.add(new Option(h,i)));
   $('solar').onclick=()=>{$('solar').setAttribute('aria-pressed','true');$('lunar').setAttribute('aria-pressed','false');};
   $('lunar').onclick=()=>{$('lunar').setAttribute('aria-pressed','true');$('solar').setAttribute('aria-pressed','false');};
+  ['gF','gM'].forEach(id=>$(id).onclick=()=>{ $('gF').setAttribute('aria-pressed',id==='gF'?'true':'false'); $('gM').setAttribute('aria-pressed',id==='gM'?'true':'false'); $('gSeg').classList.remove('need'); });
+  { const m0=loadMe(); if(m0&&(m0.g==='f'||m0.g==='m')) $(m0.g==='f'?'gF':'gM').setAttribute('aria-pressed','true'); }
   $('chips').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{$('chips').querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed','false'));c.setAttribute('aria-pressed','true');});
 })();
 
@@ -1316,9 +1515,11 @@ async function sceneOne(){ await play('t1',{next:'idle'}); await idle(); panel('
 async function afterChoice(k){ panel(null); await play(k,{next:'t2'}); await askBirth(); }
 async function askBirth(){ await play('t2',{next:'idle'}); await idle('t3'); panel('pBirth'); }
 async function afterBirth(){
+  const gv=$('gF').getAttribute('aria-pressed')==='true'?'f':$('gM').getAttribute('aria-pressed')==='true'?'m':null;
+  if(!gv){ const g=$('gSeg'); g.classList.remove('need'); void g.offsetWidth; g.classList.add('need'); g.scrollIntoView({block:'center',behavior:'smooth'}); return; }
   panel(null);
   const y=+$('by').value,m=+$('bm').value,d=+$('bd').value,h=$('bh').value; S=calc(y,m,d,h==='x'?null:+h);
-  saveMe({y,m,d,h:h==='x'?null:+h,cal:'s'});
+  saveMe({y,m,d,h:h==='x'?null:+h,cal:'s',g:gv});
   fetchClip('rv_'+S.low);
   await play('t3',{next:'t4'}); await play('t4',{next:'idle'}); await idle('t5'); panel('pWorry');
 }
@@ -1337,14 +1538,15 @@ async function afterWorry(){
 function subMode(on){ $('stage').classList.toggle('subm',on); if(on) $('stage').classList.remove('homeMode'); }
 function showResult(){ subMode(true);
   const g=GODS[S.low];
-  $('rHero').style.backgroundImage=`url("img/${S.low}.jpg")`;
-  if(window.Depth3D){ const h=$('rHero'); Depth3D.unmount(h); Depth3D.unholo(h); Depth3D.mount(h,{src:`img/${S.low}.jpg`,pos:[.5,.18]}); }
-  $('rGod').textContent=`${g.h} · ${g.el} · ${g.dir}`; $('rName').textContent=`나의 수호신, ${g.n}`;
+  applyFace(faceOf(),false);
+  $('twinB').onclick=openTwin; $('twinX').onclick=closeTwin; $('twinS').onclick=e=>{ if(e.target===$('twinS')) closeTwin(); };
+  $('twinGo').onclick=()=>{ const ch=twPick!==faceOf(); closeTwin(); if(ch){ applyFace(twPick,true); $('result').scrollTo({top:0,behavior:'smooth'}); } };
+  const rh=$('resHome'), rs=$('result'); rs.onscroll=()=>rh.classList.toggle('on',rs.scrollTop>240); rh.classList.toggle('on',rs.scrollTop>240);
   $('rPillars').innerHTML=S.P.map(p=>`<div><div class="l">${p.l}</div><div class="c">${p.s===null?'<span style="color:var(--ink-3)">?</span>':`<span style="color:${EL_COL[STEM_EL[p.s]]}">${STEM[p.s]}</span><br><span style="color:${EL_COL[BR_EL[p.b]]}">${BR[p.b]}</span>`}</div></div>`).join('');
   const max=Math.max(...S.cnt,1), names=['목(木)','화(火)','토(土)','금(金)','수(水)'];
   $('rBars').innerHTML=S.cnt.map((c,i)=>`<div class="bar ${EL_KEYS[i]===S.low?'low':''}" style="--c:${EL_COL[i]}"><span class="lbl">${names[i]}</span><div class="t"><i data-w="${Math.max(c/max*100,4)}"></i></div><span class="v">${c}</span></div>`).join('');
   $('rMission').textContent=g.mission;
-  $('result').classList.add('on'); bgm(BGM_LV.result,1.5);
+  renderWry(); $('result').classList.add('on'); bgm(BGM_LV.result,1.5);
   setTimeout(()=>$('rBars').querySelectorAll('i').forEach(i=>i.style.width=i.dataset.w+'%'),60);
 }
 $('enter').onclick=async()=>{ await unlock(); startStory(); };
@@ -1352,7 +1554,36 @@ $('skipStory').onclick=async()=>{ await unlock(); $('start').classList.add('off'
 $('c1a').onclick=()=>afterChoice('t1a');
 $('c1b').onclick=()=>afterChoice('t1b');
 $('birthGo').onclick=afterBirth;
-$('worryGo').onclick=afterWorry;
+const WRY={
+ '그 사람 마음':{s:'시온이 요즘 그 사람 기운을 비춰 줘.',l:'그 사람 속은 시온이 제일 잘 봐. 요즘 그 사람 기운부터 비춰 보자.',m:['partner','tarot'],q:['그 사람이 요즘 나를 어떻게 생각하는지 봐줘','먼저 연락해도 되는 때 알려줘']},
+ '재회':{s:'시온이 둘의 흐름을 같이 봐.',l:'다시 이어질지는 둘의 흐름이 언제 겹치는지로 봐. 시온한테 먼저 가 봐.',m:['re','partner'],q:['그 사람이랑 다시 이어질 수 있을지 봐줘','연락하기 좋은 달 알려줘']},
+ '새 인연':{s:'인연이 들어오는 달부터 짚어 줄게.',l:'인연이 들어오는 달이 따로 있어. 그 달부터 짚어 줄게.',m:['next','dohwa'],q:['올해 인연이 들어오는 달 알려줘','나랑 잘 맞는 사람 느낌 알려줘']},
+ '결혼':{s:'둘의 합이랑 배우자 자리를 같이 봐.',l:'결혼은 둘의 합이랑 배우자 자리를 같이 봐야 해.',m:['gh','life'],q:['내 결혼 시기 흐름 봐줘','배우자 자리에 어떤 사람이 맞는지 알려줘']},
+ '일 · 이직':{s:'도준이 움직일 때를 읽어 줘.',l:'움직일 때랑 버틸 때가 따로 있어. 도준이 그 판을 제일 잘 읽어.',m:['career','mr'],q:['이직하기 좋은 때 알려줘','나한테 맞는 일 스타일 알려줘']},
+ '돈 · 재물':{s:'올해 돈길이 어디로 나는지부터.',l:'돈이 들어오는 길은 사주마다 달라. 올해 그 길이 어디로 나는지부터 보자.',m:['career','sn'],q:['올해 돈이 들어오는 달 알려줘','돈 새는 습관 짚어줘']},
+ '시험 · 합격':{s:'월하가 좋은 날부터 골라 줘.',l:'날을 잘 고르는 것도 실력이야. 월하한테 좋은 날부터 받아 둬.',m:['taegil','career'],q:['시험 보기 좋은 날 흐름 알려줘','집중이 잘 되는 시기 알려줘']},
+ '건강':{s:'무리하면 안 되는 달부터 알아 두자.',l:'무리하면 안 되는 달부터 알아 두자. 미리 알면 덜 지쳐.',m:['sn','today'],q:['올해 무리하면 안 되는 달 알려줘','기운 채우는 생활 습관 알려줘']},
+ '올해 운':{s:'좋은 달이랑 조심할 달부터.',l:'2027년 열두 달, 좋은 달이랑 조심할 달부터 보자.',m:['sn','mr'],q:['올해 가장 좋은 달 알려줘','올해 조심할 것 하나만 짚어줘']},
+ '그냥 내 사주':{s:'타고난 판부터 차근히.',l:'타고난 판부터 차근히 보자. 그게 제일 정확해.',m:['life','mr'],q:['내 사주 한 줄로 요약해줘','내가 제일 빛나는 자리 알려줘']}};
+const WM={partner:['그 사람 속마음','시온 · 은거울','img/w1.jpg','partner'],tarot:['무진의 타로','무진','img/tarot/poster.jpg','tarot.html'],re:['재회 사주','시온','img/w2.jpg','love2.html?m=re'],next:['다음 연애','서하','img/seoha.jpg','love2.html?m=next'],dohwa:['도화 사주','태오','img/taeo/base.jpg','dohwa.html'],gh:['도화 궁합','태오','img/taeo/wink.jpg','gunghap.html'],life:['평생 사주','현암','img/jeongtong.jpg','lifetime.html'],career:['커리어 사주','도준','img/earth.jpg','career.html'],mr:['2027 명리 감정서','소헌 선생','img/soheon.jpg','myeongri.html'],sn:['2027 신년운세','삼신 할매','img/halmae.jpg','sinnyeon.html'],taegil:['택일','월하','img/taegil.jpg','taegil.html'],today:['오늘의 운세','서하','img/seoha.jpg','today.html']};
+function loadWry(){ try{ return JSON.parse(localStorage.getItem('obWorry')||'null'); }catch(e){ return null; } }
+function saveWry(){ const c=[...$('chips').querySelectorAll('.chip')].find(x=>x.getAttribute('aria-pressed')==='true'); const w={tag:c?c.textContent.trim():'',text:($('worryText').value||'').trim(),at:Date.now()};
+  if(!w.tag&&!w.text) return; try{ localStorage.setItem('obWorry',JSON.stringify(w)); }catch(e){} }
+function goWm(k){ const m=WM[k]; if(!m) return; if(m[3]==='partner') return partnerStart(); goPage(m[3]); }
+function askSeoha(){ const w=loadWry(); try{ sessionStorage.setItem('obAskQ',JSON.stringify({text:w&&w.text||'',q:(w&&WRY[w.tag]||{}).q||[]})); }catch(e){} goPage('chat.html?h=seoha'); }
+function renderWry(){ const w=loadWry(), d=w&&(WRY[w.tag]||(w.text?WRY['그냥 내 사주']:null));
+  const box=$('rWry'), sec=$('secWry');
+  if(!d){ if(box) box.hidden=true; if(sec) sec.hidden=true; return; }
+  const said=w.text?`<b>“${w.text.replace(/[<>&]/g,'')}”</b> `:'';
+  const tag=w.tag||'내 이야기';
+  if(box){ box.hidden=false; box.innerHTML=`<h4>내 고민 <em>· ${tag}</em></h4><p class="wyQ">${said}${d.l}</p><div class="wyB">${d.m.map(k=>`<button type="button" data-wm="${k}">${WM[k][0]}</button>`).join('')}<button type="button" data-wm="ask">서하에게 바로 묻기</button></div>`;
+    box.querySelectorAll('[data-wm]').forEach(b=>b.onclick=()=>b.dataset.wm==='ask'?askSeoha():goWm(b.dataset.wm)); }
+  if(sec){ sec.hidden=false; const m0=d.m[0];
+    { let nm=''; try{ nm=(JSON.parse(sessionStorage.getItem('me')||'null')||{}).name||''; }catch(e){} const hn=HOST.name, jo=((hn.charCodeAt(hn.length-1)-0xAC00)%28)?'이':'가';
+      $('wyAv').style.backgroundImage=`url('${HOST.poster||'img/seoha.jpg'}')`; $('wyWho').textContent=`${nm?nm+'에게 ':''}${hn}${jo} 골라 둔 방`; }
+    $('wyIm').style.backgroundImage=`url('${WM[m0][2]}')`; $('wyT').textContent=`내 고민 · ${tag}`; $('wyH').textContent=`${WM[m0][0]}부터 보자`; $('wyL').textContent=d.s||'';
+    $('wyGo').onclick=e=>{ e.stopPropagation(); goWm(m0); }; $('wyAsk').onclick=e=>{ e.stopPropagation(); askSeoha(); }; $('wyB2').onclick=()=>goWm(m0); } }
+$('worryGo').onclick=()=>{ saveWry(); afterWorry(); };
 $('worrySkip').onclick=afterWorry;
 /* ---------- partner reading (Sion) ---------- */
 Object.assign(V,{e1:'v/sion/e1.mp4',e2:'v/sion/e2.mp4',e3:'v/sion/e3.mp4'});
@@ -1419,8 +1650,9 @@ const wait=ms=>new Promise(r=>setTimeout(r,ms));
 const iga=n=>{ const c=n.charCodeAt(n.length-1)-0xAC00; return n+((c>=0&&c%28)?'이':'가'); };
 function memberStart(){
   const g=GODS[S.low]; fetchClip('m_'+S.low);
-  $('preAv').style.backgroundImage=`url("img/${S.low}.jpg")`;
-  $('preTx').innerHTML=`내일 아침 8시,<br>${iga(g.n)} 첫 개운 미션 보낼게.<br>알림 켜줄래?`;
+  $('preAv').style.backgroundImage=`url("${godImg(S.low)}")`;
+  $('preTx').innerHTML=`내일 아침 8시,<br>${iga(godName(S.low))} 첫 개운 미션 보낼게.`;
+  if(window.ObNotify){ ObNotify.ask({title:'아침 미션 받기',img:godImg(S.low),head:`내일 아침 8시, ${godName(S.low)}의 첫 개운 미션`,sub:'어디로 보낼지 골라 줘'}).then(v=>{ if(v) nextMorning(); }); return; }
   ov('ovPre');
 }
 async function nextMorning(){
@@ -1428,14 +1660,14 @@ async function nextMorning(){
   const t=$('nightT'); t.textContent='07:59'; await wait(1100); t.textContent='08:00'; await wait(800);
   const d=new Date(Date.now()+864e5), W='일월화수목금토';
   $('lockD').textContent=`${d.getMonth()+1}월 ${d.getDate()}일 ${W[d.getDay()]}요일`;
-  $('ovLock').style.backgroundImage=`url("img/${S.low}.jpg")`; $('notiPic').style.backgroundImage=`url("img/${S.low}.jpg")`;
-  $('notiN').textContent=g.n; $('notiM').textContent=MS[S.low].push; $('noti').classList.remove('on');
+  $('ovLock').style.backgroundImage=`url("${godImg(S.low)}")`; $('notiPic').style.backgroundImage=`url("${godImg(S.low)}")`;
+  $('notiN').textContent=godName(S.low); $('notiM').textContent=MS[S.low].push; $('noti').classList.remove('on');
   ov('ovLock'); await wait(900); $('noti').classList.add('on');
 }
 async function openMission(){
   const g=GODS[S.low]; ov(null); homeOff(); subMode(true); hostName=hostName||$('who').textContent; $('who').textContent=g.n;
   await play('m_'+S.low,{posterKey:'m_'+S.low}); clearSubs();
-  $('mK').textContent=`오늘의 개운 미션 · ${g.n} (${g.el})`; $('mTx').textContent=g.mission; panel('pMission'); bgm(BGM_LV.idle,1);
+  $('mK').textContent=`오늘의 개운 미션 · ${godName(S.low)} (${g.el})`; $('mTx').textContent=g.mission; panel('pMission'); bgm(BGM_LV.idle,1);
 }
 function showGauge(){
   panel(null); subMode(true); const g=GODS[S.low], idx=EL_KEYS.indexOf(S.low);
@@ -1443,7 +1675,7 @@ function showGauge(){
   const names=['목(木)','화(火)','토(土)','금(金)','수(水)'], cnt=S.cnt.slice(), max=Math.max(...cnt,1)+1;
   $('gBars').innerHTML=cnt.map((c,i)=>`<div class="bar ${i===idx?'low':''}" style="--c:${EL_COL[i]}"><span class="lbl">${names[i]}</span><div class="t"><i data-w="${Math.max(c/max*100,4)}"></i></div><span class="v">${c}${i===idx?'<em class="gUp">+0.2</em>':''}</span></div>`).join('');
   $('gStreak').innerHTML=['1일','2','3','4','5','6','7'].map((x,i)=>`<span class="${i===0?'on':''}">${i===0?'✓':x}</span>`).join('');
-  $('gStreakTx').textContent=`7일 채우면 ${g.n}의 음성 편지가 열려.`;
+  $('gStreakTx').textContent=`7일 채우면 ${godName(S.low)}의 음성 편지가 열려.`;
   const base=new Date(Date.now()+18*864e5), yy=base.getFullYear(), m=base.getMonth();
   $('kd1').textContent=`${m+1}월 17일`; $('kd2').textContent=`${m+1}월 22일`;
   $('calH').textContent=`${m+1}월 기운 캘린더`;
@@ -1467,6 +1699,7 @@ $('gSub').onclick=()=>{ ov('ovSub'); $('ovSub').scrollTop=0; bgm(BGM_LV.result,1
 /* ---------- main home ---------- */
 Object.assign(V,{halmae:'v/halmae.mp4'}); LINES.halmae=['왔구나.','…네 내년 열두 달,','이 할미가 다 봐 뒀다.','섣달에 보자.']; FALLBACK_DUR.halmae=8; POSTER.halmae='img/halmae.jpg';
 function ensureS(){ if(!S) S=calc(1996,5,14,6); }
+window.__obTest={card:k=>{ ensureS(); if(k) S.low=k; showResult(); }}; /* 자동 점검용(화면 동작 없음) */
 function homeOff(){ $('home').classList.remove('on'); $('tabs').classList.remove('on'); $('toTop').classList.remove('on'); $('stage').classList.remove('homeMode'); }
 
 /* ---------- 오늘의 운세 위젯 (today.html과 같은 규칙) ---------- */
@@ -1489,14 +1722,14 @@ function renderFort(){
   $('hFortN').innerHTML=`${v}<small>총운</small>`; $('hFortR').style.setProperty('--p',v);
 }
 function renderHome(){
-  ensureS(); renderFort(); const g=GODS[S.low];
+  ensureS(); renderFort(); try{ renderWry(); }catch(e){} const g=GODS[S.low];
   $('hMis').style.setProperty('--c',g.c);
-  $('hMisAv').style.backgroundImage=`url("img/${S.low}.jpg")`;
+  $('hMisAv').style.backgroundImage=`url("${godImg(S.low)}")`;
   /* 첫 화면 벤토: 채울 기운의 미니 수호신 + 행운 색·방향·숫자 */
   { const L={wood:['초록','#3f9f6e','동쪽','3 · 8'],fire:['빨강','#e0553f','남쪽','2 · 7'],earth:['노랑','#d3a13a','가운데','5 · 10'],metal:['흰색','#e9ecf1','서쪽','4 · 9'],water:['남색','#2f4f9a','북쪽','1 · 6']}[S.low];
     $('tday').style.setProperty('--c',g.c); $('hMisAv').style.backgroundImage=`url("img/mini/${S.low}.jpg")`; $('bjGo').querySelector('.cardT').style.backgroundImage=`url('img/card/${S.low}.jpg')`; try{ sessionStorage.setItem('obLow',JSON.stringify({k:S.low,cnt:S.cnt})); }catch(e){}
     $('hLuck').innerHTML=`<small>행운 · 채울 기운 ${g.el}</small><div class="lk"><i style="background:${L[1]}"></i><b>${L[0]}</b></div><dl><div><dt>방향</dt><dd>${L[2]}</dd></div><div><dt>숫자</dt><dd>${L[3]}</dd></div></dl>`; }
-  $('hMisK').innerHTML=`오늘의 개운 · <em>${g.n} ${g.el}</em>`; $('hMisT').textContent=g.mission;
+  $('hMisK').innerHTML=`오늘의 개운 · <em>${godName(S.low)} ${g.el}</em>`; $('hMisT').textContent=g.mission;
   const max=Math.max(...S.cnt,1), names='木火土金水';
   $('hG').innerHTML=S.cnt.map((c,i)=>`<div class="${EL_KEYS[i]===S.low?'low':''}" style="--c:${EL_COL[i]};--w:${Math.max(c/max*100,6)}%"><b>${names[i]}</b><i></i></div>`).join('');
   $('hMem').innerHTML=ORDER.map(k=>{const m=GODS[k];return `<button class="om ${k===S.low?'mine':''}" data-el="${k}" style="--c:${m.c}"><span style="background-image:url('img/${k}.jpg')"></span><b>${m.n}</b><small>${m.h} · ${m.el}</small></button>`;}).join('');
@@ -1543,7 +1776,9 @@ const goPage=u=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){}
 };
 window.addEventListener('pageshow',e=>{ if(e.persisted){ document.querySelectorAll('.mi').forEach(x=>x.remove()); if(window._miLv!=null) try{ bgm(window._miLv,1); }catch(_){} } });
 setTimeout(()=>{ ['v/menu/today.mp4','v/menu/career.mp4','v/menu/taegil.mp4','v/menu/gunghap.mp4'].forEach(h=>{ const l=document.createElement('link'); l.rel='prefetch'; l.as='video'; l.href=h; document.head.appendChild(l); }); },4000);
-$('cTaegil').onclick=()=>goPage('taegil.html'); if($('cNoeul')) $('cNoeul').onclick=()=>goPage('noeul.html');
+$('cTaegil').onclick=()=>goPage('taegil.html'); $('cMyeongri').onclick=()=>goPage('myeongri.html'); if($('cNoeul')) $('cNoeul').onclick=()=>goPage('noeul.html');
+if($('featNoeul')){ const fe=$('featNoeul'), fv=fe.querySelector('video'); fe.onclick=()=>goPage('noeul.html');
+  new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ if(!fv.getAttribute('src')) fv.src=fv.dataset.src; const p=fv.play(); if(p) p.catch(()=>{}); } else { try{ fv.pause(); }catch(_){} } }),{threshold:.3}).observe(fe); }
 $('hFort').onclick=()=>goPage('today.html'); $('tdH').onclick=()=>goPage('today.html');
 $('cToday').onclick=()=>goPage('today.html');
 $('cCareer').onclick=()=>goPage('career.html');
@@ -1560,10 +1795,12 @@ $('cPartner').onclick=()=>partnerStart();
 $('tBal').onclick=()=>showGauge();
 document.querySelectorAll('[data-go]').forEach(e=>e.onclick=()=>{ if(e.dataset.go==='partner') partnerStart(); else { fetchClip('m_'+S.low); openMission(); } });
 document.querySelectorAll('.lockc').forEach(e=>e.onclick=()=>toast('정식 오픈 때 열려요'));
-$('hBell').onclick=()=>toast('내일 아침 8시, 수호신 미션이 예약돼 있어요'); const toIntro=()=>{ try{ sessionStorage.removeItem('toHome'); }catch(e){} location.reload(); };
+['nyAll','nyEnd','nyJt'].forEach(id=>{ const e=$(id); if(e) e.onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(_){} location.href='newyear.html'; }; });
+document.querySelectorAll('.nyL').forEach(e=>e.onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(_){} location.href='newyear.html'; });
+$('hBell').onclick=()=>{ if(S&&S.low) memberStart(); else toast('수호신을 먼저 만나면 아침 미션을 받을 수 있어요'); }; const toIntro=()=>{ try{ sessionStorage.removeItem('toHome'); }catch(e){} location.reload(); };
 $('hMenu').onclick=()=>$('hMenuS').classList.add('on');
 $('hMenuS').onclick=e=>{ if(e.target.id==='hMenuS') $('hMenuS').classList.remove('on'); const b=e.target.closest('[data-m]'); if(!b) return; $('hMenuS').classList.remove('on'); if(b.dataset.m==='intro') toIntro(); else if(b.dataset.m==='arch') archOpen(); else goPage(b.dataset.m); };
-$('hSalon').onclick=toIntro; $('cObgh').onclick=$('rkObgh').onclick=()=>goPage('obgh.html'); $('hMyChar').onclick=()=>goPage('avatar.html'); $('cLife').onclick=()=>goPage('lifetime.html'); document.querySelector('.hBar .logo').onclick=toIntro;
+$('hSalon').onclick=toIntro; $('cObgh').onclick=$('rkObgh').onclick=()=>goPage('obgh.html'); $('hMyChar').onclick=()=>goPage('avatar.html'); $('cLife').onclick=()=>goPage('lifetime.html'); $('cRe').onclick=$('rkRe').onclick=()=>goPage('love2.html?m=re'); $('cNext').onclick=()=>goPage('love2.html?m=next'); document.querySelector('.hBar .logo').onclick=toIntro;
 $('hSalonT').textContent=HOST.name+'의 살롱으로 돌아가기'; $('hMenuHost').textContent=HOST.name+'의 살롱'; $('hSalonAv').style.backgroundImage=`url('${HOST.poster||'img/seoha.jpg'}')`;
 $('pills').querySelectorAll('button').forEach(b=>b.onclick=()=>{
   /* 상단 분류 = 해당 섹션으로 바로 이동 (예전: 섹션 숨기기) */
@@ -1576,7 +1813,7 @@ $('pills').querySelectorAll('button').forEach(b=>b.onclick=()=>{
   if(c==='heart'){ const card=$('cPartner'); if(card){ const row=card.parentElement; setTimeout(()=>row.scrollTo({left:card.offsetLeft-16,behavior:'smooth'}),350); } }
   if(c==='tg'){ const card=$('cTaegil'); if(card){ const row=card.parentElement; setTimeout(()=>row.scrollTo({left:card.offsetLeft-16,behavior:'smooth'}),350); } }
 });
-const PILL_TO={all:'tday',tarot:'secTarot',ny:'secNY',jt:'secJt',love:'secLoveHub',match:'secLove',re:'secRe',heart:'secRe',gaeun:'secDb',tg:'secJt',job:'secJob'};
+const PILL_TO={all:'tday',tarot:'secTarot',ny:'secNY',jt:'secJt',love:'secLoveHub',gaeun:'secDb',tg:'secJt',job:'secJob'};
 let pillLock=0;
 function setPill(c){ $('pills').querySelectorAll('button').forEach(x=>{ const on=x.dataset.c===c; x.classList.toggle('on',on); if(on){ const r=$('pills'); const rb=r.getBoundingClientRect(), xb=x.getBoundingClientRect(); r.scrollTo({left:Math.max(0,r.scrollLeft+(xb.left-rb.left)-(rb.width-xb.width)/2),behavior:'smooth'}); } }); }
 /* 화면 전체가 옆으로 밀리지 않게: 밖 틀은 가로 스크롤 0으로 고정 */
@@ -1586,7 +1823,7 @@ $('home').addEventListener('scroll',()=>{ $('toTop').classList.toggle('on',$('ho
   if(Date.now()-pillLock<900) return; /* 누른 직후 부드럽게 이동하는 동안은 그대로 */
   /* 지금 보고 있는 섹션 안에 있을 때만 그 분류를 표시(숨긴 섹션은 건너뜀), 어느 분류에도 안 걸리면 '전체' */
   const head=document.querySelector('.hHead'), y=$('home').scrollTop+(head?head.offsetHeight:100)+60; let cur='all';
-  [['ny','secNY'],['jt','secJt'],['tarot','secTarot'],['love','secLoveHub'],['love','secDohwa'],['love','secCat'],['gaeun','secDb'],['job','secJob'],['re','secRe'],['match','secLove']].forEach(([c,id])=>{ const el=document.getElementById(id); if(!el||el.hidden||!el.offsetHeight) return; if(el.offsetTop<=y&&y<el.offsetTop+el.offsetHeight) cur=c; });
+  [['ny','secNY'],['jt','secJt'],['tarot','secTarot'],['love','secLoveHub'],['love','secDohwa'],['love','secCat'],['gaeun','secDb'],['job','secJob']].forEach(([c,id])=>{ const el=document.getElementById(id); if(!el||el.hidden||!el.offsetHeight) return; if(el.offsetTop<=y&&y<el.offsetTop+el.offsetHeight) cur=c; });
   if($('home').scrollTop<40) cur='all';
   const on=$('pills').querySelector('button.on'); if(on&&((on.dataset.c==='tg'&&cur==='jt')||(on.dataset.c==='heart'&&cur==='re'))) return; if(!on||on.dataset.c!==cur) setPill(cur); },{passive:true});
 $('toTop').onclick=()=>$('home').scrollTo({top:0,behavior:'smooth'});
@@ -1598,8 +1835,12 @@ const FZI={
  bok:'<path d="M15 18c-5 6-5 22 9 22s14-16 9-22"/><path d="M15 18c3-2 15-2 18 0"/><path d="M19 12c2 3 8 3 10 0"/><path d="M20 15c-2-3-6-2-5 1M28 15c2-3 6-2 5 1"/><circle cx="24" cy="15.5" r="1.8"/><path d="M20 28h8M24 24v8"/>',
  mind:'<path d="M24 7l4.8 10.6 11.5 1.2-8.6 7.8 2.4 11.4L24 32.2 13.9 38l2.4-11.4-8.6-7.8 11.5-1.2z"/><circle cx="24" cy="24" r="3.2"/>',
  bujeok:'<rect x="15" y="5" width="18" height="38" rx="1.5"/><circle cx="24" cy="12" r="3"/><path d="M24 9v6M21 12h6M18 19h12M19 24l3 3 3-3 3 3M24 30v8M20 34h8"/>',
- tti:'<circle cx="19" cy="24" r="10"/><circle cx="29" cy="24" r="10"/><circle cx="19" cy="24" r="1.6"/><circle cx="29" cy="24" r="1.6"/>'};
-const FZ=[['past','전생 직업','뭐 하고 살았게','#e8b64f'],['animal','일주 동물','무슨 동물이게','#5fcf95'],['bok','타고난 복','복 게이지 5종','#e8b64f'],['mind','마음의 오행','심리테스트','#ff7a5c'],['bujeok','오늘의 부적','하루 한 장','#dfe5ee'],['tti','띠 궁합','10초 궁합','#ff8fa6']];
+ color:'<path d="M24 6c-9.9 0-18 7.6-18 17 0 6 4.5 9 9 9h3a3 3 0 0 1 3 3c0 2.6 1.6 7 6 7 9.9 0 15-8.6 15-18S33.9 6 24 6z"/><circle cx="15" cy="20" r="2.4"/><circle cx="22" cy="13" r="2.4"/><circle cx="31" cy="14" r="2.4"/><circle cx="36" cy="22" r="2.4"/>',
+ food:'<path d="M8 26h32a16 16 0 0 1-32 0z"/><path d="M14 40h20"/><path d="M18 21c-2-3 2-5 0-9M24 21c-2-3 2-5 0-9M30 21c-2-3 2-5 0-9"/>',
+ pastus:'<path d="M10 14h10v20H10zM28 14h10v20H28z"/><path d="M20 22c3-4 5 4 8 0"/><circle cx="15" cy="18" r="1.4"/><circle cx="33" cy="18" r="1.4"/>',
+ mbti:'<rect x="7" y="7" width="15" height="15"/><rect x="26" y="7" width="15" height="15"/><rect x="7" y="26" width="15" height="15"/><rect x="26" y="26" width="15" height="15"/>',
+tti:'<circle cx="19" cy="24" r="10"/><circle cx="29" cy="24" r="10"/><circle cx="19" cy="24" r="1.6"/><circle cx="29" cy="24" r="1.6"/>'};
+const FZ=[['past','전생 직업','뭐 하고 살았게','#e8b64f'],['animal','일주 동물','무슨 동물이게','#5fcf95'],['bok','타고난 복','복 게이지 5종','#e8b64f'],['mind','마음의 오행','심리테스트','#ff7a5c'],['bujeok','오늘의 부적','하루 한 장','#dfe5ee'],['tti','띠 궁합','10초 궁합','#ff8fa6'],['color','퍼스널 컬러','타고난 내 색','#ff8fa6'],['food','소울푸드','사주가 당기는 맛','#e8b64f'],['pastus','전생에 우리는','둘이 무슨 사이','#ff7a5c'],['mbti','팔자 MBTI','사주로 본 MBTI','#7ea6ff']];
 $('fzRow').innerHTML=FZ.map(([k,t,d,c],i)=>`<button class="fzc" type="button" data-f="${k}" style="--ec:${c};--d:${i*.45}s"><span class="fr"><svg class="ic" viewBox="0 0 48 48" fill="none" stroke="url(#fzG)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${FZI[k]}</svg><span class="nm">${t}</span></span><span class="ds">${d}</span></button>`).join('')+'<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="fzG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7e3b4"/><stop offset="1" stop-color="#c9994b"/></linearGradient></defs></svg>';
 /* 소품 그림(img/free/키.jpg)이 있으면 그림 카드로, 없으면 금선 그림 그대로 */
 window.fzLoad=()=>$('fzRow').querySelectorAll('.fzc').forEach(c=>{ const src=`img/free/${c.dataset.f}.jpg`, im=new Image(); im.onload=()=>{ const fr=c.querySelector('.fr'); fr.style.backgroundImage=`url('${src}')`; fr.classList.add('hasImg'); }; im.src=src; });
@@ -1634,7 +1875,7 @@ $('ppgMm').innerHTML=['wood','fire','earth','metal','water'].map(k=>`<i style="b
     v.addEventListener('error',()=>{ v.remove(); pc._v=null; });
     pc.insertBefore(v,pc.firstChild); pc._v=v; io.observe(pc); }); })();
 /* ---------- 보관함 (archive.js가 각 메뉴 결과를 모아 둠) ---------- */
-const AF={fort:['today','sinnyeon','lifetime','taegil'],love:['dohwa','gunghap','obgh'],work:['career'],card:['tarot'],me:['avatar'],free:['free','ppopgi','bujeok','dangbeon','myodang']};
+const AF={fort:['today','sinnyeon','myeongri','lifetime','taegil'],love:['dohwa','gunghap','obgh'],work:['career'],card:['tarot'],me:['avatar'],free:['free','ppopgi','bujeok','dangbeon','myodang']};
 let archF='all', archCur=null;
 const aEsc=t=>String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const aAgo=t=>{ const d=(Date.now()-t)/1000; if(d<60) return '방금'; if(d<3600) return Math.floor(d/60)+'분 전'; if(d<86400) return Math.floor(d/3600)+'시간 전'; return Math.floor(d/86400)+'일 전'; };
@@ -1676,10 +1917,9 @@ $('backBtn').onclick=()=>{
 if($('ctaHome')) $('ctaHome').onclick=showHome;
 $('ctaHomeBar').onclick=showHome;
 window.ObHome={goPage:u=>goPage(u),duck:()=>{ try{ bgm(BGM_LV.talk,.4); }catch(e){} },idle:()=>{ try{ bgm(BGM_LV.idle,1); }catch(e){} }}; /* charhub.js 연결 */
-(()=>{ const rh=$('resHome'), rs=$('result'); if(rh&&rs) rs.addEventListener('scroll',()=>rh.classList.toggle('on',rs.scrollTop>240),{passive:true}); })();
 $('goHome').onclick=async()=>{ await unlock(); showHome(); };
 document.querySelectorAll('[data-home]').forEach(b=>b.onclick=showHome);
-$('subGo').onclick=()=>toast('체험판: 7일 무료 체험이 시작됩니다');
+$('subGo').onclick=()=>{ if(!window.ObPay) return toast('체험판: 7일 무료 체험이 시작됩니다'); const k=S&&S.low||'wood'; ObPay.open({name:'오방 멤버십 · 월 구독',who:'수호신',desc:'매달 수호신의 편지 · 매일 개운 미션 · 엽전 · 매일 상담',price:9900,img:`img/${k}.jpg`,trial:'첫 7일 무료, 이후 매달',cta:'7일 무료로 시작하기',agree:'7일 무료 체험이 끝나면 매달 9,900원이 자동 결제되고, 마이페이지에서 언제든 해지할 수 있음을 확인했어요.',okTitle:'멤버십이 시작됐어요',okText:'내일 아침 첫 편지가 도착해요',after:()=>{ ov(null); toast('체험판: 멤버십 체험이 시작됐어요'); }}); };
 $('ctaAvatar').onclick=()=>goPage('avatar.html');
 $('ctaShare').onclick=()=>toast('체험판: 공유 카드 생성');
 $('muteBtn').onclick=()=>{ muted=!muted; [vA,vB].forEach(v=>v.muted=muted); bgm(bgmLevel,.2); $('waves').style.display=muted?'none':''; $('muteBtn').setAttribute('aria-label',muted?'소리 켜기':'소리 끄기'); };
@@ -1813,28 +2053,8 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.con
 })();
 </script>
 
-<script>window.CH_BAND=2</script>
-<script src="charhub.js?v=8"></script>
+<script src="charhub.js?v=6"></script>
 <script src="hscroll.js?v=2"></script>
 <script src="menuintro.js"></script>
 
 <script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
-<script>
-/* 시안 A: 오늘 밤 손님 고르기. 그믐밤 앞뒤(음력 27일~1일)는 그믐, 1~2월 · 12월이나 내 띠가 내년 삼재면 삼재, 나머지는 흑매. ?ng=heuk|geum|sam 으로 미리 보기 */
-(function(){ const D2='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/', CF='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_';
-  const N={heuk:{href:'heukmae.html',img:CF+'101836_ccb27e8d-f3d5-430a-975b-c64a04d3c7cf_min.webp',v:D2+'9d07049a-9f0b-45e3-9547-21f1841ad87d.mp4',r:'168,40,58',r2:'240,165,173',k:'오늘 밤 손님 · 서하의 귀띔',b:'문 밖에 흑매가 서성여',e:'둘 사이 조심할 때, 무료로 미리 보기'},
-    geum:{href:'geumeum.html',img:CF+'102005_5906aacf-085d-40b2-acda-136da797f5cc_min.webp',v:D2+'c046140c-d852-47b8-9472-52acd1fa393c.mp4',r:'59,90,154',r2:'184,200,238',k:'오늘 밤 손님 · 노을의 귀띔',b:'곧 그믐밤, 그믐이 걸어 다녀',e:'내 빈칸이 어딘지 무료로 확인해 두기'},
-    sam:{href:'samjae.html',img:CF+'102844_e93d3f57-cfef-45d4-ad1d-668f8f7cf23a_min.webp',v:D2+'9ac5edd8-b3bb-4fee-b064-025be7356f3c.mp4',r:'106,74,168',r2:'203,184,240',k:'오늘 밤 손님 · 할매의 귀띔',b:'삼남매가 지붕 위에 앉았구나',e:'내년이 내 삼재인지 무료로 보기'}};
-  function pick(){ const q=new URLSearchParams(location.search).get('ng'); if(N[q]) return q;
-    const t=new Date(); try{ const L=window.Saju&&Saju.solarToLunar(t.getFullYear(),t.getMonth()+1,t.getDate()); if(L&&(L.d>=27||L.d===1)) return 'geum'; }catch(e){}
-    const m=t.getMonth()+1; let me=null; try{ me=JSON.parse(sessionStorage.getItem('me')||localStorage.getItem('obMe')||'null'); }catch(e){}
-    if(me&&me.y){ const tb=((+me.y-4)%12+12)%12, g=[[8,0,4],[5,9,1],[2,6,10],[11,3,7]].findIndex(x=>x.includes(tb)), yrs=[[2,3,4],[11,0,1],[8,9,10],[5,6,7]][g], ny=((t.getFullYear()+1-4)%12+12)%12; if(yrs&&yrs.includes(ny)&&(m>=11||m<=2)) return 'sam'; }
-    if(m===12||m<=2) return 'sam'; return 'heuk'; }
-  const k=pick(), n=N[k], a=document.getElementById('ngt'); if(!a) return;
-  a.href=n.href; a.style.setProperty('--nr',n.r); a.style.setProperty('--nr2',n.r2);
-  document.getElementById('ngtI').style.backgroundImage="url('"+n.img+"')";
-  document.getElementById('ngtK').textContent=n.k; document.getElementById('ngtB').textContent=n.b; document.getElementById('ngtE').textContent=n.e;
-  const v=document.getElementById('ngtV'); try{ if(!(navigator.connection&&navigator.connection.saveData)&&'IntersectionObserver' in window){ new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ if(!v.src){ v.src=n.v; v.addEventListener('playing',()=>v.classList.add('on'),{once:true}); } v.play().catch(()=>{}); } else v.pause(); }),{threshold:.4}).observe(a); } }catch(e){}
-  const th=document.getElementById('thr'); if(th){ th.addEventListener('pointerenter',()=>th.classList.add('on')); setTimeout(()=>th.classList.add('on'),2500); }
-})();
-</script>

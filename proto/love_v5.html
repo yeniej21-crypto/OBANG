@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
+<link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin><link rel="preload" as="image" href="https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_095539_e6586493-bd7d-4fcd-9881-5b84d6351dc5_min.webp">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <script src="early.js?v=5"></script>
@@ -209,6 +210,7 @@ button{font-family:inherit;color:inherit}
 .sh b{font-size:21px}
 .sh p{margin-top:8px}
 .ph{overflow:clip}
+.scene video#sv{z-index:2;transition:opacity .2s}
 .jmp{position:sticky;top:calc(env(safe-area-inset-top,0px) + 60px);z-index:15;display:flex;gap:6px;overflow-x:auto;padding:10px 16px;background:rgba(10,8,12,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);scrollbar-width:none;box-shadow:0 1px 0 rgba(255,236,214,.07)}
 .jmp::-webkit-scrollbar{display:none}
 .jmp a{flex:none;font-size:12.5px;font-weight:700;color:var(--ink-2);text-decoration:none;padding:7px 12px;border:1px solid rgba(255,236,214,.14)}
@@ -223,7 +225,7 @@ button{font-family:inherit;color:inherit}
 
   <section class="scene" id="scene">
     <div class="bg"></div>
-    <video id="sv" muted loop playsinline preload="auto" poster="https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_095539_e6586493-bd7d-4fcd-9881-5b84d6351dc5_min.webp"></video>
+    <video id="sv" src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/6413447b-6897-40a6-b67f-919ed74222c6.mp4" muted autoplay playsinline preload="auto" poster="https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_095539_e6586493-bd7d-4fcd-9881-5b84d6351dc5_min.webp"></video>
     <div class="cute" id="cute"></div><div class="door"></div>
     <div class="sub" id="sub"></div>
     <div class="tx"><small>오방도감 · 연애 상담소</small><h1>누구 때문에<br>왔어</h1><p>문 닫고 앉아. 서하가 먼저 들어 줄게.<br>사주와 카드로, 네 얘기에 맞춰서.</p></div>
@@ -281,40 +283,22 @@ addEventListener('scroll',()=>$('top').classList.toggle('sc',scrollY>200),{passi
 /* ---------- 1. 들어서는 장면: 문이 열리며 서하 ---------- */
 const sc=$('scene'), sv=$('sv');
 /* v4: 문이 열리면 서하가 뾰로롱 → 귀여운 서하가 말을 건다(자동 재생, 소리는 버튼으로) */
-const VT='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/16276615-1faa-4c46-bb99-00182b738caf.mp4', VS='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/7da5996c-34ef-4cd1-bbb8-26038034c0f6.mp4', LINES=[[0.5,'연애 고민 있지.'],[2.9,'다 얘기해 봐.'],[4.4,'내가 들어 줄게.']];
-sv.remove();
-function fxVid(src,muted){ const v=document.createElement('video'); v.className='fx'; v.playsInline=true; v.setAttribute('playsinline',''); v.muted=muted; v.preload='auto'; v.src=src; sc.insertBefore(v,$('cute')); v.addEventListener('playing',()=>v.classList.add('on')); return v; }
-let vt=null, vs=null, talking=false;
-const subOf=v=>{ const sub=$('sub'); v.addEventListener('timeupdate',()=>{ let t=''; LINES.forEach(x=>{ if(v.currentTime>=x[0]) t=x[1]; }); if(v.duration&&v.currentTime>v.duration-.6) t=''; if(sub.textContent!==t){ sub.textContent=t; sub.classList.toggle('on',!!t); } }); };
-/* 10/3 20:40 은주: 소리가 안 나고 말이 늦게 나옴 → ① 소리 켜기 문(early.js)을 누른 뒤에 장면 시작 ② 말 영상은 처음부터 미리 받아 둠 ③ 변신은 1.3배로 빠르게, 끝나기 직전에 바로 말 시작 */
-let started=false, soundOn=true, startMuted=false;
-const VSpre=fxVid(VS,false); VSpre.load();
-function talk(muted){ if(talking) return; talking=true;
-  vs=VSpre; if(vs.ended||vs.currentTime>0.05){ try{ vs.currentTime=0; }catch(e){} } vs.muted=muted;
-  vs.onended=()=>{ $('cute').classList.add('on'); talking=false; vs.classList.remove('on'); };
-  const p=vs.play(); if(p&&p.catch) p.catch(e=>{ if(!(e&&e.name==='NotAllowedError')){ $('cute').classList.add('on'); talking=false; return; } vs.muted=true; vs.play().catch(()=>{ $('cute').classList.add('on'); talking=false; }); armUnmute(); }); }
-let armed=false; function armUnmute(){ if(armed) return; armed=true; const on=()=>{ document.removeEventListener('pointerdown',on,true); if(vs&&!vs.ended){ vs.muted=false; } $('snd').classList.add('lit'); }; document.addEventListener('pointerdown',on,true); }
-requestAnimationFrame(()=>setTimeout(()=>sc.classList.add('in'),120));
-function sparkle(){ const f=document.createElement('div'); f.className='spk'; f.innerHTML='<i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>'; sc.appendChild(f); setTimeout(()=>f.remove(),1400); }
-function startScene(){ if(started) return; started=true;
-  try{ soundOn=!startMuted&&sessionStorage.getItem('obSnd')!=='0'; }catch(e){ soundOn=!startMuted; }
-  if(!soundOn) armUnmute();
-  if(!VT){ sparkle(); setTimeout(()=>{ $('cute').classList.add('on'); talk(!soundOn); },450); return; }
-  vt=fxVid(VT,!soundOn); vt.playbackRate=1.3; let handed=false;
-  const hand=()=>{ if(handed) return; handed=true; $('cute').classList.add('on'); talk(!soundOn); setTimeout(()=>{ if(vt){ vt.remove(); vt=null; } },500); };
-  vt.addEventListener('timeupdate',()=>{ if(vt&&vt.duration&&vt.currentTime>=vt.duration-0.3) hand(); });
-  vt.addEventListener('ended',hand);
-  const p=vt.play(); if(p&&p.catch) p.catch(e=>{ if(e&&e.name==='NotAllowedError'){ vt.muted=true; soundOn=false; armUnmute(); vt.play().catch(hand); } else hand(); }); }
-/* 이미 화면을 눌러서 들어왔으면 바로, 아니면 '소리 켜고 들어가기'(또는 아무 곳) 누를 때 시작. 6초 안에 아무 반응이 없으면 소리 없이 시작 */
+/* 10/3 21:00 은주: 영상 · 음성이 너무 늦게 나와서 사람들이 이미 아래로 내려감(치명적) →
+   변신(가운데 움직이는 부분만 잘라 1.4배) + 말하기를 한 파일로 합침(6413447b, 8.5초, 말은 2.46초부터).
+   화면에 들어오자마자 소리 없이 바로 재생 → '소리 켜고 들어가기'(또는 아무 곳) 누르는 순간 소리 켜고, 말이 이미 지났으면 말 시작점으로 돌려 다시 */
+const OP=$('sv'), TALK_AT=2.46; let sndOn=false;
+OP.addEventListener('playing',()=>OP.classList.add('on'),{once:true});
+OP.addEventListener('ended',()=>{ $('cute').classList.add('on'); });
+function kick(){ const p=OP.play(); if(p&&p.catch) p.catch(e=>{ if(e&&e.name==='NotAllowedError'&&!OP.muted){ OP.muted=true; sndOn=false; OP.play().catch(()=>{}); } }); }
+function soundUp(force){ if(sndOn&&!force) return; let off=false; try{ off=sessionStorage.getItem('obSnd')==='0'; }catch(e){} if(off&&!force) return;
+  sndOn=true; OP.muted=false; if(force||OP.ended||OP.currentTime>TALK_AT+0.5){ try{ OP.currentTime=OP.currentTime<TALK_AT&&!force?OP.currentTime:TALK_AT; }catch(e){} } kick(); $('snd').classList.add('lit'); }
+requestAnimationFrame(()=>setTimeout(()=>sc.classList.add('in'),60));
 (function(){ const act=()=>{ try{ return !!(navigator.userActivation&&navigator.userActivation.hasBeenActive); }catch(e){ return false; } };
-  let off=false; try{ off=sessionStorage.getItem('obSnd')==='0'; }catch(e){}
-  if(act()||off){ setTimeout(startScene,300); return; }
-  const go=()=>setTimeout(startScene,150); /* '소리 없이 볼게요' 클릭이 먼저 기록되도록 살짝 늦춤 */
-  window.addEventListener('obsound',go,{once:true});
-  document.addEventListener('pointerup',go,{once:true,capture:true});
-  setTimeout(()=>{ if(!started){ startMuted=true; startScene(); } },6000);
+  if(act()){ OP.muted=false; sndOn=true; } kick();
+  window.addEventListener('obsound',()=>soundUp(false));
+  document.addEventListener('pointerdown',function f(e){ if(e.target.closest('#snd')) return; document.removeEventListener('pointerdown',f,true); setTimeout(()=>soundUp(false),260); },true);
 })();
-$('snd').onclick=()=>{ $('snd').classList.add('lit'); talking=false; if(vs){ vs.pause(); } talk(false); };
+$('snd').onclick=()=>soundUp(true);
 
 /* ---------- 2. 오늘의 연애 날씨 ---------- */
 const S=window.Saju, GAN=S.GAN, JI=S.JI;

@@ -762,3 +762,12 @@
 - 2026-10-03 15:52 · 배포: 홈 메뉴 정리 반영(home_v2 그대로, 은주 승인). 백업 bk/seoha-salon.v-before-menuv2.html. 이안 홈은 아직 예전 줄(합칠 때 정리).
 - 2026-10-03 15:54 · 배포: 연애 상담소 배너 어두운 판(서하 블라우스와 베이지 바탕이 겹침) — .band.lhubS #0e0b10, 판 = 와인빛 그라데이션 + 금색 안쪽 선, 제목 흰색, 들어가기 금색, 서하 뒤 분홍 빛 · 그림자(CSS 'lhub-dark' 블록). 서하 · 이안 · home_v2.
 - 2026-10-03 15:55 · 정자 인트로 v2 방향(은주 15:50: 지금 정자는 평면적 · 불 켜기가 AI 같음 · 소리 약함 · 걸어 들어가는 실감, 출시가 11월 말~12월 초라 겨울(눈 없음)이 기본, 눈 버전은 눈 오는 날 배포): 메인 컷 겨울 후보 4장 pav_keys.html — 1 긴 돌길(3a1f96aa) · 2 3D 애니 영화 느낌(bc83d3d9) · 3 올려다보는 돌계단(9c825c5f) · 4 소나무 사이로 엿보기(aa622780). 고르면: ① 걸어 들어가는 클링 영상(발소리 · 바람 소리 포함, 앞쪽 소나무가 스쳐 지나가는 깊이) ② 등불은 영상 대신 코드 — 같은 카메라의 꺼진/켜진 두 장면을 받아 차이로 등불 자리를 찾고, 켜진 그림을 등불마다 빛 원으로 드러냄 + 불빛 깜빡임 + 불티 + 앞쪽 얼음 가루 입자 + 아주 느린 카메라 전진 ③ 문 열림 영상(나무 문 소리) ④ 이안. 틀은 proto/pavilion2.html(자리표 __WALK__ · __BASE__ · __LIT__ · __DOOR__ · __LAMPS__). Higgsfield의 효과음 모델은 게임 전용이라 쓸 수 없음 → 발소리 · 문소리는 클링 영상 소리 + 합성.
+- 2026-10-03 16:03 · 배포: ★ 로그인 · 회원가입 1차(은주: 시행착오 없게 설계)
+  - proto/obauth.js 한 파일(early.js?v=5가 모든 화면에 붙임): ObAuth.ready · user() · require({title,reason,pay}) · open() · account() · signOut() · on(cb) · takePending() · mode(). live = Supabase Auth(카카오 · Google OAuth, PKCE, 카카오 scopes 'profile_nickname profile_image' — 이메일은 비즈 앱 전환 전엔 못 받음), mock = 키 없을 때 같은 창 · 같은 흐름, localStorage obAuthMock(체험판 표시).
+  - server/netlify/functions/config.mjs → /api/config: SUPABASE_URL · SUPABASE_ANON_KEY 있으면 live, 없으면 mock, AUTH_MODE=mock이면 강제 mock. 키는 넷리파이 환경변수에만.
+  - obpay.js: 결제 창 전에 ObAuth.require(결제하려면, 로그인), 카카오 · 구글 다녀오면 같은 결제 창 다시 열림(sessionStorage obAuthNext.pay). 상품에 noAuth:true면 건너뜀. 백업 bk/obpay.v-before-auth.js.
+  - 홈 전체 메뉴 맨 위 '로그인 · 회원가입 / 내 계정' 줄(#obaRow) → 내 계정 창(이름 · 로그인 방법 · 보관함 보기 · 로그아웃 · 탈퇴 안내). 전체 메뉴의 English · Peach Blossom 숨김(hidden).
+  - 남은 것(키 들어오면): 보관함 · 구매 기록을 Supabase 표로(profiles · archive · purchases, RLS), 로그인하면 이 기기 보관함을 계정으로 올리기, 탈퇴 처리.
+  - 테스트 t/auth.py.
+- 2026-10-03 16:05 · 타로 진행자 = 먹물(은주 결정). 지금 묘당 먹물 그림(img/cat/water.jpg)은 윙크 그림이라 말하는 영상 첫 장면도 한쪽 눈 감김 → 두 눈 뜬 새 그림 후보 cat_cmp.html: 1 3D 애니 · 카드 누르는 앞발 c2edcfff / 2 지금 그림체 고급화 · 떠 있는 카드 2432f9de / 3 3D 애니 · 바짝 다가온 얼굴 63b5fd71(참조 media df83af77). 대사 세트 초안 proto/meokmul_lines.js(처음 · 다시 · 밤 · 오랜만 · 뽑기 · 좋은 카드 · 조심 카드 · 마무리, 29줄).
+  - ★ 대사 · 말하는 영상 다양화를 개발 킥오프 자료(★ 중요 절) · To-do v2(11/20, 68개)에 넣음: 오픈 때 주연 5명 인사 5세트 · 나머지 3세트, 1월 말 주연 10세트, 처음/다시/밤/오랜만 나눠 최근 본 것 빼고 무작위, 캐릭터별 대사 표.

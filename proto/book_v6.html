@@ -614,7 +614,8 @@ function initBook(){ const d=$('desk').getBoundingClientRect(); let start=0; try
   pf=new St.PageFlip($('book'),{width:Math.round(d.width),height:Math.round(d.height),size:'stretch',minWidth:260,maxWidth:560,minHeight:420,maxHeight:1200,
     usePortrait:true,showCover:false,autoSize:true,drawShadow:true,maxShadowOpacity:.55,flippingTime:850,mobileScrollSupport:true,swipeDistance:24,clickEventForward:true,disableFlipByClick:true,startPage:start,startZIndex:2});
   pf.on('flip',e=>{ cur=e.data; activate(cur); });
-  pf.on('changeState',e=>{ if(e.data==='flipping') swoosh(); if(e.data==='user_fold'||e.data==='flipping') $('hint').classList.remove('on'); });
+  let lastSt='read';
+  pf.on('changeState',e=>{ const d=e.data; if((d==='flipping'||d==='user_fold')&&lastSt!=='user_fold'&&lastSt!=='flipping') swoosh(); if(d==='user_fold'||d==='flipping') $('hint').classList.remove('on'); lastSt=d; });
   pf.on('init',e=>{ cur=e.data.page||start; activate(cur); });
   pf.loadFromHTML(leaves);
   if(start===0){ setTimeout(()=>{ if(cur===0) $('hint').classList.add('on'); },1200); setTimeout(()=>$('hint').classList.remove('on'),7000); }
@@ -624,6 +625,10 @@ document.addEventListener('keydown',e=>{ if(!pf) return; if(e.key==='ArrowRight'
 $('tocB').onclick=()=>$('toc').classList.add('on');
 $('toc').onclick=e=>{ const b=e.target.closest('[data-i]'); if(b&&pf){ const n=+b.dataset.i; if(Math.abs(n-cur)<=1) pf.flip(n); else { pf.turnToPage(n); cur=n; activate(n); } } if(b||e.target.closest('.x')) $('toc').classList.remove('on'); };
 $('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+
+/* 아이폰은 손가락 동작 안에서 한 번 재생한 영상만 나중에 소리 내어 틀 수 있다 → 넘기는 손짓마다 앞뒤 쪽 목소리 영상을 미리 '깨워' 둔다 */
+function prime(){ [cur-1,cur+1,cur+2].forEach(j=>{ const l=leaves[j]; if(!l) return; l.querySelectorAll('video.vc,video.rvv:not([muted])').forEach(v=>{ if(v._pr) return; v._pr=1; src(v); try{ v.muted=false; const p=v.play(); v.pause(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} }); }); }
+document.addEventListener('touchend',prime,{capture:true,passive:true}); document.addEventListener('click',prime,{capture:true});
 
 /* 쪽 안의 버튼(목소리 듣기 · 글 보기 · 다시 듣기 · 명인 카드 · 홈) */
 $('book').addEventListener('click',e=>{ const l=e.target.closest('.leaf'); if(!l) return; const i=+l.dataset.i, P=PAGES[i];

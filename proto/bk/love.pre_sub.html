@@ -124,7 +124,7 @@ button{font-family:inherit;color:inherit}
 .ysf .im:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f6f0e6 0,#f6f0e6 30%,rgba(246,240,230,.86) 46%,rgba(246,240,230,0) 70%),linear-gradient(118deg,rgba(255,226,170,.32),rgba(255,226,170,0) 46%)}
 .ysf .tx{position:absolute;left:16px;top:18px;bottom:16px;width:54%;display:flex;flex-direction:column}
 .ysf small{font-size:11px;font-weight:700;letter-spacing:.1em;color:#b8352a}
-.ysf b{margin-top:8px;font-family:var(--brush);font-size:29px;font-weight:400;letter-spacing:0;line-height:1.12} /* 10/3 은주: 붓글씨체로 */
+.ysf b{margin-top:6px;font-size:22px;font-weight:900;letter-spacing:-.03em;line-height:1.25}
 .ysf em{margin-top:6px;font-style:normal;font-size:13px;line-height:1.55;color:#6b5d4f}
 .ysf i{margin-top:auto;align-self:flex-start;font-style:normal;font-size:13px;font-weight:800;padding:10px 14px;background:#2a2119;color:#f6f0e6;box-shadow:6px 8px 16px -8px rgba(60,38,18,.6)}
 .ysf:active{transform:scale(.985)}
@@ -258,15 +258,13 @@ sv.remove();
 function fxVid(src,muted){ const v=document.createElement('video'); v.className='fx'; v.playsInline=true; v.setAttribute('playsinline',''); v.muted=muted; v.preload='auto'; v.src=src; sc.insertBefore(v,$('cute')); v.addEventListener('playing',()=>v.classList.add('on')); return v; }
 let vt=null, vs=null, talking=false;
 const subOf=v=>{ const sub=$('sub'); v.addEventListener('timeupdate',()=>{ let t=''; LINES.forEach(x=>{ if(v.currentTime>=x[0]) t=x[1]; }); if(v.duration&&v.currentTime>v.duration-.6) t=''; if(sub.textContent!==t){ sub.textContent=t; sub.classList.toggle('on',!!t); } }); };
-function talk(muted){ if(talking) return; talking=true; if(vs){ vs.remove(); } vs=fxVid(VS,muted);
+function talk(muted){ if(talking) return; talking=true; if(vs){ vs.remove(); } vs=fxVid(VS,muted); subOf(vs);
   vs.addEventListener('ended',()=>{ $('sub').classList.remove('on'); $('cute').classList.add('on'); talking=false; });
-  vs.play().catch(()=>{ if(!vs.muted){ vs.muted=true; vs.play().catch(()=>{ $('cute').classList.add('on'); talking=false; }); armUnmute(); } else { $('cute').classList.add('on'); talking=false; } }); }
-/* 10/3 19:40 은주: 자막 빼고 소리를 기본으로. 폰이 소리 자동 재생을 막으면 무음으로 시작하고 첫 터치 때 소리를 켠다 */
-let armed=false; function armUnmute(){ if(armed) return; armed=true; const on=()=>{ document.removeEventListener('pointerdown',on,true); if(vs&&!vs.ended){ vs.muted=false; } $('snd').classList.add('lit'); }; document.addEventListener('pointerdown',on,true); }
+  vs.play().catch(()=>{ $('cute').classList.add('on'); talking=false; }); }
 requestAnimationFrame(()=>setTimeout(()=>sc.classList.add('in'),120));
 function sparkle(){ const f=document.createElement('div'); f.className='spk'; f.innerHTML='<i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>'; sc.appendChild(f); setTimeout(()=>f.remove(),1400); }
-setTimeout(()=>{ if(!VT){ sparkle(); setTimeout(()=>{ $('cute').classList.add('on'); talk(false); },450); return; } vt=fxVid(VT,false); vt.addEventListener('ended',()=>{ $('cute').classList.add('on'); talk(false); setTimeout(()=>{ if(vt){ vt.remove(); vt=null; } },400); });
-  vt.play().catch(()=>{ vt.muted=true; armUnmute(); vt.play().catch(()=>{ $('cute').classList.add('on'); talk(false); }); }); },1300);
+setTimeout(()=>{ if(!VT){ sparkle(); setTimeout(()=>{ $('cute').classList.add('on'); talk(true); },450); return; } vt=fxVid(VT,true); vt.addEventListener('ended',()=>{ $('cute').classList.add('on'); talk(true); setTimeout(()=>{ if(vt){ vt.remove(); vt=null; } },400); });
+  vt.play().catch(()=>{ $('cute').classList.add('on'); talk(true); }); },1300);
 $('snd').onclick=()=>{ $('snd').classList.add('lit'); talking=false; talk(false); };
 
 /* ---------- 2. 오늘의 연애 날씨 ---------- */

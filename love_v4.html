@@ -188,7 +188,7 @@ button{font-family:inherit;color:inherit}
 .st{grid-template-columns:repeat(4,1fr);gap:6px}
 .st button{display:block;min-height:0;padding:0 0 7px;border-radius:0;border:0;background:#f6efe3;text-align:center;overflow:hidden}
 .st button:active{transform:scale(.95);background:#efe5d4}
-.st button .pic{display:block;width:100%;aspect-ratio:1/1;background:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_095833_7f843edf-0ec2-4c84-bf2e-5264ccbde492_min.webp') no-repeat;background-size:400% auto;background-position:var(--bx) var(--by)}
+.st button .pic{display:block;width:100%;aspect-ratio:1/1;background:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_101429_46828228-e7ad-487a-b7d2-869b49851ba0_min.webp') no-repeat;background-size:400% auto;background-position:var(--bx) var(--by)}
 .st button b{display:block;margin-top:2px;font-size:12.5px;font-weight:800;color:#2a2119;letter-spacing:-.02em}
 </style>
 </head>
@@ -382,7 +382,7 @@ const PR={
  hundred:{n:'이별 후 100일',d:'하람 · 매일 아침 한 줄로 회복하기',img:'img/wood.jpg',c:'var(--wood)',pr:'준비 중',soon:'2월 오픈'},
  reNew:{n:'재회 감정서',d:'재이 · 이별 사정까지 듣고 읽는 재회',img:'img/water.jpg',c:'var(--water)',pr:'준비 중',soon:'11월 오픈'},
  marry:{n:'붉은 실 결혼운',d:'월하 · 결혼의 때와 결혼 궁합',img:'img/taegil.jpg',c:'#d9b38c',pr:'준비 중',soon:'1월 오픈'}};
-$('st').innerHTML=ST.map((x,i)=>`<button type="button" data-i="${i}"><span class="pic" style="--bx:${(i%4)*100/3}%;--by:${i<4?6:91}%" role="img" aria-label="${x.n}"></span><b>${x.n}</b></button>`).join('');
+$('st').innerHTML=ST.map((x,i)=>`<button type="button" data-i="${i}"><span class="pic" style="--bx:${(i%4)*100/3}%;--by:${i<4?5.8:88.5}%" role="img" aria-label="${x.n}"></span><b>${x.n}</b></button>`).join('');
 let typeT=null;
 function openSt(i){ const x=ST[i]; $('shK').textContent=`서하 · ${x.n}`; const L=$('shL'); L.textContent=''; clearTimeout(typeT);
   let k=0; const ty=()=>{ L.textContent=x.line.slice(0,++k); if(k<x.line.length) typeT=setTimeout(ty,34); }; setTimeout(ty,260);

@@ -514,7 +514,7 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 14px}
 
   <!-- 3. 열두 달 두루마리 -->
   <div class="scr" id="sScroll">
-    <div class="scene" data-scene="scroll"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div>
+    <div class="scene" data-scene="scroll" data-loop="0"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div>
     <div class="top"><button class="back" id="back4" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>열두 달 두루마리</b></div>
     <div class="scrollUI">
       <div class="mscroll rolled hid" id="mscroll" tabindex="0" role="region" aria-roledescription="두루마리" aria-label="2027년 열두 달 두루마리. 좌우 화살표로 넘겨 보세요">
@@ -625,7 +625,8 @@ const ART={
   /* 말하는 영상(소리 있음, 한 번 재생): src가 비어 있으면 글자만 나온다. subs=[초, 자막] */
   voice:{ scroll:{src:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/c1b97fa8-d285-42e9-9bf1-96e637ff3384.mp4',dur:5,subs:[[0.1,'자, 네 내년을 펼쳐 보마.']]},   /* Kling 45566376 */
           pouch:{src:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/b33cfeda-182d-45f1-9e3d-b13216748113.mp4',dur:5,subs:[[0.1,'새벽이 왔구나.'],[3.1,'이걸 받거라.']]} },   /* Kling bde80d19 (다른 테이크 ede2b656 → 4ec8ac6a) */
-  bgm:'',   /* 배경 음악: 은주가 고른 곡 주소(a/…mp3). 비어 있으면 화롯불 소리만 */
+  once:{ scroll:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/0dbb2145-b76c-4388-91f3-cd61d7e77729.mp4' },  /* 두루마리를 쫙 펴는 장면(말 없이, 한 번 재생 후 마지막 장면에 멈춤) */
+  bgm:'a/halmae_bgm.mp3',   /* 배경 음악: 은주가 고른 「Plastic Dragon – Jon Algar」(Epidemic). 풀이 화면부터만 흐른다(앞쪽은 화롯불 · 쌀 · 두루마리 소리가 주인공) */
   local:'img/halmae.jpg'                            /* 원격 그림이 안 올 때 밑에 깔리는 그림 */
 };
 const MONTH_ART=['까치와 호랑이','매화와 참새','진달래 언덕','벚꽃과 나비','모란','잉어','연꽃과 원앙','보름달과 토끼','국화','감나무와 까치','갈대와 기러기','눈 덮인 소나무와 학'];
@@ -655,8 +656,8 @@ setSH(); addEventListener('resize',()=>{ setSH(); traySize(); msLayout(true); })
 /* ---------- 소리: 화롯불 타닥거림(Web Audio 합성, 손을 댄 뒤에만 시작) ---------- */
 let soundOn=true; try{ soundOn=sessionStorage.getItem('snSnd')!=='off'; }catch(e){}
 let entered=false;
-const AMB=(()=>{ let ctx=null, out=null, fx=null, nb=null, timer=0, on=false, sw=null, swF=null, mg=null, mbuf=null, msrc=null, mreq=false;
-  const VOL=.55, MVOL=.34;  /* MVOL: 배경 음악 크기(은주가 고른 곡만, ART.bgm) */
+const AMB=(()=>{ let ctx=null, out=null, fx=null, nb=null, timer=0, on=false, sw=null, swF=null, mg=null, mbuf=null, msrc=null, mreq=false, mon=false;
+  const VOL=.55, MVOL=.42, VOLM=.3;  /* VOLM: 음악이 흐를 때 화롯불 크기 */  /* MVOL: 배경 음악 크기(은주가 고른 곡만, ART.bgm) */
   function bgmGo(){ if(!ctx||!mbuf||msrc||!on) return; msrc=ctx.createBufferSource(); msrc.buffer=mbuf; msrc.loop=true; msrc.connect(mg); msrc.start(); }
   function bgmLoad(){ if(mreq||!ART.bgm||!ctx) return; mreq=true; fetch(ART.bgm).then(r=>r.ok?r.arrayBuffer():null).then(b=>b&&new Promise((ok,no)=>ctx.decodeAudioData(b,ok,no))).then(buf=>{ if(buf){ mbuf=buf; bgmGo(); } }).catch(()=>{}); }
   function init(){ if(ctx) return true; const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false; try{ ctx=new AC(); }catch(e){ return false; }
@@ -681,7 +682,8 @@ const AMB=(()=>{ let ctx=null, out=null, fx=null, nb=null, timer=0, on=false, sw
     timer=setTimeout(sched,360+Math.random()*440); }
   function ramp(g,v,t){ const n=ctx.currentTime; g.gain.cancelScheduledValues(n); g.gain.setValueAtTime(g.gain.value,n); g.gain.linearRampToValueAtTime(v,n+t); }
   return {
-    start(){ if(!soundOn||!entered||!init()) return; const r=ctx.resume(); if(r&&r.catch) r.catch(()=>{}); ramp(fx,.9,.3); if(on) return; on=true; ramp(out,VOL,2.5); if(mg){ ramp(mg,MVOL,3); bgmLoad(); bgmGo(); } clearTimeout(timer); sched(); },
+    start(){ if(!soundOn||!entered||!init()) return; const r=ctx.resume(); if(r&&r.catch) r.catch(()=>{}); ramp(fx,.9,.3); if(on) return; on=true; ramp(out,mon?VOLM:VOL,2.5); if(mg&&mon){ ramp(mg,MVOL,3); bgmLoad(); bgmGo(); } clearTimeout(timer); sched(); },
+    music(v){ mon=!!v; if(!ctx||!on) return; if(mon){ bgmLoad(); bgmGo(); ramp(mg,MVOL,5); ramp(out,VOLM,4); } else { ramp(mg,0,2.5); ramp(out,VOL,2); } },
     stop(){ on=false; clearTimeout(timer); if(!ctx) return; ramp(out,0,.8); ramp(fx,0,.3); if(mg) ramp(mg,0,.8); if(msrc){ const m=msrc; msrc=null; setTimeout(()=>{ try{ m.stop(); }catch(e){} },900); } },
     sleep(){ clearTimeout(timer); if(ctx&&ctx.state==='running'){ const p=ctx.suspend(); if(p&&p.catch) p.catch(()=>{}); } },
     wake(){ if(ctx&&on){ const p=ctx.resume(); if(p&&p.catch) p.catch(()=>{}); clearTimeout(timer); sched(); } },
@@ -689,7 +691,7 @@ const AMB=(()=>{ let ctx=null, out=null, fx=null, nb=null, timer=0, on=false, sw
     pour(){ if(!ok()) return; const t=ctx.currentTime; for(let i=0;i<46;i++) crack(t+.05+Math.pow(Math.random(),1.4)*1.1,.012+Math.random()*.03,4000+Math.random()*3500,.006+Math.random()*.012,fx); },
     rustle(){ if(!ok()) return; const t=ctx.currentTime; for(let i=0;i<7;i++) crack(t+i*.16+Math.random()*.05,.03+Math.random()*.025,2200+Math.random()*1600,.14+Math.random()*.1,fx); },
     knot(){ if(!ok()) return; const t=ctx.currentTime; crack(t,.06,1200,.12,fx); crack(t+.14,.04,2400,.1,fx); },
-    duck(d){ if(!ctx||!on) return; ramp(out,d?VOL*.22:VOL,d?.35:1.6); if(mg) ramp(mg,d?MVOL*.25:MVOL,d?.35:1.8); } }; })();
+    duck(d){ if(!ctx||!on) return; ramp(out,d?VOL*.22:(mon?VOLM:VOL),d?.35:1.6); if(mg&&mon) ramp(mg,d?MVOL*.2:MVOL,d?.35:1.8); } }; })();
 function sndUI(){ $('sndB').classList.toggle('off',!soundOn); }
 sndUI();
 $('sndB').onclick=()=>{ soundOn=!soundOn; try{ sessionStorage.setItem('snSnd',soundOn?'on':'off'); }catch(e){} sndUI(); if(soundOn){ entered=true; AMB.start(); } else AMB.stop(); };
@@ -712,7 +714,7 @@ function Rot(k,ph){ const L=ART.vid[k], A=mkV(k,false), B=mkV(k,false); let cur=
   this.pause=()=>{ run=false; [A,B].forEach(v=>{ if(!v.paused) try{ v.pause(); }catch(e){} }); }; this.paused=()=>cur.paused; }
 document.querySelectorAll('[data-scene]').forEach(sc=>{ const k=sc.dataset.scene, ph=sc.querySelector('.ph');
   if(ph&&ART.img[k]) ph.style.backgroundImage=`url('${ART.img[k]}'),url('${ART.local}')`; /* 원격 그림이 안 오면 로컬 할매 그림이 남는다 */
-  if(!ART.vid[k]||RM) return;
+  if(!ART.vid[k]||RM||sc.dataset.loop==='0') return;
   if(Array.isArray(ART.vid[k])){ if(ART.vid[k].length){ const r=new Rot(k,ph); VIDS.push(r); } return; }
   const v=mkV(k,true); ph.after(v);
   VIDS.push({el:v,k,play(){ if(!v.getAttribute('src')) v.src=ART.vid[k]; try{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} },pause(){ if(!v.paused) try{ v.pause(); }catch(e){} },paused:()=>v.paused}); });
@@ -735,12 +737,21 @@ function talk(k,sc,sub){ const o=ART.voice[k], v=TV[k]; if(!o||!o.src||!v||RM||!
     v.onended=fin; v.onerror=fin; setTimeout(fin,(o.dur||6)*1000+2500);
     v.addEventListener('playing',()=>v.classList.add('on'),{once:true});
     try{ const p=v.play(); if(p&&p.catch) p.catch(()=>{ v.muted=true; const q=v.play(); if(q&&q.catch) q.catch(fin); }); }catch(e){ fin(); } }); }
+/* 한 번만 재생하고 마지막 장면에 멈추는 영상(두루마리 펴기) */
+const OV={};
+function playOnce(k,sc){ const src=ART.once&&ART.once[k]; if(!src||RM||!sc) return false; let v=OV[k];
+  if(!v){ v=document.createElement('video'); v.className='lv tv'; v.muted=true; v.playsInline=true; v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline',''); v.setAttribute('muted',''); v.preload='auto'; v.src=src; OV[k]=v;
+    v.addEventListener('playing',()=>v.classList.add('on')); v.addEventListener('error',()=>v.classList.remove('on')); }
+  if(v.parentNode!==sc) sc.insertBefore(v,sc.querySelector('.glow')||null);
+  try{ v.currentTime=0; }catch(e){} try{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} return true; }
+function oncePrime(){ if(RM) return; const k='scroll', src=ART.once&&ART.once[k]; if(!src||OV[k]) return; const v=document.createElement('video'); v.className='lv tv'; v.muted=true; v.playsInline=true; v.setAttribute('playsinline',''); v.preload='auto'; v.src=src; OV[k]=v;
+  v.addEventListener('playing',()=>v.classList.add('on')); v.addEventListener('error',()=>v.classList.remove('on')); }
 let vsT=0; $('sRep').addEventListener('scroll',()=>{ if(!vsT) vsT=requestAnimationFrame(()=>{ vsT=0; vSync(); }); },{passive:true});
 document.addEventListener('visibilitychange',()=>{ if(document.hidden) AMB.sleep(); else AMB.wake(); vSync(); });
 
 /* ---------- 화면 전환 ---------- */
 let cur='sIntro', repSeen=false;
-function show(id){ cur=id; ['sIntro','sRice','sScroll','sRep'].forEach(s=>$(s).classList.toggle('on',s===id)); $('pay').classList.toggle('on',id==='sRep');
+function show(id){ cur=id; ['sIntro','sRice','sScroll','sRep'].forEach(s=>$(s).classList.toggle('on',s===id)); $('pay').classList.toggle('on',id==='sRep'); AMB.music(id==='sRep');
   if(id==='sRep'){ repSeen=true; requestAnimationFrame(()=>document.querySelectorAll('#els .t i').forEach(i=>i.style.width=i.dataset.w+'%')); }
   setTimeout(vSync,60); setTimeout(vSync,900); }
 
@@ -948,7 +959,7 @@ function traySize(){ const r=stage.getBoundingClientRect(); const ts=Math.round(
 traySize();
 const RICE=(()=>{
   const cv=$('rc'); let c2=null, S=0, R=0, dpr=1, G=[], raf=0, lastT=0, mode='off', sprG=null, sprS=null, L=3;
-  let swirl=0, dist=0, taps=0, prog=0, lastA=null, ptr=null, down=null, onProg=null, onReady=null, onFormed=null, readyFired=false, idleT=0, formT0=0;
+  let swirl=0, dist=0, taps=0, prog=0, lastA=null, ptr=null, down=null, onProg=null, onReady=null, onFormed=null, readyFired=false, idleT=0, formT0=0, fullT=0;
   const N=300, RIN=.385; /* 쟁반 안쪽 반지름(쟁반 그림 한 변에 대한 비율) */
   function resize(){ const w=cv.clientWidth||parseFloat(getComputedStyle(stage).getPropertyValue('--ts'))||340; const old=S; S=w; R=S*RIN; dpr=Math.min(2,window.devicePixelRatio||1);
     cv.width=Math.round(S*dpr); cv.height=Math.round(S*dpr); c2=cv.getContext('2d'); L=S*.0088; sprites();
@@ -962,7 +973,7 @@ const RICE=(()=>{
     sprS=document.createElement('canvas'); sprS.width=w; sprS.height=h; c=sprS.getContext('2d'); c.save(); c.translate(w/2,h/2); c.scale(1,.55);
     const rg=c.createRadialGradient(0,0,0,0,0,L*1.15*k); rg.addColorStop(0,'rgba(38,22,8,.45)'); rg.addColorStop(.6,'rgba(38,22,8,.22)'); rg.addColorStop(1,'rgba(38,22,8,0)');
     c.fillStyle=rg; c.beginPath(); c.arc(0,0,L*1.15*k,0,Math.PI*2); c.fill(); c.restore(); }
-  function reset(){ cancelAnimationFrame(raf); raf=0; G=[]; mode='off'; swirl=dist=taps=prog=0; lastA=null; ptr=null; down=null; readyFired=false; if(c2) c2.clearRect(0,0,cv.width,cv.height); }
+  function reset(){ cancelAnimationFrame(raf); raf=0; G=[]; mode='off'; swirl=dist=taps=prog=0; fullT=0; lastA=null; ptr=null; down=null; readyFired=false; if(c2) c2.clearRect(0,0,cv.width,cv.height); }
   function pour(){ reset(); resize(); const now=performance.now(); mode='pour';
     for(let i=0;i<N;i++){ const a=Math.random()*Math.PI*2, r=R*.3*Math.sqrt(Math.random()), x=Math.cos(a)*r+R*.04, y=Math.sin(a)*r-R*.05;
       G.push({x,y,vx:0,vy:0,a:Math.random()*Math.PI,va:0,s:.86+Math.random()*.3,d:RM?0:Math.pow(Math.random(),1.3)*1100,land:false,f:false,tx:0,ty:0,ta:0,sx:0,sy:0,sa:0,fd:0,fu:1,cv:0}); }
@@ -976,9 +987,9 @@ const RICE=(()=>{
         g.x+=g.vx*dt; g.y+=g.vy*dt; g.a+=g.va*dt;
         const d=Math.hypot(g.x,g.y), lim=R-L*1.1; if(d>lim){ const nx=g.x/d, ny=g.y/d, vr=g.vx*nx+g.vy*ny; if(vr>0){ g.vx-=1.45*vr*nx; g.vy-=1.45*vr*ny; g.va+=(Math.random()-.5)*4; } g.x=nx*lim; g.y=ny*lim; }
         if(Math.abs(g.vx)+Math.abs(g.vy)>2||Math.abs(g.va)>.05) moving=true; });
-      if(mode==='pour'&&!moving&&el>1600) mode='play'; }
+      if(mode==='pour'&&el>1500&&(!moving||G.every(g=>g.land))) mode='play'; }
     draw(t); if(moving||ptr||mode==='pour') raf=requestAnimationFrame(tick); else raf=0;
-    if(mode==='play'&&prog>=1&&!ptr&&!readyFired&&performance.now()-idleT>350){ readyFired=true; if(onReady) onReady(); } }
+    if(mode==='play'&&prog>=1&&!readyFired){ const nw=performance.now(); if(!fullT) fullT=nw; if((!ptr&&nw-idleT>250)||nw-fullT>800){ readyFired=true; if(onReady) onReady(); } } }
   function draw(t){ if(!c2) return; c2.setTransform(1,0,0,1,0,0); c2.clearRect(0,0,cv.width,cv.height); if(!G.length) return;
     const cx=S/2, cy=S/2, k=1/3, w=sprG.width, h=sprG.height, el=(t||performance.now())-formT0;
     for(let pass=0;pass<2;pass++){ const sp=pass?sprG:sprS;
@@ -997,7 +1008,7 @@ const RICE=(()=>{
       if(dd<rr){ const w=1-dd/rr; g.vx+=(vx*kv*.85-g.vx)*w*.4; g.vy+=(vy*kv*.85-g.vy)*w*.4; if(dd>.01){ g.x+=dx/dd*(rr-dd)*.35*w; g.y+=dy/dd*(rr-dd)*.35*w; } g.va+=(Math.random()-.5)*14*w; } }
     AMB.swish(Math.min(1,sp/(R*6))*.14); }
   function scatter(p){ const rr=S*.16; for(const g of G){ if(!g.land) continue; const dx=g.x-p.x, dy=g.y-p.y, d=Math.hypot(dx,dy); if(d<rr&&d>.01){ const w=1-d/rr, sp=R*2.4*w*(.6+Math.random()*.6); g.vx+=dx/d*sp; g.vy+=dy/d*sp; g.va+=(Math.random()-.5)*16*w; } } AMB.swish(.1); setTimeout(()=>AMB.swish(0),120); }
-  function setProg(){ prog=Math.min(1,Math.max(swirl/(Math.PI*2*3),dist/(S*8),taps/12)); if(onProg) onProg(prog); }
+  function setProg(){ prog=Math.min(1,Math.max(swirl/(Math.PI*2*2),dist/(S*5),taps/8)); if(onProg) onProg(prog); }
   cv.addEventListener('pointerdown',e=>{ if(mode!=='play'&&mode!=='pour') return; e.preventDefault(); try{ cv.setPointerCapture(e.pointerId); }catch(_){} const p=local(e); ptr=p; down={p,t:p.t,moved:0}; lastA=Math.atan2(p.y,p.x); if(!raf) loop(); });
   cv.addEventListener('pointermove',e=>{ if(!ptr||mode==='form') return; const p=local(e), dt=(p.t-ptr.t)/1000; if(dt<=0) return; push(ptr,p,dt);
     const seg=Math.hypot(p.x-ptr.x,p.y-ptr.y); dist+=seg; if(down) down.moved+=seg;
@@ -1030,7 +1041,7 @@ const RICE=(()=>{
     const now=performance.now();
     G.forEach(g=>{ g.sx=g.x; g.sy=g.y; g.sa=g.a; if(!g.f){ const d=Math.hypot(g.x,g.y)||1, a=Math.atan2(g.y,g.x); const rr=d<R*.8?R*(.8+Math.random()*.14):Math.min(d,R*.95); g.tx=Math.cos(a)*rr; g.ty=Math.sin(a)*rr; g.ta=g.a+(Math.random()-.5)*1.2; }
       let da=g.ta-g.sa; while(da>Math.PI) da-=Math.PI*2; while(da<-Math.PI) da+=Math.PI*2; g.ta=g.sa+da;
-      const dd=Math.hypot(g.tx-g.sx,g.ty-g.sy); g.fd=RM?0:120+Math.random()*420+dd/R*260; g.fu=RM?260:950+Math.random()*650; g.cv=(Math.random()-.5)*R*.16; });
+      const dd=Math.hypot(g.tx-g.sx,g.ty-g.sy); g.fd=RM?0:90+Math.random()*320+dd/R*200; g.fu=RM?260:820+Math.random()*480; g.cv=(Math.random()-.5)*R*.16; });
     formT0=now; AMB.rustle(); loop(); }
   const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
   function formStep(t){ let left=false; const el=t-formT0;
@@ -1042,7 +1053,7 @@ const RICE=(()=>{
 })();
 window.RICE=RICE;
 let riceRun=0;
-async function riceStart(){ const id=++riceRun; show('sRice'); RICE.reset(); $('sRice').classList.remove('tray-on'); clearSay('rMsgs'); $('rRes').hidden=true; $('rBar').style.width='0'; rAsk(null); traySize();
+async function riceStart(){ oncePrime(); const id=++riceRun; show('sRice'); RICE.reset(); $('sRice').classList.remove('tray-on'); clearSay('rMsgs'); $('rRes').hidden=true; $('rBar').style.width='0'; rAsk(null); traySize();
   await wait(RM?200:700); if(id!==riceRun) return;
   say('rMsgs','그믐밤엔 쌀점부터 치는 법이다.');
   const steps=['만세력 찾는 중','절기 시각 맞추는 중','대운 짚는 중','정미년과 맞춰 보는 중'];
@@ -1109,7 +1120,8 @@ async function scrollEnter(){ const id=++scrollRun; show('sScroll'); msLoadImgs(
   sSay(''); $('mscroll').classList.add('rolled','hid'); $('mHint').textContent='옆으로 밀어 넘기기'; msGo(0,true);
   await wait(RM?100:500); if(id!==scrollRun) return;
   if(!(await talk('scroll',document.querySelector('#sScroll .scene'),t=>sSay(t)))){ sSay('열두 달을 펼쳐 보자.'); await wait(RM?200:1700); }
-  if(id!==scrollRun) return; $('mscroll').classList.remove('hid');
+  if(id!==scrollRun) return; sSay(''); const unroll=playOnce('scroll',document.querySelector('#sScroll .scene')); if(unroll){ AMB.rustle(); await wait(RM?60:900); if(id!==scrollRun) return; }
+  $('mscroll').classList.remove('hid');
   await wait(RM?60:500); if(id!==scrollRun) return; $('mscroll').classList.remove('rolled'); AMB.rustle(); MS.unrolled=true;
   await wait(RM?200:1500); if(id!==scrollRun) return; sSay('옆으로 밀며 보거라. 붉은 도장 찍힌 달이 볕 드는 달이다.');
   if(!RM){ await wait(900); if(id!==scrollRun||MS.i!==0) return; msGo(1); } }

@@ -30,6 +30,7 @@
   --wood:#3f7d5a; --fire:#c0392b; --earth:#a7792c; --metal:#6f7884; --water:#2f5d8a;
   --sh:100vh; --W:400px;
   --fiber:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .34  0 0 0 0 .2  0 0 0 .55 -.18'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>");
+  --hanji:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='a'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .42  0 0 0 0 .33  0 0 0 0 .2  0 0 0 .07 0'/></filter><filter id='b'><feTurbulence type='fractalNoise' baseFrequency='.035' numOctaves='3' seed='9' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .44  0 0 0 0 .28  0 0 0 .24 -.08'/></filter><filter id='c'><feTurbulence type='turbulence' baseFrequency='.02 .2' numOctaves='1' seed='21' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .4  0 0 0 0 .26  0 0 0 1.4 -1.18'/></filter><rect width='100%' height='100%' filter='url(%23b)'/><rect width='100%' height='100%' filter='url(%23c)'/><rect width='100%' height='100%' filter='url(%23a)'/></svg>");
   --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .3  0 0 0 0 .22  0 0 0 0 .12  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   color-scheme:light;
 }
@@ -52,6 +53,10 @@ button,select,input{font-family:inherit}
 .scene video.lv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:0;transition:opacity 1.4s ease}
 .scene video.lv.on{opacity:1}
 .scene video.tv{z-index:1;transition:opacity .5s ease}
+.scene video.lv:not(.tv){transition:opacity .7s ease,filter .9s ease}
+.scene.xf video.lv:not(.tv){filter:blur(5px) brightness(.62) saturate(.8)}
+.scene:after{content:"";position:absolute;inset:-10%;z-index:1;pointer-events:none;opacity:0;transition:opacity .9s ease;background:radial-gradient(ellipse 60% 45% at 40% 70%,rgba(70,40,20,.55),rgba(19,12,7,0) 70%),radial-gradient(ellipse 50% 40% at 65% 35%,rgba(40,25,14,.5),rgba(19,12,7,0) 70%)}
+.scene.xf:after{opacity:1}
 .scene.talking video.lv:not(.tv){opacity:0}
 .glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 42% at 26% 102%,rgba(255,136,52,.34),rgba(255,136,52,0) 72%),radial-gradient(ellipse 55% 30% at 82% 6%,rgba(255,214,150,.10),rgba(255,214,150,0) 70%);mix-blend-mode:screen;animation:flick 5.7s linear infinite}
 .shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(19,12,7,.62) 0%,rgba(19,12,7,0) 18%,rgba(19,12,7,0) 40%,rgba(19,12,7,.74) 64%,rgba(19,12,7,.96) 84%)}
@@ -191,7 +196,7 @@ select option{background:#1d130c;color:var(--cream)}
 .sBtns .go{margin-top:14px}
 
 /* ---------- 4. 풀이: 할매의 운세 두루마리(밝은 한지) ---------- */
-#sRep{background-color:var(--paper);background-image:var(--fiber),radial-gradient(ellipse at 20% 0%,rgba(255,252,242,.7),rgba(255,252,242,0) 55%);background-size:240px 240px,100% 100%}
+#sRep{background-color:var(--paper);background-image:var(--hanji),radial-gradient(ellipse at 20% 0%,rgba(255,252,244,.55),rgba(255,252,244,0) 60%);background-size:300px 300px,100% 100%}
 .rep{padding:0 0 calc(env(safe-area-inset-bottom,0px) + 110px)}
 .cover{position:relative;height:calc(var(--sh) * .72);min-height:470px;overflow:hidden}
 .cover .scene{position:absolute}
@@ -226,7 +231,10 @@ select option{background:#1d130c;color:var(--cream)}
 .toc a b{display:block;font-family:var(--brush);font-weight:400;font-size:22px;color:var(--seal);margin-bottom:2px}
 .chap{position:relative;height:250px;margin:64px 0 0;overflow:hidden;color:#fff;scroll-margin-top:56px}
 .chap .scene{position:absolute;inset:0}
-.chap .scene .ph{background-position:center 28%}
+.chap .scene .ph{background-position:center 28%;animation:none;transform:scale(1.04)}
+.chap .glow,.askS .glow,.cover .glow{animation:none;opacity:.9}
+.chap,.cover,.askS,.dawn{contain:paint}
+.askS .scene .ph{animation:none}
 .chap .shade{background:linear-gradient(180deg,rgba(19,12,7,.5) 0%,rgba(19,12,7,.25) 35%,rgba(19,12,7,.86) 82%,rgba(19,12,7,.94) 100%)}
 .chap .ct{position:absolute;left:22px;right:22px;bottom:24px;z-index:3}
 .chap .ct b{display:block;font-family:var(--brush);font-weight:400;font-size:42px;line-height:1.08;text-shadow:0 3px 18px rgba(0,0,0,.8)}
@@ -445,7 +453,15 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 14px}
 .dr>p{margin:6px 0 0;font-size:12px;color:var(--ink-3)}
 .fine2{margin:12px 0 0;font-size:12px;line-height:1.6;color:var(--ink-3)}
 .letter{padding-top:30px;padding-bottom:30px;background:linear-gradient(180deg,rgba(255,252,244,0),rgba(255,252,244,.75) 20%,rgba(255,252,244,.75) 80%,rgba(255,252,244,0))}
-.letter #ltx p{margin:0 0 12px;font-family:var(--bmj);font-size:18px;line-height:1.85;color:var(--ink)}
+.letter #ltx p{margin:0 0 26px;font-family:var(--bmj);font-size:17.5px;line-height:1.85;color:var(--ink-2)}
+.letter #ltx p b{font-weight:700;color:var(--ink)}
+.letter #ltx p b.lead{display:block;margin-bottom:4px;font-size:19px;line-height:1.6}
+#prem .sec p b.lead{display:block;margin-bottom:2px;font-weight:700;color:var(--ink)}
+#prem .sec p b.mo{font-weight:700;color:var(--ink)}
+.letter #ltx hr{width:40px;height:0;margin:6px auto 32px;border:0;border-top:1.5px solid rgba(179,50,42,.55)}
+#prem .sec{margin-top:64px}
+#prem .sec h3{margin-bottom:22px}
+#prem .sec p,#prem .tip,#prem .mdo p,#prem .m5 p,#prem .al p,#prem .bwr p{line-height:1.75}
 .letter .sign{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:16px 0 0;font-family:var(--serif);font-weight:700;font-size:14px}
 .letter .sign .seal{width:38px;height:38px;font-size:11px}
 .aiL{width:100%;height:46px;margin-top:14px;border:1px solid var(--ink);background:none;color:var(--ink);font-size:14px;font-weight:700;cursor:pointer}
@@ -538,7 +554,7 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 14px}
       <div class="quote"><div class="av" style="background-image:url('img/halmae.jpg')"></div><div><b>삼신 할매</b><p id="qTop"></p><span class="rice" id="qRice"></span></div></div>
 
       <nav class="toc" aria-label="풀이 차례"><a href="#ch1"><b>첫째</b>타고난 그릇</a><a href="#ch2"><b>둘째</b>정미년 한 해</a><a href="#ch3"><b>셋째</b>열두 달</a></nav>
-      <section class="chap" id="ch1"><div class="scene" data-scene="rice"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div><div class="ct"><b><span>첫째</span> 타고난 그릇</b><p>먼저 네가 무엇을 들고 태어났는지 보자.</p></div></section>
+      <section class="chap" id="ch1"><div class="scene" data-scene="rice" data-loop="0"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div><div class="ct"><b><span>첫째</span> 타고난 그릇</b><p>먼저 네가 무엇을 들고 태어났는지 보자.</p></div></section>
       <div class="sec"><h3>사주 원국<i>근거 칩을 누르면 설명이 나와요</i></h3>
         <table class="ms" id="msT"></table>
       </div>
@@ -553,7 +569,7 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 14px}
         <div class="verdict" id="duTx"></div>
       </div>
 
-      <section class="chap" id="ch2"><div class="scene" data-scene="scroll"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div><div class="ct"><b><span>둘째</span> 정미년 한 해</b><p>내년이 너한테 어떤 해인지 일러 주마.</p></div></section>
+      <section class="chap" id="ch2"><div class="scene" data-scene="scroll" data-loop="0"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div><div class="ct"><b><span>둘째</span> 정미년 한 해</b><p>내년이 너한테 어떤 해인지 일러 주마.</p></div></section>
       <div class="sec"><h3>2027 총운</h3>
         <div class="big"><div class="sc" id="ySc"></div><div class="lbl" id="yLbl"></div></div>
         <div id="yTx"></div>
@@ -561,7 +577,7 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 14px}
 
       <div class="sec"><h3>분야별 운세</h3><div class="fields" id="flds"></div></div>
 
-      <section class="chap" id="ch3"><div class="scene" data-scene="idle"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div><div class="ct"><b><span>셋째</span> 열두 달</b><p>달마다 볕 드는 날과 바람 부는 날이 있느니라.</p></div></section>
+      <section class="chap" id="ch3"><div class="scene" data-scene="idle" data-loop="0"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div><div class="ct"><b><span>셋째</span> 열두 달</b><p>달마다 볕 드는 날과 바람 부는 날이 있느니라.</p></div></section>
       <div class="sec"><h3>월별 흐름<i>절기 기준 월</i></h3>
         <svg class="chart" id="chart" viewBox="0 0 340 170" role="img" aria-label="2027년 월별 운세 점수"></svg>
         <div class="months" id="mos"></div>
@@ -574,7 +590,7 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 14px}
       </div>
       <div class="rod b"></div>
 
-      <section class="askS"><div class="scene" data-scene="idle"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div>
+      <section class="askS"><div class="scene" data-scene="idle" data-loop="0"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div>
         <div class="in"><div class="av" style="background-image:url('img/halmae.jpg')"></div><h3>할매에게 직접 묻기</h3><p>이사, 이직, 연애, 돈. 궁금한 걸 물으면 할매가 네 사주의 근거를 짚어 가며 답한다.</p>
           <div class="qs"><button type="button" data-q="올해 이사해도 되겠습니까">올해 이사해도 될지</button><button type="button" data-q="돈은 언제 모입니까">돈이 모이는 때</button><button type="button" data-q="조심할 달은 언제입니까">조심할 달</button></div>
           <button class="go" id="askBtn" type="button">할매에게 묻기</button></div>
@@ -705,10 +721,14 @@ function mkV(k,loop){ const v=document.createElement('video'); v.className='lv';
   v.preload='none'; v.poster=ART.img[k]; v.dataset.v=k; v.addEventListener('playing',()=>v.classList.add('on')); v.addEventListener('error',()=>v.classList.remove('on')); return v; }
 function Rot(k,ph){ const L=ART.vid[k], A=mkV(k,false), B=mkV(k,false); let cur=A, i=0, run=false, sw=false; ph.after(A); A.after(B);
   const pl=v=>{ try{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} };
-  [A,B].forEach(v=>{ v.addEventListener('timeupdate',()=>{ if(v!==cur||sw||!run||!v.duration) return; if(v.duration-v.currentTime<1.6) next(); });
-    v.addEventListener('ended',()=>{ if(v===cur&&!sw) next(); }); });
-  function next(){ sw=true; const o=cur, n=cur===A?B:A; i=(i+1)%L.length; n.src=L[i]; n.currentTime=0; n.classList.remove('on'); n.style.zIndex=1; o.style.zIndex=0; pl(n);
-    n.addEventListener('playing',function f(){ n.removeEventListener('playing',f); n.classList.add('on'); setTimeout(()=>{ o.classList.remove('on'); try{ o.pause(); }catch(e){} sw=false; },1500); });
+  let reps=0; const sc=ph.parentNode;
+  [A,B].forEach(v=>{ v.addEventListener('timeupdate',()=>{ if(v!==cur||sw||!run||!v.duration||reps<1) return; if(v.duration-v.currentTime<1.1) next(); });
+    v.addEventListener('ended',()=>{ if(v!==cur||sw) return; if(reps<1){ reps++; try{ v.currentTime=0; }catch(e){} pl(v); } else next(); }); });
+  /* 바뀔 때: 화롯불 연기가 스치듯 잠깐 흐려지고 어두워지는 사이에 다음 클립으로 넘어간다 */
+  function next(){ sw=true; reps=0; const o=cur, n=cur===A?B:A; i=(i+1)%L.length; n.src=L[i]; try{ n.currentTime=0; }catch(e){} n.classList.remove('on'); n.style.zIndex=1; o.style.zIndex=0;
+    sc.classList.add('xf'); pl(n);
+    n.addEventListener('playing',function f(){ n.removeEventListener('playing',f); setTimeout(()=>{ n.classList.add('on');
+      setTimeout(()=>{ o.classList.remove('on'); try{ o.pause(); }catch(e){} sc.classList.remove('xf'); setTimeout(()=>{ sw=false; },900); },700); },450); });
     cur=n; }
   this.el=A; this.k=k; this.play=()=>{ run=true; if(!cur.getAttribute('src')) cur.src=L[i]; pl(cur); };
   this.pause=()=>{ run=false; [A,B].forEach(v=>{ if(!v.paused) try{ v.pause(); }catch(e){} }); }; this.paused=()=>cur.paused; }
@@ -1137,6 +1157,19 @@ $('pouchBtn').addEventListener('click',openPouch); $('pouchTap').addEventListene
 $('dawn').addEventListener('click',e=>{ if(e.target.closest('button')) return; openPouch(e); });
 new IntersectionObserver(es=>es.forEach(e=>$('pay').classList.toggle('hide',e.isIntersecting)),{root:$('sRep'),threshold:.25}).observe($('dawn'));
 document.querySelectorAll('.toc a').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); const t=$(a.getAttribute('href').slice(1)); if(t) $('sRep').scrollTo({top:t.offsetTop-50,behavior:RM?'auto':'smooth'}); }));
+/* 상세 풀이 읽기 쉽게: 긴 문단은 첫 문장을 굵게, 달 이름은 굵게, 편지는 두 문단마다 짧은 붉은 선 */
+const MON=/(\d{1,2}월부터 \d{1,2}월까지|\d{1,2}월)/g;
+function enhP(p,lead){ if(p.dataset.x) return; p.dataset.x='1'; const t0=p.firstChild;
+  if(lead){ const all=p.textContent||'', m=all.match(/^([\s\S]{6,110}?[.。])\s+\S/); if(m&&all.length>m[1].length+12){ const end=m[1].length;
+      /* 글자 위치로 범위를 잡아 첫 문장만 꺼내 굵게 감싼다(한자 표기 등 안쪽 태그가 있어도 된다) */
+      const w0=document.createTreeWalker(p,NodeFilter.SHOW_TEXT); let acc=0, node=null, off=0; while(w0.nextNode()){ const n=w0.currentNode, L=n.nodeValue.length; if(acc+L>=end){ node=n; off=end-acc; break; } acc+=L; }
+      if(node){ try{ const r=document.createRange(); r.setStart(p,0); r.setEnd(node,off); const frag=r.extractContents(); const bb=document.createElement('b'); bb.className='lead'; bb.appendChild(frag); p.insertBefore(bb,p.firstChild); const nx=bb.nextSibling; if(nx&&nx.nodeType===3) nx.nodeValue=nx.nodeValue.replace(/^\s+/,''); }catch(e){} } } }
+  const w=document.createTreeWalker(p,NodeFilter.SHOW_TEXT), list=[]; while(w.nextNode()){ const n=w.currentNode; MON.lastIndex=0; if(!n.parentNode.closest('b')&&MON.test(n.nodeValue)) list.push(n); }
+  list.forEach(n=>{ const f=document.createDocumentFragment(); n.nodeValue.split(MON).forEach((part,k)=>{ if(!part) return; if(k%2){ const b=document.createElement('b'); b.className='mo'; b.textContent=part; f.appendChild(b); } else f.appendChild(document.createTextNode(part)); }); n.parentNode.replaceChild(f,n); }); }
+function enhPrem(){ const box=$('ltx');
+  if(box&&box.dataset.x!=='1'){ box.dataset.x='1'; const ps=[...box.querySelectorAll(':scope>p')]; ps.forEach((p,i)=>{ enhP(p,i>0); if(i%2===1&&i<ps.length-1) p.after(document.createElement('hr')); }); }
+  document.querySelectorAll('#prem .sec>p:not([class]),#prem .sec>p.p,#prem .sec>div:not([class])>p:not([class]),#prem .sec>div:not([class])>p.p').forEach(p=>{ if((p.textContent||'').length>70) enhP(p,true); }); }
+let enhT=0; new MutationObserver(()=>{ cancelAnimationFrame(enhT); enhT=requestAnimationFrame(enhPrem); }).observe($('prem'),{childList:true,subtree:true});
 let dawnSaid=false;
 new IntersectionObserver(es=>es.forEach(async e=>{ if(!e.isIntersecting||dawnSaid||$('dawn').classList.contains('paid')||!ART.voice.pouch.src) return; dawnSaid=true;
   const k=$('dawnK').textContent, l=$('dawnL').innerHTML;

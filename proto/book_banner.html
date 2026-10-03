@@ -22,8 +22,10 @@ a{color:inherit;text-decoration:none}
 
 /* A. 영상이 넘어가는 시네마 배너 */
 .A{position:relative;display:block;margin:0 18px;height:clamp(380px,112vw,470px);overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(227,184,102,.3)}
-.A video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;opacity:0;transition:opacity 1.2s}
-.A video.on{opacity:1}
+.A .sl{position:absolute;inset:0;background:#000 center 22%/cover no-repeat;opacity:0;transition:opacity 1.2s}
+.A .sl.on{opacity:1}
+.A .sl video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;opacity:0;transition:opacity .6s}
+.A .sl video.on{opacity:1}
 .A::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,.2) 48%,rgba(0,0,0,.92) 88%);pointer-events:none}
 .A .who{position:absolute;left:16px;top:14px;z-index:2;font-size:11px;font-weight:800;letter-spacing:.1em;color:rgba(255,255,255,.8);transition:opacity .5s}
 .A .who b{color:var(--gold)}
@@ -98,14 +100,19 @@ a{color:inherit;text-decoration:none}
 </div>
 <script>
 const D2='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
-/* A: 영상 두 장을 번갈아 겹쳐 4초마다 바꾼다(화면에 보일 때만) */
-(()=>{ const L=[['노을','v/poster/noeul.mp4'],['흑매',D2+'9d07049a-9f0b-45e3-9547-21f1841ad87d.mp4'],['세린',D2+'6e77ff4d-1bcc-4e77-9676-351a9f281be4.mp4'],['그믐',D2+'c046140c-d852-47b8-9472-52acd1fa393c.mp4'],['도준','v/rv_earth.mp4?v=2']];
+/* A: 장면 다섯 장(정지 그림이 먼저 깔리고, 그 위에 영상)을 4초마다 서서히 바꾼다. 화면에 보일 때만 돈다 */
+(()=>{ const HFm='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_';
+  const L=[['노을','img/noeul.jpg','v/poster/noeul.mp4'],['흑매',HFm+'20261003_101836_ccb27e8d-f3d5-430a-975b-c64a04d3c7cf_min.webp',D2+'9d07049a-9f0b-45e3-9547-21f1841ad87d.mp4'],['세린','img/yin/metal.jpg',D2+'6e77ff4d-1bcc-4e77-9676-351a9f281be4.mp4'],['그믐',HFm+'20261003_102005_5906aacf-085d-40b2-acda-136da797f5cc_min.webp',D2+'c046140c-d852-47b8-9472-52acd1fa393c.mp4'],['도준','img/earth.jpg?v=2','v/rv_earth.mp4?v=2']];
   const box=document.getElementById('A'), w=document.getElementById('Aw'), d=document.getElementById('Ad'); d.innerHTML=L.map(()=>'<i></i>').join('');
-  const vs=[0,1].map(()=>{ const v=document.createElement('video'); v.muted=true; v.playsInline=true; v.setAttribute('playsinline',''); v.loop=true; v.preload='auto'; box.insertBefore(v,box.firstChild); return v; });
-  let k=0,t=0,run=false,tm=null;
-  const show=()=>{ const v=vs[t], [n,u]=L[k]; v.src=u; v.currentTime=0; v.play().catch(()=>{}); v.oncanplay=null; v.addEventListener('playing',()=>{ v.classList.add('on'); vs[1-t].classList.remove('on'); },{once:true});
-    w.innerHTML='지금 보이는 사람 · <b>'+n+'</b>'; [...d.children].forEach((x,j)=>x.classList.toggle('on',j===k)); t=1-t; k=(k+1)%L.length; };
-  new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting&&!run){ run=true; show(); tm=setInterval(show,4200); } else if(!e.isIntersecting&&run){ run=false; clearInterval(tm); vs.forEach(v=>v.pause()); } }),{threshold:.3}).observe(box); })();
+  const S=L.map(([n,img,u])=>{ const s=document.createElement('div'); s.className='sl'; s.style.backgroundImage=`url('${img}')`;
+    const v=document.createElement('video'); v.setAttribute('muted',''); v.muted=true; v.setAttribute('playsinline',''); v.playsInline=true; v.loop=true; v.preload='metadata'; v.dataset.src=u; s.appendChild(v); box.insertBefore(s,box.firstChild); return s; });
+  let k=-1,run=false,tm=null;
+  const show=()=>{ const prev=S[k]; k=(k+1)%L.length; const s=S[k], v=s.querySelector('video');
+    if(!v.getAttribute('src')) v.src=v.dataset.src; try{ v.currentTime=0; }catch(e){} const p=v.play(); if(p&&p.catch) p.catch(()=>{});
+    v.onplaying=()=>v.classList.add('on'); s.classList.add('on'); if(prev&&prev!==s){ prev.classList.remove('on'); const pv=prev.querySelector('video'); setTimeout(()=>{ if(!prev.classList.contains('on')){ pv.pause(); pv.classList.remove('on'); } },1300); }
+    w.innerHTML='지금 보이는 사람 · <b>'+L[k][0]+'</b>'; [...d.children].forEach((x,j)=>x.classList.toggle('on',j===k)); };
+  show();
+  new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting&&!run){ run=true; const v=S[k].querySelector('video'); v.play().catch(()=>{}); tm=setInterval(show,4200); } else if(!e.isIntersecting&&run){ run=false; clearInterval(tm); S.forEach(s=>s.querySelector('video').pause()); } }),{threshold:.25}).observe(box); })();
 /* C: 얼굴 띠(두 번 이어 붙여 끊김 없이) + 목소리 */
 (()=>{ const F=[['노을','img/noeul.jpg','#b9a0e0'],['하람','img/wood.jpg','#1f9d61'],['이안','img/fire.jpg','#e0362a'],['도준','img/earth.jpg?v=2','#c98a12'],['시온','img/metal.jpg','#9aa3b0'],['재이','img/water.jpg?v=2','#3a6ad4'],['흑매','https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_101836_ccb27e8d-f3d5-430a-975b-c64a04d3c7cf_min.webp','#a8283a'],['새아','https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2_min.webp','#1f9d61'],['별하','img/yin/fire.jpg','#e0362a'],['도담','img/yin/earth.jpg','#c98a12'],['세린','img/yin/metal.jpg','#9aa3b0'],['이슬','img/yin/water.jpg','#3a6ad4'],['그믐','https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_102005_5906aacf-085d-40b2-acda-136da797f5cc_min.webp','#3b5a9a']];
   const h=F.map(([n,u,c])=>`<div style="background-image:url('${u}');--c:${c}"><i></i><span>${n}</span></div>`).join(''); document.getElementById('Ct').innerHTML=h+h;

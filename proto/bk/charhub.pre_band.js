@@ -114,20 +114,7 @@
     '.prf .poth{margin-top:28px}',
     '.prf .poth small{display:block;font-size:11.5px;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:10px}',
     '.prf .poth .chRow{padding:0 0 4px;margin:0 -20px;padding-left:20px;scroll-padding:0 20px}',
-    '.prf .poth .chC{width:88px}',
-    /* 10/3 20:45 은주: 얼굴 카드 줄이 부담스러움 → 작은 동그라미가 천천히 흘러가는 띠(누르면 멈춤) */
-    '.chBand{position:relative;overflow:hidden;padding:4px 0 2px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}',
-    '.chTrack{display:flex;gap:16px;width:max-content;padding-left:16px;animation:chMq 46s linear infinite}',
-    '.chBand.hold .chTrack{animation-play-state:paused}',
-    '@keyframes chMq{to{transform:translateX(-50%)}}',
-    '.chB{flex:none;display:flex;flex-direction:column;align-items:center;width:62px;border:0;padding:0;background:none;color:#fff;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}',
-    '.chB i,.home .chB i{display:block;width:52px;height:52px;border-radius:50%!important;background:#1a161c center 18%/cover no-repeat;box-shadow:0 0 0 1.5px rgba(10,8,12,.9),0 0 0 2.5px var(--c);transition:transform .2s}',
-    '.chB:active i{transform:scale(.92)}',
-    '.chB b{margin-top:7px;font-size:12px;font-weight:700;white-space:nowrap}',
-    '.chB small{margin-top:1px;font-size:10px;color:rgba(255,255,255,.55);white-space:nowrap}',
-    '.chB.me i{box-shadow:0 0 0 1.5px rgba(10,8,12,.9),0 0 0 3px #e3b866}',
-    '.chB.me b{color:#e3b866}',
-    '@media (prefers-reduced-motion:reduce){.chTrack{animation:none}.chBand{overflow-x:auto}}'
+    '.prf .poth .chC{width:88px}'
   ].join('\n');
 
   function card(id){ var c=C[id], m=mine(), isMine=c.el&&c.el===m&&((c.yin&&face()==='yin')||(c.yang&&face()!=='yin'));
@@ -144,10 +131,7 @@
   var TH={seoha:['img/thumb/seoha.jpg','50% 62%'],wood:['img/thumb/wood.jpg','50% 30%'],fire:['img/thumb/fire.jpg','50% 42%'],earth:['img/thumb/earth.jpg','50% 34%'],metal:['img/thumb/metal.jpg','50% 40%'],water:['img/thumb/water.jpg','50% 40%'],halmae:['img/thumb/halmae.jpg','50% 46%']};
   function mini(id){ var c=C[id], m=mine(), isMine=c.el&&c.el===m, sy=!!(c.yang&&isMine&&face()==='yin'), k=sy?id+'_y':id, f=C[k];
     return '<button type="button" class="chM'+(isMine?' me':'')+'" data-c="'+k+'"><span class="ph" style="background-image:url(\''+(TH[k]?TH[k][0]:f.img)+'\')'+(TH[k]?';background-position:'+TH[k][1]:'')+'"></span>'+(isMine?'<span class="mk">나의 수호신</span>':'')+'<span class="nm"><b>'+f.n+'</b><small>'+c.role+'</small></span></button>'; }
-  function chip(id,dup){ var c=C[id], m=mine(), isMine=c.el&&c.el===m, sy=!!(c.yang&&isMine&&face()==='yin'), k=sy?id+'_y':id, f=C[k];
-    return '<button type="button" class="chB'+(isMine?' me':'')+'" data-c="'+k+'" style="--c:'+c.c+'"'+(dup?' aria-hidden="true" tabindex="-1"':'')+'><i style="background-image:url(\''+f.img+'\')"></i><b>'+f.n+'</b><small>'+c.role+'</small></button>'; }
   function renderRows(){
-    var bd=$('chBandT'); if(bd){ var m0=mine(), l0=['seoha','taeo'].concat(EL).concat(['halmae']); if(m0){ l0=l0.filter(function(x){ return x!==m0; }); l0.unshift(m0); } bd.innerHTML=l0.map(function(x){ return chip(x,false); }).join('')+l0.map(function(x){ return chip(x,true); }).join(''); }
     var r=$('chRow'); if(r){ var m=mine(), list=['seoha','taeo'].concat(EL).concat(['halmae']); if(m){ list=list.filter(function(x){ return x!==m; }); list.unshift(m); } r.innerHTML=list.map(mini).join(''); }
     var y=$('yinRow'); if(y){ y.innerHTML=EL.map(function(e){ return card(e+'_y'); }).join(''); }
   }
@@ -217,14 +201,11 @@
   function mount(){
     var talk=$('secTalk'); if(!talk) return;
     css();
-    var rowHTML=window.CH_BAND?'<div class="chBand" id="chBand"><div class="chTrack" id="chBandT"></div></div>':'<div class="chMini" id="chRow"></div>';
-    talk.innerHTML='<div class="sh"><small>캐릭터 상담</small><b>오늘은 누구한테 털어놓을래</b></div>'+rowHTML+
+    talk.innerHTML='<div class="sh"><small>캐릭터 상담</small><b>오늘은 누구한테 털어놓을래</b></div><div class="chMini" id="chRow"></div>'+
       '<button type="button" class="yinLn" id="yinLn"><span><em>음의 현신</em>같은 기운의 여신 다섯도 만나 보기</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>';
     var mem=$('secMem'); if(mem) mem.style.display='none';
     renderRows();
-    var band=$('chBand'); if(band){ var ht=0; var hold=function(){ band.classList.add('hold'); clearTimeout(ht); }, rel=function(){ clearTimeout(ht); ht=setTimeout(function(){ band.classList.remove('hold'); },2200); };
-      band.addEventListener('pointerdown',hold); band.addEventListener('pointerup',rel); band.addEventListener('pointercancel',rel); band.addEventListener('mouseenter',hold); band.addEventListener('mouseleave',rel); }
-    document.addEventListener('click', function(e){ if(e.target.closest('#yinLn')){ e.preventDefault(); open((mine()||'water')+'_y'); return; } var b=e.target.closest('#chRow [data-c], #chBand [data-c]'); if(!b) return; e.preventDefault(); open(b.dataset.c); });
+    document.addEventListener('click', function(e){ if(e.target.closest('#yinLn')){ e.preventDefault(); open((mine()||'water')+'_y'); return; } var b=e.target.closest('#chRow [data-c]'); if(!b) return; e.preventDefault(); open(b.dataset.c); });
     // 홈이 다시 보일 때(내 수호신 · 얼굴 선택이 바뀌었을 수 있음) 줄 다시 그림
     var home=$('home'); if(home) new MutationObserver(function(){ if(home.classList.contains('on')) renderRows(); }).observe(home,{attributes:true,attributeFilter:['class']});
     window.addEventListener('pageshow', renderRows);

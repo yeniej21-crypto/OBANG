@@ -190,15 +190,6 @@ button{font-family:inherit;color:inherit}
 .st button:active{transform:scale(.95);background:#efe5d4}
 .st button .pic{display:block;width:100%;aspect-ratio:1/1;background:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_101429_46828228-e7ad-487a-b7d2-869b49851ba0_min.webp') no-repeat;background-size:400% auto;background-position:var(--bx) var(--by)}
 .st button b{display:block;margin-top:2px;font-size:12.5px;font-weight:800;color:#2a2119;letter-spacing:-.02em}
-/* 10/3 20:40 은주: 그림처럼만 보여서 누르는 단추로 안 보임 → 키캡처럼 도드라지게(아래 그림자 · 누르면 내려감) + 이름은 진한 띠에 화살표 */
-.stS .sh small:after{content:' · 눌러서 골라 봐';color:var(--ink-3);font-weight:600;letter-spacing:0}
-.st{gap:8px 6px}
-.st button{padding:0;border:1px solid rgba(232,196,138,.5);box-shadow:0 4px 0 #8f7a58,0 10px 18px rgba(0,0,0,.45);transition:transform .12s,box-shadow .12s}
-.st button:active{transform:translateY(4px);box-shadow:0 0 0 #8f7a58,0 3px 8px rgba(0,0,0,.35);background:#f6efe3}
-.st button .pic{transition:transform .3s}
-.st button:active .pic{transform:scale(1.05)}
-.st button b{display:flex;align-items:center;justify-content:center;gap:3px;margin:0;padding:7px 2px 8px;background:#2a2119;color:#f6efe3;font-size:12.5px}
-.st button b:after{content:'';flex:none;width:5px;height:5px;border-top:1.6px solid #e8c48a;border-right:1.6px solid #e8c48a;transform:rotate(45deg);margin-left:2px}
 </style>
 </head>
 <body>
@@ -271,35 +262,16 @@ sv.remove();
 function fxVid(src,muted){ const v=document.createElement('video'); v.className='fx'; v.playsInline=true; v.setAttribute('playsinline',''); v.muted=muted; v.preload='auto'; v.src=src; sc.insertBefore(v,$('cute')); v.addEventListener('playing',()=>v.classList.add('on')); return v; }
 let vt=null, vs=null, talking=false;
 const subOf=v=>{ const sub=$('sub'); v.addEventListener('timeupdate',()=>{ let t=''; LINES.forEach(x=>{ if(v.currentTime>=x[0]) t=x[1]; }); if(v.duration&&v.currentTime>v.duration-.6) t=''; if(sub.textContent!==t){ sub.textContent=t; sub.classList.toggle('on',!!t); } }); };
-/* 10/3 20:40 은주: 소리가 안 나고 말이 늦게 나옴 → ① 소리 켜기 문(early.js)을 누른 뒤에 장면 시작 ② 말 영상은 처음부터 미리 받아 둠 ③ 변신은 1.3배로 빠르게, 끝나기 직전에 바로 말 시작 */
-let started=false, soundOn=true, startMuted=false;
-const VSpre=fxVid(VS,false); VSpre.load();
-function talk(muted){ if(talking) return; talking=true;
-  vs=VSpre; if(vs.ended||vs.currentTime>0.05){ try{ vs.currentTime=0; }catch(e){} } vs.muted=muted;
-  vs.onended=()=>{ $('cute').classList.add('on'); talking=false; vs.classList.remove('on'); };
-  const p=vs.play(); if(p&&p.catch) p.catch(e=>{ if(!(e&&e.name==='NotAllowedError')){ $('cute').classList.add('on'); talking=false; return; } vs.muted=true; vs.play().catch(()=>{ $('cute').classList.add('on'); talking=false; }); armUnmute(); }); }
+function talk(muted){ if(talking) return; talking=true; if(vs){ vs.remove(); } vs=fxVid(VS,muted);
+  vs.addEventListener('ended',()=>{ $('sub').classList.remove('on'); $('cute').classList.add('on'); talking=false; });
+  vs.play().catch(()=>{ if(!vs.muted){ vs.muted=true; vs.play().catch(()=>{ $('cute').classList.add('on'); talking=false; }); armUnmute(); } else { $('cute').classList.add('on'); talking=false; } }); }
+/* 10/3 19:40 은주: 자막 빼고 소리를 기본으로. 폰이 소리 자동 재생을 막으면 무음으로 시작하고 첫 터치 때 소리를 켠다 */
 let armed=false; function armUnmute(){ if(armed) return; armed=true; const on=()=>{ document.removeEventListener('pointerdown',on,true); if(vs&&!vs.ended){ vs.muted=false; } $('snd').classList.add('lit'); }; document.addEventListener('pointerdown',on,true); }
 requestAnimationFrame(()=>setTimeout(()=>sc.classList.add('in'),120));
 function sparkle(){ const f=document.createElement('div'); f.className='spk'; f.innerHTML='<i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>'; sc.appendChild(f); setTimeout(()=>f.remove(),1400); }
-function startScene(){ if(started) return; started=true;
-  try{ soundOn=!startMuted&&sessionStorage.getItem('obSnd')!=='0'; }catch(e){ soundOn=!startMuted; }
-  if(!soundOn) armUnmute();
-  if(!VT){ sparkle(); setTimeout(()=>{ $('cute').classList.add('on'); talk(!soundOn); },450); return; }
-  vt=fxVid(VT,!soundOn); vt.playbackRate=1.3; let handed=false;
-  const hand=()=>{ if(handed) return; handed=true; $('cute').classList.add('on'); talk(!soundOn); setTimeout(()=>{ if(vt){ vt.remove(); vt=null; } },500); };
-  vt.addEventListener('timeupdate',()=>{ if(vt&&vt.duration&&vt.currentTime>=vt.duration-0.3) hand(); });
-  vt.addEventListener('ended',hand);
-  const p=vt.play(); if(p&&p.catch) p.catch(e=>{ if(e&&e.name==='NotAllowedError'){ vt.muted=true; soundOn=false; armUnmute(); vt.play().catch(hand); } else hand(); }); }
-/* 이미 화면을 눌러서 들어왔으면 바로, 아니면 '소리 켜고 들어가기'(또는 아무 곳) 누를 때 시작. 6초 안에 아무 반응이 없으면 소리 없이 시작 */
-(function(){ const act=()=>{ try{ return !!(navigator.userActivation&&navigator.userActivation.hasBeenActive); }catch(e){ return false; } };
-  let off=false; try{ off=sessionStorage.getItem('obSnd')==='0'; }catch(e){}
-  if(act()||off){ setTimeout(startScene,300); return; }
-  const go=()=>setTimeout(startScene,150); /* '소리 없이 볼게요' 클릭이 먼저 기록되도록 살짝 늦춤 */
-  window.addEventListener('obsound',go,{once:true});
-  document.addEventListener('pointerup',go,{once:true,capture:true});
-  setTimeout(()=>{ if(!started){ startMuted=true; startScene(); } },6000);
-})();
-$('snd').onclick=()=>{ $('snd').classList.add('lit'); talking=false; if(vs){ vs.pause(); } talk(false); };
+setTimeout(()=>{ if(!VT){ sparkle(); setTimeout(()=>{ $('cute').classList.add('on'); talk(false); },450); return; } vt=fxVid(VT,false); vt.addEventListener('ended',()=>{ $('cute').classList.add('on'); talk(false); setTimeout(()=>{ if(vt){ vt.remove(); vt=null; } },400); });
+  vt.play().catch(()=>{ vt.muted=true; armUnmute(); vt.play().catch(()=>{ $('cute').classList.add('on'); talk(false); }); }); },1300);
+$('snd').onclick=()=>{ $('snd').classList.add('lit'); talking=false; talk(false); };
 
 /* ---------- 2. 오늘의 연애 날씨 ---------- */
 const S=window.Saju, GAN=S.GAN, JI=S.JI;

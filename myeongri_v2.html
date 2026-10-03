@@ -221,17 +221,18 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
 .jl{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -18px;padding:4px 18px 10px;scrollbar-width:none}
 .jl::-webkit-scrollbar{display:none}
 .jc{flex:none;width:72%;scroll-snap-align:center;background:var(--sheet);border:1px solid var(--rule);position:relative}
-.jc .pic{position:relative;aspect-ratio:3/4;background:#e9e1d0 center/cover no-repeat}
-.jc .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(251,247,238,0) 55%,rgba(251,247,238,.96) 100%)}
-.jc .nm{position:absolute;right:12px;top:12px;z-index:2;writing-mode:vertical-rl;font-family:var(--brush);font-size:30px;line-height:1;color:var(--ink);text-shadow:0 0 12px rgba(251,247,238,.9)}
+.jc .pic{position:relative;aspect-ratio:4/3;background:#e9e1d0 center/cover no-repeat;border-bottom:1px solid var(--rule)}
+.jc .hd2{display:flex;align-items:baseline;gap:8px;margin:0 0 4px}
+.jc .hd2 .mo{font-family:var(--serif);font-weight:900;font-size:26px;line-height:1;color:var(--ink)}
+.jc .hd2 .nm{font-family:var(--brush);font-size:24px;line-height:1;color:var(--seal)}
 .jc .tg2{position:absolute;left:12px;top:12px;z-index:2;font-size:11px;font-weight:700;padding:4px 8px;background:var(--sheet);color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--rule)}
 .jc .tg2.g{background:var(--seal);color:#fff6ef;box-shadow:none}
 .jc .tg2.c{background:var(--ink);color:var(--sheet);box-shadow:none}
-.jc .bd{position:relative;z-index:2;margin-top:-58px;padding:0 14px 14px}
-.jc .bd small{display:block;font-size:11px;color:var(--ink-3)}
-.jc .bd b{display:block;margin-top:2px;font-family:var(--serif);font-size:17px;font-weight:900}
-.jc .bd b span{font-size:13px;color:var(--ink-3);font-weight:700;margin-left:6px}
-.jc .bd p{margin:6px 0 0;font-family:var(--serif);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+.jc .bd{position:relative;padding:14px 14px 16px}
+.jc .bd small{display:block;font-size:13px;font-weight:500;color:var(--ink-2)}
+.jc .bd b{display:block;margin-top:8px;padding-top:8px;border-top:1px solid var(--rule-2);font-family:var(--serif);font-size:16px;font-weight:900}
+.jc .bd b span{font-size:13px;color:var(--ink-2);font-weight:700;margin-left:6px}
+.jc .bd p{margin:8px 0 0;font-family:var(--serif);font-size:14.5px;line-height:1.7;color:var(--ink)}
 .jhint{font-size:11.5px;color:var(--ink-3);text-align:right;margin-top:4px}
 /* 봉인 */
 .seal{position:relative;margin:26px -14px 0;background:#0e0b09;color:#f3ead9;overflow:hidden}
@@ -342,10 +343,10 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
     <div class="htl"><small>明理館 鑑定書</small><h2>2027 명리 감정서</h2></div>
     <div class="rep" id="rep">
       <div class="doc" id="dHead"></div>
-      <div class="cov noprint" data-img="IMG_PAPER"><div><small>第一章</small><b>여덟 글자를 펼치다</b></div></div>
+      <div class="cov noprint" data-img="IMG_STUDY" data-vid="VID_STUDY"><div><small>第一章</small><b>여덟 글자를 펼치다</b></div></div>
       <div class="doc" id="d1"></div>
       <div class="doc" id="d2"></div>
-      <div class="cov noprint" data-img="IMG_STUDY" data-vid="VID_STUDY"><div><small>第三章</small><b>큰 흐름 속의 한 해</b></div></div>
+      <div class="cov noprint" data-img="IMG_SOHEON" data-vid="VID_IDLE"><div><small>第三章</small><b>큰 흐름 속의 한 해</b></div></div>
       <div class="doc" id="d3"></div>
       <div class="doc" id="d4"></div>
       <div class="cov noprint" data-img="IMG_INK" data-vid="VID_GRIND"><div><small>附錄</small><b>절기로 읽는 열두 달</b></div></div>
@@ -672,7 +673,8 @@ function sealObs(){ if(window._sealO) return; window._sealO=1; const box=$('seal
       sv.onplaying=()=>requestAnimationFrame(tick); sv.onended=()=>{ subOn($('ssub'),''); s2.play().then(()=>{ s2.classList.add('on'); sv.classList.remove('on'); }).catch(()=>{}); };
       const p=sv.play(); if(p&&p.catch) p.catch(()=>{ sv.muted=true; sv.play().catch(()=>{}); }); }
     else { try{ $('sv').pause(); $('sv2').pause(); }catch(_){} } }),{threshold:.55}).observe(box); }
-$('sealBtn').onclick=()=>$('payBtn').click();
+$('sealBtn').onclick=()=>{ if($('pay').classList.contains('done')) $('prem').scrollIntoView({behavior:'smooth',block:'start'}); else $('payBtn').click(); };
+(function(){ const pb=$('payBtn'), core=pb.onclick; pb.onclick=()=>{ if($('pay').classList.contains('done')){ $('sRep').scrollTo({top:0,behavior:'smooth'}); return; } core(); pb.textContent='감정서 처음부터 보기'; $('sealBtn').textContent='봉투 안 감정서 보기'; }; })();
 /* 결제바는 봉인 장면을 지난 뒤에만 */
 $('sRep').addEventListener('scroll',()=>{ const b=$('sealBox').getBoundingClientRect(); $('pay').classList.toggle('on',b.bottom<innerHeight*.6||$('pay').classList.contains('done')); },{passive:true});
 
@@ -703,8 +705,8 @@ function jeolgi(){ const F=window.SNF; if(!F) return; const {P,dm,st}=F; const d
   $('dJ').innerHTML=`<div class="ch"><em>부록</em><b>절기 달력</b><span>2027 입춘 ~ 2028 소한</span></div>
    <p class="p">사주의 달은 1일이 아니라 절기가 드는 시각에 바뀌네. 열두 절기의 시각을 분까지 셈해 두었으니, 달이 바뀌는 그 순간부터 기운이 바뀐다고 보게.</p>
    <div class="jgraph">${svg}</div>
-   <div class="jl" data-hj="0">${list.map(x=>{ const k=good.has(x.nm)?'good':bad.has(x.nm)?'bad':'mid'; return `<div class="jc"><div class="pic" style="background-image:url('${x.img}')"></div><span class="nm">${x.nm}</span><span class="tg2 ${k==='good'?'g':k==='bad'?'c':''}">${k==='good'?'좋은 달':k==='bad'?'조심할 달':'평이한 달'}</span>
-     <div class="bd"><small>${x.y}. ${x.m}. ${x.d}. ${String(x.hh).padStart(2,'0')}:${String(x.mi).padStart(2,'0')} 절입</small><b>${GAN[x.mp[0]]}${JI[x.mp[1]]}월<span>${x.tg} · ${x.tb}</span></b><p>${x.ev==='hap'?'월지가 자네 일지와 합을 이루네. 사람과 묶이는 일이 생기겠네. ':x.ev==='chung'?'월지가 자네 일지와 부딪히네. 이동과 변동을 조심하게. ':''}${LINE[k]}</p></div></div>`; }).join('')}</div>
+   <div class="jl" data-hj="0">${list.map(x=>{ const k=good.has(x.nm)?'good':bad.has(x.nm)?'bad':'mid'; return `<div class="jc"><div class="pic" style="background-image:url('${x.img}')"></div><span class="tg2 ${k==='good'?'g':k==='bad'?'c':''}">${k==='good'?'좋은 달':k==='bad'?'조심할 달':'평이한 달'}</span>
+     <div class="bd"><div class="hd2"><span class="mo">${x.y!==2027?x.y+'년 ':''}${x.m}월</span><span class="nm">${x.nm}</span></div><small>${x.m}월 ${x.d}일 ${x.hh<12?'오전':'오후'} ${((x.hh+11)%12)+1}시 ${String(x.mi).padStart(2,'0')}분부터 달이 바뀝니다</small><b>${GAN_K[x.mp[0]]}${JI_K[x.mp[1]]}월 (${GAN[x.mp[0]]}${JI[x.mp[1]]})<span>${x.tg} · ${x.tb}</span></b><p>${x.ev==='hap'?'월지가 자네 일지와 합을 이루네. 사람과 묶이는 일이 생기겠네. ':x.ev==='chung'?'월지가 자네 일지와 부딪히네. 이동과 변동을 조심하게. ':''}${x.ev&&k==='mid'?'':LINE[k]}</p></div></div>`; }).join('')}</div>
    <p class="jhint">옆으로 넘겨 보세요</p>`; }
 </script>
 <script src="archive.js"></script>

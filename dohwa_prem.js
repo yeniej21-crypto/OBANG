@@ -62,7 +62,7 @@ function render(){ const host=$('dprem'); K.keepOpen(host,()=>{ host.innerHTML=b
 /* 편지 달력(dohwa.html)도 같은 기준을 쓰도록: 같은 열두 달 · 같은 연애 점수 · 같은 최고의 달 */
 function calc(){ const D=window.DHF&&window.DHF(); if(!D) return null; const G=window.Prem2Core.rolling(S_,X,D.inp,12), loveG=D.inp.g==='m'?2:3;
   G.months.forEach(o=>o.love=loveScore(o,loveG)); return {months:G.months,top:[...G.months].sort((a,b)=>b.love-a.love)}; }
-window.DohwaPrem={calc,open(){ const host=$('dprem'); if(!host||!prep()) return; host.className='pkx'; host.hidden=false; K.bind(host); render();
+window.DohwaPrem={calc,open(){ const host=$('dprem'); if(!host||!prep()) return; host.className='pkx dark'; host.hidden=false; K.bind(host); render();
   const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
   K.runAI({key:F.key+'-dohwa-'+HON+'-'+F.from.y+'.'+F.from.m,ver:'v3',parts:prompts(),apply,rerender:render,S:ST}); }};
 })();

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>도화 결과 시안 · 태오의 밤</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Nanum+Pen+Script&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-display:swap}
+:root{--bg:#0a0a0d;--b1:#1c1c21;--b2:#26262c;--ink:#f2f0ee;--ink2:#a9a6a2;--ink3:#6e6b68;--pink:#ff8fa3;--me:#f4d9de}
+*{box-sizing:border-box;border-radius:0}
+html,body{margin:0;background:#000}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);word-break:keep-all;-webkit-font-smoothing:antialiased;display:flex;justify-content:center}
+.pg{position:relative;width:100%;max-width:430px;min-height:100vh;background:var(--bg);overflow:hidden}
+
+/* 첫 장면: 태오 영상이 화면을 쥔다 */
+.open{position:relative;height:min(78svh,620px);min-height:520px;overflow:hidden}
+.open video,.open .po{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.open .po{background:url('img/taeo/base.jpg') center 22%/cover no-repeat}
+.open:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,13,.55) 0,rgba(10,10,13,0) 16%,rgba(10,10,13,0) 52%,rgba(10,10,13,.9) 86%,var(--bg) 100%)}
+.bk{position:absolute;z-index:3;left:12px;top:calc(env(safe-area-inset-top,0px) + 10px);width:36px;height:36px;border-radius:50%;border:0;background:rgba(0,0,0,.35);color:#fff;display:grid;place-items:center}
+.ot{position:absolute;z-index:2;left:18px;right:18px;bottom:22px}
+.ot small{display:block;font-size:11px;color:rgba(255,255,255,.62)}
+.ot h1{margin:6px 0 0;font-family:'OBrush',serif;font-weight:400;font-size:46px;line-height:1;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.6)}
+.ot p{margin:8px 0 0;font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.86)}
+
+/* 대화 */
+.thread{padding:6px 12px 120px}
+.day{text-align:center;font-size:10.5px;color:var(--ink3);margin:10px 0 14px}
+.row{display:flex;gap:8px;align-items:flex-end;margin-top:6px;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+.row.on{opacity:1;transform:none}
+.row .av{flex:none;width:30px;height:30px;border-radius:50%;background:url('img/taeo/base.jpg') center 18%/cover;visibility:hidden}
+.row.first .av{visibility:visible}
+.row .col{max-width:78%;display:flex;flex-direction:column;align-items:flex-start}
+.row .nm{font-size:11px;color:var(--ink2);margin:0 0 4px}
+.row:not(.first) .nm{display:none}
+.bub{background:var(--b1);padding:9px 12px;font-size:13.5px;line-height:1.45;letter-spacing:-.01em}
+.bub b{color:#fff}
+.row .tm{font-size:9.5px;color:var(--ink3);margin-left:6px;align-self:flex-end;flex:none}
+.row.me{justify-content:flex-end}
+.row.me .bub{background:var(--me);color:#1a1213}
+.row.me .col{align-items:flex-end}
+.typing{display:inline-flex;gap:4px;padding:12px}
+.typing i{width:5px;height:5px;border-radius:50%;background:var(--ink2);animation:tp 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tp{0%,60%,100%{opacity:.25}30%{opacity:1}}
+
+/* 메모 스크린샷 */
+.memo{width:236px;background:#f6f4ef;color:#1b1a18;padding:12px 14px 14px;font-size:12px;box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.memo .h{display:flex;justify-content:space-between;font-size:10px;color:#9a958c}
+.memo b.t{display:block;margin:6px 0 8px;font-size:15px;font-weight:900;letter-spacing:-.03em}
+.memo .ln{display:flex;align-items:center;gap:10px;padding:5px 0;border-top:1px solid #e5e1d8;font-size:13px}
+.memo .ln span{width:20px;color:#9a958c;font-size:11px}
+.memo .ln em{font-style:normal;color:#9a958c;font-size:11px;margin-left:auto}
+.memo .ln.hit{position:relative}
+.memo .ln.hit svg{position:absolute;left:24px;top:-3px;width:70px;height:30px;overflow:visible}
+.memo .pen{font-family:'Nanum Pen Script',cursive;color:#c23a3a;font-size:19px;line-height:1;margin-left:auto}
+
+/* 사진 */
+.photo{width:200px;height:250px;background:#222 center 20%/cover no-repeat;box-shadow:0 10px 24px rgba(0,0,0,.45)}
+
+/* 사람 카드 두 장 */
+.two{display:flex;gap:6px;width:270px}
+.two div{flex:1;background:var(--b2);padding:10px}
+.two small{display:block;font-size:10px;color:var(--ink3)}
+.two b{display:block;margin-top:4px;font-size:15px;font-weight:900;letter-spacing:-.03em}
+.two p{margin:6px 0 0;font-size:11.5px;line-height:1.4;color:var(--ink2)}
+.two .lk{color:transparent;text-shadow:0 0 6px rgba(255,255,255,.5);user-select:none}
+
+/* 잠긴 달력 */
+.cal{position:relative;width:250px;background:#f6f4ef;color:#1b1a18;padding:10px 12px 12px;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.cal .h{font-size:10px;color:#9a958c}
+.cal .g{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:6px;filter:blur(3.5px)}
+.cal .g span{height:38px;border-top:1px solid #e5e1d8;font-size:12px;padding-top:4px;position:relative}
+.cal .g span.c:after{content:"";position:absolute;left:-2px;top:0;width:26px;height:22px;border:1.5px solid #c23a3a;border-radius:50%}
+.cal .veil{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(246,244,239,.35);text-align:center}
+.cal .veil b{font-size:13px;font-weight:900}
+.cal .veil small{font-size:10.5px;color:#6b665e;margin-top:2px}
+
+/* 음성 */
+.voice{display:flex;align-items:center;gap:10px;width:220px;background:var(--b1);padding:10px 12px}
+.voice .pl{width:30px;height:30px;border-radius:50%;background:var(--pink);display:grid;place-items:center;flex:none}
+.voice .wv{flex:1;height:22px;background:repeating-linear-gradient(90deg,var(--ink3) 0 2px,transparent 2px 5px);mask:linear-gradient(90deg,#000 0,#000 100%);opacity:.6;clip-path:polygon(0 40%,8% 20%,16% 55%,24% 10%,32% 45%,40% 25%,48% 60%,56% 15%,64% 50%,72% 30%,80% 55%,88% 20%,100% 45%,100% 100%,0 100%)}
+.voice small{font-size:10.5px;color:var(--ink2)}
+
+/* 왜 그렇게 봤냐면 */
+.why{margin-top:4px;font-size:11px;color:var(--ink3);background:none;border:0;padding:4px 0;font-family:inherit;text-decoration:underline;text-underline-offset:3px}
+.whyT{display:none;max-width:270px;margin-top:4px;font-size:11.5px;line-height:1.5;color:var(--ink2);border-left:2px solid var(--b2);padding-left:8px}
+.whyT.on{display:block}
+
+/* 바로 답하기 */
+.qr{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap;margin-top:12px;opacity:0;transition:opacity .3s}
+.qr.on{opacity:1}
+.qr button{border:1px solid var(--me);background:none;color:var(--me);font:inherit;font-size:13px;padding:8px 12px}
+.act{display:flex;flex-direction:column;gap:6px;margin-top:8px;width:250px}
+.act button{height:44px;border:0;background:var(--pink);color:#1a1213;font:inherit;font-size:13.5px;font-weight:900}
+.act button.g{background:none;border:1px solid var(--b2);color:var(--ink);font-weight:700}
+.act small{font-size:10.5px;color:var(--ink3);text-align:center}
+
+/* 아래 입력줄 */
+.bar{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:430px;z-index:5;display:flex;gap:8px;align-items:center;padding:10px 12px calc(env(safe-area-inset-bottom,0px) + 10px);background:rgba(10,10,13,.94);border-top:1px solid #1f1f24}
+.bar span{flex:1;height:40px;display:flex;align-items:center;padding:0 12px;background:var(--b1);font-size:13px;color:var(--ink3)}
+.bar button{width:40px;height:40px;border-radius:50%;border:0;background:var(--pink);display:grid;place-items:center}
+.foot{font-size:10px;line-height:1.5;color:var(--ink3);text-align:center;margin:26px 10px 0}
+</style>
+</head>
+<body>
+<div class="pg">
+  <section class="open">
+    <div class="po"></div>
+    <video id="ov" muted loop playsinline autoplay preload="auto" poster="img/taeo/base.jpg" src="v/taeo/L1.mp4"></video>
+    <button class="bk" type="button" aria-label="뒤로"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="ot">
+      <small>은주 누나 사주, 태오가 펼쳐 봄</small>
+      <h1>밤의 도화</h1>
+      <p>대화로 빠지게 만드는 타입. 아래로 내리면 태오가 보낸 게 와 있어.</p>
+    </div>
+  </section>
+
+  <div class="thread" id="th">
+    <div class="day">오늘 새벽 1:12</div>
+  </div>
+  <p class="foot">진행자는 AI로 만든 가상의 캐릭터예요. 풀이는 만세력 계산을 바탕으로 하며, 사람의 마음이나 행동을 단정하지 않아요.<br>시안 화면이에요. 문장과 계산은 실제 도화 결과(1996년 5월 14일 오시, 여자)에서 가져왔어요.</p>
+</div>
+<div class="bar"><span>태오에게 답장하기</span><button type="button" aria-label="보내기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a1213" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+
+<script>
+const th=document.getElementById('th');
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+let lastWho='', t=12;
+const tm=()=>`1:${String(t++).padStart(2,'0')}`;
+function row(who,html){ const r=document.createElement('div'); const first=who!==lastWho; lastWho=who;
+  r.className='row'+(who==='me'?' me':'')+(first?' first':'');
+  r.innerHTML= who==='me' ? `<span class="tm">${tm()}</span><div class="col">${html}</div>` : `<i class="av"></i><div class="col"><div class="nm">태오</div>${html}</div><span class="tm">${tm()}</span>`;
+  th.appendChild(r); requestAnimationFrame(()=>r.classList.add('on')); return r; }
+async function typing(ms){ const r=row('t','<div class="bub typing"><i></i><i></i><i></i></div>'); await wait(ms); r.remove(); lastWho=''; if(th.lastElementChild&&th.lastElementChild.classList.contains('row')&&!th.lastElementChild.classList.contains('me')) lastWho='t'; }
+async function say(html,ms=700){ await typing(ms); return row('t',html); }
+function why(text){ return `<button class="why" type="button" onclick="this.nextElementSibling.classList.toggle('on')">왜 그렇게 봤냐면</button><div class="whyT">${text}</div>`; }
+function ask(opts){ return new Promise(res=>{ const q=document.createElement('div'); q.className='qr'; q.innerHTML=opts.map((o,i)=>`<button type="button" data-i="${i}">${o}</button>`).join(''); th.appendChild(q); requestAnimationFrame(()=>q.classList.add('on'));
+  q.onclick=e=>{ const b=e.target.closest('button'); if(!b) return; q.remove(); row('me',`<div class="bub">${b.textContent}</div>`); res(+b.dataset.i); }; }); }
+
+(async()=>{
+  await wait(600);
+  await say(`<div class="bub">누나 자? 사주 펼쳐 봤는데 이거 좀 봐</div>`,500);
+  await say(`<div class="memo"><div class="h"><span>메모</span><span>오전 1:13</span></div><b class="t">은주 누나 여덟 글자</b>
+    <div class="ln hit"><span>해</span>병자<em>쥐 · 집안 자리</em><svg viewBox="0 0 70 30"><path d="M8 16c2-10 40-14 52-6 9 6-4 14-22 15S2 24 6 13" fill="none" stroke="#c23a3a" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+    <div class="ln"><span>달</span>계사<em>뱀 · 사회 자리</em></div>
+    <div class="ln"><span>날</span>신해<em>돼지 · 배우자 자리</em></div>
+    <div class="ln"><span>시</span>갑오<em>말 · 자녀 자리</em></div>
+    <div class="ln" style="border-top:0;padding-top:8px"><span></span><b class="pen">쥐 자리에 도화 하나</b></div></div>`,900);
+  await say(`<div class="bub">태어난 해 자리에 도화가 하나 있어. 사람 끄는 글자.<br>그래서 누나는 <b>밤의 도화</b>야. 얘기하다 보면 시간 가는 줄 모르게 만드는 사람</div>`+why('도화 글자는 태어난 날과 태어난 해의 지지마다 하나씩 정해져 있어요. 누나는 날 기준 자(쥐), 해 기준 유(닭)이고, 원국에서 해 자리 자(쥐)가 그 글자예요.'),1100);
+  await ask(['나 그런 편이긴 해','그게 좋은 거야']);
+  await say(`<div class="bub">도화 지수 <b>67</b>. 반쯤 핀 거야<br>아직 다 안 폈다는 뜻이기도 하고</div>`+why('지수는 원국만으로 계산했어요. 50에서 시작해 원국 도화 한 곳 +14, 인연의 별 세 개 +3을 더했어요. 이름은 계산에 쓰지 않아요.'),900);
+  await say(`<div class="photo" style="background-image:url('img/taeo/chin.jpg')"></div>`,700);
+  await say(`<div class="bub">근데 누나, 이게 재밌는 게<br>누나가 끌리는 사람이랑 누나 곁에 남는 사람이 달라</div>`,1000);
+  await say(`<div class="two"><div><small>누나가 끌리는</small><b>불 같은 사람</b><p class="lk">밝고 솔직한 사람 좋으면 바로 말하는</p></div><div><small>누나한테 빠지는</small><b>물 같은 사람</b><p class="lk">생각이 깊고 말이 통하는 사람</p></div></div>`+why('타고난 나(태어난 날의 천간 신)는 쇠예요. 쇠를 이기는 불이 여성에게 인연의 별이라 그 결에 마음이 가고, 쇠가 낳는 물은 내가 표현하는 기운이라 그 결의 사람이 먼저 다가와요.'),900);
+  const a=await ask(['둘이 뭐가 달라','그럼 누구 만나야 돼']);
+  await say(`<div class="bub">${a?'그건 내가 따로 써 뒀어':'자세한 건 내가 따로 써 뒀어'}. 그리고 앞으로 열두 달 달력도 찍어 봤는데</div>`,900);
+  await say(`<div class="cal"><div class="h">2026. 10 ~ 2027. 9</div><div class="g">${['10','11','12','1','2','3','4','5','6','7','8','9'].map((m,i)=>`<span class="${i===11||i===9?'c':''}">${m}월</span>`).join('')}</div><div class="veil"><b>누나 제일 예쁜 달은 봉인</b><small>편지 열면 보여</small></div></div>`,900);
+  await say(`<div class="voice"><span class="pl"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M7 5v14l12-7z" fill="#1a1213"/></svg></span><span class="wv"></span><small>0:41</small></div>`,700);
+  await say(`<div class="bub">음성도 남겨 뒀어. 편지랑 같이 열려</div><div class="act"><button type="button">태오의 도화 편지 열기 · 14,900원</button><button class="g" type="button">그 사람이랑 궁합 보기</button><small>열두 달 달력 · 고백하기 좋은 날 · 조심할 인연 · 음성 편지 두 편</small></div>`,900);
+})();
+</script>
+</body>
+</html>

@@ -865,3 +865,4 @@
 - 2026-10-03 22:05 · 세린 몸값 대사 영상 e9e2fbe4 '칭찬은 아껴 둘게. 네 값은 내가 매겨 줄게.' → 4d5f9be1(workmini 몸값 탭 맨 위, 무음 즉시 재생). 세린 VOICE: one Korean woman in her late 20s, native Seoul Korean, crisp clear diction. Cool, chic, slightly aloof mid-low voice, elegant and precise like a sharp head-hunter who never flatters, quiet intimate volume. 이직 쿨타임 대사 6d902afa(예비 b73f85a4).
 - 2026-10-03 21:50 · 은주: 오프닝 '다섯 신이 깨어난다'에 새 도준 · 재이가 안 보임 → 원인: _headers가 /img · /v 를 7일 캐시(max-age=604800)라 전에 들어온 폰은 옛 파일을 계속 씀. 바뀐 그림 · 영상 주소에 ?v=2 붙임(img/earth · water(.jpg · _d · thumb), img/${k}.jpg 등 동적 경로, v/rv_earth · water, v/ms/${k}, v/menu/career). 리다이렉트는 쿼리를 무시하므로 새 파일로 감. 앞으로 같은 주소의 파일을 바꿀 땐 ?v= 를 올릴 것.
 - 2026-10-03 21:50 · 오늘의 운세 카드의 수호신 얼굴을 누르면 오늘의 운세로 넘어가던 문제 → 얼굴만 따로 눌러지게(수호신 카드 · 공개 영상 memberView), 카드 다른 곳은 그대로 오늘의 운세.
+- 2026-10-03 21:55 · 흑매 화면 '막아 주는 신 · 월하' 칸이 연애 상담소로 가던 것 → 월하의 '붉은 실 궁합'(redthread.html). 전체 링크 점검: 없는 페이지로 가는 링크 0건(90개 파일), 악역 · 그림자 손님 · 캐릭터 소개 메뉴 연결 이름과 목적지 확인.

@@ -565,7 +565,7 @@ function nxNatal(){ const P=D.P, db=P.d[1], cu=D.F.cur, dh=D.F.natal.filter(x=>x
    <div><dt>지금 대운</dt><dd><b>${cu?gzK(cu.s,cu.b):'계산 전'}</b><em>${cu?`${cu.age}세부터 열 해. `:''}${dp?esc(dp[1]):'인연 쪽으로는 크게 움직이지 않는 열 해'}</em></dd></div></dl>`; }
 function renderNext(top,lo,m1,m2,B){ const T=TYPE[D.starEl], top2=top.slice(0,2), now=new Date(), M=D.M;
   const s3=M.slice(0,3), best=s3.some(x=>stOf(x,top2)==='s')?'s':s3.some(x=>stOf(x,top2)==='g')?'g':'q';
-  $('mast').className='l2-mast next'; $('mast').innerHTML=`<div class="nx-hero"><div class="nx-moon" aria-hidden="true"></div><img class="lb-cut nx-cut" src="img/pop/seoha_suit.webp" alt="서하">
+  $('mast').className='l2-mast next'; $('mast').innerHTML=`<div class="nx-hero"><div class="nx-moon" aria-hidden="true"></div><img class="lb-cut nx-cut" src="img/pop/seoha_suit2.webp" alt="서하">
     <div class="lb-anim nx-seal"><div class="lb-stamp ${best==='s'?'is-fill':best==='q'?'is-quiet':''}" style="position:relative"><small>이번 계절</small><b>${STW[best]}</b><em>${s3.map(x=>x.o.start.m).join(' · ')}월</em></div></div>
     <div class="nx-hd"><small>서하의 인연 예보 · ${now.getFullYear()}. ${now.getMonth()+1}. ${now.getDate()}</small><h1>인연<br>예보</h1><p>앞으로 열두 달, 인연의 날씨를 절기마다 짚었어.</p></div></div>`;
   const stTxt={solo:'',some:' 썸 타는 중이라 가까운 넉 달과 합을 더 크게 봤어요.',end:' 정리하는 중이라 처음 석 달은 낮추고 그 뒤 달을 더 크게 봤어요.'}[D.st];

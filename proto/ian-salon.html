@@ -768,7 +768,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .home .lhubS .lhub b{color:#fff4ea;text-shadow:0 2px 18px rgba(0,0,0,.5)}
 .home .lhubS .lhub em{color:rgba(246,236,223,.72)}
 .home .lhubS .lhub .go{background:#e8c48a;color:#1a120b}
-.home .lhubS .lhub .pp{filter:drop-shadow(0 12px 22px rgba(0,0,0,.55));-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18%,#000 100%);mask-image:linear-gradient(90deg,transparent 0,#000 18%,#000 100%)} /* 10/3 원인: 예전 누끼(seoha.webp)가 검은 재킷을 배경으로 오인해 지움 → 재킷 자리에 판 색이 비쳐 옷이 배경색처럼 보였음. 재킷까지 살린 새 누끼 seoha_suit.webp(u2net_human_seg + isnet) */
+.home .lhubS .lhub .pp{filter:drop-shadow(0 0 1px rgba(236,210,170,.55)) drop-shadow(0 0 14px rgba(170,190,235,.28)) drop-shadow(0 14px 24px rgba(0,0,0,.6))} /* 10/3 18:05 누끼 윤곽을 또렷하게: 어깨선 직접 그린 seoha_suit2 + 얇은 금빛 테두리 · 뒤 푸른 빛, 흐림 마스크 없음 */ /* 10/3 원인: 예전 누끼(seoha.webp)가 검은 재킷을 배경으로 오인해 지움 → 재킷 자리에 판 색이 비쳐 옷이 배경색처럼 보였음. 재킷까지 살린 새 누끼 seoha_suit.webp(u2net_human_seg + isnet) */
 </style>
 
 <div class="stage" id="stage">
@@ -1007,7 +1007,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     </section>
 
     <section class="hSec band lhubS" id="secLoveHub" data-cats="all love heart re match">
-      <a class="lhub" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 서하의 상담실</small><b>연애 상담소</b><em>누구 때문에 왔어<br>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span><img class="pp" src="img/pop/seoha_suit.webp" alt="" loading="lazy"></a>
+      <a class="lhub" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 서하의 상담실</small><b>연애 상담소</b><em>누구 때문에 왔어<br>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span><img class="pp" src="img/pop/seoha_suit2.webp" alt="" loading="lazy"></a>
     </section>
     <section class="hSec" id="secDohwa" data-cats="all love match">
       <div class="sh"><small>도화 · 매력</small><b>내 사주 속 도화, 얼마나 진할까</b></div>

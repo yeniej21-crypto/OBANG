@@ -977,7 +977,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <button class="it" data-m="tarot.html">무진의 타로</button>
     <button class="it" data-m="avatar.html">사주가 그린 나</button>
     <button class="it" data-m="lifetime.html">평생 사주</button>
-    <button class="it" data-m="love.html">연애 상담소</button><button class="it" data-m="chat.html">자유 상담</button>
+    <button class="it" data-m="love.html">연애 상담소</button><button class="it" data-m="obgh.html">오방 궁합</button><button class="it" data-m="chat.html">자유 상담</button>
     <button class="it" data-m="newyear.html">2027 신년 기획전</button>
     <button class="it" data-m="sinnyeon.html">2027 신년운세</button>
     <button class="it" data-m="noeul.html">해와 달의 운세<small>노을 · NEW</small></button>
@@ -1110,7 +1110,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <div class="hHead">
       <div class="hBar"><div class="logo"><img src="img/brand/odg_mark.webp" alt=""><img class="lw" src="img/brand/odg_word_h.webp" alt="오방도감"></div>
         <div class="hIc"><button id="hBell" aria-label="알림"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button><button id="hMenu" aria-label="메뉴"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div>
-      <div class="pills" id="pills"><button class="on" data-c="all">전체</button><button data-c="ny">신년</button><button data-c="jt">정통</button><button data-c="tg">택일</button><button data-c="tarot">타로</button><button data-c="love">연애</button><button data-c="gaeun">개운</button><button data-c="job">커리어</button><button data-c="re">재회</button><button data-c="heart">속마음</button><button data-c="match">궁합</button></div>
+      <div class="pills" id="pills"><button class="on" data-c="all">전체</button><button data-c="ny">신년</button><button data-c="jt">정통</button><button data-c="tg">택일</button><button data-c="tarot">타로</button><button data-c="love">연애</button><button data-c="gaeun">개운</button><button data-c="job">커리어</button></div>
     </div>
 
     <section class="hSec ny" id="secNY" data-cats="all ny jt">
@@ -1175,10 +1175,13 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <section class="hSec band lhubS" id="secLoveHub" data-cats="all love heart re match">
       <a class="lhub" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 서하의 상담실</small><b>연애 상담소</b><em>누구 때문에 왔어<br>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span><img class="pp" src="img/pop/seoha.webp" alt="" loading="lazy"></a>
     </section>
-    <section class="hSec" id="secDohwa" data-cats="all love match">
-      <div class="sh"><small>도화 · 매력</small><b>내 사주 속 도화, 얼마나 진할까</b></div>
+    <section class="hSec" id="secDohwa" data-cats="all love match re heart">
+      <div class="sh"><small>연애 · 대표 메뉴</small><b>연애, 지금 제일 궁금한 거</b></div>
       <div class="hRow">
         <div class="pc" id="cDohwa" data-vid="v/poster/dohwa.mp4" role="button" tabindex="0" style="background-image:url('img/taeo/base.jpg');background-position:center 20%"><span class="chip new">NEW</span><div class="ct"><span class="tt">도화 사주</span><span class="st">태오가 몰래 봐주는 나의 매력</span></div></div>
+        <div class="pc" id="cPartner" data-vid="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/3d178870-dde3-4414-9358-89c221d457e7.mp4" role="button" tabindex="0" style="background-image:url('https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/96ece9bc-bb47-4995-a4cc-fc7babf4523c.jpg');background-position:center 18%"><div class="ct"><span class="tt">그 사람 속마음</span><span class="st">은거울에 비친, 그의 요즘</span></div></div>
+        <div class="pc" id="cRe" role="button" tabindex="0" style="background-image:url('img/w2.jpg')"><span class="chip new">NEW</span><div class="ct"><span class="yr">2027</span><span class="tt">재회 사주</span><span class="st">우리, 다시 닿을 수 있을까</span></div></div>
+        <div class="pc" id="cNext" role="button" tabindex="0" style="background-image:url('img/seoha.jpg')"><span class="chip new">NEW</span><div class="ct"><span class="tt">다음 연애</span><span class="st">언제, 어디서, 어떤 사람과</span></div></div>
         <div class="pc" id="cGh" role="button" tabindex="0" style="background-image:url('img/taeo/wink.jpg');background-position:center 20%"><span class="chip new">NEW</span><div class="ct"><span class="tt">도화 궁합</span><span class="st">그 사람, 내 도화에 걸렸을까</span></div></div>
       </div>
     </section>
@@ -1216,22 +1219,10 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       </div>
     </section>
 
-    <section class="hSec" id="secRe" data-cats="all heart re">
-      <div class="sh"><small>속마음 · 재회</small><b>그 사람, 지금 무슨 생각할까</b></div>
-      <div class="hRow">
-        <div class="pc" id="cPartner" data-vid="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/3d178870-dde3-4414-9358-89c221d457e7.mp4" role="button" tabindex="0" style="background-image:url('https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/96ece9bc-bb47-4995-a4cc-fc7babf4523c.jpg');background-position:center 18%"><div class="ct"><span class="tt">그 사람 속마음</span><span class="st">은거울에 비친, 그의 요즘</span></div></div>
-        <div class="pc" id="cRe" role="button" tabindex="0" style="background-image:url('img/w2.jpg')"><span class="chip new">NEW</span><div class="ct"><span class="yr">2027</span><span class="tt">재회 사주</span><span class="st">우리, 다시 닿을 수 있을까</span></div></div>
-      </div>
-    </section>
-
-    <section class="hSec" id="secLove" data-cats="all love match">
-      <div class="sh"><small>연애 · 궁합</small><b>다음 사람은 언제 올까</b></div>
-      <div class="hRow">
-        <div class="pc" id="cNext" role="button" tabindex="0" style="background-image:url('img/seoha.jpg')"><span class="chip new">NEW</span><div class="ct"><span class="tt">다음 연애</span><span class="st">언제, 어디서, 어떤 사람과</span></div></div>
+    <!-- 오방 궁합: 10/3 홈에서 숨김(전체 메뉴 · 이안 소개의 오방 궁합 보기에서 열림) -->
+    <div hidden id="hideKeep">
         <div class="pc" id="cObgh" role="button" tabindex="0" style="background-image:url('img/fire.jpg')"><div class="ct"><span class="tt">오방 궁합</span><span class="st">다섯 신 중, 나랑 맞는 단 한 명</span></div></div>
-      </div>
-    </section>
-
+    </div>
     <section class="hSec band" id="secMem" data-cats="all gaeun match">
       <div class="sh"><small>나의 수호신</small><b>나를 지키는 오방</b></div>
       <div class="oRow" id="hMem"></div>
@@ -1260,8 +1251,8 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="sh"><b>지금 많이 보는 상담</b></div>
       <div class="rank">
         <div class="rk" data-go="partner"><span class="th" style="background-image:url('img/w3.jpg')"></span><em>1</em><div><b>그 사람 속마음</b><small>연락 안 오는 진짜 이유</small></div></div>
-        <div class="rk" id="rkObgh"><span class="th" style="background-image:url('img/kv_house.jpg')"></span><em>2</em><div><b>오방 궁합 순위</b><small>다섯 신과 나의 궁합 점수</small></div></div>
-        <div class="rk" id="rkRe"><span class="th" style="background-image:url('img/w2.jpg')"></span><em>3</em><div><b>재회 사주</b><small>다시 연락이 닿는 달</small></div></div>
+        <div class="rk" id="rkObgh" hidden><span class="th" style="background-image:url('img/kv_house.jpg')"></span><em>2</em><div><b>오방 궁합 순위</b><small>다섯 신과 나의 궁합 점수</small></div></div>
+        <div class="rk" id="rkRe"><span class="th" style="background-image:url('img/w2.jpg')"></span><em>2</em><div><b>재회 사주</b><small>다시 연락이 닿는 달</small></div></div>
       </div>
     </section>
 
@@ -1808,7 +1799,7 @@ $('pills').querySelectorAll('button').forEach(b=>b.onclick=()=>{
   if(c==='heart'){ const card=$('cPartner'); if(card){ const row=card.parentElement; setTimeout(()=>row.scrollTo({left:card.offsetLeft-16,behavior:'smooth'}),350); } }
   if(c==='tg'){ const card=$('cTaegil'); if(card){ const row=card.parentElement; setTimeout(()=>row.scrollTo({left:card.offsetLeft-16,behavior:'smooth'}),350); } }
 });
-const PILL_TO={all:'tday',tarot:'secTarot',ny:'secNY',jt:'secJt',love:'secLoveHub',match:'secLove',re:'secRe',heart:'secRe',gaeun:'secDb',tg:'secJt',job:'secJob'};
+const PILL_TO={all:'tday',tarot:'secTarot',ny:'secNY',jt:'secJt',love:'secLoveHub',gaeun:'secDb',tg:'secJt',job:'secJob'};
 let pillLock=0;
 function setPill(c){ $('pills').querySelectorAll('button').forEach(x=>{ const on=x.dataset.c===c; x.classList.toggle('on',on); if(on){ const r=$('pills'); const rb=r.getBoundingClientRect(), xb=x.getBoundingClientRect(); r.scrollTo({left:Math.max(0,r.scrollLeft+(xb.left-rb.left)-(rb.width-xb.width)/2),behavior:'smooth'}); } }); }
 /* 화면 전체가 옆으로 밀리지 않게: 밖 틀은 가로 스크롤 0으로 고정 */
@@ -1818,7 +1809,7 @@ $('home').addEventListener('scroll',()=>{ $('toTop').classList.toggle('on',$('ho
   if(Date.now()-pillLock<900) return; /* 누른 직후 부드럽게 이동하는 동안은 그대로 */
   /* 지금 보고 있는 섹션 안에 있을 때만 그 분류를 표시(숨긴 섹션은 건너뜀), 어느 분류에도 안 걸리면 '전체' */
   const head=document.querySelector('.hHead'), y=$('home').scrollTop+(head?head.offsetHeight:100)+60; let cur='all';
-  [['ny','secNY'],['jt','secJt'],['tarot','secTarot'],['love','secLoveHub'],['love','secDohwa'],['love','secCat'],['gaeun','secDb'],['job','secJob'],['re','secRe'],['match','secLove']].forEach(([c,id])=>{ const el=document.getElementById(id); if(!el||el.hidden||!el.offsetHeight) return; if(el.offsetTop<=y&&y<el.offsetTop+el.offsetHeight) cur=c; });
+  [['ny','secNY'],['jt','secJt'],['tarot','secTarot'],['love','secLoveHub'],['love','secDohwa'],['love','secCat'],['gaeun','secDb'],['job','secJob']].forEach(([c,id])=>{ const el=document.getElementById(id); if(!el||el.hidden||!el.offsetHeight) return; if(el.offsetTop<=y&&y<el.offsetTop+el.offsetHeight) cur=c; });
   if($('home').scrollTop<40) cur='all';
   const on=$('pills').querySelector('button.on'); if(on&&((on.dataset.c==='tg'&&cur==='jt')||(on.dataset.c==='heart'&&cur==='re'))) return; if(!on||on.dataset.c!==cur) setPill(cur); },{passive:true});
 $('toTop').onclick=()=>$('home').scrollTo({top:0,behavior:'smooth'});

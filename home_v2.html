@@ -23,6 +23,14 @@
 .home .thr:hover span,.home .thr.on span{opacity:1}
 @keyframes thrSw{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 @media (prefers-reduced-motion:reduce){.home .thr{animation:none}}
+/* ===== 10/3 21:15 수호신 드러내기(은주 확정 21:20): ① 머리 수호신 칩 ② 수호신이 본 오늘 · 개운 한마디 (오늘 밤 손님 줄엔 넣지 않음) ===== */
+.home .gChip{margin-left:auto;margin-right:6px;display:flex;align-items:center;gap:7px;height:34px;padding:0 10px 0 3px;border:1px solid rgba(var(--gr),.55);background:rgba(var(--gr),.12);color:#f6ecdf;font-family:inherit;cursor:pointer}
+.home .gChip i{flex:none;width:28px;height:28px;border-radius:50%!important;background:#222 center 16%/cover no-repeat;box-shadow:0 0 0 1px rgba(var(--gr),.8)}
+.home .gChip small{display:block;font-size:9px;font-weight:700;letter-spacing:.06em;color:rgba(var(--gr),1);line-height:1.1;text-align:left}
+.home .gChip b{display:block;font-size:12.5px;font-weight:800;line-height:1.15;text-align:left}
+.home .tdH{position:relative;padding-right:64px}
+.home .tdH .gFace{position:absolute;right:0;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%!important;background:#222 center 16%/cover no-repeat;box-shadow:0 0 0 1.5px rgba(10,8,12,.9),0 0 0 2.5px rgba(var(--gr),.8)}
+.home .tdH .gFace:after{content:'수호신';position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);font-size:9px;font-weight:800;letter-spacing:.04em;padding:2px 5px;background:rgb(var(--gr));color:#1a120b;white-space:nowrap}
 </style>
 <title>오방사주 · 서하의 살롱</title>
 <meta name="robots" content="noindex">
@@ -1146,7 +1154,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
   <div class="home" id="home">
     <div class="hHead">
       <div class="hBar"><div class="logo"><img src="img/brand/odg_mark.webp" alt=""><img class="lw" src="img/brand/odg_word_h.webp" alt="오방도감"></div>
-        <div class="hIc"><button id="hBell" aria-label="알림"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button><button id="hMenu" aria-label="메뉴"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div>
+        <button class="gChip" id="gChip" type="button" hidden><i id="gChipI"></i><span><small>나의 수호신</small><b id="gChipN"></b></span></button><div class="hIc"><button id="hBell" aria-label="알림"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button><button id="hMenu" aria-label="메뉴"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div>
       <div class="pills" id="pills"><button class="on" data-c="all">전체</button><button data-c="ny">신년</button><button data-c="jt">정통</button><button data-c="tg">택일</button><button data-c="tarot">타로</button><button data-c="love">연애</button><button data-c="gaeun">개운</button><button data-c="job">커리어</button></div>
     </div>
 
@@ -1343,7 +1351,7 @@ $('c1a').textContent=HOST.c1a; $('c1b').textContent=HOST.c1b; document.querySele
 const GODS={
   wood:{h:'靑龍',n:'하람',el:'木',dir:'동쪽',c:'var(--wood)',label:'목(木)',desc:'동쪽을 지키는 청룡 · 새 시작과 다음 인연',mission:'초록색 하나 걸치고, 동쪽으로 딱 10분만 걸어.'},
   fire:{h:'朱雀',n:'이안',el:'火',dir:'남쪽',c:'var(--fire)',label:'화(火)',desc:'남쪽을 지키는 주작 · 고백과 결단',mission:'오늘은 네가 먼저 연락해. 망설이면 불 꺼진다.'},
-  earth:{h:'黃龍',n:'도준',el:'土',dir:'중앙',c:'var(--earth)',label:'토(土)',desc:'중앙을 지키는 황룡 · 안정과 관계',mission:'책상 위 하나만 정리하자. 네 자리가 단단해야 운이 앉아.'},
+  earth:{h:'黃龍',n:'도준',el:'土',dir:'중앙',c:'var(--earth)',label:'토(土)',desc:'중앙을 지키는 황룡 · 안정과 관계',mission:'책상 위 하나만 정리하자. 네 자리가 단단해야 운이 안 새.'},
   metal:{h:'白虎',n:'시온',el:'金',dir:'서쪽',c:'var(--metal)',label:'금(金)',desc:'서쪽을 지키는 백호 · 정리와 결단',mission:'오늘, 안 맞는 약속 하나 끊어. 비워야 들어와.'},
   water:{h:'玄武',n:'재이',el:'水',dir:'북쪽',c:'var(--water)',label:'수(水)',desc:'북쪽을 지키는 현무 · 속마음과 지혜',mission:'물 한 잔 먼저 마셔. 그리고 오늘 하루, 세 줄만 적어.'}};
 const ORDER=['wood','fire','earth','metal','water'];
@@ -1664,7 +1672,7 @@ $('payGo').onclick=()=>toast('체험판: 결제 화면으로 이동합니다');
 /* ---------- membership demo ---------- */
 const MS={wood:{push:'일어났어? 오늘 미션 왔어 🌿',l:['좋은 아침.','오늘은 초록색 하나 걸치고,','동쪽으로 딱 10분만 걸어.']},
   fire:{push:'일어나. 오늘 미션 하나 줄게 🔥',l:['일어났어?','오늘은 네가 먼저 연락해.','망설이면 불 꺼진다.']},
-  earth:{push:'잘 잤어? 오늘 미션 가져왔어',l:['잘 잤어?','책상 위 하나만 정리하자.','네 자리가 단단해야 운이 앉아.']},
+  earth:{push:'잘 잤어? 오늘 미션 가져왔어',l:['잘 잤어?','책상 위 하나만 정리하자.','네 자리가 단단해야 운이 안 새.']},
   metal:{push:'미션 도착. 오늘은 짧아.',l:['오늘,','안 맞는 약속 하나 끊어.','비워야 들어와.']},
   water:{push:'…깼어? 미션 보냈어 🌙',l:['물 한 잔 먼저 마셔.','그리고 오늘 하루,','세 줄만 적어.']}};
 ORDER.forEach(k=>{ V['m_'+k]='v/ms/'+k+'.mp4'; LINES['m_'+k]=MS[k].l; FALLBACK_DUR['m_'+k]=6; POSTER['m_'+k]='img/'+k+'.jpg'; });
@@ -1758,6 +1766,19 @@ function renderHome(){
   $('hMem').innerHTML=ORDER.map(k=>{const m=GODS[k];return `<button class="om ${k===S.low?'mine':''}" data-el="${k}" style="--c:${m.c}"><span style="background-image:url('img/${k}.jpg')"></span><b>${m.n}</b><small>${m.h} · ${m.el}</small></button>`;}).join('');
   $('hMem').querySelectorAll('.om').forEach(e=>e.onclick=()=>memberView(e.dataset.el));
 }
+/* 10/3 21:15 시안: 수호신 드러내기 */
+const GRGB={wood:'70,180,127',fire:'236,90,67',earth:'211,161,58',metal:'201,209,220',water:'91,140,230'};
+function jo(w,a,b){ const c=w.charCodeAt(w.length-1)-0xAC00; return (c>=0&&c<11172&&c%28>0)?a:b; }
+function guardApply(){ try{ if(!S||!S.low) return; const k=S.low, n=godName(k), im=godImg(k), g=GODS[k], f=faceOf(), rgb=GRGB[k];
+  document.querySelector('.home')&&document.querySelector('.home').style.setProperty('--gr',rgb);
+  const ch=$('gChip'); if(ch){ ch.hidden=false; $('gChipI').style.backgroundImage=`url("${im}")`; $('gChipN').textContent=n; ch.onclick=()=>memberView(k); }
+  const K=$('hFortK'); if(K){ K.textContent=`${n}${jo(n,'이','가')} 본 오늘 · `+K.textContent.replace(/^(오늘의 운세|.+ 본 오늘) · /,''); }
+  const H=$('tdH'); if(H&&!H.querySelector('.gFace')){ const i=document.createElement('i'); i.className='gFace'; H.appendChild(i); } if(H) H.querySelector('.gFace').style.backgroundImage=`url("${im}")`;
+  $('hMisK').innerHTML=`${n}의 개운 한마디 · <em>나의 수호신 ${g.el}</em>`;
+  try{ localStorage.setItem('obGuard',JSON.stringify({k,f,n})); sessionStorage.setItem('obGP','1'); }catch(e){}
+}catch(e){} }
+window.guardApply=guardApply;
+{ const _rh=renderHome; renderHome=function(){ _rh.apply(this,arguments); guardApply(); }; }
 /* 홈 '사주가 그린 나' 배너: 내 정보가 있으면 내 일간 오행·성별 그림으로 */
 function myChar(){ const el=$('hMyChar'); let me=null; try{ me=JSON.parse(sessionStorage.getItem('me')||'null'); }catch(e){} if(!el||!me||!me.y||!window.Saju) return;
   try{ let y=+me.y,m=+me.m,d=+me.d; if(me.cal==='l'){ const r=Saju.lunarToSolar(y,m,d,!!me.leap); if(!r) return; y=r.y; m=r.m; d=r.d; }

@@ -20,7 +20,7 @@ const SS={
  정인:{k:'문서가 드는 달',good:'배움과 문서, 어른의 도움이 들어오는 기운일세. 시험과 자격, 계약서에 좋고 마음이 편안해지네.',bad:'기대고 싶은 마음이 커지는 기운일세. 남의 도움만 기다리다 때를 놓치지 말게.',love:['아껴 주는 사람이 곁에 오네','기대다 관계가 기울기 쉽네'],money:['문서와 계약으로 재산이 느네','받기만 하다 기회를 놓치네'],work:['시험과 자격에 좋은 결과가 나네','결정을 미루기 쉽네'],do:'문서 챙기고 공부 이어 가기',avoid:'남의 결정만 기다리기'}};
 const USM={장생:'새로 싹트는 자리',목욕:'마음이 들뜨는 자리',관대:'의젓하게 자리 잡는 자리',건록:'제 발로 서는 자리',제왕:'힘이 가장 센 자리',쇠:'힘을 고르는 자리',병:'지치기 쉬운 자리',사:'기운이 멈추는 자리',묘:'거두어 쌓는 자리',절:'기운이 바닥인 자리',태:'새 기운을 품는 자리',양:'조용히 키우는 자리'};
 const SEAT={년지:'집안과 바깥 평판',월지:'일터와 부모',일지:'배우자와 가까운 사람',시지:'꿈과 자녀'};
-const RELM={육합:'손을 잡아 일이 순하게 풀리네',충:'정면으로 부딪혀 변동이 생기네',형:'서로 견제하니 서류와 약속을 두 번 보게',원진:'까닭 없이 서운해지기 쉽네',파:'약속 하나가 어긋나기 쉽네',해:'작은 섭섭함이 쌓이기 쉽네',삼합:'힘을 모아 기운이 커지네','같은 글자':'같은 기운이 겹쳐 일이 두 배로 커지네'};
+const RELM={육합:'손을 잡아 일이 순하게 풀리네',충:'정면으로 부딪혀 변동이 생기네',형:'서로 견제하는 일이 생기네. 서류와 약속은 두 번 보게',원진:'까닭 없이 서운해지기 쉽네',파:'약속 하나가 어긋나기 쉽네',해:'작은 섭섭함이 쌓이기 쉽네',삼합:'힘을 모아 기운이 커지네','같은 글자':'같은 기운이 겹쳐 일이 두 배로 커지네'};
 const SSM={역마:'자리를 옮기거나 멀리 움직일 일이 생기네',도화:'사람 눈에 띄고 인연이 붙네',화개:'홀로 깊어지는 공부가 붙네',천을귀인:'도와주는 사람이 나타나네',양인:'추진력이 세지나 다툼과 다침을 조심하게',홍염:'은근한 매력이 드러나네',문창귀인:'글과 공부가 빛나네',공망:'기대보다 손에 남는 것이 적네',백호:'서두르다 다치지 않게 조심하게'};
 const ELX=[{n:'나무',color:'초록',dir:'동쪽',num:'3 · 8',acts:['아침 햇살 속에서 이십 분 걷기','책상 위에 작은 화분 하나 두기','새로 배우는 것 하나 시작하기']},
  {n:'불',color:'빨강',dir:'남쪽',num:'2 · 7',acts:['볕 좋은 날 몸 움직이기','사람 많은 자리에 한 번 더 나가기','미뤄 둔 제안 하나 꺼내기']},
@@ -38,14 +38,14 @@ const dstr=x=>`${x.m}월 ${x.d}일 (${DOW[x.w]})`;
 
 function ruleCopy(){ const M=F.months, st=F.st;
   const months=M.map(o=>{ const a=SS[o.t1]; let total=`${o.term} 달 ${o.gz}월은 자네에게 ${o.t1}${bt(o.t1)?'과':'와'} ${o.t2}의 달일세. ${a[o.f1?'good':'bad']} 이달 자네 일간은 ${o.us}, 곧 ${USM[o.us]}에 서네.`;
-    o.br.slice(0,2).forEach(r=>total+=` ${r.at} ${JI[natalAt(r.at)]}와 ${JI[o.b]}의 ${r.k}이니 ${SEAT[r.at]} 쪽에서 ${RELM[r.k]}.`); o.ss.slice(0,2).forEach(k=>total+=` ${k}${bt(k)?'이':'가'} 드니 ${SSM[k]}.`); if(o.fill) total+=` ${EL[F.blank]} 기운이 들어 자네 빈칸을 채우네.`;
+    const gp={}; o.br.forEach(r=>(gp[r.at]=gp[r.at]||[]).push(r.k)); Object.keys(gp).slice(0,3).forEach(at=>{ const ks=gp[at], neg=ks.find(k=>!/합/.test(k)), lead=ks.length>1?(neg||ks[0]):ks[0]; total+=ks.length===1&&ks[0]==='같은 글자'?` ${at} ${JI[natalAt(at)]}와 같은 글자가 다시 들어오니 ${SEAT[at]} 쪽에서 ${RELM[ks[0]]||'같은 기운이 겹쳐 일이 커지네'}.`:` ${at} ${JI[natalAt(at)]}와 ${JI[o.b]}의 ${ks.length>1?jo(ks.join(' · '),'이','가')+' 함께 걸리니':ks[0]+'이니'} ${SEAT[at]} 쪽에서 ${RELM[lead]||RELM[ks[0]]||'기운이 움직이네'}.`; }); o.ss.slice(0,2).forEach(k=>total+=` ${k}${bt(k)?'이':'가'} 드니 ${SSM[k]}.`); if(o.fill) total+=` ${EL[F.blank]} 기운이 들어 자네 빈칸을 채우네.`;
     const pr=o.br.find(r=>r.at==='년지'||r.at==='월지');
     return {tag:a.k,total,love:(o.br.some(r=>r.at==='일지'&&r.k==='육합')?'가까운 사람과 마음이 묶이는 달일세':o.br.some(r=>r.at==='일지'&&r.k==='충')?'가까운 관계가 흔들리니 말을 아끼게':a.love[o.f1?0:1])+'.',
       money:a.money[o.f1?0:1]+(o.ss.includes('공망')?'. 공망이 걸려 기대보다 적게 남네.':'.'),work:a.work[o.f1?0:1]+'.',people:pr?`${SEAT[pr.at]} 쪽에서 ${RELM[pr.k]}.`:'사람 관계는 무난한 달일세.',
       body:['병','사','절','묘'].includes(o.us)?'기운이 꺾이는 달일세. 잠을 늘리고 일정을 비워 두게.':['건록','제왕','장생','관대'].includes(o.us)?'기운이 차오르는 달일세. 미뤄 둔 운동을 시작하기 좋네.':'무리하지 않으면 무난한 달일세.',do:a.do,avoid:a.avoid}; });
   const pick=fn=>M.filter(fn).map(o=>o.start.m+'월'), list=a=>a.length?a.join(', '):'뚜렷한 달이 없네';
   const ys=F.ys;
-  return {pan:[`올해 정미(丁未)의 천간 정(丁)은 자네에게 ${ys.t1}일세. ${SS[ys.t1][S_.favorable(st,S_.rel(F.dm,stEl(ys.s)))?'good':'bad']}`,`지지 미(未)는 자네에게 ${ys.t2}일세. ${SS[ys.t2][S_.favorable(st,S_.relBranch(F.dm,ys.b))?'good':'bad']}`].concat(ys.br.map(r=>`${r.at} ${JI[natalAt(r.at)]}와 미(未)의 ${r.k}이니 ${SEAT[r.at]} 쪽에서 ${RELM[r.k]}.`)).concat(ys.ss.map(k=>`올해 미(未)는 자네에게 ${k}일세. ${SSM[k]}.`)),
+  return {pan:[`올해 정미(丁未)의 천간 정(丁)은 자네에게 ${ys.t1}일세. ${SS[ys.t1][S_.favorable(st,S_.rel(F.dm,stEl(ys.s)))?'good':'bad']}`,`지지 미(未)는 자네에게 ${ys.t2}일세. ${SS[ys.t2][S_.favorable(st,S_.relBranch(F.dm,ys.b))?'good':'bad']}`,`올해 자네 일간은 ${ys.us}, 곧 ${USM[ys.us]}에 서네. ${['장생','관대','건록','제왕'].includes(ys.us)?'제 힘이 붙는 해이니 미뤄 둔 일을 앞으로 당기게.':['병','사','묘','절'].includes(ys.us)?'힘이 낮게 깔리는 해이니 일을 넓히기보다 줄여서 깊게 하게.':'힘이 넘치지도 모자라지도 않는 해이니 하던 일을 꾸준히 이어 가면 되네.'}`].concat(ys.br.map(r=>r.k==='같은 글자'?`${r.at} ${JI[natalAt(r.at)]}와 같은 미(未)가 들어오니 ${SEAT[r.at]} 쪽에서 ${RELM[r.k]||'같은 기운이 겹쳐 일이 커지네'}.`:`${r.at} ${JI[natalAt(r.at)]}와 미(未)의 ${r.k}이니 ${SEAT[r.at]} 쪽에서 ${RELM[r.k]||'기운이 움직이네'}.`)).concat(ys.ss.map(k=>`올해 미(未)는 자네에게 ${k}일세. ${SSM[k]}.`)),
    areas:{love:{sum:`인연이 가까워지는 달은 ${list(pick(o=>o.br.some(r=>r.at==='일지'&&r.k==='육합')||o.ss.includes('도화')||(o.g1===(F.male?2:3)&&o.f1)))}일세.`,tip:'끌리는 사람보다 편한 사람을 보게'},money:{sum:`돈의 기운이 움직이는 달은 ${list(pick(o=>(o.g1===2||o.g2===2)&&(o.f1||o.f2)))}일세.`,tip:'버는 달에 반은 떼어 두게'},work:{sum:`자리와 문서의 기운이 드는 달은 ${list(pick(o=>(o.g1===3||o.g1===4)&&o.f1))}일세.`,tip:'내밀 서류는 좋은 달 전에 준비해 두게'},people:{sum:'원국의 년지와 월지에 걸리는 달마다 집안과 일터 쪽 일이 움직이네.',tip:'서운한 말은 그날 풀게'},body:{sum:`쉬어 갈 달은 ${list(pick(o=>o.sc<45))}일세.`,tip:'오래가는 통증은 꼭 병원에 보이게'}},
    months,best:{},warn:{},letter:['자네 감정서를 여기까지 썼네.','좋은 달에는 크게 걸음을 내딛고, 궂은 달에는 걸음을 늦추면 그것으로 충분하네.','사주는 정답이 아니라 지도일세. 길은 자네가 고르는 거고.'],draft:true}; }
 
@@ -67,6 +67,7 @@ function mrow(o,i,DY,img){ const c=C.months[i]; const ev=[`천간 ${o.t1}`,`지�
    <div class="mrb">${img?`<div class="mpic" style="background-image:url('${img}')"><span>${o.term}</span></div>`:''}<p class="p">${N(c.total)}</p><dl class="m5">${AREAS.map(([k,l])=>`<dt>${l}</dt><dd>${N(c[k])}</dd>`).join('')}<dt>권하는 일</dt><dd>${c.do}</dd><dt>삼갈 일</dt><dd>${c.avoid}</dd></dl>${(()=>{ const D=monthDays(o); return `<div class="mdays"><div><small>좋은 날</small>${D.good.map(x=>`<b>${x.m}월 ${x.d}일 (${DOW[x.w]})</b><i>${GOODWHY(x)}</i>`).join('')||'<i>뚜렷한 날이 없네</i>'}</div><div><small>피할 날</small>${D.bad.map(x=>`<b>${x.m}월 ${x.d}일 (${DOW[x.w]})</b><i>${BADWHY(x)}</i>`).join('')||'<i>크게 부딪히는 날이 없네</i>'}</div></div>`; })()}<p class="evid">근거 · ${ev.join(' · ')}</p></div></div>`; }
 
 const jo=(w,a,b)=>w+(bt(w)?a:b);
+const hage=t=>t.replace(/맞는다$/,'맞네').replace(/않다$/,'않네').replace(/다$/,'네');
 /* ---------- v2 확장(10/4): 타고난 그릇 · 대운 · 달마다 좋은 날/조심할 날 · 영역별 열두 달 · 자주 묻는 다섯 가지 · 열두 달 개운표 ---------- */
 const DM_HG=['큰 나무 같은 사람일세. 한번 정한 길은 곧게 밀고 가고, 남 밑보다 앞에 서는 편이 편하네. 사람을 이끌고 일을 일으키는 힘이 있으나, 꺾이지 않으려다 부러질 수 있으니 휘는 법도 익혀 두게. 자네에게 좋은 해는 뿌리를 적셔 주는 물과 가지를 다듬어 주는 쇠가 알맞게 드는 해일세.',
  '덩굴과 꽃 같은 사람일세. 부드럽게 휘어 어디서든 뿌리를 내리고, 사람 사이를 잇는 재주가 있네. 혼자 서기보다 기댈 곳을 찾아 함께 자라는 편이 오래가네. 겉은 여려 보여도 끈질긴 사람이니, 남의 기대에 맞추느라 자네 결을 잃지는 말게.',
@@ -85,19 +86,20 @@ const ORG=['간과 눈, 근육과 힘줄','심장과 혈관, 눈의 피로','위
 const GRPN=['비겁(나와 같은 기운)','식상(내가 내보내는 기운)','재성(재물의 기운)','관성(자리와 책임의 기운)','인성(배움과 도움의 기운)'];
 const clamp=v=>Math.max(20,Math.min(95,Math.round(v)));
 function areaScores(o){ const loveG=F.male?2:3, strong=['장생','관대','건록','제왕'].includes(o.us), weak=['병','사','묘','절'].includes(o.us), has=(at,k)=>o.br.some(r=>r.at===at&&r.k===k), any=k=>o.br.some(r=>r.k===k);
-  return {money:clamp(52+(o.g1===2?(o.f1?16:-9):0)+(o.g2===2?(o.f2?12:-6):0)+(o.g1===0&&!o.f1?-6:0)+(o.ss.includes('공망')?-7:0)+(o.ss.includes('천을귀인')?4:0)+o.fill*3),
+  return {money:clamp(52+(o.g1===2||o.g2===2?(F.st.strong?14:3):0)+(o.g1===1&&o.f1?7:0)+(o.g2===1&&o.f2?4:0)+(o.g1===0||o.g2===0?(F.st.strong?-8:6):0)+(o.ss.includes('공망')?-7:0)+(o.ss.includes('천을귀인')?4:0)+o.fill*3),
    work:clamp(52+(o.g1===3?(o.f1?16:-9):0)+(o.g2===3?(o.f2?10:-5):0)+(o.g1===4?(o.f1?8:-3):0)+(has('월지','육합')?7:0)+(has('월지','충')?-9:0)+(strong?4:0)+(o.ss.includes('역마')?3:0)),
    love:clamp(52+(has('일지','육합')?15:0)+(has('일지','충')?-14:0)+(o.ss.includes('도화')?8:0)+(o.ss.includes('홍염')?5:0)+(o.g1===loveG?(o.f1?10:-4):0)+(has('일지','원진')?-6:0)),
    people:clamp(52+(has('년지','육합')||has('월지','육합')?8:0)+(has('년지','충')||has('월지','충')?-8:0)+(any('형')||any('원진')||any('해')?-5:0)+(o.ss.includes('천을귀인')?9:0)+(o.g1===0?(o.f1?6:-5):0)),
    body:clamp(54+(strong?10:0)+(weak?-11:0)+(o.ss.includes('백호')?-8:0)+(o.ss.includes('양인')?-4:0)+(any('충')?-5:0)+o.fill*4)}; }
 function monthDays(o){ const {P,dm,st}=F, db=P.d[1], mb=P.m[1], yb=P.y[1], loveG=F.male?2:3; const s0=Date.UTC(o.start.y,o.start.m-1,o.start.d), e0=Date.UTC(o.end.y,o.end.m-1,o.end.d); const all=[];
-  for(let t=s0;t<=e0;t+=864e5){ const d=new Date(t), y=d.getUTCFullYear(), m=d.getUTCMonth()+1, dd=d.getUTCDate(), w=d.getUTCDay(); const [s,b]=S_.dayPillar(y,m,dd);
+  const T=x=>Date.UTC(x.y,x.m-1,x.d,x.hh||0,x.mi||0), nx=F.months[F.months.indexOf(o)+1], sT=T(o.start), eT=nx?T(nx.start):e0+864e5;
+  for(let t=s0;t<=e0+864e5;t+=864e5){ if(t+432e5<sT||t+432e5>=eT) continue; const d=new Date(t), y=d.getUTCFullYear(), m=d.getUTCMonth()+1, dd=d.getUTCDate(), w=d.getUTCDay(); const [s,b]=S_.dayPillar(y,m,dd);
     const g1=S_.rel(dm,stEl(s)), g2=S_.relBranch(dm,b), f1=S_.favorable(st,g1), f2=S_.favorable(st,g2); const ch=S_.isChung(b,db)?'일지':S_.isChung(b,mb)?'월지':S_.isChung(b,yb)?'년지':'';
     let v=(f1?2:0)+(f2?2:0)+(S_.isHap(b,db)?2.5:0)+(S_.isHap(b,mb)?1:0)-(ch?6:0); all.push({y,m,d:dd,w,s,b,g1,g2,v,ch,hap:S_.isHap(b,db),love:g1===loveG&&f1}); }
   const good=[...all].filter(x=>!x.ch&&x.v>0).sort((a,b)=>b.v-a.v).slice(0,2).sort((a,b)=>a.y-b.y||a.m-b.m||a.d-b.d);
   const bad=all.filter(x=>x.ch==='일지'||x.ch==='월지').slice(0,2);
   return {good,bad}; }
-const GOODWHY=x=>x.hap?'일지와 합이 드는 날':x.love?'인연의 별이 뜨는 날':S_.favorable(F.st,x.g1)&&S_.favorable(F.st,x.g2)?'하늘과 땅이 모두 자네 편인 날':'자네 사주가 반기는 날';
+const GOODWHY=x=>`${GAN[x.s]}${JI[x.b]}일 · `+(x.hap?'배우자 자리와 합이 드는 날':x.love?'인연의 별이 뜨는 날':S_.favorable(F.st,x.g1)&&S_.favorable(F.st,x.g2)?(S_.tgStem(F.dm,x.s)===S_.tgBranch(F.dm,x.b)?`천간과 지지가 모두 ${S_.tgStem(F.dm,x.s)}, 자네 편인 날`:`${jo(S_.tgStem(F.dm,x.s),'과','와')} ${jo(S_.tgBranch(F.dm,x.b),'이','가')} 모두 자네 편인 날`):'자네 사주가 반기는 날');
 const BADWHY=x=>x.ch==='일지'?'일지와 부딪히는 날, 가까운 사람과 말 조심':'월지와 부딪히는 날, 일터의 큰 결정 미루기';
 function favElsOf(){ const fg=F.st.strong?[1,2,3]:[0,4]; return fg.map(g=>(stEl(F.dm)+g)%5); }
 function bars(vals,hi){ return `<div class="abar">${vals.map((v,i)=>`<div class="${hi&&hi.includes(i)?'hi':''}"><i style="height:${Math.round((v-15)/85*100)}%"></i><small>${F.months[i].start.m}</small></div>`).join('')}</div>`; }
@@ -105,39 +107,54 @@ const AREA_BASE={
  money:()=>{ const e=(stEl(F.dm)+2)%5, n=F.cnt[e]; return `자네 원국에서 재물의 기운(${EL[e]})은 ${n}개일세. ${n===0?'원국에 재물의 글자가 없으니, 돈은 들어오는 해와 달을 골라 거두는 사주일세. 큰돈을 쫓기보다 들어오는 때를 알아 두는 것이 자네의 재테크네.':n>=3?'재물의 글자가 많으니 돈 냄새를 맡는 감각이 있으나, 그만큼 돈 때문에 마음이 바쁘기 쉽네. 버는 재주보다 지키는 습관이 자네를 부자로 만드네.':'재물의 글자가 알맞게 있으니 꾸준히 벌고 모으는 결이 있네. 무리한 한 방보다 쌓는 쪽이 자네 운에 맞네.'}${F.st.strong?' 자네는 신강하니 재물을 감당할 힘이 있네. 기회가 오면 받아 내게.':' 자네는 신약하니 큰돈을 한꺼번에 들이기보다 나눠 받는 편이 탈이 없네.'}`; },
  work:()=>{ const e=(stEl(F.dm)+3)%5, n=F.cnt[e], m=S_.tgBranch(F.dm,F.P.m[1]); return `자네 원국에서 자리와 책임의 기운(${EL[e]})은 ${n}개이고, 사회의 자리인 월지는 ${m}일세. ${TG_SOC[m]||''} ${n===0?'관성이 없으니 남이 정한 틀보다 자네가 만든 틀에서 힘이 나네.':n>=3?'관성이 많으니 맡는 일이 늘 무겁네. 거절할 일을 고르는 것도 실력일세.':'관성이 알맞으니 조직 안에서 인정받으며 오르는 길이 순하네.'}`; },
  love:()=>{ const e=(stEl(F.dm)+(F.male?2:3))%5, n=F.cnt[e], spouse=S_.tgBranch(F.dm,F.P.d[1]); return `자네에게 인연의 별(${F.male?'재성':'관성'}, ${EL[e]})은 원국에 ${n}개이고, 배우자 자리인 일지에는 ${jo(spouse,'이','가')} 앉아 있네. ${n===0?'인연의 별이 원국에 없으니 인연은 운에서 들어오는 해와 달에 맺어지네. 그때를 놓치지 않는 것이 중요하네.':n>=3?'인연의 별이 많으니 사람이 잘 붙네. 고르는 눈이 곧 자네 복일세.':'인연의 별이 알맞으니 서두르지 않아도 맞는 사람이 곁에 오네.'} 일지의 ${jo(spouse,'은','는')} 자네가 가까운 사람에게 바라는 모습이기도 하네.`; },
- people:()=>{ const b=F.cnt[stEl(F.dm)], i=F.cnt[(stEl(F.dm)+4)%5]; return `자네 원국에는 나와 같은 기운(비겁)이 ${b}개, 나를 돕는 기운(인성)이 ${i}개 있네. ${b>=3?'곁에 사람이 많고 경쟁도 많으니, 의리와 선을 함께 지키게.':b===0?'혼자 해내는 힘이 강한 대신 기댈 사람을 일부러 만들어 두어야 하네.':'벗과 동료가 알맞게 있어 서로 힘이 되네.'} ${i>=2?'어른과 스승의 도움이 따르는 사주일세.':'윗사람의 도움보다 자네 손으로 길을 내는 사주일세.'}`; },
+ people:()=>{ const b=F.cnt[stEl(F.dm)]-1, i=F.cnt[(stEl(F.dm)+4)%5]; return `자네 원국에는 나와 같은 기운(비겁)이 ${b}개, 나를 돕는 기운(인성)이 ${i}개 있네. ${b>=3?'곁에 사람이 많고 경쟁도 많으니, 의리와 선을 함께 지키게.':b===0?'혼자 해내는 힘이 강한 대신 기댈 사람을 일부러 만들어 두어야 하네.':'벗과 동료가 알맞게 있어 서로 힘이 되네.'} ${i>=2?'어른과 스승의 도움이 따르는 사주일세.':'윗사람의 도움보다 자네 손으로 길을 내는 사주일세.'}`; },
  body:()=>`자네 원국에서 가장 넘치는 기운은 ${EL[F.cnt.indexOf(Math.max(...F.cnt))]}, 가장 모자란 기운은 ${EL[F.blank]}일세. 오행으로 보면 ${ORG[F.blank]} 쪽을 아끼라고 하네. ${F.st.strong?'기운이 센 사주라 무리해도 버티지만, 버티는 사이에 쌓이니 쉬는 날을 정해 두게.':'기운을 아껴 쓰는 사주라 잠과 밥이 곧 보약일세.'} 이것은 건강 진단이 아니라 기운의 균형을 본 것이니, 몸이 보내는 신호는 꼭 의사에게 보이게.`};
 const AREA_DO={money:['좋은 달에 들어온 돈의 절반은 바로 떼어 두기','큰 지출은 좋은 달로 미루기','조심할 달에는 보증과 투자 쉬기'],work:['내밀 서류는 좋은 달 한 달 전에 준비하기','조심할 달에는 큰 결정을 미루고 실력 다지기','좋은 달에 면담과 제안을 몰아 두기'],love:['좋은 달에는 먼저 연락하기','조심할 달에는 말보다 행동으로 마음 보이기','서운한 일은 그날 안에 풀기'],people:['좋은 달에 미뤄 둔 사람을 만나기','조심할 달에는 돈 거래와 큰 약속 피하기','집안 어른께 안부를 정해 두고 드리기'],body:['조심할 달에는 일정을 비워 두기','같은 시간에 자고 일어나기']};
-function areaBlock(k,l){ const vals=F.months.map(o=>areaScores(o)[k]); const idx=vals.map((v,i)=>({v,i})); const top=[...idx].sort((a,b)=>b.v-a.v).slice(0,2).map(x=>x.i), low=[...idx].sort((a,b)=>a.v-b.v).slice(0,2).map(x=>x.i);
+const AREA_POS={money:o=>[o.g1===2||o.g2===2?'재물의 글자가 들어오고':'',(o.g1===1&&o.f1)?'재주가 돈으로 이어지고':'',(o.g1===0||o.g2===0)&&!F.st.strong?'자네 힘이 붙어 돈을 감당하고':'',o.ss.includes('천을귀인')?'돕는 사람이 나타나고':''],
+ work:o=>[o.g1===3?'자리와 책임의 기운이 들고':'',o.g1===4?'문서와 배움의 기운이 들고':'',o.br.some(r=>r.at==='월지'&&r.k==='육합')?'일터 자리와 합이 들고':'',['장생','관대','건록','제왕'].includes(o.us)?`자네 일간이 ${o.us}의 자리에 서고`:'',o.ss.includes('역마')?'역마가 들어 움직임이 순하고':''],
+ love:o=>[o.br.some(r=>r.at==='일지'&&r.k==='육합')?'배우자 자리와 합이 들고':'',o.ss.includes('도화')?'도화가 뜨고':'',o.ss.includes('홍염')?'홍염이 들고':'',o.g1===(F.male?2:3)&&o.f1?'인연의 별이 뜨고':''],
+ people:o=>[o.br.some(r=>(r.at==='년지'||r.at==='월지')&&r.k==='육합')?'집안과 일터 자리에 합이 들고':'',o.ss.includes('천을귀인')?'돕는 사람이 나타나고':'',o.g1===0&&o.f1?'뜻 맞는 동료가 곁에 서고':''],
+ body:o=>[['장생','관대','건록','제왕'].includes(o.us)?`일간이 ${o.us}의 자리에 서 기운이 차오르고`:'',o.fill?'모자란 기운이 채워지고':'']};
+const AREA_NEG={money:o=>[(o.g1===2||o.g2===2)&&!F.st.strong?'재물이 보여도 감당하기 버겁고':'',(o.g1===0||o.g2===0)&&F.st.strong?'나눠야 할 몫이 생기고':'',o.ss.includes('공망')?'공망이 걸려 손에 남는 것이 적고':''],
+ work:o=>[o.br.some(r=>r.at==='월지'&&r.k==='충')?'일터 자리와 충이 걸리고':'',o.g1===3&&!o.f1?'책임이 버겁게 몰리고':'',['병','사','묘','절'].includes(o.us)?`일간이 ${o.us}의 자리라 힘이 낮고`:''],
+ love:o=>[o.br.some(r=>r.at==='일지'&&r.k==='충')?'배우자 자리와 충이 걸리고':'',o.br.some(r=>r.at==='일지'&&r.k==='원진')?'배우자 자리에 원진이 걸리고':'',o.g1===(F.male?2:3)&&!o.f1?'인연이 와도 버겁게 느껴지고':''],
+ people:o=>[o.br.some(r=>(r.at==='년지'||r.at==='월지')&&r.k==='충')?'집안이나 일터 자리와 충이 걸리고':'',o.br.some(r=>['형','원진','해','파'].includes(r.k))?`${o.br.find(r=>['형','원진','해','파'].includes(r.k)).at} 쪽에 ${o.br.find(r=>['형','원진','해','파'].includes(r.k)).k}이 걸리고`:''],
+ body:o=>[['병','사','묘','절'].includes(o.us)?`일간이 ${o.us}의 자리라 기운이 낮고`:'',o.ss.includes('백호')?'백호가 들어 다침을 조심해야 하고':'',o.br.some(r=>r.k==='충')?'충이 걸려 몸이 바쁘고':'']};
+const why=(arr,dflt)=>{ const a=arr.filter(Boolean); return a.length?a.slice(0,2).join(' ').replace(/들고$/,'드네').replace(/고$/,'네'):dflt; };
+const rankA=k=>{ const idx=F.months.map((o,i)=>({i,v:areaScores(o)[k]})); return {top:[...idx].sort((a,b)=>b.v-a.v||a.i-b.i).slice(0,2).map(x=>x.i),low:[...idx].sort((a,b)=>a.v-b.v||a.i-b.i).slice(0,2).map(x=>x.i)}; };
+const pair=(ids,fn)=>{ const mm=i=>F.months[i].start.m+'월', t=ids.map(fn); if(ids.length===2&&t[0]===t[1]) return `${mm(ids[0])}(${F.months[ids[0]].gz})과 ${mm(ids[1])}(${F.months[ids[1]].gz})은 모두 ${t[0]}.`; return ids.map((i,j)=>`${mm(i)}(${F.months[i].gz})은 ${t[j]}.`).join(' '); };
+function areaBlock(k,l){ const vals=F.months.map(o=>areaScores(o)[k]); const R0=rankA(k), top=R0.top, low=R0.low, topS=[...top].sort((a,b)=>a-b), lowS=[...low].sort((a,b)=>a-b);
   const mm=i=>F.months[i].start.m+'월';
   return `<div class="ar2"><div class="arh"><b>${l}</b><span>올해 평균 ${Math.round(vals.reduce((a,b)=>a+b,0)/12)}점</span></div>${bars(vals,top)}
    <p class="p"><b>타고난 결.</b> ${AREA_BASE[k]()}</p>
-   <p class="p"><b>올해의 흐름.</b> ${N(C.areas[k].sum)}</p>
-   <p class="p"><b>볕이 드는 달은 ${top.map(mm).join('과 ')}일세.</b> ${top.map(i=>{ const o=F.months[i]; return `${mm(i)}은 ${o.gz}월로 천간이 ${o.t1}, 지지가 ${jo(o.t2,'이네','네')}.`; }).join(' ')} <b>걸음을 늦출 달은 ${low.map(mm).join('과 ')}일세.</b> ${low.map(i=>{ const o=F.months[i]; const r=o.br[0]; return `${mm(i)}은 ${r?`${jo(r.at,'과','와')} ${jo(r.k,'이','가')} 걸리고`:`운성이 ${jo(o.us,'이라','라')} 기운이 낮고`}`; }).join(', ')} 하니 서두르지 말게.</p>
+   ${C.ai?`<p class="p"><b>올해의 흐름.</b> ${N(C.areas[k].sum)}</p>`:''}
+   <p class="p"><b>볕이 드는 달은 ${topS.map(mm).join('과 ')}일세.</b> ${pair(topS,i=>why(AREA_POS[k](F.months[i]),'사주가 반기는 기운이 드네'))} <b>걸음을 늦출 달은 ${lowS.map(mm).join('과 ')}일세.</b> ${pair(lowS,i=>why(AREA_NEG[k](F.months[i]),'사주가 반기지 않는 기운이 드네'))} 이때는 서두르지 말고 다음 볕을 기다리게.</p>
    <ol class="rxl">${(k==='body'?AREA_DO.body.slice(0,2).concat([ELX[F.blank].acts[0]]):AREA_DO[k]).map(a=>`<li>${a}</li>`).join('')}</ol>
    <p class="tip">소헌 선생 · ${N(C.areas[k].tip)}</p></div>`; }
 function natureDoc(){ const P=F.P, dm=F.dm, mT=S_.tgBranch(dm,P.m[1]), jh=F.johu, G=S_.tgStem;
   const grpCnt=[0,0,0,0,0]; [P.y,P.m,P.d,P.h].forEach((p,i)=>{ if(!p) return; if(i!==2) grpCnt[S_.rel(dm,stEl(p[0]))]++; grpCnt[S_.relBranch(dm,p[1])]++; });
-  const mx=grpCnt.indexOf(Math.max(...grpCnt)), mn=grpCnt.indexOf(Math.min(...grpCnt));
+  const mx=grpCnt.indexOf(Math.max(...grpCnt)), mn=grpCnt.indexOf(Math.min(...grpCnt)); const mxA=grpCnt.map((n,i)=>n===grpCnt[mx]?i:-1).filter(i=>i>=0), mnA=grpCnt.map((n,i)=>n===grpCnt[mn]?i:-1).filter(i=>i>=0); const GN=i=>GRPN[i].split('(')[0], GL=a=>a.length>2?a.map(GN).join(', '):a.map(GN).join('과 ');
+  const MXT=['스스로 서려는 힘이 앞서는 사주일세. 남의 손을 빌리는 법을 익히면 더 멀리 가네.','재주와 표현이 앞서는 사주일세. 꺼내 보인 만큼 길이 열리네.','재물과 현실 감각이 앞서는 사주일세. 지키는 습관이 붙으면 크게 모이네.','책임과 자리가 앞서는 사주일세. 무거운 짐을 덜어 내는 법도 알아 두게.','배움과 생각이 앞서는 사주일세. 배운 것을 손으로 옮길 때 결실을 보네.'];
+  const MNT=['나와 같은 기운이 적으니 혼자 버티기보다 곁에 설 사람을 일부러 두게.','내보내는 기운이 적으니 속에 든 것을 말과 결과물로 꺼내는 연습이 필요하네.','재물의 기운이 적으니 돈은 들어오는 때를 골라 거두는 것이 요령일세.','자리의 기운이 적으니 남이 정한 틀보다 자네가 정한 규칙이 힘이 되네.','돕는 기운이 적으니 배움과 쉼을 스스로 챙겨야 지치지 않네.'];
   const nat=F.natal.length?F.natal.map(o=>`<li><b>${o.at} · ${o.k}</b> ${NSS[o.k]||SSM[o.k]||''}</li>`).join(''):'<li>원국에 두드러진 신살이 없네. 신살보다 오행과 십성의 흐름으로 읽는 사주일세.</li>';
   return `<div class="doc"><div class="ch"><em>제5장</em><b>타고난 그릇</b><span>일간 · 월지 · 십성의 분포 · 신살</span></div>
    <p class="p"><b>자네는 ${GAN[dm]}${EL[stEl(dm)]}일세.</b> ${DM_HG[dm]}</p>
    <p class="p"><b>사회에서 쓰는 힘은 ${mT}일세.</b> 태어난 달의 지지 ${JI[P.m[1]]}가 자네에게 ${jo(mT,'이','가')} 되네. 월지는 사주에서 가장 힘이 센 자리라, 자네가 세상에 나가 일할 때 쓰는 연장이 바로 이것일세. ${TG_SOC[mT]||''}</p>
    <div class="g5">${grpCnt.map((n,i)=>`<div class="${i===mx?'mx':''}"><b>${n}</b><small>${['비겁','식상','재성','관성','인성'][i]}</small></div>`).join('')}</div>
-   <p class="p">여덟 글자를 십성으로 나누어 보면 ${GRPN[mx]}이 ${grpCnt[mx]}개로 가장 많고, ${GRPN[mn]}이 ${grpCnt[mn]}개로 가장 적네. ${['스스로 서려는 힘이 앞서는 사주일세. 남의 손을 빌리는 법을 익히면 더 멀리 가네.','재주와 표현이 앞서는 사주일세. 꺼내 보인 만큼 길이 열리네.','재물과 현실 감각이 앞서는 사주일세. 지키는 습관이 붙으면 크게 모이네.','책임과 자리가 앞서는 사주일세. 무거운 짐을 덜어 내는 법도 알아 두게.','배움과 생각이 앞서는 사주일세. 배운 것을 손으로 옮길 때 결실을 보네.'][mx]} 가장 적은 ${GRPN[mn].split('(')[0]}은 자네가 운에서 받아 써야 할 기운이니, 그 기운이 드는 해와 달을 잘 쓰게.</p>
-   <p class="p"><b>강약과 계절.</b> 자네는 ${F.st.label}한 사주일세. ${F.st.strong?'기운이 넉넉하니 밖으로 쓰고 나누는 운(식상 · 재성 · 관성)에서 결실을 보네.':'기운을 아껴 써야 하니 나를 채우고 돕는 운(인성 · 비겁)에서 힘을 얻네.'}${jh&&jh.need!=null?` 계절로 보면 자네는 ${jh.season}에 태어나 ${jh.why.replace(/다$/,'네')}.`:''}</p>
+   <p class="p">여덟 글자를 십성으로 나누어 보면 ${mxA.length>1?`${GL(mxA)}이 ${grpCnt[mx]}개씩으로 가장 많고`:`${GRPN[mx]}이 ${grpCnt[mx]}개로 가장 많고`}, ${grpCnt[mn]===0?`${GL(mnA)}${mnA.length>1?'은 하나도 없네':(bt(GN(mn))?'은':'는')+' 하나도 없네'}`:`${GL(mnA)}이 ${grpCnt[mn]}개${mnA.length>1?'씩':''}으로 가장 적네`}. ${mxA.length>1?`${jo(mxA.map(i=>MXT[i].split('이 앞서는')[0].split('가 앞서는')[0]).join(', '),'이','가')} 함께 앞서는 사주일세. ${mxA.map(i=>MXT[i].split('사주일세. ')[1]).join(' ')}`:MXT[mx]} ${grpCnt[mn]===0?mnA.map(i=>MNT[i]).join(' '):''} 모자란 기운은 운에서 받아 써야 하니, 그 기운이 드는 해와 달을 잘 쓰게.</p>
+   <p class="p"><b>강약과 계절.</b> 자네는 ${F.st.label}한 사주일세. ${F.st.strong?'기운이 넉넉하니 밖으로 쓰고 나누는 운(식상 · 재성 · 관성)에서 결실을 보네.':'기운을 아껴 써야 하니 나를 채우고 돕는 운(인성 · 비겁)에서 힘을 얻네.'}${jh&&jh.need!=null?` 계절로 보면 자네는 ${hage(jh.why)}.`:''}</p>
    <p class="p" style="margin-bottom:6px"><b>원국의 별(신살).</b></p><ul class="nss">${nat}</ul>
    ${F.gong&&F.gong.length?`<p class="p"><b>공망.</b> 자네 일주로 보면 ${F.gong.map(b=>JI[b]).join('와 ')}가 비어 있는 자리일세. 이 글자가 드는 해와 달에는 기대만큼 손에 남지 않기 쉬우니 욕심을 덜고 실속을 보게.</p>`:''}</div>`; }
 function daeunDoc(){ const D=F.DU, age=F.age; if(!D||!D.list||!D.list.length) return '';
-  const rows=D.list.map(x=>{ const g=S_.rel(F.dm,stEl(x.s)), fv=S_.favorable(F.st,g)&&S_.favorable(F.st,S_.relBranch(F.dm,x.b)); const now=age>=x.age&&age<x.age+10; return `<div class="du2 ${now?'now':''}"><span class="a">${x.age}~${x.age+9}세</span><span class="g" data-hj="0">${GAN[x.s]}${JI[x.b]}</span><span class="t">${DU_T2[g]}</span><span class="f">${fv?'순풍':'맞바람'}</span></div>`; }).join('');
+  const rows=D.list.map(x=>{ const g=S_.rel(F.dm,stEl(x.s)), fs=S_.favorable(F.st,g), fb=S_.favorable(F.st,S_.relBranch(F.dm,x.b)), wind=fs&&fb?'순풍':fs?'대체로 순풍':fb?'반반':'맞바람'; const now=age>=x.age&&age<x.age+10; return `<div class="du2 ${now?'now':''}"><span class="a">${x.age}~${x.age+9}세</span><span class="g" data-hj="0">${GAN[x.s]}${JI[x.b]}</span><span class="t">${DU_T2[g]}</span><span class="f">${wind}</span></div>`; }).join('');
   const cur=F.cur, nx=F.nxt, cg=S_.rel(F.dm,stEl(cur.s));
   return `<div class="doc"><div class="ch"><em>제6장</em><b>대운의 흐름</b><span>${D.fwd?'순행':'역행'} · ${D.start}세 시작</span></div>
    <p class="p">대운은 10년마다 바뀌는 큰 계절일세. 한 해의 운이 날씨라면 대운은 계절이라, 같은 비라도 봄비와 가을비가 다르듯 같은 해라도 어느 대운에서 맞느냐에 따라 뜻이 달라지네.</p>
    <div class="dul">${rows}</div>
-   <p class="p"><b>지금은 ${GAN[cur.s]}${JI[cur.b]} 대운(${cur.age}~${cur.age+9}세)일세.</b> ${DU_T2[cg]}이네. 천간은 자네에게 ${S_.tgStem(F.dm,cur.s)}, 지지는 ${jo(S_.tgBranch(F.dm,cur.b),'이니','니')} ${SS[S_.tgStem(F.dm,cur.s)].good.split('. ')[0]}.</p>
-   ${nx?`<p class="p"><b>다음은 ${GAN[nx.s]}${JI[nx.b]} 대운(${nx.age}세부터)일세.</b> ${DU_T2[S_.rel(F.dm,stEl(nx.s))]}이 기다리고 있네. ${age>=cur.age+8?'문턱이 가까우니 올해와 내년은 다음 10년을 준비하는 해로 쓰게.':'아직 시간이 있으니 지금 대운에서 거둘 것을 먼저 거두게.'}</p>`:''}</div>`; }
+   <p class="p"><b>지금은 ${GAN[cur.s]}${JI[cur.b]} 대운(${cur.age}~${cur.age+9}세)일세.</b> ${DU_T2[cg]}이네. 천간은 자네에게 ${S_.tgStem(F.dm,cur.s)}, 지지는 ${jo(S_.tgBranch(F.dm,cur.b),'이니','니')} ${SS[S_.tgStem(F.dm,cur.s)][S_.favorable(F.st,cg)?'good':'bad'].split('. ')[0]}. ${S_.favorable(F.st,cg)?'큰 흐름이 자네 사주를 받쳐 주는 10년일세.':'큰 흐름이 자네 사주에 버거운 10년이니, 속도보다 방향을 챙기게.'}${F.gong&&F.gong.includes(cur.b)?` 다만 대운의 지지 ${JI[cur.b]}는 자네 공망 자리라, 애쓴 만큼 손에 남지 않는다고 느낄 때가 있네. 이 10년은 결과보다 쌓이는 실력과 사람을 보게.`:''}</p>
+   ${nx?`<p class="p"><b>다음은 ${GAN[nx.s]}${JI[nx.b]} 대운(${nx.age}세부터)일세.</b> ${DU_T2[S_.rel(F.dm,stEl(nx.s))]}이 기다리고 있네. ${(()=>{ const a=S_.favorable(F.st,S_.rel(F.dm,stEl(nx.s))), b=S_.favorable(F.st,S_.relBranch(F.dm,nx.b)); return a&&b?'천간과 지지가 모두 자네 편이라 한결 순한 바람이 부는 10년일세.':a||b?'반쯤은 자네 편인 바람이라, 고를 일과 버릴 일을 가리면 순하게 지나가네.':'자네 사주에 맞바람이 부는 10년이니, 지금부터 체력과 저축을 쌓아 두게.'; })()} ${age>=cur.age+8?'문턱이 가까우니 올해와 내년은 다음 10년을 준비하는 해로 쓰게.':'아직 시간이 있으니 지금 대운에서 거둘 것을 먼저 거두게.'}</p>`:''}</div>`; }
 function faqDoc(DY){ const sc=k=>F.months.map((o,i)=>({i,v:areaScores(o)[k]})).sort((a,b)=>b.v-a.v), mm=i=>F.months[i].start.m+'월';
-  const w=sc('work'), m=sc('money'), l=sc('love'), b=sc('body'); const mv=F.months.map((o,i)=>({o,i})).filter(x=>x.o.ss.includes('역마')).map(x=>mm(x.i));
+  const R=k=>{ const r=rankA(k); return [{i:r.top[0]},{i:r.top[1]}].concat(Array(8).fill({i:0}),[{i:r.low[1]},{i:r.low[0]}]); }; const w=R('work'), m=R('money'), l=R('love'), b=R('body'); const mv=F.months.map((o,i)=>({o,i})).filter(x=>x.o.ss.includes('역마')&&x.o.sc>=50).map(x=>mm(x.i));
   const dd=a=>a.length?a.map(x=>`${x.m}월 ${x.d}일`).join(', '):'따로 고른 날이 없네';
   const Q=[['올해 이직하거나 자리를 옮겨도 되겠습니까',`자리를 옮기기 좋은 달은 ${mm(w[0].i)}과 ${mm(w[1].i)}일세. 이 두 달에는 자리와 문서의 기운이 자네를 받쳐 주네.${mv.length?` 또 ${mv.join(', ')}에는 역마가 들어 움직임 자체가 순하네.`:''} 반대로 ${mm(w[11].i)}에는 결정을 미루고 실력을 다지게. 옮길지 말지는 운보다 조건이 먼저이니, 조건을 갖춘 뒤 좋은 달에 움직이게.`],
    ['돈은 언제 모이고 언제 새겠습니까',`돈이 붙는 달은 ${mm(m[0].i)}과 ${mm(m[1].i)}일세. 이때 들어온 돈의 절반은 바로 떼어 두게. 새기 쉬운 달은 ${mm(m[11].i)}과 ${mm(m[10].i)}이니, 이 두 달에는 보증과 투자, 충동적인 큰 지출을 쉬게. 계약과 문서는 ${dd(DY.deal)}이 좋네.`],
@@ -145,7 +162,8 @@ function faqDoc(DY){ const sc=k=>F.months.map((o,i)=>({i,v:areaScores(o)[k]})).s
    ['이사나 큰 계약은 언제가 좋겠습니까',`이사는 자네 원국과 부딪히지 않는 ${dd(DY.move)}이 좋네. 계약과 서류는 ${dd(DY.deal)}에 하게. 어느 쪽이든 일지와 충이 드는 날은 피했으니, 날을 고른 뒤에는 준비에 마음을 쓰게.`],
    ['올해 몸은 어디를 아껴야 하겠습니까',`기운이 가장 낮은 달은 ${mm(b[11].i)}과 ${mm(b[10].i)}일세. 이 두 달에는 일정을 비우고 잠을 늘리게. 오행으로는 ${ORG[F.blank]} 쪽을 아끼라고 하네. 다만 이것은 기운의 균형을 본 것이지 진단이 아니니, 불편한 곳은 꼭 의사에게 보이게.`]];
   return `<div class="doc"><div class="ch"><em>제10장</em><b>자주 묻는 다섯 가지</b><span>감정서의 근거로 답하네</span></div>${Q.map(q=>`<div class="qa"><b>${q[0]}</b><p class="p">${q[1]}</p></div>`).join('')}</div>`; }
-function gaeunTable(){ const fav=favElsOf(); return `<table class="gil gun" data-hj="0"><tr><th>달</th><td><b>곁에 둘 기운</b></td></tr>${F.months.map(o=>{ const inM=[stEl(o.s),BR_EL[o.b]]; const e=fav.find(x=>!inM.includes(x)); const ex=ELX[e==null?F.blank:e]; return `<tr><th>${o.start.m}월 <small>${o.term}</small></th><td>${o.fill?'자네 빈칸이 저절로 채워지는 달일세. 이달은 들어오는 기운을 그대로 받게.':`${ex.n} 기운 · ${ex.color} · ${ex.dir}<small>${ex.acts[(o.start.m)%3]}</small>`}</td></tr>`; }).join('')}</table>`; }
+const ACT6=[ELX[0].acts.concat(['초록 잎이 보이는 자리에 앉기','아침 일찍 하루 시작하기','계획을 종이에 적어 두기']),ELX[1].acts.concat(['밝은 색 옷 한 벌 입기','좋아하는 사람에게 먼저 연락하기','낮에 햇볕 쬐기']),ELX[2].acts.concat(['흙 만지는 일 하나 하기','지출 장부 한 번 맞춰 보기','오래된 약속 하나 지키기']),ELX[3].acts.concat(['쓰는 물건 하나 손질하기','하루 할 일을 셋으로 줄이기','하기 싫은 일 먼저 끝내기']),ELX[4].acts.concat(['따뜻한 물로 하루 마무리하기','혼자 생각하는 시간 갖기','밤늦은 연락 줄이기'])];
+function gaeunTable(){ const fav=favElsOf(); return `<table class="gil gun" data-hj="0"><tr><th>달</th><td><b>곁에 둘 기운</b></td></tr>${F.months.map((o,ix)=>{ const inM=[stEl(o.s),BR_EL[o.b]]; const e=fav.find(x=>!inM.includes(x)); const ex=ELX[e==null?F.blank:e]; return `<tr><th>${o.start.m}월 <small>${o.term}</small></th><td>${o.fill?`${ELX[F.blank].n} 기운이 저절로 들어 빈칸이 채워지는 달일세. 이달은 그 기운을 받아 쓰기만 하면 되네.<small>${ACT6[F.blank][ix%6]}</small>`:`${ex.n} 기운 · ${ex.color} · ${ex.dir}<small>${ACT6[e==null?F.blank:e][ix%6]}</small>`}</td></tr>`; }).join('')}</table>`; }
 function monthGil(){ return `<table class="gil" data-hj="0"><tr><th>달</th><td><b>좋은 날</b> · <span style="color:var(--ink-3)">피할 날</span></td></tr>${F.months.map(o=>{ const D=monthDays(o); return `<tr><th>${o.start.m}월</th><td>${D.good.map(x=>`${dstr(x)} <em>${GAN[x.s]}${JI[x.b]}</em>`).join('<br>')||'-'}${D.bad.length?`<small>피할 날 · ${D.bad.map(x=>`${x.m}/${x.d} ${x.ch} 충`).join(' · ')}</small>`:''}</td></tr>`; }).join('')}</table>`; }
 
 function build(){ const X0=window.SNF; const DY=goodDays(); const fg=F.st.strong?[1,2,3]:[0,4], favEls=fg.map(g=>(stEl(F.dm)+g)%5), needI=favEls.reduce((a,e)=>F.cnt[e]<F.cnt[a]?e:a,favEls[0]), need=ELX[needI], jh=F.johu;
@@ -159,9 +177,9 @@ function build(){ const X0=window.SNF; const DY=goodDays(); const fg=F.st.strong
   H.push(`<div class="doc"><div class="ch"><em>제8장</em><b>열두 달 월운 감정</b><span>입춘 기준 절월 · 달마다 좋은 날과 피할 날</span></div><div class="mlist">${F.months.map((o,i)=>mrow(o,i,DY,JE[i])).join('')}</div><p class="capt">오른쪽 숫자는 그달 점수(100점 만점)일세. 붉은 달은 볕이 드는 달, 흐린 달은 걸음을 늦출 달이네. 달 이름을 누르면 접고 펼 수 있네.</p></div>`);
   H.push(`<div class="doc"><div class="ch"><em>제9장</em><b>영역별 감정</b><span>막대는 달마다의 점수 · 붉은 막대가 좋은 달</span></div>${AREAS.map(([k,l])=>areaBlock(k,l)).join('')}</div>`);
   H.push(faqDoc(DY));
-  const bw=(i,t,g)=>{ const o=F.months[i]; return `<div class="bwr ${g?'good':'bad'}"><b>${o.start.m}월</b><div><p class="bt">${g?'볕이 드는 달':'걸음을 늦출 달'} · ${C.months[i].tag}</p><p>${N(t)}</p></div></div>`; };
+  const bw=(i,t,g)=>{ const o=F.months[i]; return `<div class="bwr ${g?'good':'bad'}"><b>${o.start.m}월</b><div><p class="bt">${g?'볕이 드는 달':'걸음을 늦출 달'} · ${o.gz}월 · ${o.t1} · 운성 ${o.us}</p><p>${N(t)}</p></div></div>`; };
   H.push(`<div class="doc"><div class="ch"><em>제11장</em><b>소헌 선생의 권고</b></div><div class="bw">${Object.keys(C.best).map(i=>bw(+i,C.best[i],1)).join('')}${Object.keys(C.warn).map(i=>bw(+i,C.warn[i],0)).join('')}</div>
-   <p class="p" style="margin-top:16px">자네 사주가 올해 가장 반기는 기운은 <b>${need.n}</b>일세. ${need.n} 기운을 곁에 두면 좋은 달은 더 좋아지고 궂은 달은 덜 궂어지네.${jh&&jh.need!=null?` 또 자네는 ${jh.why.replace(/다$/,'네')}.`:''}</p>
+   <p class="p" style="margin-top:16px">자네 사주가 올해 가장 반기는 기운은 <b>${need.n}</b>일세. ${need.n} 기운을 곁에 두면 좋은 달은 더 좋아지고 궂은 달은 덜 궂어지네.${jh&&jh.need!=null?(jh.need!==needI?` 한편 자네는 ${hage(jh.why)}. ${need.n}이 자네 힘을 북돋운다면 ${ELX[jh.need].n}은 계절의 치우침을 덜어 주니, 둘을 함께 챙기게.`:` 계절로 봐도 자네는 ${hage(jh.why)}. 힘과 계절이 같은 기운을 가리키니 더 믿고 챙기게.`):''}</p>
    <div class="rx3"><div><small>곁에 둘 색</small><b>${need.color}</b></div><div><small>방위</small><b>${need.dir}</b></div><div><small>숫자</small><b>${need.num}</b></div></div><ol class="rxl">${need.acts.map(a=>`<li>${a}</li>`).join('')}</ol>
    <p class="p" style="margin-top:16px"><b>열두 달 개운표.</b> 달마다 들어오는 기운이 다르니, 그달에 모자란 쪽을 채우는 법을 적어 두었네.</p>${gaeunTable()}</div>`);
   const crow=(t,a,n)=>`<tr><th>${t}</th><td>${a.length?a.map(x=>`${dstr(x)} <em>${GAN[x.s]}${JI[x.b]}일</em>`).join('<br>'):'올해는 따로 고른 날이 없네'}<small>${n}</small></td></tr>`;
@@ -172,6 +190,13 @@ function build(){ const X0=window.SNF; const DY=goodDays(); const fg=F.st.strong
   H.push(`<p class="note">${C.ai?'이 감정서는 만세력 계산 근거만 재료로 AI가 소헌 선생의 말투로 쓴 글입니다':'지금 보이는 글은 해석 사전으로 조립한 감정서입니다. 같은 근거로 AI가 소헌 선생의 말투로 더 길게 다시 써 드려요'}. 소헌 선생은 AI로 만든 가상의 명리가입니다.</p>`);
   return H.join(''); }
 
+function letterRule(){ const mm=i=>F.months[i].start.m+'월', fg=F.st.strong?[1,2,3]:[0,4], favEls=fg.map(g=>(stEl(F.dm)+g)%5), needI=favEls.reduce((a,e)=>F.cnt[e]<F.cnt[a]?e:a,favEls[0]), need=ELX[needI], cur=F.cur, nx=F.nxt, age=F.age;
+  const L=[`자네 감정서를 여기까지 썼네. 자네는 ${DM_HG[F.dm].split('일세.')[0]}일세. 올해 정미년은 자네에게 ${jo(F.ys.t1,'과','와')} ${jo(F.ys.t2,'이','가')} 드는 해이고, 자네는 지금 ${GAN[cur.s]}${JI[cur.b]} 대운을 걷고 있네.`,
+   `올해 볕이 가장 잘 드는 달은 ${F.bestI.map(mm).join(', ')}일세. 큰 결정과 새 시작은 이 ${['','한','두','석','넉'][F.bestI.length]} 달에 몰아 두고, ${[...F.warnI].sort((a,b)=>a-b).map(mm).join('과 ')}에는 걸음을 늦추게. 늦춘다는 것은 멈춘다는 뜻이 아니라, 다음 볕을 위해 힘을 모은다는 뜻일세.`,
+   `자네 사주가 가장 반기는 기운은 ${jo(need.n,'이네','네')}. ${need.color} 빛을 곁에 두고, ${need.acts[0]}부터 해 보게. 운은 큰일에서보다 매일 되풀이하는 작은 습관에서 먼저 움직이네.`,
+   nx&&age>=cur.age+7?`${nx.age}세에는 ${GAN[nx.s]}${JI[nx.b]} 대운으로 넘어가네. 문턱 앞의 몇 해는 늘 어수선하니, 올해 거둔 것을 잘 갈무리해 다음 10년의 밑천으로 삼게.`:`지금 대운은 아직 갈 길이 남았네. 이 10년이 자네에게 주려는 것을 서두르지 말고 하나씩 받아 두게.`,
+   '사주는 정답이 아니라 지도일세. 지도를 읽었으니 길은 자네가 고르게. 한 해를 걸어 보고 다시 오면, 그때 또 함께 짚어 봄세.'];
+  return L; }
 /* ---------- AI 원고 ---------- */
 function card(ids){ const P=F.P, gzs=p=>p?GAN[p[0]]+JI[p[1]]:'모름', dm=F.dm;
   const pil=[['년주',P.y],['월주',P.m],['일주',P.d],['시주',P.h]].map(([n,p])=>p?{자리:n,간지:gzs(p),천간십성:n==='일주'?'나(일간)':S_.tgStem(dm,p[0]),지지십성:S_.tgBranch(dm,p[1]),운성:X.unseong(dm,p[1])}:{자리:n,간지:'모름'});
@@ -184,7 +209,7 @@ function card(ids){ const P=F.P, gzs=p=>p?GAN[p[0]]+JI[p[1]]:'모름', dm=F.dm;
 function prompts(){ const A=window.PremAI, ST=A.STYLE.soheon+'\n'+A.COMMON.replace(/- 이름을 부를 때는 \{N\} 토큰만 쓴다[^\n]*\n/,'- 의뢰인은 이름 대신 "자네"라고 부른다.\n');
   const ex="{\"i\": 6, \"tag\": \"문서가 드는 달\", \"total\": \"입추 달 무신(戊申)월일세. 쉽게 말하면 자네 말에 처음으로 무게가 실리는 달이네. 위의 무(戊)는 흙인데, 자네에게 흙은 정인(배움과 문서, 도와주는 어른)일세. 원국에 하나도 없던 흙이 들어오니 자네 빈칸이 이달에 채워지는 셈이지. 아래의 신(申)은 자네와 같은 쇠 기운이라 곁에서 힘을 보태네. 자네 일간 신(辛)은 이달에 제왕(힘이 가장 센 때)의 자리에 서네. 그러니 계약, 연봉 이야기, 시험은 이달에 하게. 다만 신(申)과 자네 일지(배우자 자리) 해(亥)는 해(은근히 서운하게 만드는 관계)라, 바쁜 자네를 가까운 사람이 서운해할 수 있네. 짧게라도 안부를 남기게.\", \"love\": \"마음이 단단해져 끌려다니지 않는 달일세. 바쁘다고 연락을 미루면 서운함이 쌓이니 짧게라도 안부를 남기게.\", \"money\": \"올해 돈 이야기를 꺼내기 가장 좋은 달이네. 받을 돈과 계약 조건은 말로 끝내지 말고 문서로 남기게.\", \"work\": \"자격 시험, 이직 서류, 승진 면담 모두 이달이 좋네. 미뤄 둔 제안을 꺼내 보게.\", \"people\": \"뜻 맞는 동료가 힘이 되네. 사소한 신경전은 웃어넘기는 편이 오래 가네.\", \"body\": \"기운이 차오르는 달일세. 미뤄 둔 운동을 이달에 시작하면 오래 이어지네.\", \"do\": \"계약과 서류를 이달에 마무리하기\", \"avoid\": \"바쁘다고 가까운 사람 연락 미루기\"}";
   const year=`${ST}\n\n[할 일] 명리관 감정서 '2027 세운 정밀'과 '권고', '맺음말'을 쓴다. 열두 달은 입춘 기준 절월이다.
-출력 JSON 형식: {"pan":["올해 간지가 원국에 들어오는 법. 6~7단락, 단락마다 200~280자. 천간 십성, 지지 십성, 원국과의 관계, 신살, 대운과 겹쳐 본 올해를 차례로"],"best":{"${F.bestI.join('":"이유 1~2문장","')}":"이유 1~2문장"},"warn":{"${F.warnI.join('":"이유 1~2문장","')}":"이유 1~2문장"},"letter":["맺음말 4~5단락, 단락마다 90~150자. 마지막 단락은 '사주는 정답이 아니라 지도'라는 생각으로 맺는다"]}
+출력 JSON 형식: {"pan":["올해 간지가 원국에 들어오는 법. 6~7단락, 단락마다 200~280자. 천간 십성, 지지 십성, 원국과의 관계, 신살, 대운과 겹쳐 본 올해를 차례로"],"best":{"${F.bestI.join('":"근거 2문장과 권하는 일 1문장, 합쳐 120~180자","')}":"근거 2문장과 권하는 일 1문장, 합쳐 120~180자"},"warn":{"${F.warnI.join('":"근거 2문장과 권하는 일 1문장, 합쳐 120~180자","')}":"근거 2문장과 권하는 일 1문장, 합쳐 120~180자"},"letter":["맺음말 4~5단락, 단락마다 90~150자. 마지막 단락은 '사주는 정답이 아니라 지도'라는 생각으로 맺는다"]}
 best와 warn의 키는 달 번호이며 위 번호로 고정이다.
 
 [사실 카드]
@@ -268,7 +293,7 @@ table.gil{width:100%;border-collapse:collapse;border-top:1px solid var(--ink);bo
 .g5 div{text-align:center;padding:10px 0}.g5 div+div{border-left:1px solid var(--rule-2)}.g5 b{display:block;font-family:var(--serif);font-size:22px;font-weight:900}.g5 small{font-size:11.5px;color:var(--ink-3)}.g5 .mx b{color:var(--seal)}
 .nss{margin:0 0 12px;padding-left:18px}.nss li{font-size:14px;line-height:1.75;margin:4px 0;font-family:var(--serif)}.nss li b{color:var(--seal)}
 .dul{margin:4px 0 14px;border-top:1px solid var(--ink)}
-.du2{display:grid;grid-template-columns:74px 44px 1fr 44px;gap:6px;align-items:center;padding:9px 2px;border-bottom:1px solid var(--rule-2);font-size:13px}
+.du2{display:grid;grid-template-columns:70px 40px 1fr 62px;gap:6px;align-items:center;padding:9px 2px;border-bottom:1px solid var(--rule-2);font-size:13px}
 .du2 .g{font-family:var(--serif);font-weight:900;font-size:15px}.du2 .f{text-align:right;font-size:12px;color:var(--ink-3)}.du2.now{background:var(--seal-bg)}.du2.now .a{color:var(--seal);font-weight:700}
 .ar2{padding:16px 0;border-top:1px solid var(--rule)}.ch+.ar2{border-top:0;padding-top:0}
 .arh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px}.arh b{font-family:var(--serif);font-size:17px;font-weight:900}.arh span{font-size:12px;color:var(--ink-3)}
@@ -282,7 +307,10 @@ window.MRPrem={open(){ const host=$('prem'); const X0=window.SNF; if(!host||!X0)
   if(!document.getElementById('mrCss')){ const s=document.createElement('style'); s.id='mrCss'; s.textContent=CSS; document.head.appendChild(s); }
   F=window.Prem2Core.build(S_,X,X0.inp); F.male=X0.inp.g==='m'; F.ysc=X0.ys; C=ruleCopy(); if(window.HJ) C=HJ.glAll(C);
   const s=[...F.months.map((o,i)=>({o,i}))].sort((a,b)=>b.o.sc-a.o.sc); F.bestI=s.slice(0,3).map(x=>x.i).sort((a,b)=>a-b); F.warnI=s.slice(-2).map(x=>x.i);
-  F.bestI.forEach(i=>C.best[i]=SS[F.months[i].t1].good.split('. ')[0]+'.'); F.warnI.forEach(i=>C.warn[i]=SS[F.months[i].t1].bad.split('. ')[0]+'.');
+  const dl=a=>a.map(x=>`${x.m}월 ${x.d}일`).join('과 ');
+  F.bestI.forEach(i=>{ const o=F.months[i], a=SS[o.t1], D=monthDays(o); C.best[i]=`${a.good} 이달에는 ${a.do}를 권하네.${D.good.length?` 날을 고른다면 ${dl(D.good)}이 좋네.`:''}`; });
+  F.warnI.forEach(i=>{ const o=F.months[i], a=SS[o.t1], D=monthDays(o); C.warn[i]=`${a.bad}${a.bad.includes(a.avoid.slice(0,4))?'':` 삼갈 일은 ${a.avoid}일세.`}${D.bad.length?` 특히 ${dl(D.bad)}은 큰일을 피하게.`:''}`; });
+  if(!C.ai) C.letter=letterRule();
   AIS={n:0,done:0,state:''}; host.innerHTML=build(); host.hidden=false; const lk=$('dLock'); if(lk) lk.hidden=true; if(!host._b){ bind(host); host._b=1; }
   host.querySelectorAll('.mr').forEach(r=>r.classList.add('open')); startAI(); }};
 })();

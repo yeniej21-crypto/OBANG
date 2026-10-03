@@ -1,4 +1,4 @@
-/* 악역 셋 공통 동작(10/3): 등장 입체 영상 → 대사 영상(소리) → 무료 진단 → 결과 한 장 → 더 보기 풀이(10/3 20:40 은주: 악역 콘텐츠는 전부 무료) → 막아 주는 오방신.
+/* 악역 셋 공통 동작(10/3): 등장 입체 영상 → 대사 영상(소리) → 무료 진단 → 결과 한 장 → 990원 풀이 → 막아 주는 오방신.
    계산은 saju.js 만세력에 붙인다. 흑매 = 원진 · 귀문 · 충(악연 매듭), 그믐 = 공망(빈칸), 삼재 = 띠 삼합으로 들 · 눌 · 날삼재.
    겁주고 끝내지 않는다. 결과는 늘 '피하는 법'과 '지켜 주는 신'으로 끝난다. */
 (function(){
@@ -93,21 +93,14 @@ const AREA=[{a:'사람',d:'내 편, 친구, 동료',keep:'믿는 사람에게도
   {a:'돈',d:'들어오고 나가는 돈, 재물',keep:'그달엔 큰돈을 움직이지 않아요. 새는 돈(구독 · 할부)을 먼저 막아요.'},
   {a:'자리',d:'일, 직함, 평판(여성에게는 연인 자리도)',keep:'그달엔 자리 이동 · 이직 결정을 미뤄요. 윗사람과 부딪힐 일은 하루 늦춰요.'},
   {a:'집',d:'집, 공부, 나를 돕는 사람',keep:'그달엔 계약 · 이사 서류를 두 번 봐요. 공부는 새로 시작하기보다 이어 가요.'}];
-/* 10/3 20:40 은주: '비어 있는 자리는 사람 · 집'이 무슨 뜻인지 모르겠음 → 공망을 쉬운 말로 먼저 풀고, 자리마다 '이렇게 느껴져요 · 이럴 땐'으로 */
-const FEEL=['정작 기대고 싶을 때 곁에 있는 사람이 비는 느낌. 사람은 많은데 내 편은 적다고 느끼기 쉬워요.',
-  '열심히 만들고 말해도 생각만큼 알아주지 않는 느낌. 결과가 손에서 빠져나가기 쉬워요.',
-  '들어온 돈이 오래 머물지 않고 어디론가 새는 느낌. 모으는 것보다 지키는 게 어려워요.',
-  '애쓴 만큼 이름 · 자리가 남지 않는 느낌. 자리가 자주 바뀌거나 평가가 늦게 와요.',
-  '집 · 서류 · 공부처럼 기반이 되는 일이 자꾸 미뤄지는 느낌. 도와줄 어른이 아쉬울 때가 있어요.'];
 function geumCalc(a){ const P=PIL(a); const ds=P.d[0], db=P.d[1];
   let idx=0; for(let i=0;i<60;i++){ if(i%10===ds&&i%12===db){ idx=i; break; } }
   const x=Math.floor(idx/10), kw=[((10-2*x)%12+12)%12,((11-2*x)%12+12)%12];
   const areas=[...new Set(kw.map(b=>S.relBranch(ds,b)))].map(r=>Object.assign({r},AREA[r]));
   const pos=[]; if(kw.includes(P.y[1])) pos.push('띠 자리(어릴 때 · 집안)'); if(kw.includes(P.m[1])) pos.push('달 자리(일터 · 사회)'); if(P.h&&kw.includes(P.h[1])) pos.push('시 자리(말년 · 자식)');
   const open=nextMonths(12).filter(o=>kw.includes(o.b));
-  const om=[...new Set(open.map(o=>o.m))].slice(0,2).map(m=>m+'월').join(' · ');
-  const say=pos.length?`보이지. 네 사주 여덟 글자 안에 정말 비어 있는 칸이 있어. 거긴 내가 자주 들러.`:`평소엔 티가 안 나. 네 여덟 글자 안엔 빈칸이 없거든. 대신 ${om||'빈 글자가 돌아오는 달'}엔 내가 지나가.`;
-  return {k:'geum',kw,areas,pos,open,om,P,gd:JI_K[kw[0]]+JI_K[kw[1]]+' 공망',title:`${areas.map(o=>o.a).join(' · ')} 쪽이 잘 비어`,say,
+  const say=pos.length?'보이지. 네 사주에 실제로 비어 있는 칸이 있어.':'빈칸이 겉으로 드러나진 않았어. 그래도 그달엔 내가 지나가.';
+  return {k:'geum',kw,areas,pos,open,P,gd:JI_K[kw[0]]+JI_K[kw[1]]+' 공망',title:`비어 있는 자리는 ${areas.map(o=>o.a).join(' · ')}`,say,
     why:`근거 · ${GAN_K[ds]}${JI_K[db]}일은 갑${['자','술','신','오','진','인'][x]}순이라 ${JI_K[kw[0]]} · ${JI_K[kw[1]]}이 공망(비어 있는 글자)이에요. 두 글자가 일간에게 무엇인지로 빈 자리를 읽었어요`}; }
 const SAMG=[[2,3,4],[11,0,1],[8,9,10],[5,6,7]];        /* 삼재가 드는 해의 지지(들 · 눌 · 날) */
 const GRP_OF=b=>[[8,0,4],[5,9,1],[2,6,10],[11,3,7]].findIndex(g=>g.includes(b));
@@ -137,11 +130,8 @@ function show(R){ const box=$('rs'); let h='';
      ${R.n?`<ul>${R.knots.map(k=>`<li><b>${k.t} · ${k.at}</b>${k.w}</li>`).join('')}</ul>`:''}<p class="why">${R.why}</p>`; }
   else if(R.k==='geum'){ h=`<div class="hd"><small>그믐의 빈칸</small><span class="gd">${R.gd}</span><h2>${R.title}</h2></div>${voidArt(R.kw)}
      <p class="bb"><em>그믐</em>${R.say}</p>
-     <div class="ex"><b>빈칸(공망)이 뭐냐면</b>사주의 열두 글자 중 두 글자는 태어날 때부터 '자리는 있는데 주인이 없는' 칸이에요. 네 빈 글자는 <em>${JI_K[R.kw[0]]} · ${JI_K[R.kw[1]]}</em>. 이 두 글자가 맡은 쪽의 일은 애써도 손에 덜 잡히고, 채워도 금방 비는 느낌이 들기 쉬워요. 나쁜 운이라기보다 '새는 곳'이라, 어디가 새는지 알면 막을 수 있어요.</div>
-     <dl class="tl"><div><dt>빈 글자</dt><dd>${JI_K[R.kw[0]]} · ${JI_K[R.kw[1]]}</dd></div><div><dt>조심할 달</dt><dd>${R.om||'없음'}</dd></div><div><dt>내 사주 속 빈칸</dt><dd>${R.pos.length?R.pos.length+'곳':'없음'}</dd></div></dl>
-     <ul>${R.areas.map(o=>`<li><b>${o.a} 쪽이 비기 쉬워 · ${o.d}</b>${FEEL[o.r]}<span class="kp">이럴 땐 · ${o.keep}</span></li>`).join('')}
-     <li><b>내 사주 속 빈칸 · ${R.pos.length?R.pos.length+'곳':'없음'}</b>${R.pos.length?`빈 글자가 네 여덟 글자 안에 실제로 들어 있어요(${R.pos.join(' · ')}). 그 자리의 일은 평소에도 조금씩 비는 느낌이 있어요.`:'빈 글자가 네 여덟 글자 안에는 없어요. 그래서 평소엔 거의 티가 안 나고, 빈 글자가 돌아오는 달에만 살짝 느껴져요.'}</li>
-     <li><b>조심할 달 · ${R.om||'없음'}</b>달마다 바뀌는 글자 중 네 빈 글자(${JI_K[R.kw[0]]} · ${JI_K[R.kw[1]]})가 돌아오는 달이에요. 이때 위의 쪽 일이 잘 새니까, 새로 채우기보다 새는 곳을 먼저 막아요.</li></ul><p class="why">${R.why}</p>`; }
+     <dl class="tl"><div><dt>빈 글자</dt><dd>${JI_K[R.kw[0]]} · ${JI_K[R.kw[1]]}</dd></div><div><dt>빈칸이 열리는 달</dt><dd>${R.open.length?R.open[0].m+'월':'없음'}</dd></div><div><dt>사주에 보이는 칸</dt><dd>${R.pos.length}곳</dd></div></dl>
+     <ul>${R.areas.map(o=>`<li><b>${o.a} · ${o.d}</b>이 자리에 생긴 건 쉽게 비고, 비워 둔 건 쉽게 안 채워져요.</li>`).join('')}${R.pos.length?`<li><b>사주에 드러난 빈칸</b>${R.pos.join(' · ')}</li>`:''}</ul><p class="why">${R.why}</p>`; }
   else { h=`<div class="hd"><small>삼남매의 삼재</small><span class="gd">${R.gd}</span><h2>${R.title}</h2></div>${samArt(R)}
      <p class="bb"><em>${R.cur?R.cur.who:'날이'}</em>${R.say}</p>
      <dl class="tl"><div><dt>올해</dt><dd>${R.cur?R.cur.kind:'아님'}</dd></div><div><dt>다음 삼재</dt><dd>${R.nxt?R.nxt.y+'년':'-'}</dd></div><div><dt>띠</dt><dd>${ANI[R.ti]}띠</dd></div></dl>
@@ -153,7 +143,7 @@ function show(R){ const box=$('rs'); let h='';
 function share(R){ const url=location.origin+location.pathname+'?ref=share';
   try{ if(window.ObShare&&ObShare.open){ ObShare.open({kicker:C.name+' · '+C.free,head:R.title,sub:R.say,big:R.gd,unit:'',tags:[C.name,C.free],img:C.still,menu:C.free,name:'obang-'+K+'.jpg',url}); return; } }catch(e){}
   if(navigator.share) navigator.share({title:C.free+' · '+C.name,text:R.title,url}).catch(()=>{}); else { try{ navigator.clipboard.writeText(url); toast('주소를 복사했어요'); }catch(e){} } }
-/* ---------- 5. 더 보기 풀이(무료) ---------- */
+/* ---------- 5. 990원 풀이 ---------- */
 function paidHTML(R){
   if(R.k==='heuk'){ const first=R.knots.slice().sort((x,y)=>['충','귀문','원진'].indexOf(x.t)-['충','귀문','원진'].indexOf(y.t))[0];
     const TALK={원진:'"너는 맨날 그래" 같은 단정하는 말. 서운함을 한 번에 몰아서 말하지 않기.',귀문:'밤늦게 길게 보내는 메시지. 예민한 날은 답을 다음 날 아침으로.',충:'둘 다 화난 상태에서 결론 내기. 자리를 한 번 바꾸고 다시 말하기.'};
@@ -177,11 +167,11 @@ function paidHTML(R){
    ${html_m}
    <li><b>해 두면 좋은 일</b>집 안 묵은 물건 정리, 아끼는 사람에게 먼저 연락, 하루 일찍 자기. 삼남매는 정돈된 집엔 오래 못 있어요.</li></ul></div>`; }
 function pay(){ const R=window.__VR; if(!R) return; const open=()=>{ $('pv').innerHTML=paidHTML(R); $('pv').classList.add('on'); setTimeout(()=>$('pv').scrollIntoView({behavior:'smooth',block:'start'}),80); };
-  open(); }
+  if(window.ObPay&&ObPay.open) ObPay.open({name:`${C.paid} · ${C.name}`,who:C.name,desc:C.paidSub,price:990,img:C.still,noAuth:true,after:open}); else open(); }
 
 /* ---------- 6. 막아 주는 신 · 다른 악역 ---------- */
 function rest(){ const g=C.guard; $('gd').innerHTML=`<a class="gd2" href="${g.href}"><i style="background-image:url('${g.img}')"></i><span><small>막아 주는 신 · ${g.who}</small><b>${g.t}</b><span>${g.d}</span></span></a>`;
-  $('ot').innerHTML=Object.keys(V).filter(k=>k!==K).map(k=>`<a href="${V[k].page}"><i style="background-image:url('${V[k].still}')"></i><span><b>${V[k].name}</b><small>${V[k].free}</small><em>무료로 보기</em></span></a>`).join('');
+  $('ot').innerHTML=Object.keys(V).filter(k=>k!==K).map(k=>`<a href="${V[k].page}" style="background-image:url('${V[k].still}')"><small>${V[k].free} · 무료</small><b>${V[k].name}</b></a>`).join('');
   const NX={heuk:[['love.html','연애 상담소','서하가 상황별로 골라 주는 풀이'],['gunghap.html','도화 궁합','둘의 인연 타이밍'],['yeonseo.html','곧 받을 편지','다음 인연이 오는 달 · 무료']],
     geum:[['noeul.html','해와 달의 운세','노을이 보는 올해 흐름'],['today.html','오늘의 운세','매일 아침 바뀌는 무료 운세'],['free.html','무료 운세 모두 보기','오방 뽑기 · 부적 카드']],
     sam:[['sinnyeon.html','할매의 2027 신년운세','한 해 운을 미리'],['ppopgi.html','오방 뽑기','통을 흔들어 뽑는 오늘의 괘 · 무료'],['bujeok.html','부적 카드','오늘 내 부적 한 장 · 무료']]}[K];
@@ -192,6 +182,6 @@ document.title=`${C.free} · ${C.name}`;
 $('back').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
 addEventListener('scroll',()=>$('top').classList.toggle('sc',scrollY>200),{passive:true});
 $('top').querySelector('b').textContent=C.name;
-document.body.classList.add('v-'+K); hero(); form(); rest();
-$('pdT').textContent=C.paid+' · 무료'; $('pdS').textContent=C.paidSub; $('pdGo').onclick=pay;
+hero(); form(); rest();
+$('pdT').textContent=C.paid; $('pdS').textContent=C.paidSub; $('pdGo').onclick=pay;
 })();

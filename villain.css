@@ -1,0 +1,88 @@
+/* 악역 셋 공통 화면(10/3): 흑매 · 그믐 · 삼재 삼남매. 색만 악역마다 다르다(--v 주색, --v2 보조, --bg 바탕). 모서리 없음(원형만). */
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+:root{--bg:#0d0a0d;--ink:#f6f1ea;--ink2:#cfc5b8;--ink3:#8f867b;--line:rgba(255,236,214,.12);--v:#c0392b;--v2:#e8a3a0;--paper:#f3ece2;--pink:#2a2119;
+  --serif:'Noto Serif KR',serif;--brush:'OBrush','Noto Serif KR',serif;--sans:'Noto Sans KR',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:#000}
+body{font-family:var(--sans);color:var(--ink);word-break:keep-all;display:flex;justify-content:center;-webkit-tap-highlight-color:transparent}
+.ph{position:relative;width:100%;max-width:430px;min-height:100vh;background:var(--bg);overflow:hidden;padding-bottom:56px}
+button{font-family:inherit;color:inherit}
+.top{position:fixed;top:0;left:0;right:0;margin:0 auto;max-width:430px;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 10px) 12px 10px;transition:background .3s}
+.top.sc{background:rgba(8,6,10,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.ib{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(8,6,10,.4);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;cursor:pointer}
+.top b{font-size:15px;font-weight:700;opacity:0;transition:opacity .3s}.top.sc b{opacity:1}
+/* 1. 등장: 앞 · 중간 · 뒤가 따로 움직이는 입체 영상 */
+.vh{position:relative;height:76vh;min-height:520px;max-height:700px;overflow:hidden;background:#000}
+.vh .po{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.vh video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0;transition:opacity .5s}
+.vh video.on{opacity:1}
+.vh:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.45) 0,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 52%,var(--bg) 97%)}
+.vh .nm{position:absolute;left:20px;right:20px;bottom:22px;z-index:3}
+.vh .nm small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.18em;color:var(--v2)}
+.vh .nm h1{margin:8px 0 0;font-family:var(--brush);font-weight:400;font-size:56px;line-height:1}
+.vh .nm p{margin:10px 0 0;font-size:14.5px;line-height:1.6;color:var(--ink2)}
+.vh .snd{position:absolute;right:14px;top:calc(env(safe-area-inset-top,0px) + 64px);z-index:4;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.24);background:rgba(8,6,10,.45);display:grid;place-items:center;cursor:pointer}
+.vh .snd.on{border-color:var(--v2);color:var(--v2)}
+/* 2. 무료 진단 */
+.sec{padding:30px 16px 0}
+.sh small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--v2)}
+.sh b{display:block;margin-top:6px;font-size:20px;font-weight:800;letter-spacing:-.02em}
+.sh{margin-bottom:14px}
+.fm{display:grid;gap:8px;padding:16px 14px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.fm label{font-size:12px;color:var(--ink3);font-weight:700;letter-spacing:.04em}
+.fm .g3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:6px}
+.fm select{width:100%;height:46px;border-radius:0;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.35);color:#fff;font-size:15px;padding:0 10px;font-family:inherit;appearance:none;-webkit-appearance:none}
+.seg{display:flex;border:1px solid rgba(255,255,255,.16)}
+.seg button{flex:1;height:44px;border:0;background:none;font-size:14px;cursor:pointer;color:rgba(255,255,255,.7)}
+.seg button.on{background:color-mix(in srgb,var(--v) 30%,transparent);color:#fff;font-weight:700}
+.ti{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.ti button{height:46px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.3);font-size:14px;cursor:pointer}
+.ti button.on{background:var(--v);border-color:var(--v);color:#fff;font-weight:800}
+.go{width:100%;height:54px;margin-top:6px;border:0;background:var(--v);color:#fff;font-size:16px;font-weight:800;cursor:pointer;letter-spacing:.02em}
+.go.lt{background:var(--paper);color:#1a120b}
+/* 3. 결과: 산가지 결과처럼 한 장 */
+.rs{scroll-margin-top:70px;margin-top:16px;padding:20px 16px 18px;background:var(--paper);color:var(--pink);position:relative}
+.rs .hd{text-align:center}
+.rs .hd small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.14em;color:#8f8475}
+.rs .gd{display:inline-block;margin-top:10px;padding:5px 13px;font-size:13px;font-weight:900;letter-spacing:.24em;text-indent:.24em;color:#fff;background:var(--v)}
+.rs h2{margin:10px 0 0;font-family:var(--serif);font-size:24px;font-weight:900;line-height:1.35}
+.rs .art{display:block;margin:14px auto 0;width:100%;max-width:330px;height:auto}
+.rs .bb{position:relative;margin:14px 0 0;background:#fff;padding:13px 14px;font-size:15px;line-height:1.6;box-shadow:0 8px 20px rgba(60,40,20,.08)}
+.rs .bb em{display:block;font-style:normal;font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--v);margin-bottom:4px}
+.rs .tl{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px}
+.rs .tl div{background:#fff;padding:9px 6px;text-align:center}
+.rs .tl dt{font-size:10.5px;color:#8f8475}
+.rs .tl dd{margin:4px 0 0;font-size:14px;font-weight:800}
+.rs ul{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.rs li{background:#fff;padding:11px 12px;font-size:14px;line-height:1.55}
+.rs li b{display:block;font-size:12px;color:var(--v);letter-spacing:.04em;margin-bottom:3px}
+.rs .why{margin:10px 0 0;font-size:11.5px;line-height:1.6;color:#8f8475}
+/* 990원 풀이 */
+.pd{margin-top:10px;padding:16px 14px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.pd h3{margin:0;font-size:17px;font-weight:800}
+.pd p{margin:6px 0 0;font-size:13.5px;line-height:1.6;color:var(--ink2)}
+.pd .go{margin-top:12px}
+.pd .go s{opacity:.6;font-weight:600;margin-right:6px}
+.pv{scroll-margin-top:70px;margin-top:10px;display:none}
+.pv.on{display:block}
+.pv .rs{margin-top:0}
+/* 4. 막아 주는 신 */
+.gd2{display:flex;gap:12px;align-items:center;margin-top:12px;padding:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);text-decoration:none;color:inherit}
+.gd2 i{flex:none;width:62px;height:62px;border-radius:50%;background:#222 center 18%/cover no-repeat;box-shadow:0 0 0 2px rgba(243,215,155,.6)}
+.gd2 small{display:block;font-size:11px;font-weight:800;letter-spacing:.1em;color:#e3b866}
+.gd2 b{display:block;margin-top:3px;font-size:15.5px}
+.gd2 span{display:block;margin-top:3px;font-size:12.5px;line-height:1.5;color:var(--ink3)}
+.ot{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ot a{position:relative;display:block;height:120px;overflow:hidden;text-decoration:none;color:#fff;background:#111 center 25%/cover no-repeat}
+.ot a:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.85))}
+.ot a b{position:absolute;left:10px;bottom:9px;z-index:1;font-family:var(--brush);font-weight:400;font-size:24px}
+.ot a small{position:absolute;left:10px;top:9px;z-index:1;font-size:10.5px;font-weight:800;letter-spacing:.1em;color:rgba(255,255,255,.8)}
+.foot{margin:22px 16px 0;font-size:11px;line-height:1.6;color:var(--ink3);text-align:center}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:90;background:rgba(20,16,12,.95);color:#fff;font-size:14px;padding:11px 16px;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.on{opacity:1}
+/* 이어서 보기 */
+.nx{display:grid;gap:6px}
+.nx1{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);text-decoration:none;color:inherit}
+.nx1 b{font-size:15px;font-weight:800}
+.nx1 span{font-size:12px;color:var(--ink3);text-align:right}
+.nx1.hm{background:none}

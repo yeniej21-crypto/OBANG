@@ -17,7 +17,7 @@ const CFG={
  'sinnyeon.html':{before:()=>$('prem'),ready:()=>T('qTop'),data:()=>({menu:'2027 신년운세',kicker:'2027 신년운세 · 삼신 할매',big:T('ySc'),unit:'점',head:T('qTop'),sub:T('yTx'),img:'img/halmae.jpg'})},
  'lifetime.html':{before:()=>$('prem'),ready:()=>T('qTop'),data:()=>({menu:'평생 사주',kicker:'평생 사주 · 현암',head:T('qTop'),sub:T('giT'),img:'img/jeongtong.jpg'})},
  'love2.html':{before:()=>$('lockL'),ready:()=>T('rT'),data:()=>({menu:document.title.split('·')[0].trim(),kicker:T('rK'),big:T('rN'),unit:'',head:T('rT'),sub:T('rP'),img:BG('rHero')})},
- 'career.html':{before:()=>$('lockC'),ready:()=>T('tNm'),data:()=>({menu:'커리어 사주',kicker:'커리어 사주 · '+T('tEn'),head:T('tNm'),sub:T('tDesc'),img:'img/earth.jpg'})},
+ 'career.html':{before:()=>$('lockC'),ready:()=>T('tNm'),data:()=>({menu:'커리어 사주',kicker:'커리어 사주 · '+T('tEn'),head:T('tNm'),sub:T('tDesc'),img:'img/earth.jpg?v=2'})},
  'taegil.html':{before:()=>$('lockT'),ready:()=>T('oT'),data:()=>({menu:'택일',kicker:T('oK'),head:T('oT'),sub:T('oS'),img:'img/taegil.jpg'})},
  'gunghap.html':{before:()=>$('lockG'),ready:()=>T('scT'),data:()=>({menu:'도화 궁합',kicker:`${T('nA')} × ${T('nB')} · 도화 궁합`,big:T('sc'),unit:'점',head:T('scT'),sub:T('say'),img:'img/taeo/base.jpg'})},
  'tarot.html':{before:()=>$('lockR'),ready:()=>T('vBig'),data:()=>({menu:'무진의 타로',kicker:T('rKick'),head:T('vBig'),sub:T('vLine'),img:'img/tarot/mujin.jpg'})},

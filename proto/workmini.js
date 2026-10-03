@@ -4,7 +4,7 @@
 (function(){
 const S=window.Saju, $=id=>document.getElementById(id);
 const D2='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/', CF='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_';
-const DOJUN={n:'도준',img:CF+'084427_0f26f62a-829f-4db8-8f13-60e26ea429e1_min.webp',v:'v/rv_earth.mp4',tag:'커리어 · 황룡 도준'};
+const DOJUN={n:'도준',img:CF+'084427_0f26f62a-829f-4db8-8f13-60e26ea429e1_min.webp',v:'v/rv_earth.mp4?v=2',tag:'커리어 · 황룡 도준'};
 const SERIN={n:'세린',img:'img/yin/metal.jpg',v:window.WM_SERIN||'',tag:'몸값 감정 · 백호 세린'};
 const T={day:{h:DOJUN,t:'오늘의 일운',p:'오늘 회사에서 뭐가 먹히고 뭐가 막히는지, 출근 전에 한 장으로.'},
   pay:{h:SERIN,t:'내 몸값 리포트',p:'칭찬은 아껴 둘게. 네 값은 내가 매겨 줄게.'},

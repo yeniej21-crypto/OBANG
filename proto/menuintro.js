@@ -1,7 +1,7 @@
 /* MenuIntro — 메뉴에 들어오면 캐릭터가 4~6초 한마디 하고 본 화면으로 넘어가는 짧은 인트로.
    소리 정책: 항상 목소리와 함께 재생한다. 홈에서 메뉴를 누르면 그 탭 안에서 바로 재생(=소리 허용)하고 페이지를 넘긴다.
    페이지를 직접 열어 브라우저가 소리 재생을 막으면, 무음으로 틀지 않고 포스터 위에 "탭해서 시작"을 띄워 한 번 누르면 목소리로 처음부터 재생한다.
-   사용: MenuIntro.play({src:'v/menu/career.mp4', poster:'img/earth.jpg', who:'도준 · 黃龍', title:'커리어 사주', subs:[[0,'스펙 말고,'],[1.4,'타고난 판부터 보자.']]}) */
+   사용: MenuIntro.play({src:'v/menu/career.mp4?v=2', poster:'img/earth.jpg?v=2', who:'도준 · 黃龍', title:'커리어 사주', subs:[[0,'스펙 말고,'],[1.4,'타고난 판부터 보자.']]}) */
 (function(){
   const css=`.mi{position:absolute;inset:0;z-index:90;background:#000;overflow:hidden;opacity:1;transition:opacity .6s}
 .mi.bye{opacity:0;pointer-events:none}
@@ -49,7 +49,7 @@
   /* 메뉴별 인트로 — 다른 화면에서 누를 때 그 탭 안에서 재생하고 넘어가도록 공용으로 둔다 */
   const MAP={
     'today.html':{src:'v/menu/today.mp4',poster:'img/seoha.jpg',who:'서하 · 오늘의 운세',title:'오늘의 운세',subs:[[1.25,'좋은 아침.'],[3.25,'오늘 네 하루, 먼저 펼쳐봤어.']]},
-    'career.html':{src:'v/menu/career.mp4',poster:'img/earth.jpg',who:'도준 · 黃龍',title:'커리어 사주',subs:[[0,'스펙 말고,'],[1.8,'타고난 판부터 보자.'],[4.3,'네가 제일 비싸지는 자리.']]},
+    'career.html':{src:'v/menu/career.mp4?v=2',poster:'img/earth.jpg?v=2',who:'도준 · 黃龍',title:'커리어 사주',subs:[[0,'스펙 말고,'],[1.8,'타고난 판부터 보자.'],[4.3,'네가 제일 비싸지는 자리.']]},
     'taegil.html':{src:'v/menu/taegil.mp4',poster:'img/taegil.jpg',who:'월하 · 擇日',title:'택일',subs:[[0.9,'그날…'],[2.2,'해도 되는 날일까.'],[4.6,'날은 내가 골라줄게.']]},
     'gunghap.html':{src:'v/menu/gunghap.mp4',poster:'img/taeo/wink.jpg',who:'태오 · 桃花',title:'도화 궁합',subs:[[1.0,'그 사람 생일 알아?'],[3.8,'누나한테 끌리는지 봐줄게.']]},
     'tarot.html':{src:'v/tarot/intro.mp4',poster:'img/tarot/mujin.jpg',who:'무진 · 한밤의 카드방',title:'무진의 타로',subs:[[0.3,'앉아요.'],[2.3,'…카드한테 물어보고 싶은 거,'],[5.1,'하나 있죠?']]},

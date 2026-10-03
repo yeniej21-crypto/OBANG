@@ -27,7 +27,7 @@
 .home .gChip small{display:block;font-size:9px;font-weight:700;letter-spacing:.06em;color:rgba(var(--gr),1);line-height:1.1;text-align:left}
 .home .gChip b{display:block;font-size:12.5px;font-weight:800;line-height:1.15;text-align:left}
 .home .tdH{position:relative;padding-right:64px}
-.home .tdH .gFace{position:absolute;right:0;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%!important;background:#222 center 16%/cover no-repeat;box-shadow:0 0 0 1.5px rgba(10,8,12,.9),0 0 0 2.5px rgba(var(--gr),.8)}
+.home .tdH .gFace{cursor:pointer;z-index:2;position:absolute;right:0;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%!important;background:#222 center 16%/cover no-repeat;box-shadow:0 0 0 1.5px rgba(10,8,12,.9),0 0 0 2.5px rgba(var(--gr),.8)}
 .home .tdH .gFace:after{content:'수호신';position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);font-size:9px;font-weight:800;letter-spacing:.04em;padding:2px 5px;background:rgb(var(--gr));color:#1a120b;white-space:nowrap}
 </style>
 <title>오방사주 · 서하의 살롱</title>
@@ -1243,9 +1243,9 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
         <button data-h="taeo" style="--c:#ffb9a6"><span style="background-image:url('img/taeo/base.jpg')"></span><b>태오</b><small>연애·도화</small></button>
         <button data-h="wood" style="--c:var(--wood)"><span style="background-image:url('img/wood.jpg')"></span><b>하람</b><small>새 시작</small></button>
         <button data-h="fire" style="--c:var(--fire)"><span style="background-image:url('img/fire.jpg')"></span><b>이안</b><small>고백·결단</small></button>
-        <button data-h="earth" style="--c:var(--earth)"><span style="background-image:url('img/earth.jpg')"></span><b>도준</b><small>일·돈</small></button>
+        <button data-h="earth" style="--c:var(--earth)"><span style="background-image:url('img/earth.jpg?v=2')"></span><b>도준</b><small>일·돈</small></button>
         <button data-h="metal" style="--c:var(--metal)"><span style="background-image:url('img/sion.jpg')"></span><b>시온</b><small>속마음·재회</small></button>
-        <button data-h="water" style="--c:var(--water)"><span style="background-image:url('img/water.jpg')"></span><b>재이</b><small>마음</small></button>
+        <button data-h="water" style="--c:var(--water)"><span style="background-image:url('img/water.jpg?v=2')"></span><b>재이</b><small>마음</small></button>
         <button data-h="halmae" style="--c:#d9b38c"><span style="background-image:url('img/halmae.jpg')"></span><b>할매</b><small>정통</small></button>
       </div>
     </section>
@@ -1258,11 +1258,11 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <section class="hSec" id="secJob" data-cats="all job">
       <div class="sh"><small>일 · 커리어</small><b>나, 여기서 버티는 게 맞을까</b></div>
       <div class="hRow">
-        <div class="pc" id="cCareer" role="button" tabindex="0" style="background-image:url('img/earth.jpg');background-position:center 14%"><span class="chip new">NEW</span><div class="ct"><span class="yr">2027</span><span class="tt">커리어 사주</span><span class="st">내 일 유형과 움직일 달</span></div></div>
+        <div class="pc" id="cCareer" role="button" tabindex="0" style="background-image:url('img/earth.jpg?v=2');background-position:center 14%"><span class="chip new">NEW</span><div class="ct"><span class="yr">2027</span><span class="tt">커리어 사주</span><span class="st">내 일 유형과 움직일 달</span></div></div>
         <div class="pc" id="cCool" role="button" tabindex="0" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_084427_71ac8f06-b054-4dcd-85b1-b471599794cd_min.webp');background-position:center 20%"><span class="chip new">NEW</span><div class="ct"><span class="tt">이직 쿨타임</span><span class="st">옮길까, 버틸까 · 무료</span></div></div>
         <div class="pc" id="cWDay" role="button" tabindex="0" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_084427_0f26f62a-829f-4db8-8f13-60e26ea429e1_min.webp');background-position:center 18%"><span class="chip new">NEW</span><div class="ct"><span class="tt">오늘의 일운</span><span class="st">도준 · 무료 · 매일</span></div></div>
         <div class="pc" id="cWPay" role="button" tabindex="0" style="background-image:url('img/yin/metal.jpg');background-position:center 16%"><span class="chip new">NEW</span><div class="ct"><span class="tt">내 몸값 리포트</span><span class="st">세린 · 990원</span></div></div>
-        <div class="pc" id="cWBoss" role="button" tabindex="0" style="background-image:url('img/earth.jpg');background-position:center 30%"><span class="chip new">NEW</span><div class="ct"><span class="tt">상사 궁합</span><span class="st">도준 · 2,900원</span></div></div>
+        <div class="pc" id="cWBoss" role="button" tabindex="0" style="background-image:url('img/earth.jpg?v=2');background-position:center 30%"><span class="chip new">NEW</span><div class="ct"><span class="tt">상사 궁합</span><span class="st">도준 · 2,900원</span></div></div>
         <div class="pc" id="cToday" role="button" tabindex="0" style="background-image:url('img/seoha.jpg');background-position:center 14%"><div class="ct"><span class="tt">오늘의 운세</span><span class="st">매일 아침 바뀌는 나의 하루</span></div></div>
       </div>
     </section>
@@ -1333,7 +1333,7 @@ const HOST=/*HOST*/{id:'seoha',name:'서하',intro:'v/intro.mp4',introPoster:'im
   dur:{t1:3.6,t1a:4.9,t1b:4.4,t2:4.6,t3:5.6,t4:3.5,t5:6.3,t6:6.5}}/*/HOST*/;
 const H=HOST.clips;
 const V={intro:HOST.intro,t1:H+'t1.mp4',t1a:H+'t1a.mp4',t1b:H+'t1b.mp4',t2:H+'t2.mp4',t3:H+'t3.mp4',t4:H+'t4.mp4',t5:H+'t5.mp4',t6:H+'t6.mp4',idle:H+'idle.mp4',
-  rv_wood:'v/rv_wood.mp4',rv_fire:'v/rv_fire.mp4',rv_earth:'v/rv_earth.mp4',rv_metal:'v/rv_metal.mp4',rv_water:'v/rv_water.mp4'};
+  rv_wood:'v/rv_wood.mp4',rv_fire:'v/rv_fire.mp4',rv_earth:'v/rv_earth.mp4?v=2',rv_metal:'v/rv_metal.mp4',rv_water:'v/rv_water.mp4?v=2'};
 const LINES=HOST.lines;
 const CUE=HOST.cue||{}; /* 줄마다 시작 초(말소리 기준). 줄 수가 같을 때만 쓰고, 없으면 글자 수 비례 */
 const FALLBACK_DUR=Object.assign({intro:6,idle:5,rv:5},HOST.dur);
@@ -1366,13 +1366,13 @@ const YIN={
   metal:{n:'세린',st:'辛',ys:'庚',img:'img/yin/metal.jpg',v:YIN_V+'6e77ff4d-1bcc-4e77-9676-351a9f281be4.mp4',line:'칭찬은 아껴 둘게. 넌 아직 더 빛날 수 있어.'},
   water:{n:'이슬',st:'癸',ys:'壬',img:'img/yin/water.jpg',v:YIN_V+'cf2ab952-53cb-4703-b502-6445b716aec8.mp4',line:'천천히 말해도 돼. 다 들려.'}};
 function faceOf(){ try{ return localStorage.getItem('obFace')==='yin'?'yin':'yang'; }catch(e){ return 'yang'; } }
-function godImg(k){ return faceOf()==='yin'?YIN[k].img:`img/${k}.jpg`; }
+function godImg(k){ return faceOf()==='yin'?YIN[k].img:`img/${k}.jpg?v=2`; }
 function godName(k){ return faceOf()==='yin'?YIN[k].n:GODS[k].n; }
 function applyFace(f,withVoice){ const k=S.low, g=GODS[k], y=YIN[k], h=$('rHero'), v=$('faceV'), sub=$('faceSub');
   try{ localStorage.setItem('obFace',f); }catch(e){}
-  const o=f==='yin'?{n:g.n,img:`img/${k}.jpg`}:{n:y.n,img:y.img};
+  const o=f==='yin'?{n:g.n,img:`img/${k}.jpg?v=2`}:{n:y.n,img:y.img};
   $('twinAv').style.backgroundImage=`url("${o.img}")`; $('twinT').textContent=`${f==='yin'?y.n:g.n}에게는 또 하나의 얼굴이 있어요`; $('twinE').textContent=`같은 ${TW_BEAST[k]}(${g.el}) · ${o.n}`;
-  const img=f==='yin'?y.img:`img/${k}.jpg`; h.style.backgroundImage=`url("${img}")`;
+  const img=f==='yin'?y.img:`img/${k}.jpg?v=2`; h.style.backgroundImage=`url("${img}")`;
   if(window.Depth3D){ Depth3D.unmount(h); Depth3D.unholo(h); if(f==='yang') Depth3D.mount(h,{src:img,pos:[.5,.18]}); }
   $('rGod').textContent=`${g.h} · ${g.el} · ${g.dir}`+(f==='yin'?' · 음의 현신':''); $('rName').textContent=`나의 수호신, ${f==='yin'?y.n:g.n}`;
   v.pause(); v.classList.remove('on'); sub.classList.remove('on');
@@ -1394,7 +1394,7 @@ function openTwin(){ const k=S.low, g=GODS[k], y=YIN[k], t=TW[k], cur=faceOf(); 
   $('twinH').textContent=`같은 ${TW_BEAST[k]}, 다른 얼굴`;
   $('twinP').textContent=`${twJ(g.n,'과','와')} ${twJ(y.n,'은','는')} 같은 ${TW_BEAST[k]}의 기운에서 나온 두 얼굴이에요. 오방의 신은 하나의 기운을 드러나는 양의 얼굴과 스며드는 음의 얼굴, 두 모습으로 지녀요. 지켜 주는 힘은 같고, 곁에 있는 방식만 달라요.`;
   const tile=(f,n,img,[hj,img2,tr])=>`<button type="button" data-f="${f}" class="${f===cur?'on cur':''}" style="background-image:url('${img}')"><span class="now">지금 함께하는 얼굴</span><span class="cap"><small>${f==='yang'?'양의 얼굴':'음의 얼굴'} · ${hj} ${img2}</small><b>${n}</b><em>${tr}</em></span></button>`;
-  $('twinPair').innerHTML=tile('yang',g.n,`img/${k}.jpg`,t[0])+tile('yin',y.n,y.img,t[1]);
+  $('twinPair').innerHTML=tile('yang',g.n,`img/${k}.jpg?v=2`,t[0])+tile('yin',y.n,y.img,t[1]);
   $('twinPair').querySelectorAll('button').forEach(b=>b.onclick=()=>{ twPick=b.dataset.f; $('twinPair').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); twGoTxt(); });
   twGoTxt(); $('twinS').classList.add('on'); $('twinS').setAttribute('aria-hidden','false'); }
 function twGoTxt(){ const k=S.low, n=twPick==='yin'?YIN[k].n:GODS[k].n; $('twinGo').textContent=twPick===faceOf()?`${n}${twJ(n,'과','와').slice(n.length)} 계속 함께하기`:`${n}${(c=>c>=0&&c<11172&&c%28>0&&c%28!==8?'으로':'로')(n.charCodeAt(n.length-1)-0xAC00)} 바꾸기`; }
@@ -1598,7 +1598,7 @@ const WRY={
  '건강':{s:'무리하면 안 되는 달부터 알아 두자.',l:'무리하면 안 되는 달부터 알아 두자. 미리 알면 덜 지쳐.',m:['sn','today'],q:['올해 무리하면 안 되는 달 알려줘','기운 채우는 생활 습관 알려줘']},
  '올해 운':{s:'좋은 달이랑 조심할 달부터.',l:'2027년 열두 달, 좋은 달이랑 조심할 달부터 보자.',m:['sn','mr'],q:['올해 가장 좋은 달 알려줘','올해 조심할 것 하나만 짚어줘']},
  '그냥 내 사주':{s:'타고난 판부터 차근히.',l:'타고난 판부터 차근히 보자. 그게 제일 정확해.',m:['life','mr'],q:['내 사주 한 줄로 요약해줘','내가 제일 빛나는 자리 알려줘']}};
-const WM={partner:['그 사람 속마음','시온 · 은거울','img/w1.jpg','partner'],tarot:['무진의 타로','무진','img/tarot/poster.jpg','tarot.html'],re:['재회 사주','시온','img/w2.jpg','love2.html?m=re'],next:['다음 연애','서하','img/seoha.jpg','love2.html?m=next'],dohwa:['도화 사주','태오','img/taeo/base.jpg','dohwa.html'],gh:['도화 궁합','태오','img/taeo/wink.jpg','gunghap.html'],life:['평생 사주','현암','img/jeongtong.jpg','lifetime.html'],career:['커리어 사주','도준','img/earth.jpg','career.html'],mr:['2027 명리 감정서','소헌 선생','img/soheon.jpg','myeongri.html'],sn:['2027 신년운세','삼신 할매','img/halmae.jpg','sinnyeon.html'],taegil:['택일','월하','img/taegil.jpg','taegil.html'],today:['오늘의 운세','서하','img/seoha.jpg','today.html']};
+const WM={partner:['그 사람 속마음','시온 · 은거울','img/w1.jpg','partner'],tarot:['무진의 타로','무진','img/tarot/poster.jpg','tarot.html'],re:['재회 사주','시온','img/w2.jpg','love2.html?m=re'],next:['다음 연애','서하','img/seoha.jpg','love2.html?m=next'],dohwa:['도화 사주','태오','img/taeo/base.jpg','dohwa.html'],gh:['도화 궁합','태오','img/taeo/wink.jpg','gunghap.html'],life:['평생 사주','현암','img/jeongtong.jpg','lifetime.html'],career:['커리어 사주','도준','img/earth.jpg?v=2','career.html'],mr:['2027 명리 감정서','소헌 선생','img/soheon.jpg','myeongri.html'],sn:['2027 신년운세','삼신 할매','img/halmae.jpg','sinnyeon.html'],taegil:['택일','월하','img/taegil.jpg','taegil.html'],today:['오늘의 운세','서하','img/seoha.jpg','today.html']};
 function loadWry(){ try{ return JSON.parse(localStorage.getItem('obWorry')||'null'); }catch(e){ return null; } }
 function saveWry(){ const c=[...$('chips').querySelectorAll('.chip')].find(x=>x.getAttribute('aria-pressed')==='true'); const w={tag:c?c.textContent.trim():'',text:($('worryText').value||'').trim(),at:Date.now()};
   if(!w.tag&&!w.text) return; try{ localStorage.setItem('obWorry',JSON.stringify(w)); }catch(e){} }
@@ -1677,7 +1677,7 @@ const MS={wood:{push:'일어났어? 오늘 미션 왔어 🌿',l:['좋은 아침
   earth:{push:'잘 잤어? 오늘 미션 가져왔어',l:['잘 잤어?','책상 위 하나만 정리하자.','네 자리가 단단해야 운이 안 새.']},
   metal:{push:'미션 도착. 오늘은 짧아.',l:['오늘,','안 맞는 약속 하나 끊어.','비워야 들어와.']},
   water:{push:'…깼어? 미션 보냈어 🌙',l:['물 한 잔 먼저 마셔.','그리고 오늘 하루,','세 줄만 적어.']}};
-ORDER.forEach(k=>{ V['m_'+k]='v/ms/'+k+'.mp4'; LINES['m_'+k]=MS[k].l; FALLBACK_DUR['m_'+k]=6; POSTER['m_'+k]='img/'+k+'.jpg'; });
+ORDER.forEach(k=>{ V['m_'+k]='v/ms/'+k+'.mp4?v=2'; LINES['m_'+k]=MS[k].l; FALLBACK_DUR['m_'+k]=6; POSTER['m_'+k]='img/'+k+'.jpg?v=2'; });
 const ov=id=>{ ['ovPre','ovSys','ovNight','ovLock','ovGauge','ovSub','ovKv'].forEach(x=>$(x).classList.toggle('on',x===id)); };
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 const iga=n=>{ const c=n.charCodeAt(n.length-1)-0xAC00; return n+((c>=0&&c%28)?'이':'가'); };
@@ -1765,7 +1765,7 @@ function renderHome(){
   $('hMisK').innerHTML=`오늘의 개운 · <em>${godName(S.low)} ${g.el}</em>`; $('hMisT').textContent=g.mission;
   const max=Math.max(...S.cnt,1), names='木火土金水';
   $('hG').innerHTML=S.cnt.map((c,i)=>`<div class="${EL_KEYS[i]===S.low?'low':''}" style="--c:${EL_COL[i]};--w:${Math.max(c/max*100,6)}%"><b>${names[i]}</b><i></i></div>`).join('');
-  $('hMem').innerHTML=ORDER.map(k=>{const m=GODS[k];return `<button class="om ${k===S.low?'mine':''}" data-el="${k}" style="--c:${m.c}"><span style="background-image:url('img/${k}.jpg')"></span><b>${m.n}</b><small>${m.h} · ${m.el}</small></button>`;}).join('');
+  $('hMem').innerHTML=ORDER.map(k=>{const m=GODS[k];return `<button class="om ${k===S.low?'mine':''}" data-el="${k}" style="--c:${m.c}"><span style="background-image:url('img/${k}.jpg?v=2')"></span><b>${m.n}</b><small>${m.h} · ${m.el}</small></button>`;}).join('');
   $('hMem').querySelectorAll('.om').forEach(e=>e.onclick=()=>memberView(e.dataset.el));
 }
 /* 10/3 21:15 시안: 수호신 드러내기 */
@@ -1775,7 +1775,7 @@ function guardApply(){ try{ if(!S||!S.low) return; const k=S.low, n=godName(k), 
   document.querySelector('.home')&&document.querySelector('.home').style.setProperty('--gr',rgb);
   const ch=$('gChip'); if(ch){ ch.hidden=false; $('gChipI').style.backgroundImage=`url("${im}")`; $('gChipN').textContent=n; ch.onclick=()=>memberView(k); }
   const K=$('hFortK'); if(K){ K.textContent=`${n}${jo(n,'이','가')} 본 오늘 · `+K.textContent.replace(/^(오늘의 운세|.+ 본 오늘) · /,''); }
-  const H=$('tdH'); if(H&&!H.querySelector('.gFace')){ const i=document.createElement('i'); i.className='gFace'; H.appendChild(i); } if(H) H.querySelector('.gFace').style.backgroundImage=`url("${im}")`;
+  const H=$('tdH'); if(H&&!H.querySelector('.gFace')){ const i=document.createElement('i'); i.className='gFace'; H.appendChild(i); } if(H) H.querySelector('.gFace').style.backgroundImage=`url("${im}")`; if(H){ const gf=H.querySelector('.gFace'); gf.setAttribute('role','button'); gf.setAttribute('aria-label','나의 수호신 보기'); gf.onclick=e=>{ e.stopPropagation(); e.preventDefault(); memberView(k); }; }
   $('hMisK').innerHTML=`${n}의 개운 한마디 · <em>나의 수호신 ${g.el}</em>`;
   try{ localStorage.setItem('obGuard',JSON.stringify({k,f,n})); sessionStorage.setItem('obGP','1'); }catch(e){}
 }catch(e){} }
@@ -1798,7 +1798,7 @@ function showHome(){
   if(window.Depth3D){ Depth3D.fromBg('#home .pc'); Depth3D.auto(document.getElementById('home')); }
 }
 async function memberView(el){
-  const g=GODS[el]; homeOff(); subMode(true); fetchClip('rv_'+el); POSTER['rv_'+el]='img/'+el+'.jpg';
+  const g=GODS[el]; homeOff(); subMode(true); fetchClip('rv_'+el); POSTER['rv_'+el]='img/'+el+'.jpg?v=2';
   $('ncHanja').textContent=g.h; $('ncHanja').style.setProperty('--c',g.c); $('namecard').style.setProperty('--c',g.c);
   $('ncName').textContent=g.n; $('ncDesc').textContent=g.desc; $('namecard').querySelector('.k').textContent=el===S.low?'나의 수호신':'오방 멤버';
   setTimeout(()=>$('namecard').classList.add('on'),500);
@@ -1821,7 +1821,7 @@ const goPage=u=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){}
   MenuIntro.go(u,document.querySelector('.stage'));
 };
 window.addEventListener('pageshow',e=>{ if(e.persisted){ document.querySelectorAll('.mi').forEach(x=>x.remove()); if(window._miLv!=null) try{ bgm(window._miLv,1); }catch(_){} } });
-setTimeout(()=>{ ['v/menu/today.mp4','v/menu/career.mp4','v/menu/taegil.mp4','v/menu/gunghap.mp4'].forEach(h=>{ const l=document.createElement('link'); l.rel='prefetch'; l.as='video'; l.href=h; document.head.appendChild(l); }); },4000);
+setTimeout(()=>{ ['v/menu/today.mp4','v/menu/career.mp4?v=2','v/menu/taegil.mp4','v/menu/gunghap.mp4'].forEach(h=>{ const l=document.createElement('link'); l.rel='prefetch'; l.as='video'; l.href=h; document.head.appendChild(l); }); },4000);
 $('cTaegil').onclick=()=>goPage('taegil.html'); $('cMyeongri').onclick=()=>goPage('myeongri.html'); if($('cNoeul')) $('cNoeul').onclick=()=>goPage('noeul.html');
 if($('featNoeul')){ const fe=$('featNoeul'), fv=fe.querySelector('video'); fe.onclick=()=>goPage('noeul.html');
   new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ if(!fv.getAttribute('src')) fv.src=fv.dataset.src; const p=fv.play(); if(p) p.catch(()=>{}); } else { try{ fv.pause(); }catch(_){} } }),{threshold:.3}).observe(fe); }
@@ -1965,7 +1965,7 @@ $('ctaHomeBar').onclick=showHome;
 window.ObHome={goPage:u=>goPage(u),duck:()=>{ try{ bgm(BGM_LV.talk,.4); }catch(e){} },idle:()=>{ try{ bgm(BGM_LV.idle,1); }catch(e){} }}; /* charhub.js 연결 */
 $('goHome').onclick=async()=>{ await unlock(); showHome(); };
 document.querySelectorAll('[data-home]').forEach(b=>b.onclick=showHome);
-$('subGo').onclick=()=>{ if(!window.ObPay) return toast('체험판: 7일 무료 체험이 시작됩니다'); const k=S&&S.low||'wood'; ObPay.open({name:'오방 멤버십 · 월 구독',who:'수호신',desc:'매달 수호신의 편지 · 매일 개운 미션 · 엽전 · 매일 상담',price:9900,img:`img/${k}.jpg`,trial:'첫 7일 무료, 이후 매달',cta:'7일 무료로 시작하기',agree:'7일 무료 체험이 끝나면 매달 9,900원이 자동 결제되고, 마이페이지에서 언제든 해지할 수 있음을 확인했어요.',okTitle:'멤버십이 시작됐어요',okText:'내일 아침 첫 편지가 도착해요',after:()=>{ ov(null); toast('체험판: 멤버십 체험이 시작됐어요'); }}); };
+$('subGo').onclick=()=>{ if(!window.ObPay) return toast('체험판: 7일 무료 체험이 시작됩니다'); const k=S&&S.low||'wood'; ObPay.open({name:'오방 멤버십 · 월 구독',who:'수호신',desc:'매달 수호신의 편지 · 매일 개운 미션 · 엽전 · 매일 상담',price:9900,img:`img/${k}.jpg?v=2`,trial:'첫 7일 무료, 이후 매달',cta:'7일 무료로 시작하기',agree:'7일 무료 체험이 끝나면 매달 9,900원이 자동 결제되고, 마이페이지에서 언제든 해지할 수 있음을 확인했어요.',okTitle:'멤버십이 시작됐어요',okText:'내일 아침 첫 편지가 도착해요',after:()=>{ ov(null); toast('체험판: 멤버십 체험이 시작됐어요'); }}); };
 $('ctaAvatar').onclick=()=>goPage('avatar.html');
 $('ctaShare').onclick=()=>toast('체험판: 공유 카드 생성');
 $('muteBtn').onclick=()=>{ muted=!muted; [vA,vB].forEach(v=>v.muted=muted); bgm(bgmLevel,.2); $('waves').style.display=muted?'none':''; $('muteBtn').setAttribute('aria-label',muted?'소리 켜기':'소리 끄기'); };
@@ -1986,7 +1986,7 @@ afterOpening.then(async()=>{ for(const k of NEED){ await fetchClip(k); nDone++; 
   const q=CORE.filter(k=>!NEED.includes(k)); const worker=async()=>{ while(q.length){ const k=q.shift(); await fetchClip(k); nDone++; upd(); } }; await Promise.all([worker(),worker()]); });
 
 /* ---------- 오프닝 v3: 문을 두드리면 다섯 수호신이 차례로 눈을 뜬다 ---------- */
-const OP_COL=[['靑龍','木','var(--wood)','img/wood.jpg','v/rv_wood.mp4',3.0,'#5fbf8a'],['朱雀','火','var(--fire)','img/fire.jpg','v/rv_fire.mp4',3.0,'#ff6a4a'],['黃龍','土','var(--earth)','img/earth.jpg','v/rv_earth.mp4',2.3,'#e0b25a'],['白虎','金','var(--metal)','img/sion.jpg','v/rv_metal.mp4',2.9,'#dfe6f0'],['玄武','水','var(--water)','img/water.jpg','v/rv_water.mp4',3.2,'#5f86ff']];
+const OP_COL=[['靑龍','木','var(--wood)','img/wood.jpg','v/rv_wood.mp4',3.0,'#5fbf8a'],['朱雀','火','var(--fire)','img/fire.jpg','v/rv_fire.mp4',3.0,'#ff6a4a'],['黃龍','土','var(--earth)','img/earth.jpg?v=2','v/rv_earth.mp4?v=2',2.3,'#e0b25a'],['白虎','金','var(--metal)','img/sion.jpg','v/rv_metal.mp4',2.9,'#dfe6f0'],['玄武','水','var(--water)','img/water.jpg?v=2','v/rv_water.mp4?v=2',3.2,'#5f86ff']];
 const OP_KO=['나무','불','흙','쇠','물'], OP_H='木火土金水', OP_GAN='甲乙丙丁戊己庚辛壬癸', OP_JI='子丑寅卯辰巳午未申酉戌亥';
 const jong=w=>{ const c=w.charCodeAt(w.length-1)-0xAC00; return c>=0&&c<11172&&c%28>0; };
 let opAC=null, opOut=null, opRev=null, opNodes=[], opMus=null, opMusBuf=null, opMusT=null;

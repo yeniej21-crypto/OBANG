@@ -318,7 +318,7 @@ function renderOut(){ const me=A.me, e=A.dm, st=A.strong, lw=A.low, G=GODS[K[lw]
   $('why').innerHTML=h;
   const L=['시','일','월','년'], ps=[A.P.h,A.P.d,A.P.m,A.P.y];
   $('pil').innerHTML=ps.map((p,i)=>`<div class="${i===1?'me':''}"><small>${L[i]}주</small>${p?`<b style="color:${COL[Math.floor(p[0]/2)]}">${GAN[p[0]]}</b><b style="color:${COL[BR_EL[p[1]]]}">${JI[p[1]]}</b>`:'<b style="color:#555">·</b><b style="color:#555">·</b>'}</div>`).join('');
-  $('duoA').style.backgroundImage=`url('${IMG}')`; $('duoG').style.backgroundImage=`url('img/${K[lw]}.jpg')`;
+  $('duoA').style.backgroundImage=`url('${IMG}')`; $('duoG').style.backgroundImage=`url('img/${K[lw]}.jpg?v=2')`;
   $('duoMe').textContent=me.name||'나'; $('duoGk').textContent=`${G.h} · ${ELH[lw]}`; $('duoGn').textContent=G.n;
   $('gq').innerHTML=`"${G.line}"<small>${G.n} · 네 사주에 가장 부족한 ${ELKO[lw]}(${ELH[lw]})을 채우는 수호신</small>`;
   $('lockBl').style.backgroundImage=`url('${IMG}')`;

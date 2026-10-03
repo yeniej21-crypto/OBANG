@@ -316,10 +316,10 @@ function tgCount(P){ const dm=P.d[0], L=['비견','겁재','식신','상관','�
 const PEACH=b=>[2,6,10].includes(b)?3:[8,0,4].includes(b)?9:[5,9,1].includes(b)?6:0;
 
 /* ================= 테스트 정의 ================= */
-const HOST={doj:{n:'도준',h:'黃龍',img:'img/earth.jpg'},har:{n:'하람',h:'靑龍',img:'img/wood.jpg'},jae:{n:'재이',h:'玄武',img:'img/water.jpg'},ian:{n:'이안',h:'朱雀',img:'img/fire.jpg'},sion:{n:'시온',h:'白虎',img:'img/metal.jpg'},taeo:{n:'태오',h:'桃花',img:'img/taeo/wink.jpg'}};
+const HOST={doj:{n:'도준',h:'黃龍',img:'img/earth.jpg?v=2'},har:{n:'하람',h:'靑龍',img:'img/wood.jpg'},jae:{n:'재이',h:'玄武',img:'img/water.jpg?v=2'},ian:{n:'이안',h:'朱雀',img:'img/fire.jpg'},sion:{n:'시온',h:'白虎',img:'img/metal.jpg'},taeo:{n:'태오',h:'桃花',img:'img/taeo/wink.jpg'}};
 const T={
  past:{cat:'saju',t:'전생 직업',tt:'전생에 나는<br>조선의 ○○',teaser:'전생에 너, 한양에서 뭐 하고 살았게?',host:'doj',input:'birth',ld:['호적 뒤지는 중…','조선 팔도 수소문하는 중…','호패 새기는 중…'],
-   up:{k:'커리어 사주 · 도준',t:'그럼 이번 생 적성은?',s:'사주로 보는 일 유형·업계·움직일 달',go:'career.html',img:'img/earth.jpg'}},
+   up:{k:'커리어 사주 · 도준',t:'그럼 이번 생 적성은?',s:'사주로 보는 일 유형·업계·움직일 달',go:'career.html',img:'img/earth.jpg?v=2'}},
  animal:{cat:'saju',t:'내 일주 동물',tt:'넌 무슨 색,<br>무슨 동물이게?',teaser:'태어난 날 60갑자로 보는 진짜 내 동물',host:'har',input:'birth',ld:['태어난 날 찾는 중…','60갑자 돌리는 중…','동물 깨우는 중…'],
    up:{k:'평생 사주 · 현암',t:'동물 말고, 한평생 흐름은?',s:'인생 그래프·대운 열 마디·전성기',go:'lifetime.html',img:'img/jeongtong.jpg'}},
  bok:{cat:'saju',t:'타고난 복 5종',tt:'먹을 복은 확실한데…<br>나머지는?',teaser:'재물복·인복·먹을복·일복·연애복 게이지',host:'jae',input:'birth',ld:['복주머니 꺼내는 중…','여덟 글자 흔들어 보는 중…','복 세는 중…'],

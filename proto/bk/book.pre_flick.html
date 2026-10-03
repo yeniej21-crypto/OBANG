@@ -221,6 +221,7 @@ button{font-family:inherit;cursor:pointer}
 .mini i{width:18.5%}
 
 /* ===== v5 (10/3 밤) 개정판: 이야기 쪽 · 큰 글자 쪽 · 두 얼굴 쪽 · 명인의 방 · 그림자 손님 · 목소리 쪽 ===== */
+.desk .book{transform:rotateY(calc(var(--tx)*2.2deg)) rotateX(calc(var(--ty)*-1.6deg))}
 /* 기울기 값은 매 프레임 바뀌므로 등장 애니메이션(transform)과 분리해 translate 속성으로만 움직인다 */
 .cur .cfg{transform:none;translate:calc(var(--tx)*12px) calc(var(--ty)*6px)}
 .fg{left:-4%;width:108%;transform:translate(calc(var(--tx)*14px),calc(var(--sy,-8%) + var(--ty)*8px)) scale(1.04)}
@@ -630,19 +631,14 @@ $('tocB').onclick=()=>$('toc').classList.add('on');
 $('toc').onclick=e=>{ const b=e.target.closest('[data-i]'); if(b) go(+b.dataset.i); if(b||e.target.closest('.x')) $('toc').classList.remove('on'); };
 $('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
 
-/* 입체감(10/3 22:45 깜빡임 수정): 기울기 값은 지금 펼친 쪽에만 넣는다(책 전체 35쪽을 다시 그리지 않게).
-   입력이 있을 때만 움직이고, 멈추면 계산도 멈춘다. 숨 쉬듯 흔들리는 효과 · 책 전체 기울이기는 뺐다 */
-(()=>{ let gx=0,gy=0,x=0,y=0,run=false,tgt=null;
-  const loop=()=>{ x+=(gx-x)*.12; y+=(gy-y)*.12; const l=leaves[cur];
-    if(l!==tgt){ if(tgt){ tgt.style.removeProperty('--tx'); tgt.style.removeProperty('--ty'); } tgt=l; }
-    if(l){ l.style.setProperty('--tx',x.toFixed(3)); l.style.setProperty('--ty',y.toFixed(3)); }
-    if(Math.abs(gx-x)>.004||Math.abs(gy-y)>.004) requestAnimationFrame(loop); else run=false; };
-  const set=(a,b)=>{ gx=Math.max(-1,Math.min(1,a)); gy=Math.max(-1,Math.min(1,b)); if(!run){ run=true; requestAnimationFrame(loop); } };
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const st=$('stage');
-  addEventListener('pointermove',e=>{ if(drag) return; if(e.pointerType!=='mouse') return; const r=st.getBoundingClientRect(); set(((e.clientX-r.left)/r.width-.5)*2,((e.clientY-r.top)/r.height-.5)*2); },{passive:true});
-  let lastO=0; addEventListener('deviceorientation',e=>{ if(e.gamma==null) return; const t=performance.now(); if(t-lastO<50) return; lastO=t; set(e.gamma/22,(e.beta-40)/24); },{passive:true});
-})();
+/* 입체감: 손가락 · 마우스 · 폰 기울기에 따라 책 · 배경 · 인물이 서로 다른 깊이로 움직인다. 입력이 없으면 숨 쉬듯 아주 느리게 흔들린다 */
+(()=>{ const st=$('stage'); let gx=0,gy=0,x=0,y=0,last=-1e9;
+  const set=(a,b)=>{ gx=Math.max(-1,Math.min(1,a)); gy=Math.max(-1,Math.min(1,b)); last=performance.now(); };
+  addEventListener('pointermove',e=>{ if(drag&&drag.moved) return; const r=st.getBoundingClientRect(); set(((e.clientX-r.left)/r.width-.5)*2,((e.clientY-r.top)/r.height-.5)*2); },{passive:true});
+  addEventListener('deviceorientation',e=>{ if(e.gamma==null) return; set(e.gamma/22,(e.beta-40)/24); },{passive:true});
+  const tick=t=>{ let tx=gx,ty=gy; if(t-last>2500){ tx=Math.sin(t/2600)*.35; ty=Math.cos(t/3400)*.22; }
+    x+=(tx-x)*.06; y+=(ty-y)*.06; st.style.setProperty('--tx',x.toFixed(3)); st.style.setProperty('--ty',y.toFixed(3)); requestAnimationFrame(tick); };
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tick); })();
 
 (()=>{ let s=0; try{ s=+(sessionStorage.getItem('obBookPg')||0); }catch(e){} if(s>0&&s<N){ go(s,false); } else activate(); })();
 </script>

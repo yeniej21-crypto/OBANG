@@ -1,0 +1,17 @@
+const {chromium}=require('playwright');
+(async()=>{ const b=await chromium.launch(); const p=await b.newPage({viewport:{width:390,height:844},deviceScaleFactor:2}); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
+ await p.addInitScript(()=>{ sessionStorage.setItem('obSnd','0'); });
+ await p.goto('http://localhost:8812/myeongri.html'); await p.waitForTimeout(3000);
+ await p.evaluate(()=>{ $('sub').style.setProperty('--sb',roomSub()+'px'); subOn($('sub'),'오늘은 자네의 여덟 글자를, 제대로 읽어 봄세.'); }); await p.waitForTimeout(500);
+ await p.screenshot({path:'cs_1.png'});
+ await p.evaluate(()=>{ document.getElementById('enterBtn').click(); grindInk=async()=>{}; }); await p.waitForTimeout(1300);
+ await p.evaluate(()=>{ subOn($('sub'),'태어난 날짜와 시간을 적어 주게.'); }); await p.waitForTimeout(500);
+ await p.screenshot({path:'cs_2.png'});
+ await p.evaluate(()=>{ $('sIntro').scrollTop=500; }); await p.waitForTimeout(1200);
+ await p.screenshot({path:'cs_3.png'});
+ await p.evaluate(()=>{ localStorage.setItem('obCC','0'); ccSync(); }); await p.waitForTimeout(400);
+ await p.screenshot({path:'cs_4.png'});
+ await p.evaluate(()=>{ localStorage.removeItem('obCC'); ccSync(); document.getElementById('goBtn').click(); }); await p.waitForTimeout(15000);
+ await p.evaluate(()=>{ subOn($('hsub'),'이제, 한 글자씩 짚어 봄세.'); }); await p.waitForTimeout(500);
+ await p.screenshot({path:'cs_5.png'});
+ console.log(errs); await b.close(); })();

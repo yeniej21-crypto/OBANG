@@ -71,6 +71,11 @@ a{color:inherit;text-decoration:none}
 #sIn .im.hi{opacity:0}
 #sIn.hero .im.hi{opacity:1}
 #sIn .scrB{height:66%;background:linear-gradient(180deg,rgba(246,240,230,0),rgba(246,240,230,.86) 30%,rgba(246,240,230,.97) 58%)}
+/* 10/3 은주: 영상만 나올 때는 아래 뿌연 막이 예쁜 화면을 가림 → 글이 떠 있을 때만 깔고, 영상만 나오는 동안은 걷는다. 첫 화면 막도 글 뒤만 덮게 낮춤 */
+#sIn .scrB{transition:opacity .8s ease;height:56%;background:linear-gradient(180deg,rgba(246,240,230,0),rgba(246,240,230,.78) 40%,rgba(246,240,230,.95) 72%)}
+#sIn.play .scrB{opacity:0}
+#sIn #alley{opacity:1;transition:opacity 1s ease}
+#sIn #alley.off{opacity:0}
 .itx{position:absolute;left:22px;right:22px;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);z-index:6;transition:opacity .8s ease,transform .8s ease}
 .itx.out{opacity:0;transform:translateY(12px);pointer-events:none}
 .itx.it2{opacity:0;transform:translateY(14px);pointer-events:none}
@@ -332,6 +337,7 @@ a{color:inherit;text-decoration:none}
   <section class="scr on" id="sIn">
     <div class="vb">
       <div class="im br" data-img="exterior"></div>
+      <video id="alley" src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/65244db2-d88d-436d-ae73-230afed5f225.mp4" muted loop playsinline autoplay preload="auto"></video>
       <video data-v="door" data-p="exterior" muted playsinline preload="auto"></video>
       <div class="im hi br" data-img="hero"></div>
       <video data-v="hero" data-p="hero" muted loop playsinline preload="none"></video>
@@ -662,9 +668,10 @@ let started=false;
 async function enter(withSound){ if(started) return; started=true; entered=true; soundOn=withSound; try{ sessionStorage.setItem('ysSnd',soundOn?'on':'off'); }catch(e){} sndUI();
   if(soundOn) AUD.start(); $('itx').classList.add('out'); vib(8);
   vPrime('hero'); vPrime('counter');
-  AUD.duck(true); const ok=await vOnce('door',()=>AUD.slide()); if(!ok) AUD.slide(); AUD.duck(false);
+  $('sIn').classList.add('play');
+  AUD.duck(true); const ok=await vOnce('door',()=>{ AUD.slide(); const al=$('alley'); if(al){ al.classList.add('off'); setTimeout(()=>{ try{ al.pause(); }catch(e){} },1200); } }); if(!ok) AUD.slide(); AUD.duck(false);
   heroOn=true; $('sIn').classList.add('hero'); vLoop('hero');
-  await wait(RM?60:ok?500:900); $('itx2').classList.add('on'); }
+  await wait(RM?60:ok?500:900); $('sIn').classList.remove('play'); $('itx2').classList.add('on'); }
 $('start').onclick=()=>enter(true);
 $('startMute').onclick=()=>enter(false);
 $('goIn').onclick=()=>{ if(cur!=='sIn') return; vib(6); show('sTalk'); interview(); };

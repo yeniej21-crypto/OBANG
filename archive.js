@@ -39,7 +39,7 @@
       get:()=>({h:tx('#qTop').split('.')[0],s:'',sub:tx('#rTitle'),lines:[tx('#qTop'),tx('#giT').slice(0,90)]}),re:true},
     taegil:{menu:'택일',img:'img/taegil.jpg',form:'#sIn',ready:()=>vis('#sOut')&&tx('#oT'),
       get:()=>({h:tx('#oT'),s:'',sub:tx('#oK'),lines:[tx('#qT')]}),re:true},
-    career:{menu:'커리어 사주',img:'img/earth.jpg',form:'#sIn',ready:()=>vis('#sOut')&&tx('#tNm'),
+    career:{menu:'커리어 사주',img:'img/earth.jpg?v=2',form:'#sIn',ready:()=>vis('#sOut')&&tx('#tNm'),
       get:()=>({h:tx('#tNm'),s:'',sub:tx('#tEn'),lines:[tx('#tDesc')]}),re:true},
     gunghap:{menu:'도화 궁합',img:'img/taeo/wink.jpg',form:null,ready:()=>tx('#sc')&&tx('#scT')&&vis('#sc'),
       get:()=>({h:tx('#scT'),s:tx('#sc'),sub:`${tx('#nA')} × ${tx('#nB')}`,lines:[tx('#say')]}),re:false},

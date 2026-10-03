@@ -232,7 +232,7 @@ button{font-family:inherit;cursor:pointer}
 </div>
 <script>
 const $=id=>document.getElementById(id);
-const GOD=(k,n,h,el,dir,col,job,c,fx,body,q)=>({t:'god',k,n,h,el,dir,col,job,c,fx,body,q,bg:`img/${k}.jpg`,...(['wood','fire','earth'].includes(k)?{once:`v/rv_${k}.mp4`}:{fg:`img/pop/${k}.webp`}),vid:`v/ms/${k}.mp4`,talk:1,sy:'-9%',toc:`${n} · ${h}`});
+const GOD=(k,n,h,el,dir,col,job,c,fx,body,q)=>({t:'god',k,n,h,el,dir,col,job,c,fx,body,q,bg:`img/${k}.jpg?v=2`,...(['wood','fire','earth'].includes(k)?{once:`v/rv_${k}.mp4?v=2`}:{fg:`img/pop/${k}.webp`}),vid:`v/ms/${k}.mp4?v=2`,talk:1,sy:'-9%',toc:`${n} · ${h}`});
 /* 음의 현신(여신 5): 같은 신수의 다른 얼굴. 그림 · 대사 영상은 캐릭터 시트 10 기준 */
 const YV='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
 const YGOD=(k,n,h,el,dir,stem,job,c,fx,bg,v,body,q)=>({t:'god',yin:1,k,n,h,el,dir,col:stem,job,c,fx,body,q,bg,vid:YV+v,talk:1,sy:'-12%',toc:`${n} · ${h} · 음`});

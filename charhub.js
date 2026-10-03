@@ -20,11 +20,11 @@
       d:'새 시작과 다음 인연을 맡은 신. 맑고 다정하게, 망설이는 첫걸음을 끝까지 응원해요.',t:['새 시작','다음 인연','공부 · 취미'],menu:['다음 연애 보기','cNext','love2.html?m=next'],role:'새 시작',hj:'甲',im:'큰 나무',face:'곧게 뻗어 길을 내는 얼굴'},
     fire:{n:'이안',img:'img/fire.jpg',v:'v/rv_fire.mp4',q:'망설이는 거 있지. 말해 봐.',
       d:'고백과 결단을 맡은 신. 나른하고 짧게 말하지만, 무심한 듯 정확하게 등을 밀어 줘요.',t:['고백','결단','내 매력'],menu:['오방 궁합 보기','cObgh','obgh.html'],role:'고백 · 결단',hj:'丙',im:'한낮의 해',face:'환하게 앞을 비추는 얼굴'},
-    earth:{n:'도준',img:'img/earth.jpg',v:'v/rv_earth.mp4',q:'일이든 돈이든 편하게 물어봐.',
+    earth:{n:'도준',img:'img/earth.jpg?v=2',v:'v/rv_earth.mp4?v=2',q:'일이든 돈이든 편하게 물어봐.',
       d:'일과 돈, 관계의 중심을 맡은 신. 선배처럼 차분하게, 현실적으로 정리해 줘요.',t:['이직','돈 흐름','맞는 일'],menu:['커리어 사주 보기','cCareer','career.html'],role:'일 · 돈',hj:'戊',im:'큰 산',face:'흔들리지 않게 받치는 얼굴'},
     metal:{n:'시온',img:'img/sion.jpg',v:'v/rv_metal.mp4',q:'누구 얘기야.',
       d:'정리와 결단을 맡은 신. 감정은 덜고 핵심만, 그 사람의 속마음을 담백하게 읽어요.',t:['그 사람 속마음','관계 정리','재회'],menu:['그 사람 속마음 보기','','heart.html'],role:'속마음 · 재회',hj:'庚',im:'무쇠',face:'단번에 끊어 내는 얼굴'},
-    water:{n:'재이',img:'img/water.jpg',v:'v/rv_water.mp4',q:'오늘 좀 지쳐 보이네. 들어 줄게.',
+    water:{n:'재이',img:'img/water.jpg?v=2',v:'v/rv_water.mp4?v=2',q:'오늘 좀 지쳐 보이네. 들어 줄게.',
       d:'속마음과 지혜를 맡은 신. 먼저 마음을 읽어 주고, 그다음에 사주로 짚어 줘요.',t:['복잡한 마음','나는 어떤 사람','조심할 달'],menu:['평생 사주 보기','cLife','lifetime.html'],role:'마음',hj:'壬',im:'큰 물',face:'깊고 멀리 흐르는 얼굴'},
     wood_y:{n:'새아',img:SAEA_IMG,v:YV+'5c50aa18-ca62-4c3f-a583-dcf5d4847487.mp4',q:'괜찮아. 휘어도 안 꺾여.',
       d:'웃으면서 할 말 다 하는 다정한 고집쟁이. 다시 시작하는 힘, 끝까지 버티는 힘을 맡았어요.',t:['다시 시작','버티는 힘','관계 회복'],menu:['다음 연애 보기','cNext','love2.html?m=next'],role:'다시 시작',hj:'乙',im:'덩굴',face:'휘어도 다시 일어서는 얼굴'},
@@ -150,7 +150,7 @@
     return list; }
 
   /* 10/3 은주: 상담 썸네일이 다 얼굴로 꽉 차서 이상함 → 영상 속 상반신 · 테이블까지 보이는 컷을 섞음(img/thumb, 위치 따로) */
-  var TH={seoha:['img/thumb/seoha.jpg','50% 62%'],wood:['img/thumb/wood.jpg','50% 30%'],fire:['img/thumb/fire.jpg','50% 42%'],earth:['img/thumb/earth.jpg','50% 34%'],metal:['img/thumb/metal.jpg','50% 40%'],water:['img/thumb/water.jpg','50% 40%'],halmae:['img/thumb/halmae.jpg','50% 46%']};
+  var TH={seoha:['img/thumb/seoha.jpg','50% 62%'],wood:['img/thumb/wood.jpg','50% 30%'],fire:['img/thumb/fire.jpg','50% 42%'],earth:['img/thumb/earth.jpg?v=2','50% 34%'],metal:['img/thumb/metal.jpg','50% 40%'],water:['img/thumb/water.jpg?v=2','50% 40%'],halmae:['img/thumb/halmae.jpg','50% 46%']};
   function mini(id){ var c=C[id], m=mine(), isMine=c.el&&c.el===m, sy=!!(c.yang&&isMine&&face()==='yin'), k=sy?id+'_y':id, f=C[k];
     return '<button type="button" class="chM'+(isMine?' me':'')+'" data-c="'+k+'"><span class="ph" style="background-image:url(\''+(TH[k]?TH[k][0]:f.img)+'\')'+(TH[k]?';background-position:'+TH[k][1]:'')+'"></span>'+(isMine?'<span class="mk">나의 수호신</span>':'')+'<span class="nm"><b>'+f.n+'</b><small>'+c.role+'</small></span></button>'; }
   function chip(id,dup){ var c=C[id], m=mine(), isMine=c.el&&c.el===m, sy=!!(c.yang&&isMine&&face()==='yin'), k=sy?id+'_y':id, f=C[k];

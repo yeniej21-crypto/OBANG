@@ -405,16 +405,16 @@ const PR={
  life:{n:'평생 사주',d:'현암 · 대운으로 본 인연의 때',img:'img/jeongtong.jpg',c:'#d9b38c',pr:'39,000원',u:'lifetime.html'},
  chatFire:{n:'이안에게 털어놓기',d:'고백 · 결단, 짧고 솔직하게',img:'img/fire.jpg',c:'var(--fire)',pr:'상담',u:'chat.html?h=fire'},
  chatTaeo:{n:'태오에게 털어놓기',d:'연애 코치, 눈치 빠른 연하',img:'img/taeo/base.jpg',c:'#ffb9a6',pr:'상담',u:'chat.html?h=taeo'},
- chatEarth:{n:'도준에게 털어놓기',d:'관계의 중심, 현실적으로 정리',img:'img/earth.jpg',c:'var(--earth)',pr:'상담',u:'chat.html?h=earth'},
- chatWater:{n:'재이에게 털어놓기',d:'먼저 마음을 들어 주는 사람',img:'img/water.jpg',c:'var(--water)',pr:'상담',u:'chat.html?h=water'},
+ chatEarth:{n:'도준에게 털어놓기',d:'관계의 중심, 현실적으로 정리',img:'img/earth.jpg?v=2',c:'var(--earth)',pr:'상담',u:'chat.html?h=earth'},
+ chatWater:{n:'재이에게 털어놓기',d:'먼저 마음을 들어 주는 사람',img:'img/water.jpg?v=2',c:'var(--water)',pr:'상담',u:'chat.html?h=water'},
  chatWood:{n:'하람에게 털어놓기',d:'다시 시작하는 힘을 응원',img:'img/wood.jpg',c:'var(--wood)',pr:'상담',u:'chat.html?h=wood'},
  chatMetal:{n:'시온에게 털어놓기',d:'감정은 덜고 핵심만',img:'img/sion.jpg',c:'var(--metal)',pr:'상담',u:'chat.html?h=metal'},
  chatHalmae:{n:'삼신 할매에게 묻기',d:'적힌 만큼만, 담담하게',img:'img/halmae.jpg',c:'#d9b38c',pr:'상담',u:'chat.html?h=halmae'},
  flag:{n:'내 연애 설명서',d:'서하 · 연애 체질부터 인연의 10년까지',img:'img/seoha.jpg',c:'var(--gold)',pr:'준비 중',soon:'11월 오픈'},
  confess:{n:'고백 타이밍',d:'이안 · 두 사람 교차와 고백할 날, 첫 문장',img:'img/fire.jpg',c:'var(--fire)',pr:'준비 중',soon:'12월 오픈'},
- check:{n:'우리 사이 점검',d:'도준 · 부딪히는 지점과 풀어 갈 말',img:'img/earth.jpg',c:'var(--earth)',pr:'준비 중',soon:'1월 오픈'},
+ check:{n:'우리 사이 점검',d:'도준 · 부딪히는 지점과 풀어 갈 말',img:'img/earth.jpg?v=2',c:'var(--earth)',pr:'준비 중',soon:'1월 오픈'},
  hundred:{n:'이별 후 100일',d:'하람 · 매일 아침 한 줄로 회복하기',img:'img/wood.jpg',c:'var(--wood)',pr:'준비 중',soon:'2월 오픈'},
- reNew:{n:'재회 감정서',d:'재이 · 이별 사정까지 듣고 읽는 재회',img:'img/water.jpg',c:'var(--water)',pr:'준비 중',soon:'11월 오픈'},
+ reNew:{n:'재회 감정서',d:'재이 · 이별 사정까지 듣고 읽는 재회',img:'img/water.jpg?v=2',c:'var(--water)',pr:'준비 중',soon:'11월 오픈'},
  marry:{n:'붉은 실 결혼운',d:'월하 · 결혼의 때와 결혼 궁합',img:'img/taegil.jpg',c:'#d9b38c',pr:'준비 중',soon:'1월 오픈'}};
 $('st').innerHTML=ST.map((x,i)=>`<button type="button" data-i="${i}"><span class="pic" style="--bx:${(i%4)*100/3}%;--by:${i<4?5.8:88.5}%" role="img" aria-label="${x.n}"></span><b>${x.n}</b></button>`).join('');
 let typeT=null;
@@ -431,7 +431,7 @@ $('shP').onclick=e=>{ const b=e.target.closest('[data-p]'); if(!b) return; const
   go(q.u); };
 
 /* ---------- 4. 상담소 사람들 → 캐릭터 소개 화면 ---------- */
-const PPL=[['seoha','서하','상담소 주인','img/seoha.jpg','var(--gold)'],['metal','시온','속마음 · 재회','img/sion.jpg','var(--metal)'],['water','재이','마음 · 이별','img/water.jpg','var(--water)'],['taeo','태오','도화 · 썸','img/taeo/base.jpg','#ffb9a6'],['fire','이안','고백 · 결단','img/fire.jpg','var(--fire)'],['earth','도준','연애 중 · 결혼','img/earth.jpg','var(--earth)'],['wood','하람','새 인연','img/wood.jpg','var(--wood)'],['halmae','삼신 할매','정통','img/halmae.jpg','#d9b38c']];
+const PPL=[['seoha','서하','상담소 주인','img/seoha.jpg','var(--gold)'],['metal','시온','속마음 · 재회','img/sion.jpg','var(--metal)'],['water','재이','마음 · 이별','img/water.jpg?v=2','var(--water)'],['taeo','태오','도화 · 썸','img/taeo/base.jpg','#ffb9a6'],['fire','이안','고백 · 결단','img/fire.jpg','var(--fire)'],['earth','도준','연애 중 · 결혼','img/earth.jpg?v=2','var(--earth)'],['wood','하람','새 인연','img/wood.jpg','var(--wood)'],['halmae','삼신 할매','정통','img/halmae.jpg','#d9b38c']];
 $('ppl').innerHTML=PPL.map(([k,n,s,img,c])=>`<button type="button" data-c="${k}" style="--c:${c}"><i style="background-image:url('${img}')"></i><b>${n}</b><small>${s}</small></button>`).join('');
 $('ppl').onclick=e=>{ const b=e.target.closest('[data-c]'); if(!b) return; if(window.ObChar) ObChar.open(b.dataset.c); else go('chat.html?h='+b.dataset.c); };
 })();

@@ -21,7 +21,7 @@ window.NY27={
     line:'올해의 한 단어 · 총운 점수 · 가장 좋은 달과 조심할 달 하나씩',get:'공유하는 한 단어 카드'},
    {id:'seoha',cat:'f990',name:'서하의 올해 버릴 것 · 잡을 것',short:'버릴 것 · 잡을 것',who:'서하',img:'img/seoha.jpg',url:'',status:'soon',open:'11월 오픈',price:'990원',line:'직설 코칭 한 장'},
    {id:'taeo',cat:'f990',name:'태오의 2027 연애 달력',short:'연애 달력',who:'태오',img:'img/taeo/base.jpg',url:'',status:'soon',open:'11월 오픈',price:'990원',line:'인연이 오는 달 · 고백 타이밍'},
-   {id:'dojun',cat:'f990',name:'도준의 2027 돈 · 일',short:'돈 · 일',who:'도준',img:'img/earth.jpg',url:'',status:'soon',open:'11월 오픈',price:'990원',line:'재물 흐름 · 이직 타이밍'},
+   {id:'dojun',cat:'f990',name:'도준의 2027 돈 · 일',short:'돈 · 일',who:'도준',img:'img/earth.jpg?v=2',url:'',status:'soon',open:'11월 오픈',price:'990원',line:'재물 흐름 · 이직 타이밍'},
    {id:'mujin',cat:'f990',name:'무진의 열두 달 타로',short:'열두 달 타로',who:'무진',img:'img/tarot/mujin.jpg',url:'',status:'soon',open:'11월 오픈',price:'990원',line:'달마다 카드 한 장'},
    {id:'ppopgi',cat:'free',name:'오방 뽑기 · 새해 첫 괘',short:'새해 첫 괘',who:'미니 수호신',img:'img/mini/tong.jpg',url:'ppopgi.html',status:'open',price:'무료',line:'통을 흔들어 올해 첫 괘를 뽑아 보기'},
    {id:'bujeok',cat:'free',name:'새해 부적 카드',short:'부적 카드',who:'오방신',img:'img/card/wood.jpg',url:'bujeok.html',status:'open',price:'하루 한 장 무료',line:'모자란 기운의 신이 그려진 부적 한 장'},

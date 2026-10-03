@@ -14,7 +14,7 @@ const P={
  'myeongri.html':{btn:'payBtn',name:'소헌 선생의 2027 명리 감정서',who:'명리관 소헌 선생',desc:'열두 달 월운 감정 · 영역별 감정 · 권고 · 길일표 · 감정서 저장',price:19900,was:29000,img:'img/soheon.jpg',skip:()=>$('pay')&&$('pay').classList.contains('done')},
  'sinnyeon.html':{btn:'payBtn',name:'2027 신년운세 · 할매의 열두 달',who:'삼신 할매',desc:'열두 달 상세 풀이 · 분야별 운 · 조심할 날',price:19900,was:29000,img:'img/halmae.jpg',skip:()=>$('pay')&&$('pay').classList.contains('done')},
  'lifetime.html':{btn:'payBtn',name:'평생 사주 · 현암의 상세 풀이',who:'현암',desc:'열 해씩 펼친 대운 · 재물 · 일 · 인연의 평생 결',price:39000,was:59000,img:'img/jeongtong.jpg',skip:()=>$('pay')&&$('pay').classList.contains('done')},
- 'career.html':{btn:'payBtn',name:'커리어 사주 · 도준의 2027 로드맵',who:'도준',desc:'달별 액션 플랜 · 면접 · 입사일 택일',price:19900,img:'img/earth.jpg'},
+ 'career.html':{btn:'payBtn',name:'커리어 사주 · 도준의 2027 로드맵',who:'도준',desc:'달별 액션 플랜 · 면접 · 입사일 택일',price:19900,img:'img/earth.jpg?v=2'},
  'taegil.html':{btn:'payBtn',name:'택일 · 정밀 택일',who:'월하',desc:'좋은 날의 시간대 · 방향 · 함께할 사람까지',price:9900,img:'img/taegil.jpg'},
  'tarot.html':{btn:'payBtn',name:'무진의 타로 · 전체 풀이',who:'무진',desc:'켈틱 크로스 10장 · 3개월 흐름',price:9900,img:'img/tarot/mujin.jpg'},
  'heart':{btn:'payBtn',name:'시온의 은거울 리포트',who:'시온',desc:'그 사람의 연애 방식 · 요즘 왜 그럴까 · 앞으로 석 달 · 보낼 문장 세 가지 · 다시 볼 날',price:19900,img:'img/sion.jpg'},

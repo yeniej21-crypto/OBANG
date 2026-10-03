@@ -93,7 +93,7 @@ function show(R){ const yy=new Date().getFullYear(), mm=o=>(o.y!==yy?String(o.y)
   $('rs').hidden=false; $('pd').hidden=false; $('pv').classList.remove('on'); window.__CR=R; $('shr').onclick=()=>share(R);
   setTimeout(()=>$('rs').scrollIntoView({behavior:'smooth',block:'start'}),80); }
 function share(R){ const url=location.origin+location.pathname+'?ref=share';
-  try{ if(window.ObShare&&ObShare.open){ ObShare.open({kicker:'도준 · 이직 쿨타임',head:R.title,sub:R.say,big:String(R.gauge),unit:'%',tags:['이직 쿨타임',R.gd],img:'img/earth.jpg',menu:'이직 쿨타임',name:'obang-cooltime.jpg',url}); return; } }catch(e){}
+  try{ if(window.ObShare&&ObShare.open){ ObShare.open({kicker:'도준 · 이직 쿨타임',head:R.title,sub:R.say,big:String(R.gauge),unit:'%',tags:['이직 쿨타임',R.gd],img:'img/earth.jpg?v=2',menu:'이직 쿨타임',name:'obang-cooltime.jpg',url}); return; } }catch(e){}
   if(navigator.share) navigator.share({title:'이직 쿨타임 · 도준',text:R.title,url}).catch(()=>{}); else { try{ navigator.clipboard.writeText(url); toast('주소를 복사했어요'); }catch(e){} } }
 
 /* ---------- 5. 도준의 이직 플랜(무료) ---------- */
@@ -108,8 +108,8 @@ function plan(R){ const yy=new Date().getFullYear(), mm=o=>(o.y!==yy?String(o.y)
 $('pdGo').onclick=()=>{ const R=window.__CR; if(!R) return; $('pv').innerHTML=plan(R); $('pv').classList.add('on'); setTimeout(()=>$('pv').scrollIntoView({behavior:'smooth',block:'start'}),80); };
 
 /* ---------- 6. 이어서 ---------- */
-$('gd').innerHTML=`<a class="gd2" href="career.html"><i style="background-image:url('img/earth.jpg')"></i><span><small>도준 · 커리어 사주</small><b>나한테 맞는 일 · 업계 · 능력치</b><span>스펙 말고 타고난 판부터 보는 일 사주 리포트</span></span></a>
- <a class="gd2" href="chat.html?h=earth" style="margin-top:8px"><i style="background-image:url('img/earth.jpg');background-position:center 30%"></i><span><small>도준과 1:1</small><b>이직 고민, 직접 털어놓기</b><span>상황을 말하면 사주에 맞춰 답해 줘요</span></span></a>`;
+$('gd').innerHTML=`<a class="gd2" href="career.html"><i style="background-image:url('img/earth.jpg?v=2')"></i><span><small>도준 · 커리어 사주</small><b>나한테 맞는 일 · 업계 · 능력치</b><span>스펙 말고 타고난 판부터 보는 일 사주 리포트</span></span></a>
+ <a class="gd2" href="chat.html?h=earth" style="margin-top:8px"><i style="background-image:url('img/earth.jpg?v=2');background-position:center 30%"></i><span><small>도준과 1:1</small><b>이직 고민, 직접 털어놓기</b><span>상황을 말하면 사주에 맞춰 답해 줘요</span></span></a>`;
 $('nx').innerHTML=[['workmini.html?t=pay','내 몸값 리포트','세린의 감정 · 990원'],['workmini.html?t=boss','상사 궁합','도준 · 2,900원'],['workmini.html?t=day','오늘의 일운','도준 · 무료 · 매일'],['taegil.html','면접 · 입사 날짜 잡기','택일 · 월하'],['today.html','오늘의 운세','매일 아침 바뀌는 하루'],['./','홈으로','오방도감 처음 화면']].map(x=>`<a class="nx1${x[0]==='./'?' hm':''}" href="${x[0]}"><b>${x[1]}</b><span>${x[2]}</span></a>`).join('');
 form();
 })();

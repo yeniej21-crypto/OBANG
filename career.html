@@ -164,7 +164,7 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
   <div class="scr on" id="sIn">
     <div class="top"><button class="ib" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>커리어 사주</b><span class="tag">黃龍 · 도준</span></div>
     <div class="wrap">
-      <div class="hero" style="background-image:url('img/earth.jpg')"><video class="hv" src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/f9512e9a-7f19-480a-be0b-5aa3ba0f3867.mp4" muted autoplay loop playsinline preload="auto"></video><div><small>CAREER · 일 사주 리포트</small><h1>스펙 말고,<br>타고난 판부터 보자</h1><p>"어디서 일해야 네가 제일 비싸지는지,<br>언제 움직여야 하는지. <b>내가 정리해줄게.</b>"</p></div></div>
+      <div class="hero" style="background-image:url('img/earth.jpg?v=2')"><video class="hv" src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/f9512e9a-7f19-480a-be0b-5aa3ba0f3867.mp4" muted autoplay loop playsinline preload="auto"></video><div><small>CAREER · 일 사주 리포트</small><h1>스펙 말고,<br>타고난 판부터 보자</h1><p>"어디서 일해야 네가 제일 비싸지는지,<br>언제 움직여야 하는지. <b>내가 정리해줄게.</b>"</p></div></div>
       <div class="card"><h3>지금 나는</h3><div class="chipset" id="sit"><button class="on" data-v="work">직장인</button><button data-v="move">이직 준비</button><button data-v="job">취준생</button><button data-v="free">프리랜서·창업</button><button data-v="study">학생</button></div></div>
       <div class="card"><h3>이름 (선택) · 성별</h3><input type="text" id="nm" maxlength="8" placeholder="예) 은주"><div class="seg" id="gSeg" style="margin-top:8px"><button class="on" data-v="f">여자</button><button data-v="m">남자</button></div></div>
       <div class="card"><h3>생년월일</h3>
@@ -177,7 +177,7 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
     </div>
   </div>
 
-  <div class="scr" id="sLoad" style="background-image:url('img/earth.jpg')">
+  <div class="scr" id="sLoad" style="background-image:url('img/earth.jpg?v=2')">
     <div class="in"><div class="who">도준 · 黃龍</div><div class="ln" id="ldT"></div>
       <div class="steps" id="ldS"><div><i>✓</i>원국 여덟 글자 세우기</div><div><i>✓</i>십성으로 일 능력치 계산</div><div><i>✓</i>도움 오행으로 업계 고르기</div><div><i>✓</i>2027년 열두 달 커리어 운 읽기</div></div></div>
   </div>
@@ -185,7 +185,7 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
   <div class="scr" id="sOut">
     <div class="top"><button class="ib" id="back2" aria-label="다시 입력"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="whoT">커리어 리포트</b><span class="tag" id="ilju"></span></div>
     <div class="wrap">
-      <div class="type" style="background-image:url('img/earth.jpg')"><div class="in"><small>너의 일 유형</small><span class="en" id="tEn"></span><h2 id="tNm"></h2><span class="x" id="tX"></span><p id="tDesc"></p><div class="chips" id="tWhy"></div></div></div>
+      <div class="type" style="background-image:url('img/earth.jpg?v=2')"><div class="in"><small>너의 일 유형</small><span class="en" id="tEn"></span><h2 id="tNm"></h2><span class="x" id="tX"></span><p id="tDesc"></p><div class="chips" id="tWhy"></div></div></div>
 
       <div class="sh"><small>능력치</small><b>사주로 본 일 능력치 다섯</b></div>
       <div class="card radar"><div id="radar"></div><div class="chips" id="rWhy" style="justify-content:center"></div></div>
@@ -208,7 +208,7 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
       <div class="sh"><small>지금 10년</small><b id="duH"></b></div>
       <div class="kv" id="du"></div>
 
-      <div class="say"><div class="av" style="background-image:url('img/earth.jpg')"></div><div><b>도준의 한마디</b><p id="sayT"></p></div></div>
+      <div class="say"><div class="av" style="background-image:url('img/earth.jpg?v=2')"></div><div><b>도준의 한마디</b><p id="sayT"></p></div></div>
 
       <div class="lock" id="lockC"><b>2027 커리어 로드맵 전체 열기</b><ul><li>달별 액션 플랜 (지원·면접·협상 타이밍)</li><li>면접·입사일 택일 (시간대까지)</li><li>연봉 협상에서 먹히는 한 문장</li></ul><button class="go" id="payBtn">19,900원 · 로드맵 받기</button></div>
       <div id="cprem" hidden></div>
@@ -384,7 +384,7 @@ $('askBtn').onclick=()=>{ location.href='chat.html?h=earth&from=career'; };
 $('tgBtn').onclick=()=>{ if(window.MenuIntro) MenuIntro.go('taegil.html'); else location.href='taegil.html'; };
 
 /* 첫 화면 캐릭터 인트로 */
-MenuIntro.play({src:'v/menu/career.mp4',poster:'img/earth.jpg',who:'도준 · 黃龍',title:'커리어 사주',subs:[[0,'스펙 말고,'],[1.8,'타고난 판부터 보자.'],[4.3,'네가 제일 비싸지는 자리.']]});
+MenuIntro.play({src:'v/menu/career.mp4?v=2',poster:'img/earth.jpg?v=2',who:'도준 · 黃龍',title:'커리어 사주',subs:[[0,'스펙 말고,'],[1.8,'타고난 판부터 보자.'],[4.3,'네가 제일 비싸지는 자리.']]});
 </script>
 <script src="reveal.js"></script>
 <script src="archive.js"></script>

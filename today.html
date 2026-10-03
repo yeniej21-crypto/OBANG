@@ -379,7 +379,7 @@ function render(idx){
   $('tm').innerHTML=H.good.map(([h])=>`<div><span>좋음</span><b>${HR_NICE[h]}</b><small>${JI[h]}시 · ${Sj.isHap(h,M.dayB)?'일지와 합':BR_EL[h]===M.fav?'도움 기운':h===M.peach?'도화 시간':'순한 시간'}</small></div>`).join('')+`<div><span class="x">조심</span><b>${HR_NICE[H.bad]}</b><small>${JI[H.bad]}시 · 일지와 충</small></div>`;
   // flip card
   const gk=ELK[fe], G=GODS[gk]; $('flip').classList.remove('on'); $('flip').style.setProperty('--c',ELC[fe]);
-  $('flipB').style.backgroundImage=`url('img/${gk}.jpg')`; $('fK').textContent=`${G.h} · ${G.n} · ${G.el}`; $('fT').textContent=MIS[gk][((idx%3)+3)%3];
+  $('flipB').style.backgroundImage=`url('img/${gk}.jpg?v=2')`; $('fK').textContent=`${G.h} · ${G.n} · ${G.el}`; $('fT').textContent=MIS[gk][((idx%3)+3)%3];
   $('whoT').textContent=M.me.name?`${M.me.name}의 운세`:'오늘의 운세';
 }
 function renderWeek(){

@@ -172,7 +172,7 @@ const E={
 const ORDER=['wood','fire','earth','metal','water'];
 const GR={A:['대길','오늘은 네 편이 제일 많은 날'],B:['길','흐름이 너를 밀어주는 날'],C:['소길','작게, 그래도 확실하게 좋은 날'],D:['조심','한 박자 쉬어 가면 괜찮은 날']};
 const TOPIC={today:'오늘',love:'연애',work:'일',money:'돈'};
-const UP={today:['오늘의 운세','내 사주로 보는 오늘 하루','today.html','img/seoha.jpg'],love:['도화 사주','태오가 봐주는 나의 매력','dohwa.html','img/taeo/base.jpg'],work:['커리어 사주','내 일 유형과 움직일 달','career.html','img/earth.jpg'],money:['2027 신년 운세','삼신 할매가 열두 달을 읽는다','sinnyeon.html','img/halmae.jpg']};
+const UP={today:['오늘의 운세','내 사주로 보는 오늘 하루','today.html','img/seoha.jpg'],love:['도화 사주','태오가 봐주는 나의 매력','dohwa.html','img/taeo/base.jpg'],work:['커리어 사주','내 일 유형과 움직일 달','career.html','img/earth.jpg?v=2'],money:['2027 신년 운세','삼신 할매가 열두 달을 읽는다','sinnyeon.html','img/halmae.jpg']};
 let topic='today', busy=false, R=null;
 const rnd=n=>{ const a=new Uint32Array(1); crypto.getRandomValues(a); return a[0]%n; };
 function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),1800); }

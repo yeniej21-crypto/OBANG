@@ -462,12 +462,12 @@ const ART={
   vid:{
     hero:CF2+'afe7cc7d-6fc5-4558-b4f2-84766b9405be.mp4',     /* loop */
     door:CF2+'9c19594f-6405-45ab-87b7-127366f37847.mp4',     /* once */
-    counter:CF2+'d8bdbc46-cb21-4d16-914f-c9c1baab81e7.mp4',  /* loop */
+    counter:CF2+'0a58af6b-2e46-4494-b1c6-5c3a1b27d4a0.mp4',  /* loop */
     drawers:CF2+'2b6d6fc1-10cd-4985-9e95-e5f6a79f2b95.mp4',  /* loop */
     envelope:CF2+'af116ec2-22d6-4bb6-8b5a-392f88df049d.mp4', /* loop */
     open:CF2+'86d35ded-7518-4b8b-a550-c974a6d0e1f0.mp4',     /* once: 봉인 깨짐 → 덮개 → 편지 올라옴 */
     unfold:CF2+'dabccc7d-efd4-4ec4-9268-89f05fd6e364.mp4',   /* once: 접힌 편지가 펴짐 */
-    ending:CF2+'7a1a492e-25b1-479b-a325-f6c044bf9c87.mp4' }, /* loop */
+    ending:CF2+'f7363840-8dcf-4726-8203-4773a3551f0d.mp4' }, /* loop */
   bgm:''
 };
 ART.hero=ART.img.hero; ART.ending=ART.img.ending;

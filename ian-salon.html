@@ -754,8 +754,8 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .lhub{position:relative;display:flex;align-items:center;margin:26px 18px 0;min-height:150px;padding:0 0 0 18px;background:#f5efe5;color:#1f1a15;text-decoration:none;overflow:visible}
 .lhub .tx{position:relative;z-index:1;display:flex;flex-direction:column;padding:20px 0;width:58%}
 .lhub small{font-size:10.5px;font-weight:800;letter-spacing:.08em;color:#b8862f}
-.lhub b{margin-top:6px;font-family:var(--brush);font-weight:400;font-size:30px;line-height:1.1;color:#1f1a15}
-.lhub em{margin-top:6px;font-style:normal;font-size:12.5px;line-height:1.5;color:#8a8178}
+.lhub b{margin-top:8px;font-family:var(--brush);font-weight:400;font-size:40px;line-height:1.05;letter-spacing:.01em;color:#1f1a15}
+.lhub em{margin-top:8px;font-style:normal;font-size:13.5px;line-height:1.55;color:#6f665d}
 .lhub .go{margin-top:12px;align-self:flex-start;font-size:12.5px;font-weight:800;color:#f5efe5;background:#1f1a15;padding:7px 14px}
 .lhub .pp{position:absolute;right:-4px;bottom:0;height:calc(100% + 34px);width:auto;max-width:46%;object-fit:cover;object-position:top;pointer-events:none}
 </style>
@@ -956,7 +956,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <div class="hHead">
       <div class="hBar"><div class="logo"><img src="img/brand/odg_mark.webp" alt=""><img class="lw" src="img/brand/odg_word_h.webp" alt="오방도감"></div>
         <div class="hIc"><button id="hBell" aria-label="알림"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button><button id="hMenu" aria-label="메뉴"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div>
-      <div class="pills" id="pills"><button class="on" data-c="all">전체</button><button data-c="jt">정통</button><button data-c="love">연애</button><button data-c="match">궁합</button><button data-c="re">재회</button><button data-c="heart">속마음</button><button data-c="gaeun">개운</button><button data-c="tg">택일</button><button data-c="job">커리어</button></div>
+      <div class="pills" id="pills"><button class="on" data-c="all">전체</button><button data-c="ny">신년</button><button data-c="jt">정통</button><button data-c="tg">택일</button><button data-c="love">연애</button><button data-c="gaeun">개운</button><button data-c="job">커리어</button><button data-c="re">재회</button><button data-c="heart">속마음</button><button data-c="match">궁합</button></div>
     </div>
 
     <section class="tday" id="tday" data-cats="all gaeun">
@@ -975,9 +975,6 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="fzRow" id="fzRow"></div>
     </section>
 
-    <section class="hSec" id="secBook" data-cats="all">
-      <button class="bookC" id="bookGo" type="button"><span class="bg" style="background-image:url('img/intro0.jpg')"></span><img class="pp" src="img/pop/house.webp" alt="" loading="lazy"><span class="tx"><small>오방사주 세계관 · 무료</small><b>팔자에<br>신이 들었다</b><em>빈칸 하나에,<br>신 다섯이 줄을 섰다</em><i class="go">책 펼쳐 보기 →</i></span></button>
-    </section>
 
     <section class="hSec" id="secJt" data-cats="all jt tg">
       <div class="sh"><small>정통</small><b>올해 내 사주, 제대로 한번 볼까</b></div>
@@ -999,7 +996,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     </section>
 
     <section class="hSec band lhubS" id="secLoveHub" data-cats="all love heart re match">
-      <a class="lhub" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 연애 상담소</small><b>누구 때문에 왔어</b><em>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span><img class="pp" src="img/pop/seoha.webp" alt="" loading="lazy"></a>
+      <a class="lhub" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 서하의 상담실</small><b>연애 상담소</b><em>누구 때문에 왔어<br>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span><img class="pp" src="img/pop/seoha.webp" alt="" loading="lazy"></a>
     </section>
     <section class="hSec" id="secDohwa" data-cats="all love match">
       <div class="sh"><small>도화 · 매력</small><b>내 사주 속 도화, 얼마나 진할까</b></div>
@@ -1014,7 +1011,6 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <button class="myoC" id="myoGo" type="button" style="background-image:url('img/cat/madam.jpg')"><video id="myoV" muted loop playsinline preload="none"></video><span class="tg">NEW</span><span class="tx"><b>묘당</b><em>여섯 고양이의 연애운 · 꿈해몽 · 속마음 · 금전운</em></span><span class="av" id="myoAv"></span></button>
     </section>
 
-    <div class="myChar" id="hMyChar" role="button" tabindex="0" data-cats="all gaeun love" data-d3="img/avatar/fire_f.jpg" data-d3pos=".5 .16"><span class="chip new">NEW</span><div class="t"><small>사주가 그린 나</small><b id="hMyT">여덟 글자가 그린<br>내 모습</b><span>옷·빛·곁에 설 수호신까지<br>사주가 정해 줘요</span></div></div>
 
     <section class="hSec" id="secTalk" data-cats="all heart love re">
       <div class="sh"><small>자유 상담</small><b>오늘은 누구한테 털어놓을래</b></div>
@@ -1064,7 +1060,13 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="oRow" id="hMem"></div>
     </section>
 
-    <section class="hSec" data-cats="all">
+    <!-- 콘텐츠 · 세계관 (10/3 은주: 세계관 책 · 사주가 그린 나는 아래로, 퀄리티 끌어올린 뒤 다시 위로 검토) -->
+    <section class="hSec" id="secBook" data-cats="all">
+      <button class="bookC" id="bookGo" type="button"><span class="bg" style="background-image:url('img/intro0.jpg')"></span><img class="pp" src="img/pop/house.webp" alt="" loading="lazy"><span class="tx"><small>오방사주 세계관 · 무료</small><b>팔자에<br>신이 들었다</b><em>빈칸 하나에,<br>신 다섯이 줄을 섰다</em><i class="go">책 펼쳐 보기 →</i></span></button>
+    </section>
+    <div class="myChar" id="hMyChar" role="button" tabindex="0" data-cats="all gaeun love" data-d3="img/avatar/fire_f.jpg" data-d3pos=".5 .16"><span class="chip new">NEW</span><div class="t"><small>사주가 그린 나</small><b id="hMyT">여덟 글자가 그린<br>내 모습</b><span>옷·빛·곁에 설 수호신까지<br>사주가 정해 줘요</span></div></div>
+    <!-- 해외판 미리보기: 10/3 은주 지시로 숨김. 해외 진출 때 hidden만 지우면 복구 -->
+    <section class="hSec" id="secGlobal" data-cats="all" hidden>
       <div class="sh"><small>GLOBAL · 영어판 미리보기</small><b>K-Saju, 해외에서는 이렇게</b></div>
       <div class="gl" id="cGlobal" role="button" tabindex="0"><div class="im" style="background-image:url('img/taeo/base.jpg')"></div><div><small>ENGLISH · 桃花</small><b>Peach Blossom Saju</b><span>태오 한국어 음성 + 영어 자막<br>출생 도시 시간대·경도까지 보정</span></div></div>
     </section>
@@ -1532,9 +1534,10 @@ $('pills').querySelectorAll('button').forEach(b=>b.onclick=()=>{
   if(!el||c==='all'){ $('home').scrollTo({top:0,behavior:'smooth'}); return; }
   const head=document.querySelector('.hHead'), off=(head?head.offsetHeight:100)+6;
   $('home').scrollTo({top:Math.max(0,el.offsetTop-off),behavior:'smooth'});
+  if(c==='heart'){ const card=$('cPartner'); if(card){ const row=card.parentElement; setTimeout(()=>row.scrollTo({left:card.offsetLeft-16,behavior:'smooth'}),350); } }
   if(c==='tg'){ const card=$('cTaegil'); if(card){ const row=card.parentElement; setTimeout(()=>row.scrollTo({left:card.offsetLeft-16,behavior:'smooth'}),350); } }
 });
-const PILL_TO={all:'tday',jt:'secJt',love:'secDohwa',match:'secLove',re:'secRe',heart:'secTalk',gaeun:'secMem',tg:'secJt',job:'secJob'};
+const PILL_TO={all:'tday',ny:'secNY',jt:'secJt',love:'secLoveHub',match:'secLove',re:'secRe',heart:'secRe',gaeun:'secDb',tg:'secJt',job:'secJob'};
 let pillLock=0;
 function setPill(c){ $('pills').querySelectorAll('button').forEach(x=>{ const on=x.dataset.c===c; x.classList.toggle('on',on); if(on){ const r=$('pills'); const rb=r.getBoundingClientRect(), xb=x.getBoundingClientRect(); r.scrollTo({left:Math.max(0,r.scrollLeft+(xb.left-rb.left)-(rb.width-xb.width)/2),behavior:'smooth'}); } }); }
 /* 화면 전체가 옆으로 밀리지 않게: 밖 틀은 가로 스크롤 0으로 고정 */
@@ -1542,9 +1545,11 @@ function setPill(c){ $('pills').querySelectorAll('button').forEach(x=>{ const on
 window.addEventListener('scroll',()=>{ if(window.scrollX) window.scrollTo(0,window.scrollY); },{passive:true});
 $('home').addEventListener('scroll',()=>{ $('toTop').classList.toggle('on',$('home').scrollTop>700);
   if(Date.now()-pillLock<900) return; /* 누른 직후 부드럽게 이동하는 동안은 그대로 */
-  const head=document.querySelector('.hHead'), y=$('home').scrollTop+(head?head.offsetHeight:100)+40; let cur='all';
-  [['jt','secJt'],['love','secDohwa'],['heart','secTalk'],['job','secJob'],['re','secRe'],['match','secLove'],['gaeun','secMem']].forEach(([c,id])=>{ const el=document.getElementById(id); if(el&&el.offsetTop<=y) cur=c; });
-  const on=$('pills').querySelector('button.on'); if(on&&on.dataset.c==='tg'&&cur==='jt') return; if(!on||on.dataset.c!==cur) setPill(cur); },{passive:true});
+  /* 지금 보고 있는 섹션 안에 있을 때만 그 분류를 표시(숨긴 섹션은 건너뜀), 어느 분류에도 안 걸리면 '전체' */
+  const head=document.querySelector('.hHead'), y=$('home').scrollTop+(head?head.offsetHeight:100)+60; let cur='all';
+  [['ny','secNY'],['jt','secJt'],['love','secLoveHub'],['love','secDohwa'],['love','secCat'],['gaeun','secDb'],['job','secJob'],['re','secRe'],['match','secLove']].forEach(([c,id])=>{ const el=document.getElementById(id); if(!el||el.hidden||!el.offsetHeight) return; if(el.offsetTop<=y&&y<el.offsetTop+el.offsetHeight) cur=c; });
+  if($('home').scrollTop<40) cur='all';
+  const on=$('pills').querySelector('button.on'); if(on&&((on.dataset.c==='tg'&&cur==='jt')||(on.dataset.c==='heart'&&cur==='re'))) return; if(!on||on.dataset.c!==cur) setPill(cur); },{passive:true});
 $('toTop').onclick=()=>$('home').scrollTo({top:0,behavior:'smooth'});
 /* ---------- 무료 존 ---------- */
 /* 무료 존 카드: 테스트마다 상징 그림(금선) — 호패·십이지 원반·복주머니·오행 별·부적·맞물린 두 고리 */

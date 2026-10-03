@@ -1107,7 +1107,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <div class="hHead">
       <div class="hBar"><div class="logo"><img src="img/brand/odg_mark.webp" alt=""><img class="lw" src="img/brand/odg_word_h.webp" alt="오방도감"></div>
         <div class="hIc"><button id="hBell" aria-label="알림"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button><button id="hMenu" aria-label="메뉴"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div>
-      <div class="pills" id="pills"><button class="on" data-c="all">전체</button><button data-c="ny">신년</button><button data-c="jt">정통</button><button data-c="tg">택일</button><button data-c="love">연애</button><button data-c="gaeun">개운</button><button data-c="job">커리어</button><button data-c="re">재회</button><button data-c="heart">속마음</button><button data-c="match">궁합</button></div>
+      <div class="pills" id="pills"><button class="on" data-c="all">전체</button><button data-c="ny">신년</button><button data-c="jt">정통</button><button data-c="tg">택일</button><button data-c="tarot">타로</button><button data-c="love">연애</button><button data-c="gaeun">개운</button><button data-c="job">커리어</button><button data-c="re">재회</button><button data-c="heart">속마음</button><button data-c="match">궁합</button></div>
     </div>
 
     <section class="hSec ny" id="secNY" data-cats="all ny jt">
@@ -1161,7 +1161,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       </div>
     </section>
 
-    <section class="hSec" data-cats="all heart love job">
+    <section class="hSec" id="secTarot" data-cats="all heart love job">
       <div class="sh"><small>타로</small><b>카드한테 물어보고 싶은 거, 하나 있죠</b></div>
       <div class="hRow">
         <div class="pc" id="cTarot" data-vid="v/poster/tarot.mp4" role="button" tabindex="0" style="background-image:url('img/tarot/poster.jpg');background-position:center 18%"><span class="chip new">NEW</span><div class="ct"><span class="tt">무진의 타로</span><span class="st">연애·일·돈, 카드로 보는 지금</span></div></div>
@@ -1805,7 +1805,7 @@ $('pills').querySelectorAll('button').forEach(b=>b.onclick=()=>{
   if(c==='heart'){ const card=$('cPartner'); if(card){ const row=card.parentElement; setTimeout(()=>row.scrollTo({left:card.offsetLeft-16,behavior:'smooth'}),350); } }
   if(c==='tg'){ const card=$('cTaegil'); if(card){ const row=card.parentElement; setTimeout(()=>row.scrollTo({left:card.offsetLeft-16,behavior:'smooth'}),350); } }
 });
-const PILL_TO={all:'tday',ny:'secNY',jt:'secJt',love:'secLoveHub',match:'secLove',re:'secRe',heart:'secRe',gaeun:'secDb',tg:'secJt',job:'secJob'};
+const PILL_TO={all:'tday',tarot:'secTarot',ny:'secNY',jt:'secJt',love:'secLoveHub',match:'secLove',re:'secRe',heart:'secRe',gaeun:'secDb',tg:'secJt',job:'secJob'};
 let pillLock=0;
 function setPill(c){ $('pills').querySelectorAll('button').forEach(x=>{ const on=x.dataset.c===c; x.classList.toggle('on',on); if(on){ const r=$('pills'); const rb=r.getBoundingClientRect(), xb=x.getBoundingClientRect(); r.scrollTo({left:Math.max(0,r.scrollLeft+(xb.left-rb.left)-(rb.width-xb.width)/2),behavior:'smooth'}); } }); }
 /* 화면 전체가 옆으로 밀리지 않게: 밖 틀은 가로 스크롤 0으로 고정 */
@@ -1815,7 +1815,7 @@ $('home').addEventListener('scroll',()=>{ $('toTop').classList.toggle('on',$('ho
   if(Date.now()-pillLock<900) return; /* 누른 직후 부드럽게 이동하는 동안은 그대로 */
   /* 지금 보고 있는 섹션 안에 있을 때만 그 분류를 표시(숨긴 섹션은 건너뜀), 어느 분류에도 안 걸리면 '전체' */
   const head=document.querySelector('.hHead'), y=$('home').scrollTop+(head?head.offsetHeight:100)+60; let cur='all';
-  [['ny','secNY'],['jt','secJt'],['love','secLoveHub'],['love','secDohwa'],['love','secCat'],['gaeun','secDb'],['job','secJob'],['re','secRe'],['match','secLove']].forEach(([c,id])=>{ const el=document.getElementById(id); if(!el||el.hidden||!el.offsetHeight) return; if(el.offsetTop<=y&&y<el.offsetTop+el.offsetHeight) cur=c; });
+  [['ny','secNY'],['jt','secJt'],['tarot','secTarot'],['love','secLoveHub'],['love','secDohwa'],['love','secCat'],['gaeun','secDb'],['job','secJob'],['re','secRe'],['match','secLove']].forEach(([c,id])=>{ const el=document.getElementById(id); if(!el||el.hidden||!el.offsetHeight) return; if(el.offsetTop<=y&&y<el.offsetTop+el.offsetHeight) cur=c; });
   if($('home').scrollTop<40) cur='all';
   const on=$('pills').querySelector('button.on'); if(on&&((on.dataset.c==='tg'&&cur==='jt')||(on.dataset.c==='heart'&&cur==='re'))) return; if(!on||on.dataset.c!==cur) setPill(cur); },{passive:true});
 $('toTop').onclick=()=>$('home').scrollTo({top:0,behavior:'smooth'});

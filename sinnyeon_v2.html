@@ -457,7 +457,7 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 14px}
 .letter #ltx p b{font-weight:700;color:var(--ink)}
 .letter #ltx p b.lead{display:block;margin-bottom:4px;font-size:19px;line-height:1.6}
 #prem .sec p b.lead{display:block;margin-bottom:2px;font-weight:700;color:var(--ink)}
-#prem .sec p b.mo{font-weight:700;color:var(--ink)}
+#prem .sec p b.emk,.letter #ltx p b.emk{font-weight:700;color:var(--ink)}
 .letter #ltx hr{width:40px;height:0;margin:6px auto 32px;border:0;border-top:1.5px solid rgba(179,50,42,.55)}
 #prem .sec{margin-top:64px}
 #prem .sec h3{margin-bottom:22px}
@@ -1165,7 +1165,7 @@ function enhP(p,lead){ if(p.dataset.x) return; p.dataset.x='1'; const t0=p.first
       const w0=document.createTreeWalker(p,NodeFilter.SHOW_TEXT); let acc=0, node=null, off=0; while(w0.nextNode()){ const n=w0.currentNode, L=n.nodeValue.length; if(acc+L>=end){ node=n; off=end-acc; break; } acc+=L; }
       if(node){ try{ const r=document.createRange(); r.setStart(p,0); r.setEnd(node,off); const frag=r.extractContents(); const bb=document.createElement('b'); bb.className='lead'; bb.appendChild(frag); p.insertBefore(bb,p.firstChild); const nx=bb.nextSibling; if(nx&&nx.nodeType===3) nx.nodeValue=nx.nodeValue.replace(/^\s+/,''); }catch(e){} } } }
   const w=document.createTreeWalker(p,NodeFilter.SHOW_TEXT), list=[]; while(w.nextNode()){ const n=w.currentNode; MON.lastIndex=0; if(!n.parentNode.closest('b')&&MON.test(n.nodeValue)) list.push(n); }
-  list.forEach(n=>{ const f=document.createDocumentFragment(); n.nodeValue.split(MON).forEach((part,k)=>{ if(!part) return; if(k%2){ const b=document.createElement('b'); b.className='mo'; b.textContent=part; f.appendChild(b); } else f.appendChild(document.createTextNode(part)); }); n.parentNode.replaceChild(f,n); }); }
+  list.forEach(n=>{ const f=document.createDocumentFragment(); n.nodeValue.split(MON).forEach((part,k)=>{ if(!part) return; if(k%2){ const b=document.createElement('b'); b.className='emk'; b.textContent=part; f.appendChild(b); } else f.appendChild(document.createTextNode(part)); }); n.parentNode.replaceChild(f,n); }); }
 function enhPrem(){ const box=$('ltx');
   if(box&&box.dataset.x!=='1'){ box.dataset.x='1'; const ps=[...box.querySelectorAll(':scope>p')]; ps.forEach((p,i)=>{ enhP(p,i>0); if(i%2===1&&i<ps.length-1) p.after(document.createElement('hr')); }); }
   document.querySelectorAll('#prem .sec>p:not([class]),#prem .sec>p.p,#prem .sec>div:not([class])>p:not([class]),#prem .sec>div:not([class])>p.p').forEach(p=>{ if((p.textContent||'').length>70) enhP(p,true); }); }
@@ -1201,6 +1201,6 @@ MenuIntro.play({src:'v/halmae.mp4',poster:'img/halmae.jpg',who:'삼신 할매 ·
 <script src="archive.js"></script>
 <script src="depth3d.js"></script>
 <script>window.Depth3D&&setTimeout(()=>Depth3D.watch('.hero,#heroP,.ch'),200);</script>
-<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
+<script src="hanja.js"></script><script src="paybar.js" defer></script><script src="pcshell.js" defer></script><script src="obshare.js" defer></script><script src="obpay.js" defer></script>
 </body>
 </html>

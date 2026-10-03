@@ -86,18 +86,47 @@
       +'.obSg .go{display:flex;flex-direction:column;align-items:center;gap:14px;border:0;background:none;color:#f6ecdf;cursor:pointer;padding:24px;font:inherit;-webkit-tap-highlight-color:transparent}'
       +'.obSg .c{flex:none;box-sizing:border-box;width:64px;height:64px;min-height:64px;border-radius:50%;border:1px solid rgba(232,196,138,.8);display:grid;place-items:center;color:#e8c48a;background:rgba(10,8,12,.4);animation:obSgP 2.4s ease-in-out infinite}'
       +'.obSg .t{font-family:"Song Myung","Noto Serif KR",serif;font-size:20px;letter-spacing:.06em;text-shadow:0 2px 14px rgba(0,0,0,.85)}'
-      +'.obSg .s{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);margin:0 auto;width:max-content;border:0;background:none;color:rgba(246,236,223,.6);font:500 13px/1 "Noto Sans KR",sans-serif;letter-spacing:.04em;padding:12px 14px;cursor:pointer}'
+      +'.obSg .h{margin-top:-4px;font:600 13px/1.4 "Noto Sans KR",sans-serif;letter-spacing:.02em;color:rgba(246,236,223,.78);text-shadow:0 2px 10px rgba(0,0,0,.85)}'
+      +'.obSg.warn .h{color:#ffb4a8}'
+      +'.obSg.warn .c{animation:obSgP 1.1s ease-in-out infinite;border-color:#ffd59a}'
+      +'.obSg .s{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);margin:0 auto;width:max-content;border:0;background:none;color:rgba(246,236,223,.42);font:500 12px/1 "Noto Sans KR",sans-serif;letter-spacing:.04em;padding:12px 14px;cursor:pointer}'
       +'@keyframes obSgP{0%,100%{box-shadow:0 0 0 0 rgba(232,196,138,.28)}50%{box-shadow:0 0 0 13px rgba(232,196,138,0)}}'
       +'@media (prefers-reduced-motion:reduce){.obSg .c{animation:none}}';
     document.head.appendChild(st);
     el=document.createElement('div'); el.className='obSg'; el.setAttribute('role','dialog'); el.setAttribute('aria-label','소리 켜고 들어가기');
-    el.innerHTML='<button type="button" class="go"><span class="c"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a7.5 7.5 0 0 1 0 11"/></svg></span><span class="t">소리 켜고 들어가기</span></button><button type="button" class="s">소리 없이 볼게요</button>';
+    el.innerHTML='<button type="button" class="go"><span class="c"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a7.5 7.5 0 0 1 0 11"/></svg></span><span class="t">소리 켜고 들어가기</span><span class="h">신들이 직접 말을 걸어요</span></button><button type="button" class="s">소리 없이 볼게요</button>';
     el.addEventListener('click',function(e){ if(e.target.closest('.s')) return; unlock(); close(); });
-    el.querySelector('.s').addEventListener('click',function(){ mute(); close(); });
+    var sb=el.querySelector('.s'), warned=false;
+    sb.addEventListener('click',function(e){ e.stopPropagation(); if(!warned){ warned=true; el.classList.add('warn'); el.querySelector('.h').textContent='목소리를 끄면 이야기의 절반이 사라져요'; sb.textContent='그래도 소리 없이 볼게요'; return; } mute(); close(); });
     document.body.appendChild(el); requestAnimationFrame(function(){ requestAnimationFrame(function(){ if(el) el.classList.add('on'); }); }); }
   try{ if(SND.test(location.pathname)){ var go=function(){ FORCE=true; ask(); }; if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ setTimeout(go,200); }); else setTimeout(go,200); } }catch(e){}
   /* 다른 곳을 눌러도 소리는 풀린다: 막혔던 것을 다시 틀고 문을 닫는다 */
   document.addEventListener('pointerup',function(e){ if(done||(el&&el.contains(e.target))) return; if(BL.length||CX.length||FORCE){ setTimeout(function(){ if(!done&&act()){ unlock(); close(); } },0); } },true);
+})();
+
+
+/* 10/4 은주: 소리 없이 골라도 '소리를 켜야 제대로 즐긴다'를 계속 알려 주는 작은 장치.
+   소리가 중심인 화면에서 소리 없이(obSnd=0)로 보고 있으면 왼쪽 아래에 '소리 켜기' 표시가 떠 있다. 누르면 그 자리에서 목소리가 켜진다 */
+(function(){
+  var SND=/(avatar|book|book_v6|free|lovemini|noeul|obgh|ppopgi|sinnyeon|sinnyeon_v2|meokmul|heukmae|geumeum|samjae|love|cooltime|workmini|yeonseo|redthread|myodang|dohwa|career|today|taegil|myeongri|lifetime)\.html$/;
+  function no(){ try{ return sessionStorage.getItem('obSnd')==='0'; }catch(e){ return false; } }
+  var el=null;
+  function on(){ try{ sessionStorage.removeItem('obSnd'); }catch(e){}
+    try{ document.querySelectorAll('video').forEach(function(v){ if(!v.paused&&v.muted&&!v.loop){ v.muted=false; } }); }catch(e){}
+    try{ window.dispatchEvent(new Event('obsound')); }catch(e){}
+    if(el){ el.classList.remove('on'); var x=el; setTimeout(function(){ if(x.parentNode) x.parentNode.removeChild(x); },400); el=null; } }
+  function show(){ if(el||!document.body||!no()) return;
+    var st=document.createElement('style');
+    st.textContent='.obSn{position:fixed;left:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 86px);z-index:2147482000;display:flex;align-items:center;gap:7px;height:34px;padding:0 13px 0 10px;border:0;background:rgba(14,11,16,.82);color:#f3e2c2;font:700 12.5px/1 "Noto Sans KR",sans-serif;box-shadow:inset 0 0 0 1px rgba(232,196,138,.6),0 6px 18px rgba(0,0,0,.4);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s;cursor:pointer;-webkit-tap-highlight-color:transparent}'
+      +'.obSn.on{opacity:1;transform:none}.obSn svg{flex:none}.obSn i{width:7px;height:7px;border-radius:50%;background:#ff7a66;animation:obSnB 2s ease-in-out infinite}'
+      +'@keyframes obSnB{50%{opacity:.25}}';
+    document.head.appendChild(st);
+    el=document.createElement('button'); el.type='button'; el.className='obSn'; el.setAttribute('aria-label','소리 켜기');
+    el.innerHTML='<i></i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/></svg>소리 켜기';
+    el.addEventListener('click',function(e){ e.stopPropagation(); on(); });
+    document.body.appendChild(el); requestAnimationFrame(function(){ requestAnimationFrame(function(){ if(el) el.classList.add('on'); }); }); }
+  try{ if(SND.test(location.pathname)){ var t=function(){ setTimeout(show,1200); }; if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',t); else t();
+    var iv=setInterval(function(){ if(no()) show(); else if(el) on(); },1500); setTimeout(function(){ clearInterval(iv); },600000); } }catch(e){}
 })();
 
 /* 10/3: 로그인 · 회원가입 모듈(obauth.js)을 모든 화면에 */

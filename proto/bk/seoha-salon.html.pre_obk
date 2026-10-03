@@ -66,7 +66,6 @@
 .home .bkS .bkN{margin:10px 18px 0;font-size:12.5px;line-height:1.55;color:var(--ink3,#8f8475)}
 </style>
 <title>오방사주 · 서하의 살롱</title>
-<meta name="robots" content="noindex">
 <meta name="description" content="다섯 신이 읽어 주는 나의 사주">
 <meta property="og:type" content="website"><meta property="og:site_name" content="오방사주">
 <meta property="og:title" content="오방사주"><meta property="og:description" content="다섯 신이 읽어 주는 나의 사주">
@@ -365,8 +364,8 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .hMenuS.on .in{transform:none}
 .hMenuS .hd{display:flex;align-items:center;gap:8px;margin-bottom:18px}
 .hMenuS .hd img{width:26px;height:26px}
-.hMenuS button.it[hidden]{display:none!important}
 .hMenuS .hd b{font-family:var(--serif);font-size:18px;color:#E9D3A4;font-weight:700}
+.hMenuS button.it[hidden]{display:none!important}
 .hMenuS button.it{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;color:#f2f2f4;font-size:15px;padding:13px 4px;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;text-align:left;font-family:var(--sans)}
 .hMenuS button.it small{margin-left:auto;font-size:11.5px;color:#8e8e96}
 .hMenuS button.it.hi{color:var(--gold-2);font-weight:700}
@@ -1303,6 +1302,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
         </div><p class="jn">재미로 보는 운세예요. 이직 · 연봉 같은 중요한 결정은 실제 상황을 먼저 봐 주세요.</p></div>
     </section>
 
+    <!-- 오방 궁합: 10/3 홈에서 숨김(전체 메뉴 · 이안 소개의 오방 궁합 보기에서 열림) -->
     <div hidden id="hideKeep">
         <div class="pc" id="cObgh" role="button" tabindex="0" style="background-image:url('img/fire.jpg')"><div class="ct"><span class="tt">오방 궁합</span><span class="st">다섯 신 중, 나랑 맞는 단 한 명</span></div></div>
     </div>
@@ -1314,7 +1314,8 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
     <!-- 10/3 22:45 은주: 세계관 책은 완성도 올릴 때까지 원래 자리(나의 수호신 아래). 크기 · 문구는 개정판 그대로 -->
     <section class="hSec bkS" id="secBook" data-cats="all">
       <div class="sh"><small>처음이라면, 이 책부터</small><b>오방도감의 세계를 한 권으로</b></div>
-      <div class="obk" id="obk"></div>
+      <button class="bookC" id="bookGo" type="button"><span class="bg" style="background-image:url('img/intro0.jpg')"></span><span class="grp"><img src="/.netlify/images?url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_39PvKg67WRq5T66HczulEDxUKSm%2Fhf_20261003_131035_b7d3e905-856a-469e-976a-3d5ce5b23068.png&amp;w=420&amp;fm=webp&amp;q=80" alt="" style="--x:-2%;--s:.9" loading="lazy"><img src="/.netlify/images?url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_39PvKg67WRq5T66HczulEDxUKSm%2Fhf_20261003_131030_809e9f44-288c-4eaa-bdec-7d5abd261339.png&amp;w=420&amp;fm=webp&amp;q=80" alt="" style="--x:36%;--s:1" loading="lazy"></span><span class="tx"><small>세계관 책 · 제1권 · 무료</small><b>팔자에<br>신이 들었다</b><em>신 열 명과 그림자 손님 셋,<br>그리고 당신의 빈칸 이야기</em><span class="tg"><i>35쪽</i><i>목소리</i><i>팝업북</i></span><i class="go">책 펼쳐 보기 →</i></span></button>
+      <p class="bkN">수호신이 왜 내 빈칸에 오는지 알고 나면, 오늘의 운세가 다르게 읽혀요.</p>
     </section>
     <div class="myChar" id="hMyChar" role="button" tabindex="0" data-cats="all gaeun love" data-d3="img/avatar/fire_f.jpg" data-d3pos=".5 .16"><span class="chip new">NEW</span><div class="t"><small>사주가 그린 나</small><b id="hMyT">여덟 글자가 그린<br>내 모습</b><span>옷·빛·곁에 설 수호신까지<br>사주가 정해 줘요</span></div></div>
     <!-- 해외판 미리보기: 10/3 은주 지시로 숨김. 해외 진출 때 hidden만 지우면 복구 -->
@@ -1933,7 +1934,7 @@ $('ppgGo').onclick=()=>goPage('ppopgi.html');
 $('bjGo').onclick=()=>goPage('bujeok.html');
 $('dbGo').onclick=()=>goPage('dangbeon.html');
 $('myoGo').onclick=()=>goPage('myodang.html');
-if($('bookGo')) $('bookGo').onclick=()=>goPage('book.html');
+$('bookGo').onclick=()=>goPage('book.html');
 $('myoAv').innerHTML=['water','fire','earth','metal','wood'].map(k=>`<i style="background-image:url('img/cat/${k}.jpg')"></i>`).join('');
 /* 묘당 카드: 보일 때만 마담 영상 무음 반복 */
 (()=>{ const c=$('myoGo'), v=$('myoV'); if(!('IntersectionObserver' in window)) return; v.addEventListener('playing',()=>v.classList.add('on')); v.addEventListener('error',()=>v.remove());
@@ -2137,7 +2138,7 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.con
 </script>
 
 <script>window.CH_BAND=2</script>
-<script src="charhub.js?v=9"></script><script src="bookbanner.js?v=1" defer></script>
+<script src="charhub.js?v=9"></script>
 <script src="hscroll.js?v=2"></script>
 <script src="menuintro.js"></script>
 

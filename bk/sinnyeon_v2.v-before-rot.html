@@ -51,8 +51,6 @@ button,select,input{font-family:inherit}
 .scene .glow,.scene .shade{z-index:2}
 .scene video.lv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:0;transition:opacity 1.4s ease}
 .scene video.lv.on{opacity:1}
-.scene video.tv{z-index:1;transition:opacity .5s ease}
-.scene.talking video.lv:not(.tv){opacity:0}
 .glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 42% at 26% 102%,rgba(255,136,52,.34),rgba(255,136,52,0) 72%),radial-gradient(ellipse 55% 30% at 82% 6%,rgba(255,214,150,.10),rgba(255,214,150,0) 70%);mix-blend-mode:screen;animation:flick 5.7s linear infinite}
 .shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(19,12,7,.62) 0%,rgba(19,12,7,0) 18%,rgba(19,12,7,0) 40%,rgba(19,12,7,.74) 64%,rgba(19,12,7,.96) 84%)}
 @keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.09) translateY(-1%)}}
@@ -219,20 +217,6 @@ select option{background:#1d130c;color:var(--cream)}
 .sec h3{display:block;margin:0 0 18px;font-family:var(--brush);font-weight:400;font-size:32px;line-height:1.15;color:var(--ink)}
 .sec h3 i{display:block;margin-top:6px;font-style:normal;font-family:var(--sans);font-size:12px;font-weight:500;line-height:1.5;color:var(--ink-3);letter-spacing:.01em}
 .sec h3:after{content:"";display:block;width:44px;height:2px;margin-top:12px;background:var(--seal)}
-/* 풀이를 세 장으로 묶는 띠(어두운 장면 위 붓글씨 제목 + 할매 한 줄) */
-.toc{display:flex;margin:30px 22px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
-.toc a{flex:1;padding:14px 4px 13px;text-align:center;font-family:var(--bmj);font-size:16px;line-height:1.3;color:var(--ink);text-decoration:none}
-.toc a+a{border-left:1px solid var(--line)}
-.toc a b{display:block;font-family:var(--brush);font-weight:400;font-size:22px;color:var(--seal);margin-bottom:2px}
-.chap{position:relative;height:250px;margin:64px 0 0;overflow:hidden;color:#fff;scroll-margin-top:56px}
-.chap .scene{position:absolute;inset:0}
-.chap .scene .ph{background-position:center 28%}
-.chap .shade{background:linear-gradient(180deg,rgba(19,12,7,.5) 0%,rgba(19,12,7,.25) 35%,rgba(19,12,7,.86) 82%,rgba(19,12,7,.94) 100%)}
-.chap .ct{position:absolute;left:22px;right:22px;bottom:24px;z-index:3}
-.chap .ct b{display:block;font-family:var(--brush);font-weight:400;font-size:42px;line-height:1.08;text-shadow:0 3px 18px rgba(0,0,0,.8)}
-.chap .ct b span{color:var(--lamp)}
-.chap .ct p{margin:10px 0 0;font-family:var(--bmj);font-size:17px;line-height:1.55;color:var(--cream2);text-shadow:0 2px 12px rgba(0,0,0,.85)}
-.chap+.sec{margin-top:34px}
 table.ms{width:100%;border-collapse:collapse;text-align:center;table-layout:fixed;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
 .ms th{font-size:12px;color:var(--ink-2);font-weight:700;padding:10px 0 8px;letter-spacing:.06em}
 .ms td{border-top:1px solid var(--line);padding:8px 0}
@@ -537,8 +521,6 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 14px}
       <div class="dhead"><small>2027 정미년 · 신년운세</small><h2 id="rTitle"></h2><p id="rSub"></p></div>
       <div class="quote"><div class="av" style="background-image:url('img/halmae.jpg')"></div><div><b>삼신 할매</b><p id="qTop"></p><span class="rice" id="qRice"></span></div></div>
 
-      <nav class="toc" aria-label="풀이 차례"><a href="#ch1"><b>첫째</b>타고난 그릇</a><a href="#ch2"><b>둘째</b>정미년 한 해</a><a href="#ch3"><b>셋째</b>열두 달</a></nav>
-      <section class="chap" id="ch1"><div class="scene" data-scene="rice"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div><div class="ct"><b><span>첫째</span> 타고난 그릇</b><p>먼저 네가 무엇을 들고 태어났는지 보자.</p></div></section>
       <div class="sec"><h3>사주 원국<i>근거 칩을 누르면 설명이 나와요</i></h3>
         <table class="ms" id="msT"></table>
       </div>
@@ -553,7 +535,6 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 14px}
         <div class="verdict" id="duTx"></div>
       </div>
 
-      <section class="chap" id="ch2"><div class="scene" data-scene="scroll"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div><div class="ct"><b><span>둘째</span> 정미년 한 해</b><p>내년이 너한테 어떤 해인지 일러 주마.</p></div></section>
       <div class="sec"><h3>2027 총운</h3>
         <div class="big"><div class="sc" id="ySc"></div><div class="lbl" id="yLbl"></div></div>
         <div id="yTx"></div>
@@ -561,7 +542,6 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 14px}
 
       <div class="sec"><h3>분야별 운세</h3><div class="fields" id="flds"></div></div>
 
-      <section class="chap" id="ch3"><div class="scene" data-scene="idle"><div class="ph"></div><div class="glow"></div><div class="shade"></div></div><div class="ct"><b><span>셋째</span> 열두 달</b><p>달마다 볕 드는 날과 바람 부는 날이 있느니라.</p></div></section>
       <div class="sec"><h3>월별 흐름<i>절기 기준 월</i></h3>
         <svg class="chart" id="chart" viewBox="0 0 340 170" role="img" aria-label="2027년 월별 운세 점수"></svg>
         <div class="months" id="mos"></div>
@@ -613,19 +593,13 @@ svg.pan{display:block;width:100%;height:auto;margin:-4px 0 14px}
 const CF1='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
 const ART={
   img:{
-    idle:CF1+'hf_20261003_030412_5567b616-48c8-4369-817b-bcacda98ef55_min.webp',   /* 화롯가에 곧게 앉아 염주를 쥔 할매(10/3 자세 교체, 예전 턱 괸 자세 0a6cc702) */
+    idle:CF1+'hf_20261003_014937_0a6cc702-dfba-4bbd-aa6a-65cd7a347ffa_min.webp',   /* 화롯가에서 손짓하는 할매 */
     rice:CF1+'hf_20261003_014937_67982913-b495-4aa2-8eb1-cb232a953736_min.webp',   /* 쌀 쟁반을 든 할매 */
     tray:CF1+'hf_20261003_014936_3eb5368c-d260-4d9c-811e-d39a942c9c2e_min.webp',   /* 위에서 본 빈 쟁반(정사각) */
     scroll:CF1+'hf_20261003_014937_68d06960-c382-4dd4-b273-7a7d06b69b65_min.webp', /* 두루마리를 펴는 할매 */
     pouch:CF1+'hf_20261003_014937_9405b298-18e5-44a4-a035-415c7d88043a_min.webp',  /* 새벽, 복주머니를 내미는 할매 */
     months:['hf_20261003_014952_047f0acf-14a8-46eb-aa7a-cd53681e6d66','hf_20261003_014950_d6abc742-6e0b-44b8-9e11-686ee4ce579f','hf_20261003_014951_deb7c371-b5f8-4d85-af42-02fb7a7e5a86','hf_20261003_014950_d4a96c84-a25e-47df-9110-75e43509c548','hf_20261003_014951_9c39c652-89de-4508-870a-1e381267b7c7','hf_20261003_014952_52e2c98f-bc05-4223-8458-599ee10e6f7a','hf_20261003_014952_e84aa609-3f67-4977-bd2d-850eb89f27b6','hf_20261003_014951_ded33e88-b764-408d-9c31-ef19a67e314f','hf_20261003_014951_4ad4a1b9-a82c-4df1-9252-e5d2cd897431','hf_20261003_014952_690c0bf1-30ba-46af-93b1-fce621701c24','hf_20261003_014951_e4f41cdd-5f7d-4a1a-8e14-38ea51ac9e86','hf_20261003_014951_1c65a592-6b2b-4acf-a70b-5f5904ddef07'].map(k=>CF1+k+'_min.webp') },
-  vid:{ idle:['https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/68e01ffb-b3c6-447c-8362-05166f854348.mp4','https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/a1fea704-0a87-4212-9f47-56e5cf3f7a8d.mp4','https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/9820ccc5-0687-4485-a407-64d5171be801.mp4','https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/cefa3bf4-5f80-441f-b1c1-b1e13a263ca6.mp4','https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/5ad34e56-ef26-4ab4-8513-7d66a8dc1e3e.mp4'],
-       /* 화로 너머로 다가가는 원근 · 손 쬐기 · 염주 · 화로 돌아 보기(원근) · 부젓가락, 차례로 넘어감 */
-        rice:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/82e03936-5548-4aee-9de2-4ba0f606e373.mp4', scroll:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/72ef3b52-cae8-4d9c-8074-6a1101e396ea.mp4', pouch:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/c11faa01-cd22-47a3-9677-6ea6d908408b.mp4' },  /* d2ol7 mp4 주소를 넣으면 그림 위로 무음 반복 재생 */
-  /* 말하는 영상(소리 있음, 한 번 재생): src가 비어 있으면 글자만 나온다. subs=[초, 자막] */
-  voice:{ scroll:{src:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/c1b97fa8-d285-42e9-9bf1-96e637ff3384.mp4',dur:5,subs:[[0.1,'자, 네 내년을 펼쳐 보마.']]},   /* Kling 45566376 */
-          pouch:{src:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/b33cfeda-182d-45f1-9e3d-b13216748113.mp4',dur:5,subs:[[0.1,'새벽이 왔구나.'],[3.1,'이걸 받거라.']]} },   /* Kling bde80d19 (다른 테이크 ede2b656 → 4ec8ac6a) */
-  bgm:'',   /* 배경 음악: 은주가 고른 곡 주소(a/…mp3). 비어 있으면 화롯불 소리만 */
+  vid:{ idle:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/8b5ec1e7-9925-4110-af62-b99766dfa9ff.mp4', rice:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/82e03936-5548-4aee-9de2-4ba0f606e373.mp4', scroll:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/72ef3b52-cae8-4d9c-8074-6a1101e396ea.mp4', pouch:'https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/c11faa01-cd22-47a3-9677-6ea6d908408b.mp4' },  /* d2ol7 mp4 주소를 넣으면 그림 위로 무음 반복 재생 */
   local:'img/halmae.jpg'                            /* 원격 그림이 안 올 때 밑에 깔리는 그림 */
 };
 const MONTH_ART=['까치와 호랑이','매화와 참새','진달래 언덕','벚꽃과 나비','모란','잉어','연꽃과 원앙','보름달과 토끼','국화','감나무와 까치','갈대와 기러기','눈 덮인 소나무와 학'];
@@ -655,12 +629,10 @@ setSH(); addEventListener('resize',()=>{ setSH(); traySize(); msLayout(true); })
 /* ---------- 소리: 화롯불 타닥거림(Web Audio 합성, 손을 댄 뒤에만 시작) ---------- */
 let soundOn=true; try{ soundOn=sessionStorage.getItem('snSnd')!=='off'; }catch(e){}
 let entered=false;
-const AMB=(()=>{ let ctx=null, out=null, fx=null, nb=null, timer=0, on=false, sw=null, swF=null, mg=null, mbuf=null, msrc=null, mreq=false;
-  const VOL=.55, MVOL=.34;  /* MVOL: 배경 음악 크기(은주가 고른 곡만, ART.bgm) */
-  function bgmGo(){ if(!ctx||!mbuf||msrc||!on) return; msrc=ctx.createBufferSource(); msrc.buffer=mbuf; msrc.loop=true; msrc.connect(mg); msrc.start(); }
-  function bgmLoad(){ if(mreq||!ART.bgm||!ctx) return; mreq=true; fetch(ART.bgm).then(r=>r.ok?r.arrayBuffer():null).then(b=>b&&new Promise((ok,no)=>ctx.decodeAudioData(b,ok,no))).then(buf=>{ if(buf){ mbuf=buf; bgmGo(); } }).catch(()=>{}); }
+const AMB=(()=>{ let ctx=null, out=null, fx=null, nb=null, timer=0, on=false, sw=null, swF=null;
+  const VOL=.55;
   function init(){ if(ctx) return true; const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false; try{ ctx=new AC(); }catch(e){ return false; }
-    out=ctx.createGain(); out.gain.value=0; out.connect(ctx.destination); mg=ctx.createGain(); mg.gain.value=0; mg.connect(ctx.destination); fx=ctx.createGain(); fx.gain.value=0; fx.connect(ctx.destination);
+    out=ctx.createGain(); out.gain.value=0; out.connect(ctx.destination); fx=ctx.createGain(); fx.gain.value=0; fx.connect(ctx.destination);
     const sr=ctx.sampleRate; nb=ctx.createBuffer(1,sr*2,sr); const d=nb.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
     /* 낮게 웅웅거리는 불길(갈색 잡음) */
     const bb=ctx.createBuffer(1,sr*4,sr), e=bb.getChannelData(0); let l=0; for(let i=0;i<e.length;i++){ l=(l+.02*(Math.random()*2-1))/1.02; e[i]=l*3.2; }
@@ -681,60 +653,34 @@ const AMB=(()=>{ let ctx=null, out=null, fx=null, nb=null, timer=0, on=false, sw
     timer=setTimeout(sched,360+Math.random()*440); }
   function ramp(g,v,t){ const n=ctx.currentTime; g.gain.cancelScheduledValues(n); g.gain.setValueAtTime(g.gain.value,n); g.gain.linearRampToValueAtTime(v,n+t); }
   return {
-    start(){ if(!soundOn||!entered||!init()) return; const r=ctx.resume(); if(r&&r.catch) r.catch(()=>{}); ramp(fx,.9,.3); if(on) return; on=true; ramp(out,VOL,2.5); if(mg){ ramp(mg,MVOL,3); bgmLoad(); bgmGo(); } clearTimeout(timer); sched(); },
-    stop(){ on=false; clearTimeout(timer); if(!ctx) return; ramp(out,0,.8); ramp(fx,0,.3); if(mg) ramp(mg,0,.8); if(msrc){ const m=msrc; msrc=null; setTimeout(()=>{ try{ m.stop(); }catch(e){} },900); } },
+    start(){ if(!soundOn||!entered||!init()) return; const r=ctx.resume(); if(r&&r.catch) r.catch(()=>{}); ramp(fx,.9,.3); if(on) return; on=true; ramp(out,VOL,2.5); clearTimeout(timer); sched(); },
+    stop(){ on=false; clearTimeout(timer); if(!ctx) return; ramp(out,0,.8); ramp(fx,0,.3); },
     sleep(){ clearTimeout(timer); if(ctx&&ctx.state==='running'){ const p=ctx.suspend(); if(p&&p.catch) p.catch(()=>{}); } },
     wake(){ if(ctx&&on){ const p=ctx.resume(); if(p&&p.catch) p.catch(()=>{}); clearTimeout(timer); sched(); } },
     swish(v){ if(!ok()||!sw) return; sw.gain.setTargetAtTime(Math.min(.16,v),ctx.currentTime,.06); },
     pour(){ if(!ok()) return; const t=ctx.currentTime; for(let i=0;i<46;i++) crack(t+.05+Math.pow(Math.random(),1.4)*1.1,.012+Math.random()*.03,4000+Math.random()*3500,.006+Math.random()*.012,fx); },
     rustle(){ if(!ok()) return; const t=ctx.currentTime; for(let i=0;i<7;i++) crack(t+i*.16+Math.random()*.05,.03+Math.random()*.025,2200+Math.random()*1600,.14+Math.random()*.1,fx); },
-    knot(){ if(!ok()) return; const t=ctx.currentTime; crack(t,.06,1200,.12,fx); crack(t+.14,.04,2400,.1,fx); },
-    duck(d){ if(!ctx||!on) return; ramp(out,d?VOL*.22:VOL,d?.35:1.6); if(mg) ramp(mg,d?MVOL*.25:MVOL,d?.35:1.8); } }; })();
+    knot(){ if(!ok()) return; const t=ctx.currentTime; crack(t,.06,1200,.12,fx); crack(t+.14,.04,2400,.1,fx); } }; })();
 function sndUI(){ $('sndB').classList.toggle('off',!soundOn); }
 sndUI();
 $('sndB').onclick=()=>{ soundOn=!soundOn; try{ sessionStorage.setItem('snSnd',soundOn?'on':'off'); }catch(e){} sndUI(); if(soundOn){ entered=true; AMB.start(); } else AMB.stop(); };
 const miOn=()=>!!document.querySelector('.mi')||document.documentElement.classList.contains('mi-pre');
-document.addEventListener('pointerdown',()=>{ if(miOn()) return; entered=true; if(soundOn) AMB.start(); talkPrime(); },{passive:true});
+document.addEventListener('pointerdown',()=>{ if(miOn()) return; entered=true; if(soundOn) AMB.start(); },{passive:true});
 
 /* ---------- 장면 그림 · 영상: 보일 때만 재생, 영상이 없거나 안 되면 그림이 남는다 ---------- */
 const VIDS=[];
-/* 영상 한 개면 무음 반복, 여러 개(배열)면 클립이 끝날 때마다 다음 클립으로 겹쳐 넘긴다 */
-function mkV(k,loop){ const v=document.createElement('video'); v.className='lv'; v.muted=true; v.loop=loop; v.playsInline=true; v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline',''); v.setAttribute('muted','');
-  v.preload='none'; v.poster=ART.img[k]; v.dataset.v=k; v.addEventListener('playing',()=>v.classList.add('on')); v.addEventListener('error',()=>v.classList.remove('on')); return v; }
-function Rot(k,ph){ const L=ART.vid[k], A=mkV(k,false), B=mkV(k,false); let cur=A, i=0, run=false, sw=false; ph.after(A); A.after(B);
-  const pl=v=>{ try{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} };
-  [A,B].forEach(v=>{ v.addEventListener('timeupdate',()=>{ if(v!==cur||sw||!run||!v.duration) return; if(v.duration-v.currentTime<1.6) next(); });
-    v.addEventListener('ended',()=>{ if(v===cur&&!sw) next(); }); });
-  function next(){ sw=true; const o=cur, n=cur===A?B:A; i=(i+1)%L.length; n.src=L[i]; n.currentTime=0; n.classList.remove('on'); n.style.zIndex=1; o.style.zIndex=0; pl(n);
-    n.addEventListener('playing',function f(){ n.removeEventListener('playing',f); n.classList.add('on'); setTimeout(()=>{ o.classList.remove('on'); try{ o.pause(); }catch(e){} sw=false; },1500); });
-    cur=n; }
-  this.el=A; this.k=k; this.play=()=>{ run=true; if(!cur.getAttribute('src')) cur.src=L[i]; pl(cur); };
-  this.pause=()=>{ run=false; [A,B].forEach(v=>{ if(!v.paused) try{ v.pause(); }catch(e){} }); }; this.paused=()=>cur.paused; }
 document.querySelectorAll('[data-scene]').forEach(sc=>{ const k=sc.dataset.scene, ph=sc.querySelector('.ph');
   if(ph&&ART.img[k]) ph.style.backgroundImage=`url('${ART.img[k]}'),url('${ART.local}')`; /* 원격 그림이 안 오면 로컬 할매 그림이 남는다 */
   if(!ART.vid[k]||RM) return;
-  if(Array.isArray(ART.vid[k])){ if(ART.vid[k].length){ const r=new Rot(k,ph); VIDS.push(r); } return; }
-  const v=mkV(k,true); ph.after(v);
-  VIDS.push({el:v,k,play(){ if(!v.getAttribute('src')) v.src=ART.vid[k]; try{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} },pause(){ if(!v.paused) try{ v.pause(); }catch(e){} },paused:()=>v.paused}); });
+  const v=document.createElement('video'); v.className='lv'; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline',''); v.setAttribute('muted','');
+  v.preload='none'; v.poster=ART.img[k]; v.dataset.v=k; v.addEventListener('playing',()=>v.classList.add('on')); v.addEventListener('error',()=>v.classList.remove('on'));
+  ph.after(v); VIDS.push(v); });
 $('trayImg').style.backgroundImage=`url('${ART.img.tray}')`;
 function vSync(){ const sr=stage.getBoundingClientRect();
-  VIDS.forEach(c=>{ const v=c.el, scr=v.closest('.scr'); let vis=!document.hidden&&!!scr&&scr.classList.contains('on')&&!v.parentNode.classList.contains('talking');
+  VIDS.forEach(v=>{ const scr=v.closest('.scr'); let vis=!document.hidden&&!!scr&&scr.classList.contains('on');
     if(vis){ const r=v.parentNode.getBoundingClientRect(); vis=r.bottom>sr.top+20&&r.top<sr.bottom-20; }
-    if(vis) c.play(); else c.pause(); }); }
-/* 할매가 말하는 영상: 첫 터치 때 미리 깨워 두고(아이폰 소리 허용), 장면 위에서 한 번 재생한 뒤 반복 영상으로 돌아간다 */
-const TV={};
-function talkPrime(){ if(RM) return; Object.keys(ART.voice).forEach(k=>{ const o=ART.voice[k]; if(!o.src||TV[k]) return;
-  const v=document.createElement('video'); v.className='lv tv'; v.playsInline=true; v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline',''); v.preload='auto'; v.src=o.src; v.muted=!soundOn; TV[k]=v;
-  try{ const p=v.play(); v.pause(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} }); }
-function talk(k,sc,sub){ const o=ART.voice[k], v=TV[k]; if(!o||!o.src||!v||RM||!sc) return Promise.resolve(false);
-  if(v.parentNode!==sc) sc.insertBefore(v,sc.querySelector('.glow')||null);
-  v.muted=!soundOn; try{ v.currentTime=0; }catch(e){} sc.classList.add('talking'); vSync(); AMB.duck(true);
-  return new Promise(res=>{ let done=false; const subs=o.subs.slice();
-    const fin=()=>{ if(done) return; done=true; v.ontimeupdate=null; v.classList.remove('on'); try{ v.pause(); }catch(e){} sc.classList.remove('talking'); AMB.duck(false); vSync(); res(true); };
-    v.ontimeupdate=()=>{ while(subs.length&&v.currentTime>=subs[0][0]) sub(subs.shift()[1]); };
-    v.onended=fin; v.onerror=fin; setTimeout(fin,(o.dur||6)*1000+2500);
-    v.addEventListener('playing',()=>v.classList.add('on'),{once:true});
-    try{ const p=v.play(); if(p&&p.catch) p.catch(()=>{ v.muted=true; const q=v.play(); if(q&&q.catch) q.catch(fin); }); }catch(e){ fin(); } }); }
+    if(vis){ if(!v.getAttribute('src')){ v.src=ART.vid[v.dataset.v]; } try{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} }
+    else if(!v.paused){ try{ v.pause(); }catch(e){} } }); }
 let vsT=0; $('sRep').addEventListener('scroll',()=>{ if(!vsT) vsT=requestAnimationFrame(()=>{ vsT=0; vSync(); }); },{passive:true});
 document.addEventListener('visibilitychange',()=>{ if(document.hidden) AMB.sleep(); else AMB.wake(); vSync(); });
 
@@ -1107,9 +1053,8 @@ async function scrollEnter(){ const id=++scrollRun; show('sScroll'); msLoadImgs(
   await wait(40); msLayout(true);
   if(MS.unrolled) return;
   sSay(''); $('mscroll').classList.add('rolled','hid'); $('mHint').textContent='옆으로 밀어 넘기기'; msGo(0,true);
-  await wait(RM?100:500); if(id!==scrollRun) return;
-  if(!(await talk('scroll',document.querySelector('#sScroll .scene'),t=>sSay(t)))){ sSay('열두 달을 펼쳐 보자.'); await wait(RM?200:1700); }
-  if(id!==scrollRun) return; $('mscroll').classList.remove('hid');
+  await wait(RM?100:600); if(id!==scrollRun) return; sSay('열두 달을 펼쳐 보자.');
+  await wait(RM?200:1700); if(id!==scrollRun) return; $('mscroll').classList.remove('hid');
   await wait(RM?60:500); if(id!==scrollRun) return; $('mscroll').classList.remove('rolled'); AMB.rustle(); MS.unrolled=true;
   await wait(RM?200:1500); if(id!==scrollRun) return; sSay('옆으로 밀며 보거라. 붉은 도장 찍힌 달이 볕 드는 달이다.');
   if(!RM){ await wait(900); if(id!==scrollRun||MS.i!==0) return; msGo(1); } }
@@ -1124,12 +1069,6 @@ const openPouch=e=>{ if(e){ e.stopPropagation(); } $('payBtn').click(); };
 $('pouchBtn').addEventListener('click',openPouch); $('pouchTap').addEventListener('click',openPouch);
 $('dawn').addEventListener('click',e=>{ if(e.target.closest('button')) return; openPouch(e); });
 new IntersectionObserver(es=>es.forEach(e=>$('pay').classList.toggle('hide',e.isIntersecting)),{root:$('sRep'),threshold:.25}).observe($('dawn'));
-document.querySelectorAll('.toc a').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); const t=$(a.getAttribute('href').slice(1)); if(t) $('sRep').scrollTo({top:t.offsetTop-50,behavior:RM?'auto':'smooth'}); }));
-let dawnSaid=false;
-new IntersectionObserver(es=>es.forEach(async e=>{ if(!e.isIntersecting||dawnSaid||$('dawn').classList.contains('paid')||!ART.voice.pouch.src) return; dawnSaid=true;
-  const k=$('dawnK').textContent, l=$('dawnL').innerHTML;
-  await talk('pouch',document.querySelector('#dawn .scene'),t=>{ $('dawnL').textContent=t; });
-  if(!$('dawn').classList.contains('paid')){ $('dawnK').textContent=k; $('dawnL').innerHTML=l; } }),{root:$('sRep'),threshold:.6}).observe($('dawn'));
 function openAsk(first){ if(!window.AskChat||!ASKU) return; AskChat.open({persona:'halmae',theme:'paper',root:$('stage'),avatar:'img/halmae.jpg',user:ASKU,first,tier:'default',starters:['올해 이사해도 되겠습니까','돈은 언제 모입니까','조심할 달은 언제입니까']}); }
 $('askBtn').onclick=()=>openAsk();
 document.querySelectorAll('.askS .qs button').forEach(b=>b.onclick=()=>openAsk(b.dataset.q));

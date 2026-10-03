@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>오방도감은 이렇게 만듭니다</title>
+<meta property="og:title" content="오방도감은 이렇게 만듭니다"><meta property="og:description" content="겉은 이야기, 속은 만세력. 오방도감이 사주를 계산하고 풀고 대하는 방식">
+<script src="early.js?v=6"></script>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&family=Noto+Serif+KR:wght@500;700&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-display:swap}
+/* 오방도감 소개(10/4 초안): 겉은 이야기, 속은 계산. 어두운 화면에 그림이 그라데이션으로 이어지며 아래로 읽어 내려간다. 영상은 둘(오프닝 · 소헌 선생) */
+:root{--brush:'OBrush','Noto Sans KR',serif;--serif:'Noto Serif KR',serif;--gold:#e3b866;--gold2:#f0d9a2;--ink:#f3ece2;--ink2:rgba(243,236,226,.78);--ink3:rgba(243,236,226,.52);--bg:#0a0809}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+.pg{max-width:460px;margin:0 auto;position:relative;overflow:hidden;background:var(--bg)}
+.top{position:fixed;left:0;right:0;top:0;z-index:50;display:flex;justify-content:center;pointer-events:none}
+.top .in{width:100%;max-width:460px;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;background:linear-gradient(180deg,rgba(10,8,9,.96) 0%,rgba(10,8,9,.88) 62%,rgba(10,8,9,0) 100%);padding-bottom:22px;pointer-events:auto}
+.top button{width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center}
+.top b{font-size:13.5px;font-weight:700;color:rgba(255,255,255,.9)}
+/* 장면: 그림이 위아래로 번지며 다음 장면으로 이어진다 */
+.sc{position:relative;padding:0 24px}
+.im{position:relative;margin:0 -24px;height:var(--h,420px);background:#000 center var(--y,20%)/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 22%,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 22%,#000 70%,transparent 100%)}
+.im video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center var(--y,20%);opacity:0;transition:opacity .8s}
+.im video.on{opacity:1}
+.ov{position:relative;margin-top:calc(var(--lift,140px) * -1);z-index:2}
+.k{display:block;font-size:11.5px;font-weight:800;letter-spacing:.16em;color:var(--gold)}
+h1,h2{font-family:var(--brush);font-weight:400;margin:10px 0 0;line-height:1.14;text-wrap:balance}
+h1{font-size:46px}h2{font-size:34px}
+.lead{margin:14px 0 0;font-family:var(--serif);font-weight:500;font-size:16.5px;line-height:1.85;color:var(--ink2)}
+.lead b{color:#fff;font-weight:700}
+p.t{margin:14px 0 0;font-size:15px;line-height:1.85;color:var(--ink2)}
+p.t b{color:#fff}
+.gap{height:72px}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .9s,transform .9s}
+.rv.on{opacity:1;transform:none}
+/* 오행 = 오방신 */
+.five{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:24px -6px 0}
+.five div{position:relative;aspect-ratio:3/5;background:#000 center 18%/cover no-repeat;overflow:hidden}
+.five div::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.9))}
+.five div i{position:absolute;left:0;right:0;top:0;height:3px;background:var(--c);z-index:1}
+.five div span{position:absolute;left:0;right:0;bottom:7px;z-index:1;text-align:center;line-height:1.25}
+.five div span b{display:block;font-family:var(--serif);font-size:20px;color:var(--c)}
+.five div span small{display:block;font-size:10px;color:var(--ink2)}
+/* 세 겹 단면도 */
+.lay{margin:26px 0 0;display:flex;flex-direction:column;gap:0}
+.ly{position:relative;padding:16px 16px 16px 58px;border-left:2px solid var(--c);background:linear-gradient(90deg,color-mix(in srgb,var(--c) 16%,transparent),rgba(0,0,0,0) 80%)}
+.ly+.ly{margin-top:10px}
+.ly em{position:absolute;left:14px;top:14px;font-style:normal;font-family:var(--serif);font-weight:700;font-size:24px;color:var(--c)}
+.ly b{display:block;font-size:15.5px;font-weight:800}
+.ly small{display:block;margin-top:4px;font-size:13px;line-height:1.6;color:var(--ink2)}
+/* 오늘의 만세력(실제 계산) */
+.live{margin:24px 0 0;padding:18px 16px 16px;background:#0f0c0d;box-shadow:inset 0 0 0 1px rgba(227,184,102,.28)}
+.live small.h{display:flex;justify-content:space-between;font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--gold)}
+.pil{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
+.pil div{text-align:center;padding:8px 0 9px;background:#161213}
+.pil div small{display:block;font-size:10.5px;color:var(--ink3)}
+.pil div b{display:block;margin-top:4px;font-family:var(--serif);font-size:26px;line-height:1.15}
+.pil div i{display:block;font-style:normal;font-size:11px;color:var(--ink2);margin-top:2px}
+.live p{margin:12px 0 0;font-size:12.5px;line-height:1.6;color:var(--ink2)}
+.live p b{color:var(--gold2)}
+/* 근거 목록 */
+.facts{margin:22px 0 0;list-style:none;padding:0}
+.facts li{display:grid;grid-template-columns:30px 1fr;gap:10px;padding:14px 0;border-top:1px solid rgba(255,255,255,.08)}
+.facts li:last-child{border-bottom:1px solid rgba(255,255,255,.08)}
+.facts li em{font-style:normal;font-family:var(--serif);font-weight:700;font-size:15px;color:var(--gold)}
+.facts li b{display:block;font-size:15px;font-weight:800}
+.facts li span{display:block;margin-top:4px;font-size:13.5px;line-height:1.65;color:var(--ink2)}
+/* 이론과 손님 */
+.th{margin:22px 0 0;display:grid;gap:10px}
+.th a{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:center;text-decoration:none;color:inherit;padding:8px;background:#110d10;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 45%,transparent)}
+.th a i{width:76px;height:92px;background:#000 center 18%/cover no-repeat}
+.th a small{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--c2)}
+.th a b{display:block;margin-top:3px;font-size:16px;font-weight:800}
+.th a span{display:block;margin-top:4px;font-size:12.5px;line-height:1.55;color:var(--ink2)}
+/* 감수 진행 상황 */
+.st{margin:22px 0 0;display:grid;gap:8px}
+.st>div{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:start;padding:12px 12px;background:#100d0e}
+.st>div em{font-style:normal;font-size:11px;font-weight:900;text-align:center;padding:4px 0;color:#1a130c;background:var(--gold)}
+.st>div.go em{background:#7fb8a0}
+.st>div.pl em{background:transparent;color:var(--gold2);box-shadow:inset 0 0 0 1px rgba(227,184,102,.6)}
+.st>div b{display:block;font-size:14.5px;font-weight:800}
+.st>div span{display:block;margin-top:3px;font-size:12.5px;line-height:1.55;color:var(--ink2)}
+/* 인용 */
+.qt{margin:24px 0 0;padding:4px 0 4px 16px;box-shadow:inset 3px 0 0 var(--gold);font-family:var(--serif);font-weight:700;font-size:20px;line-height:1.55}
+.qt small{display:block;margin-top:8px;font-family:'Noto Sans KR',sans-serif;font-weight:600;font-size:12px;color:var(--ink3)}
+.snd{position:absolute;right:16px;top:16px;z-index:3;display:flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:0;border-radius:16px;background:rgba(0,0,0,.5);color:#fff;font:inherit;font-size:12px;font-weight:800;box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
+.snd i{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+/* 약속 */
+.pr{margin:22px 0 0;display:grid;gap:12px}
+.pr div{padding:14px 16px;background:linear-gradient(90deg,rgba(227,184,102,.1),rgba(0,0,0,0));box-shadow:inset 2px 0 0 var(--gold)}
+.pr b{display:block;font-size:15px;font-weight:800}
+.pr span{display:block;margin-top:4px;font-size:13px;line-height:1.6;color:var(--ink2)}
+.note{margin:22px 0 0;padding:16px;background:#0f0c0d;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.note b{display:block;font-size:13px;font-weight:900;color:var(--gold)}
+.note ul{margin:10px 0 0;padding-left:18px}
+.note li{margin:6px 0;font-size:13px;line-height:1.6;color:var(--ink2)}
+.road{margin:22px 0 0;position:relative;padding-left:22px}
+.road::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--gold),rgba(227,184,102,.1))}
+.road div{position:relative;padding:0 0 18px}
+.road div::before{content:"";position:absolute;left:-21px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 2px var(--gold)}
+.road b{display:block;font-size:15px;font-weight:800}
+.road small{display:block;font-size:11px;font-weight:800;color:var(--gold);letter-spacing:.06em}
+.road span{display:block;margin-top:4px;font-size:13px;line-height:1.6;color:var(--ink2)}
+.cta{display:flex;gap:8px;margin:26px 0 0}
+.cta a{flex:1;display:grid;place-items:center;height:52px;text-decoration:none;font-size:15px;font-weight:900;background:var(--gold);color:#1a130c}
+.cta a.gh{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(243,236,226,.4)}
+.foot{margin:46px 0 0;padding:22px 24px calc(env(safe-area-inset-bottom,0px) + 34px);font-size:11.5px;line-height:1.7;color:var(--ink3);border-top:1px solid rgba(255,255,255,.06)}
+</style></head>
+<body><div class="pg" id="pg">
+<div class="top"><div class="in"><button id="back" type="button" aria-label="뒤로"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>오방도감 소개</b></div></div>
+
+<!-- 1. 첫 장면: 오프닝 영상 -->
+<section class="sc">
+  <div class="im" style="--h:540px;--y:30%;background-image:url('img/op_take_end.jpg')"><video id="v1" muted loop playsinline preload="auto" data-src="v/op_take.mp4"></video></div>
+  <div class="ov" style="--lift:200px">
+    <span class="k rv">ABOUT OBANG DOGAM</span>
+    <h1 class="rv">겉은 이야기,<br>속은 만세력.</h1>
+    <p class="lead rv">신들이 말을 걸고 그림자 손님이 찾아오는 화면은 <b>껍데기</b>입니다. 그 안에는 태어난 순간의 하늘을 계산한 여덟 글자와, 천 년 넘게 다듬어진 명리의 규칙이 들어 있습니다.</p>
+  </div>
+</section>
+<div class="gap"></div>
+
+<!-- 2. 우리는 무엇인가 -->
+<section class="sc">
+  <span class="k rv">우리는</span>
+  <h2 class="rv">어려운 명리를,<br>신의 목소리로 옮깁니다</h2>
+  <p class="t rv">사주명리는 정교한 학문이지만 말이 어렵습니다. 비견, 상관, 공망, 원진. 처음 듣는 사람에게는 암호에 가깝습니다. 오방도감은 이 말들을 버리지 않고, <b>사람이 알아들을 수 있는 이야기</b>로 옮기기 위해 세계관을 만들었습니다.</p>
+  <p class="t rv">그래서 캐릭터는 장식이 아니라 번역입니다. 다섯 신은 다섯 기운이고, 당신의 수호신은 당신 사주에서 <b>가장 비어 있는 기운</b>입니다.</p>
+  <div class="five rv">
+    <div style="--c:#3fbf7f;background-image:url('img/wood.jpg')"><i></i><span><b>木</b><small>하람 · 동</small></span></div>
+    <div style="--c:#ff5a46;background-image:url('img/fire.jpg')"><i></i><span><b>火</b><small>이안 · 남</small></span></div>
+    <div style="--c:#e0a53a;background-image:url('img/earth.jpg?v=2')"><i></i><span><b>土</b><small>도준 · 중앙</small></span></div>
+    <div style="--c:#c9d1db;background-image:url('img/metal.jpg')"><i></i><span><b>金</b><small>시온 · 서</small></span></div>
+    <div style="--c:#5b8cff;background-image:url('img/water.jpg?v=2')"><i></i><span><b>水</b><small>재이 · 북</small></span></div>
+  </div>
+</section>
+<div class="gap"></div>
+
+<!-- 3. 세 겹 -->
+<section class="sc">
+  <div class="im" style="--h:300px;--y:40%;background-image:url('img/intro0.jpg')"></div>
+  <div class="ov" style="--lift:90px">
+    <span class="k rv">한 화면의 단면</span>
+    <h2 class="rv">모든 풀이는<br>세 겹으로 되어 있습니다</h2>
+    <div class="lay rv">
+      <div class="ly" style="--c:#e3b866"><em>1</em><b>보이는 겹 · 이야기</b><small>신과 손님, 목소리와 영상. 결과를 오래 기억하게 만드는 겹입니다.</small></div>
+      <div class="ly" style="--c:#c98a5a"><em>2</em><b>해석의 겹 · 명리 규칙</b><small>십성, 합과 충, 공망, 대운. 계산된 글자 사이의 관계를 정해진 규칙으로 읽습니다.</small></div>
+      <div class="ly" style="--c:#8a6a4a"><em>3</em><b>바닥의 겹 · 만세력 계산</b><small>태어난 순간의 절기와 날짜를 계산해 여덟 글자를 세웁니다. 이 겹이 틀리면 위의 모든 것이 틀립니다.</small></div>
+    </div>
+    <p class="t rv">그래서 우리는 가장 아래 겹부터 단단하게 만들었습니다.</p>
+  </div>
+</section>
+<div class="gap"></div>
+
+<!-- 4. 계산의 근거 + 지금 이 순간 실제 계산 -->
+<section class="sc">
+  <span class="k rv">바닥의 겹</span>
+  <h2 class="rv">여덟 글자는<br>이렇게 세웁니다</h2>
+  <ul class="facts rv">
+    <li><em>年</em><div><b>해는 입춘으로 바뀝니다</b><span>1월 1일이나 설날이 아니라, 해가 입춘점을 지나는 순간 띠와 해의 글자가 바뀝니다.</span></div></li>
+    <li><em>月</em><div><b>달은 절기의 순간으로 바뀝니다</b><span>열두 절기의 시각을 천문 계산으로 직접 구했습니다(1949~2031년, 한국 시간, 세차 · 광행차 보정). 달력의 1일이 아니라 절입 시각을 넘는 순간 달의 글자가 바뀝니다.</span></div></li>
+    <li><em>日</em><div><b>날은 끊김 없는 날짜 셈으로</b><span>육십갑자는 수천 년 동안 하루도 빠지지 않고 이어져 왔습니다. 율리우스 날짜로 그 순서를 그대로 이어 셉니다.</span></div></li>
+    <li><em>時</em><div><b>시는 두 시간 단위의 시진으로</b><span>태어난 시를 열두 시진으로 나눕니다. 자시는 당일을 기준으로 합니다. 시간을 모르면 시주를 비워 두고 세 기둥으로만 풉니다.</span></div></li>
+    <li><em>陰</em><div><b>음력은 변환표로</b><span>음력 생일은 1950~2030년 한국 음력 변환표로 양력으로 바꾼 뒤 계산합니다. 윤달도 구분합니다.</span></div></li>
+  </ul>
+  <div class="live rv" id="live"><small class="h"><span>지금 이 순간의 만세력</span><span id="lvT"></span></small>
+    <div class="pil" id="lvP"></div>
+    <p id="lvN"></p></div>
+  <p class="t rv">위 네 기둥은 장식이 아니라, 이 화면을 연 지금 이 순간을 실제로 계산한 값입니다.</p>
+</section>
+<div class="gap"></div>
+
+<!-- 5. 해석의 근거: 이론이 곧 세계관 -->
+<section class="sc">
+  <div class="im" style="--h:320px;--y:18%;background-image:url('img/jeongtong.jpg')"></div>
+  <div class="ov" style="--lift:110px">
+    <span class="k rv">해석의 겹</span>
+    <h2 class="rv">세계관의 모든 인물은<br>명리의 개념에서 왔습니다</h2>
+    <p class="t rv">자평명리의 오래된 원칙, 십성 · 합충 · 공망 · 신살 · 대운을 그대로 따릅니다. 그리고 그 개념 하나하나에 얼굴을 붙였습니다.</p>
+    <div class="th rv">
+      <a href="geumeum.html" style="--c:#3b5a9a;--c2:#b8c8ee"><i style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_102005_5906aacf-085d-40b2-acda-136da797f5cc_min.webp')"></i><div><small>공망(空亡)</small><b>그믐</b><span>일주마다 정해진 두 지지가 비는 자리. 육십갑자의 순(旬)에서 계산합니다.</span></div></a>
+      <a href="heukmae.html" style="--c:#a8283a;--c2:#f0a5ad"><i style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_101836_ccb27e8d-f3d5-430a-975b-c64a04d3c7cf_min.webp')"></i><div><small>원진 · 귀문 · 충</small><b>흑매</b><span>두 사람의 일지 사이 관계로 어긋나기 쉬운 매듭을 찾습니다.</span></div></a>
+      <a href="samjae.html" style="--c:#6a4aa8;--c2:#cbb8f0"><i style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_102844_e93d3f57-cfef-45d4-ad1d-668f8f7cf23a_min.webp')"></i><div><small>삼재(三災)</small><b>삼재 삼남매</b><span>띠의 삼합으로 들 · 눌 · 날삼재가 드는 해를 셉니다.</span></div></a>
+      <a href="dohwa.html" style="--c:#e0679a;--c2:#f5b5cf"><i style="background-image:url('img/taeo/base.jpg')"></i><div><small>도화(桃花)</small><b>태오의 도화 사주</b><span>년지 · 일지 기준 도화 글자와 그 글자가 들어오는 해와 달을 봅니다.</span></div></a>
+    </div>
+  </div>
+</section>
+<div class="gap"></div>
+
+<!-- 6. AI의 자리 -->
+<section class="sc">
+  <span class="k rv">AI는 어디까지</span>
+  <h2 class="rv">계산은 규칙이,<br>문장은 사람과 AI가</h2>
+  <p class="t rv">원국, 대운, 세운과 월운, 합과 충은 <b>정해진 규칙으로 계산</b>합니다. 같은 생일을 넣으면 언제나 같은 결과가 나옵니다. AI는 그 결과를 바꾸지 않습니다.</p>
+  <p class="t rv">AI가 하는 일은 계산된 사실을 <b>당신의 말투로 읽기 쉽게 옮기는 것</b>, 그리고 궁금한 것을 이어서 묻게 해 주는 것입니다. 근거 없이 지어낸 예언은 쓰지 않도록, 문장은 늘 계산된 사실 위에서만 만듭니다.</p>
+</section>
+<div class="gap"></div>
+
+<!-- 7. 사람의 손: 감수 -->
+<section class="sc">
+  <span class="k rv">사람의 손</span>
+  <h2 class="rv">출시 전,<br>사람의 눈으로 다시 봅니다</h2>
+  <p class="t rv">계산이 맞는지, 풀이가 명리의 원칙에서 벗어나지 않는지. 기계만 믿지 않고 사람의 감수를 거칩니다. 어디까지 왔는지 숨기지 않고 적어 둡니다.</p>
+  <div class="st rv">
+    <div><em>완료</em><div><b>절기 시각 천문 계산 · 음력 변환표 내장</b><span>외부 서비스 없이 우리 엔진 안에서 계산합니다.</span></div></div>
+    <div><em>완료</em><div><b>공개 만세력과 표본 대조</b><span>무작위 생일 표본을 공개 라이브러리 결과와 맞춰 보았습니다.</span></div></div>
+    <div class="go"><em>진행 중</em><div><b>해석 사전 정리</b><span>십성 · 신살 · 운의 해석 문장을 한 곳에 모아 근거와 함께 정리하고 있습니다.</span></div></div>
+    <div class="pl"><em>출시 전</em><div><b>명리 전문가 감수</b><span>계산 규칙과 해석 문장을 명리 전문가에게 감수받습니다. 감수자의 허락을 받으면 이름과 이력을 이 페이지에 밝힙니다.</span></div></div>
+    <div class="pl"><em>출시 전</em><div><b>외부 만세력과 자동 대조</b><span>원국 · 대운 · 절입 시각을 외부 만세력과 대량으로 자동 대조하고, 결과를 공개합니다.</span></div></div>
+  </div>
+</section>
+<div class="gap"></div>
+
+<!-- 8. 사주를 대하는 태도: 소헌 선생 영상 -->
+<section class="sc">
+  <div class="im" style="--h:470px;--y:18%;background-image:url('img/soheon.jpg')"><video id="v2" playsinline preload="none" data-src="v/menu/soheon.mp4"></video><button class="snd" id="v2b" type="button"><i></i>소헌 선생 목소리</button></div>
+  <div class="ov" style="--lift:150px">
+    <span class="k rv">우리가 사주를 대하는 태도</span>
+    <div class="qt rv">사주는 정답이 아니라 지도일세.<br>길은 자네가 고르는 거고.<small>소헌 선생 · 명리 감정서</small></div>
+    <div class="pr rv">
+      <div><b>정해진 운명이 아니라, 타고난 경향과 때</b><span>사주는 무엇이 일어난다고 단정하지 않습니다. 어떤 기운이 강하고 약한지, 언제 바람이 바뀌는지를 보여 줄 뿐입니다.</span></div>
+      <div><b>나쁜 소식으로 끝내지 않습니다</b><span>조심할 때를 알려 줄 때는 언제나 피하는 법과 지켜 줄 신을 함께 놓습니다. 그림자 손님 이야기도 늘 막는 신으로 끝납니다.</span></div>
+      <div><b>결정은 언제나 당신이</b><span>이직, 연애, 돈의 결정은 지금의 상황이 먼저입니다. 사주는 그 결정을 돕는 하나의 지도입니다.</span></div>
+    </div>
+  </div>
+</section>
+<div class="gap"></div>
+
+<!-- 9. 꼭 알아 둘 것 -->
+<section class="sc">
+  <span class="k rv">꼭 알아 둘 것</span>
+  <h2 class="rv">정직하게 밝히는 한계</h2>
+  <div class="note rv"><b>이용할 때 알아 두세요</b><ul>
+    <li>태어난 시간을 모르면 시주를 뺀 세 기둥으로 풉니다. 시간이 있으면 더 정확합니다.</li>
+    <li>절기가 바뀌는 날 그 시각 근처에 태어났다면, 공표된 시각과 수 분 차이로 달의 글자가 달라질 수 있습니다.</li>
+    <li>국내판은 한국 표준시를 기준으로 합니다. 해외에서 태어났다면 결과가 다를 수 있습니다.</li>
+    <li>건강, 법률, 투자처럼 중요한 결정은 반드시 전문가와 상의하세요. 오방도감의 풀이는 참고와 성찰을 위한 것입니다.</li>
+    <li>진행자와 신, 손님은 모두 AI로 만든 가상의 캐릭터입니다.</li>
+    <li>로그인 전에는 생일 정보가 이 기기 안에만 저장됩니다.</li>
+  </ul></div>
+</section>
+<div class="gap"></div>
+
+<!-- 10. 앞으로 -->
+<section class="sc">
+  <div class="im" style="--h:300px;--y:50%;background-image:url('img/noeul.jpg')"></div>
+  <div class="ov" style="--lift:100px">
+    <span class="k rv">앞으로</span>
+    <h2 class="rv">오방도감이<br>가려는 곳</h2>
+    <div class="road rv">
+      <div><small>출시 전</small><b>감수자 공개와 대조 결과 공개</b><span>누가 어떤 기준으로 보았는지, 우리 계산이 얼마나 맞는지 숫자로 보여 드립니다.</span></div>
+      <div><small>다음</small><b>평생 사주, 한 권의 책</b><span>현암의 평생 사주를 대운 아홉 마디로 읽는 한 권의 책으로 만듭니다.</span></div>
+      <div><small>다음</small><b>내 원국 무료 공개</b><span>계산된 여덟 글자, 지장간, 대운표를 누구나 무료로 볼 수 있게 열어 둡니다.</span></div>
+      <div><small>계속</small><b>수호신과 쌓는 시간</b><span>매일의 개운 미션이 쌓여, 운을 보는 것을 넘어 운을 가꾸는 습관이 되게 합니다.</span></div>
+    </div>
+  </div>
+</section>
+<div class="gap"></div>
+
+<section class="sc">
+  <h2 class="rv" style="font-size:30px">빈칸은 메우는 게 아니라,<br>함께 지키는 것.</h2>
+  <div class="cta rv"><a href="./" id="goMe">내 빈칸 찾기</a><a class="gh" href="book.html#p=0">세계관 책 보기</a></div>
+</section>
+<p class="foot">오방도감 · 녹트서울<br>만세력 계산: 절기 시각 천문 계산(1949~2031년, KST) · 한국 음력 변환표(1950~2030년)<br>이 페이지는 출시 전 초안이며, 감수 진행 상황에 따라 내용이 갱신됩니다.</p>
+</div>
+<script src="saju.js"></script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+$('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} if(history.length>1) history.back(); else location.href='./'; };
+$('goMe').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} };
+/* 나타나기 */
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }),{threshold:.15});
+document.querySelectorAll('.rv').forEach(x=>io.observe(x));
+/* 영상: 보일 때만. 오프닝은 소리 없이 반복, 소헌 선생은 보일 때 한 번 말하고 버튼으로 다시 */
+const v1=$('v1'), v2=$('v2');
+new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ if(!v1.src) v1.src=v1.dataset.src; v1.muted=true; v1.onplaying=()=>v1.classList.add('on'); v1.play().catch(()=>{}); } else v1.pause(); }),{threshold:.3}).observe(v1);
+const sndOff=()=>{ try{ return sessionStorage.getItem('obSnd')==='0'; }catch(e){ return false; } };
+let said=false;
+const talk=force=>{ if(!v2.src) v2.src=v2.dataset.src; v2.muted=!force&&sndOff(); try{ v2.currentTime=0; }catch(e){} v2.onplaying=()=>v2.classList.add('on'); const p=v2.play(); if(p&&p.catch) p.catch(()=>{ v2.muted=true; v2.play().catch(()=>{}); }); };
+new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting&&!said){ said=true; talk(false); } else if(!e.isIntersecting){ v2.pause(); } }),{threshold:.5}).observe(v2);
+$('v2b').onclick=()=>{ try{ sessionStorage.removeItem('obSnd'); }catch(e){} talk(true); };
+/* 지금 이 순간의 만세력(실제 계산) */
+try{ const S=window.Saju, n=new Date(); const k=new Date(n.getTime()+(n.getTimezoneOffset()+540)*60000); /* 한국 시간 */
+  const y=k.getFullYear(), m=k.getMonth()+1, d=k.getDate(), mins=k.getHours()*60+k.getMinutes(), hi=Math.floor(((mins+60)%1440)/120);
+  const P=S.pillars(y,m,d,hi); const G=S.GAN, J=S.JI, GK=S.GAN_K, JK=S.JI_K;
+  $('lvP').innerHTML=[['시',P.h],['일',P.d],['월',P.m],['년',P.y]].map(([t,p])=>p?`<div><small>${t}주</small><b>${G[p[0]]}${J[p[1]]}</b><i>${GK[p[0]]}${JK[p[1]]}</i></div>`:`<div><small>${t}주</small><b>·</b><i></i></div>`).join('');
+  $('lvT').textContent=`${y}.${m}.${d} ${String(k.getHours()).padStart(2,'0')}:${String(k.getMinutes()).padStart(2,'0')} KST`;
+  if(P.nextTerm){ const EP=Date.UTC(1900,0,1), t=new Date(EP+P.nextTerm*60000), left=P.nextTerm-(P.t);
+    const NAMES=['소한','입춘','경칩','청명','입하','망종','소서','입추','백로','한로','입동','대설'], nm=NAMES[(P.m[1]+11)%12+0]||'';
+    const dd=Math.floor((P.nextTerm-(Math.floor((Date.UTC(y,m-1,d)-EP)/60000)+mins))/1440);
+    $('lvN').innerHTML=`다음 절입 <b>${t.getUTCMonth()+1}월 ${t.getUTCDate()}일 ${String(t.getUTCHours()).padStart(2,'0')}:${String(t.getUTCMinutes()).padStart(2,'0')}</b> · 이 순간을 넘으면 월주의 글자가 바뀝니다.`; }
+}catch(e){ $('live').style.display='none'; }
+})();
+</script>
+<script src="pcshell.js" defer></script>
+</body></html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<script src="early.js?v=4"></script>
+<title>이름 없는 정자 · 겨울 미리보기</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 정자 인트로 v2(겨울 기본): ① 걸어 들어가는 영상(발소리) ② 등불 — 실제 켜진 그림을 등불 자리마다 빛 원으로 드러냄(코드) + 앞쪽 입자 ③ 문 열림 영상 ④ 이안 */
+:root{--gold:#e8c48a;--ink:#f6ecdf;--ink2:rgba(246,236,223,.66);--bg:#040306}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+.st{position:fixed;inset:0;max-width:520px;margin:0 auto;overflow:hidden;background:var(--bg)}
+.ly{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+.ly.on{opacity:1}
+.ly img,.ly video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 50%}
+/* 등불 무대: 바탕(꺼진 그림) 위에 켜진 그림을 빛 원으로 드러냄. 무대 전체는 아주 천천히 앞으로 */
+.lamp .cam{position:absolute;inset:0;transform-origin:50% 62%;transform:scale(1);transition:transform 14s cubic-bezier(.2,.1,.2,1)}
+.lamp.on .cam{transform:scale(1.07)}
+.lamp .lit{opacity:1;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.lamp .glow{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen}
+.lamp .glow i{position:absolute;width:var(--r);height:var(--r);margin:calc(var(--r) / -2) 0 0 calc(var(--r) / -2);border-radius:50%;background:radial-gradient(circle,rgba(255,196,120,.55) 0%,rgba(255,150,70,.22) 32%,rgba(255,120,50,0) 70%);opacity:0;transform:scale(.4);transition:opacity .9s ease,transform 1.4s cubic-bezier(.2,.8,.2,1)}
+.lamp .glow i.on{opacity:1;transform:scale(1);animation:flick 2.6s ease-in-out infinite}
+@keyframes flick{0%,100%{filter:brightness(1)}22%{filter:brightness(1.18)}47%{filter:brightness(.9)}71%{filter:brightness(1.12)}}
+.lamp .full{transition:opacity 2.2s ease}
+canvas.fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.grad{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(4,3,6,.6) 0%,rgba(4,3,6,0) 24%,rgba(4,3,6,0) 58%,rgba(4,3,6,.86) 100%)}
+.vig{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 120px 40px rgba(0,0,0,.55)}
+.hd{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 54px);text-align:center;transition:opacity .9s}
+.hd small{display:block;font-size:13px;letter-spacing:.32em;color:var(--gold);text-shadow:0 1px 10px rgba(0,0,0,.8)}
+.hd h1{margin:14px 0 0;font-family:'OBrush','Song Myung',serif;font-weight:400;font-size:48px;letter-spacing:.04em;line-height:1.1;text-shadow:0 4px 26px rgba(0,0,0,.85)}
+.cue{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 70px);display:flex;flex-direction:column;align-items:center;gap:16px;transition:opacity .7s}
+.cue button{width:76px;height:76px;border-radius:50%;border:1px solid rgba(232,196,138,.85);background:rgba(10,8,12,.38);display:grid;place-items:center;color:var(--gold);cursor:pointer;padding:0;animation:pulse 2.4s ease-in-out infinite}
+.cue p{margin:0;font-family:'Song Myung',serif;font-size:21px;letter-spacing:.06em;text-shadow:0 2px 14px rgba(0,0,0,.9)}
+.dots{display:flex;gap:12px}
+.dots i{width:8px;height:8px;border-radius:50%;background:rgba(232,196,138,.22);transition:all .5s}
+.dots i.on{background:var(--gold);box-shadow:0 0 12px rgba(232,196,138,.9)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,196,138,.3)}50%{box-shadow:0 0 0 14px rgba(232,196,138,0)}}
+.sub{position:absolute;left:24px;right:24px;bottom:calc(env(safe-area-inset-bottom,0px) + 170px);text-align:center;font-family:'Song Myung',serif;font-size:24px;line-height:1.5;text-shadow:0 2px 16px rgba(0,0,0,.95),0 0 2px #000;opacity:0;transition:opacity .45s}
+.sub.on{opacity:1}
+.end{position:absolute;left:24px;right:24px;bottom:calc(env(safe-area-inset-bottom,0px) + 40px);display:flex;flex-direction:column;gap:10px;opacity:0;pointer-events:none;transition:opacity .8s}
+.end.on{opacity:1;pointer-events:auto}
+.end a,.end button{display:block;width:100%;padding:16px;border:0;font:700 16px/1 'Noto Sans KR',sans-serif;text-align:center;text-decoration:none;cursor:pointer}
+.end a{background:var(--gold);color:#1a130b}
+.end button{background:rgba(10,8,12,.5);color:var(--ink2);border:1px solid rgba(246,236,223,.18)}
+.pvNote{position:absolute;left:12px;top:calc(env(safe-area-inset-top,0px) + 14px);font-size:12px;color:var(--ink2);z-index:5}
+.hide{opacity:0!important;pointer-events:none!important}
+@media (prefers-reduced-motion:reduce){.cue button{animation:none}.lamp .cam{transition:none}}
+</style>
+</head>
+<body>
+<div class="st" id="st">
+  <div class="ly on" id="lyWalk"><video id="vWalk" playsinline preload="auto"></video></div>
+  <div class="ly lamp" id="lyLamp"><div class="cam" id="cam"><img id="base" alt=""><img class="lit" id="lit" alt=""><img class="full" id="full" alt="" style="opacity:0"><div class="glow" id="glow"></div></div></div>
+  <div class="ly" id="lyDoor"><video id="vDoor" playsinline preload="auto"></video></div>
+  <div class="ly" id="lyIan"><video id="vIan" playsinline preload="auto" src="v/ian/t1.mp4" poster="img/ian.jpg"></video></div>
+  <canvas class="fx" id="fx"></canvas>
+  <div class="grad"></div><div class="vig"></div>
+  <div class="pvNote">미리보기 · 겨울</div>
+  <div class="hd" id="hd"><small>서울 어느 옥상</small><h1>이름 없는 정자</h1></div>
+  <div class="cue" id="cue">
+    <button id="go" type="button" aria-label="들어가기"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M12 3v2"/><path d="M7 7h10l-1.2 10H8.2z"/><path d="M6 19h12"/><path d="M12 10.2c1.3 1.2 1.5 2.4.9 3.4-.4.6-1.4.7-1.9.1-.6-.7-.3-1.7 1-3.5z"/></svg></button>
+    <p id="cueT">걸어 들어가기</p>
+    <div class="dots" id="dots" style="visibility:hidden"><i></i><i></i><i></i></div>
+  </div>
+  <div class="sub" id="sub"></div>
+  <div class="end" id="end"><a href="ian-salon.html">이안의 살롱으로 들어가기</a><button id="again" type="button">처음부터 다시</button></div>
+</div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+/* 겨울(눈 없음)이 기본. 눈 오는 날 버전은 같은 틀에 SET.snow로 추가해 두고 그날만 켠다 */
+const SET={
+  walk:'__WALK__',           /* 걸어 들어가는 영상(클링 소리: 발소리 · 바람) */
+  base:'__BASE__',           /* 등불 꺼진 장면(걸어 들어간 마지막 위치) */
+  lit:'__LIT__',             /* 같은 자리, 등불이 다 켜진 장면 */
+  door:'__DOOR__',           /* 문 열림 영상(소리 포함) */
+  lamps:__LAMPS__            /* 등불 자리 [x%, y%, 반지름%] — 켜진 그림과 꺼진 그림의 차이로 찾음, 가까운 것부터 */
+};
+const LINES=[[0,'왔네.'],[1.4,'기다리고 있었어.'],[3.0,'이리 와서 앉아.']];
+const CUE=['등불을 켜 줘','하나 더','마지막 하나'];
+let stage=0, busy=false, ctx=null, amb=null;
+/* ---- 소리: 바람 · 먼 도시(합성), 불 붙는 소리 ---- */
+function au(){ if(ctx) return ctx; const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return null; ctx=new AC();
+  const n=ctx.createBuffer(1,ctx.sampleRate*4,ctx.sampleRate), d=n.getChannelData(0); let l=0; for(let i=0;i<d.length;i++){ const w=Math.random()*2-1; l=(l+0.02*w)/1.02; d[i]=l*3.4; }
+  const s=ctx.createBufferSource(); s.buffer=n; s.loop=true; const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=600; amb=ctx.createGain(); amb.gain.value=0; s.connect(f); f.connect(amb); amb.connect(ctx.destination); s.start();
+  amb.gain.linearRampToValueAtTime(.12,ctx.currentTime+2); return ctx; }
+function ignite(k){ const c=au(); if(!c) return; if(c.state!=='running') c.resume(); const t=c.currentTime+.02;
+  const nb=c.createBuffer(1,c.sampleRate*.9,c.sampleRate), nd=nb.getChannelData(0); for(let i=0;i<nd.length;i++){ const e=i/nd.length; nd[i]=(Math.random()*2-1)*Math.pow(1-e,1.6)*(Math.random()<.004?3:1); }
+  const ns=c.createBufferSource(); ns.buffer=nb; const bp=c.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=900+k*90; bp.Q.value=.7; const g=c.createGain(); g.gain.value=.32; ns.connect(bp); bp.connect(g); g.connect(c.destination); ns.start(t);
+  const o=c.createOscillator(), og=c.createGain(); o.type='sine'; o.frequency.setValueAtTime(140,t); o.frequency.exponentialRampToValueAtTime(60,t+.45); og.gain.setValueAtTime(.0001,t); og.gain.exponentialRampToValueAtTime(.26,t+.03); og.gain.exponentialRampToValueAtTime(.0001,t+.6); o.connect(og); og.connect(c.destination); o.start(t); o.stop(t+.7); }
+/* ---- 앞쪽 입자: 얼음 가루(가까울수록 크고 흐림) + 등불 둘레 불티 ---- */
+const cv=$('fx'), g2=cv.getContext('2d'); let W=0,H=0, P=[], E=[];
+function fit(){ const r=cv.getBoundingClientRect(), dp=Math.min(2,devicePixelRatio||1); W=cv.width=r.width*dp; H=cv.height=r.height*dp; }
+fit(); addEventListener('resize',fit);
+for(let i=0;i<70;i++) P.push({x:Math.random(),y:Math.random(),z:Math.random(),vx:(Math.random()-.5)*.0004,vy:.0002+Math.random()*.0006});
+function emit(x,y){ for(let i=0;i<10;i++) E.push({x:x/100,y:y/100,vx:(Math.random()-.5)*.0012,vy:-.001-Math.random()*.0018,l:1}); }
+function loop(){ g2.clearRect(0,0,W,H);
+  for(const p of P){ p.x+=p.vx+Math.sin(performance.now()/2600+p.z*9)*.0002; p.y+=p.vy*(.4+p.z); if(p.y>1.05){ p.y=-.05; p.x=Math.random(); } if(p.x<-.05) p.x=1.05; if(p.x>1.05) p.x=-.05;
+    const r=(p.z>.85?6+p.z*10:1+p.z*2.2)*(W/400), a=p.z>.85?.10:.35*(.4+p.z); const gr=g2.createRadialGradient(p.x*W,p.y*H,0,p.x*W,p.y*H,r); gr.addColorStop(0,`rgba(225,236,255,${a})`); gr.addColorStop(1,'rgba(225,236,255,0)'); g2.fillStyle=gr; g2.beginPath(); g2.arc(p.x*W,p.y*H,r,0,7); g2.fill(); }
+  for(let i=E.length-1;i>=0;i--){ const e=E[i]; e.x+=e.vx; e.y+=e.vy; e.vy+=.00002; e.l-=.012; if(e.l<=0){ E.splice(i,1); continue; } const r=(1.2+e.l*1.6)*(W/400); g2.fillStyle=`rgba(255,${170+e.l*60|0},90,${e.l*.9})`; g2.beginPath(); g2.arc(e.x*W,e.y*H,r,0,7); g2.fill(); }
+  requestAnimationFrame(loop); }
+requestAnimationFrame(loop);
+/* ---- 등불 드러내기 ---- */
+const lit=$('lit'), glow=$('glow'); const shown=[];
+function paintMask(){ const m=shown.map(([x,y,r,k])=>`radial-gradient(circle at ${x}% ${y}%, #000 0, #000 ${r*k*.45}%, rgba(0,0,0,.55) ${r*k*.8}%, transparent ${r*k}%)`).join(','); lit.style.webkitMaskImage=lit.style.maskImage=m||'linear-gradient(transparent,transparent)'; }
+paintMask();
+function light(L){ const it=[L[0],L[1],L[2],0]; shown.push(it); const t0=performance.now(); const grow=()=>{ const k=Math.min(1,(performance.now()-t0)/1100); it[3]=1-Math.pow(1-k,3); paintMask(); if(k<1) requestAnimationFrame(grow); }; requestAnimationFrame(grow);
+  const i=document.createElement('i'); i.style.left=L[0]+'%'; i.style.top=L[1]+'%'; i.style.setProperty('--r',(L[2]*1.6)+'%'); i.style.width=i.style.height=(L[2]*1.6/100*cv.clientWidth)+'px'; glow.appendChild(i); requestAnimationFrame(()=>i.classList.add('on')); emit(L[0],L[1]); }
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+function groups(){ const L=SET.lamps.slice(); const n=L.length; if(n<3) return [L,[],[]]; const a=Math.ceil(n/3), b=Math.ceil((n-a)/2); return [L.slice(0,a),L.slice(a,a+b),L.slice(a+b)]; }
+const GR=groups();
+function playTo(v,t){ return new Promise(r=>{ const p=v.play(); if(p&&p.catch) p.catch(()=>r()); const f=()=>{ if(v.ended||(t&&v.currentTime>=t-0.03)){ return r(); } requestAnimationFrame(f); }; requestAnimationFrame(f); }); }
+async function next(){ if(busy) return; busy=true; au();
+  if(stage===0){ /* 걸어 들어가기 */
+    $('hd').classList.add('hide'); $('cue').classList.add('hide'); const v=$('vWalk'); v.muted=false; try{ v.currentTime=0; }catch(e){}
+    await playTo(v,0); $('lyLamp').classList.add('on'); await wait(900); $('lyWalk').classList.remove('on');
+    stage=1; $('cueT').textContent=CUE[0]; $('dots').style.visibility='visible'; $('cue').classList.remove('hide'); busy=false; return; }
+  if(stage>=1&&stage<=3){ const k=stage-1; ignite(k); $('dots').children[k].classList.add('on');
+    for(const L of GR[k]){ light(L); await wait(260); }
+    stage++; if(stage<=3){ $('cueT').textContent=CUE[stage-1]; await wait(500); busy=false; return; }
+    /* 마지막: 장면 전체가 따뜻하게 */
+    $('cue').classList.add('hide'); await wait(600); $('full').style.opacity=1; if(amb&&ctx) amb.gain.linearRampToValueAtTime(.08,ctx.currentTime+2); await wait(2400);
+    const d=$('vDoor'); d.muted=false; try{ d.currentTime=0; }catch(e){} $('lyDoor').classList.add('on'); await playTo(d,0);
+    const ian=$('vIan'); $('lyIan').classList.add('on'); ian.muted=false; try{ ian.currentTime=0; }catch(e){} const p=ian.play(); if(p&&p.catch) p.catch(()=>{ ian.muted=true; ian.play().catch(()=>{}); });
+    let last=-1; const tick=()=>{ let i=-1; LINES.forEach((c,j)=>{ if(ian.currentTime>=c[0]) i=j; }); if(i!==last){ last=i; $('sub').classList.remove('on'); if(i>=0) setTimeout(()=>{ $('sub').textContent=LINES[i][1]; $('sub').classList.add('on'); },120); } if(!ian.ended) requestAnimationFrame(tick); else { $('sub').classList.remove('on'); $('end').classList.add('on'); } };
+    requestAnimationFrame(tick); } }
+$('go').onclick=next; $('st').addEventListener('click',e=>{ if(e.target.closest('.end')||e.target.closest('#go')) return; if(stage>=1&&stage<=3) next(); });
+$('again').onclick=()=>location.reload();
+$('vWalk').src=SET.walk; $('base').src=SET.base; $('lit').src=SET.lit; $('full').src=SET.lit; $('vDoor').src=SET.door;
+try{ $('vWalk').load(); }catch(e){}
+})();
+</script>
+</body>
+</html>

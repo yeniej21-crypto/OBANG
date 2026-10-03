@@ -52,6 +52,7 @@ button,select,input{font-family:inherit}
 .fc:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 30%,rgba(8,6,10,.92) 88%)}
 .fc .tg{position:absolute;left:10px;top:10px;z-index:2;font:800 10px/1 var(--sans);letter-spacing:.1em;color:#1a1208;background:linear-gradient(180deg,#f3d79b,#d6a64f);padding:5px 7px;border-radius:0}
 .fc .tm{position:absolute;right:10px;top:10px;z-index:2;font-size:10.5px;color:#fff;background:rgba(0,0,0,.5);padding:4px 7px;border-radius:0;backdrop-filter:blur(6px)}
+.fc.fcTop{display:block;text-decoration:none;background-position:center 30%}
 .fc .ct{position:absolute;left:12px;right:12px;bottom:12px;z-index:2}
 .fc .ct b{display:block;font-family:var(--brush);font-weight:400;font-size:25px;line-height:1.15}
 .fc .ct span{display:block;margin-top:5px;font-size:12px;line-height:1.45;color:var(--ink-2)}
@@ -480,7 +481,10 @@ const enc=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g
 const dec=v=>{ try{ v=v.replace(/-/g,'+').replace(/_/g,'/'); return JSON.parse(decodeURIComponent(escape(atob(v)))); }catch(e){ return null; } };
 const INV=Q.get('f')?dec(Q.get('f')):null;
 function cardHTML(k,i){ const X=T[k]; return `<button class="fc" type="button" data-t="${k}" style="background-image:url('img/free/${k}.jpg'),url('${HOST[X.host].img}');animation-delay:${i*50}ms">${(window.FREE_PLUS_ORDER||[]).includes(k)?'<span class="tg">NEW</span>':''}<span class="ct"><b>${X.t}</b><span>${X.teaser}</span></span></button>`; }
-function hub(f='all'){ $('hubG').innerHTML=ORDER.filter(k=>f==='all'||T[k].cat===f).map(cardHTML).join(''); }
+/* 10/3 은주: 모두 보기 맨 위에 오방 뽑기 · 부적 카드(하루 한 번 메뉴)를 꼭 넣기 */
+const TOP2=[{h:'ppopgi.html',img:'img/mini/tong.jpg',tg:'하루 한 번',t:'오방 뽑기',d:'통을 흔들면, 오늘의 괘가 톡'},{h:'bujeok.html',img:'img/card/wood.jpg',tg:'하루 한 장 무료',t:'오늘의 부적 카드',d:'모자란 기운이 사는 부적, 모아 보기'}];
+function top2HTML(){ return TOP2.map((x,i)=>`<a class="fc fcTop" href="${x.h}" onclick="try{sessionStorage.setItem('fromFree','1')}catch(e){}" style="background-image:url('${x.img}');animation-delay:${i*50}ms"><span class="tg">${x.tg}</span><span class="ct"><b>${x.t}</b><span>${x.d}</span></span></a>`).join(''); }
+function hub(f='all'){ $('hubG').innerHTML=(f==='all'||f==='pick'?top2HTML():'')+ORDER.filter(k=>f==='all'||T[k].cat===f).map(cardHTML).join(''); }
 $('hubF').onclick=e=>{ const b=e.target.closest('[data-f]'); if(!b) return; $('hubF').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); hub(b.dataset.f); };
 document.addEventListener('click',e=>{ const c=e.target.closest('.fc[data-t]'); if(!c) return; openTest(c.dataset.t); });
 

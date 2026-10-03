@@ -367,7 +367,7 @@ $('ppl').onclick=e=>{ const b=e.target.closest('[data-c]'); if(!b) return; if(wi
   const io=new IntersectionObserver(es=>es.forEach(e=>{ const v=e.target; if(!v.isConnected){ io.unobserve(v); return; } if(e.isIntersecting) play(v); else { try{ v.pause(); }catch(_){} } }),{threshold:.25});
   vs.forEach(v=>io.observe(v)); })();
 </script>
-<script src="charhub.js?v=5"></script>
+<script src="charhub.js?v=6"></script>
 <script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obpay.js" defer></script>
 </body>
 </html>

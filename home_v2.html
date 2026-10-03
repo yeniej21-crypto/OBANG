@@ -864,7 +864,7 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 .home .lhubS .lhub b{color:#fff4ea;text-shadow:0 2px 18px rgba(0,0,0,.5)}
 .home .lhubS .lhub em{color:rgba(246,236,223,.72)}
 .home .lhubS .lhub .go{background:#e8c48a;color:#1a120b}
-.home .lhubS .lhub .pp{filter:drop-shadow(0 0 18px rgba(190,210,255,.22)) drop-shadow(0 12px 22px rgba(0,0,0,.55))}
+.home .lhubS .lhub .pp{filter:drop-shadow(0 12px 22px rgba(0,0,0,.55))} /* 10/3 블라우스를 아이보리로 보정한 그림(seoha_iv) · 푸른 번짐 빛 뺌 */
 </style>
 
 <div class="stage" id="stage">
@@ -1178,12 +1178,12 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
       <div class="sh"><small>타로</small><b>카드한테 물어보고 싶은 거, 하나 있죠</b></div>
       <div class="hRow">
         <div class="pc" id="cTarot" data-vid="v/poster/tarot.mp4" role="button" tabindex="0" style="background-image:url('img/tarot/poster.jpg');background-position:center 18%"><span class="chip new">NEW</span><div class="ct"><span class="tt">무진의 타로</span><span class="st">연애·일·돈, 카드로 보는 지금</span></div></div>
-        <div class="pc" id="cTarot1" role="button" tabindex="0" style="background-image:url('img/tarot/good.jpg');background-position:center 16%"><span class="chip free">무료</span><div class="ct"><span class="tt">오늘의 카드</span><span class="st">하루 한 장, 무진이 뒤집어 줘요</span></div></div>
+        <div class="pc" id="cTarot1" role="button" tabindex="0" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_073740_e14c75eb-d09a-4494-a57e-021fefdda659_min.webp');background-position:center 30%"><span class="chip free">무료</span><div class="ct"><span class="tt">먹물의 오늘 한 장</span><span class="st">묘당 검은 고양이가 카드 한 장 뒤집어 줘요</span></div></div>
       </div>
     </section>
 
     <section class="hSec band lhubS" id="secLoveHub" data-cats="all love heart re match">
-      <a class="lhub" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 서하의 상담실</small><b>연애 상담소</b><em>누구 때문에 왔어<br>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span><img class="pp" src="img/pop/seoha.webp" alt="" loading="lazy"></a>
+      <a class="lhub" id="lhub" href="love.html" onclick="try{sessionStorage.setItem('toHome','1')}catch(e){}"><span class="tx"><small>NEW · 서하의 상담실</small><b>연애 상담소</b><em>누구 때문에 왔어<br>상황만 고르면 서하가 안내해요</em><span class="go">들어가기</span></span><img class="pp" src="img/pop/seoha_iv.webp" alt="" loading="lazy"></a>
     </section>
     <section class="hSec" id="secDohwa" data-cats="all love match re heart">
       <div class="sh"><small>연애 · 대표 메뉴</small><b>연애, 지금 제일 궁금한 거</b></div>
@@ -1777,7 +1777,7 @@ if($('featNoeul')){ const fe=$('featNoeul'), fv=fe.querySelector('video'); fe.on
 $('hFort').onclick=()=>goPage('today.html'); $('tdH').onclick=()=>goPage('today.html');
 $('cToday').onclick=()=>goPage('today.html');
 $('cCareer').onclick=()=>goPage('career.html');
-$('cTarot').onclick=$('cTarot1').onclick=()=>goPage('tarot.html');
+$('cTarot').onclick=()=>goPage('tarot.html'); $('cTarot1').onclick=()=>goPage('meokmul.html'); /* 10/3 무료 한 장 = 먹물 */
 $('cGlobal').onclick=()=>goPage('peach.html');
 document.querySelectorAll('#hChat [data-h]').forEach(b=>b.onclick=()=>goPage('chat.html?h='+b.dataset.h));
 $('cGh').onclick=()=>goPage('gunghap.html');
@@ -2048,7 +2048,7 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.con
 })();
 </script>
 
-<script src="charhub.js?v=5"></script>
+<script src="charhub.js?v=6"></script>
 <script src="hscroll.js?v=2"></script>
 <script src="menuintro.js"></script>
 

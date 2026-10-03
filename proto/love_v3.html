@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="early.js?v=5"></script>
+<meta name="robots" content="noindex"><title>연애 상담소 · 오방도감</title>
+<meta name="description" content="서하가 먼저 들어 주는 연애 상담소">
+<meta property="og:type" content="website"><meta property="og:site_name" content="오방도감">
+<meta property="og:title" content="연애 상담소 · 서하"><meta property="og:description" content="누구 때문에 왔어. 서하가 먼저 들어 줄게">
+<meta property="og:image" content="https://obangsaju.netlify.app/img/og/home.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&display=swap">
+<script src="vidguard.js?v=1"></script>
+<style>
+/* 연애 상담소(10/3): 서하의 살롱에 들어서는 장면 → 오늘의 연애 날씨(무료) → 지금 상황 고르기 → 맞는 감정서 · 상담. 설계 문서: Claude Docs 「오방도감 연애 라인 고도화 기획」 */
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+:root{--bg:#0a080c;--card:#151117;--line:rgba(255,236,214,.09);--ink:#f6f1ea;--ink-2:#d2c8bb;--ink-3:#8f867b;--gold:#e3b866;--gold-2:#f3d79b;--rose:#e9a2a0;
+  --wood:#46b47f;--fire:#ec5a43;--earth:#d3a13a;--metal:#c9d1dc;--water:#5b8ce6;--serif:'Noto Serif KR',serif;--brush:'OBrush','Noto Serif KR',serif;--sans:'Noto Sans KR',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:#000}
+body{font-family:var(--sans);color:var(--ink);word-break:keep-all;display:flex;justify-content:center;-webkit-tap-highlight-color:transparent}
+.ph{position:relative;width:100%;max-width:430px;min-height:100vh;background:var(--bg);overflow:hidden;padding-bottom:48px}
+button{font-family:inherit;color:inherit}
+/* 맨 위 막대 */
+.top{position:fixed;top:0;left:0;right:0;margin:0 auto;max-width:430px;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 10px) 12px 10px;transition:background .3s}
+.top.sc{background:rgba(10,8,12,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.ib{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(10,8,12,.4);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;cursor:pointer}
+.top b{font-size:15px;font-weight:700;opacity:0;transition:opacity .3s}.top.sc b{opacity:1}
+/* 1. 들어서는 장면 */
+.scene{position:relative;height:78vh;min-height:520px;max-height:720px;overflow:hidden;background:#000}
+.scene .bg{position:absolute;inset:-4% -4% 0;background:url('img/pop/seoha_bg.jpg') center 18%/cover no-repeat;transform:scale(1.04);transition:transform 6s ease}
+.scene.in .bg{transform:scale(1.0)}
+.scene video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;opacity:0;transition:opacity 1s}
+.scene video.on{opacity:1}
+.scene .door{position:absolute;inset:0;z-index:3;background:url('img/intro0.jpg') center/cover;transition:opacity 1.4s ease,transform 1.6s cubic-bezier(.3,.6,.2,1);pointer-events:none}
+.scene.in .door{opacity:0;transform:scale(1.35)}
+.scene::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(10,8,12,.55) 0,rgba(10,8,12,0) 22%,rgba(10,8,12,0) 46%,rgba(10,8,12,.86) 80%,var(--bg) 100%);pointer-events:none}
+.scene .tx{position:absolute;left:20px;right:20px;bottom:26px;z-index:4;opacity:0;transform:translateY(14px);transition:opacity 1s ease .9s,transform 1s ease .9s}
+.scene.in .tx{opacity:1;transform:none}
+.scene .tx small{display:block;font-size:11.5px;letter-spacing:.2em;color:var(--gold-2);font-weight:700}
+.scene .tx h1{margin:10px 0 0;font-family:var(--brush);font-weight:400;font-size:44px;line-height:1.08}
+.scene .tx p{margin:10px 0 0;font-size:14.5px;color:var(--ink-2);line-height:1.6}
+.scene .sub{position:absolute;left:20px;right:20px;top:46%;z-index:4;text-align:center;font-family:var(--serif);font-size:19px;line-height:1.5;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.9);opacity:0;transition:opacity .4s}
+.scene .sub.on{opacity:1}
+.snd{position:absolute;right:14px;top:calc(env(safe-area-inset-top,0px) + 64px);z-index:5;display:flex;align-items:center;gap:6px;height:36px;padding:0 13px 0 10px;border-radius:999px;border:1px solid rgba(255,255,255,.24);background:rgba(10,8,12,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:12.5px;cursor:pointer;opacity:0;transition:opacity .6s ease 1.6s}
+.scene.in .snd{opacity:1}
+/* 칸 */
+.sec{padding:34px 16px 0}
+.sh small{display:block;font-size:11.5px;letter-spacing:.12em;color:#b8996a;font-weight:700}
+.sh b{display:block;margin-top:6px;font-size:19px;font-weight:800;letter-spacing:-.02em}
+.sh p{margin:6px 0 0;font-size:13px;color:var(--ink-3);line-height:1.55}
+.sh{margin-bottom:16px}
+/* 2. 오늘의 연애 날씨 */
+.wx{position:relative;border-radius:22px;overflow:hidden;padding:20px 18px 18px;background:var(--sky,linear-gradient(160deg,#2a2119,#120e10));border:1px solid var(--line);transition:background .8s}
+.wx .ic{position:absolute;right:14px;top:12px;width:92px;height:92px;opacity:.95}
+.wx small{font-size:12px;color:rgba(255,255,255,.75);font-weight:700;letter-spacing:.04em}
+.wx h3{margin:8px 0 0;font-family:var(--serif);font-size:25px;font-weight:900;line-height:1.3;max-width:70%}
+.wx .ln{margin:10px 0 0;font-size:14px;line-height:1.65;color:rgba(255,255,255,.88)}
+.wx .row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.wx .ch{border-radius:12px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.14);padding:8px 11px}
+.wx .ch em{display:block;font-style:normal;font-size:10.5px;color:rgba(255,255,255,.6)}
+.wx .ch b{display:block;margin-top:2px;font-size:14px}
+.wx .why{margin-top:12px;font-size:11.5px;color:rgba(255,255,255,.62);line-height:1.6}
+.wx .meter{display:flex;align-items:center;gap:10px;margin-top:12px}
+.wx .meter i{flex:1;height:6px;border-radius:6px;background:rgba(255,255,255,.14);overflow:hidden}
+.wx .meter i b{display:block;height:100%;width:0;border-radius:6px;background:#e3b866;transition:width 1.2s cubic-bezier(.2,.7,.2,1) .2s}
+.wx .meter span{font-family:var(--serif);font-weight:900;font-size:18px;min-width:34px;text-align:right}
+.wxf{display:grid;gap:10px}
+.wxf .g3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:6px}
+.wxf .g2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.wxf select{width:100%;height:46px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.28);color:#fff;font-size:15px;padding:0 10px;font-family:inherit;appearance:none;-webkit-appearance:none}
+.seg{display:flex;border:1px solid rgba(255,255,255,.16);border-radius:12px;overflow:hidden}
+.seg button{flex:1;height:44px;border:0;background:none;font-size:14px;cursor:pointer;color:rgba(255,255,255,.7)}
+.seg button.on{background:rgba(243,215,155,.18);color:#fff;font-weight:700}
+.go{width:100%;height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#f0cf8a,#d6a957);color:#1a1206;font-size:16px;font-weight:800;cursor:pointer}
+.wx .again{margin-top:12px;background:none;border:0;padding:0;font-size:12px;color:rgba(255,255,255,.55);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+/* 3. 지금 상황 */
+.st{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.st button{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:64px;padding:12px 12px 12px 14px;border-radius:14px;border:1px solid var(--line);background:#141016;text-align:left;cursor:pointer;transition:transform .15s,background .2s}
+.st button:active{transform:scale(.97);background:#1b161e}
+.st button b{display:block;font-size:15px;font-weight:700}
+.st button small{display:block;margin-top:3px;font-size:11.5px;color:var(--ink-3)}
+.st button svg{flex:none;color:rgba(243,215,155,.6)}
+/* 상황 시트 */
+.sheet{position:fixed;inset:0;margin:0 auto;max-width:430px;z-index:40;display:flex;align-items:flex-end;background:rgba(4,3,6,.62);opacity:0;pointer-events:none;transition:opacity .3s}
+.sheet.on{opacity:1;pointer-events:auto}
+.sheet .in{width:100%;max-height:88%;overflow-y:auto;background:linear-gradient(180deg,#1b161e,#0e0b10);border-top:1px solid rgba(243,215,155,.3);border-radius:22px 22px 0 0;padding:20px 16px calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateY(30px);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.sheet.on .in{transform:none}
+.sheet .who{display:flex;gap:12px;align-items:flex-start}
+.sheet .who i{flex:none;width:48px;height:48px;border-radius:50%;background:url('img/seoha.jpg') center 16%/cover;box-shadow:0 0 0 2px var(--gold)}
+.sheet .who small{display:block;font-size:11.5px;color:var(--gold-2);font-weight:700;letter-spacing:.06em}
+.sheet .who p{margin:4px 0 0;font-family:var(--serif);font-size:17px;line-height:1.55;min-height:3.1em}
+.pl{margin-top:16px;display:grid;gap:8px}
+.pi{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.03);cursor:pointer;text-align:left;width:100%}
+.pi .av{flex:none;width:46px;height:46px;border-radius:50%;background:#222 center 16%/cover;box-shadow:0 0 0 1.5px rgba(227,184,102,.45)}
+.pi .t{flex:1;min-width:0}
+.pi .t b{display:block;font-size:14.5px;font-weight:700}
+.pi .t small{display:block;margin-top:2px;font-size:12px;color:var(--ink-3);line-height:1.45}
+.pi .pr{flex:none;text-align:right;font-size:12.5px;font-weight:800;color:var(--gold-2)}
+.pi .pr em{display:block;font-style:normal;font-size:10.5px;font-weight:600;color:var(--ink-3);margin-top:2px}
+.pi.soon{opacity:.75}
+.pi.soon .pr{color:var(--ink-3)}
+.pi.top1{border-color:rgba(243,215,155,.4);background:linear-gradient(90deg,rgba(243,215,155,.1),rgba(243,215,155,0))}
+.sheet .x{display:block;width:100%;margin-top:10px;padding:12px;border:0;background:none;color:var(--ink-3);font-size:14px;cursor:pointer}
+/* 4. 상담소 사람들 */
+.ppl{display:flex;gap:14px;overflow-x:auto;margin:0 -16px;padding:2px 16px 4px;scrollbar-width:none}
+.ppl::-webkit-scrollbar{display:none}
+.ppl button{flex:none;width:66px;border:0;background:none;padding:0;cursor:pointer;text-align:center}
+.ppl i{display:block;width:58px;height:58px;margin:0 auto;border-radius:50%;background:#222 center 16%/cover;box-shadow:0 0 0 2px var(--bg),0 0 0 3px rgba(227,184,102,.55)}
+.ppl b{display:block;margin-top:7px;font-size:12px}
+.ppl small{display:block;font-size:10px;color:var(--ink-3);margin-top:1px;white-space:nowrap}
+.ai{margin:34px 16px 0;text-align:center;font-size:11px;color:var(--ink-3);line-height:1.6}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(-50%);z-index:80;background:rgba(0,0,0,.85);color:#fff;font-size:14px;padding:10px 16px;border-radius:999px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+/* 연서당의 작은 편지들(10/3): 하람의 연서당 문간 배너 + 무료 미니 세 가지(하람 그림 · 보일 때만 영상). 모서리 없음, 원격 그림이 안 열리면 볕 든 종이색 + 선 그림 */
+.ysf{position:relative;display:block;height:228px;margin-bottom:10px;overflow:hidden;color:#2a2119;text-decoration:none;background:radial-gradient(90% 80% at 85% 10%,#fff0ce,rgba(255,240,206,0) 60%),linear-gradient(160deg,#f3e3c4,#dcc196);box-shadow:0 18px 30px -18px rgba(0,0,0,.8);transition:transform .15s}
+.ysf .im{position:absolute;inset:0;overflow:hidden}
+.ysf .im .pi,.ysf .im video{position:absolute;top:0;bottom:0;right:0;width:72%;height:100%;object-fit:cover;object-position:center 30%;background:center 30%/cover no-repeat}
+.ysf .im .pi{animation:ysBr 20s ease-in-out infinite alternate;transform-origin:60% 30%}
+@keyframes ysBr{from{transform:scale(1.02)}to{transform:scale(1.08)}}
+.ysf .im video{opacity:0;transition:opacity 1s}
+.ysf .im video.on{opacity:1}
+.ysf .im:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f6f0e6 0,#f6f0e6 30%,rgba(246,240,230,.86) 46%,rgba(246,240,230,0) 70%),linear-gradient(118deg,rgba(255,226,170,.32),rgba(255,226,170,0) 46%)}
+.ysf .tx{position:absolute;left:16px;top:18px;bottom:16px;width:54%;display:flex;flex-direction:column}
+.ysf small{font-size:11px;font-weight:700;letter-spacing:.1em;color:#b8352a}
+.ysf b{margin-top:6px;font-size:22px;font-weight:900;letter-spacing:-.03em;line-height:1.25}
+.ysf em{margin-top:6px;font-style:normal;font-size:13px;line-height:1.55;color:#6b5d4f}
+.ysf i{margin-top:auto;align-self:flex-start;font-style:normal;font-size:13px;font-weight:800;padding:10px 14px;background:#2a2119;color:#f6f0e6;box-shadow:6px 8px 16px -8px rgba(60,38,18,.6)}
+.ysf:active{transform:scale(.985)}
+.mini{display:grid;gap:8px}
+.mini a{position:relative;display:flex;align-items:center;gap:14px;min-height:116px;padding:8px 14px 8px 8px;border-radius:0;background:linear-gradient(118deg,#fbf7ef 0,#f6f0e6 45%,#ece2d0 100%);color:#2a2119;text-decoration:none;box-shadow:0 14px 24px -16px rgba(0,0,0,.7);transition:transform .15s}
+.mini a:active{transform:scale(.985)}
+.mini .pic{flex:none;width:86px;height:100px;display:grid;place-items:center;background:radial-gradient(90% 70% at 20% 10%,#fff0ce,rgba(255,240,206,0) 60%),#efe5d4;box-shadow:inset 0 0 0 1px rgba(42,33,25,.1),4px 6px 12px -6px rgba(60,38,18,.45);overflow:hidden;position:relative}
+.mini .pic svg{display:block}
+.mini .pic .hr,.mini .pic video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;background:center 30%/cover no-repeat}
+.mini .pic video{opacity:0;transition:opacity .9s}
+.mini .pic video.on{opacity:1}
+.mini .pic:after{content:"";position:absolute;inset:0;background:linear-gradient(118deg,rgba(255,226,170,.28),rgba(255,226,170,0) 50%);pointer-events:none}
+.mini .tx{flex:1;min-width:0}
+.mini .tx small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;color:#9a8b7a}
+.mini .tx b{display:block;margin-top:3px;font-size:16px;font-weight:800;letter-spacing:-.02em;color:#2a2119}
+.mini .tx em{display:block;margin-top:3px;font-style:normal;font-size:12.5px;line-height:1.5;color:#6b5d4f}
+.mini .ar{flex:none;color:#9a8b7a}
+.mini .wk{position:absolute;inset:18px 8px;display:grid;grid-template-columns:repeat(7,1fr);background:#e6d9c3;box-shadow:inset 0 0 0 1px rgba(42,33,25,.12)}
+.mini .wk i{border-left:1px solid rgba(42,33,25,.12)}.mini .wk i:first-child{border-left:0}
+.mini .wk i.on{background:radial-gradient(70% 60% at 50% 45%,#fff3d9,rgba(255,230,180,.75) 55%,rgba(255,230,180,0))}
+@media (prefers-reduced-motion:reduce){.ysf .im .pi{animation:none}}
+
+/* ===== 10/3 18:45 v3 시안: 은주 — 연애 날씨가 너무 크고 밋밋, 상황 고르기는 글자만 줄줄이라 버튼 느낌이 없음 → 날씨는 한 장짜리 작은 카드, 상황은 귀여운 그림 썸네일 카드 + 남색 띠로 구역 나눔 (모서리 없음) ===== */
+.wx{border-radius:0;padding:14px 14px 12px;background:var(--sky);border:1px solid rgba(255,255,255,.1)}
+.wx .ic{position:static;width:58px;height:58px;flex:none;margin:-4px -2px 0 -6px}
+.wx .hd{display:flex;align-items:center;gap:10px}
+.wx .hd .tt{flex:1;min-width:0}
+.wx small{font-size:11px;letter-spacing:.02em;color:rgba(255,255,255,.66)}
+.wx h3{margin:3px 0 0;font-size:19px;max-width:none;line-height:1.25}
+.wx .sc{flex:none;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--acc,#e3b866) calc(var(--p,0)*1%),rgba(255,255,255,.12) 0);position:relative}
+.wx .sc:before{content:"";position:absolute;inset:5px;border-radius:50%;background:rgba(10,10,18,.82)}
+.wx .sc b{position:relative;font-family:var(--serif);font-weight:900;font-size:19px;line-height:1}
+.wx .sc em{position:absolute;bottom:-15px;left:0;right:0;text-align:center;font-style:normal;font-size:9.5px;color:rgba(255,255,255,.55)}
+.wx .ln{margin:12px 0 0;font-size:13.5px;line-height:1.55;color:#fff}
+.wx .row{gap:6px;margin-top:10px}
+.wx .ch{border-radius:0;padding:6px 9px;display:flex;align-items:baseline;gap:6px;background:rgba(0,0,0,.25)}
+.wx .ch em{display:inline;font-size:10.5px}
+.wx .ch b{display:inline;margin:0;font-size:13px}
+.wx .ft{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-top:9px}
+.wx .why{margin:0;font-size:11px;line-height:1.5;color:rgba(255,255,255,.5)}
+.wx .again{margin:0;flex:none;font-size:11px}
+.wx .meter{display:none}
+#secWx .sh{margin-bottom:12px}
+#secWx .sh p{display:none}
+/* 상황: 남색 띠 + 그림 카드 */
+.stband{margin-top:34px;padding:26px 16px 24px;background:linear-gradient(180deg,#121729,#0f1322);border-top:1px solid rgba(160,180,255,.12);border-bottom:1px solid rgba(160,180,255,.12)}
+.stband .sh{margin-bottom:14px}
+.stband .sh small{color:#f2a7b6}
+.stband .sh p{display:block;color:rgba(220,226,255,.6)}
+.st{gap:10px}
+.st button{display:block;min-height:0;padding:0;border-radius:0;border:1px solid rgba(170,190,255,.14);background:var(--sbg,#14192e);overflow:hidden;text-align:left;box-shadow:0 10px 22px -14px rgba(0,0,0,.8)}
+.st button:active{transform:scale(.97);background:var(--sbg,#14192e);border-color:rgba(243,215,155,.6)}
+.st button .pic{display:block;width:100%;aspect-ratio:1/1;background:var(--sheet) no-repeat;background-size:400% auto;background-position:var(--bx) var(--by)}
+.st button .lb{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:9px 10px 10px 12px;background:rgba(255,255,255,.04);border-top:1px solid rgba(170,190,255,.1)}
+.st button .lb b{font-size:15px;font-weight:800}
+.st button .lb small{margin-top:2px;font-size:11.5px;color:rgba(220,226,255,.62)}
+.st button .lb svg{color:#f3d79b}
+.st.g4{grid-template-columns:repeat(4,1fr);gap:8px}
+.st.g4 .lb{padding:7px 4px 8px;justify-content:center;text-align:center}
+.st.g4 .lb small,.st.g4 .lb svg{display:none}
+.st.g4 .lb b{font-size:12.5px;letter-spacing:-.02em}
+/* 미리보기 전용 전환 버튼 */
+.pvsw{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);transform:translateX(-50%);z-index:60;display:flex;gap:4px;padding:5px;background:rgba(10,8,12,.92);border:1px solid rgba(243,215,155,.35)}
+.pvsw button{height:34px;padding:0 10px;border:0;background:none;color:#cfc6b9;font-size:12.5px;font-weight:700;cursor:pointer}
+.pvsw button.on{background:#e3b866;color:#1a1206}
+</style>
+</head>
+<body>
+<div class="ph" id="ph">
+  <div class="top" id="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>연애 상담소</b><span style="width:40px"></span></div>
+
+  <section class="scene" id="scene">
+    <div class="bg"></div>
+    <video id="sv" muted loop playsinline preload="auto" poster="img/pop/seoha_bg.jpg"></video>
+    <div class="door"></div>
+    <div class="sub" id="sub"></div>
+    <div class="tx"><small>오방도감 · 연애 상담소</small><h1>누구 때문에<br>왔어</h1><p>문 닫고 앉아. 서하가 먼저 들어 줄게.<br>사주와 카드로, 네 얘기에 맞춰서.</p></div>
+    <button class="snd" id="snd" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg>서하 목소리</button>
+  </section>
+
+  <section class="sec" id="secWx">
+    <div class="sh"><small>매일 무료</small><b>오늘의 연애 날씨</b><p>내 사주와 오늘의 기운이 어떻게 만나는지, 매일 아침 바뀌어요.</p></div>
+    <div class="wx" id="wx"></div>
+  </section>
+
+
+  <section class="stband">
+    <div class="sh"><small>지금 어떤 상황이야</small><b>네 상황부터 골라 줘</b><p>눌러 보면 서하가 맞는 풀이를 골라 줘요.</p></div>
+    <div class="st" id="st"></div>
+  </section>
+
+
+  <section class="sec" id="secMini">
+    <div class="sh"><small>무료 · 하람이 써 주는</small><b>연서당의 작은 편지들</b><p>생일만 있으면 바로 나와요. 마음에 들면 친구에게 카드로 보내요.</p></div>
+    <a class="ysf" href="yeonseo.html"><span class="im"><span class="pi" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_002112_ac4bb635-6498-4664-b753-dbc9bf75f580_min.webp')"></span><video class="yv" muted loop playsinline preload="none" poster="https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_002112_ac4bb635-6498-4664-b753-dbc9bf75f580_min.webp" data-src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/afe7cc7d-6fc5-4558-b4f2-84766b9405be.mp4"></video></span><span class="tx"><small>하람의 연서당 · 새로 열었어요</small><b>볕 드는 편지 가게<br>곧 받을 편지</b><em>열두 서랍 중 햇빛이 멈추는 달, 다음 인연의 편지가 와요</em><i>연서당 들어가기</i></span></a>
+    <div class="mini">
+      <a href="lovemini.html?t=type"><span class="pic"><svg viewBox="0 0 76 76" width="62" height="62" aria-hidden="true"><defs><radialGradient id="mnW" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#d65a4a"/><stop offset=".55" stop-color="#b8352a"/><stop offset="1" stop-color="#7f1e16"/></radialGradient><filter id="mnB"><feGaussianBlur stdDeviation="2.4"/></filter></defs><ellipse cx="40" cy="43" rx="25" ry="23" fill="#2a2119" opacity=".3" filter="url(#mnB)"/><path d="M38 12c6 0 9 3 13 4s8 4 9 9 4 8 3 13-1 9-4 12-6 8-11 9-8 3-13 2-8-2-12-5-7-6-8-11-3-8-1-13 2-9 6-12 7-6 12-7z" fill="url(#mnW)"/><circle cx="38" cy="38" r="17" fill="#a42e24" stroke="#7e1d15" stroke-opacity=".6"/><g fill="#c94a3c"><circle cx="38" cy="32" r="4"/><circle cx="43.7" cy="36.1" r="4"/><circle cx="41.5" cy="42.9" r="4"/><circle cx="34.5" cy="42.9" r="4"/><circle cx="32.3" cy="36.1" r="4"/></g><circle cx="38" cy="38" r="2.4" fill="#e9b26a"/><ellipse cx="30" cy="25" rx="7" ry="3" fill="#fff" fill-opacity=".18" transform="rotate(-32 30 25)"/></svg><span class="hr" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_514adb66-edf2-4b3a-ba17-e308bd4054cd_min.webp')"></span><video class="yv" muted loop playsinline preload="none" poster="https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_514adb66-edf2-4b3a-ba17-e308bd4054cd_min.webp" data-src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/84f23237-3cec-4dfc-8dc7-3c80143618f5.mp4"></video></span><span class="tx"><small>놋쇠 도장을 꾹 누르면</small><b>봉랍 체질 카드</b><em>봉랍 색으로 읽는 나의 연애 체질</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+      <a href="lovemini.html?t=match"><span class="pic"><svg viewBox="0 0 76 76" width="76" height="76" aria-hidden="true"><path d="M-2 46C10 46 14 38 22 38" fill="none" stroke="#2a2119" stroke-width="2.4" stroke-linecap="round"/><path d="M78 30C66 30 62 38 54 38" fill="none" stroke="#b8352a" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="44" cy="38" rx="10" ry="7" fill="none" stroke="#b8352a" stroke-width="2.4"/><ellipse cx="32" cy="38" rx="10" ry="7" fill="none" stroke="#2a2119" stroke-width="2.4"/><path d="M36.5 32.4A10 7 0 0 1 41.6 31.2" fill="none" stroke="#efe5d4" stroke-width="5"/><path d="M36.5 32.4A10 7 0 0 1 41.6 31.2" fill="none" stroke="#b8352a" stroke-width="2.4"/></svg><span class="hr" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_f02f9001-2006-4921-a162-31f21cc2a7b2_min.webp')"></span><video class="yv" muted loop playsinline preload="none" poster="https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_f02f9001-2006-4921-a162-31f21cc2a7b2_min.webp" data-src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/14ab2ecc-5f0c-41e0-9add-4935589905dd.mp4"></video></span><span class="tx"><small>붉은 실과 먹색 실을 묶으면</small><b>실 묶기 궁합</b><em>두 사람의 생일로 보는 매듭의 결</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+      <a href="lovemini.html?t=week"><span class="pic"><span class="wk"><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i></span><span class="hr" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_ac7dda5b-c926-4efc-a637-71ffe9186cec_min.webp')"></span><video class="yv" muted loop playsinline preload="none" poster="https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_003011_ac7dda5b-c926-4efc-a637-71ffe9186cec_min.webp" data-src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/cfd7fd9d-095f-4f9e-8456-3421bfc5160b.mp4"></video></span><span class="tx"><small>대나무 발을 걷으면</small><b>햇빛 일주일</b><em>이번 주 연락하기 좋은 이틀과 시간</em></span><svg class="ar" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><small>상담소 사람들</small><b>누구한테 털어놓을래</b></div>
+    <div class="ppl" id="ppl"></div>
+  </section>
+
+  <p class="ai">진행자는 AI로 만든 가상의 캐릭터예요. 풀이는 만세력 계산과 카드 해석을 바탕으로 하며, 사람의 마음이나 미래를 단정하지 않아요.</p>
+
+  <div class="sheet" id="sheet" aria-hidden="true"><div class="in">
+    <div class="who"><i></i><div><small id="shK"></small><p id="shL"></p></div></div>
+    <div class="pl" id="shP"></div>
+    <button class="x" id="shX" type="button">닫기</button>
+  </div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="saju.js"></script>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const toast=t=>{ const e=$('toast'); e.textContent=t; e.classList.add('on'); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove('on'),2000); };
+const go=u=>{ try{ sessionStorage.setItem('toHome','1'); sessionStorage.setItem('fromLove','1'); }catch(e){} location.href=u; };
+$('back').onclick=()=>{ if(history.length>1) history.back(); else location.href='./'; };
+addEventListener('scroll',()=>$('top').classList.toggle('sc',scrollY>200),{passive:true});
+
+/* ---------- 1. 들어서는 장면: 문이 열리며 서하 ---------- */
+const sc=$('scene'), sv=$('sv');
+sv.src='v/idle.mp4'; sv.addEventListener('playing',()=>sv.classList.add('on'));
+const p=sv.play(); if(p&&p.catch) p.catch(()=>{});
+requestAnimationFrame(()=>setTimeout(()=>sc.classList.add('in'),120));
+let talking=false;
+$('snd').onclick=()=>{ if(talking) return; talking=true; const v=document.createElement('video'); v.playsInline=true; v.setAttribute('playsinline',''); v.src='v/t1.mp4'; v.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;z-index:1;opacity:0;transition:opacity .5s';
+  sc.insertBefore(v,sv.nextSibling); const sub=$('sub'), L=[[0.2,'왔네.'],[1.4,'문 닫고, 이리 와 앉아.']];
+  v.addEventListener('playing',()=>{ v.style.opacity=1; });
+  v.addEventListener('timeupdate',()=>{ let t=''; L.forEach(x=>{ if(v.currentTime>=x[0]) t=x[1]; }); if(sub.textContent!==t){ sub.textContent=t; sub.classList.toggle('on',!!t); } });
+  v.addEventListener('ended',()=>{ sub.classList.remove('on'); v.style.opacity=0; setTimeout(()=>{ v.remove(); talking=false; },600); });
+  v.play().catch(()=>{ v.remove(); talking=false; }); };
+
+/* ---------- 2. 오늘의 연애 날씨 ---------- */
+const S=window.Saju, GAN=S.GAN, JI=S.JI;
+const loadMe=()=>{ try{ return JSON.parse(sessionStorage.getItem('me')||localStorage.getItem('obMe')||'null'); }catch(e){ return null; } };
+const saveMe=o=>{ try{ const old=loadMe()||{}; const n=Object.assign(old,o); sessionStorage.setItem('me',JSON.stringify(n)); localStorage.setItem('obMe',JSON.stringify(n)); }catch(e){} };
+const PEACH={8:9,0:9,4:9, 2:3,6:3,10:3, 5:6,9:6,1:6, 11:0,3:0,7:0}; /* 일지 삼합 → 도화 */
+const LIUHE=[1,0,11,10,9,8,7,6,5,4,3,2]; /* 육합 짝 */
+const SANHE=[[8,0,4],[2,6,10],[5,9,1],[11,3,7]];
+const YUANJIN=[7,6,9,8,11,10,1,0,3,2,5,4];
+const sanhe=(a,b)=>a!==b&&SANHE.some(g=>g.includes(a)&&g.includes(b));
+const chung=(a,b)=>Math.abs(a-b)===6;
+const HOURS=['23:30~01:29','01:30~03:29','03:30~05:29','05:30~07:29','07:30~09:29','09:30~11:29','11:30~13:29','13:30~15:29','15:30~17:29','17:30~19:29','19:30~21:29','21:30~23:29'];
+const HNAME=['자시','축시','인시','묘시','진시','사시','오시','미시','신시','유시','술시','해시'];
+function solarOf(me){ if(me.cal==='l'){ const s=S.lunarToSolar(+me.y,+me.m,+me.d,!!me.leap); if(s) return s; } return {y:+me.y,m:+me.m,d:+me.d}; }
+function weather(me,date){
+  const s=solarOf(me), P=S.pillars(s.y,s.m,s.d,me.h==null||me.h===''?null:+me.h);
+  const dm=P.d[0], db=P.d[1], de=Math.floor(dm/2);
+  const loveEl=me.g==='m'?(de+2)%5:(de+3)%5; /* 인연의 별: 여성 관성 · 남성 재성 */
+  const T=S.dayPillar(date.getFullYear(),date.getMonth()+1,date.getDate()), ts=T[0], tb=T[1];
+  const pe=PEACH[db]; let sc=52; const why=[], tags=[];
+  if(tb===pe){ sc+=18; why.push(`오늘 일진의 ${JI[tb]}가 내 도화 글자`); tags.push('peach'); }
+  if(LIUHE[db]===tb){ sc+=14; why.push(`내 배우자 자리 ${JI[db]}와 오늘 ${JI[tb]}가 육합`); tags.push('hap'); }
+  else if(sanhe(db,tb)){ sc+=7; why.push(`배우자 자리 ${JI[db]}와 오늘 ${JI[tb]}가 삼합`); tags.push('hap'); }
+  if(Math.floor(ts/2)===loveEl){ sc+=10; why.push(`오늘 천간 ${GAN[ts]}가 인연의 별 기운`); tags.push('star'); }
+  else if(S.BR_EL[tb]===loveEl){ sc+=5; why.push(`오늘 지지 ${JI[tb]}에 인연의 별 기운`); tags.push('star'); }
+  if(chung(db,tb)){ sc-=18; why.push(`배우자 자리 ${JI[db]}와 오늘 ${JI[tb]}가 충`); tags.push('chung'); }
+  if(YUANJIN[db]===tb){ sc-=8; why.push(`배우자 자리와 오늘이 원진`); tags.push('yj'); }
+  sc=Math.max(18,Math.min(94,sc));
+  /* 연락하기 좋은 시간: 깨어 있는 시간(묘시~해시) 중 도화 · 육합 · 삼합 · 인연의 별 */
+  const hs=[]; for(let h=3;h<=11;h++){ let v=0; if(h===pe) v+=3; if(LIUHE[db]===h) v+=3; else if(sanhe(db,h)) v+=1; if(S.BR_EL[h]===loveEl) v+=1; if(chung(db,h)) v-=4; if(v>0) hs.push([h,v]); }
+  hs.sort((a,b)=>b[1]-a[1]||a[0]-b[0]); const good=hs.slice(0,2).map(x=>x[0]).sort((a,b)=>a-b);
+  return {sc,tags,why,ts,tb,good,dm,db,loveEl};
+}
+const KIND=sc=>sc>=72?['clear','맑음','#2a2119','#120e10','sun']:sc>=56?['bright','구름 조금','#2a2119','#120e10','cloudsun']:sc>=40?['cloud','흐림','#2a2119','#120e10','cloud']:['rain','소나기','#2a2119','#120e10','rain'];
+const LINE={peach:'눈길이 머무는 날이에요. 먼저 웃어 주는 쪽이 이겨요.',hap:'가까운 사람과 마음이 맞물리는 날이에요. 미뤄 둔 연락, 오늘 해도 좋아요.',star:'인연의 기운이 들어오는 날이에요. 새 자리에 한 번 나가 봐요.',
+  chung:'말이 어긋나기 쉬운 날이에요. 중요한 얘기는 하루 미뤄요.',yj:'괜히 서운해지기 쉬운 날이에요. 혼자 결론 내리지 말아요.',none:'조용한 날이에요. 나를 돌보는 데 쓰면 다음 주가 달라져요.'};
+const TITLE={clear:'마음이 잘 닿는 날',bright:'조금씩 가까워지는 날',cloud:'천천히 가도 되는 날',rain:'오늘은 한 박자 쉬기'};
+function icon(k){ const g='#f3d79b', w='rgba(255,255,255,.88)';
+  if(k==='sun') return `<svg class="ic" viewBox="0 0 100 100"><circle cx="50" cy="50" r="18" fill="${g}"/><g stroke="${g}" stroke-width="3.5" stroke-linecap="round">${[0,45,90,135,180,225,270,315].map(a=>{const r=a*Math.PI/180;return `<line x1="${50+Math.cos(r)*27}" y1="${50+Math.sin(r)*27}" x2="${50+Math.cos(r)*36}" y2="${50+Math.sin(r)*36}"/>`;}).join('')}</g></svg>`;
+  if(k==='cloudsun') return `<svg class="ic" viewBox="0 0 100 100"><circle cx="40" cy="38" r="15" fill="${g}"/><path d="M30 72h44a14 14 0 0 0 0-28 20 20 0 0 0-38 6 11 11 0 0 0-6 22z" fill="${w}"/></svg>`;
+  if(k==='cloud') return `<svg class="ic" viewBox="0 0 100 100"><path d="M24 70h52a15 15 0 0 0 0-30 22 22 0 0 0-42 6 12 12 0 0 0-10 24z" fill="${w}" opacity=".85"/></svg>`;
+  return `<svg class="ic" viewBox="0 0 100 100"><path d="M24 58h52a15 15 0 0 0 0-30 22 22 0 0 0-42 6 12 12 0 0 0-10 24z" fill="${w}" opacity=".8"/><g stroke="#f3d79b" stroke-width="3" stroke-linecap="round"><line x1="36" y1="68" x2="32" y2="80"/><line x1="50" y1="68" x2="46" y2="80"/><line x1="64" y1="68" x2="60" y2="80"/></g></svg>`; }
+function renderWx(){ const me=loadMe(), box=$('wx');
+  if(!me||!me.y){ renderForm(); return; }
+  const now=new Date(), W=weather(me,now), K=KIND(W.sc), top=W.tags.find(t=>['chung','yj'].includes(t))&&W.sc<50?W.tags.find(t=>['chung','yj'].includes(t)):(W.tags[0]||'none');
+  box.style.setProperty('--sky',`linear-gradient(160deg,${K[2]},${K[3]})`);
+  const md=`${now.getMonth()+1}월 ${now.getDate()}일 · 오늘 일진 ${GAN[W.ts]}${JI[W.tb]}`;
+  const SKY={clear:['#3a2a12','#140f0a','#f3c46a'],bright:['#2c2a2a','#12121a','#f0cf8a'],cloud:['#25283a','#101220','#c9cfe6'],rain:['#1b2440','#0b0f1e','#8fb0ff']}[K[0]];
+  box.style.setProperty('--sky',`radial-gradient(120% 90% at 0% 0%,${SKY[0]},${SKY[1]} 70%)`); box.style.setProperty('--acc',SKY[2]);
+  box.innerHTML=`<div class="hd">${icon(K[4])}<div class="tt"><small>${md}</small><h3>${TITLE[K[0]]}</h3></div><div class="sc" id="wxSc" style="--p:0"><b>${W.sc}</b><em>연애 지수</em></div></div>
+    <p class="ln">${LINE[top]}</p>
+    <div class="row"><div class="ch"><em>날씨</em><b>${K[1]}</b></div><div class="ch"><em>연락 좋은 때</em><b>${W.good.length?W.good.map(h=>HNAME[h]+' '+HOURS[h].split('~')[0]).join(' · '):'오늘은 쉬어 가기'}</b></div></div>
+    <div class="ft"><p class="why">근거 · ${W.why.length?W.why.join(' · '):'오늘 일진이 내 연애 자리와 크게 부딪히지도 끌어당기지도 않아요'}</p><button class="again" id="wxRe" type="button">생일 다시 넣기</button></div>`;
+  requestAnimationFrame(()=>setTimeout(()=>{ const c=$('wxSc'); if(c){ let p=0; const st=()=>{ p=Math.min(W.sc,p+2); c.style.setProperty('--p',p); if(p<W.sc) requestAnimationFrame(st); }; st(); } },120));
+  requestAnimationFrame(()=>setTimeout(()=>{ const b=$('wxB'); if(b) b.style.width=W.sc+'%'; },60));
+  $('wxRe').onclick=()=>renderForm(me); }
+function renderForm(me){ const box=$('wx'); me=me||{};
+  box.style.setProperty('--sky','linear-gradient(160deg,#2a2119,#120e10)');
+  const yNow=new Date().getFullYear(), ys=[]; for(let y=yNow-19;y>=1950;y--) ys.push(y);
+  box.innerHTML=`${icon('cloudsun')}<small>생일만 알려 주면 바로</small><h3>오늘 내 연애 기운은</h3>
+    <div class="wxf" style="margin-top:16px">
+      <div class="seg" id="wCal"><button data-v="s" class="${me.cal!=='l'?'on':''}" type="button">양력</button><button data-v="l" class="${me.cal==='l'?'on':''}" type="button">음력</button></div>
+      <div class="g3"><select id="wY">${ys.map(y=>`<option ${+me.y===y||(!me.y&&y===1996)?'selected':''}>${y}</option>`).join('')}</select><select id="wM">${Array.from({length:12},(_,i)=>`<option value="${i+1}" ${+me.m===i+1?'selected':''}>${i+1}월</option>`).join('')}</select><select id="wD"></select></div>
+      <div class="g2"><div class="seg" id="wG"><button data-v="f" class="${me.g!=='m'?'on':''}" type="button">여자</button><button data-v="m" class="${me.g==='m'?'on':''}" type="button">남자</button></div><select id="wH"><option value="">태어난 시 모름</option>${HNAME.map((n,i)=>`<option value="${i}" ${me.h!=null&&me.h!==''&&+me.h===i?'selected':''}>${n} ${HOURS[i]}</option>`).join('')}</select></div>
+      <button class="go" id="wGo" type="button">오늘의 연애 날씨 보기</button>
+    </div>`;
+  const fillD=()=>{ const y=+$('wY').value, m=+$('wM').value, n=new Date(y,m,0).getDate(), cur=+$('wD').value||+me.d||14; $('wD').innerHTML=Array.from({length:n},(_,i)=>`<option value="${i+1}" ${cur===i+1?'selected':''}>${i+1}일</option>`).join(''); };
+  fillD(); $('wY').onchange=$('wM').onchange=fillD;
+  const seg=id=>$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>$(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)));
+  seg('wCal'); seg('wG');
+  $('wGo').onclick=()=>{ const cal=$('wCal').querySelector('.on').dataset.v, o={cal,y:+$('wY').value,m:+$('wM').value,d:+$('wD').value,g:$('wG').querySelector('.on').dataset.v,h:$('wH').value===''?null:+$('wH').value};
+    if(cal==='l'&&!S.lunarToSolar(o.y,o.m,o.d,false)){ toast('없는 음력 날짜예요'); return; }
+    saveMe(o); renderWx(); }; }
+renderWx();
+
+/* ---------- 3. 지금 상황 → 맞는 감정서 ---------- */
+const ST=[
+ {k:'solo',hj:'緣',n:'솔로',s:'언제 · 어떤 사람',c:'var(--rose)',line:'비어 있는 자리는 모자란 게 아니야. 아직 맞는 사람이 안 온 거지.',
+  p:[['next'],['dohwa'],['madam'],['tarotLove'],['flag']]},
+ {k:'crush',hj:'戀',n:'짝사랑',s:'그 사람도 나를',c:'var(--fire)',line:'마음은 혼자 커지는데 말은 못 하고. 그 사람 결부터 같이 보자.',
+  p:[['partner'],['tarotHeart'],['chatFire'],['confess']]},
+ {k:'some',hj:'曖',n:'썸',s:'이거 될까',c:'#ffb9a6',line:'애매한 게 제일 피곤하지. 이 썸이 어느 쪽으로 기우는지 보자.',
+  p:[['gunghap'],['redthread'],['tarotLove'],['chatTaeo'],['confess']]},
+ {k:'dating',hj:'愛',n:'연애 중',s:'우리 오래 갈까',c:'var(--gold)',line:'좋을 때 한 번 들여다보면 오래 가. 둘이 어떻게 맞물리는지 볼까.',
+  p:[['redthread'],['gunghap'],['tarotLove'],['chatEarth'],['check']]},
+ {k:'fight',hj:'倦',n:'권태 · 다툼',s:'왜 자꾸 부딪혀',c:'var(--earth)',line:'싸우는 데도 결이 있어. 어디서 자꾸 부딪히는지부터 보자.',
+  p:[['chatEarth'],['redthread'],['tarotLove'],['check']]},
+ {k:'breakup',hj:'別',n:'이별 직후',s:'언제 괜찮아져',c:'var(--metal)',line:'지금은 답보다 숨이 먼저야. 천천히 얘기해도 돼.',
+  p:[['chatWater'],['chatWood'],['tarotFlow'],['hundred']]},
+ {k:'reunion',hj:'回',n:'재회',s:'다시 닿을까',c:'var(--water)',line:'다시 닿을지는 둘의 때가 말해 줘. 서두르지 말고 같이 보자.',
+  p:[['re'],['tarotHeart'],['chatMetal'],['reNew']]},
+ {k:'marry',hj:'婚',n:'결혼',s:'이 사람이랑 언제',c:'#d9b38c',line:'이 사람이랑, 그리고 언제. 그 두 가지를 같이 보자.',
+  p:[['redthread'],['gunghap'],['life'],['chatHalmae'],['marry']]}];
+const PR={
+ next:{n:'다음 연애',d:'서하 · 다음 인연이 오는 달과 그 사람',img:'img/seoha.jpg',c:'var(--gold)',pr:'9,900원',u:'love2.html?m=next'},
+ dohwa:{n:'도화 사주',d:'태오 · 내 사주 속 끌림과 인연 달력',img:'img/taeo/base.jpg',c:'#ffb9a6',pr:'14,900원',u:'dohwa.html'},
+ madam:{n:'이달의 연애운',d:'묘당 마담 · 이번 달 끌림 날과 연락 시간',img:'img/cat/madam.jpg',c:'var(--rose)',pr:'990원',u:'myodang.html'},
+ tarotLove:{n:'연애 타로',d:'무진 · 내 마음, 그 사람 마음, 앞으로',img:'img/tarot/mujin.jpg',c:'#b48cff',pr:'한 장 무료',u:'tarot.html?t=love'},
+ tarotHeart:{n:'그 사람 속마음 타로',d:'무진 · 그 사람이 보는 나와 할 행동',img:'img/tarot/mujin.jpg',c:'#b48cff',pr:'한 장 무료',u:'tarot.html?t=heart'},
+ tarotFlow:{n:'지금 내 흐름 타로',d:'무진 · 지금 자리와 다가올 흐름',img:'img/tarot/mujin.jpg',c:'#b48cff',pr:'한 장 무료',u:'tarot.html?t=flow'},
+ redthread:{n:'붉은 실 궁합',d:'월하 · 여덟 글자로 보는 정통 궁합',img:'img/taegil.jpg',c:'#b8352a',pr:'무료로 시작',u:'redthread.html'},
+ partner:{n:'그 사람 속마음',d:'시온의 은거울 · 그 사람의 결과 요즘',img:'img/sion.jpg',c:'var(--metal)',pr:'무료로 시작',u:'heart.html'},
+ gunghap:{n:'도화 궁합',d:'태오 · 두 사람의 끌림과 오래 감',img:'img/taeo/base.jpg',c:'#ffb9a6',pr:'14,900원',u:'gunghap.html'},
+ re:{n:'재회 사주',d:'시온 · 다시 닿기 쉬운 달과 연락할 날',img:'img/sion.jpg',c:'var(--metal)',pr:'14,900원',u:'love2.html?m=re'},
+ life:{n:'평생 사주',d:'현암 · 대운으로 본 인연의 때',img:'img/jeongtong.jpg',c:'#d9b38c',pr:'39,000원',u:'lifetime.html'},
+ chatFire:{n:'이안에게 털어놓기',d:'고백 · 결단, 짧고 솔직하게',img:'img/fire.jpg',c:'var(--fire)',pr:'상담',u:'chat.html?h=fire'},
+ chatTaeo:{n:'태오에게 털어놓기',d:'연애 코치, 눈치 빠른 연하',img:'img/taeo/base.jpg',c:'#ffb9a6',pr:'상담',u:'chat.html?h=taeo'},
+ chatEarth:{n:'도준에게 털어놓기',d:'관계의 중심, 현실적으로 정리',img:'img/earth.jpg',c:'var(--earth)',pr:'상담',u:'chat.html?h=earth'},
+ chatWater:{n:'재이에게 털어놓기',d:'먼저 마음을 들어 주는 사람',img:'img/water.jpg',c:'var(--water)',pr:'상담',u:'chat.html?h=water'},
+ chatWood:{n:'하람에게 털어놓기',d:'다시 시작하는 힘을 응원',img:'img/wood.jpg',c:'var(--wood)',pr:'상담',u:'chat.html?h=wood'},
+ chatMetal:{n:'시온에게 털어놓기',d:'감정은 덜고 핵심만',img:'img/sion.jpg',c:'var(--metal)',pr:'상담',u:'chat.html?h=metal'},
+ chatHalmae:{n:'삼신 할매에게 묻기',d:'적힌 만큼만, 담담하게',img:'img/halmae.jpg',c:'#d9b38c',pr:'상담',u:'chat.html?h=halmae'},
+ flag:{n:'내 연애 설명서',d:'서하 · 연애 체질부터 인연의 10년까지',img:'img/seoha.jpg',c:'var(--gold)',pr:'준비 중',soon:'11월 오픈'},
+ confess:{n:'고백 타이밍',d:'이안 · 두 사람 교차와 고백할 날, 첫 문장',img:'img/fire.jpg',c:'var(--fire)',pr:'준비 중',soon:'12월 오픈'},
+ check:{n:'우리 사이 점검',d:'도준 · 부딪히는 지점과 풀어 갈 말',img:'img/earth.jpg',c:'var(--earth)',pr:'준비 중',soon:'1월 오픈'},
+ hundred:{n:'이별 후 100일',d:'하람 · 매일 아침 한 줄로 회복하기',img:'img/wood.jpg',c:'var(--wood)',pr:'준비 중',soon:'2월 오픈'},
+ reNew:{n:'재회 감정서',d:'재이 · 이별 사정까지 듣고 읽는 재회',img:'img/water.jpg',c:'var(--water)',pr:'준비 중',soon:'11월 오픈'},
+ marry:{n:'붉은 실 결혼운',d:'월하 · 결혼의 때와 결혼 궁합',img:'img/taegil.jpg',c:'#d9b38c',pr:'준비 중',soon:'1월 오픈'}};
+/* 상황 그림: 한 장(4칸 x 2줄)에서 칸을 잘라 쓴다 */
+const SHEETS={a:{u:'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_093416_4f844788-635b-40ec-bcf6-4221f296c4f1_min.webp',bg:'#14192e',y:[7.7,86.5]},c:{u:'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_093417_6bca47ec-ad3b-48a8-9a17-bd861326b8fd_min.webp',bg:'#111526',y:[7.7,89.7]}};
+let SV='a', GV=2; try{ const q=new URLSearchParams(location.search); if(SHEETS[q.get('s')]) SV=q.get('s'); if(q.get('g')==='4') GV=4; }catch(e){}
+function drawSt(){ const sh=SHEETS[SV]; $('st').className='st'+(GV===4?' g4':''); $('st').style.setProperty('--sheet',`url('${sh.u}')`); $('st').style.setProperty('--sbg',sh.bg);
+  $('st').innerHTML=ST.map((x,i)=>`<button type="button" data-i="${i}"><span class="pic" style="--bx:${(i%4)*100/3}%;--by:${sh.y[Math.floor(i/4)]}%" role="img" aria-label="${x.n}"></span><span class="lb"><span><b>${x.n}</b><small>${x.s}</small></span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span></button>`).join(''); }
+drawSt();
+(()=>{ const d=document.createElement('div'); d.className='pvsw'; d.innerHTML='<button data-s="a">그림 A</button><button data-s="c">그림 B</button><button data-g="2">큰 카드</button><button data-g="4">작은 칸</button>';
+  const mark=()=>d.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.s===SV||+b.dataset.g===GV)); mark();
+  d.onclick=e=>{ const b=e.target.closest('button'); if(!b) return; if(b.dataset.s) SV=b.dataset.s; if(b.dataset.g) GV=+b.dataset.g; drawSt(); mark(); }; document.body.appendChild(d); })();
+let typeT=null;
+function openSt(i){ const x=ST[i]; $('shK').textContent=`서하 · ${x.n}`; const L=$('shL'); L.textContent=''; clearTimeout(typeT);
+  let k=0; const ty=()=>{ L.textContent=x.line.slice(0,++k); if(k<x.line.length) typeT=setTimeout(ty,34); }; setTimeout(ty,260);
+  $('shP').innerHTML=x.p.map(([id],j)=>{ const q=PR[id]; return `<button type="button" class="pi${q.soon?' soon':''}${j===0&&!q.soon?' top1':''}" data-p="${id}" style="--c:${q.c}"><span class="av" style="background-image:url('${q.img}')"></span><span class="t"><b>${q.n}</b><small>${q.d}</small></span><span class="pr">${q.soon?q.soon:q.pr}${q.soon?'<em>알림 받기</em>':''}</span></button>`; }).join('');
+  $('sheet').classList.add('on'); $('sheet').setAttribute('aria-hidden','false');
+  try{ if(navigator.vibrate) navigator.vibrate(8); }catch(e){} }
+$('st').onclick=e=>{ const b=e.target.closest('[data-i]'); if(b) openSt(+b.dataset.i); };
+const closeSt=()=>{ $('sheet').classList.remove('on'); $('sheet').setAttribute('aria-hidden','true'); };
+$('shX').onclick=closeSt; $('sheet').onclick=e=>{ if(e.target===$('sheet')) closeSt(); };
+$('shP').onclick=e=>{ const b=e.target.closest('[data-p]'); if(!b) return; const q=PR[b.dataset.p];
+  if(q.soon){ if(window.ObNotify) ObNotify.ask({title:'오픈 알림 받기',img:q.img,head:q.n,sub:`${q.soon} · 열리면 바로 알려 드릴게요`}); else toast(`${q.soon} 예정이에요`); return; }
+  go(q.u); };
+
+/* ---------- 4. 상담소 사람들 → 캐릭터 소개 화면 ---------- */
+const PPL=[['seoha','서하','상담소 주인','img/seoha.jpg','var(--gold)'],['metal','시온','속마음 · 재회','img/sion.jpg','var(--metal)'],['water','재이','마음 · 이별','img/water.jpg','var(--water)'],['taeo','태오','도화 · 썸','img/taeo/base.jpg','#ffb9a6'],['fire','이안','고백 · 결단','img/fire.jpg','var(--fire)'],['earth','도준','연애 중 · 결혼','img/earth.jpg','var(--earth)'],['wood','하람','새 인연','img/wood.jpg','var(--wood)'],['halmae','삼신 할매','정통','img/halmae.jpg','#d9b38c']];
+$('ppl').innerHTML=PPL.map(([k,n,s,img,c])=>`<button type="button" data-c="${k}" style="--c:${c}"><i style="background-image:url('${img}')"></i><b>${n}</b><small>${s}</small></button>`).join('');
+$('ppl').onclick=e=>{ const b=e.target.closest('[data-c]'); if(!b) return; if(window.ObChar) ObChar.open(b.dataset.c); else go('chat.html?h='+b.dataset.c); };
+})();
+</script>
+<script>
+/* 연서당의 작은 편지들: 하람 영상은 화면에 보일 때만 소리 없이 재생, 실패하면 그림만 남김 */
+(()=>{ const vs=[...document.querySelectorAll('#secMini video.yv')]; if(!vs.length) return;
+  let rm=false; try{ rm=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  const play=v=>{ if(!v.getAttribute('src')&&v.dataset.src) v.src=v.dataset.src; try{ const p=v.play(); if(p) p.catch(()=>{}); }catch(_){} };
+  vs.forEach(v=>{ v.muted=true; v.defaultMuted=true; v.loop=true; v.playsInline=true; v.setAttribute('muted',''); v.setAttribute('playsinline','');
+    v.addEventListener('playing',()=>v.classList.add('on')); v.addEventListener('error',()=>v.remove()); });
+  if(rm) return;
+  if(!('IntersectionObserver' in window)){ vs.forEach(play); return; }
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ const v=e.target; if(!v.isConnected){ io.unobserve(v); return; } if(e.isIntersecting) play(v); else { try{ v.pause(); }catch(_){} } }),{threshold:.25});
+  vs.forEach(v=>io.observe(v)); })();
+</script>
+<script src="charhub.js?v=6"></script>
+<script src="hanja.js"></script><script src="pcshell.js" defer></script><script src="obpay.js" defer></script>
+</body>
+</html>

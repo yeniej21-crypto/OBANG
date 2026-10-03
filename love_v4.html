@@ -153,7 +153,7 @@ button{font-family:inherit;color:inherit}
 .scene .cute{position:absolute;inset:0;z-index:1;background:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_095832_4ea3150d-254c-4090-9783-1453db06e843_min.webp') center 22%/cover no-repeat;opacity:0;transition:opacity .25s}
 .scene .cute.on{opacity:1}
 .scene video.fx{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:1;opacity:0;transition:opacity .35s}
-.scene video.fx.on{opacity:1}
+.scene video.fx.on{opacity:1;z-index:2} /* 10/3 20:50: 귀여운 서하 정지 그림(.cute)이 말 영상을 덮고 있었음 → 재생 중엔 영상을 위로 */
 .scene .sub{top:auto;bottom:178px;font-family:var(--sans);font-weight:700;font-size:17px}
 .scene .spk{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(circle at 50% 34%,rgba(255,240,210,.95),rgba(255,214,230,.5) 22%,rgba(255,255,255,0) 52%);animation:spkF 1.2s ease forwards}
 .scene .spk i{position:absolute;left:50%;top:34%;width:10px;height:10px;margin:-5px;background:#fff6d8;transform:rotate(45deg);box-shadow:0 0 12px #ffd9a0;animation:spkI 1s ease-out forwards}

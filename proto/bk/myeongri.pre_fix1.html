@@ -405,7 +405,7 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
 <script src="saju_x.js"></script>
 <script src="prem2_core.js"></script>
 <script src="premai.js"></script>
-<script src="myeongri_prem2.js?v=2"></script>
+<script src="myeongri_prem2.js?v=1"></script>
 <script>
 window.MR2A={
 "VID_BRUSH2":"https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/18a570a2-dfb4-44e6-9fbf-6512a13ae956.mp4",
@@ -583,8 +583,8 @@ function render(name,sol,h,orig){
   const favG=st.strong?'식상 · 재성 · 관성':'인성 · 비겁'; const jh=X.johu(P);
   $('d2').innerHTML=`<div class="ch"><em>제2장</em><b>오행과 강약</b></div><div class="els">${cnt.map((c,i)=>`<div class="el" style="--c:${ELC[i]}"><b>${EL[i]}</b><div class="t"><i data-w="${Math.max(c/mx*100,3)}"></i></div><span>${c}</span></div>`).join('')}</div>
    <p class="p">자네 일간 <b>${GAN[dm]}${EL[stEl(dm)]}</b>은 ${EL[strongEl]} 기운이 가장 많고 ${EL[weak]} 기운이 가장 적네. 나를 돕는 글자의 비중으로 보면 <b>${st.label}</b>한 사주일세${fn(st.strong?'신강':'신약',`일간을 뺀 ${st.of}글자 중 나를 돕는 글자 ${st.n}개, 월지에 가중치를 두어 판단.`)}. 그러니 <b>${favG}</b>의 기운이 들어오는 해와 달에 자네가 힘을 쓰기 쉽네.</p>
-   ${jh&&jh.need!=null?`<p class="p">계절로 보면 자네는 ${jh.why.replace(/맞는다$/,'맞네').replace(/다$/,'네')}${fn('조후')}. 올해 처방에서 이 점을 함께 보겠네.</p>`:''}
-   <p class="p">${EL[weak]} 기운이 가장 모자라니, 오방도감에서 말하는 자네의 빈칸은 <b>${EL[weak]}</b>일세. 빈칸은 모자람이 아니라 채울 자리이니 마음 쓸 일은 아니네.</p>${notes()}`;
+   ${jh&&jh.need!=null?`<p class="p">계절로 보면 자네는 ${jh.season}에 태어났네. ${jh.why.replace(/다$/,'네')}${fn('조후')}. 올해 처방에서 이 점을 함께 보겠네.</p>`:''}
+   <p class="p">${EL[weak]} 기운이 가장 모자라니, 오방사주에서 말하는 자네의 빈칸은 <b>${EL[weak]}</b>일세. 빈칸은 모자람이 아니라 채울 자리이니 마음 쓸 일은 아니네.</p>${notes()}`;
   /* 제3장 대운 속의 2027 */
   FN=[];
   $('d3').innerHTML=`<div class="ch"><em>제3장</em><b>대운 속의 2027</b><span>${DU.fwd?'순행':'역행'} · ${DU.start}세 시작</span></div>

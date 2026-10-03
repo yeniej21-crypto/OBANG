@@ -66,9 +66,9 @@ function calc(sol,h,ans){ const P=S.pillars(sol.y,sol.m,sol.d,h), dm=P.d[0], db=
   best.slice(0,2).forEach(o=>{ if(o.v>=54) o.tag='go1'; });
   const apply=best.slice(0,2).sort((a,b)=>a.y-b.y||a.m-b.m), itv=months.filter(o=>o.g===3&&!S.isChung(o.b,db)).slice(0,2), money=[...months].filter(o=>o.g===2).sort((a,b)=>b.v-a.v)[0], bad=months.filter(o=>o.tag==='bad').slice(0,2);
   const cnt=S.elCount(P), st=S.strength(P); let need=[0,1,2,3,4].filter(e=>S.favorable(st,S.rel(dm,e))); need.sort((a,b)=>cnt[a]-cnt[b]); const ne=need[0];
-  const TITLE=['움직여 볼 만한 흐름','준비해 두면 좋은 흐름','지금은 다지는 흐름'];
-  const GD=['쿨타임 거의 참','쿨타임 차는 중','쿨타임 넉넉'];
-  const SAY=['흐름이 조금씩 움직이는 때야. 마음이 가면 알아보는 것부터 가볍게 해 봐.','문은 천천히 열리는 중이야. 서두르지 말고 이력서부터 다듬어 두자.','지금은 여기서 하나 더 쌓아 두는 쪽이 편해 보여. 쉬어 가는 것도 실력이야.'][kind];
+  const TITLE=['지금 옮길 때야','버티면서 준비할 때야','지금은 버틸 때야'];
+  const GD=['쿨타임 다 참','쿨타임 차는 중','쿨타임 남음'];
+  const SAY=['기분 탓 아니야. 판이 움직이고 있어. 이번엔 네가 먼저 움직여.','나갈 문은 열리고 있어. 다만 지금 뛰면 손해야. 이력서부터 다듬자.','지금 나가면 같은 고민을 다른 회사에서 하게 돼. 여기서 하나만 더 쌓고 가.'][kind];
   const yy=t.getFullYear(), ap=apply.map(o=>(o.y!==yy?String(o.y).slice(2)+'년 ':'')+o.m+'월').join(' · ')||'-';
   return {P,months,gauge,kind,title:TITLE[kind],gd:GD[kind],say:SAY,apply,itv,money,bad,ne,sajuV,sitV,ap,ans,
     why:`근거 · ${S.GAN_K[dm]}${S.JI_K[db]}일생. 앞으로 12달 월주가 일간에게 무엇인지(관성 · 재성은 움직임, 인성 · 비겁은 머무름), 역마(${S.JI_K[ym]}), 일터 자리(월지 ${S.JI_K[mb]})와의 충 · 합을 봤어요. 사주 ${sajuV}점과 지금 상황 ${sitV}점을 6 : 4로 섞었어요.`}; }
@@ -89,7 +89,6 @@ function show(R){ const yy=new Date().getFullYear(), mm=o=>(o.y!==yy?String(o.y)
    <li><b>사주가 말하는 쪽 · ${R.sajuV}점</b>${R.sajuV>=66?'앞으로 1년, 자리를 바꾸는 기운이 강하게 들어와요.':R.sajuV>=52?'움직일 기운과 머물 기운이 반반이에요. 고르는 달이 중요해요.':'올해는 자리를 지키는 기운이 더 커요. 안에서 키우는 게 남아요.'}</li>
    <li><b>지금 상황이 말하는 쪽 · ${R.sitV}점</b>${R.sitV>=60?'마음은 이미 반쯤 나가 있어요. 준비가 따라오면 돼요.':R.sitV>=30?'흔들리는 중이에요. 충동으로 나가지 않게 날짜를 정해 두세요.':'아직은 버틸 힘이 있어요. 이직은 계획으로만 두세요.'}</li></ul>
    <p class="why">${R.why}</p>
-   <p class="dis">재미로 보는 운세예요. 이직 · 연봉 · 인간관계처럼 중요한 결정은 실제 조건과 주변 조언을 먼저 살펴 주세요.</p>
    <button class="go" id="shr" type="button" style="margin-top:12px">결과 친구에게 보내기</button>`;
   $('rs').hidden=false; $('pd').hidden=false; $('pv').classList.remove('on'); window.__CR=R; $('shr').onclick=()=>share(R);
   setTimeout(()=>$('rs').scrollIntoView({behavior:'smooth',block:'start'}),80); }
@@ -101,7 +100,7 @@ function share(R){ const url=location.origin+location.pathname+'?ref=share';
 const DO={go1:['지원서를 내고 면접을 잡아요','제안이 오면 이번엔 만나 봐요','가고 싶은 곳에 먼저 연락해요'],pr:['경력 한 줄을 숫자로 바꿔 써요','가고 싶은 회사 세 곳을 정해 둬요','포트폴리오에 최근 성과 하나를 넣어요','헤드헌터 · 지인에게 근황을 알려 둬요'],stay:['지금 자리에서 성과 하나를 만들어요','윗사람에게 내 일을 한 번 보여 줘요','배울 것 하나를 끝까지 해 둬요'],bad:['큰 결정은 미루고 컨디션을 지켜요','충동 사표는 금지, 일기에만 써요']};
 function plan(R){ const yy=new Date().getFullYear(), mm=o=>(o.y!==yy?String(o.y).slice(2)+'년 ':'')+o.m+'월';
   const days=[]; if(R.itv.length){ R.itv.forEach(o=>{ for(let d=1;d<=28&&days.length<4;d++){ const dt=new Date(o.y,o.m-1,d), w=dt.getDay(); if(w===0||w===6) continue; const dp=S.dayPillar(o.y,o.m,d); if(S.isChung(dp[1],R.P.d[1])) continue; if(S.rel(R.P.d[0],S.stEl(dp[0]))===3||S.isHap(dp[1],R.P.d[1])){ days.push(`${o.m}월 ${d}일(${'일월화수목금토'[w]})`); d+=6; } } }); }
-  return `<div class="rs"><div class="hd"><small>도준의 이직 플랜</small><h2>${['가볍게 알아보는 플랜','천천히 준비하는 플랜','지금 자리를 다지는 플랜'][R.kind]}</h2></div>
+  return `<div class="rs"><div class="hd"><small>도준의 이직 플랜</small><h2>${['석 달 안에 옮기는 플랜','반년 준비하고 옮기는 플랜','버티면서 몸값 올리는 플랜'][R.kind]}</h2></div>
    <ul>${R.months.slice(0,6).map(o=>`<li><b>${mm(o)} · ${LBL[o.tag]}</b>${DO[o.tag][(o.m+o.y)%DO[o.tag].length]}.${o.why.includes('역마')?' 이동 운이 붙은 달이라 제안이 들어오기 쉬워요.':''}</li>`).join('')}
    <li><b>면접 보기 좋은 날</b>${days.length?days.join(' · '):'다음 달력에서 다시 볼게요'} · 오전 10시에서 오후 2시 사이가 무난해요</li>
    <li><b>연봉 얘기 꺼낼 타이밍</b>${R.money?mm(R.money)+'. 돈의 기운(재성)이 드는 달이라 숫자 얘기가 잘 먹혀요. 원하는 금액을 먼저 말하고, 근거는 성과 하나로.':'1년 안에 돈의 기운이 약해요. 연봉보다 직함 · 업무 범위로 협상해요.'}</li>
@@ -111,6 +110,6 @@ $('pdGo').onclick=()=>{ const R=window.__CR; if(!R) return; $('pv').innerHTML=pl
 /* ---------- 6. 이어서 ---------- */
 $('gd').innerHTML=`<a class="gd2" href="career.html"><i style="background-image:url('img/earth.jpg?v=2')"></i><span><small>도준 · 커리어 사주</small><b>나한테 맞는 일 · 업계 · 능력치</b><span>스펙 말고 타고난 판부터 보는 일 사주 리포트</span></span></a>
  <a class="gd2" href="chat.html?h=earth" style="margin-top:8px"><i style="background-image:url('img/earth.jpg?v=2');background-position:center 30%"></i><span><small>도준과 1:1</small><b>이직 고민, 직접 털어놓기</b><span>상황을 말하면 사주에 맞춰 답해 줘요</span></span></a>`;
-$('nx').innerHTML=[['workmini.html?t=pay','내 몸값 리포트','세린 · 무료'],['workmini.html?t=boss','상사 궁합','도준 · 무료'],['workmini.html?t=day','오늘의 일운','도준 · 무료 · 매일'],['taegil.html','면접 · 입사 날짜 잡기','택일 · 월하'],['today.html','오늘의 운세','매일 아침 바뀌는 하루'],['./','홈으로','오방도감 처음 화면']].map(x=>`<a class="nx1${x[0]==='./'?' hm':''}" href="${x[0]}"><b>${x[1]}</b><span>${x[2]}</span></a>`).join('');
+$('nx').innerHTML=[['workmini.html?t=pay','내 몸값 리포트','세린의 감정 · 990원'],['workmini.html?t=boss','상사 궁합','도준 · 2,900원'],['workmini.html?t=day','오늘의 일운','도준 · 무료 · 매일'],['taegil.html','면접 · 입사 날짜 잡기','택일 · 월하'],['today.html','오늘의 운세','매일 아침 바뀌는 하루'],['./','홈으로','오방도감 처음 화면']].map(x=>`<a class="nx1${x[0]==='./'?' hm':''}" href="${x[0]}"><b>${x[1]}</b><span>${x[2]}</span></a>`).join('');
 form();
 })();

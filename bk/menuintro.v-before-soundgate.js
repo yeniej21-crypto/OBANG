@@ -12,11 +12,11 @@
 .mi .sub.on{opacity:1;transform:none}
 .mi .tt{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 70px);text-align:center;font-family:'OBrush','Noto Serif KR',serif;font-size:44px;color:#fff;letter-spacing:.02em;text-shadow:0 3px 22px rgba(0,0,0,.9);opacity:0;transform:scale(1.06);transition:all .7s}
 .mi.end .tt{opacity:1;transform:none}
-.mi .gate{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:flex-end;gap:12px;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 64px);border:0;background:linear-gradient(180deg,rgba(6,5,8,0) 40%,rgba(6,5,8,.78) 100%);color:#f6ecdf;cursor:pointer;font-family:'Song Myung','Noto Serif KR',serif;font-size:19px;letter-spacing:.06em}
+.mi .gate{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;border:0;background:rgba(0,0,0,.38);color:#fff;cursor:pointer;font:700 14px/1.4 'Noto Sans KR',sans-serif;letter-spacing:.04em}
 .mi .gate.on{display:flex}
-.mi .gate i{width:62px;height:62px;border-radius:50%;border:1px solid rgba(232,196,138,.75);display:grid;place-items:center;font-style:normal;color:#e8c48a;box-sizing:border-box;background:rgba(10,8,12,.35);animation:miPulse 2.4s ease-in-out infinite}
-.mi .gate small{font:500 12.5px/1 'Noto Sans KR',sans-serif;letter-spacing:.04em;color:rgba(246,236,223,.55)}
-@keyframes miPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,196,138,.26)}50%{box-shadow:0 0 0 12px rgba(232,196,138,0)}}
+.mi .gate i{width:78px;height:78px;border-radius:50%;border:1.5px solid rgba(255,236,200,.8);display:grid;place-items:center;font-style:normal;font-size:26px;padding-left:5px;box-sizing:border-box;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:miPulse 1.6s ease-in-out infinite}
+.mi .gate small{font-weight:500;font-size:12px;opacity:.75}
+@keyframes miPulse{50%{box-shadow:0 0 0 10px rgba(255,236,200,.14)}}
 .mi .x{position:absolute;right:14px;top:calc(env(safe-area-inset-top,0px) + 14px);border:0;background:none;color:rgba(255,255,255,.7);font:500 12.5px/1 'Noto Sans KR',sans-serif;cursor:pointer;padding:6px}`;
   let pageDone=false;
   const abs=u=>{ try{ return new URL(u,location.href).href; }catch(e){ return u; } };
@@ -27,7 +27,7 @@
     const root=o.root||document.querySelector('.stage')||document.body;
     if(!document.getElementById('miCss')){ const s=document.createElement('style'); s.id='miCss'; s.textContent=css; document.head.appendChild(s); }
     const el=document.createElement('div'); el.className='mi';
-    el.innerHTML=`<div class="po" style="background-image:url('${o.poster}')"></div><video playsinline preload="auto" src="${o.src}"></video><div class="sh"></div><div class="who">${o.who||''}</div><div class="sub"></div><div class="tt">${o.title||''}</div><button class="gate" type="button"><i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a7.5 7.5 0 0 1 0 11"/></svg></i>소리 켜고 들어가기<small>목소리와 함께 시작해요</small></button><button class="x" type="button">건너뛰기</button>`;
+    el.innerHTML=`<div class="po" style="background-image:url('${o.poster}')"></div><video playsinline preload="auto" src="${o.src}"></video><div class="sh"></div><div class="who">${o.who||''}</div><div class="sub"></div><div class="tt">${o.title||''}</div><button class="gate" type="button"><i>▶︎</i>탭해서 시작<small>소리를 켜 주세요</small></button><button class="x" type="button">건너뛰기</button>`;
     root.appendChild(el);
     const v=el.querySelector('video'), sub=el.querySelector('.sub'), gate=el.querySelector('.gate');
     let closed=false, last=-1, playing=false, ticking=false;

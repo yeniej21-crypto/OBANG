@@ -1,12 +1,12 @@
-/* 일 운세 미니 3종(10/3 21:40 은주): 가볍게 · 무료 + 990 + 2,900.
-   day 오늘의 일운(무료 · 도준) · pay 내 몸값 리포트(990원 · 세린, 칭찬 없는 감정사) · boss 상사 궁합(2,900원 · 도준)
+/* 출근길 재미 운세 3종(10/3 21:40 기획, 22:00 은주: 전부 무료 · 재미로만 · 가벼운 톤).
+   day 오늘의 일운(도준) · pay 내 몸값 리포트(세린, 칭찬 없는 감정사) · boss 상사 궁합(도준)
    ?t=day|pay|boss 로 바로 열기. 영상은 들어오자마자 무음 재생, 첫 터치에 소리. */
 (function(){
 const S=window.Saju, $=id=>document.getElementById(id);
 const D2='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/', CF='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_';
 const DOJUN={n:'도준',img:CF+'084427_0f26f62a-829f-4db8-8f13-60e26ea429e1_min.webp',v:'v/rv_earth.mp4?v=2',tag:'커리어 · 황룡 도준'};
 const SERIN={n:'세린',img:'img/yin/metal.jpg',v:window.WM_SERIN||'',tag:'몸값 감정 · 백호 세린'};
-const T={day:{h:DOJUN,t:'오늘의 일운',p:'오늘 회사에서 뭐가 먹히고 뭐가 막히는지, 출근 전에 한 장으로.'},
+const T={day:{h:DOJUN,t:'오늘의 일운',p:'출근길에 가볍게 보는 오늘의 일 운. 재미로만 봐 줘.'},
   pay:{h:SERIN,t:'내 몸값 리포트',p:'칭찬은 아껴 둘게. 네 값은 내가 매겨 줄게.'},
   boss:{h:DOJUN,t:'상사 궁합',p:'팀장 눈에 내가 어떻게 보이는지. 보고 방식부터 승진 타이밍까지.'}};
 let K=(new URLSearchParams(location.search).get('t')||'day'); if(!T[K]) K='day';
@@ -104,12 +104,12 @@ function show(R){ let h='';
     <p class="bb"><em>세린</em>${R.say}</p><ul><li><b>너의 값이 붙는 방식</b>${PTYPE[R.top].d}. 같은 일을 해도 이 방식으로 보여 줄 때 값이 커져요.</li></ul><p class="why">${R.why}</p>`; }
   else { h=`<div class="hd"><small>도준이 본 상사 궁합</small><span class="gd">${R.gd}</span><h2>${R.title}</h2></div><div class="big">${R.v}<small>점</small></div>
     <p class="bb"><em>도준</em>${R.say}</p><ul><li><b>팀장 눈에 비친 나</b>${['내 자리를 넘보는 사람','말 많은 똑똑이','믿고 맡기는 실무자','지켜봐야 할 신입','키워 볼 만한 후배'][R.g]}</li></ul><p class="why">${R.why}</p>`; }
-  h+=`<button class="go" id="shr" type="button" style="margin-top:12px">결과 친구에게 보내기</button>`;
+  h+=`<p class="dis">재미로 보는 운세예요. 이직 · 연봉 · 인간관계처럼 중요한 결정은 실제 조건과 주변 조언을 먼저 살펴 주세요.</p><button class="go" id="shr" type="button" style="margin-top:12px">결과 친구에게 보내기</button>`;
   $('rs').innerHTML=h; $('rs').hidden=false; window.__WR=R; $('shr').onclick=()=>share(R);
   $('pv').classList.remove('on'); $('pv').innerHTML='';
-  if(R.k==='day'){ $('pd').hidden=false; $('pdT').textContent='세린의 몸값 감정 · 990원'; $('pdS').textContent='오늘 일운을 봤다면, 다음은 내 값. 몸값 지수와 협상 타이밍'; $('pdGo').innerHTML='내 몸값 보러 가기'; $('pdGo').onclick=()=>{ tab('pay'); scrollTo({top:vh.offsetHeight-60,behavior:'smooth'}); }; }
-  else { const pr=R.k==='pay'?990:2900; $('pd').hidden=false; $('pdT').textContent=R.k==='pay'?'세린의 몸값 리포트 전체':'상사 궁합 전체'; $('pdS').textContent=R.k==='pay'?'연봉 얘기 꺼낼 달 · 요일 · 시간, 협상 첫 문장, 피할 말, 몸값 올리는 일 세 가지':'잘 먹히는 보고 방식, 금지어, 풀리는 달 · 부딪히는 달, 승진 얘기 꺼낼 타이밍';
-    $('pdGo').innerHTML=`<s>${R.k==='pay'?'1,900':'4,900'}원</s>${pr.toLocaleString()}원으로 전체 보기`; $('pdGo').onclick=()=>buy(R,pr); }
+  if(R.k==='day'){ $('pd').hidden=false; $('pdT').textContent='세린의 몸값 감정 · 무료'; $('pdS').textContent='오늘 일운을 봤다면, 다음은 내 값. 몸값 지수와 협상 타이밍'; $('pdGo').innerHTML='내 몸값 보러 가기'; $('pdGo').onclick=()=>{ tab('pay'); scrollTo({top:vh.offsetHeight-60,behavior:'smooth'}); }; }
+  else { $('pd').hidden=false; $('pdT').textContent=R.k==='pay'?'세린의 몸값 리포트 전체 · 무료':'상사 궁합 전체 · 무료'; $('pdS').textContent=R.k==='pay'?'연봉 얘기 꺼낼 달 · 요일 · 시간, 협상 첫 문장, 피할 말, 몸값 올리는 일 세 가지':'잘 먹히는 보고 방식, 금지어, 풀리는 달 · 부딪히는 달, 승진 얘기 꺼낼 타이밍';
+    $('pdGo').innerHTML='무료로 전체 보기'; $('pdGo').onclick=()=>{ $('pv').innerHTML=full(R); $('pv').classList.add('on'); setTimeout(()=>$('pv').scrollIntoView({behavior:'smooth',block:'start'}),80); }; }
   setTimeout(()=>$('rs').scrollIntoView({behavior:'smooth',block:'start'}),80); }
 function buy(R,pr){ const open=()=>{ $('pv').innerHTML=full(R); $('pv').classList.add('on'); setTimeout(()=>$('pv').scrollIntoView({behavior:'smooth',block:'start'}),80); };
   const c=T[R.k]; if(window.ObPay&&ObPay.open) ObPay.open({name:c.t+' · '+c.h.n,who:c.h.n,desc:$('pdS').textContent,price:pr,img:c.h.img,noAuth:true,after:open}); else open(); }

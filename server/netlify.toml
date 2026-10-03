@@ -3,3 +3,60 @@
 
 [functions]
   directory = "netlify/functions"
+
+# 10/3 21:20 새 도준 · 새 재이 데뷔: 옛 그림 · 영상 주소를 새 파일로 바꿔 줌(사이트 어디서 부르든 새 얼굴로)
+[[redirects]]
+  from = "/img/earth.jpg"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/116e89f1-6fcf-42c2-8137-011a4957175a.jpg"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/img/thumb/earth.jpg"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/ce687052-d536-4508-8a5d-2f3daf05f284.jpg"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/img/earth_d.jpg"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/5541c13e-c902-4d9f-9c86-f7dd9694b68e.jpg"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/img/water.jpg"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/ccdbf400-0787-4e1b-af52-6baa7e0e84f4.jpg"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/img/thumb/water.jpg"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/a6fddef0-f44f-446b-bc84-ef57fca19677.jpg"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/img/water_d.jpg"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/aa11a9b3-5434-4f33-9c3c-6d65d7572735.jpg"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/v/rv_earth.mp4"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/cc5eff26-34a6-457b-b5f4-46f1b601f4a7.mp4"
+  status = 302
+  force = true
+[[redirects]]
+  from = "/v/rv_water.mp4"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/7ad260ee-e543-4829-a30c-57a05b6472b4.mp4"
+  status = 302
+  force = true
+[[redirects]]
+  from = "/v/ms/earth.mp4"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/046c6171-b856-4f86-895e-5a62ac9b65ea.mp4"
+  status = 302
+  force = true
+[[redirects]]
+  from = "/v/ms/water.mp4"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/009505de-a976-4d56-9bbb-0ac335b05629.mp4"
+  status = 302
+  force = true
+[[redirects]]
+  from = "/v/menu/career.mp4"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/973c6842-5193-4fad-ad4a-998223011543.mp4"
+  status = 302
+  force = true

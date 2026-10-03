@@ -186,7 +186,7 @@ function pay(){ const R=window.__VR; if(!R) return; const open=()=>{ $('pv').inn
 
 /* ---------- 6. 막아 주는 신 · 다른 악역 ---------- */
 function myGuard(){ /* 10/3 21:15 시안: 내 수호신이 문 앞을 지킴(홈 시안에서 들어왔을 때만) */
-  let o=null, on=false; try{ o=JSON.parse(localStorage.getItem('obGuard')||'null'); on=sessionStorage.getItem('obGP')==='1'||/[?&]gp=1/.test(location.search); }catch(e){} if(!o||!o.k||!on) return '';
+  let o=null; try{ o=JSON.parse(localStorage.getItem('obGuard')||'null'); }catch(e){} if(!o||!o.k) return ''; /* 21:20 은주 확정: 항상 */
   const YI={wood:'새아',fire:'별하',earth:'도담',metal:'세린',water:'이슬'}, YA={wood:'하람',fire:'이안',earth:'도준',metal:'시온',water:'재이'};
   const n=o.f==='yin'?YI[o.k]:YA[o.k], img=o.f==='yin'?(o.k==='wood'?'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2_min.webp':`img/yin/${o.k}.jpg`):`img/${o.k}.jpg`;
   const jo=(w,a,b)=>{ const c=w.charCodeAt(w.length-1)-0xAC00; return (c>=0&&c<11172&&c%28>0)?a:b; };

@@ -164,7 +164,7 @@ select,input[type=text]{height:44px;border-radius:0;border:1px solid var(--line)
   <div class="scr on" id="sIn">
     <div class="top"><button class="ib" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>커리어 사주</b><span class="tag">黃龍 · 도준</span></div>
     <div class="wrap">
-      <div class="hero" style="background-image:url('img/earth.jpg?v=2')"><div><small>CAREER · 일 사주 리포트</small><h1>스펙 말고,<br>타고난 판부터 보자</h1><p>"어디서 일해야 네가 제일 비싸지는지,<br>언제 움직여야 하는지. <b>내가 정리해줄게.</b>"</p></div></div>
+      <div class="hero" style="background-image:url('img/earth.jpg?v=2')"><video class="hv" src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/f9512e9a-7f19-480a-be0b-5aa3ba0f3867.mp4" muted autoplay loop playsinline preload="auto"></video><div><small>CAREER · 일 사주 리포트</small><h1>스펙 말고,<br>타고난 판부터 보자</h1><p>"어디서 일해야 네가 제일 비싸지는지,<br>언제 움직여야 하는지. <b>내가 정리해줄게.</b>"</p></div></div>
       <div class="card"><h3>지금 나는</h3><div class="chipset" id="sit"><button class="on" data-v="work">직장인</button><button data-v="move">이직 준비</button><button data-v="job">취준생</button><button data-v="free">프리랜서·창업</button><button data-v="study">학생</button></div></div>
       <div class="card"><h3>이름 (선택) · 성별</h3><input type="text" id="nm" maxlength="8" placeholder="예) 은주"><div class="seg" id="gSeg" style="margin-top:8px"><button class="on" data-v="f">여자</button><button data-v="m">남자</button></div></div>
       <div class="card"><h3>생년월일</h3>

@@ -1277,11 +1277,11 @@ select:focus,input:focus,.choice:focus-visible,.chip:focus-visible,.tbtn:focus-v
 
     <section class="hSec" id="secJob" data-cats="all job">
       <div class="sh"><small>일 · 커리어</small><b>나, 여기서 버티는 게 맞을까</b></div>
-      <a class="jbHero" id="jbHero" href="career.html">
+      <a class="jbHero" id="jbHero" href="career.html"><video muted loop playsinline autoplay preload="none" data-src="https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/f9512e9a-7f19-480a-be0b-5aa3ba0f3867.mp4" poster="img/earth.jpg?v=2"></video>
         <span class="tx"><small>정통 · 심화 리포트 · 도준</small><b>커리어 사주</b><em>스펙 말고, 타고난 판부터.<br>일 유형 · 맞는 업계 · 10년 흐름 · 움직일 달</em><i>리포트 보기</i></span></a>
       <div class="jbFun"><div class="jh"><b>출근길 재미 운세</b><span>전부 무료 · 1분</span></div>
         <div class="jg">
-          <a href="workmini.html?t=day"><i style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_084428_87f764bc-bedf-4491-b570-f28aefebf324_min.webp')"></i><b>오늘의 일운</b><small>도준 · 매일</small></a>
+          <a href="workmini.html?t=day"><i style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_084427_0f26f62a-829f-4db8-8f13-60e26ea429e1_min.webp')"></i><b>오늘의 일운</b><small>도준 · 매일</small></a>
           <a href="cooltime.html"><i style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_084427_71ac8f06-b054-4dcd-85b1-b471599794cd_min.webp')"></i><b>이직 쿨타임</b><small>도준</small></a>
           <a href="workmini.html?t=pay"><i style="background-image:url('img/yin/metal.jpg')"></i><b>내 몸값</b><small>세린</small></a>
           <a href="workmini.html?t=boss"><i style="background-image:url('img/earth.jpg?v=2');background-position:center 30%"></i><b>상사 궁합</b><small>도준</small></a>
@@ -2146,3 +2146,4 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&!$('home').classList.con
   const th=document.getElementById('thr'); if(th){ th.addEventListener('pointerenter',()=>th.classList.add('on')); setTimeout(()=>th.classList.add('on'),2500); }
 })();
 </script>
+<script>(function(){ const a=document.getElementById('jbHero'); if(!a) return; const v=a.querySelector('video'); try{ new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ if(!v.src){ v.src=v.dataset.src; v.addEventListener('playing',()=>v.classList.add('on'),{once:true}); } v.play().catch(()=>{}); } else v.pause(); }),{threshold:.3}).observe(a); }catch(e){} a.onclick=e=>{ e.preventDefault(); try{ sessionStorage.setItem('toHome','1'); }catch(_){} location.href='career.html'; }; })();</script>

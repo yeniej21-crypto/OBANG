@@ -254,7 +254,7 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
 /* 묻기 */
 .ask{position:relative;margin:26px -14px 0;padding:0;color:#f4f1ea;background:#000;overflow:hidden}
 .ask video,.ask .pst{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000 center/cover}
-.ask video{opacity:0;transition:opacity .8s}.ask video.on{opacity:1}.ask video.on~.in{background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.35) 30%,rgba(0,0,0,.85) 62%)}
+.ask video{opacity:0;transition:opacity .8s}.ask video.on{opacity:.55}
 .ask .in{position:relative;z-index:2;padding:120px 20px 22px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.75) 45%)}
 .ask h3{margin:0;font-family:var(--brush);font-weight:400;font-size:26px}
 .ask p{margin:6px 0 12px;font-size:13px;color:#d9d0c2;line-height:1.6}
@@ -283,37 +283,6 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
 .toast{position:absolute;left:50%;bottom:120px;transform:translate(-50%,8px);z-index:60;background:var(--ink);color:var(--paper);font-size:13.5px;padding:10px 16px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 #prem[hidden]{display:none}
-
-/* 봉투 열기: 결제가 끝나면 끈이 풀리고 · 인장이 갈라지고 · 덮개가 젖혀지고 · 감정서가 올라온다 */
-.env{position:absolute;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 80% at 50% 45%,rgba(30,22,16,.92),rgba(8,6,5,.98));opacity:0;pointer-events:none;transition:opacity .5s;perspective:1100px}
-.env.on{opacity:1;pointer-events:auto}
-.env .box{position:relative;width:78%;max-width:320px;aspect-ratio:16/10;transform:translateY(30px) scale(.92);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-.env.on .box{transform:none}
-.env .back,.env .front,.env .flap,.env .letter{position:absolute;left:0;right:0}
-.env .back{inset:0;background:#d9cdb4}
-.env .letter{left:6%;right:6%;top:8%;height:86%;background:#fbf7ee;box-shadow:0 2px 8px rgba(0,0,0,.25);padding:14px 14px 0;text-align:center;font-family:var(--serif);transition:transform 1.1s cubic-bezier(.3,.8,.2,1),height 1.1s;z-index:2}
-.env .letter::before{content:"";position:absolute;inset:5px;border:1px solid rgba(163,38,31,.45)}
-.env .letter small{display:block;font-size:10px;letter-spacing:.34em;color:var(--seal);font-weight:700}
-.env .letter b{display:block;margin-top:6px;font-size:19px;font-weight:900;letter-spacing:.3em;padding-left:.3em}
-.env .letter i{display:block;margin-top:5px;font-style:normal;font-size:11px;color:var(--ink-3)}
-.env .front{inset:0;z-index:3;background:linear-gradient(160deg,#efe6d2,#e3d6bb);clip-path:polygon(0 0,50% 52%,100% 0,100% 100%,0 100%);box-shadow:inset 0 -12px 30px rgba(120,95,60,.18)}
-.env .front::after{content:"";position:absolute;inset:0;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><circle cx="2" cy="2" r=".6" fill="%23c9b893"/></svg>');opacity:.5}
-.env .flap{top:0;height:58%;z-index:4;background:linear-gradient(180deg,#e9dec6,#dccfb2);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:50% 0;transition:transform .9s cubic-bezier(.5,0,.3,1),z-index 0s .45s;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25))}
-.env .cord{position:absolute;left:-4%;right:-4%;top:46%;height:3px;z-index:6;background:#a3261f;box-shadow:0 1px 2px rgba(0,0,0,.35);transition:transform .7s cubic-bezier(.6,0,.4,1),opacity .7s}
-.env .cord.v{left:50%;right:auto;top:-4%;bottom:-4%;width:3px;height:auto;margin-left:-1.5px}
-.env .wax{position:absolute;left:50%;top:46%;z-index:7;width:46px;height:46px;margin:-22px 0 0 -23px;display:flex}
-.env .wax span{flex:1;background:var(--seal);color:#fff3ea;font-family:var(--serif);font-weight:900;font-size:14px;display:flex;align-items:center;overflow:hidden;transition:transform .6s cubic-bezier(.5,0,.3,1),opacity .6s;box-shadow:0 2px 6px rgba(0,0,0,.35)}
-.env .wax span:first-child{justify-content:flex-end}
-.env .wax span:last-child{justify-content:flex-start}
-.env .cap{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 54px);text-align:center;font-family:var(--serif);font-size:15px;font-weight:700;color:#f3ead9;opacity:0;transition:opacity .5s}
-.env.s1 .cap{opacity:1}
-.env.s1 .cord{transform:scaleX(0);opacity:0}
-.env.s1 .cord.v{transform:scaleY(0)}
-.env.s2 .wax span:first-child{transform:translate(-26px,8px) rotate(-18deg);opacity:0}
-.env.s2 .wax span:last-child{transform:translate(26px,8px) rotate(18deg);opacity:0}
-.env.s3 .flap{transform:rotateX(178deg);z-index:1}
-.env.s4 .letter{transform:translateY(-62%);z-index:5}
-.env.s5 .box{transform:scale(2.6);opacity:0;transition:transform 1s cubic-bezier(.6,0,.4,1),opacity .8s .2s}
 @media (prefers-reduced-motion:reduce){.th video,.hero video{transition:none}}
 @media print{
   body{background:#fff;overflow:visible;height:auto;display:block}
@@ -396,7 +365,6 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
   </div>
 
   <div class="pay" id="pay"><div class="pr"><s>29,000원</s> <b>19,900원</b> · 2027 신년 한정</div><button class="go" id="payBtn">감정서 전체 열기</button></div>
-  <div class="env" id="env"><div class="box"><div class="back"></div><div class="letter"><small>明理館 鑑定書</small><b>감정서</b><i id="envWho"></i></div><div class="front"></div><div class="flap"></div><div class="cord"></div><div class="cord v"></div><div class="wax"><span>素</span><span>軒</span></div></div><p class="cap" id="envCap">봉인을 풉니다</p></div>
   <div class="sheet" id="sheet"><div class="box"><b id="shT"></b><p id="shP"></p><button class="go" id="shX" style="margin-top:0">알겠어요</button></div></div>
   <div class="toast" id="toast"></div>
 </div>
@@ -695,7 +663,7 @@ function heroTalk(){ const hv=$('hv'), h2=$('hv2'); $('heroP').style.backgroundI
 /* 장 표지: 보일 때만 반복 영상 */
 function covers(){ document.querySelectorAll('.cov').forEach(c=>{ if(c._d) return; c._d=1; c.style.backgroundImage=`url('${A[c.dataset.img]}')`; if(c.dataset.vid){ const v=document.createElement('video'); v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline',''); v.preload='none'; c.prepend(v); c._v=v; } });
   document.querySelectorAll('.ask video[data-vid]').forEach(v=>{ v.parentNode._v=v; });
-  const io=new IntersectionObserver(es=>es.forEach(e=>{ const v=e.target._v; if(!v) return; if(e.isIntersecting){ if(!v.getAttribute('src')) v.src=A[e.target.querySelector('video').dataset.vid||e.target.dataset.vid]; v.play().then(()=>{ v.classList.add('on'); const ps=e.target.querySelector('.pst'); if(ps) ps.style.opacity=0; }).catch(()=>{}); } else v.pause(); }),{threshold:.3});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ const v=e.target._v; if(!v) return; if(e.isIntersecting){ if(!v.getAttribute('src')) v.src=A[e.target.querySelector('video').dataset.vid||e.target.dataset.vid]; v.play().then(()=>v.classList.add('on')).catch(()=>{}); } else v.pause(); }),{threshold:.3});
   document.querySelectorAll('.cov,.ask').forEach(c=>io.observe(c)); sealObs(); }
 /* 봉인: 보이면 소헌 선생이 봉투를 들고 말함 → 봉투 묶는 손 반복 */
 let sealed=false;
@@ -706,16 +674,7 @@ function sealObs(){ if(window._sealO) return; window._sealO=1; const box=$('seal
       const p=sv.play(); if(p&&p.catch) p.catch(()=>{ sv.muted=true; sv.play().catch(()=>{}); }); }
     else { try{ $('sv').pause(); $('sv2').pause(); }catch(_){} } }),{threshold:.55}).observe(box); }
 $('sealBtn').onclick=()=>{ if($('pay').classList.contains('done')) $('prem').scrollIntoView({behavior:'smooth',block:'start'}); else $('payBtn').click(); };
-(function(){ const pb=$('payBtn'), core=pb.onclick;
-  const rustle=()=>{ try{ if(muted()) return; const c=new (window.AudioContext||window.webkitAudioContext)(), n=c.sampleRate*.5, bf=c.createBuffer(1,n,c.sampleRate), d=bf.getChannelData(0); for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/n,2)*.5; const s=c.createBufferSource(); s.buffer=bf; const f=c.createBiquadFilter(); f.type='highpass'; f.frequency.value=1800; s.connect(f); f.connect(c.destination); s.start(); }catch(e){} };
-  const openEnv=()=>new Promise(res=>{ const e=$('env'), F=window.SNF||{}; $('envWho').textContent=`의뢰인 ${F.name||''} · 제 2027-${F.docNo||''} 호`; e.className='env'; void e.offsetWidth; e.classList.add('on');
-    const st=(c,t,cap)=>setTimeout(()=>{ e.classList.add(c); if(cap!=null) $('envCap').textContent=cap; if(c==='s2'||c==='s3') rustle(); if(c==='s2'){ try{ navigator.vibrate&&navigator.vibrate(25); }catch(_){} } },t);
-    st('s1',700,'붉은 끈을 풉니다'); st('s2',1500,'관인을 뜯습니다'); st('s3',2200,'봉투를 엽니다'); st('s4',3000,'자네의 열두 달일세'); st('s5',4300,null);
-    setTimeout(()=>{ e.classList.remove('on'); res(); setTimeout(()=>{ e.className='env'; },600); },5000); });
-  const unlock=async()=>{ await openEnv(); core(); pb.textContent='감정서 처음부터 보기'; $('sealBtn').textContent='봉투 안 감정서 보기'; };
-  pb.onclick=()=>{ if($('pay').classList.contains('done')){ $('sRep').scrollTo({top:0,behavior:'smooth'}); return; }
-    if(window.ObPay&&ObPay.open) ObPay.open({name:'소헌 선생의 2027 명리 감정서',who:'명리관 소헌 선생',desc:'세운 정밀 · 열두 달 월운 · 영역별 감정 · 권고 · 길일표 · 관인 감정서 저장',price:19900,was:29000,img:'img/soheon.jpg',okTitle:'결제가 완료됐어요',okText:'봉투를 열어 감정서를 펼칩니다',after:unlock});
-    else unlock(); }; })();
+(function(){ const pb=$('payBtn'), core=pb.onclick; pb.onclick=()=>{ if($('pay').classList.contains('done')){ $('sRep').scrollTo({top:0,behavior:'smooth'}); return; } core(); pb.textContent='감정서 처음부터 보기'; $('sealBtn').textContent='봉투 안 감정서 보기'; }; })();
 /* 결제바는 봉인 장면을 지난 뒤에만 */
 $('sRep').addEventListener('scroll',()=>{ const b=$('sealBox').getBoundingClientRect(); $('pay').classList.toggle('on',b.bottom<innerHeight*.6||$('pay').classList.contains('done')); },{passive:true});
 

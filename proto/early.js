@@ -99,3 +99,6 @@
   /* 다른 곳을 눌러도 소리는 풀린다: 막혔던 것을 다시 틀고 문을 닫는다 */
   document.addEventListener('pointerup',function(e){ if(done||(el&&el.contains(e.target))) return; if(BL.length||CX.length||FORCE){ setTimeout(function(){ if(!done&&act()){ unlock(); close(); } },0); } },true);
 })();
+
+/* 10/3: 로그인 · 회원가입 모듈(obauth.js)을 모든 화면에 */
+(function(){ try{ if(window.ObAuth||document.querySelector('script[src*="obauth.js"]')) return; var s=document.createElement('script'); s.src='obauth.js?v=1'; s.async=true; (document.head||document.documentElement).appendChild(s); }catch(e){} })();

@@ -121,13 +121,22 @@
     '.chBand.hold .chTrack{animation-play-state:paused}',
     '@keyframes chMq{to{transform:translateX(-50%)}}',
     '.chB{flex:none;display:flex;flex-direction:column;align-items:center;width:62px;border:0;padding:0;background:none;color:#fff;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}',
-    '.chB i,.home .chB i{display:block;width:52px;height:52px;border-radius:50%!important;background:#1a161c center 18%/cover no-repeat;box-shadow:0 0 0 1.5px rgba(10,8,12,.9),0 0 0 2.5px var(--c);transition:transform .2s}',
+    '.chB i,.home .chB i{display:block;width:52px;height:52px;border-radius:50%!important;background:#1a161c center 18%/cover no-repeat;box-shadow:0 0 0 1px rgba(232,196,138,.28);transition:transform .2s}',
     '.chB:active i{transform:scale(.92)}',
     '.chB b{margin-top:7px;font-size:12px;font-weight:700;white-space:nowrap}',
     '.chB small{margin-top:1px;font-size:10px;color:rgba(255,255,255,.55);white-space:nowrap}',
     '.chB.me i{box-shadow:0 0 0 1.5px rgba(10,8,12,.9),0 0 0 3px #e3b866}',
     '.chB.me b{color:#e3b866}',
-    '@media (prefers-reduced-motion:reduce){.chTrack{animation:none}.chBand{overflow-x:auto}}'
+    '@media (prefers-reduced-motion:reduce){.chTrack{animation:none}.chBand{overflow-x:auto}}',
+    /* 10/3 20:50 은주: 알록달록 테두리 동그라미가 조잡함 → 띠 배너 하나(얼굴 몇 개를 겹친 상징 + 한 줄 + 단추) */
+    '.chBan{position:relative;display:flex;align-items:center;gap:14px;width:calc(100% - 32px);margin:0 16px;padding:16px 14px 16px 16px;border:0;background:linear-gradient(120deg,#1d1820 0%,#141117 70%);box-shadow:inset 0 0 0 1px rgba(232,196,138,.22);color:#f6ecdf;font-family:inherit;text-align:left;cursor:pointer}',
+    '.chBan .stk{flex:none;display:flex;padding-left:10px}',
+    '.chBan .stk i,.home .chBan .stk i{display:block;width:36px;height:36px;margin-left:-11px;border-radius:50%!important;background:#222 center 18%/cover no-repeat;box-shadow:0 0 0 2px #17141a;filter:saturate(.85)}',
+    '.chBan .tx{flex:1;min-width:0}',
+    '.chBan small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.1em;color:#e3b866}',
+    '.chBan b{display:block;margin-top:4px;font-size:16px;font-weight:800;letter-spacing:-.02em;white-space:nowrap}',
+    '.chBan em{display:block;margin-top:3px;font-style:normal;font-size:11.5px;color:rgba(246,236,223,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+    '.chBan .go,.home .chBan .go{flex:none;width:34px;height:34px;border-radius:50%!important;background:#e8c48a;display:grid;place-items:center}','.chBan .go:after{content:"";width:7px;height:7px;border-top:2px solid #1a120b;border-right:2px solid #1a120b;transform:translateX(-2px) rotate(45deg)}'
   ].join('\n');
 
   function card(id){ var c=C[id], m=mine(), isMine=c.el&&c.el===m&&((c.yin&&face()==='yin')||(c.yang&&face()!=='yin'));
@@ -217,14 +226,15 @@
   function mount(){
     var talk=$('secTalk'); if(!talk) return;
     css();
-    var rowHTML=window.CH_BAND?'<div class="chBand" id="chBand"><div class="chTrack" id="chBandT"></div></div>':'<div class="chMini" id="chRow"></div>';
-    talk.innerHTML='<div class="sh"><small>캐릭터 상담</small><b>오늘은 누구한테 털어놓을래</b></div>'+rowHTML+
+    var stk=['seoha','taeo','fire','halmae'].map(function(k){ return '<i style="background-image:url(\''+C[k].img+'\')"></i>'; }).join('');
+    var rowHTML=window.CH_BAND===2?'<button type="button" class="chBan" id="chBan"><span class="stk">'+stk+'</span><span class="tx"><small>캐릭터 상담</small><b>캐릭터별 1:1 상담</b><em>고민에 맞는 상대를 골라요</em></span><span class="go" aria-hidden="true"></span></button>':window.CH_BAND?'<div class="chBand" id="chBand"><div class="chTrack" id="chBandT"></div></div>':'<div class="chMini" id="chRow"></div>';
+    talk.innerHTML=(window.CH_BAND===2?'':'<div class="sh"><small>캐릭터 상담</small><b>오늘은 누구한테 털어놓을래</b></div>')+rowHTML+
       '<button type="button" class="yinLn" id="yinLn"><span><em>음의 현신</em>같은 기운의 여신 다섯도 만나 보기</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>';
     var mem=$('secMem'); if(mem) mem.style.display='none';
     renderRows();
     var band=$('chBand'); if(band){ var ht=0; var hold=function(){ band.classList.add('hold'); clearTimeout(ht); }, rel=function(){ clearTimeout(ht); ht=setTimeout(function(){ band.classList.remove('hold'); },2200); };
       band.addEventListener('pointerdown',hold); band.addEventListener('pointerup',rel); band.addEventListener('pointercancel',rel); band.addEventListener('mouseenter',hold); band.addEventListener('mouseleave',rel); }
-    document.addEventListener('click', function(e){ if(e.target.closest('#yinLn')){ e.preventDefault(); open((mine()||'water')+'_y'); return; } var b=e.target.closest('#chRow [data-c], #chBand [data-c]'); if(!b) return; e.preventDefault(); open(b.dataset.c); });
+    document.addEventListener('click', function(e){ if(e.target.closest('#chBan')){ e.preventDefault(); open(mine()||'seoha'); return; } if(e.target.closest('#yinLn')){ e.preventDefault(); open((mine()||'water')+'_y'); return; } var b=e.target.closest('#chRow [data-c], #chBand [data-c]'); if(!b) return; e.preventDefault(); open(b.dataset.c); });
     // 홈이 다시 보일 때(내 수호신 · 얼굴 선택이 바뀌었을 수 있음) 줄 다시 그림
     var home=$('home'); if(home) new MutationObserver(function(){ if(home.classList.contains('on')) renderRows(); }).observe(home,{attributes:true,attributeFilter:['class']});
     window.addEventListener('pageshow', renderRows);

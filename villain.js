@@ -9,7 +9,7 @@ const V={
  heuk:{name:'흑매',page:'heukmae.html',tag:'그림자 손님 · 원진과 귀문의 실',line:'월하의 옛 제자. 붉은 실 사이에 검은 실을 몰래 섞는다.',
    still:CF+'101836_ccb27e8d-f3d5-430a-975b-c64a04d3c7cf_min.webp',enter:'',talk:'',
    free:'우리 사이 조심할 때',freeSub:'나와 그 사람 생일로, 둘이 언제 조금 어긋나기 쉬운지 봐요.',paid:'관계 풀이',paidSub:'무엇부터 조심할지, 어긋나기 쉬운 달과 풀리는 달, 피하면 좋은 말',
-   guard:{who:'월하',img:'img/taegil.jpg',t:'월하의 붉은 실',d:'흑매가 섞은 검은 실을 끊어 내는 건 월하의 일이야.',href:'love.html'}},
+   guard:{who:'월하',img:'img/taegil.jpg',t:'월하의 붉은 실 궁합',d:'흑매가 섞은 검은 실을 끊어 내는 건 월하의 일이야.',href:'redthread.html'}},
  geum:{name:'그믐',page:'geumeum.html',tag:'그림자 손님 · 공망의 화신',line:'달이 사라지는 밤에만 걷는다. 사람마다 비어 있는 자리를 알고 있다.',
    still:CF+'102005_5906aacf-085d-40b2-acda-136da797f5cc_min.webp',enter:'',talk:'',
    free:'내 빈칸 확인',freeSub:'생일 하나로, 내 사주에서 비어 있는 자리와 그 자리가 열리는 달을 봐요.',paid:'빈칸 지키기',paidSub:'빈칸이 열리는 달마다 지키는 법, 다가오는 그믐밤 달력',

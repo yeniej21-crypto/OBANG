@@ -69,19 +69,19 @@
     '.yinBan .tx small{display:block;font-size:11px;letter-spacing:.14em;color:#e3b866;font-weight:700}',
     '.yinBan .tx b{display:block;margin-top:5px;font-family:var(--serif,serif);font-size:22px;font-weight:900;line-height:1.3}',
     '.yinBan .tx span{display:block;margin-top:5px;font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.5}',
-    '.chMini{display:flex;gap:8px;overflow-x:auto;padding:2px 16px 4px;scroll-snap-type:x proximity;scroll-padding:0 16px;scrollbar-width:none}',
+    '.chMini{display:flex;gap:14px;overflow-x:auto;padding:2px 16px 4px;scrollbar-width:none}',
     '.chMini::-webkit-scrollbar{display:none}',
-    '.chM{position:relative;flex:none;width:96px;height:132px;border:0;padding:0;background:#141117;color:#fff;text-align:left;cursor:pointer;font-family:inherit;overflow:hidden;scroll-snap-align:start;border-radius:0!important}',
-    '.chM .ph{position:absolute;inset:0;background:#1a161c center 14%/cover no-repeat;transition:transform .5s}',
-    '.chM:active .ph{transform:scale(1.04)}',
-    '.chM::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,10,0) 42%,rgba(8,6,10,.92) 100%);pointer-events:none}',
-    '.chM .nm{position:absolute;left:9px;right:6px;bottom:8px;z-index:1}',
-    '.chM b{display:block;font-family:"Song Myung","Noto Serif KR",serif;font-weight:400;font-size:17px;line-height:1.1;letter-spacing:.02em;white-space:nowrap}',
-    '.chM small{display:block;margin-top:3px;font-size:11px;color:rgba(255,255,255,.62);white-space:nowrap}',
-    '.chM .mk{position:absolute;left:0;top:0;z-index:1;font-size:10.5px;font-weight:700;letter-spacing:.04em;color:#1a130b;background:#e3b866;padding:4px 7px}',
-    '.chM.me{box-shadow:inset 0 0 0 1px #e3b866}',
-    '.yinLn{display:flex;align-items:center;justify-content:space-between;margin:14px 16px 0;padding:13px 2px 2px;border:0;border-top:1px solid rgba(255,240,220,.1);border-radius:0;background:none;color:#fff;font-family:inherit;width:calc(100% - 32px);cursor:pointer;text-align:left}',
-    '.yinLn span{font-size:13.5px;color:rgba(255,255,255,.72)}.yinLn span em{font-style:normal;color:#e3b866;font-weight:700;margin-right:8px}',
+    '.chM{flex:none;width:60px;border:0;padding:0;background:none;color:#fff;text-align:center;cursor:pointer;font-family:inherit}',
+    '.chM .pp{position:relative;display:block;width:60px;height:56px}',
+    '.home .chM .pp i,.chM .pp i{border-radius:50%!important}',
+    '.chM .pp i{position:absolute;top:2px;width:52px;height:52px;border-radius:50%;background:#222 center 16%/cover no-repeat;box-shadow:0 0 0 2px #0b0a0e,0 0 0 3.5px var(--c)}',
+    '.chM .pp i.a{left:4px;z-index:1}',
+    '.chM.two .pp i.a{left:0}.chM.two .pp i.b{left:20px;top:10px;width:40px;height:40px;opacity:.95;box-shadow:0 0 0 2px #0b0a0e,0 0 0 3px var(--c)}',
+    '.chM b{display:block;margin-top:6px;font-size:12px;font-weight:700;white-space:nowrap}',
+    '.chM small{display:block;margin-top:1px;font-size:10px;color:#8a8a92;white-space:nowrap}',
+    '.chM .mk{display:block;margin-top:2px;font-size:9.5px;font-weight:800;color:#e3b866}',
+    '.yinLn{display:flex;align-items:center;justify-content:space-between;margin:12px 16px 0;padding:11px 14px;border:1px solid rgba(255,240,220,.1);border-radius:14px;background:rgba(255,255,255,.03);color:#fff;font-family:inherit;width:calc(100% - 32px);cursor:pointer;text-align:left}',
+    '.yinLn span{font-size:13px;color:rgba(255,255,255,.82)}.yinLn span em{font-style:normal;color:#e3b866;font-weight:700;margin-right:6px}',
     '.yinLn svg{flex:none;color:#e3b866}',
     '.prf{position:absolute;inset:0;z-index:64;background:#0b090d;overflow-y:auto;overscroll-behavior:contain;opacity:0;pointer-events:none;transform:translateY(16px);transition:opacity .35s,transform .45s cubic-bezier(.2,.8,.2,1)}',
     '.prf.on{opacity:1;pointer-events:auto;transform:none}',
@@ -128,7 +128,8 @@
     return list; }
 
   function mini(id){ var c=C[id], m=mine(), isMine=c.el&&c.el===m, sy=!!(c.yang&&isMine&&face()==='yin'), k=sy?id+'_y':id, f=C[k];
-    return '<button type="button" class="chM'+(isMine?' me':'')+'" data-c="'+k+'"><span class="ph" style="background-image:url(\''+f.img+'\')"></span>'+(isMine?'<span class="mk">나의 수호신</span>':'')+'<span class="nm"><b>'+f.n+'</b><small>'+c.role+'</small></span></button>'; }
+    var b=c.yang?'<i class="b" style="background-image:url(\''+(sy?c.img:C[id+'_y'].img)+'\')"></i>':'';
+    return '<button type="button" class="chM'+(c.yang?' two':'')+'" data-c="'+k+'" style="--c:'+c.c+'"><span class="pp"><i class="a" style="background-image:url(\''+f.img+'\')"></i>'+b+'</span><b>'+f.n+'</b>'+(isMine?'<span class="mk">나의 수호신</span>':'<small>'+c.role+'</small>')+'</button>'; }
   function renderRows(){
     var r=$('chRow'); if(r){ var m=mine(), list=['seoha','taeo'].concat(EL).concat(['halmae']); if(m){ list=list.filter(function(x){ return x!==m; }); list.unshift(m); } r.innerHTML=list.map(mini).join(''); }
     var y=$('yinRow'); if(y){ y.innerHTML=EL.map(function(e){ return card(e+'_y'); }).join(''); }

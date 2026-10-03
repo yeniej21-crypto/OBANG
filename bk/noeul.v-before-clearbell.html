@@ -505,22 +505,22 @@ function armLoops(root){ const els=[...root.querySelectorAll('.px[data-v]')].fil
   els.forEach(el=>{ const v=document.createElement('video'); v.className='lv'; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline',''); v.preload='none';
     v.addEventListener('playing',()=>v.classList.add('on')); el.querySelector('.ph').appendChild(v); el._lv=v; o.observe(el); }); }
 armLoops($('sTalk'));
-/* 프롤로그의 종 흔드는 장면: 화면에 들어오면 맑고 청명한 작은 종소리(합성, 소리 버튼을 따른다) */
+/* 프롤로그의 종 흔드는 장면: 화면에 들어오면 낮고 길게 울리는 산사 범종 같은 소리(합성, 소리 버튼을 따른다) */
 const BELL=(()=>{ let ctx=null, out=null, tm=0, n=0;
   const on=()=>{ const b=document.getElementById('sndB'); return !(b&&b.classList.contains('off')); };
   function init(){ if(ctx) return true; const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false; try{ ctx=new AC(); }catch(e){ return false; }
     out=ctx.createGain(); out.gain.value=.6; out.connect(ctx.destination);
-    const sr=ctx.sampleRate, L=Math.floor(sr*3.2), ir=ctx.createBuffer(2,L,sr); for(let c=0;c<2;c++){ const d=ir.getChannelData(c); for(let i=0;i<L;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/L,3.2); }
-    const cv=ctx.createConvolver(); cv.buffer=ir; const lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=7000; const wet=ctx.createGain(); wet.gain.value=.32;
+    const sr=ctx.sampleRate, L=Math.floor(sr*5.5), ir=ctx.createBuffer(2,L,sr); for(let c=0;c<2;c++){ const d=ir.getChannelData(c); for(let i=0;i<L;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/L,3.2); }
+    const cv=ctx.createConvolver(); cv.buffer=ir; const lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=2400; const wet=ctx.createGain(); wet.gain.value=.5;
     out.connect(cv); cv.connect(lp); lp.connect(wet); wet.connect(ctx.destination); return true; }
   function ring(){ window.__bell=(window.__bell||0)+1; if(!on()) return; if(!init()) return; if(ctx.state!=='running'){ const r=ctx.resume(); if(r&&r.then) r.then(()=>{ if(ctx.state==='running') ring2(); }).catch(()=>{}); return; } ring2(); }
-  function ring2(){ const t0=ctx.currentTime+.03, f=1180; /* 손에 든 작은 종(요령 · 풍경)의 맑고 높은 소리: 흔들 때마다 세 번 울림, 맥놀이로 반짝임 */
-    if(window.BGM&&BGM.duck){ BGM.duck(true); setTimeout(()=>BGM.duck(false),3600); }
-    [[0,1,1],[.36,.72,1.004],[.8,.5,.997]].forEach(([dt,amp,dv])=>{ const t=t0+dt, ff=f*dv;
-      [[1,.30,3.4],[1.0036,.22,3.4],[2.32,.12,2.0],[2.98,.08,1.5],[4.16,.05,.9],[5.43,.03,.5]].forEach(([r,a,d])=>{
-        const o=ctx.createOscillator(), g=ctx.createGain(); o.type='sine'; o.frequency.value=ff*r; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(a*amp,t+.004); g.gain.exponentialRampToValueAtTime(.0001,t+d*(.7+.3*amp)); o.connect(g); g.connect(out); o.start(t); o.stop(t+d+.05); });
-      const nb=ctx.createBuffer(1,Math.floor(ctx.sampleRate*.025),ctx.sampleRate), nd=nb.getChannelData(0); for(let i=0;i<nd.length;i++) nd[i]=(Math.random()*2-1)*(1-i/nd.length);
-      const ns=ctx.createBufferSource(), nh=ctx.createBiquadFilter(), ng=ctx.createGain(); ns.buffer=nb; nh.type='highpass'; nh.frequency.value=3000; ng.gain.value=.06*amp; ns.connect(nh); nh.connect(ng); ng.connect(out); ns.start(t); }); }
+  function ring2(){ const t=ctx.currentTime+.03, f=146; /* 폰 스피커에서도 들리도록 바탕을 D3로, 배음을 조금 세게 */
+    if(window.BGM&&BGM.duck){ BGM.duck(true); setTimeout(()=>BGM.duck(false),3800); }
+    /* 종의 배음은 정수배가 아니라서 맥놀이가 생긴다: 낮은 울림(hum) · 바탕음 두 개(살짝 어긋남) · 높은 배음은 빨리 사라짐 */
+    [[.5,.22,10],[1,.40,8],[1.006,.32,8],[1.19,.16,5.5],[2.0,.26,6],[2.71,.20,4.5],[3.02,.14,3.5],[4.1,.08,2.5],[5.36,.05,1.6],[8.1,.03,.6]].forEach(([r,a,d])=>{
+      const o=ctx.createOscillator(), g=ctx.createGain(); o.type='sine'; o.frequency.value=f*r; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(a,t+.02); g.gain.exponentialRampToValueAtTime(.0001,t+d); o.connect(g); g.connect(out); o.start(t); o.stop(t+d+.05); });
+    const nb=ctx.createBuffer(1,ctx.sampleRate*.12,ctx.sampleRate), nd=nb.getChannelData(0); for(let i=0;i<nd.length;i++) nd[i]=(Math.random()*2-1)*(1-i/nd.length);
+    const ns=ctx.createBufferSource(), nl=ctx.createBiquadFilter(), ng=ctx.createGain(); ns.buffer=nb; nl.type='lowpass'; nl.frequency.value=1400; ng.gain.value=.14; ns.connect(nl); nl.connect(ng); ng.connect(out); ns.start(t); }
   ['pointerdown','touchend','keydown'].forEach(ev=>document.addEventListener(ev,()=>{ if(init()){ const r=ctx.resume(); if(r&&r.catch) r.catch(()=>{}); } },{passive:true}));
   const host=document.querySelector('#sTalk .pp[data-v="hand"]');
   if(host) new IntersectionObserver(es=>es.forEach(e=>{ clearInterval(tm); if(e.isIntersecting){ n=0; setTimeout(ring,700); tm=setInterval(()=>{ if(++n>=2){ clearInterval(tm); return; } ring(); },9000); } }),{root:$('sTalk'),threshold:.55}).observe(host);

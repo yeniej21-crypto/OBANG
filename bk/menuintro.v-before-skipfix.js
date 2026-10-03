@@ -22,7 +22,7 @@
   const abs=u=>{ try{ return new URL(u,location.href).href; }catch(e){ return u; } };
   const unpre=()=>document.documentElement.classList.remove('mi-pre');
   function play(o){
-    if(!o.onDone){ if(pageDone) return; pageDone=true; try{ if(location.hash==='#re'||sessionStorage.getItem('obRe')){ unpre(); return; } }catch(e){} try{ const sk=sessionStorage.getItem('skipMI'); if(sk&&abs(sk)===abs(o.src)){ sessionStorage.removeItem('skipMI'); unpre(); return; } }catch(e){} }
+    if(!o.onDone){ if(pageDone) return; pageDone=true; try{ if(location.hash==='#re'||sessionStorage.getItem('obRe')){ unpre(); return; } }catch(e){} try{ if(sessionStorage.getItem('skipMI')===abs(o.src)){ sessionStorage.removeItem('skipMI'); unpre(); return; } }catch(e){} }
     if(document.querySelector('.mi')){ unpre(); return; }
     const root=o.root||document.querySelector('.stage')||document.body;
     if(!document.getElementById('miCss')){ const s=document.createElement('style'); s.id='miCss'; s.textContent=css; document.head.appendChild(s); }

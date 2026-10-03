@@ -107,230 +107,6 @@ body:not(.next) #sRs{--acc:var(--sage);--acc-ink:var(--sage-ink)}
 .l2-open .lb-stamp b{margin:2px 0;color:var(--paper);font-size:19px}
 #lprem.pkx .pk-letter .pk-sg i{border-radius:50%;color:#fffaf2}
 #lprem.pkx .pk-row.pk-hi .pk-a,#lprem.pkx .pk-row.pk-hi .pk-c{color:var(--acc-ink)}
-/* ── 다음 연애(서하) 결과 · 밤 화면 ─────────────────────────────────────────
-   body.next 의 결과(#sRs)만 덮는다. 재회(시온)는 위 밝은 한지 화면 그대로.
-   바탕: 먹빛 남색에 자두빛 번짐 + 잔 결(노이즈) + 가장자리 비네트. 강조색은 서하의 등불빛 하나 */
-body.next #sRs.lb{
-  --paper:#0d0c16; --paper-2:#1b1623; --paper-3:#15111d; --ink:#f3ede5; --ink-2:#d0c7c4; --ink-3:#a39aa6;
-  --acc:#e8b07a; --acc-ink:#efbd8a; --honey:#e8b07a; --gold:#e8b07a; --wax:#e8b07a;
-  --line:rgba(236,224,240,.14); --line-2:rgba(236,224,240,.06); --card:#15111d; --lamp:#f6d3a8;
-  color:var(--ink); color-scheme:dark; background-color:#0d0c16;
-  background-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 .95  0 0 0 0 .9  0 0 0 .055 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
-    radial-gradient(120% 560px at 78% 120px,rgba(96,52,100,.50),rgba(96,52,100,0) 70%),
-    radial-gradient(110% 760px at 0 1500px,rgba(28,46,94,.42),rgba(28,46,94,0) 70%),
-    radial-gradient(110% 820px at 100% 2900px,rgba(84,40,78,.36),rgba(84,40,78,0) 70%),
-    radial-gradient(120% 900px at 20% 4300px,rgba(26,40,84,.36),rgba(26,40,84,0) 70%),
-    linear-gradient(180deg,#14101f 0,#0d0c16 760px,#0c0b15 100%);
-  background-size:180px 180px,100% 100%,100% 100%,100% 100%,100% 100%,100% 100%;
-  background-position:0 0,0 0,0 0,0 0,0 0,0 0;
-  background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat;background-attachment:local}
-body.next.bright .stage:after{content:"";position:absolute;inset:0;z-index:15;pointer-events:none;background:radial-gradient(130% 85% at 50% 42%,rgba(0,0,0,0) 62%,rgba(0,0,0,.34))}
-body.next.bright .top b{color:#eadfd2;font-size:14px;letter-spacing:.12em}
-body.next.bright .ib{background:rgba(13,12,22,.55);border-color:rgba(236,224,240,.18);color:#f3ede5;box-shadow:none}
-body.next #sRs .rs{padding:0 20px calc(env(safe-area-inset-bottom,0px) + 40px)}
-
-/* 첫 장면: 달빛 원 앞의 서하. 어두운 머리 · 옷이 바탕에 묻히지 않게 뒤에 달 원, 몸에 등불빛 테두리 */
-body.next .l2-mast.next{padding:0;overflow:hidden}
-body.next .l2-mast.next:after{display:none}
-.nx-hero{position:relative;height:590px}
-.nx-hero:before{content:"";position:absolute;inset:0;background:
-  radial-gradient(1.4px 1.4px at 12% 18%,rgba(255,240,220,.75),transparent),radial-gradient(1px 1px at 30% 9%,rgba(255,240,220,.6),transparent),
-  radial-gradient(1.2px 1.2px at 8% 46%,rgba(255,240,220,.5),transparent),radial-gradient(1px 1px at 22% 33%,rgba(255,240,220,.45),transparent),
-  radial-gradient(1.3px 1.3px at 92% 6%,rgba(255,240,220,.55),transparent),radial-gradient(1px 1px at 40% 24%,rgba(255,240,220,.4),transparent);pointer-events:none}
-.nx-moon{position:absolute;right:2px;top:26px;width:286px;height:286px;border-radius:50%;
-  background:radial-gradient(closest-side,rgba(255,228,196,.42),rgba(240,182,124,.20) 58%,rgba(232,170,110,.06) 92%,rgba(232,170,110,0));
-  box-shadow:0 0 90px 24px rgba(232,170,110,.13),inset 0 0 0 1px rgba(255,222,186,.16)}
-.nx-hero .nx-cut{position:absolute;right:-36px;top:46px;height:600px;width:auto;z-index:1;
-  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 1.5%,#000 52%,rgba(0,0,0,.55) 70%,transparent 88%);mask-image:linear-gradient(180deg,transparent 0,#000 1.5%,#000 52%,rgba(0,0,0,.55) 70%,transparent 88%);
-  filter:drop-shadow(0 0 1px rgba(255,224,190,.75)) drop-shadow(0 0 16px rgba(232,170,110,.32)) drop-shadow(-18px 10px 36px rgba(120,88,170,.30))}
-.nx-hd{position:absolute;left:20px;right:20px;bottom:6px;z-index:3}
-.nx-hd small{display:block;font-size:14px;font-weight:700;color:var(--acc-ink);text-shadow:0 1px 10px rgba(0,0,0,.7)}
-.nx-hd h1{margin:10px 0 0;font-family:var(--brush);font-weight:400;font-size:76px;line-height:.98;color:var(--ink);text-shadow:0 4px 30px rgba(0,0,0,.65)}
-.nx-hd p{margin:16px 0 0;max-width:230px;font-size:16px;line-height:1.7;color:var(--ink-2);text-shadow:0 1px 12px rgba(0,0,0,.9)}
-.nx-seal{position:absolute;left:18px;top:104px;z-index:3}
-.nx-seal .lb-stamp{--sz:132px}
-.nx-seal .lb-stamp small{font-size:14px;letter-spacing:0}
-.nx-seal .lb-stamp em{font-size:14px;letter-spacing:0;margin-top:2px}
-body.next #sRs .lb-stamp.is-fill small,body.next #sRs .lb-stamp.is-fill b,body.next #sRs .lb-stamp.is-fill em{color:#1c1209}
-
-/* 지수: 큰 숫자 + 가는 눈금선 */
-body.next .l2-score{display:flex;flex-direction:column;text-align:left;margin-top:44px;padding:0}
-body.next .lb-score .lb-k{order:1;font-size:15px;letter-spacing:.02em;color:var(--acc-ink)}
-body.next .lb-score .lb-n{order:2;margin:6px 0 0;font-size:112px;line-height:.92;letter-spacing:-.045em;color:var(--ink)}
-body.next .lb-score .lb-n i{font-size:34px;color:var(--acc-ink);margin-left:6px;letter-spacing:0}
-body.next #arc{order:3;margin-top:22px}
-body.next .lb-scale{order:4;max-width:none;margin:8px 0 0;font-size:14px;color:var(--ink-3)}
-body.next .lb-score h2{order:5;margin:36px 0 0;font-family:var(--brush);font-weight:400;font-size:46px;line-height:1.12;color:var(--ink)}
-body.next .lb-score p{order:6;margin:16px 0 0;max-width:none;font-size:16px;line-height:1.8;color:var(--ink-2)}
-.nx-scale{display:block;width:100%;height:auto;overflow:visible}
-
-/* 섹션: 작은 머리말 + 큰 제목, 상자 없이 여백으로 나눈다 */
-.nx-sec{position:relative;margin-top:92px}
-.nx-k{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:700;color:var(--acc-ink)}
-.nx-k:before{content:"";width:28px;height:1px;background:var(--acc)}
-.nx-t{margin:14px 0 0;font-family:var(--serif);font-weight:900;font-size:30px;line-height:1.3;letter-spacing:-.02em;color:var(--ink)}
-.nx-lead{margin:14px 0 0;font-size:16px;line-height:1.8;color:var(--ink-2)}
-.nx-lead b{color:var(--ink);font-weight:700}
-
-/* 열두 달 밤하늘 */
-.nx-sky{position:relative;margin:26px -20px 0}
-.nx-sky svg{display:block;width:100%;height:auto}
-.nx-sky text{font-family:var(--sans)}
-.nx-glow{transform-box:fill-box;transform-origin:center;animation:nxPulse 3.4s ease-in-out infinite}
-@keyframes nxPulse{50%{opacity:.55}}
-.nx-key{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:6px;font-size:14px;color:var(--ink-2)}
-.nx-key span{display:inline-flex;align-items:center;gap:8px}
-.nx-key svg{width:16px;height:20px}
-
-/* 달별 장부 */
-.nx-led{list-style:none;margin:30px 0 0;padding:0}
-.nx-led li{display:grid;grid-template-columns:52px 64px 1fr;align-items:baseline;gap:10px;padding:11px 0;border-top:1px solid var(--line)}
-.nx-led li.yr{display:block;padding:20px 0 8px;border-top:0;font-family:var(--serif);font-size:15px;font-weight:700;color:var(--ink-3)}
-.nx-led li.yr:first-child{padding-top:0}
-.nx-led .mo{font-family:var(--serif);font-size:19px;font-weight:900;color:var(--ink)}
-.nx-led .st{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:700;color:var(--ink-3)}
-.nx-led .st i{flex:none;width:10px;height:10px;border-radius:50%;border:1.5px dashed var(--ink-3)}
-.nx-led .wd{font-size:15px;line-height:1.5;color:var(--ink-3)}
-.nx-led .wd em{margin-left:8px;font-style:normal;font-size:14px;font-weight:700;color:var(--acc-ink)}
-.nx-led li.is-g .st{color:var(--ink-2)}
-.nx-led li.is-g .st i{border:1.5px solid var(--acc)}
-.nx-led li.is-g .wd{color:var(--ink-2)}
-.nx-led li.is-s{padding:15px 0}
-.nx-led li.is-s .mo{font-size:24px;color:var(--lamp)}
-.nx-led li.is-s .st{color:var(--acc-ink)}
-.nx-led li.is-s .st i{border:0;background:var(--acc);box-shadow:0 0 0 3px rgba(232,176,122,.18),0 0 14px 2px rgba(232,176,122,.55)}
-.nx-led li.is-s .wd{font-size:16px;font-weight:700;color:var(--ink)}
-.nx-led li.is-lo .wd{color:var(--ink-2)}
-
-/* 나타날 사람: 한 문장으로 */
-.nx-who{position:relative;margin-top:18px}
-.nx-glyph{position:absolute;right:-14px;top:-64px;z-index:0;font-family:var(--brush);font-size:200px;line-height:1;color:var(--acc);opacity:.10;pointer-events:none}
-.nx-glyph.two{font-size:132px;top:-40px}
-.nx-who>*:not(.nx-glyph){position:relative;z-index:1}
-.nx-pre{margin:0;font-size:16px;color:var(--ink-2)}
-.nx-big{margin:10px 0 0;font-family:var(--serif);font-weight:900;font-size:36px;line-height:1.28;letter-spacing:-.03em;color:var(--lamp)}
-.nx-sup{margin:18px 0 0;font-size:16px;line-height:1.8;color:var(--ink-2)}
-.nx-dl{margin:28px 0 0;padding:0}
-.nx-dl>div{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:baseline;padding:13px 0;border-top:1px solid var(--line)}
-.nx-dl>div:last-child{border-bottom:1px solid var(--line)}
-.nx-dl dt{font-size:14px;font-weight:700;color:var(--ink-3)}
-.nx-dl dd{margin:0;font-size:16px;line-height:1.55;color:var(--ink)}
-.nx-dl dd em{display:block;margin-top:4px;font-style:normal;font-size:14px;line-height:1.6;color:var(--ink-3)}
-.nx-dl dd b{font-family:var(--serif);font-size:19px;font-weight:900}
-.nx-dl .lk dd{display:flex;align-items:center;gap:8px;color:var(--ink-3)}
-.nx-dl .lk dd span{filter:blur(4px);user-select:none}
-.nx-dl .lk svg{flex:none;width:14px;height:14px;color:var(--acc)}
-.nx-dl .lb-dots{display:inline-flex;margin-left:10px;vertical-align:2px}
-.nx-dl .lb-dots i{width:10px;height:10px}
-
-/* 언제 · 어디서: 세로 시간선 */
-.nx-tl{position:relative;list-style:none;margin:28px 0 0;padding:0 0 0 34px}
-.nx-tl:before{content:"";position:absolute;left:7px;top:10px;bottom:12px;width:1px;background:linear-gradient(180deg,var(--acc),rgba(232,176,122,.15))}
-.nx-tl li{position:relative;padding-bottom:30px}
-.nx-tl li:last-child{padding-bottom:0}
-.nx-tl li:before{content:"";position:absolute;left:-33px;top:6px;width:13px;height:13px;border-radius:50%;background:#0d0c16;border:1.5px solid var(--ink-3)}
-.nx-tl li.lit:before{background:var(--acc);border-color:var(--acc);box-shadow:0 0 0 4px rgba(232,176,122,.16),0 0 18px 3px rgba(232,176,122,.5)}
-.nx-tl .d{display:block;font-family:var(--serif);font-size:26px;font-weight:900;line-height:1.2;color:var(--ink)}
-.nx-tl li.lit .d{color:var(--lamp)}
-.nx-tl b{display:block;margin-top:6px;font-size:16px;font-weight:700;color:var(--ink)}
-.nx-tl em{display:block;margin-top:4px;font-style:normal;font-size:15px;line-height:1.6;color:var(--ink-3)}
-.nx-tl li.dim .d{font-size:21px;color:var(--ink-2)}
-.nx-place{margin-top:34px;padding:22px 0 0;border-top:1px solid var(--line)}
-.nx-place small{display:block;font-size:14px;font-weight:700;color:var(--ink-3)}
-.nx-place b{display:block;margin-top:8px;font-family:var(--brush);font-weight:400;font-size:42px;line-height:1.1;color:var(--ink)}
-.nx-place em{display:block;margin-top:8px;font-style:normal;font-size:16px;line-height:1.6;color:var(--ink-2)}
-
-/* 서하의 한마디 */
-.nx-say{position:relative;margin:22px 0 0;padding:0}
-.nx-say:before{content:"\201C";position:absolute;left:-4px;top:-30px;font-family:var(--serif);font-size:96px;line-height:1;color:var(--acc);opacity:.5}
-.nx-say blockquote{margin:0;padding:34px 0 0}
-.nx-say blockquote p{margin:0;font-family:var(--serif);font-size:24px;font-weight:700;line-height:1.6;letter-spacing:-.02em;color:var(--ink)}
-.nx-say figcaption{display:flex;align-items:center;gap:12px;margin-top:20px;font-size:15px;font-weight:700;color:var(--ink-2)}
-.nx-say .lb-av{width:44px;height:44px;border-radius:50%;background:#222 center 14%/cover no-repeat;box-shadow:0 0 0 1.5px var(--acc),0 0 16px rgba(232,176,122,.35)}
-.nx-act{margin-top:30px;padding:18px 0;border-top:1px solid var(--acc);border-bottom:1px solid var(--line)}
-.nx-act small{display:block;font-size:14px;font-weight:700;color:var(--acc-ink)}
-.nx-act b{display:block;margin-top:6px;font-family:var(--serif);font-size:20px;font-weight:900;line-height:1.45;color:var(--ink)}
-
-/* 근거 · 막대 */
-body.next #sRs .lb-why{margin-top:26px;padding:2px 0 2px 16px;border-left:1px solid rgba(232,176,122,.5);background:none}
-body.next #sRs .lb-why small{font-size:14px;letter-spacing:.02em;color:var(--acc-ink)}
-body.next #sRs .lb-why p{margin:6px 0 0;font-size:14px;line-height:1.75;color:var(--ink-3)}
-body.next #sRs .lb-why p b{color:var(--ink-2)}
-body.next #sRs .lb-bars{gap:16px;margin-top:26px}
-body.next #sRs .lb-sb{grid-template-columns:1fr 110px}
-body.next #sRs .lb-sb .l b{font-size:16px;color:var(--ink)}
-body.next #sRs .lb-sb .l small{margin-top:3px;font-size:14px;color:var(--ink-3)}
-body.next #sRs .lb-sb .g{height:4px;background:rgba(236,224,240,.10);box-shadow:none}
-body.next #sRs .lb-sb .g:before{top:-6px;bottom:-6px;background:rgba(236,224,240,.35)}
-body.next #sRs .lb-sb .g i{background:var(--acc);box-shadow:0 0 10px rgba(232,176,122,.5)}
-body.next #sRs .lb-sb .g i.neg{background:repeating-linear-gradient(135deg,#a39aa6 0 2px,rgba(163,154,166,.35) 2px 4px);box-shadow:none}
-body.next #sRs .lb-sb-ax{grid-template-columns:1fr 110px;margin-top:6px;font-size:13px}
-body.next #sRs .lb-dots i{border-color:var(--acc)}
-body.next #sRs .lb-dots i.on{background:var(--acc)}
-
-/* 잠금 · 버튼 */
-body.next #sRs .lb-lock{margin-top:96px;padding:28px 22px 22px;background:linear-gradient(180deg,rgba(40,28,48,.75),rgba(20,16,30,.75));border:1px solid rgba(232,176,122,.30);box-shadow:0 40px 70px -40px rgba(0,0,0,.9),0 0 60px -20px rgba(232,176,122,.18)}
-body.next #sRs .lb-lock .hd small{font-size:15px;letter-spacing:.02em}
-body.next #sRs .lb-lock h4{margin-top:10px;font-size:23px;line-height:1.45;padding-right:84px}
-body.next #sRs .lb-lock .seal{--sz:70px;top:20px;right:20px}
-body.next #sRs .lb-lock .seal small{font-size:13px;letter-spacing:0}
-body.next #sRs .lb-lock .pv{margin-top:18px;background:rgba(255,255,255,.03);border:1px dashed rgba(236,224,240,.18)}
-body.next #sRs .lb-lock .pv p{font-size:16px;color:var(--ink-2)}
-body.next #sRs .lb-lock .pv:after{background:linear-gradient(180deg,rgba(22,17,30,0),rgba(22,17,30,.75))}
-body.next #sRs .lb-lock ul{margin-top:18px}
-body.next #sRs .lb-lock li{padding:13px 0;font-size:16px}
-body.next #sRs .lb-lock li em{font-size:14px}
-body.next #sRs .lb-btn{height:58px;background:var(--acc);color:#1c1209;font-size:17px;box-shadow:0 18px 40px -18px rgba(232,176,122,.7),inset 0 1px 0 rgba(255,255,255,.3)}
-body.next #sRs .lb-btn.ghost{height:52px;background:transparent;color:var(--ink);border:1px solid rgba(236,224,240,.24);font-size:16px;box-shadow:none}
-body.next #sRs .obs-btn{margin-top:72px;color:var(--ink);border-color:rgba(236,224,240,.26);background:transparent;font-size:16px}
-body.next #sRs .lb-fine{margin-top:22px;font-size:13px;line-height:1.7;color:var(--ink-3)}
-
-/* 결제 뒤 노트도 같은 밤 화면으로: 상자 대신 여백과 가는 선 */
-body.next #lprem.pkx{--pk-line:var(--line);--pk-card:transparent;margin-top:64px}
-body.next #lprem .l2-open{padding:22px 0;background:none;border:0;border-top:1px solid var(--acc);border-bottom:1px solid var(--line)}
-body.next #lprem .l2-open small{font-size:15px;letter-spacing:.02em}
-body.next #lprem .l2-open b{font-size:22px}
-body.next #lprem.pkx .pk-st{background:rgba(255,255,255,.04);border-color:rgba(232,176,122,.4)}
-body.next #lprem.pkx .pk-st span{font-size:15px}
-body.next #lprem.pkx .pk-st small{font-size:14px}
-body.next #lprem.pkx .pk-sec{margin-top:64px;padding:0;background:none;border:0;box-shadow:none}
-body.next #lprem.pkx .pk-sec>h3{flex-wrap:wrap;gap:6px 10px;margin-bottom:18px;font-size:24px;line-height:1.35;color:var(--ink)}
-body.next #lprem.pkx .pk-sec>h3:before{display:none}
-body.next #lprem.pkx .pk-sec>h3 i{flex-basis:100%;margin:0;font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink-3)}
-body.next #lprem.pkx .pk-p{font-size:16px;line-height:1.85;color:var(--ink-2)}
-body.next #lprem.pkx .pk-vs{gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:20px}
-body.next #lprem.pkx .pk-vs div{padding:18px 6px;background:none;border:0;text-align:left}
-body.next #lprem.pkx .pk-vs div+div{border-left:1px solid var(--line);padding-left:16px}
-body.next #lprem.pkx .pk-vs small{font-size:14px}
-body.next #lprem.pkx .pk-vs b{font-size:26px;color:var(--lamp)}
-body.next #lprem.pkx .pk-vs b[style]{font-size:20px!important}
-body.next #lprem.pkx .pk-vs em{margin-top:6px;font-size:14px;line-height:1.5}
-body.next #lprem.pkx .pk-h{grid-template-columns:64px 1fr 36px;padding:15px 0}
-body.next #lprem.pkx .pk-h .pk-a{font-size:17px}
-body.next #lprem.pkx .pk-h .pk-a small{font-size:13px}
-body.next #lprem.pkx .pk-h .pk-b2{font-size:15px;color:var(--ink-2)}
-body.next #lprem.pkx .pk-h .pk-b2 em{color:var(--ink)}
-body.next #lprem.pkx .pk-h .pk-c{font-size:18px}
-body.next #lprem.pkx .pk-row .pk-tag{font-size:13px;padding:1px 6px;color:#1c1209}
-body.next #lprem.pkx .pk-row.pk-lo .pk-tag{background:#5e5663;color:var(--ink)}
-body.next #lprem.pkx .pk-row.pk-hi .pk-a,body.next #lprem.pkx .pk-row.pk-hi .pk-c{color:var(--lamp)}
-body.next #lprem.pkx .pk-key{font-size:15px;color:var(--ink)}
-body.next #lprem.pkx .pk-key b{font-size:14px}
-body.next #lprem.pkx .pk-ev{font-size:14px;color:var(--ink-3)}
-body.next #lprem.pkx .pk-cards{gap:0;border-top:1px solid var(--line)}
-body.next #lprem.pkx .pk-card{grid-template-columns:86px 1fr;gap:14px;padding:16px 0;background:none;border:0;border-bottom:1px solid var(--line)}
-body.next #lprem.pkx .pk-card>b{font-size:24px;color:var(--lamp)}
-body.next #lprem.pkx .pk-card>b small{font-size:13px}
-body.next #lprem.pkx .pk-card p{font-size:15px}
-body.next #lprem.pkx .pk-card .pk-ct{font-size:16px}
-body.next #lprem.pkx .pk-letter{padding:30px 22px 24px;background:linear-gradient(180deg,rgba(44,30,50,.7),rgba(22,17,32,.7));border:1px solid rgba(232,176,122,.28);box-shadow:0 40px 70px -40px rgba(0,0,0,.9)}
-body.next #lprem.pkx .pk-letter .pk-lt p{font-size:17px;line-height:1.9;color:var(--ink)}
-body.next #lprem.pkx .pk-letter .pk-sg{font-size:16px;color:var(--ink-2)}
-body.next #lprem.pkx .pk-letter .pk-sg i{width:44px;height:44px;font-size:13px;color:#1c1209}
-body.next #lprem.pkx .pk-note{margin:22px 0 0;font-size:13px;color:var(--ink-3)}
-body.next #lprem~.lb-btn.ghost{margin-top:16px}
-@media (prefers-reduced-motion:reduce){.nx-glow{animation:none}}
 .toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translate(-50%,20px);background:rgba(20,18,24,.95);color:#fff;padding:12px 18px;font-size:13.5px;opacity:0;pointer-events:none;transition:all .3s;z-index:60;white-space:nowrap}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 </style>
@@ -523,71 +299,46 @@ function natalTiles(){ const P=D.P, db=P.d[1], cu=D.F.cur, dh=D.F.natal.filter(x
 /* 다음 연애 · 인연 예보 */
 const STW={s:'강함',g:'맑음',q:'고요'};
 function stOf(x,top2){ return top2.includes(x)||x.sc>=75?'s':x.sc>=62?'g':'q'; }
-/* 다음 연애 · 밤 화면 조각 */
-const nxSec=(k,t,body,cls)=>`<section class="nx-sec ${cls||''}"><div class="nx-k">${k}</div>${t?`<h3 class="nx-t">${t}</h3>`:''}${body}</section>`;
-function nxScale(v,lo,hi){ const t=Math.max(0,Math.min(1,(v-lo)/(hi-lo))), W=350, x=(t*W).toFixed(1); let tk='';
-  for(let k=0;k<=10;k++){ const tx=(k/10*W).toFixed(1); tk+=`<line x1="${tx}" x2="${tx}" y1="${k%5?13:10}" y2="${k%5?19:22}" stroke="rgba(236,224,240,${k%5?.22:.4})" stroke-width="1"/>`; }
-  return `<svg class="nx-scale" viewBox="0 0 ${W} 32" aria-hidden="true"><defs><radialGradient id="nxSg"><stop offset="0" stop-color="#e8b07a" stop-opacity=".55"/><stop offset="1" stop-color="#e8b07a" stop-opacity="0"/></radialGradient></defs>${tk}
-   <line x1="0" x2="${W}" y1="16" y2="16" stroke="rgba(236,224,240,.22)" stroke-width="1"/><line x1="0" x2="${x}" y1="16" y2="16" stroke="#e8b07a" stroke-width="2"/>
-   <circle cx="${x}" cy="16" r="16" fill="url(#nxSg)"/><circle cx="${x}" cy="16" r="5.5" fill="#f6d3a8"/></svg>`; }
-/* 열두 달 밤하늘: 곡선은 인연의 기운, 가장 센 달엔 등불, 맑은 달엔 별, 고요한 달엔 점 */
-function nxSky(top2){ const W=390, x0=28, x1=362, px=i=>x0+i*(x1-x0)/11, py=v=>192-(Math.max(30,Math.min(96,v))-30)/66*118, M=D.M;
-  const pts=M.map((x,i)=>[px(i),py(x.sc)]); let d=`M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
-  for(let i=1;i<pts.length;i++){ const [a0,b0]=pts[i-1],[a1,b1]=pts[i], c=(a0+a1)/2; d+=` C${c.toFixed(1)} ${b0.toFixed(1)} ${c.toFixed(1)} ${b1.toFixed(1)} ${a1.toFixed(1)} ${b1.toFixed(1)}`; }
-  const area=d+` L${pts[11][0].toFixed(1)} 206 L${pts[0][0].toFixed(1)} 206 Z`;
-  let sd=(D.idx*7919+M.reduce((a,x)=>a+x.sc*31,0))%2147483647||7; const rn=()=>(sd=sd*16807%2147483647)/2147483647;
-  let stars=''; for(let k=0;k<44;k++){ const sx=rn()*W, sy=4+rn()*150, r=.4+rn()*1.05, o=.12+rn()*.45; stars+=`<circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${r.toFixed(2)}" fill="#f3ede5" opacity="${o.toFixed(2)}"/>`; }
-  const marks=M.map((x,i)=>{ const st=stOf(x,top2), [cx,cy]=pts[i], X1=cx.toFixed(1), Y1=cy.toFixed(1);
-    if(st==='s') return `<line x1="${X1}" y1="0" x2="${X1}" y2="${(cy-12).toFixed(1)}" stroke="#e8b07a" stroke-opacity=".38" stroke-width="1"/>
-      <circle class="nx-glow" cx="${X1}" cy="${Y1}" r="26" fill="url(#nxGl)"/>
-      <rect x="${(cx-3.5).toFixed(1)}" y="${(cy-12.5).toFixed(1)}" width="7" height="2.6" fill="#8a5d35"/><ellipse cx="${X1}" cy="${Y1}" rx="7.6" ry="9.8" fill="url(#nxLn)"/><rect x="${(cx-3.5).toFixed(1)}" y="${(cy+9.6).toFixed(1)}" width="7" height="2.6" fill="#8a5d35"/>
-      <text x="${X1}" y="${(cy+34).toFixed(1)}" text-anchor="middle" font-size="16" font-weight="700" fill="#f6d3a8" paint-order="stroke" stroke="#120f1c" stroke-width="4">${x.o.start.m}월</text>`;
-    if(st==='g') return `<circle cx="${X1}" cy="${Y1}" r="11" fill="url(#nxGl)" opacity=".7"/><path d="M${X1} ${(cy-6.5).toFixed(1)} L${(cx+1.7).toFixed(1)} ${(cy-1.7).toFixed(1)} L${(cx+6.5).toFixed(1)} ${Y1} L${(cx+1.7).toFixed(1)} ${(cy+1.7).toFixed(1)} L${X1} ${(cy+6.5).toFixed(1)} L${(cx-1.7).toFixed(1)} ${(cy+1.7).toFixed(1)} L${(cx-6.5).toFixed(1)} ${Y1} L${(cx-1.7).toFixed(1)} ${(cy-1.7).toFixed(1)} Z" fill="#f6d3a8"/>`;
-    return `<circle cx="${X1}" cy="${Y1}" r="2.4" fill="#a39aa6" opacity=".8"/>`; }).join('');
-  const axis=M.map((x,i)=>{ const st=stOf(x,top2), X1=pts[i][0].toFixed(1), sub=isNow(x.o)?`<text x="${X1}" y="250" text-anchor="middle" font-size="13" font-weight="700" fill="#efbd8a">지금</text>`:(x.o.start.m===1&&i>0)?`<text x="${X1}" y="250" text-anchor="middle" font-size="13" fill="#a39aa6">${x.o.start.y}</text>`:'';
-    return `<text x="${X1}" y="230" text-anchor="middle" font-size="14" font-weight="${st==='s'?700:500}" fill="${st==='s'?'#f6d3a8':st==='g'?'#d0c7c4':'#a39aa6'}">${x.o.start.m}</text>${sub}`; }).join('');
-  const yb=M.findIndex((x,i)=>i>0&&x.o.start.m===1), yl=yb>0?`<line x1="${((pts[yb-1][0]+pts[yb][0])/2).toFixed(1)}" x2="${((pts[yb-1][0]+pts[yb][0])/2).toFixed(1)}" y1="212" y2="252" stroke="rgba(236,224,240,.16)" stroke-dasharray="2 3"/>`:'';
-  return `<div class="nx-sky"><svg viewBox="0 0 ${W} 258" role="img" aria-label="앞으로 열두 달 인연의 기운. 등불이 걸린 달이 가장 센 달">
-   <defs><linearGradient id="nxAr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8b07a" stop-opacity=".20"/><stop offset="1" stop-color="#e8b07a" stop-opacity="0"/></linearGradient>
-    <linearGradient id="nxFd" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".1" stop-color="#fff"/><stop offset=".9" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><mask id="nxMk"><rect width="390" height="258" fill="url(#nxFd)"/></mask>
-    <radialGradient id="nxGl"><stop offset="0" stop-color="#f3c58f" stop-opacity=".6"/><stop offset=".45" stop-color="#e8b07a" stop-opacity=".2"/><stop offset="1" stop-color="#e8b07a" stop-opacity="0"/></radialGradient>
-    <radialGradient id="nxLn" cx=".45" cy=".4" r=".65"><stop offset="0" stop-color="#fff1d6"/><stop offset=".5" stop-color="#f0b878"/><stop offset="1" stop-color="#b8612e"/></radialGradient></defs>
-   ${stars}<path d="${area}" fill="url(#nxAr)" mask="url(#nxMk)"/><path d="${d}" fill="none" stroke="#e8b07a" stroke-opacity=".16" stroke-width="7"/><path d="${d}" fill="none" stroke="#e8b07a" stroke-opacity=".85" stroke-width="1.6"/>
-   <line x1="12" x2="378" y1="206" y2="206" stroke="rgba(236,224,240,.18)"/>${yl}${marks}${axis}</svg></div>`; }
-function nxKey(){ const ic={s:`<svg viewBox="0 0 16 20"><line x1="8" y1="0" x2="8" y2="5" stroke="#e8b07a" stroke-opacity=".5"/><ellipse cx="8" cy="12" rx="5.5" ry="7" fill="#f0b878"/></svg>`,g:`<svg viewBox="0 0 16 20"><path d="M8 5 L9.5 8.5 L13 10 L9.5 11.5 L8 15 L6.5 11.5 L3 10 L6.5 8.5 Z" fill="#f6d3a8"/></svg>`,q:`<svg viewBox="0 0 16 20"><circle cx="8" cy="10" r="2.4" fill="#a39aa6"/></svg>`};
-  return `<div class="nx-key"><span>${ic.s}등불 · 강함</span><span>${ic.g}별 · 맑음</span><span>${ic.q}점 · 고요</span></div>`; }
-function nxNatal(){ const P=D.P, db=P.d[1], cu=D.F.cur, dh=D.F.natal.filter(x=>x.k==='도화'), AT={년주:'태어난 해',월주:'태어난 달',일주:'태어난 날',시주:'태어난 시'};
-  const sp=D.pts.find(p=>/^원국 인연의 별/.test(p[0])), jp=D.pts.find(p=>/^원국 일지/.test(p[0])), dp=D.pts.find(p=>/^대운/.test(p[0]));
-  return `<dl class="nx-dl">
-   <div><dt>타고난 인연의 별</dt><dd><b>${D.stars}개</b><span class="lb-dots">${[0,1,2,3].map(k=>`<i class="${k<D.stars?'on':''}"></i>`).join('')}</span><em>${sp?esc(sp[1]):''}</em></dd></div>
-   <div><dt>배우자 자리</dt><dd><b>${S_.JI_K[db]} · ${ANI[db]}</b><em>${jp?esc(jp[1]):'태어난 날의 지지. 연애가 깊어질수록 드러나는 자리'}</em></dd></div>
-   <div><dt>타고난 도화</dt><dd><b>${dh.length?'있음':'없음'}</b><em>${dh.length?dh.map(x=>AT[x.at]).join(' · ')+'에 사람을 끄는 기운':'끌림보다 신뢰로 가까워지는 편'}</em></dd></div>
-   <div><dt>지금 대운</dt><dd><b>${cu?gzK(cu.s,cu.b):'계산 전'}</b><em>${cu?`${cu.age}세부터 열 해. `:''}${dp?esc(dp[1]):'인연 쪽으로는 크게 움직이지 않는 열 해'}</em></dd></div></dl>`; }
+function stampHtml(st,word,extra){ return `<div class="lb-stamp ${st==='s'?'is-fill':st==='q'?'is-quiet':''}" ${extra||''}><b>${word}</b></div>`; }
+function curve(top2){ const W=360,H=150, X=i=>18+i*29.5, Y=v=>124-(Math.max(30,Math.min(96,v))-30)/66*104;
+  const pts=D.M.map((x,i)=>[X(i),Y(x.sc)]); let d=`M${pts[0][0]} ${pts[0][1]}`;
+  for(let i=1;i<pts.length;i++){ const [x0,y0]=pts[i-1],[x1,y1]=pts[i], cx=(x0+x1)/2; d+=` C${cx} ${y0} ${cx} ${y1} ${x1} ${y1}`; }
+  const area=d+` L${pts[11][0]} 128 L${pts[0][0]} 128 Z`, gl=(v,t)=>`<line x1="10" x2="350" y1="${Y(v)}" y2="${Y(v)}" stroke="rgba(42,33,25,.22)" stroke-dasharray="2 4"/><text x="12" y="${Y(v)-4}" font-size="9.5" fill="#9a8b7a">${t} 선</text>`;
+  return `<svg class="lb-curve" viewBox="0 0 ${W} ${H}" aria-hidden="true"><defs><linearGradient id="cvG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--acc)" stop-opacity=".22"/><stop offset="1" stop-color="var(--acc)" stop-opacity="0"/></linearGradient></defs>
+   ${gl(75,'강함')}${gl(62,'맑음')}<path d="${area}" fill="url(#cvG)"/><path d="${d}" fill="none" stroke="var(--acc)" stroke-width="2.2"/>
+   ${D.M.map((x,i)=>{ const st=stOf(x,top2), [px,py]=pts[i]; return (st==='s'?`<circle cx="${px}" cy="${py}" r="5.5" fill="var(--acc)" stroke="#fffaf1" stroke-width="2"/><text x="${px}" y="${py-11}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--acc)">${x.o.start.m}월</text>`:`<circle cx="${px}" cy="${py}" r="3" fill="#fffaf1" stroke="${st==='g'?'var(--acc)':'#9a8b7a'}" stroke-width="1.5"/>`)+`<text x="${px}" y="145" text-anchor="middle" font-size="10" fill="#6b5d4f">${x.o.start.m}</text>`; }).join('')}</svg>`; }
+function personSvg(){ return `<svg viewBox="0 0 120 176" aria-hidden="true"><defs><linearGradient id="psG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2119" stop-opacity=".26"/><stop offset="1" stop-color="#2a2119" stop-opacity=".07"/></linearGradient>
+  <pattern id="psH" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#2a2119" stroke-opacity=".08" stroke-width="1.4"/></pattern></defs>
+  <g fill="none" stroke="var(--acc)" stroke-opacity=".2"><circle cx="60" cy="70" r="34"/><circle cx="60" cy="70" r="48"/><circle cx="60" cy="70" r="62" stroke-dasharray="3 5"/></g>
+  <path d="M60 40c-13 0-22 10-22 25 0 10 4 19 10 24l-1 11c-17 4-31 14-35 30-2 9-3 25-3 46h102c0-21-1-37-3-46-4-16-18-26-35-30l-1-11c6-5 10-14 10-24 0-15-9-25-22-25z" fill="url(#psG)"/>
+  <path d="M60 40c-13 0-22 10-22 25 0 10 4 19 10 24l-1 11c-17 4-31 14-35 30-2 9-3 25-3 46h102c0-21-1-37-3-46-4-16-18-26-35-30l-1-11c6-5 10-14 10-24 0-15-9-25-22-25z" fill="url(#psH)" stroke="#2a2119" stroke-opacity=".35" stroke-width="1"/>
+  <text x="60" y="162" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6b5d4f" letter-spacing=".08em">윤곽만 예보됨</text></svg>`; }
 function renderNext(top,lo,m1,m2,B){ const T=TYPE[D.starEl], top2=top.slice(0,2), now=new Date(), M=D.M;
   const s3=M.slice(0,3), best=s3.some(x=>stOf(x,top2)==='s')?'s':s3.some(x=>stOf(x,top2)==='g')?'g':'q';
-  $('mast').className='l2-mast next'; $('mast').innerHTML=`<div class="nx-hero"><div class="nx-moon" aria-hidden="true"></div><img class="lb-cut nx-cut" src="img/pop/seoha.webp" alt="서하">
-    <div class="lb-anim nx-seal"><div class="lb-stamp ${best==='s'?'is-fill':best==='q'?'is-quiet':''}" style="position:relative"><small>이번 계절</small><b>${STW[best]}</b><em>${s3.map(x=>x.o.start.m).join(' · ')}월</em></div></div>
-    <div class="nx-hd"><small>서하의 인연 예보 · ${now.getFullYear()}. ${now.getMonth()+1}. ${now.getDate()}</small><h1>인연<br>예보</h1><p>앞으로 열두 달, 인연의 날씨를 절기마다 짚었어.</p></div></div>`;
-  const stTxt={solo:'',some:' 썸 타는 중이라 가까운 넉 달과 합을 더 크게 봤어요.',end:' 정리하는 중이라 처음 석 달은 낮추고 그 뒤 달을 더 크게 봤어요.'}[D.st];
-  const wOf=x=>x===lo?{solo:'쉬어 가는 달',some:'말을 아낄 달',end:'정리에 쓰는 달'}[D.st]:(x.why.filter(t=>!NEG.test(t))[0]?WS[x.why.filter(t=>!NEG.test(t))[0]]:x.why[0]?WS[x.why[0]]||x.why[0]:'조용한 달');
-  const led=`<ol class="nx-led">${M.map((x,i)=>{ const st=stOf(x,top2), yr=(i===0||x.o.start.m===1)?`<li class="yr">${x.o.start.y}년</li>`:'';
-    return yr+`<li class="is-${st}${x===lo?' is-lo':''}"><span class="mo">${x.o.start.m}월</span><span class="st"><i></i>${STW[st]}</span><span class="wd">${esc(wOf(x))}${isNow(x.o)?'<em>이번 달</em>':''}</span></li>`; }).join('')}</ol>`;
-  const s1=nxSec('열두 달 인연 예보',`${m1}월에 등불이 켜져`,`<p class="nx-lead">가장 센 달은 <b>${m1}월</b>, 그다음은 <b>${m2}월</b>. 등불이 걸린 달이 제일 세고, 별이 뜬 달은 맑아. 점만 찍힌 달은 고요해.</p>${nxSky(top2)}${nxKey()}${led}
-   ${note(`달마다 그달 기운이 내 배우자 자리(태어난 날의 지지)와 끌어당기면 더하고, 부딪히면 뺐어요. 사람을 끄는 기운(도화), 인연의 별, 나와 마음이 맞는 기운(천간합)이 드는 달도 더했어요. 달은 절기 기준이에요.${stTxt}`,`<b>${m1}월</b>은 ${esc(terms(top[0].why.filter(t=>!NEG.test(t))))||'큰 걸림이 없는 순한 흐름'}이 겹친 달이에요.`)}`);
-  const dmEl=stEl(D.P.d[0]), pl=T.place.split(', '), gw=ELW[D.starEl];
-  const s2=nxSec('나타날 사람','',`<div class="nx-who"><span class="nx-glyph${gw.length>1?' two':''}" aria-hidden="true">${gw}</span><p class="nx-pre">인연의 별이 그린 다음 사람</p><h3 class="nx-big">${esc(T.n)}</h3>
-   <p class="nx-sup">${gw}의 결을 띤 사람이야. ${esc(pl.slice(0,2).join(', '))} 같은 자리에서 마주치기 쉬워.</p>
-   <dl class="nx-dl"><div><dt>오행</dt><dd>${gw}의 결 · ${S_.EL_K[D.starEl]}</dd></div><div><dt>자리</dt><dd>${esc(pl.slice(0,2).join(', '))}</dd></div>
-   <div class="lk"><dt>인상</dt><dd>${LOCK}<span>${esc(T.look.replace(/[가-힣]/g,'○'))}</span></dd></div><div class="lk"><dt>하는 일</dt><dd>${LOCK}<span>${esc(T.job.replace(/[가-힣]/g,'○'))}</span></dd></div></dl></div>
-   ${note(`인연의 별은 ${D.male?'남성에게는 내가 다루는 기운(재성)':'여성에게는 나를 다스리는 기운(관성)'}이에요. 타고난 나(일간)가 <b>${ELW[dmEl]}</b>라서, 그 기운은 <b>${gw}</b>${K.bt(gw)?'이':'가'} 돼요. 다음 사람은 그 결을 띠기 쉬워요.`,'인상과 하는 일은 서하의 인연 노트에서 열려요.')}`);
-  const lowWhy=lo.why.filter(w=>NEG.test(w)).map(w=>WS[w]||w).join(' · ')||'인연의 기운이 가장 약한 달';
-  const evs=[{x:top[0],k:ST_N[D.st].when,lit:1},{x:top[1],k:'한 번 더 오는 때',lit:1}].concat(top2.includes(lo)?[]:[{x:lo,k:ST_N[D.st].bad,lit:0}]).sort((a,b)=>a.x.i-b.x.i);
-  const s3s=nxSec('언제 · 어디서',`${m1}월, ${esc(pl[0])}`,`<ol class="nx-tl">${evs.map(e=>`<li class="${e.lit?'lit':'dim'}"><span class="d">${e.x.o.start.y}년 ${e.x.o.start.m}월</span><b>${e.k}</b><em>${e.lit?`${dr(e.x.o)} · ${e.x.o.term}부터`:esc(lowWhy)}</em></li>`).join('')}</ol>
-   <div class="nx-place"><small>만나기 쉬운 곳</small><b>${esc(pl[0])}</b><em>${esc(pl.slice(1).join(', '))}</em></div>
-   ${note(`때는 가장 센 달의 절기 구간이에요. 절기로 나뉜 한 달이라 달력의 1일과 조금 어긋나요. 곳은 인연의 별 ${gw}의 기운이 잘 드러나는 자리예요.`,lo.why.some(w=>NEG.test(w))?`<b>${lo.o.start.m}월</b>은 ${esc(terms(lo.why.filter(w=>NEG.test(w))))}이 걸린 달이에요.`:'')}`);
+  $('mast').className='l2-mast next'; $('mast').innerHTML=`<div class="lb-bar"><span>오방 인연 예보</span><span>${now.getFullYear()}. ${now.getMonth()+1}. ${now.getDate()} 발표</span></div>
+   <div class="l2-mh"><div class="tx"><small>예보관 서하</small><h1>인연<br>예보</h1><p>앞으로 열두 달,<br>인연의 날씨를<br>절기마다 짚었어.</p></div>
+    <div class="cutw"><img class="lb-cut" src="img/pop/seoha.webp" alt="서하"></div>
+    <div class="lb-anim" style="position:absolute;left:4px;bottom:22px;z-index:3"><div class="lb-stamp ${best==='s'?'is-fill':best==='q'?'is-quiet':''}" style="--sz:124px;position:relative"><small>이번 계절</small><b>${STW[best]}</b><em>${s3.map(x=>x.o.start.m).join(' · ')}월</em></div></div></div>`;
+  const W=WT_(), stTxt={solo:'',some:' 썸 타는 중이라 가까운 넉 달과 합을 더 크게 봤어요.',end:' 정리하는 중이라 처음 석 달은 낮추고 그 뒤 달을 더 크게 봤어요.'}[D.st];
+  const cal=`<div class="lb-cal lb-anim">${M.map((x,i)=>{ const st=stOf(x,top2), w=x===lo?{solo:'쉬어 가는 달',some:'말을 아낄 달',end:'정리에 쓰는 달'}[D.st]:(x.why.filter(t=>!NEG.test(t))[0]?WS[x.why.filter(t=>!NEG.test(t))[0]]:x.why[0]?WS[x.why[0]]||x.why[0]:'조용한 달');
+    return `<div class="${top2.includes(x)?'is-top':''} ${isNow(x.o)?'is-now':''}">${i===0||x.o.start.m===1?`<span class="y">${x.o.start.y}</span>`:''}<span class="m">${x.o.start.m}<i>월</i></span>${stampHtml(st,STW[st],`style="--d:${(i*.05).toFixed(2)}s"`)}<span class="w">${esc(w)}</span></div>`; }).join('')}</div>`;
+  const s1=sec('01','열두 달 인연 예보','절기 기준 월',`<p class="lb-lead">가장 센 달은 <b>${m1}월</b>, 그다음은 <b>${m2}월</b>. 도장이 진할수록 인연의 기운이 강한 달이에요.</p>${curve(top2)}${cal}
+   <div class="lb-legend"><span><i class="f"></i>강함</span><span><i></i>맑음</span><span><i class="q"></i>고요</span></div>
+   ${note(`달마다 그달 기운이 내 배우자 자리(태어난 날의 지지)와 끌어당기면 더하고, 부딪히면 뺐어요. 사람을 끄는 기운(도화), 인연의 별, 나와 마음이 맞는 기운(천간합)이 드는 달도 더했어요.${stTxt}`,`<b>${m1}월</b>은 ${esc(terms(top[0].why.filter(t=>!NEG.test(t))))||'큰 걸림이 없는 순한 흐름'}이 겹친 달이에요.`)}`);
+  const dmEl=stEl(D.P.d[0]);
+  const s2=sec('02','나타날 사람','예보 카드',`<div class="lb-person lb-anim"><div class="pic">${personSvg()}<div class="lb-stamp is-fill"><b>${ELW[D.starEl]}</b></div></div>
+   <div class="inf"><small>출현 예상 인물</small><h4>${esc(T.n)}</h4><dl><dt>오행</dt><dd>${ELW[D.starEl]}의 결 · ${S_.EL_K[D.starEl]}</dd><dt>자리</dt><dd>${esc(T.place.split(', ').slice(0,2).join(', '))}</dd>
+   <dt>인상</dt><dd class="lk">${LOCK}<span>${esc(T.look.replace(/[가-힣]/g,'○'))}</span></dd><dt>하는 일</dt><dd class="lk">${LOCK}<span>${esc(T.job.replace(/[가-힣]/g,'○'))}</span></dd></dl></div></div>
+   ${note(`인연의 별은 ${D.male?'남성에게는 내가 다루는 기운(재성)':'여성에게는 나를 다스리는 기운(관성)'}이에요. 타고난 나(일간)가 <b>${ELW[dmEl]}</b>라서, 그 기운은 <b>${ELW[D.starEl]}</b>${K.bt(ELW[D.starEl])?'이':'가'} 돼요. 다음 사람은 그 결을 띠기 쉬워요.`,'인상과 하는 일은 서하의 인연 노트에서 열려요.')}`);
+  const s3s=sec('03','언제 · 어디서','',`<div class="lb-tiles">
+   <div><small>${ST_N[D.st].when}</small><b>${top[0].o.start.y}년 ${m1}월</b><em>${dr(top[0].o)} · ${top[0].o.term}부터</em></div>
+   <div><small>한 번 더 오는 때</small><b>${top[1].o.start.y}년 ${m2}월</b><em>${dr(top[1].o)} · ${top[1].o.term}부터</em></div>
+   <div><small>만나기 쉬운 곳</small><b>${esc(T.place.split(', ')[0])}</b><em>${esc(T.place.split(', ').slice(1).join(', '))}</em></div>
+   <div><small>${ST_N[D.st].bad}</small><b>${lo.o.start.m}월</b><em>${esc(lo.why.filter(w=>NEG.test(w)).map(w=>WS[w]||w).join(' · ')||'인연의 기운이 가장 약한 달')}</em></div></div>
+   ${note(`때는 가장 센 달의 절기 구간이에요. 절기로 나뉜 한 달이라 달력의 1일과 조금 어긋나요. 곳은 인연의 별 ${ELW[D.starEl]}의 기운이 잘 드러나는 자리예요.`,lo.why.some(w=>NEG.test(w))?`<b>${lo.o.start.m}월</b>은 ${esc(terms(lo.why.filter(w=>NEG.test(w))))}이 걸린 달이에요.`:'')}`);
   const act={solo:`${m1}월엔 들어오는 약속을 거절하지 않기`,some:`${m1}월에 내 마음을 한 번은 말하기`,end:`${m1}월 전까지 정리를 끝내 두기`}[D.st];
-  const s4=nxSec('서하의 한마디','',`<figure class="nx-say"><blockquote><p id="sayT"></p></blockquote><figcaption><span class="lb-av" style="background-image:url('${CFG.img}')"></span>${CFG.who}</figcaption></figure><div class="nx-act"><small>할 일 하나</small><b>${esc(act)}</b></div>`);
-  const s5=nxSec('지수를 만든 것',`${D.idx}%는 이렇게 나왔어`,`${bars()}<div style="height:30px"></div>${nxNatal()}${note('지수는 가장 센 두 달과 좋은 달의 수, 앞으로 맞을 해의 기운, 지금 대운, 타고난 인연의 별과 도화를 더하고, 배우자 자리가 흔들리는 구조는 뺐어요. 막대가 길수록 지수에 크게 작용했어요.')}`);
+  const s4=sec('04','서하의 한마디','',`<div class="lb-quote"><div class="lb-av" style="background-image:url('${CFG.img}')"></div><div><small>${CFG.who}</small><p id="sayT"></p></div></div><div class="lb-act"><small>할 일 하나</small><b>${esc(act)}</b></div>`);
+  const s5=sec('05','지수를 만든 것','',`${bars()}<div style="height:16px"></div>${natalTiles()}${note('지수는 가장 센 두 달과 좋은 달의 수, 앞으로 맞을 해의 기운, 지금 대운, 타고난 인연의 별과 도화를 더하고, 배우자 자리가 흔들리는 구조는 뺐어요. 막대가 길수록 지수에 크게 작용했어요.')}`);
   $('body').innerHTML=s1+s2+s3s+s4+s5; }
 /* 재회 · 경로 지도 */
 function route(top,lo){ const M=D.M, dest=top[0], sec2=top[1];
@@ -655,7 +406,7 @@ function renderRe(top,lo,m1,m2,B){ const now=new Date(), R=route(top,lo), el=(no
   $('body').innerHTML=s1+s2+s3+s4+s5; }
 function render(){ const top=rank(), lo=lowest(), m1=top[0].o.start.m, m2=top[1].o.start.m, B=band(D.idx);
   $('rK').textContent=MODE==='re'?'재회 가능성':'다음 인연 지수'; $('rN').innerHTML=`${D.idx}<i>%</i>`;
-  $('arc').innerHTML=MODE==='re'?arc(D.idx,25,92):nxScale(D.idx,30,92); $('arcS').innerHTML=MODE==='re'?'<span>정리 쪽</span><span>다시 닿는 쪽</span>':'<span>고요</span><span>강함</span>';
+  $('arc').innerHTML=arc(D.idx,MODE==='re'?25:30,92); $('arcS').innerHTML=MODE==='re'?'<span>정리 쪽</span><span>다시 닿는 쪽</span>':'<span>고요</span><span>강함</span>';
   if(MODE==='re'){ $('rT').textContent=['붙잡기보다 정리 쪽으로 기울어','다시 닿기엔 바람이 약한 쪽이야','반반이야, 타이밍이 전부야','기다려 볼 근거가 있는 사이야','다시 닿을 문이 열려 있어'][B];
     const pt=D.pts.find(p=>!/^가장 센 달/.test(p[0]))||D.pts[0]; $('rP').textContent=`가장 가까워지는 달은 ${m1}월, 그다음은 ${m2}월. ${kr(pt[0])} · ${kr(pt[1])}.`; renderRe(top,lo,m1,m2,B); }
   else { const T=TYPE[D.starEl], now=new Date(), cur=top[0].o.start.y*100+top[0].o.start.m<=now.getFullYear()*100+now.getMonth()+1, when=cur?'지금':`${m1}월`;

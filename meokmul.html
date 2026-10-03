@@ -77,6 +77,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
   <div class="pad"></div>
 </div>
+<script src="vidguard.js?v=1"></script>
 <script src="meokmul_lines.js"></script>
 <script src="tarot_data.js"></script>
 <script>
@@ -112,6 +113,8 @@ function say(k){ /* 대사 한 줄: 영상 재생, 끝나면 마지막 장면 �
 /* 하루 한 장 */
 const today=new Date(); const dk=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 let S={}; try{ S=JSON.parse(localStorage.getItem('obMeok')||'{}'); }catch(e){}
+/* 점검용: ?test=1 이면 하루 한 장 제한 없이 매번 새로 뽑기(기록도 남기지 않음) */
+const TEST=/[?&]test=1\b/.test(location.search); if(TEST) S={};
 const save=()=>{ try{ localStorage.setItem('obMeok',JSON.stringify(S)); }catch(e){} };
 function hash(s){ let h=2166136261; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
 /* 부채꼴 7장 */
@@ -125,8 +128,8 @@ function show(r){ const C=TAROT[r.c]; const rv=!!r.rv;
   $('res').classList.add('on'); setTimeout(()=>$('flip').classList.add('on'),120); }
 function pick(i){ if(S.d===dk) return; const fan=$('fan'); fan.classList.add('done');
   const b=fan.querySelector('[data-i="'+i+'"]'); b.classList.add('pk'); b.style.transform='translateY(-14px)';
-  const h=hash(dk+'|'+i+'|'+(S.n||0)); const c=h%TAROT.length, rv=((h>>>8)%100)<28;
-  S={d:dk,c,rv,n:(S.n||0)+1}; save();
+  const h=hash(dk+'|'+i+'|'+(S.n||0)+(TEST?'|'+Date.now():'')); const c=h%TAROT.length, rv=((h>>>8)%100)<28;
+  S={d:dk,c,rv,n:(S.n||0)+1}; if(!TEST) save();
   say('slide');
   setTimeout(()=>{ fan.style.display='none'; show(S); const tone=(TAROT[c].tone||0)*(rv?-1:1);
     say(tone>0?'good':'care').then(()=>new Promise(r=>setTimeout(r,500))).then(()=>say('more'));

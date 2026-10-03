@@ -56,7 +56,7 @@
   if(!op) return;
   var BL=[], CX=[], el=null, timer=0, done=false, FORCE=false;
   /* 소리가 중심인 화면은 막히기 전이라도 처음 들어오면 문을 띄운다 */
-  var SND=/(avatar|book|free|heart|lovemini|noeul|obgh|ppopgi|redthread|sinnyeon|sinnyeon_v2|yeonseo)\.html$/;
+  var SND=/(avatar|book|free|lovemini|noeul|obgh|ppopgi|sinnyeon|sinnyeon_v2)\.html$/;
   function act(){ try{ return !!(navigator.userActivation&&navigator.userActivation.hasBeenActive); }catch(e){ return false; } }
   function no(){ try{ return sessionStorage.getItem('obSnd')==='0'; }catch(e){ return false; } }
   P.play=function(){ var m=this, r=op.apply(m,arguments);
@@ -66,7 +66,7 @@
   if(AC){ try{ var W=class extends AC{ constructor(){ super(...arguments); var c=this; if(c.state==='suspended'&&!act()){ CX.push(c); ask(); } } };
     if(window.AudioContext) window.AudioContext=W; if(window.webkitAudioContext) window.webkitAudioContext=W; }catch(e){} }
   function own(){ /* 화면 자체 시작 단추가 보이면 그쪽을 따른다 */
-    var s=['.mi .gate.on','#splash:not(.off)','#startBtn','[data-sound-gate]'];
+    var s=['.mi .gate.on','#splash:not(.off)','#startBtn','#startMute','[data-sound-gate]'];
     for(var i=0;i<s.length;i++){ var n=document.querySelector(s[i]); if(n&&n.offsetParent!==null&&getComputedStyle(n).visibility!=='hidden'&&getComputedStyle(n).opacity!=='0') return true; }
     return false; }
   function need(){ return !done&&!act()&&(FORCE||BL.length||CX.some(function(c){ return c.state==='suspended'; })); }

@@ -73,7 +73,6 @@ button{font-family:inherit;cursor:pointer}
 .got1{margin:22px 2px 0;font-size:14px;line-height:1.6;color:var(--ink2);text-align:center}
 .got1 b{color:var(--ink)}
 .more{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:48px;margin-top:8px;border:1px dashed rgba(60,40,20,.28);background:transparent;color:var(--ink);font-size:14px;font-weight:700}
-.more[hidden]{display:none!important}.more:disabled{opacity:.45;cursor:default}.bonus{display:flex;flex-direction:column}
 .more em{font-style:normal;font-weight:800;color:var(--red)}
 .tilt{margin:8px 0 0;text-align:center;font-size:12px;color:var(--ink3)}
 
@@ -174,11 +173,10 @@ button{font-family:inherit;cursor:pointer}
 
     <div class="row2 pickA" id="pickB"><button class="btn pr" id="draw" type="button">오늘의 부적 받기</button></div>
     <div class="gotA" id="gotB" hidden><div class="row2"><button class="btn pr" id="save" type="button">카드 저장</button><button class="btn" id="wall" type="button">배경화면으로 받기</button></div>
-      <div class="bonus" id="bonus"><button class="more" id="bjStamp" type="button"></button><button class="more" id="bjShare" type="button"></button></div>
-      <button class="more" id="bjMore" type="button" hidden>한 장 더 받기 <em>990원</em></button></div>
+      <button class="more" id="bjMore" type="button">한 장 더 받기 <em>990원</em></button></div>
 
     <div class="col"><h3>부적 도감 <small id="colN"></small></h3><div class="grid" id="grid"></div></div>
-    <p class="price">하루 한 장은 무료예요 · 출석 도장을 찍거나 친구에게 보내면 한 장씩 더 받아요</p>
+    <p class="price">하루 한 장은 무료예요 · 한 장 더 받으면 <b>990원</b> · 체험판에서는 실제로 결제되지 않아요</p>
   </div></div>
   <div class="sheet" id="sheet"><img id="shImg" alt="부적 카드 이미지"><div class="row2"><button class="btn pr" id="shDl" type="button">이미지 받기</button><button class="btn" id="shX" type="button">닫기</button></div></div>
   <div class="toast" id="toast"></div>
@@ -279,13 +277,6 @@ function draw(){ const D=readDraw(); if(D.n>0&&!D.pend){ more(); return; }
   saveDraw({d:dstr,n:D.n+1,pend:false,last:{el,use,r:R}}); mode='got'; fresh=k; render(); flip();
   setTimeout(()=>toast(R===2?'홀로가 나왔어요 · 도감에 담았어요':R===1?'레어가 나왔어요 · 도감에 담았어요':'도감에 담았어요'),720);
   const s=document.querySelector('.scr'); if(s) s.scrollTo({top:0,behavior:'smooth'}); }
-/* 10/3 은주: 한 장 더는 결제 대신 출석 도장 · 친구에게 보내기로(하루 각 한 번). 결제 코드는 more()에 남겨 둠 */
-const stampKey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-function stampedToday(){ try{ const o=JSON.parse(localStorage.getItem('obStamp')||'null'); return !!(o&&o.days&&o.days[stampKey(new Date())]); }catch(e){ return false; } }
-function grant(kind){ const D=readDraw(); if(D[kind]) return; D[kind]=true; D.pend=true; saveDraw(D); mode='pick'; R=null; render(); flip(); bonusUI(); toast(kind==='bs'?'도장 덕에 한 장 더':'보내 줘서 고마워, 한 장 더'); setTimeout(()=>{ const t=$('pickA'); if(t) t.scrollIntoView({behavior:'smooth',block:'center'}); },300); }
-function bonusUI(){ const D=readDraw(), st=stampedToday(), a=$('bjStamp'), b=$('bjShare'); if(!a) return;
-  a.disabled=!!D.bs; a.innerHTML=D.bs?'출석 도장 보너스 받음':st?'도장 찍었으니 <em>한 장 더</em>':'출석 도장 찍고 <em>한 장 더</em>';
-  b.disabled=!!D.bh; b.innerHTML=D.bh?'보내기 보너스 받음':'친구에게 보내고 <em>한 장 더</em>'; }
 function more(){ const go=()=>{ const D=readDraw(); D.pend=true; saveDraw(D); mode='pick'; R=null; render(); flip(); setTimeout(()=>{ const t=$('pickA'); if(t) t.scrollIntoView({behavior:'smooth',block:'center'}); },300); };
   if(window.ObPay) ObPay.open({btn:'bjMore',name:'부적 카드 한 장 더',who:'오방',desc:'기운과 용도를 골라 한 장 더 · 등급은 받는 순간 정해져요',price:990,img:cimg(el,use),okTitle:'결제가 완료됐어요',okText:'기운과 용도를 고르고 받아 보세요',after:go});
   else go(); }
@@ -294,12 +285,6 @@ async function viewDex(k,o){ const s={el,use,R}; const [a,b]=k.split('|'); el=a;
   if(png) sheet(png,`obang-bujeok-${a}-${b}.png`); else toast('이미지를 만들지 못했어요'); }
 $('uses').querySelectorAll('button').forEach(b=>b.onclick=()=>{ if(use===b.dataset.k) return; use=b.dataset.k; render(); flip(); });
 $('draw').onclick=draw; $('bjMore').onclick=more;
-$('bjStamp').onclick=()=>{ if(stampedToday()) return grant('bs'); try{ sessionStorage.setItem('toHome','1'); }catch(e){} location.href='dangbeon.html?from=bujeok'; };
-$('bjShare').onclick=async()=>{ let png=null; try{ png=await cardPng(); }catch(e){}
-  const on=()=>{ window.removeEventListener('obshare:done',on); grant('bh'); }; window.addEventListener('obshare:done',on);
-  if(window.ObShare&&png) ObShare.sheet({src:png,name:'obang-bujeok.png',title:'오방사주 부적 카드',text:'오늘 내 부적 나왔어. 너도 한 장 받아 봐',url:location.origin+location.pathname+'?ref=share'});
-  else { try{ if(navigator.share) await navigator.share({title:'오방사주 부적 카드',text:'오늘 내 부적 나왔어. 너도 한 장 받아 봐',url:location.origin+location.pathname}); on(); }catch(e){ window.removeEventListener('obshare:done',on); } } };
-bonusUI(); window.addEventListener('focus',bonusUI);
 
 /* 이미지: 카드 · 배경화면 */
 function loadImg(src){ return new Promise((ok,no)=>{ const i=new Image(); i.onload=()=>ok(i); i.onerror=no; i.src=src; }); }

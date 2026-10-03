@@ -529,8 +529,7 @@ function clip(v,sub,src,lines,dur){ return new Promise(res=>{ let done=false, ti
   let p=null; try{ p=v.play(); }catch(e){}
   if(p&&p.then) p.then(()=>{ if(!timerOn) v.classList.add('on'); }).catch(()=>{ if(timerOn||done) return; v.muted=true; const p2=v.play(); if(p2&&p2.then) p2.then(()=>{ if(!timerOn) v.classList.add('on'); }).catch(timer); else timer(); });
   else timer();
-  /* 폰에서 영상 받는 데 2초 넘게 걸리면 정지 화면 + 자막으로 넘어가 버리던 문제 → 받는 중이면 최대 7초까지 기다림 */
-  const t0w=performance.now(); const chk=()=>{ if(done||timerOn) return; if(!v.paused&&v.currentTime>=.05) return; if(v.error||performance.now()-t0w>7000) return timer(); if(v.readyState<3||v.paused){ if(v.paused&&v.readyState>=3){ const p3=v.play(); if(p3&&p3.catch) p3.catch(()=>{}); } sf=setTimeout(chk,500); } }; sf=setTimeout(chk,1200);
+  sf=setTimeout(()=>{ if(!done&&!timerOn&&(v.paused||v.currentTime<.05)) timer(); },2400);
   setTimeout(fin,(dur+6)*1000); }); }
 
 /* ---------- 배경 영상 (소리 없는 반복 컷) ---------- */
@@ -549,7 +548,7 @@ async function mirrorBridge(){ const vo=$('vo'), vv=$('vv'), sub=$('vsub'), vp=v
   await wait(ok?3000:1900); sub.classList.remove('on'); await wait(250);
   return ()=>{ vo.classList.remove('on'); setTimeout(()=>{ try{ vv.pause(); }catch(e){} vv.classList.remove('on'); vp.classList.remove('mi'); sub.textContent=''; },650); }; }
 const E1=[[0.1,'그 사람 얘기'],[1.85,'생일 줘봐']], E3=[[0.15,'여기서부턴 진짜 속마음이야'],[3.35,'들을 준비 됐어']];
-const iv=$('iv'); iv.preload='auto'; iv.src='v/sion/e1.mp4'; try{ iv.load(); }catch(e){}
+const iv=$('iv'); iv.src='v/sion/e1.mp4';
 
 /* ---------- 화면 전환 ---------- */
 let cur='sIn';

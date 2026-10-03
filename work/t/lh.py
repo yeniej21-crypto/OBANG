@@ -1,12 +1,9 @@
-import asyncio
-from playwright.async_api import async_playwright
-async def main():
-    async with async_playwright() as p:
-        b=await p.chromium.launch(); pg=await (await b.new_context(viewport={'width':390,'height':844})).new_page()
-        await pg.add_init_script("try{sessionStorage.setItem('toHome','1');sessionStorage.setItem('obLow',JSON.stringify({k:'earth'}));localStorage.setItem('obFace','yin');}catch(e){}")
-        await pg.goto('http://localhost:8812/seoha-salon.html'); await pg.wait_for_timeout(3000)
-        await pg.evaluate("document.getElementById('home').scrollTop=document.getElementById('secLoveHub').offsetTop-110"); await pg.wait_for_timeout(800)
-        await pg.screenshot(path='t/lhub2.png')
-        await pg.evaluate("document.getElementById('home').scrollTop=document.getElementById('fz').offsetTop-120"); await pg.wait_for_timeout(800)
-        await pg.screenshot(path='t/fz.png'); await b.close()
-asyncio.run(main())
+from playwright.sync_api import sync_playwright
+with sync_playwright() as p:
+    b=p.chromium.launch(); pg=b.new_page(viewport={'width':390,'height':844},device_scale_factor=3)
+    pg.add_init_script("try{sessionStorage.setItem('toHome','1');sessionStorage.setItem('obSnd','0')}catch(e){}")
+    pg.goto('http://localhost:8812/seoha-salon.html'); pg.wait_for_timeout(3500)
+    pg.evaluate("document.getElementById('lhub').scrollIntoView({block:'center'})"); pg.wait_for_timeout(1500)
+    pg.locator('#lhub').screenshot(path='t/lhub3.png')
+    print(pg.evaluate("(()=>{const i=document.querySelector('#lhub .pp');const cs=getComputedStyle(i);return [i.currentSrc,cs.opacity,cs.filter,cs.mixBlendMode,getComputedStyle(i.parentNode).opacity]})()"))
+    b.close()

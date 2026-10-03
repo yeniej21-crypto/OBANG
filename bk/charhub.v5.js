@@ -127,10 +127,8 @@
     if(first){ list=list.filter(function(x){ return x!==first; }); list.unshift(first); }
     return list; }
 
-  /* 10/3 은주: 상담 썸네일이 다 얼굴로 꽉 차서 이상함 → 영상 속 상반신 · 테이블까지 보이는 컷을 섞음(img/thumb, 위치 따로) */
-  var TH={seoha:['img/thumb/seoha.jpg','50% 62%'],wood:['img/thumb/wood.jpg','50% 30%'],fire:['img/thumb/fire.jpg','50% 42%'],earth:['img/thumb/earth.jpg','50% 34%'],metal:['img/thumb/metal.jpg','50% 40%'],water:['img/thumb/water.jpg','50% 40%'],halmae:['img/thumb/halmae.jpg','50% 46%']};
   function mini(id){ var c=C[id], m=mine(), isMine=c.el&&c.el===m, sy=!!(c.yang&&isMine&&face()==='yin'), k=sy?id+'_y':id, f=C[k];
-    return '<button type="button" class="chM'+(isMine?' me':'')+'" data-c="'+k+'"><span class="ph" style="background-image:url(\''+(TH[k]?TH[k][0]:f.img)+'\')'+(TH[k]?';background-position:'+TH[k][1]:'')+'"></span>'+(isMine?'<span class="mk">나의 수호신</span>':'')+'<span class="nm"><b>'+f.n+'</b><small>'+c.role+'</small></span></button>'; }
+    return '<button type="button" class="chM'+(isMine?' me':'')+'" data-c="'+k+'"><span class="ph" style="background-image:url(\''+f.img+'\')"></span>'+(isMine?'<span class="mk">나의 수호신</span>':'')+'<span class="nm"><b>'+f.n+'</b><small>'+c.role+'</small></span></button>'; }
   function renderRows(){
     var r=$('chRow'); if(r){ var m=mine(), list=['seoha','taeo'].concat(EL).concat(['halmae']); if(m){ list=list.filter(function(x){ return x!==m; }); list.unshift(m); } r.innerHTML=list.map(mini).join(''); }
     var y=$('yinRow'); if(y){ y.innerHTML=EL.map(function(e){ return card(e+'_y'); }).join(''); }

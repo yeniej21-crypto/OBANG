@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="early.js?v=5"></script>
+<title>먹물의 오늘 한 장</title>
+<link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Song+Myung&display=swap">
+<style>
+@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+/* 먹물의 오늘 한 장 — 무료 타로 한 장(10/3 은주: 타로 진행 = 먹물). 묘당 검은 고양이가 말하는 영상으로 맞이하고, 한 장 뽑게 하고, 반응하고, 무진 카드방으로 넘긴다.
+   하루 한 장(localStorage obMeok). 화면 문구: 물음표 · 느낌표 · 말줄임표 · 이모지 없음. 각진 면(동그라미만 예외). */
+:root{--brush:'OBrush','Song Myung',serif;--sans:'Noto Sans KR',"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --bg:#120e0c;--ink:#f4ece0;--ink2:#cdbfac;--ink3:#8f8273;--gold:#e3b866;--line:rgba(255,236,210,.12);color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:#0a0807;color:var(--ink);font-family:var(--sans);display:flex;justify-content:center;word-break:keep-all}
+button{font-family:inherit;cursor:pointer}
+.stage{position:relative;width:100%;max-width:460px;min-height:100%;background:var(--bg)}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:12px 14px;background:linear-gradient(#120e0c,rgba(18,14,12,0))}
+.ib{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(0,0,0,.35);color:var(--ink);display:grid;place-items:center}
+.ib svg{width:20px;height:20px}
+.top b{font-size:13px;letter-spacing:.14em;color:var(--gold);font-weight:800}
+.vw{position:relative;margin:0 16px;height:min(54vh,520px);overflow:hidden;background:#1a1512 center 30%/cover no-repeat}
+.vw video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%;opacity:0;transition:opacity .35s}
+.vw video.on{opacity:1}
+.vw:after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(rgba(18,14,12,0),rgba(18,14,12,.92));pointer-events:none}
+.sub{position:absolute;left:16px;right:16px;bottom:14px;z-index:2;font-family:'Song Myung',serif;font-size:19px;line-height:1.5;text-align:center;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.8);min-height:28px;transition:opacity .3s}
+.who{position:absolute;left:12px;top:12px;z-index:2;font-size:11px;font-weight:800;letter-spacing:.08em;color:#1a1208;background:var(--gold);padding:5px 8px}
+.hd{padding:14px 20px 0}
+.hd small{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--gold)}
+.hd h1{margin:4px 0 0;font-family:var(--brush);font-weight:400;font-size:30px;line-height:1.15}
+.hd p{margin:8px 0 0;font-size:14px;line-height:1.6;color:var(--ink2)}
+.fan{position:relative;height:186px;margin:6px 0 0;overflow:hidden;perspective:900px}
+.cd{position:absolute;top:18px;left:50%;width:84px;height:140px;margin-left:-42px;border:0;padding:0;background:transparent;transform-origin:50% 120%;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.cd i{position:absolute;inset:0;background:#2a211a url('img/tarot/back.jpg') center/cover;box-shadow:0 10px 24px rgba(0,0,0,.55),inset 0 0 0 1px rgba(227,184,102,.35)}
+.cd:hover i,.cd:focus-visible i{box-shadow:0 14px 30px rgba(0,0,0,.6),inset 0 0 0 1px rgba(227,184,102,.9)}
+.fan.done .cd{pointer-events:none}
+.fan.done .cd:not(.pk){opacity:0}
+.res{display:none;padding:6px 20px 0}
+.res.on{display:block}
+.flip{width:180px;height:300px;margin:6px auto 0;perspective:1000px}
+.flip .in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,.7,.2,1)}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:center/cover no-repeat;box-shadow:0 18px 40px rgba(0,0,0,.6),inset 0 0 0 1px rgba(227,184,102,.4)}
+.flip .f{background-image:url('img/tarot/back.jpg')}
+.flip .b{transform:rotateY(180deg)}
+.flip .b.rv{transform:rotateY(180deg) rotate(180deg)}
+.rn{margin:18px 0 0;text-align:center}
+.rn small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.1em;color:var(--gold)}
+.rn b{display:block;margin-top:6px;font-family:var(--brush);font-weight:400;font-size:32px}
+.kw{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:10px}
+.kw span{font-size:12px;color:var(--ink2);border:1px solid var(--line);padding:4px 8px}
+.rd{margin:18px 0 0;padding:16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:15px;line-height:1.75;color:var(--ink)}
+.rd em{display:block;margin-top:10px;font-style:normal;font-size:13.5px;color:var(--ink2)}
+.cta{display:flex;flex-direction:column;gap:8px;margin:18px 0 0}
+.cta button{width:100%;padding:15px;border:0;font-size:15px;font-weight:800}
+.cta .p{background:var(--gold);color:#1a1208}
+.cta .s{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.note{margin:16px 0 0;font-size:12px;color:var(--ink3);text-align:center;line-height:1.6}
+.pad{height:calc(env(safe-area-inset-bottom,0px) + 40px)}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>FREE · 오늘 한 장</b></div>
+  <div class="vw" id="vw"><span class="who">묘당 · 먹물</span><video id="va" playsinline preload="auto"></video><video id="vb" playsinline preload="auto"></video><div class="sub" id="sub"></div></div>
+  <div class="hd" id="hd"><small>묘당 뒷방 카드</small><h1>먹물의 오늘 한 장</h1><p>생각 하나만 품고, 끌리는 카드를 눌러요. 하루에 한 장이에요.</p></div>
+  <div class="fan" id="fan"></div>
+  <div class="res" id="res">
+    <div class="flip" id="flip"><div class="in"><div class="f"></div><div class="b" id="cb"></div></div></div>
+    <div class="rn"><small id="rDir"></small><b id="rName"></b><div class="kw" id="rKw"></div></div>
+    <div class="rd" id="rTxt"></div>
+    <div class="cta"><button class="p" id="goMujin" type="button">무진 카드방에서 깊게 보기</button><button class="s" id="goShare" type="button">친구한테도 한 장 보내기</button><button class="s" id="goHome" type="button">홈으로</button></div>
+    <p class="note">재미로 보는 한 장이에요. 내일 다시 오면 새 카드를 뽑을 수 있어요.</p>
+  </div>
+  <div class="pad"></div>
+</div>
+<script src="meokmul_lines.js"></script>
+<script src="tarot_data.js"></script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const D2='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
+const POSTER='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261003_073740_e14c75eb-d09a-4494-a57e-021fefdda659_min.webp';
+/* 말하는 영상(대사는 meokmul_lines.js 와 같은 문장). 영상이 없으면 그림 + 자막만 */
+const CLIP={
+  first:{v:''/*처음 인사 영상은 목소리 다시 뽑는 중*/,t:'처음 보는 얼굴이네. 한 장만 뽑아. 두 장 뽑으면 욕심이야'},
+  back:{v:D2+'add430a0-43e9-44d7-a1ec-91158c60c906.mp4',t:'또 왔어. 어제 카드 맞았지. 인정하고 들어와'},
+  night:{v:D2+'f37c94a6-4745-4967-9afd-c4339f0a9def.mp4',t:'잠 안 오지. 나도 밤이 제일 좋아'},
+  pick:{v:D2+'fe140f0c-5634-40bc-85df-9185e4596045.mp4',t:'마음에 걸리는 거 하나. 그거면 돼'},
+  slide:{v:D2+'5cb1d843-da46-4cbf-833d-18843df315d8.mp4',t:''},
+  good:{v:D2+'27f73901-d81f-4488-b04c-2e481e19eb80.mp4',t:'오, 좋은 거 나왔다. 이번 주는 네 편이야'},
+  care:{v:D2+'3e43ab6d-5c1d-45ed-8439-cedbb35954a5.mp4',t:'음. 듣기 좋은 말은 아니야. 그래도 들어'},
+  more:{v:D2+'e0a78569-23a2-492c-8124-08ea7c8a7662.mp4',t:'한 장으로는 여기까지. 깊게 보려면 무진 카드방'},
+  again:{v:'',t:'오늘 카드는 이미 뽑았어. 내일 또 와'}
+};
+$('vw').style.backgroundImage="url('"+POSTER+"')";
+const muted=()=>{ try{ return sessionStorage.getItem('obSnd')==='0'; }catch(e){ return false; } };
+let cur=$('va'), nxt=$('vb'), q=Promise.resolve();
+function say(k){ /* 대사 한 줄: 영상 재생, 끝나면 마지막 장면 유지 */
+  q=q.then(()=>new Promise(res=>{ const c=CLIP[k]; if(!c){ res(); return; }
+    $('sub').textContent=c.t||'';
+    if(!c.v||c.v.indexOf('__')===0){ setTimeout(res,c.t?2400:300); return; }
+    const v=nxt; v.src=c.v; v.muted=muted(); let done=false; const fin=()=>{ if(done) return; done=true; res(); };
+    v.onended=fin; v.onerror=()=>{ v.classList.remove('on'); setTimeout(fin,2000); };
+    const go=()=>{ v.classList.add('on'); cur.classList.remove('on'); const t=cur; cur=v; nxt=t; };
+    const p=v.play(); if(p&&p.then) p.then(go).catch(()=>{ v.muted=true; v.play().then(go).catch(()=>setTimeout(fin,2400)); }); else go();
+    setTimeout(fin,9000); }));
+  return q; }
+/* 하루 한 장 */
+const today=new Date(); const dk=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+let S={}; try{ S=JSON.parse(localStorage.getItem('obMeok')||'{}'); }catch(e){}
+const save=()=>{ try{ localStorage.setItem('obMeok',JSON.stringify(S)); }catch(e){} };
+function hash(s){ let h=2166136261; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+/* 부채꼴 7장 */
+const N=7; $('fan').innerHTML=Array.from({length:N},(_,i)=>{ const a=(i-(N-1)/2)*11, x=(i-(N-1)/2)*30; return `<button class="cd" type="button" data-i="${i}" aria-label="${i+1}번째 카드" style="transform:translateX(${x}px) rotate(${a}deg)"><i></i></button>`; }).join('');
+function show(r){ const C=TAROT[r.c]; const rv=!!r.rv;
+  $('cb').style.backgroundImage="url('"+C.img+"')"; $('cb').classList.toggle('rv',rv);
+  $('rDir').textContent=(rv?'거꾸로 나온 ':'바로 나온 ')+C.han+' · '+C.en;
+  $('rName').textContent=C.ko;
+  $('rKw').innerHTML=(rv?C.kwR:C.kw).map(x=>'<span>'+x+'</span>').join('');
+  $('rTxt').innerHTML=(rv?C.rv:C.up)+(C.love?'<em>연애로 보면 '+(rv?C.love.rv:C.love.up)+'</em>':'');
+  $('res').classList.add('on'); setTimeout(()=>$('flip').classList.add('on'),120); }
+function pick(i){ if(S.d===dk) return; const fan=$('fan'); fan.classList.add('done');
+  const b=fan.querySelector('[data-i="'+i+'"]'); b.classList.add('pk'); b.style.transform='translateY(-14px)';
+  const h=hash(dk+'|'+i+'|'+(S.n||0)); const c=h%TAROT.length, rv=((h>>>8)%100)<28;
+  S={d:dk,c,rv,n:(S.n||0)+1}; save();
+  say('slide');
+  setTimeout(()=>{ fan.style.display='none'; show(S); const tone=(TAROT[c].tone||0)*(rv?-1:1);
+    say(tone>0?'good':'care').then(()=>new Promise(r=>setTimeout(r,500))).then(()=>say('more'));
+    setTimeout(()=>$('res').scrollIntoView({behavior:'smooth',block:'start'}),900); },700); }
+$('fan').addEventListener('click',e=>{ const b=e.target.closest('.cd'); if(b) pick(+b.dataset.i); });
+/* 시작 */
+const hr=today.getHours(), first=!S.n;
+if(S.d===dk){ $('fan').style.display='none'; $('hd').querySelector('p').textContent='오늘 뽑은 카드예요. 내일 새 카드가 기다려요.'; show(S); say('again'); }
+else { say(first?'first':((hr>=23||hr<4)?'night':'back')).then(()=>say('pick')); }
+$('goMujin').onclick=()=>{ location.href='tarot.html'; };
+$('goHome').onclick=$('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} location.href='./'; };
+$('goShare').onclick=()=>{ const u=location.origin+location.pathname; if(window.ObShare&&ObShare.sheet){ ObShare.sheet({title:'먹물의 오늘 한 장',text:'묘당 검은 고양이가 오늘 카드 한 장 뒤집어 줘',url:u}); return; }
+  if(navigator.share){ navigator.share({title:'먹물의 오늘 한 장',url:u}).catch(()=>{}); } else { try{ navigator.clipboard.writeText(u); $('goShare').textContent='링크를 복사했어요'; }catch(e){} } };
+})();
+</script>
+<script src="obshare.js"></script>
+</body>
+</html>

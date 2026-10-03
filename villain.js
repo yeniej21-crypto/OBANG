@@ -185,7 +185,13 @@ function pay(){ const R=window.__VR; if(!R) return; const open=()=>{ $('pv').inn
   open(); }
 
 /* ---------- 6. 막아 주는 신 · 다른 악역 ---------- */
-function rest(){ const g=C.guard; $('gd').innerHTML=`<a class="gd2" href="${g.href}"><i style="background-image:url('${g.img}')"></i><span><small>막아 주는 신 · ${g.who}</small><b>${g.t}</b><span>${g.d}</span></span></a>`;
+function myGuard(){ /* 10/3 21:15 시안: 내 수호신이 문 앞을 지킴(홈 시안에서 들어왔을 때만) */
+  let o=null, on=false; try{ o=JSON.parse(localStorage.getItem('obGuard')||'null'); on=sessionStorage.getItem('obGP')==='1'||/[?&]gp=1/.test(location.search); }catch(e){} if(!o||!o.k||!on) return '';
+  const YI={wood:'새아',fire:'별하',earth:'도담',metal:'세린',water:'이슬'}, YA={wood:'하람',fire:'이안',earth:'도준',metal:'시온',water:'재이'};
+  const n=o.f==='yin'?YI[o.k]:YA[o.k], img=o.f==='yin'?(o.k==='wood'?'https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/hf_20261002_064155_cabdc321-7f5b-47b3-9ba6-e41a246362c2_min.webp':`img/yin/${o.k}.jpg`):`img/${o.k}.jpg`;
+  const jo=(w,a,b)=>{ const c=w.charCodeAt(w.length-1)-0xAC00; return (c>=0&&c<11172&&c%28>0)?a:b; };
+  return `<a class="gd2 mine" href="chat.html?h=${o.k}${o.f==='yin'?'_y':''}"><i style="background-image:url('${img}')"></i><span><small>나의 수호신 · ${n}</small><b>${C.name}${jo(C.name,'이','가')} 와도, 네 문 앞은 내가 지킬게</b><span>${n}에게 바로 털어놓기</span></span></a>`; }
+function rest(){ const g=C.guard; $('gd').innerHTML=myGuard()+`<a class="gd2" href="${g.href}"><i style="background-image:url('${g.img}')"></i><span><small>막아 주는 신 · ${g.who}</small><b>${g.t}</b><span>${g.d}</span></span></a>`;
   $('ot').innerHTML=Object.keys(V).filter(k=>k!==K).map(k=>`<a href="${V[k].page}"><i style="background-image:url('${V[k].still}')"></i><span><b>${V[k].name}</b><small>${V[k].free}</small><em>무료로 보기</em></span></a>`).join('');
   const NX={heuk:[['love.html','연애 상담소','서하가 상황별로 골라 주는 풀이'],['gunghap.html','도화 궁합','둘의 인연 타이밍'],['yeonseo.html','곧 받을 편지','다음 인연이 오는 달 · 무료']],
     geum:[['noeul.html','해와 달의 운세','노을이 보는 올해 흐름'],['today.html','오늘의 운세','매일 아침 바뀌는 무료 운세'],['free.html','무료 운세 모두 보기','오방 뽑기 · 부적 카드']],

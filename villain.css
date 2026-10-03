@@ -96,3 +96,6 @@ button{font-family:inherit;color:inherit}
 .rs li .kp{display:block;margin-top:7px;padding-top:7px;border-top:1px dashed #e3d9cb;font-size:13px;color:#6b6157}
 /* 10/3 20:40 은주: 그믐 이름이 붓글씨체에서 '그'가 이상하게 나옴 → 그믐만 송명체 */
 .v-geum .vh .nm h1{font-family:'Song Myung','Noto Serif KR',serif;font-size:58px;letter-spacing:.04em}
+/* 10/3 21:15 시안: 나의 수호신 칸 */
+.gd2.mine{border-color:rgba(227,184,102,.55);background:linear-gradient(90deg,rgba(227,184,102,.14),rgba(255,255,255,.03))}
+.gd2.mine small{color:#f0cf8a}

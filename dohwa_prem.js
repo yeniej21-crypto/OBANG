@@ -3,7 +3,7 @@
 (function(){
 const S_=window.Saju, X=window.SajuX, {GAN,JI,EL,stEl,GAN_K,JI_K}=S_; const gk=(s,b)=>GAN_K[s]+JI_K[b], kr=t=>String(t).replace(/[甲乙丙丁戊己庚辛壬癸]/g,c=>GAN_K[GAN.indexOf(c)]).replace(/[子丑寅卯辰巳午未申酉戌亥]/g,c=>JI_K[JI.indexOf(c)]); /* 화면에는 한자 대신 한글 읽기 */ const $=id=>document.getElementById(id); const K=window.PK;
 const DOW=['일','월','화','수','목','금','토'];
-let F=null,C=null,ST={},HON='누나';
+let F=null,C=null,ST={},HON='누나',MODE='kit',ROOT=null,OPEN=null,AIK=new Set();
 function loveScore(o,loveG){ let s=50; if(o.ss.includes('도화')) s+=15; if(o.ss.includes('홍염')) s+=6;
   if(o.br.some(r=>r.at==='일지'&&(r.k==='육합'||r.k==='삼합'))) s+=12; if(o.sr.some(r=>r.at==='일간'&&r.k==='천간합')) s+=10;
   if(o.g1===loveG||o.g2===loveG) s+=o.f1||o.f2?8:4; if(o.br.some(r=>r.at==='일지'&&r.k==='충')) s-=15; if(o.br.some(r=>r.at==='일지'&&r.k==='원진')) s-=6; if(o.ss.includes('공망')) s-=4;
@@ -17,7 +17,7 @@ function prep(){ const D=window.DHF&&window.DHF(); if(!D) return false; HON=D.br
   F=window.Prem2Core.rolling(S_,X,D.inp,12); F.nick=D.nick; F.male=D.inp.g==='m'; F.T=D.T; F.score=D.score;
   const loveG=F.male?2:3; F.months.forEach(o=>o.love=loveScore(o,loveG)); F.days=loveDays(); F.loveG=loveG;
   const P=F.P; F.stars=[['년간',P.y[0],1],['월간',P.m[0],1],['시간',P.h&&P.h[0],1],['년지',P.y[1],0],['월지',P.m[1],0],['일지',P.d[1],0],['시지',P.h&&P.h[1],0]].filter(x=>x[1]!=null).filter(([n,v,st])=>(st?S_.rel(F.dm,stEl(v)):S_.relBranch(F.dm,v))===loveG).map(x=>x[0]);
-  C=K.gl(draft()); ST={}; return true; }
+  C=K.gl(draft()); ST={}; AIK=new Set(); OPEN=null; return true; }
 const h=t=>t.replace(/\{S\}/g,HON);
 function draft(){ const top=[...F.months].sort((a,b)=>b.love-a.love), d=F.P.d[1];
   return {draft:true,nature:[`{S} 도화 유형은 ${F.T.n}이야. ${F.T.d}`,`{S} 사주에서 인연의 별은 ${F.male?'재성':'관성'}인데, ${F.stars.length?F.stars.join(' · ')+'에 있어':'원국엔 드러나 있지 않아서 운에서 들어올 때 피는 타입이야'}.`],
@@ -44,7 +44,7 @@ ${card()}`;
 ${card(ids)}`;
   const isArr=d=>Array.isArray(d)&&d.every(x=>x&&typeof x.text==='string');
   return [{id:'core',prompt:core,check:d=>d&&Array.isArray(d.nature)&&Array.isArray(d.letter)},{id:'c0',prompt:cal([0,1,2,3,4,5]),check:isArr},{id:'c1',prompt:cal([6,7,8,9,10,11]),check:isArr}]; }
-function apply(id,d){ if(id==='core') ['nature','pattern','meet','warn','letter'].forEach(k=>{ if(d[k]) C[k]=d[k]; }); else d.forEach(x=>{ const i=+x.i; if(i>=0&&i<12) C.months[i]=Object.assign({},C.months[i],x); }); }
+function apply(id,d){ if(id==='core') ['nature','pattern','meet','warn','letter'].forEach(k=>{ if(d[k]){ C[k]=d[k]; AIK.add(k); } }); else d.forEach(x=>{ const i=+x.i; if(i>=0&&i<12) C.months[i]=Object.assign({},C.months[i],x); }); }
 function build(){ const n=F.nick, ps=a=>K.ps((a||[]).map(h),n);
   const top=[...F.months].sort((a,b)=>b.love-a.love); const hi=top.slice(0,2), lo=top.slice(-1);
   const H=[`<div class="pk-st" id="dhst" hidden></div>`];
@@ -59,10 +59,31 @@ function build(){ const n=F.nick, ps=a=>K.ps((a||[]).map(h),n);
   H.push(`<p class="pk-note" style="margin:14px 2px 0">${ST.ai?'이 편지는 만세력 계산 근거만 재료로 AI가 태오의 말투로 쓴 글이에요. 명리 전문가 감수 전 원고예요':'이 부분은 해석 사전으로 조립한 초안이에요. 정식 서비스에서는 같은 근거로 태오가 길게 써 줘요'}</p>`);
   return H.join(''); }
 function render(){ const host=$('dprem'); K.keepOpen(host,()=>{ host.innerHTML=build(); }); K.status($('dhst'),Object.assign({who:'태오가 깊은 편지'},ST)); }
+/* 편지 모드(dohwa.html 결제 뒤 편지): 화면 조각을 편지지 안의 자리(data-dp)마다 채운다. 바뀐 자리만 다시 그린다 */
+function whyL(list){ return list&&list.length?`<button class="dl-why" type="button" aria-expanded="false" data-why>왜 그렇게 봤냐면</button><div class="dl-whyT">${list.map(x=>K.esc(window.HJ?HJ.evItem(x):x)).join(' · ')}</div>`:''; }
+function buildL(){ const n=F.nick, P=(a,c)=>(a||[]).map(p=>`<p class="${c||'dl-p'} ink">${K.tok(h(p),n)}</p>`).join('');
+  const top=[...F.months].sort((a,b)=>b.love-a.love), hi=top.slice(0,2), lo=top.slice(-1);
+  if(!OPEN){ const f=F.months.findIndex(o=>hi.includes(o)); OPEN=new Set(f>=0?['c'+f]:[]); }
+  const months=`<div class="dl-mos">${F.months.map((o,i)=>{ const c=C.months[i]||{}, k='c'+i, op=OPEN.has(k), tag=hi.includes(o)?'최고':lo.includes(o)?'조심':'';
+    return `<div class="dl-mo ink${hi.includes(o)?' hi':lo.includes(o)?' lo':''}${op?' open':''}" data-k="${k}"><button class="h" type="button" aria-expanded="${op}"><span class="m">${o.start.m}월<small>${o.start.y}.${o.start.m}.${o.start.d}~</small></span><span class="t"><em>${kr(o.gz)}</em>${K.tok(h(c.title||''),n)}${tag?`<i>${tag}</i>`:''}</span><span class="s">${o.love}</span></button><div class="b">${P([c.text])}${c.tip?`<p class="dl-tip ink"><b>이달 한 줄</b>${K.tok(h(c.tip),n)}</p>`:''}${whyL(o.br.map(r=>r.at+' '+r.k).concat(o.sr.map(r=>r.at+' '+r.k)).concat(o.ss))}</div></div>`; }).join('')}</div>`;
+  const days=F.days.length?`<div class="dl-days">${F.days.map(o=>`<div class="dl-dy ink"><b>${o.m}.${o.d}</b><span><small>${DOW[o.w]}요일 · ${gk(o.s,o.b)}일</small>${[S_.isHap(o.b,F.P.d[1])?'배우자 자리와 합이 드는 날':'',X.ganHap(o.s,F.dm)?'일간과 천간합이 드는 날':'',X.shinsal(o.b,F.P,o.s).includes('도화')?'도화가 피는 날':''].filter(Boolean).join(' · ')||'인연의 별이 뜨는 날'}</span></div>`).join('')}</div>`:'<p class="dl-p ink">앞으로 열두 달은 따로 고른 날이 없어. 연애 점수가 높은 달을 노려.</p>';
+  return {months,days,meet:P(C.meet),
+   nature:P(C.nature)+whyL(F.natal.map(o=>o.at+' '+o.k).concat(F.stars.length?['인연의 별 '+F.stars.join(' · ')]:[])),
+   pattern:P(C.pattern),
+   /* 초안의 조심할 인연 · 맺음말은 편지 본문(dohwa.html)과 같은 말이라, AI가 쓴 글이 올 때만 더한다 */
+   warn:AIK.has('warn')?P(C.warn):'', letter:AIK.has('letter')?P(C.letter):'',
+   note:ST.ai?'이 편지는 만세력 계산 근거만 재료로 AI가 태오의 말투로 쓴 글이에요. 명리 전문가 감수 전 원고예요':'이 편지의 긴 풀이는 해석 사전으로 조립한 초안이에요. 정식 서비스에서는 같은 근거로 태오가 길게 써 줘요'}; }
+function renderL(){ if(!ROOT) return; const B=buildL(); Object.keys(B).forEach(k=>{ const el=ROOT.querySelector(`[data-dp="${k}"]`); if(el&&el.__h!==B[k]){ el.innerHTML=B[k]; el.__h=B[k]; } });
+  K.status(ROOT.querySelector('#dhst'),Object.assign({who:'태오가 깊은 편지'},ST)); }
+function bindL(root){ if(root._dl) return; root._dl=1; root.addEventListener('click',e=>{ const b=e.target.closest('.dl-mo .h'); if(!b) return; const r=b.parentNode, k=r.dataset.k, on=!r.classList.contains('open'); r.classList.toggle('open',on); b.setAttribute('aria-expanded',on); if(OPEN){ if(on) OPEN.add(k); else OPEN.delete(k); } }); }
 /* 편지 달력(dohwa.html)도 같은 기준을 쓰도록: 같은 열두 달 · 같은 연애 점수 · 같은 최고의 달 */
 function calc(){ const D=window.DHF&&window.DHF(); if(!D) return null; const G=window.Prem2Core.rolling(S_,X,D.inp,12), loveG=D.inp.g==='m'?2:3;
   G.months.forEach(o=>o.love=loveScore(o,loveG)); return {months:G.months,top:[...G.months].sort((a,b)=>b.love-a.love)}; }
-window.DohwaPrem={calc,open(){ const host=$('dprem'); if(!host||!prep()) return; host.className='pkx dark'; host.hidden=false; K.bind(host); render();
+/* open() : 예전처럼 #dprem 안에 어두운 상세 풀이 판(premkit) · open({mode:'letter',root}) : 편지지 안 자리마다 */
+window.DohwaPrem={calc,open(o){ o=o||{};
+  if(o.mode==='letter'){ ROOT=o.root||document.getElementById('letter'); if(!ROOT||!prep()) return; MODE='letter'; bindL(ROOT); renderL();
+    K.runAI({key:F.key+'-dohwa-'+HON+'-'+F.from.y+'.'+F.from.m,ver:'v3',parts:prompts(),apply,rerender:renderL,S:ST}); return; }
+  const host=$('dprem'); if(!host||!prep()) return; MODE='kit'; host.className='pkx dark'; host.hidden=false; K.bind(host); render();
   const f=host.querySelector('.pk-row.pk-hi'); if(f) f.classList.add('open');
   K.runAI({key:F.key+'-dohwa-'+HON+'-'+F.from.y+'.'+F.from.m,ver:'v3',parts:prompts(),apply,rerender:render,S:ST}); }};
 })();

@@ -84,12 +84,15 @@ async function pay(){ const go=el.querySelector('[data-pay]'); go.disabled=true;
   await new Promise(r=>setTimeout(r,1000)); el.querySelector('.done').classList.add('on');
   await new Promise(r=>setTimeout(r,1100)); close(); const p=cur; p._paid=true; const b=$(p.btn); if(b) b.dataset.obpaid='1';
   if(p.after) p.after(); else if(b) b.click(); }
-function open(p){ if(!el) build(); cur=p; disc=false; render(); requestAnimationFrame(()=>el.classList.add('on')); }
+function open0(p){ if(!el) build(); cur=p; disc=false; render(); requestAnimationFrame(()=>el.classList.add('on')); }
+/* 10/3: 결제 전에 로그인(구경은 그냥, 남기려면 로그인). 카카오 · 구글 다녀오면 같은 결제 창을 다시 연다 */
+function open(p){ if(window.ObAuth&&!p.noAuth&&!ObAuth.user()){ ObAuth.require({title:'결제하려면, 로그인',reason:'결제한 풀이는 보관함에 남아서 언제든 다시 열려요.',pay:true}).then(()=>open0(p)); return; } open0(p); }
 function close(){ if(el) el.classList.remove('on'); }
 const key=isHome?'home':file, C=P[key];
 if(C) document.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('#'+C.btn); if(!b) return; if(b.dataset.obpaid==='1') return; if(C.skip&&C.skip()) return;
   e.preventDefault(); e.stopImmediatePropagation(); open(C); },true);
 window.ObPay={open,close,toast,products:P};
+if(C){ let tries=0; const resume=()=>{ if(!window.ObAuth){ if(++tries<30) setTimeout(resume,300); return; } ObAuth.ready.then(()=>{ const n=ObAuth.takePending(); if(n&&n.pay) setTimeout(()=>open0(C),600); }); }; resume(); }
 /* 알림 받기: 브라우저가 알림을 받을 수 있으면(안드로이드 · PC) 웹 알림, 아니면(아이폰) 카카오톡 */
 const canPush=('Notification' in window)&&('serviceWorker' in navigator)&&('PushManager' in window);
 function ask(o){ return new Promise(res=>{ if(!el) build(); const kakaoFirst=!canPush;

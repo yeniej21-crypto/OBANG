@@ -40,7 +40,16 @@ button{font-family:inherit;cursor:pointer}
 .fan.done .cd:not(.pk){opacity:0}
 .res{display:none;padding:6px 20px 0}
 .res.on{display:block}
-.flip{width:180px;height:300px;margin:6px auto 0;perspective:1000px}
+.slot{position:absolute;right:16px;bottom:84px;width:86px;height:144px;z-index:3;opacity:0;transform:translateY(60px) rotate(8deg) scale(.85);transition:opacity .45s,transform .6s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.slot.on{opacity:1;transform:rotate(5deg)}
+.slot .flip{width:100%;height:100%;margin:0}
+.flip{perspective:1000px}
+.res{opacity:0;transform:translateY(10px);transition:opacity .6s,transform .6s}
+.res.show{opacity:1;transform:none}
+.rdy{display:none;margin:12px auto 0;padding:9px 16px;border:1px solid rgba(227,184,102,.5);background:rgba(0,0,0,.35);color:var(--gold);font-size:13px;font-weight:800}
+.rdy.on{display:block}
+.fan.wait .cd{opacity:.55}
+.fan .cd{transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .4s}
 .flip .in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,.7,.2,1)}
 .flip.on .in{transform:rotateY(180deg)}
 .flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:center/cover no-repeat;box-shadow:0 18px 40px rgba(0,0,0,.6),inset 0 0 0 1px rgba(227,184,102,.4)}
@@ -65,11 +74,11 @@ button{font-family:inherit;cursor:pointer}
 <body>
 <div class="stage" id="stage">
   <div class="top"><button class="ib" id="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><b>FREE · 오늘 한 장</b></div>
-  <div class="vw" id="vw"><span class="who">묘당 · 먹물</span><video id="va" playsinline preload="auto"></video><video id="vb" playsinline preload="auto"></video><div class="sub" id="sub"></div></div>
+  <div class="vw" id="vw"><span class="who">묘당 · 먹물</span><video id="va" playsinline preload="auto"></video><video id="vb" playsinline preload="auto"></video><div class="slot" id="slot"><div class="flip" id="flip"><div class="in"><div class="f"></div><div class="b" id="cb"></div></div></div></div><div class="sub" id="sub"></div></div>
+  <button class="rdy" id="rdy" type="button">풀이 바로 보기</button>
   <div class="hd" id="hd"><small>묘당 뒷방 카드</small><h1>먹물의 오늘 한 장</h1><p>생각 하나만 품고, 끌리는 카드를 눌러요. 하루에 한 장이에요.</p></div>
   <div class="fan" id="fan"></div>
   <div class="res" id="res">
-    <div class="flip" id="flip"><div class="in"><div class="f"></div><div class="b" id="cb"></div></div></div>
     <div class="rn"><small id="rDir"></small><b id="rName"></b><div class="kw" id="rKw"></div></div>
     <div class="rd" id="rTxt"></div>
     <div class="cta"><button class="p" id="goMujin" type="button">무진 카드방에서 깊게 보기</button><button class="s" id="goShare" type="button">친구한테도 한 장 보내기</button><button class="s" id="goHome" type="button">홈으로</button></div>
@@ -99,17 +108,16 @@ const CLIP={
 };
 $('vw').style.backgroundImage="url('"+POSTER+"')";
 const muted=()=>{ try{ return sessionStorage.getItem('obSnd')==='0'; }catch(e){ return false; } };
-let cur=$('va'), nxt=$('vb'), q=Promise.resolve();
-function say(k){ /* 대사 한 줄: 영상 재생, 끝나면 마지막 장면 유지 */
-  q=q.then(()=>new Promise(res=>{ const c=CLIP[k]; if(!c){ res(); return; }
-    $('sub').textContent=c.t||'';
-    if(!c.v||c.v.indexOf('__')===0){ setTimeout(res,c.t?2400:300); return; }
-    const v=nxt; v.src=c.v; v.muted=muted(); let done=false; const fin=()=>{ if(done) return; done=true; res(); };
-    v.onended=fin; v.onerror=()=>{ v.classList.remove('on'); setTimeout(fin,2000); };
-    const go=()=>{ v.classList.add('on'); cur.classList.remove('on'); const t=cur; cur=v; nxt=t; };
-    const p=v.play(); if(p&&p.then) p.then(go).catch(()=>{ v.muted=true; v.play().then(go).catch(()=>setTimeout(fin,2400)); }); else go();
-    setTimeout(fin,9000); }));
-  return q; }
+/* 한 번에 한 대사만. 새 대사가 오면 앞 대사는 끊고 바로 넘어감(뚝뚝 끊기지 않게 교차) */
+let cur=$('va'), nxt=$('vb'), tok=0;
+function say(k){ const my=++tok; return new Promise(res=>{ const c=CLIP[k]; if(!c){ res(); return; }
+    $('sub').style.opacity=0; setTimeout(()=>{ if(my===tok){ $('sub').textContent=c.t||''; $('sub').style.opacity=1; } },180);
+    if(!c.v){ setTimeout(res,c.t?2200:200); return; }
+    const v=nxt; v.src=c.v; v.muted=muted(); let done=false; const fin=()=>{ if(done) return; done=true; v.onended=null; res(my===tok); };
+    v.onended=fin; v.onerror=()=>setTimeout(fin,1500);
+    const go=()=>{ if(my!==tok){ v.pause(); return; } v.classList.add('on'); cur.classList.remove('on'); const old=cur; setTimeout(()=>{ try{ old.pause(); }catch(e){} },400); cur=v; nxt=old; };
+    const p=v.play(); if(p&&p.then) p.then(go).catch(()=>{ v.muted=true; v.play().then(go).catch(()=>setTimeout(fin,2200)); }); else go();
+    setTimeout(fin,9000); }); }
 /* 하루 한 장 */
 const today=new Date(); const dk=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 let S={}; try{ S=JSON.parse(localStorage.getItem('obMeok')||'{}'); }catch(e){}
@@ -119,26 +127,34 @@ const save=()=>{ try{ localStorage.setItem('obMeok',JSON.stringify(S)); }catch(e
 function hash(s){ let h=2166136261; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
 /* 부채꼴 7장 */
 const N=7; $('fan').innerHTML=Array.from({length:N},(_,i)=>{ const a=(i-(N-1)/2)*11, x=(i-(N-1)/2)*30; return `<button class="cd" type="button" data-i="${i}" aria-label="${i+1}번째 카드" style="transform:translateX(${x}px) rotate(${a}deg)"><i></i></button>`; }).join('');
-function show(r){ const C=TAROT[r.c]; const rv=!!r.rv;
+function fill(r){ const C=TAROT[r.c]; const rv=!!r.rv;
   $('cb').style.backgroundImage="url('"+C.img+"')"; $('cb').classList.toggle('rv',rv);
   $('rDir').textContent=(rv?'거꾸로 나온 ':'바로 나온 ')+C.han+' · '+C.en;
   $('rName').textContent=C.ko;
   $('rKw').innerHTML=(rv?C.kwR:C.kw).map(x=>'<span>'+x+'</span>').join('');
-  $('rTxt').innerHTML=(rv?C.rv:C.up)+(C.love?'<em>연애로 보면 '+(rv?C.love.rv:C.love.up)+'</em>':'');
-  $('res').classList.add('on'); setTimeout(()=>$('flip').classList.add('on'),120); }
-function pick(i){ if(S.d===dk) return; const fan=$('fan'); fan.classList.add('done');
-  const b=fan.querySelector('[data-i="'+i+'"]'); b.classList.add('pk'); b.style.transform='translateY(-14px)';
+  $('rTxt').innerHTML=(rv?C.rv:C.up)+(C.love?'<em>연애로 보면 '+(rv?C.love.rv:C.love.up)+'</em>':''); }
+let shown=false;
+function reveal(){ if(shown) return; shown=true; $('rdy').classList.remove('on');
+  $('res').classList.add('on'); requestAnimationFrame(()=>$('res').classList.add('show'));
+  /* 마지막 한마디는 영상 없이 자막으로만(풀이를 읽는 동안 말이 겹치지 않게) */
+  setTimeout(()=>{ $('sub').style.opacity=0; setTimeout(()=>{ $('sub').textContent=CLIP.more.t; $('sub').style.opacity=1; },200); },400);
+  setTimeout(()=>$('res').scrollIntoView({behavior:'smooth',block:'start'}),350); }
+function pick(i){ if(S.d===dk||$('fan').classList.contains('done')) return; const fan=$('fan'); fan.classList.add('done');
+  const b=fan.querySelector('[data-i="'+i+'"]'); b.classList.add('pk'); b.style.transform='translateY(-40px) scale(1.06)';
   const h=hash(dk+'|'+i+'|'+(S.n||0)+(TEST?'|'+Date.now():'')); const c=h%TAROT.length, rv=((h>>>8)%100)<28;
-  S={d:dk,c,rv,n:(S.n||0)+1}; if(!TEST) save();
-  say('slide');
-  setTimeout(()=>{ fan.style.display='none'; show(S); const tone=(TAROT[c].tone||0)*(rv?-1:1);
-    say(tone>0?'good':'care').then(()=>new Promise(r=>setTimeout(r,500))).then(()=>say('more'));
-    setTimeout(()=>$('res').scrollIntoView({behavior:'smooth',block:'start'}),900); },700); }
+  S={d:dk,c,rv,n:(S.n||0)+1}; if(!TEST) save(); fill(S);
+  /* 고른 카드가 먹물 앞 탁자로 올라가 뒤집히고, 그 카드를 보며 반응 → 끝나면 풀이 */
+  setTimeout(()=>{ fan.style.display='none'; $('hd').style.display='none'; $('vw').scrollIntoView({behavior:'smooth',block:'start'}); $('slot').classList.add('on'); },380);
+  setTimeout(()=>$('flip').classList.add('on'),1000);
+  setTimeout(()=>{ const tone=(TAROT[c].tone||0)*(rv?-1:1); $('rdy').classList.add('on');
+    say(tone>0?'good':'care').then(()=>setTimeout(reveal,350)); },1500); }
 $('fan').addEventListener('click',e=>{ const b=e.target.closest('.cd'); if(b) pick(+b.dataset.i); });
+$('rdy').onclick=reveal;
 /* 시작 */
 const hr=today.getHours(), first=!S.n;
-if(S.d===dk){ $('fan').style.display='none'; $('hd').querySelector('p').textContent='오늘 뽑은 카드예요. 내일 새 카드가 기다려요.'; show(S); say('again'); }
-else { say(first?'first':((hr>=23||hr<4)?'night':'back')).then(()=>say('pick')); }
+if(S.d===dk){ $('fan').style.display='none'; $('hd').querySelector('p').textContent='오늘 뽑은 카드예요. 내일 새 카드가 기다려요.'; fill(S); $('slot').classList.add('on'); $('flip').classList.add('on'); shown=true; $('res').classList.add('on','show'); say('again'); }
+else { $('fan').classList.add('wait');
+  say(first?'first':((hr>=23||hr<4)?'night':'back')).then(ok=>{ $('fan').classList.remove('wait'); if(ok&&!$('fan').classList.contains('done')) say('pick'); }); }
 $('goMujin').onclick=()=>{ location.href='tarot.html'; };
 $('goHome').onclick=$('back').onclick=()=>{ try{ sessionStorage.setItem('toHome','1'); }catch(e){} location.href='./'; };
 $('goShare').onclick=()=>{ const u=location.origin+location.pathname; if(window.ObShare&&ObShare.sheet){ ObShare.sheet({title:'먹물의 오늘 한 장',text:'묘당 검은 고양이가 오늘 카드 한 장 뒤집어 줘',url:u}); return; }

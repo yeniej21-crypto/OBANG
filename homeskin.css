@@ -189,3 +189,50 @@ html.skE .home #dbN{color:#fff!important}
 html.skE .hFoot{color:#8a8a8a!important}
 html.skD .home #hFortN,html.skB .home #hFortN{color:#fff!important}html.skD .home #hFortN small,html.skB .home #hFortN small{color:#e6dccb!important}
 html.skD .dspD{border-radius:20px!important}html.skD .home .back2salon{border-radius:20px!important}
+
+/* ================= 10/4 10:10 은주 확정: 홈 디자인 5단(언제든 바꿀 수 있게) =================
+   1 지금 그대로(클래스 없음) · 2 skP 지금 + 위 분류 탭 알약 · 3 skP skR 지금 + 탭 알약 + 칸 둥근 카드 · 4 skB 한지 라이트 · 5 skD 카드형 모던. (E skE는 보관)
+   고르는 법: obskin.js 의 기본값, 미리보기는 주소 ?skin=1~5 */
+
+/* ---- 2 · 위 분류 탭 알약(어두운 바탕) ---- */
+html.skP .pills{gap:6px!important;padding:10px 0 8px!important}
+html.skP .pills button{background:rgba(255,255,255,.08)!important;color:#d6cfc5!important;border-radius:999px!important;font-weight:600!important;box-shadow:none!important;padding:7px 14px!important}
+html.skP .pills button.on{background:#f4efe8!important;color:#15120f!important;font-weight:700!important}
+html.skP .hHead .wvA{border-radius:999px!important}
+
+/* ---- 3 · 칸을 둥근 카드로(지금 색 그대로) ---- */
+html.skR{--rs:#141117;--rl:rgba(255,240,220,.07)}
+html.skR .home .hSec,html.skR .home .ngtS,html.skR .home .fz{margin:12px 12px 0!important;padding:20px 0 18px!important;border-radius:24px!important;overflow:hidden;background-color:var(--rs);box-shadow:inset 0 0 0 1px var(--rl)}
+html.skR .home .band{background:#fff!important;box-shadow:none}
+html.skR .home .hSec.ny{background-color:transparent}
+html.skR .home .sh{padding:0 18px 14px!important}
+html.skR .home .pc{border-radius:16px!important}
+html.skR .home .pc .chip,html.skR .home .pc .chip.open,html.skR .home .pc .chip.new{border-radius:999px!important}
+html.skR .home .pc .play,html.skR .home .ngt .pic,html.skR .home .cRow button span,html.skR .home .ppg .tg,html.skR .home .back2salon .av,html.skR .home .jbFun .jg i,html.skR .dspD a i,html.skR .wyHd i{border-radius:50%!important}
+html.skR .home .tday{border-radius:24px!important;margin:12px 12px 0!important;overflow:hidden}
+html.skR .home .tday .bt,html.skR .home .band .tool,html.skR .home .ppg,html.skR .home .dbBand .dbx,html.skR .home .jbFun,html.skR .home .fort,html.skR .home .today,html.skR .home .gl{border-radius:16px!important}
+html.skR .home .back2salon{border-radius:20px!important;margin:12px 12px 0!important}
+html.skR .home .jbFun .jg a{border-radius:14px!important}
+html.skR .home .ngt{border-radius:20px!important}
+html.skR .home .lhub,html.skR .home .myoC,html.skR .home .myChar,html.skR .home .bookC,html.skR .home .F,html.skR .wyB2{border-radius:18px!important;overflow:hidden}
+html.skR .home .lhub .go,html.skR .home .bookC .go,html.skR .home button.go,html.skR .wyB2 .chip{border-radius:999px!important}
+html.skR .dsp .pc,html.skR .dspC .tdy{border-radius:16px!important}
+html.skR .dsp .bd{border-radius:999px!important}
+html.skR .dspD{margin:12px 12px 0!important;padding:2px 14px;border-radius:20px!important;background:var(--rs);box-shadow:inset 0 0 0 1px var(--rl)}
+html.skR .dspD a{border:0!important}
+html.skR .rkL{border-radius:24px!important}
+html.skR .r2 .th{border-radius:12px!important}
+html.skR .abBand{border-radius:20px!important;margin:12px 12px 0!important;background:var(--rs);border:0!important;box-shadow:inset 0 0 0 1px var(--rl)}
+html.skR .abBand .sl{border-radius:12px!important}
+html.skR .toTop{border-radius:50%!important}
+
+/* ---- 4 · 5 밝은 바탕: '○○에게 서하가 골라 둔 방' 제목 어둡게 ---- */
+html.skB .wyHd b,html.skD .wyHd b{color:var(--t1)!important}
+html.skB .wyHd small,html.skD .wyHd small{color:var(--ac)!important}
+html.skB .wyHd i,html.skD .wyHd i{box-shadow:0 0 0 1.5px var(--ln)!important}
+html.skD .wyB2{border-radius:18px!important;overflow:hidden}
+html.skR .home .rkL{background-color:#f5f1e8!important}
+html.skR .home .band #thr span{color:#b23a4e!important}
+html.skP .home .ppg small{color:#9a6b1f!important}
+html.skP .home #dbWk i{color:#8f8475!important}
+html.skP .hFoot{color:#8a8a90!important}

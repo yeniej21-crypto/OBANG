@@ -12,15 +12,16 @@ const ROOMS={
  geum:{who:'그림자 손님 · 그믐',t:'내 빈칸 확인',line:'달이 없는 밤엔 비어 있는 게 잘 보여. 내 공망 자리 짚어 보기',img:D8+'hf_20261003_102005_5906aacf-085d-40b2-acda-136da797f5cc_min.webp',v:D2+'c046140c-d852-47b8-9472-52acd1fa393c.mp4',href:'geumeum.html',badge:'무료',c:'#9fb4e8',pos:'center 24%'},
  sam:{who:'그림자 손님 · 삼재 삼남매',t:'나의 삼재',line:'들어간다, 눌러앉는다, 나간다. 삼 년을 머무는 손님 확인',img:D8+'hf_20261003_102844_e93d3f57-cfef-45d4-ad1d-668f8f7cf23a_min.webp',v:D2+'9ac5edd8-b3bb-4fee-b064-025be7356f3c.mp4',href:'samjae.html',badge:'무료',c:'#c3aef0',pos:'center 40%'},
  redthread:{who:'월하의 실타래',t:'붉은 실 궁합',line:'두 사람 사이의 실, 어디서 엉키고 어디서 풀리는지',img:'img/taegil.jpg',href:'redthread.html',badge:'NEW',c:'#e36b5a',pos:'center 25%'},
+ cooltime:{who:'도준 · 커리어',t:'이직 쿨타임',line:'옮길까, 버틸까. 내 쿨타임 게이지와 열두 달 이직 달력',img:'img/earth.jpg',href:'cooltime.html',badge:'무료',c:'#e3b866',pos:'center 22%'},
  meokmul:{who:'묘당 검은 고양이',t:'먹물의 오늘 한 장',line:'하루에 딱 한 장. 같은 걸 두 번 물으면 카드가 삐져',img:'img/cat/water.jpg',v:D2+'6c50abf3-653a-4ed5-92bc-0cacbdcb72b0.mp4',href:'meokmul.html',badge:'하루 한 장 무료',c:'#bfb7ff',pos:'center 30%'}
 };
 const SLOTS=[
- {id:'annex',type:'carousel',at:'#secBook',where:'before',cats:'all love heart gaeun',k:'오방도감 별관',h:'이번 주, 문을 연 방',items:['yeonseo','heuk','redthread','geum','lovemini','meokmul','sam']},
+ {id:'annex',type:'carousel',at:'#secBook',where:'before',cats:'all love heart gaeun',k:'오방도감 별관',h:'이번 주, 문을 연 방',items:['yeonseo','heuk','redthread','geum','sam','cooltime']},
  {id:'alley',on:false,type:'split',at:'#secBook',where:'before',cats:'all love heart gaeun',day:'yeonseo',night:['heuk','geum','sam']},
  {id:'today',on:false,type:'daily',at:'#secBook',where:'before',cats:'all love heart gaeun',pool:['yeonseo','heuk','redthread','lovemini','geum','meokmul','sam']},
  {id:'br-love',type:'bridge',at:'#secLoveHub',where:'after',cats:'all love heart re',item:'yeonseo',text:'연서당 · 너에게 올 편지 한 통, 먼저 열어 보기'},
  {id:'br-dohwa',type:'bridge',at:'#secDohwa',where:'after',cats:'all love match',item:'redthread',text:'월하의 붉은 실 궁합 · 두 사람의 실이 어디서 엉키는지'},
- {id:'br-cat',type:'bridge',at:'#secCat',where:'after',cats:'all love heart',item:'meokmul',text:'먹물의 오늘 한 장 · 아직 안 뽑았으면 하루 한 장 무료'}
+ {id:'br-cat',type:'bridge',at:'#secCat',where:'after',cats:'all love heart',item:'lovemini',text:'연서당의 작은 편지들 · 무료 연애 편지 세 장'}
 ];
 const CSS=`.dsp{--dg:#d9b26a}
 .dsp .sh small{color:var(--dg)}

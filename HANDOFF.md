@@ -955,3 +955,8 @@
   ② 카드형 모던 오프닝 글씨 색: homeskin.css?v=5 — 밝은 색 변수를 html 전체가 아니라 .home · .tabs · .toTop에만 건다(B · D · E 모두). 오프닝 · 시작 화면 · 스토리는 원래 어두운 색 그대로. 백업 bk/homeskin.pre_scope.css
   ③ 붓글씨 늦게 바뀌는 문제: fontsplit.py(스크래치패드) — 원본 obrush.woff2(1.06MB)를 점 줄이기(2단위) + 512 단위로 다듬고(눈 차이 없음) 다섯 묶음으로 나눔: a 홈 첫 화면 70KB · b 다른 메뉴 첫 화면 98KB · s 숫자 · 기호 33KB · c1 · c2 나머지 한글 각 227KB. unicode-range로 화면에 쓰인 글자 묶음만 받음(홈은 70KB 하나). font-display:block(기본 글꼴로 먼저 보였다가 바뀌는 깜빡임 없음), 페이지마다 첫 화면에 필요한 묶음 preload, /fonts/* 1년 고정 캐시(_headers, build_site.py). 글꼴 내용이 바뀌면 fontsplit.py의 VER를 올릴 것. 캔버스 공유 그림(avatar · free · obgh)은 그리기 전에 OBrush 묶음 전부를 불러옴. 페이지별 붓글씨 글자 = _fc.js → _fc.json. 백업 bk/pre_fontsplit_1004.tgz, bk/myeongri.pre_cc.prefont.html
   · 실서버 확인: 홈 obrush_a1만 받음, 기본 어두운 → 버튼 → 밝은 · 기억, 카드형 모던에서 오프닝 원래 색. 명리 감정서 자막 · 안내 대기분은 여전히 배포 안 함(작업본 유지).
+- 2026-10-04 10:57 · ■ 오늘 작업 마감(은주). 전체 백업.
+  · 실서버 = c27a1b7(홈 화면 전환 버튼 2↔5 · 오프닝 색 복구 · 붓글씨 나눠 싣기). 작업본 proto = 실서버 + 명리 감정서 배포 대기분(자막 ccVis · 무료/유료 안내 · 맞춤 잠금 미리보기 · noVA).
+  · 은주 답 기다리는 것: ① 명리 감정서 대기분 배포 OK(OK 나면 _hold 절차 없이 그대로 deploy_push) → 삼성 폰에서 파란 단추 사라졌는지 확인 ② 처음 오는 사람 화면 DEFAULT 2(어두운) 그대로 둘지 5(밝은)로 할지.
+  · 내일(10/5): 은주 가입 · 키 입력(「가입 · 키 입력 안내(10/5)」 문서, AUTH_MODE=mock 먼저) → Supabase 연결(SQL은 work/supabase_init_sql.txt, obauth 보관함 · 구매 기록).
+  · 10/6: 개발팀 공유. 그 뒤: ObScope · 물음 받기를 다른 유료 메뉴에, 처리방침 문구, 소개 페이지 감수 문구, 절기 그림 가짜 글자 점검.

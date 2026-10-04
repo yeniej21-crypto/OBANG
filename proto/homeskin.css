@@ -1,12 +1,13 @@
 /* 홈 스킨 시안 2차(10/4 09:50) — 콘텐츠 종류 · 배열은 그대로, 디자인만. <html class="skB|skD|skE">
+   10/4 10:50 변수는 html이 아니라 .home · .tabs · .toTop에만 건다(오프닝 · 스토리 화면은 원래 어두운 색 그대로)
    B 한지 라이트(다듬음): Apple 밝은 캔버스 · The Pattern 에디토리얼 · 29CM 여백
    D 카드형 모던: 토스(TDS) · App Store Today — 회색 바탕 위 둥근 흰 카드, 큰 굵은 제목, 알약 칩
    E 시네마틱 셸프: Spotify · Netflix — #121212 · 작품 색이 번지는 칸 배경 · 둥근 포스터 · 칩 탭 */
 
 /* ================= B 한지 라이트(다듬음) ================= */
-html.skB{--bg:#f5f2ec;--s1:#ffffff;--s2:#faf8f4;--ln:#e6e0d5;--ac:#a3261f;--t1:#1d1b18;--t2:#6e675e;--t3:#9b9387;
+html.skB .home,html.skB .tabs,html.skB .toTop{--bg:#f5f2ec;--s1:#ffffff;--s2:#faf8f4;--ln:#e6e0d5;--ac:#a3261f;--t1:#1d1b18;--t2:#6e675e;--t3:#9b9387;
  --ink:#1d1b18;--ink-2:#4a443d;--ink-3:#8b8379;--gold:#a3261f;--gold-2:#a3261f;color-scheme:light}
-html.skB body,html.skB .home{background:var(--bg)!important;color:var(--t1)!important}
+html.skB .home{background:var(--bg)!important;color:var(--t1)!important}
 html.skB .hHead{background:rgba(245,242,236,.92)!important;border-bottom:1px solid var(--ln)}
 html.skB .hHead::after{display:none!important}
 html.skB .hHead .logo img{filter:brightness(0) saturate(0);opacity:.86}
@@ -51,9 +52,9 @@ html.skB .tabs button{color:#9b9387!important}html.skB .tabs button.on{color:var
 html.skB .toTop{background:#fff!important;color:var(--t1)!important;box-shadow:0 2px 10px rgba(0,0,0,.12)!important}
 
 /* ================= D 카드형 모던(토스 · App Store Today) ================= */
-html.skD{--bg:#f2f4f6;--s1:#ffffff;--s2:#f7f8fa;--ln:#e5e8eb;--ac:#a3261f;--t1:#191f28;--t2:#6b7684;--t3:#8b95a1;
+html.skD .home,html.skD .tabs,html.skD .toTop{--bg:#f2f4f6;--s1:#ffffff;--s2:#f7f8fa;--ln:#e5e8eb;--ac:#a3261f;--t1:#191f28;--t2:#6b7684;--t3:#8b95a1;
  --ink:#191f28;--ink-2:#4e5968;--ink-3:#8b95a1;--gold:#a3261f;--gold-2:#a3261f;color-scheme:light}
-html.skD body,html.skD .home{background:var(--bg)!important;color:var(--t1)!important}
+html.skD .home{background:var(--bg)!important;color:var(--t1)!important}
 html.skD .hHead{background:rgba(242,244,246,.9)!important}
 html.skD .hHead::after{display:none!important}
 html.skD .hHead .logo img{filter:brightness(0) saturate(0);opacity:.9}
@@ -107,9 +108,9 @@ html.skD .tabs button{color:var(--t3)!important}html.skD .tabs button.on{color:v
 html.skD .toTop{background:#fff!important;color:var(--t1)!important;box-shadow:0 4px 12px rgba(0,0,0,.08)!important;border-radius:50%!important}
 
 /* ================= E 시네마틱 셸프(Spotify · Netflix) ================= */
-html.skE{--bg:#121212;--s1:#1a1a1a;--s2:#242424;--ln:rgba(255,255,255,.08);--ac:#e8c27a;--t1:#ffffff;--t2:#b3b3b3;--t3:#7a7a7a;
+html.skE .home,html.skE .tabs,html.skE .toTop{--bg:#121212;--s1:#1a1a1a;--s2:#242424;--ln:rgba(255,255,255,.08);--ac:#e8c27a;--t1:#ffffff;--t2:#b3b3b3;--t3:#7a7a7a;
  --ink:#fff;--ink-2:#d6d6d6;--ink-3:#a7a7a7;--gold:#e8c27a;--gold-2:#e8c27a}
-html.skE body,html.skE .home{background:var(--bg)!important}
+html.skE .home{background:var(--bg)!important}
 html.skE .hHead{background:rgba(18,18,18,.82)!important;backdrop-filter:blur(20px) saturate(1.6)!important}
 html.skE .hHead::after{display:none!important}
 html.skE .hHead .wvA{border-radius:999px!important;background:rgba(255,255,255,.1)!important;color:#fff!important;box-shadow:none!important}

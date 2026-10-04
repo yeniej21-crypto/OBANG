@@ -21,6 +21,6 @@ for f in glob.glob(C+'/v/**/*.mp4',recursive=True):
     if os.path.exists(P+'/'+rel) and os.path.getmtime(f)>=os.path.getmtime(P+'/'+rel): shutil.copy(f,O+'/'+rel)
 # 쓰지 않는 원본(도장 jpg)은 빼기
 for f in glob.glob(O+'/img/stamp/*.jpg'): os.remove(f)
-open(O+'/_headers','w').write('/*\n  X-Frame-Options: SAMEORIGIN\n/v/*\n  Cache-Control: public, max-age=604800\n/img/*\n  Cache-Control: public, max-age=604800\n')
+open(O+'/_headers','w').write('/*\n  X-Frame-Options: SAMEORIGIN\n/v/*\n  Cache-Control: public, max-age=604800\n/img/*\n  Cache-Control: public, max-age=604800\n/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n')
 open(O+'/README.md','w',encoding='utf-8').write('# 오방사주 체험판\n\n정적 사이트(빌드 없음). 넷리파이: 빌드 명령 비움, 공개 폴더 `/`.\n시작 화면은 index.html(서하 체험판).\n')
 print('ok')

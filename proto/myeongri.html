@@ -13,8 +13,8 @@
 <link rel="icon" href="img/brand/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="img/brand/icon-180.png">
 <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin><link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;700;900&display=swap">
-<style>
-@font-face{font-family:'OBrush';src:url('fonts/obrush.woff2') format('woff2');font-weight:400;font-display:swap}
+<link rel="preload" href="fonts/obrush_a1.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="fonts/obrush_b1.woff2" as="font" type="font/woff2" crossorigin><style>
+/*OBF*/@font-face{font-family:'OBrush';src:url('fonts/obrush_c21.woff2') format('woff2');font-weight:400;font-display:block;unicode-range:U+C12D,U+C130-C131,U+C139-C140,U+C154-C168,U+C194-C27D,U+C2A8,U+C2B4,U+C2B7-C2B9,U+C2DD,U+C2EB,U+C2ED-C30D,U+C368-C53B,U+C545,U+C549,U+C54C,U+C555-C557,U+C559-C55E,U+C561-C571,U+C57D-C598,U+C5B5-C5BB,U+C5BD-C5C4,U+C5C7,U+C5C9-C5CC,U+C5D1,U+C5E0-C5E3,U+C5ED-C5EE,U+C5FC-C61B,U+C625,U+C62C-C62D,U+C633-C63B,U+C644,U+C655-C6A9,U+C6B1,U+C6C0-C6CC,U+C6DC-C6F9,U+C717-C721,U+C728-C735,U+C751,U+C775,U+C783,U+C787,U+C789-C78E,U+C794-C7A4,U+C7A6,U+C7C1-C800,U+C810,U+C813,U+C81D-C838,U+C871-C881,U+C88B-C8E0,U+C8FD,U+C904-C90D,U+C92C-C99D,U+C9CA-C9F1,U+CA0D-CC3E,U+CC45-CCA8,U+CCAD,U+CCD0-CCE4,U+CD09-CD1B,U+CD5C-CD95,U+CD9C-CE35,U+CE5C-CE6D,U+CE7C-CEA1,U+CEE8,U+CEF7-CF08,U+CF20-CF8C,U+CFFC-D06C,U+D074-D07D,U+D0A8-D0B9,U+D0C1-D0D5,U+D0ED-D0F1,U+D131-D134,U+D145,U+D150-D17C,U+D1A1-D1A4,U+D1F4,U+D230-D30E,U+D31D-D328,U+D380-D398,U+D39C-D3B4,U+D3D0,U+D3ED-D45C,U+D479-D47C,U+D488-D551,U+D559,U+D56B-D56D,U+D575-D588,U+D5C8,U+D5D0-D600,U+D608-D64D,U+D658-D669,U+D68D-D749,U+D754-D790,U+D799-D7A3}@font-face{font-family:'OBrush';src:url('fonts/obrush_c11.woff2') format('woff2');font-weight:400;font-display:block;unicode-range:U+AC04-AC07,U+AC11-AC16,U+AC1A,U+AC1D-AC54,U+AC71-AC77,U+AC81,U+AC89,U+ACA0-ACAC,U+ACBD-ACC1,U+ACE1-ACE4,U+ACE8-ACF1,U+ACF5,U+AD04-AD50,U+AD70-AD73,U+AD76-AD7F,U+AD82-ADC8,U+ADE0,U+ADF9-ADFC,U+AE09-AE0B,U+AE34,U+AE40,U+AE43-AE4A,U+AE4E-AE65,U+AE7C,U+AEBE-AECF,U+AEF4-AFC0,U+AFD4-B04A,U+B053-B08D,U+B0A1,U+B0A9-B0AB,U+B0AD-B0B3,U+B0B8-B0E5,U+B109-B10C,U+B113-B123,U+B128-B141,U+B155,U+B179-B192,U+B194-B1A8,U+B20C-B290,U+B299-B2AC,U+B2CC-B2D0,U+B2DD,U+B2E5,U+B2EB,U+B2ED-B2EE,U+B2FF,U+B304-B313,U+B355-B35C,U+B365-B371,U+B3C5-B3D5,U+B3FC-B410,U+B41C-B429,U+B451-B454,U+B460-B4C8,U+B4DD,U+B4E3,U+B4EC-B545,U+B550-B5A1,U+B5A8-B755,U+B77D-B784,U+B78F-B790,U+B799-B7C9,U+B7F0-B801,U+B808-B818,U+B825-B840,U+B85D-B86D,U+B8B0-B8E1,U+B8EC-B960,U+B975,U+B985,U+B989,U+B9AD,U+B9BD-B9C1,U+B9C9,U+B9CE,U+B9D1-B9D9,U+B9DD,U+B9E1,U+B9E5-B9FA,U+BA3C-BA4D,U+BA58-BA74,U+BA87,U+BAA9-BABB,U+BB36,U+BB47-BBA4,U+BBFC-BBFF,U+BC0C-BC11,U+BC15-BC18,U+BC1C-BC1D,U+BC25,U+BC2D-BC43,U+BC85,U+BC8C-BC94,U+BC97-BCC0,U+BCCD-BCD1,U+BCF8-BD05,U+BD10-BD59,U+BD81,U+BD90-BE14,U+BE4C-BE5A,U+BE60-BF18,U+BFCC-C090,U+C0AD,U+C0B6,U+C0BD-C0BF,U+C0C9-C0D8,U+C11D-C11E,U+C124-C12C}@font-face{font-family:'OBrush';src:url('fonts/obrush_s1.woff2') format('woff2');font-weight:400;font-display:block;unicode-range:U+21-27,U+2A-2B,U+2D,U+2F,U+33-34,U+36,U+38-3E,U+40,U+43-48,U+4A-4C,U+4E-53,U+55-7E,U+FC-314E,U+FF08-FF1F}@font-face{font-family:'OBrush';src:url('fonts/obrush_b1.woff2') format('woff2');font-weight:400;font-display:block;unicode-range:U+28-29,U+31,U+35,U+3F,U+41-42,U+49,U+4D,U+54,U+B7,U+AC01,U+AC08,U+AC19,U+AC1C,U+AC70,U+AC78-AC80,U+AC83,U+AC8C,U+ACB9-ACBC,U+ACC4-ACE0,U+ACF3,U+ACFC,U+AD6C-AD6D,U+AD74,U+ADDC,U+AE08,U+AE38,U+AE41,U+AE4C,U+AEBC,U+AED8,U+AFC8,U+B04C,U+B0A0,U+B0A8,U+B0AC,U+B108,U+B110,U+B150,U+B178,U+B193,U+B204-B208,U+B2C8,U+B2D8,U+B2E8,U+B2F5,U+B354,U+B3D9,U+B418,U+B458,U+B4E0,U+B5A4,U+B760-B77C,U+B78D,U+B791-B798,U+B807,U+B824,U+B8E8,U+B974,U+B978-B984,U+B987,U+B9B4-B9BC,U+B9CC,U+B9D0,U+B9DE,U+B9E4,U+BA38,U+BA54,U+BABD,U+BB35,U+BB3B,U+BBF8,U+BC00,U+BC14,U+BC24,U+BC84,U+BC88,U+BC95,U+BCC4,U+BCD5,U+BCF5,U+BD09,U+BD84-BD88,U+BE5B,U+C0B0,U+C0C8,U+C120-C123,U+C148-C14B,U+C190,U+C2A4,U+C2AC,U+C2DC,U+C313,U+C544,U+C548,U+C54A,U+C554,U+C558,U+C57C,U+C5BC,U+C5C5,U+C5D4,U+C628,U+C62E,U+C654,U+C6B8,U+C6D0-C6D4,U+C704,U+C77D,U+C785,U+C791,U+C804-C808,U+C811,U+C81C,U+C84C,U+C885,U+C900,U+C911-C918,U+C9C8,U+C9F8,U+CC44,U+CCAB,U+CCB4,U+CD08,U+CD1D,U+CD98,U+CE58-CE59,U+CEEC,U+CF1C,U+CFE0,U+D070,U+D0A4,U+D0DC,U+D130,U+D138,U+D14C,U+D22C,U+D310,U+D37C,U+D399,U+D3BC,U+D3EC,U+D478,U+D480,U+D589-D5A5,U+D5CC,U+D604,U+D750-D751,U+D798}@font-face{font-family:'OBrush';src:url('fonts/obrush_a1.woff2') format('woff2');font-weight:400;font-display:block;unicode-range:U+20,U+2C,U+2E,U+30,U+32,U+37,U+AC00,U+AC10,U+ACB0,U+ACE7,U+AD00,U+AD81,U+ADF8,U+AE00,U+AE30,U+AE68,U+B098-B09C,U+B0B4,U+B124,U+B144,U+B294-B298,U+B2E4,U+B2EC,U+B2F4,U+B2F9,U+B300,U+B35F,U+B3C4,U+B450,U+B4DC,U+B4E4,U+B54C,U+B78C,U+B7EC,U+B85C,U+B871,U+B9AC,U+B9B0,U+B9C8,U+B9DB,U+BA39,U+BA85,U+BAA8,U+BB18-BB34,U+BB38,U+BB3C,U+BC1B,U+BC29,U+BCF4,U+BD80,U+BD89,U+BE44-BE48,U+BF51,U+C0AC,U+C0B4,U+C0BC,U+C0C1,U+C0DD-C11C,U+C12F,U+C138,U+C18C-C18D,U+C2B5,U+C2E0-C2E4,U+C2EC,U+C560,U+C5B4,U+C5C6,U+C5C8,U+C5D0,U+C5EC,U+C5F0-C5F4,U+C624,U+C640,U+C6B0,U+C6B4,U+C724,U+C73C-C74C,U+C758-C774,U+C778-C77C,U+C784,U+C788,U+C790,U+C7A5,U+C7AC,U+C801,U+C815,U+C870,U+C8FC,U+C9C0-C9C4,U+CE74-CE78,U+CEE4,U+CFE8,U+D0C0,U+D0DD,U+D1A0,U+D1B5,U+D314,U+D3B8,U+D3C9,U+D558,U+D55C-D569,U+D574,U+D654-D655,U+D68C}/*OBF*/
 /* 명리 감정서 v2(10/4): 실사 서재 몰입형. 입실(말하는 영상) → 의뢰서 → 먹 갈기(직접 문지름) → 붓으로 원국 → 인장 → 감정서(절기 수묵 달력) → 봉인 → 결제 */
 :root{
   --brush:'OBrush','Noto Serif KR',serif; --serif:'Noto Serif KR',"Nanum Myeongjo",serif;
@@ -46,20 +46,6 @@ button,select,input{font-family:inherit}
 .th.gone{opacity:0;transition:opacity .8s,height .9s}
 .sub{position:absolute;left:22px;right:22px;bottom:var(--sb,150px);z-index:6;text-align:center;font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.6;color:#f6efe2;text-shadow:0 2px 10px rgba(0,0,0,.85);opacity:0;transition:opacity .35s,bottom .9s;pointer-events:none}
 .sub.on{opacity:1}
-.sub span,.hsub span,.ssub span{background:rgba(12,10,8,.64);padding:3px 10px;line-height:1.95;text-shadow:none;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.sub.top{top:calc(env(safe-area-inset-top,0px) + 62px);bottom:auto!important;font-size:15.5px}
-.cc{height:30px;padding:0 10px;border:1px solid rgba(255,255,255,.6);background:rgba(0,0,0,.35);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.06em;cursor:pointer;border-radius:0;font-family:inherit}
-.cc.on{background:#f6efe2;border-color:#f6efe2;color:#171512}
-.tbar .cc{margin-left:auto}.tbar{transition:background .3s}.tbar.solid{background:rgba(14,11,9,.92)}.tbar .snd{margin-left:6px}
-.hero .cc,.seal .fr .cc{position:absolute;top:12px;right:12px;z-index:4}
-.frl0{margin:16px 0 -6px;text-align:center;font-size:12px;line-height:1.6;color:rgba(243,234,217,.75)}
-.frl{margin:16px 0 0;padding:10px 12px;border:1px solid var(--rule);font-size:12.5px;line-height:1.75;color:var(--ink-2)}
-.frl b{display:inline-block;min-width:56px;margin-right:6px;font-family:var(--serif);font-weight:900;color:var(--ink)}.frl b.pd{color:var(--seal)}
-.frd{margin:26px 0 14px;text-align:center}.frd span{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:14px;font-weight:900;color:var(--seal);letter-spacing:.08em}
-.frd span::before,.frd span::after{content:"";flex:1;height:1px;background:var(--seal);opacity:.45}
-.frd p{margin:8px 0 0;font-family:var(--serif);font-size:14px;line-height:1.65;color:var(--ink-2)}
-.lock .blw{position:relative}.lock .pk .tq{margin:4px 0 6px}
-.lock .ov .stat{font-family:var(--serif);font-size:13.5px;font-weight:700;color:var(--seal)}
 .tbar{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px}
 .tbar .back{width:36px;height:36px;border-radius:50%;border:0;background:rgba(0,0,0,.35);display:grid;place-items:center;color:#fff;cursor:pointer;backdrop-filter:blur(6px)}
 .tbar .back svg{width:18px;height:18px}
@@ -344,11 +330,10 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
 <div class="stage" id="stage">
   <div class="th" id="th"><div class="pst" id="thP"></div><video id="va" playsinline preload="auto"></video><video id="vb" playsinline preload="auto"></video></div>
   <div class="sub" id="sub"></div>
-  <div class="tbar" id="tbar"><button class="back" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="tbT">명리관 · 소헌 선생</b><button class="cc" type="button" aria-label="자막 켜고 끄기">자막</button><button class="snd" id="sndOn" type="button"><i></i>소리 켜기</button></div>
+  <div class="tbar" id="tbar"><button class="back" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="tbT">명리관 · 소헌 선생</b><button class="snd" id="sndOn" type="button"><i></i>소리 켜기</button></div>
 
   <div class="scr on" id="sRoom">
     <div class="plate"><small>明理館 · 2027 丁未年</small><h1>소헌 선생의<br>명리 감정서</h1><p>절기의 시각으로 여덟 글자를 세우고, 한 글자씩 근거를 짚어 읽습니다.</p></div>
-    <p class="frl0">원국부터 세운 총평까지는 무료로 보시고, 봉투 안 본문 아홉 장은 결제 후 열립니다</p>
     <button class="enter" id="enterBtn" type="button">의뢰서 쓰기</button>
     <p class="ailbl">소헌 선생은 AI로 만든 가상의 명리가입니다</p>
   </div>
@@ -364,7 +349,6 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
         <div class="r"><span>생시</span><div><select id="bh" aria-label="태어난 시"></select></div></div>
       </div>
       <div id="intake"></div>
-      <p class="frl"><b>무료</b>원국 · 오행과 강약 · 대운 · 세운 총평 · 물음의 실마리<br><b class="pd">19,900원</b>봉투 안 본문 아홉 장 · 물음의 답 · 열두 달 · 길일</p>
       <button class="go" id="goBtn">의뢰서 올리기</button>
       <p class="fine">자시(23:30~01:29)는 당일 기준 · 시를 모르면 세 기둥으로 감정합니다</p>
       <div id="scope"></div>
@@ -389,7 +373,7 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
   </div>
 
   <div class="scr" id="sRep">
-    <div class="hero noprint" id="hero"><div class="pst" id="heroP"></div><video id="hv" playsinline preload="none"></video><video id="hv2" playsinline muted loop preload="none"></video><div class="hsub" id="hsub"></div><button class="cc noprint" type="button" aria-label="자막 켜고 끄기">자막</button></div>
+    <div class="hero noprint" id="hero"><div class="pst" id="heroP"></div><video id="hv" playsinline preload="none"></video><video id="hv2" playsinline muted loop preload="none"></video><div class="hsub" id="hsub"></div></div>
     <div class="htl"><small>明理館 鑑定書</small><h2>2027 명리 감정서</h2></div>
     <div class="rep" id="rep">
       <div class="doc" id="dHead"></div>
@@ -403,8 +387,7 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
       <div class="cov noprint" data-img="IMG_INK" data-vid="VID_GRIND"><div><small>附錄</small><b>절기로 읽는 열두 달</b></div></div>
       <div class="doc" id="dJ"></div>
       <div class="ask noprint"><div class="pst" style="background-image:url('img/soheon.jpg')"></div><video data-vid="VID_IDLE" muted loop playsinline preload="none"></video><div class="in"><h3>소헌 선생에게 묻기</h3><p>감정서를 읽다 걸리는 대목이 있으면 물어보게. 자네 원국의 근거를 짚어 가며 답하겠네. 세 번까지 물을 수 있어요.</p><div class="qs"><button data-q="올해 이직을 해도 되겠습니까">올해 이직을 해도 되겠습니까</button><button data-q="돈은 언제 모이겠습니까">돈은 언제 모이겠습니까</button><button data-q="조심할 달은 언제입니까">조심할 달은 언제입니까</button></div><button class="go" id="askBtn">소헌 선생에게 묻기</button></div></div>
-      <div class="frd noprint"><span>여기까지가 무료 감정일세</span><p>봉투 안에는 자네 물음의 답과 열두 달의 날짜가 이미 적혀 있네.</p></div>
-      <div class="seal noprint" id="sealBox"><div class="fr" id="sealFr"><video id="sv" playsinline preload="none"></video><video id="sv2" playsinline muted loop preload="none"></video><div class="ssub" id="ssub"></div><button class="cc" type="button" aria-label="자막 켜고 끄기">자막</button></div>
+      <div class="seal noprint" id="sealBox"><div class="fr" id="sealFr"><video id="sv" playsinline preload="none"></video><video id="sv2" playsinline muted loop preload="none"></video><div class="ssub" id="ssub"></div></div>
         <div class="in"><h3>봉투 안의 감정서</h3>
           <ul class="toc"><li><em>한눈에</em>한눈에 보는 2027 · 열두 달 곡선 · 오행 · 대운</li><li><em>제5장</em>자네가 물은 것 · 답과 달 · 분기 계획 · 고른 날</li><li><em>제6장</em>타고난 그릇 · 십성 분포 · 원국의 별</li><li><em>제7장</em>대운의 흐름 · 지금과 다음 10년</li><li><em>제8장</em>2027 세운 정밀</li><li><em>제9장</em>열두 달 월운 · 달마다 좋은 날과 피할 날</li><li><em>제10장</em>영역별 감정 · 재물 · 일 · 인연 · 사람 · 몸</li><li><em>제11장</em>자주 묻는 다섯 가지</li><li><em>제12장</em>소헌 선생의 권고 · 열두 달 개운표</li><li><em>제13장</em>길일표 · 맺음말 · 관인 감정서</li></ul>
           <p class="pr"><s>29,000원</s> <b>19,900원</b> · 2027 신년 한정</p>
@@ -623,7 +606,6 @@ function render(name,sol,h,orig){
   $('d4').innerHTML=`<div class="ch"><em>제4장</em><b>2027 세운 총평</b></div><div class="yr"><div class="sc">${ys}<small>/100</small></div><div class="lb"><b>${['문이 열리는 해','다지고 쌓는 해','바람이 센 해'][tier]}</b>정미(丁未)년 · ${S_.tgStem(dm,YS)} · ${S_.tgBranch(dm,YB)}의 해</div></div>${yh}${notes()}`;
   window.SNF={name,nick,male,P,dm,st,cnt,ys,tier,cur,curFav,inp:{y:sol.y,m:sol.m,d:sol.d,h,g:gender},docNo:docNo(sol,h),td,ask:ASK};
   try{ if(window.MRPrem&&MRPrem.teaser) MRPrem.teaser($('dQ')); }catch(e){ $('dQ').hidden=true; }
-  try{ if(window.MRPrem&&MRPrem.peek) MRPrem.peek($('dLock')); }catch(e){}
   const pr=$('prem'); pr.hidden=true; pr.innerHTML=''; $('dLock').hidden=false; $('pay').classList.remove('done'); $('payBtn').textContent='감정서 전체 열기';
 }
 function openAsk(first){ if(!window.AskChat||!ASKU) return; AskChat.open({persona:'soheon',theme:'paper',root:$('stage'),avatar:'img/soheon_av.jpg',user:ASKU,first,tier:'default'}); }
@@ -637,18 +619,9 @@ const A=window.MR2A;
 const muted=()=>{ try{ return sessionStorage.getItem('obSnd')==='0'; }catch(e){ return false; } };
 /* 극장: 말하는 영상 → 끝나면 반복 영상(idle)으로. 영상 두 장을 교차시켜 끊김 없게 */
 let cur=$('va'), nxt=$('vb'), tok=0, loopSrc=null, soundBlocked=false;
-/* 자막: 은주 10/4 — 소리를 끈 사람(또는 소리가 막힌 경우)에게는 자동으로, 소리를 켠 사람에게는 숨김. 볼륨 0은 웹에서 알 수 없어 '자막' 버튼으로 직접 켜고, 선택은 기억(obCC) */
-const ccPref=()=>{ try{ return localStorage.getItem('obCC'); }catch(e){ return null; } };
-const silent=()=>[typeof cur!=='undefined'?cur:null,$('hv'),$('sv')].some(v=>v&&!v.paused&&!v.loop&&v.muted);
-function ccVis(){ const p=ccPref(); if(p==='1') return true; if(p==='0') return false; return muted()||soundBlocked||silent(); }
-function ccSync(){ const on=ccVis(); document.querySelectorAll('.cc').forEach(b=>b.classList.toggle('on',on)); ['sub','hsub','ssub'].forEach(id=>{ const el=$(id); if(el) el.classList.toggle('on',!!(on&&el._t)); }); }
-function subOn(el,t){ el._t=t||''; el.classList.remove('on'); setTimeout(()=>{ if(el._t!==(t||'')) return; el.innerHTML=t?`<span>${t}</span>`:''; if(t&&ccVis()) el.classList.add('on'); },160); }
-document.addEventListener('click',e=>{ const b=e.target.closest('.cc'); if(!b) return; try{ localStorage.setItem('obCC',ccVis()?'0':'1'); }catch(e){} ccSync(); });
-/* 삼성 인터넷 동영상 도우미 등 브라우저가 띄우는 영상 단추를 줄이는 표시 */
-function noVA(){ document.querySelectorAll('video').forEach(v=>{ if(v._nv) return; v._nv=1; v.setAttribute('disablepictureinpicture',''); v.setAttribute('disableremoteplayback',''); v.setAttribute('controlslist','nofullscreen noremoteplayback nodownload noplaybackrate'); v.setAttribute('x-webkit-airplay','deny'); try{ v.disablePictureInPicture=true; v.disableRemotePlayback=true; }catch(e){} }); }
-noVA();
+function subOn(el,t){ el.classList.remove('on'); setTimeout(()=>{ el.textContent=t||''; if(t) el.classList.add('on'); },160); }
 function playOn(v,src,{loop=false,mute=false}={}){ return new Promise(res=>{ v.loop=loop; if(v.getAttribute('src')!==src) v.src=src; try{ v.currentTime=0; }catch(e){}
-  v.muted=mute||muted(); const p=v.play(); if(p&&p.then) p.then(()=>res(true)).catch(()=>{ v.muted=true; soundBlocked=!mute; if(soundBlocked) $('sndOn').classList.add('on'); ccSync(); v.play().then(()=>res(true)).catch(()=>res(false)); }); else res(true); }); }
+  v.muted=mute||muted(); const p=v.play(); if(p&&p.then) p.then(()=>res(true)).catch(()=>{ v.muted=true; soundBlocked=!mute; if(soundBlocked) $('sndOn').classList.add('on'); v.play().then(()=>res(true)).catch(()=>res(false)); }); else res(true); }); }
 function swap(){ cur.classList.remove('on'); nxt.classList.add('on'); const o=cur; cur=nxt; nxt=o; setTimeout(()=>{ try{ nxt.pause(); }catch(e){} },600); }
 /* 대사: 자막은 [[초, 문장]...] */
 function say(src,subs,{after=null,sb}={}){ const my=++tok; if(sb!=null) $('sub').style.setProperty('--sb',sb+'px');
@@ -659,26 +632,22 @@ function say(src,subs,{after=null,sb}={}){ const my=++tok; if(sb!=null) $('sub')
     v.onended=fin; setTimeout(()=>{ if(!v.ended&&v.currentTime<.1) fin(); },12000); }); }
 function loopTo(src){ const v=nxt; playOn(v,src,{loop:true,mute:true}).then(()=>swap()); }
 function setPoster(url){ $('thP').style.backgroundImage=`url('${url}')`; }
-$('sndOn').onclick=()=>{ try{ sessionStorage.removeItem('obSnd'); }catch(e){} soundBlocked=false; $('sndOn').classList.remove('on'); [cur,$('hv'),$('sv')].forEach(v=>{ if(v&&!v.loop&&!v.paused){ v.muted=false; } }); ccSync(); };
-document.addEventListener('touchend',()=>{ if(soundBlocked&&!muted()){ [cur,$('hv'),$('sv')].forEach(v=>{ if(v&&!v.loop&&!v.paused){ v.muted=false; } }); soundBlocked=false; $('sndOn').classList.remove('on'); ccSync(); } },{passive:true});
+$('sndOn').onclick=()=>{ try{ sessionStorage.removeItem('obSnd'); }catch(e){} soundBlocked=false; $('sndOn').classList.remove('on'); [cur,$('hv'),$('sv')].forEach(v=>{ if(v&&!v.loop&&!v.paused){ v.muted=false; } }); };
+document.addEventListener('touchend',()=>{ if(soundBlocked&&!muted()){ [cur,$('hv'),$('sv')].forEach(v=>{ if(v&&!v.loop&&!v.paused){ v.muted=false; } }); soundBlocked=false; $('sndOn').classList.remove('on'); } },{passive:true});
 
 /* 화면 전환 */
 const SCR=['sRoom','sIntro','sInk','sWrite','sRep'];
 function show(id){ SCR.forEach(s=>$(s).classList.toggle('on',s===id)); $('pay').classList.toggle('on',id==='sRep'&&false);
   $('th').classList.toggle('half',id==='sIntro'); $('th').classList.toggle('gone',id==='sRep'); $('sub').style.display=id==='sRep'?'none':'';
-  $('tbar').style.display=id==='sRep'?'none':''; if(id!=='sIntro'){ $('sub').classList.remove('top'); $('tbar').classList.remove('solid'); } $('tbT').textContent=id==='sInk'?'먹을 가는 중':id==='sWrite'?'원국을 세우는 중':'명리관 · 소헌 선생'; }
+  $('tbar').style.display=id==='sRep'?'none':''; $('tbT').textContent=id==='sInk'?'먹을 가는 중':id==='sWrite'?'원국을 세우는 중':'명리관 · 소헌 선생'; }
 
 /* 1. 입실 */
 setPoster(A.IMG_SOHEON);
-say(A.T_ENTER,[[1.0,'왔는가. 거기 앉게.'],[3.3,'오늘은 자네의 여덟 글자를, 제대로 읽어 봄세.']],{after:A.VID_IDLE,sb:roomSub()}).then(()=>{});
+say(A.T_ENTER,[[1.0,'왔는가. 거기 앉게.'],[3.3,'오늘은 자네의 여덟 글자를, 제대로 읽어 봄세.']],{after:A.VID_IDLE,sb:300}).then(()=>{});
 setTimeout(()=>$('enterBtn').classList.add('on'),1600);
 if(window.ObIntake){ ObIntake.mount($('intake'),{voice:'soheon'}); $('scope').innerHTML=ObScope.html({free:['원국','오행과 강약','대운 속의 2027','세운 총평','절기로 읽는 열두 달','자네 물음의 실마리'],paid:['자네가 물은 것의 답','한눈에 보는 2027','타고난 그릇','대운','세운 정밀','열두 달 월운과 좋은 날','영역별 감정','자주 묻는 다섯 가지','권고와 개운표','길일표','PDF 저장'],price:'19,900원',was:'29,000원',tag:'2027 신년 한정'}); }
-function placeSub(){ if(!$('sIntro').classList.contains('on')) return; const thB=$('th').getBoundingClientRect().bottom, rq=document.querySelector('#sIntro .req').getBoundingClientRect().top, edge=Math.min(thB,rq), s=$('sub'), sb0=$('stage').getBoundingClientRect().bottom;
-  $('tbar').classList.toggle('solid',rq<70); if(edge<170) s.classList.add('top'); else { s.classList.remove('top'); s.style.setProperty('--sb',(sb0-edge+16)+'px'); } }
-function roomSub(){ const pl=document.querySelector('#sRoom .plate'); if(!pl) return 300; return Math.round($('stage').getBoundingClientRect().bottom-pl.getBoundingClientRect().top+14); }
-$('sIntro').addEventListener('scroll',placeSub,{passive:true}); addEventListener('resize',placeSub);
-$('enterBtn').onclick=()=>{ setPoster(A.IMG_FORM); show('sIntro'); placeSub(); setTimeout(placeSub,950); say(A.T_FORM,[[1.0,'태어난 날짜와 시간을 적어 주게.'],[4.0,'시간을 모르면, 비워 두어도 괜찮네.']],{after:A.VID_IDLE}); };
-$('back1').onclick=()=>{ if($('sIntro').classList.contains('on')){ show('sRoom'); $('sub').style.setProperty('--sb',roomSub()+'px'); return; } if(history.length>1) history.back(); else location.href='./'; };
+$('enterBtn').onclick=()=>{ setPoster(A.IMG_FORM); show('sIntro'); $('sub').style.setProperty('--sb',(innerHeight*0.6+16)+'px'); say(A.T_FORM,[[1.0,'태어난 날짜와 시간을 적어 주게.'],[4.0,'시간을 모르면, 비워 두어도 괜찮네.']],{after:A.VID_IDLE}); };
+$('back1').onclick=()=>{ if($('sIntro').classList.contains('on')){ show('sRoom'); $('sub').style.setProperty('--sb','250px'); return; } if(history.length>1) history.back(); else location.href='./'; };
 
 /* 2. 먹 갈기: 손가락으로 원을 그리면 먹 가는 영상이 그만큼 움직이고, 갈리는 소리가 남 */
 let inkP=0, inkDone=null, last=null, ac=null, noise=null, gainN=null, inkStop=0;
@@ -721,7 +690,7 @@ ritual=async function(name,sol,h,P,DU){
 
 /* 4. 감정서: 맨 위에서 소헌 선생이 원국을 짚고, 끝나면 서재 반복 */
 const _render=render;
-render=function(name,sol,h,orig){ _render(name,sol,h,orig); jeolgi(); fields(); covers(); noVA(); ccSync(); };
+render=function(name,sol,h,orig){ _render(name,sol,h,orig); jeolgi(); fields(); covers(); };
 const _go=$('goBtn').onclick;
 $('goBtn').onclick=async()=>{ tok++; await _go(); heroTalk(); };
 function heroTalk(){ const hv=$('hv'), h2=$('hv2'); $('heroP').style.backgroundImage=`url('${A.IMG_SOHEON}')`; h2.src=A.VID_IDLE;

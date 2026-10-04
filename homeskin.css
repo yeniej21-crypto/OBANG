@@ -162,3 +162,30 @@ html.skE .abBand .sl{border-radius:8px!important}
 html.skE .tabs{background:linear-gradient(180deg,rgba(18,18,18,.6),#121212 40%)!important;border-top:0!important;backdrop-filter:blur(10px)}
 html.skE .tabs button.on{color:#fff!important}
 html.skE .toTop{border-radius:50%!important;background:#fff!important;color:#121212!important}
+
+/* ===== D 보완(10/4 10:00): 밝은 바탕 위 밝은 글씨 전수 점검 결과 ===== */
+html.skD .home .bkS,html.skD .home .lhubS,html.skD .home .myChar,html.skD .home .pc,html.skD .home .myoC,html.skD .dsp .pc,html.skD .home #chBan,html.skD .home .chBan{--ink:#f6f1ea;--ink-2:#cfc6ba;--ink-3:#8e867c;--gold:#e3b866;--gold-2:#f3d79b}
+html.skD .home #hLuck .lk b{color:var(--t1)!important}
+html.skD .home #ngtK{color:#c2455a!important}
+html.skD .home #thr span{color:#c2455a!important}
+html.skD .home #yinLn span{color:var(--t2)!important}html.skD .home #yinLn span em{color:var(--ac)!important}
+html.skD .home #dbWk i{color:#8b95a1!important}
+html.skD .home .myChar .t small{color:#f3d79b!important}
+html.skD .home .hFoot{color:#6b7684!important}
+html.skD .home .bkS .F,html.skB .home .bkS .F{color:#f6f1ea!important}
+html.skD .home .bkS .F h3,html.skB .home .bkS .F h3{color:#f6f1ea!important}
+/* ===== B 보완: 같은 점검 결과 ===== */
+html.skB .home .bkS,html.skB .home .lhubS,html.skB .home .myChar,html.skB .home .pc,html.skB .home .myoC,html.skB .dsp .pc{--ink:#f6f1ea;--ink-2:#cfc6ba;--ink-3:#8e867c;--gold:#e3b866;--gold-2:#f3d79b}
+html.skB .pills button{color:#7d766c!important}
+html.skB .home #hLuck .lk b{color:var(--t1)!important}
+html.skB .home #ngtK,html.skB .home #thr span{color:#b23a4e!important}
+html.skB .home #yinLn span{color:var(--t2)!important}html.skB .home #yinLn span em{color:var(--ac)!important}
+html.skB .home #dbWk i{color:#9b9387!important}
+html.skB .home .myChar .t small{color:#f3d79b!important}
+html.skB .hFoot{color:#857d72!important}
+/* ===== E 보완 ===== */
+html.skE .home #dbWk i{color:#7a7a7a!important}
+html.skE .home #dbN{color:#fff!important}
+html.skE .hFoot{color:#8a8a8a!important}
+html.skD .home #hFortN,html.skB .home #hFortN{color:#fff!important}html.skD .home #hFortN small,html.skB .home #hFortN small{color:#e6dccb!important}
+html.skD .dspD{border-radius:20px!important}html.skD .home .back2salon{border-radius:20px!important}

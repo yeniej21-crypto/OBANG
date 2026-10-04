@@ -294,6 +294,19 @@ function teaserHTML(){ const topics=(F.ask.topics||[]).filter(k=>TQ[k]), list=to
     return `<div class="tz"><p class="tq">${TQ[k]}</p>${lineSvg([{v:R.vals}],{h:96,nolab:1,label:TL[k]+' 흐름'})}<p class="p">자네가 물은 ${TL[k]}, 볕이 드는 달은 두 번 오네. ${sameHalf?`두 달 모두 ${half(t[0])}에 있네.`:`한 번은 상반기, 한 번은 하반기에 있네.`} 몇 월 며칠인지, 그달에 무엇을 하고 무엇을 미룰지는 봉투 안 첫 장에 적어 두었네.</p></div>`; };
   const w=F.ask.worry;
   return `<div class="ch"><em>물음</em><b>자네가 물은 것</b><span>실마리만 먼저 보이네</span></div>${list.map(one).join('')}${w?`<p class="p">적어 준 사연도 읽었네. 그 사연에는 봉투 안에서 따로 답하겠네.</p>`:''}`; }
+
+/* 잠금 미리보기: 그 사람의 실제 본문 첫머리만 보이고 나머지는 섞어서 흐리게(본문은 화면에 싣지 않음) */
+const scramble=t=>{ const a=[...t].filter(c=>/\S/.test(c)); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } let k=0; return [...t].map(c=>/\S/.test(c)?a[k++]:c).join(''); };
+function peekHTML(){ const keep=C; C=ruleCopy(); const DY=goodDays(); const tmp=document.createElement('div'); tmp.innerHTML=build(); C=keep;
+  const len=tmp.textContent.replace(/\s+/g,'').length, figs=tmp.querySelectorAll('svg').length+tmp.querySelectorAll('.abar').length, tabs=tmp.querySelectorAll('table').length;
+  const days=F.months.reduce((a,o)=>a+monthDays(o).good.length,0)+Object.values(DY).reduce((a,x)=>a+x.length,0);
+  const topics=(F.ask.topics||[]).filter(k=>TQ[k]), k=topics[0]||'flow', d=tmp.querySelector('.askd .tqa'), first=d?d.querySelector('.p'):null;
+  const lead=first?first.textContent.replace(/^왜 그렇게 보는가\.\s*/,'').split(/(?<=[일네]세?\.)\s/)[0]:'';
+  const rest=d?[...d.querySelectorAll('.vd,.p')].slice(0,4).map(e=>e.textContent).join(' '):'';
+  const man=n=>{ const m=Math.floor(n/10000), c=Math.round((n%10000)/1000); return m?`약 ${m}만${c?` ${c}천`:''} 자`:`약 ${c}천 자`; };
+  return `<div class="pk"><div class="ch"><em>제5장</em><b>자네가 물은 것</b></div><p class="tq">${TQ[k]}</p><p class="p"><b>왜 그렇게 보는가.</b> ${lead}</p></div>
+   <div class="blw"><div class="bl"><p class="vd">${scramble(rest.slice(0,60))}</p>${lineSvg([{v:F.months.map(o=>tScore(o,k))}],{h:110,nolab:1})}<p class="p">${scramble(rest.slice(60,420))}</p></div>
+   <div class="ov"><b>감정서 본문 · 제5장부터 제13장</b><span class="stat">${man(len)} · 그림과 표 ${figs+tabs}개 · 고른 날 ${days}일</span><small>자네가 물은 것의 답 · 한눈에 보는 2027<br>타고난 그릇 · 대운 · 세운 정밀 · 열두 달 월운<br>영역별 감정 · 권고 · 길일표</small></div></div>`; }
 function prepF(){ const X0=window.SNF; F=window.Prem2Core.build(S_,X,X0.inp); F.male=X0.inp.g==='m'; F.ysc=X0.ys; F.ask=X0.ask||{topics:[],status:'',worry:''};
   const s=[...F.months.map((o,i)=>({o,i}))].sort((a,b)=>b.o.sc-a.o.sc); F.bestI=s.slice(0,3).map(x=>x.i).sort((a,b)=>a-b); F.warnI=s.slice(-2).map(x=>x.i); return F; }
 const CSS3=`.glance .gt{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin:6px 0 14px}
@@ -427,7 +440,8 @@ table.gil{width:100%;border-collapse:collapse;border-top:1px solid var(--ink);bo
 .qa{padding:14px 0;border-top:1px solid var(--rule-2)}.ch+.qa{border-top:0;padding-top:0}.qa>b{display:block;font-family:var(--serif);font-size:15.5px;font-weight:900;margin-bottom:6px}.qa>b:before{content:'問 ';color:var(--seal)}
 .gun th small{display:block;font-size:11px;color:var(--ink-3);font-weight:500}
 @media print{.mrb{display:block!important}.mrh{pointer-events:none}}`;
-window.MRPrem={teaser(host){ if(!host||!window.SNF) return; if(!document.getElementById('mrCss')){ const s=document.createElement('style'); s.id='mrCss'; s.textContent=CSS+CSS3; document.head.appendChild(s); } prepF(); host.innerHTML=teaserHTML(); host.hidden=false; },
+window.MRPrem={peek(host){ if(!host||!window.SNF) return; prepF(); host.innerHTML=peekHTML(); },
+ teaser(host){ if(!host||!window.SNF) return; if(!document.getElementById('mrCss')){ const s=document.createElement('style'); s.id='mrCss'; s.textContent=CSS+CSS3; document.head.appendChild(s); } prepF(); host.innerHTML=teaserHTML(); host.hidden=false; },
  open(){ const host=$('prem'); const X0=window.SNF; if(!host||!X0) return;
   if(!document.getElementById('mrCss')){ const s=document.createElement('style'); s.id='mrCss'; s.textContent=CSS+CSS3; document.head.appendChild(s); }
   prepF(); C=ruleCopy(); if(window.HJ) C=HJ.glAll(C);

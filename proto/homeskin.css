@@ -1,96 +1,164 @@
-/* 홈 스킨 시안(10/4) — 구조 · 배열은 그대로, 색 · 면 · 간격 · 글자 위계만 바꾼다. <html class="skA|skB|skC">
-   원칙(리서치): 바탕 하나 + 면 두 단계, 강조색 하나는 버튼 · 라벨에만, 칩 한 가지 모양, 섹션 머리 한 가지 모양, 그림자 대신 가는 선 */
+/* 홈 스킨 시안 2차(10/4 09:50) — 콘텐츠 종류 · 배열은 그대로, 디자인만. <html class="skB|skD|skE">
+   B 한지 라이트(다듬음): Apple 밝은 캔버스 · The Pattern 에디토리얼 · 29CM 여백
+   D 카드형 모던: 토스(TDS) · App Store Today — 회색 바탕 위 둥근 흰 카드, 큰 굵은 제목, 알약 칩
+   E 시네마틱 셸프: Spotify · Netflix — #121212 · 작품 색이 번지는 칸 배경 · 둥근 포스터 · 칩 탭 */
 
-/* ---------- 공통 정돈(세 시안 모두) ---------- */
-html[class*="sk"] .home .hSec{margin-top:40px}
-html[class*="sk"] .home .sh{padding:0 18px 12px}
-html[class*="sk"] .home .sh small{font-size:11px;font-weight:700;letter-spacing:.1em}
-html[class*="sk"] .home .sh b{font-size:18px;font-weight:700;letter-spacing:-.02em;margin-top:5px}
-html[class*="sk"] .home .pc{box-shadow:none!important}
-html[class*="sk"] .home .pc .chip,html[class*="sk"] .home .pc .chip.open,html[class*="sk"] .home .pc .chip.new{background:rgba(10,9,12,.5)!important;color:#fff!important;border:1px solid rgba(255,255,255,.32)!important;font-weight:600;letter-spacing:.03em}
-html[class*="sk"] .home .back2salon{border-radius:0!important}
-html[class*="sk"] .home .back2salon .av{border-radius:50%!important}
-
-/* ---------- 시안 A · 먹빛 정돈: 전부 어두운 면 하나로(넷플릭스 · 왓챠식 일관성) ---------- */
-html.skA{--bg:#111014;--s1:#18161b;--s2:#201d23;--ln:rgba(255,255,255,.07);--ac:#d2b07a;--t1:#f2eee8;--t2:#a59d93;--t3:#77706a}
-html.skA body,html.skA .home{background:var(--bg)!important}
-html.skA .hHead{background:rgba(17,16,20,.94)!important}
-html.skA .hHead::after{background:linear-gradient(180deg,rgba(17,16,20,.94),rgba(17,16,20,0))!important}
-html.skA .pills button{color:#8c867f}
-html.skA .pills button.on{color:var(--t1);box-shadow:inset 0 -2px 0 var(--ac)!important}
-html.skA .home .sh small{color:var(--ac)!important}
-html.skA .home .sh b{color:var(--t1)!important}
-html.skA .home .band{background:transparent!important;color:var(--t1)}
-html.skA .home .band .sh small{color:var(--ac)!important}
-html.skA .home .band .sh b,html.skA .home .band .fzc,html.skA .home .band .om{color:var(--t1)!important}
-html.skA .home .band .tool,html.skA .home .ppg,html.skA .home .dbBand .dbx{background:var(--s1)!important;color:var(--t1)!important;border:1px solid var(--ln)!important}
-html.skA .home .ppg b,html.skA .home .dbBand .dbx b,html.skA .home .band .tool b{color:var(--t1)!important}
-html.skA .home .ppg em,html.skA .home .band .tool small,html.skA .home .band .fzAll,html.skA .home .band .om small,html.skA .home .band .fzc .ds{color:var(--t2)!important}
-html.skA .home .ppg small,html.skA .home .band .tool small em{color:var(--ac)!important}
-html.skA .home .ppg .tg{background-color:var(--s2)!important}
-html.skA .home .band .tiles span{background:var(--s2)!important}
-html.skA .home .jbFun{background:var(--s1)!important;color:var(--t1)!important;border:1px solid var(--ln)}
-html.skA .home .jbFun .jg a{background:var(--s2)!important;color:var(--t1)!important;box-shadow:none!important}
-html.skA .home .jbFun .jh span{color:var(--ac)!important}
-html.skA .home .jbFun .jg small,html.skA .home .jbFun .jn{color:var(--t3)!important}
-html.skA .home .fort,html.skA .home .today,html.skA .home .back2salon,html.skA .home .gl,html.skA .home .myChar{background:var(--s1)!important;border:1px solid var(--ln)!important}
-html.skA .rkL{background:var(--s1)!important;color:var(--t1)}
-html.skA .rkL .sh b,html.skA .r2 b{color:var(--t1)!important}
-html.skA .r2{border-top-color:var(--ln)!important}html.skA .r2 small{color:var(--t2)!important}html.skA .r2 em{color:var(--ac)!important}
-html.skA .tabs{background:rgba(17,16,20,.96)!important;border-top:1px solid var(--ln)!important}
-html.skA .hFoot{border-top-color:var(--ln)!important}
-
-/* ---------- 시안 B · 한지 라이트: 밝은 종이 바탕 에디토리얼(29CM · The Pattern식) ---------- */
-html.skB{--bg:#f3efe7;--s1:#ffffff;--s2:#f8f5ef;--ln:#e4ddd0;--ac:#a3261f;--t1:#1c1916;--t2:#6f675d;--t3:#9a9186;color-scheme:light}
+/* ================= B 한지 라이트(다듬음) ================= */
+html.skB{--bg:#f5f2ec;--s1:#ffffff;--s2:#faf8f4;--ln:#e6e0d5;--ac:#a3261f;--t1:#1d1b18;--t2:#6e675e;--t3:#9b9387;
+ --ink:#1d1b18;--ink-2:#4a443d;--ink-3:#8b8379;--gold:#a3261f;--gold-2:#a3261f;color-scheme:light}
 html.skB body,html.skB .home{background:var(--bg)!important;color:var(--t1)!important}
-html.skB .hHead{background:#1c1916!important}
-html.skB .hHead::after{background:linear-gradient(180deg,rgba(28,25,22,.5),rgba(28,25,22,0))!important;height:10px!important}
-html.skB .pills button{color:#9d958a}
-html.skB .pills button.on{color:#fff;box-shadow:inset 0 -2px 0 #d9b26a!important}
-html.skB .home .sh small{color:var(--ac)!important}
-html.skB .home .sh b{color:var(--t1)!important}
+html.skB .hHead{background:rgba(245,242,236,.92)!important;border-bottom:1px solid var(--ln)}
+html.skB .hHead::after{display:none!important}
+html.skB .hHead .logo img{filter:brightness(0) saturate(0);opacity:.86}
+html.skB .hHead .logo b{color:var(--t1)!important}
+html.skB .hIc button{color:var(--t1)!important}
+html.skB .hHead [class*="wv"],html.skB .hHead .wvA{background:transparent!important;color:var(--t1)!important;box-shadow:inset 0 0 0 1px var(--t1)!important}
+html.skB .pills button{color:#958d82!important}
+html.skB .pills button.on{color:var(--t1)!important;box-shadow:inset 0 -2px 0 var(--t1)!important}
+html.skB .home .hSec{margin-top:44px}
+html.skB .home .sh{padding:0 20px 14px}
+html.skB .home .sh small{color:var(--ac)!important;font-size:11px;font-weight:700;letter-spacing:.14em}
+html.skB .home .sh b{color:var(--t1)!important;font-family:'Noto Serif KR',serif!important;font-weight:700!important;font-size:21px!important;letter-spacing:-.02em;margin-top:6px}
+html.skB .home .fzAll,html.skB .home .ny .fzAll{color:var(--t2)!important}
+html.skB .home .hSec.ny{background:none!important}
+html.skB .home .ny .sh small{color:var(--ac)!important}
+html.skB .home .pc{box-shadow:0 1px 0 rgba(0,0,0,.04)!important}
+html.skB .home .pc .chip,html.skB .home .pc .chip.open,html.skB .home .pc .chip.new{background:#f5f2ec!important;color:var(--t1)!important;border:0!important;font-weight:700}
 html.skB .home .band{background:transparent!important}
-html.skB .home .band .tool,html.skB .home .ppg,html.skB .home .dbBand .dbx,html.skB .home .jbFun{background:var(--s1)!important;border:1px solid var(--ln)!important;color:var(--t1)!important}
-html.skB .home .ppg small,html.skB .home .band .tool small em,html.skB .home .jbFun .jh span{color:var(--ac)!important}
-html.skB .home .jbFun .jg a{background:var(--s2)!important;box-shadow:none!important}
-html.skB .home .fort,html.skB .home .today,html.skB .home .back2salon,html.skB .home .gl,html.skB .home .myChar{background:var(--s1)!important;border:1px solid var(--ln)!important;color:var(--t1)!important}
-html.skB .home .back2salon b,html.skB .home .today b,html.skB .home .fort b{color:var(--t1)!important}
-html.skB .home .back2salon small{color:var(--t2)!important}
-html.skB .home .tday{color:var(--t1)}
+html.skB .home .band .tool,html.skB .home .ppg,html.skB .home .dbBand .dbx,html.skB .home .jbFun,html.skB .home .fort,html.skB .home .today,html.skB .home .back2salon,html.skB .home .gl{background:var(--s1)!important;border:1px solid var(--ln)!important;box-shadow:none!important;color:var(--t1)!important}
+html.skB .home .tday{background:var(--s1)!important;border:1px solid var(--ln)!important;color:var(--t1)!important;margin-left:16px;margin-right:16px}
 html.skB .home .tday *{color:inherit}
-html.skB .home .ngt .tx b{color:var(--t1)!important}html.skB .home .ngt em{color:var(--t2)!important}
-html.skB .home .cRow b{color:var(--t1)!important}html.skB .home .cRow small{color:var(--t2)!important}
-html.skB .home .bkS .bkN,html.skB .home .tool small{color:var(--t2)!important}
-html.skB .dspD a{border-color:var(--ln)!important}html.skB .dspD a span{color:var(--t1)!important}
+html.skB .home .tday small,html.skB .home .tday em{color:var(--t2)!important}
+html.skB .home .ppg small,html.skB .home .band .tool small em,html.skB .home .jbFun .jh span{color:var(--ac)!important}
+html.skB .home .ppg em,html.skB .home .band .tool small,html.skB .home .jbFun .jg small,html.skB .home .jbFun .jn,html.skB .home .back2salon small{color:var(--t2)!important}
+html.skB .home .ppg b,html.skB .home .back2salon b,html.skB .home .band .tool b{color:var(--t1)!important}
+html.skB .home .back2salon i{color:var(--ac)!important}
+html.skB .home .jbFun .jg a{background:var(--s2)!important;box-shadow:none!important;color:var(--t1)!important}
+html.skB .home .ngt{background:var(--s1)!important;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);color:var(--t1)!important}
+html.skB .home .ngt b{color:var(--t1)!important}html.skB .home .ngt em{color:var(--t2)!important}
+html.skB .home .cRow button{color:var(--t1)!important}html.skB .home .cRow button small{color:var(--t2)!important}
+html.skB .home .bkS .bkN{color:var(--t2)!important}
+html.skB .home .bkS .sh small{color:var(--ac)!important}
+html.skB .dsp .sh small{color:var(--ac)!important}
+html.skB .dspD a{border-color:var(--ln)!important}html.skB .dspD a span{color:var(--t1)!important}html.skB .dspD a span b,html.skB .dspD a em{color:var(--ac)!important}
 html.skB .rkL{background:transparent!important}
-html.skB .tabs{background:rgba(255,255,255,.96)!important;border-top:1px solid var(--ln)!important}
-html.skB .tabs button{color:#8a8278!important}html.skB .tabs button.on{color:var(--t1)!important}
-html.skB .hFoot{border-top-color:var(--ln)!important;color:var(--t3)!important}
-html.skB .abBand{border-color:var(--ln)!important}html.skB .abBand b{color:var(--t1)!important}
-
-/* ---------- 시안 C · 투톤 정돈: 지금 구조(어두운 바탕 + 밝은 띠)를 살리고 밝은 면을 한 가지 크림으로 ---------- */
-html.skC{--bg:#121015;--cr:#f4f0e8;--cr2:#fbf9f5;--ln:#e5ded2;--ac:#c9a467;--acd:#9a6b2a;--t1:#f2eee8;--d1:#1c1916;--d2:#776e63}
-html.skC body,html.skC .home{background:var(--bg)!important}
-html.skC .hHead{background:rgba(18,16,21,.94)!important}
-html.skC .hHead::after{background:linear-gradient(180deg,rgba(18,16,21,.94),rgba(18,16,21,0))!important}
-html.skC .pills button.on{box-shadow:inset 0 -2px 0 var(--ac)!important}
-html.skC .home .sh small{color:var(--ac)!important}
-html.skC .home .sh b{color:var(--t1)!important}
-html.skC .home .band{background:var(--cr)!important;padding-top:24px;padding-bottom:20px}
-html.skC .home .band .sh small{color:var(--acd)!important}
-html.skC .home .band .sh b{color:var(--d1)!important}
-html.skC .home .band .tool,html.skC .home .ppg,html.skC .home .dbBand .dbx{background:var(--cr2)!important;border:1px solid var(--ln)!important;box-shadow:none!important}
-html.skC .home .ppg small,html.skC .home .band .tool small em{color:var(--acd)!important}
-html.skC .home .jbFun{background:var(--cr)!important;border:0}
-html.skC .home .jbFun .jg a{background:var(--cr2)!important;box-shadow:none!important;border:1px solid var(--ln)}
-html.skC .home .jbFun .jh span{color:var(--acd)!important}
-html.skC .home .fort,html.skC .home .today,html.skC .home .back2salon,html.skC .home .gl,html.skC .home .myChar{background:#1a171d!important;border:1px solid rgba(255,255,255,.06)!important}
-html.skC .rkL{background:var(--cr)!important}
-html.skC .r2{border-top-color:var(--ln)!important}html.skC .r2 em{color:var(--acd)!important}
-html.skC .tabs{background:rgba(18,16,21,.96)!important;border-top:1px solid rgba(255,255,255,.06)!important}
-html.skC .lhubS .lhub .go,html.skC .home .bookC .go{background:var(--ac)!important;color:#15110a!important}
-
-html.skC .rkL .sh b{color:var(--d1)!important}html.skC .rkL .sh small{color:var(--acd)!important}
 html.skB .rkL .sh b{color:var(--t1)!important}
-html.skB .home .myChar b,html.skB .home .gl b{color:var(--t1)!important}
-html.skB #secNY .sh b{color:#fff!important}html.skB #secNY .sh small{color:#e3a99f!important}
+html.skB .r2{border-top-color:var(--ln)!important}
+html.skB .abBand{border-color:var(--ln)!important}html.skB .abBand b{color:var(--t1)!important}html.skB .abBand small{color:var(--t2)!important}
+html.skB .hFoot{border-top-color:var(--ln)!important;color:var(--t3)!important}
+html.skB .tabs{background:rgba(255,255,255,.94)!important;border-top:1px solid var(--ln)!important}
+html.skB .tabs button{color:#9b9387!important}html.skB .tabs button.on{color:var(--t1)!important}
+html.skB .toTop{background:#fff!important;color:var(--t1)!important;box-shadow:0 2px 10px rgba(0,0,0,.12)!important}
+
+/* ================= D 카드형 모던(토스 · App Store Today) ================= */
+html.skD{--bg:#f2f4f6;--s1:#ffffff;--s2:#f7f8fa;--ln:#e5e8eb;--ac:#a3261f;--t1:#191f28;--t2:#6b7684;--t3:#8b95a1;
+ --ink:#191f28;--ink-2:#4e5968;--ink-3:#8b95a1;--gold:#a3261f;--gold-2:#a3261f;color-scheme:light}
+html.skD body,html.skD .home{background:var(--bg)!important;color:var(--t1)!important}
+html.skD .hHead{background:rgba(242,244,246,.9)!important}
+html.skD .hHead::after{display:none!important}
+html.skD .hHead .logo img{filter:brightness(0) saturate(0);opacity:.9}
+html.skD .hHead .logo b{color:var(--t1)!important}
+html.skD .hIc button{color:var(--t1)!important}
+html.skD .hHead .wvA{background:#fff!important;color:var(--t1)!important;box-shadow:none!important;border-radius:999px!important}
+html.skD .pills{gap:6px!important;padding:10px 0 8px!important}
+html.skD .pills button{background:#fff!important;color:var(--t2)!important;border-radius:999px!important;font-weight:600!important;box-shadow:none!important}
+html.skD .pills button.on{background:var(--t1)!important;color:#fff!important}
+/* 섹션 = 둥근 흰 카드 */
+html.skD .home .hSec,html.skD .home .ngtS,html.skD .home .fz{margin:12px 12px 0!important;padding:20px 0 18px!important;background:var(--s1)!important;border-radius:24px!important;overflow:hidden}
+html.skD .home .hSec.ny{background:var(--s1)!important}
+html.skD .home .sh{padding:0 18px 14px!important}
+html.skD .home .sh small{color:var(--t3)!important;font-size:12px!important;font-weight:600!important;letter-spacing:0!important}
+html.skD .home .sh b{color:var(--t1)!important;font-size:20px!important;font-weight:800!important;letter-spacing:-.03em!important;margin-top:4px}
+html.skD .home .fzAll,html.skD .home .ny .fzAll{color:var(--t3)!important}
+html.skD .home .pc{border-radius:18px!important;box-shadow:none!important}
+html.skD .home .pc .chip,html.skD .home .pc .chip.open,html.skD .home .pc .chip.new{border-radius:999px!important;background:rgba(255,255,255,.92)!important;color:var(--t1)!important;border:0!important;font-weight:700}
+html.skD .home .pc .play{border-radius:50%!important}
+html.skD .home .band{background:var(--s1)!important}
+html.skD .home .band .tool,html.skD .home .ppg,html.skD .home .dbBand .dbx,html.skD .home .jbFun,html.skD .home .fort,html.skD .home .today,html.skD .home .back2salon,html.skD .home .gl{background:var(--s2)!important;border:0!important;border-radius:16px!important;box-shadow:none!important;color:var(--t1)!important}
+html.skD .home .tday{background:var(--s1)!important;color:var(--t1)!important;border-radius:24px!important;margin:12px 12px 0!important}
+html.skD .home .tday *{color:inherit}
+html.skD .home .tday small,html.skD .home .tday em{color:var(--t2)!important}
+html.skD .home .tday [class*="b"]{border-radius:16px!important}
+html.skD .home .ppg small,html.skD .home .band .tool small em,html.skD .home .jbFun .jh span{color:var(--ac)!important}
+html.skD .home .ppg em,html.skD .home .band .tool small,html.skD .home .jbFun .jg small,html.skD .home .jbFun .jn,html.skD .home .back2salon small{color:var(--t2)!important}
+html.skD .home .ppg b,html.skD .home .back2salon b{color:var(--t1)!important}
+html.skD .home .back2salon i{color:var(--ac)!important}
+html.skD .home .jbFun .jg a{background:#fff!important;border-radius:14px!important;box-shadow:none!important;color:var(--t1)!important}
+html.skD .home .ngt{background:var(--s1)!important;color:var(--t1)!important;border-radius:20px!important}
+html.skD .home .ngt b{color:var(--t1)!important}html.skD .home .ngt em{color:var(--t2)!important}
+html.skD .home .ngt .pic,html.skD .home .cRow button span,html.skD .home .ppg .tg,html.skD .home .back2salon .av,html.skD .home .jbFun .jg i,html.skD .dspD a i,html.skD .dspB .fc i{border-radius:50%!important}
+html.skD .home .cRow button{color:var(--t1)!important}html.skD .home .cRow button small{color:var(--t2)!important}
+html.skD .home .lhub,html.skD .home .myoC,html.skD .home .myChar,html.skD .home .bookC,html.skD .home .lhubS .lhub{border-radius:18px!important;overflow:hidden}
+html.skD .home .lhub .go,html.skD .home .bookC .go,html.skD .home .pc .go,html.skD .home button.go{border-radius:12px!important}
+html.skD .home .bkS .bkN{color:var(--t2)!important}
+html.skD .dsp .pc,html.skD .dspC .tdy{border-radius:18px!important}
+html.skD .dsp .bd{border-radius:999px!important;background:rgba(255,255,255,.92)!important;color:var(--t1)!important;border:0!important}
+html.skD .dsp .sh small{color:var(--t3)!important}
+html.skD .dspD{margin:12px 12px 0!important;background:var(--s1);border-radius:20px;padding:4px 14px}
+html.skD .dspD a{border:0!important}html.skD .dspD a span{color:var(--t1)!important}html.skD .dspD a span b,html.skD .dspD a em{color:var(--ac)!important}
+html.skD .rkL{background:var(--s1)!important}
+html.skD .rkL .sh b{color:var(--t1)!important}
+html.skD .r2{border-top-color:var(--ln)!important}html.skD .r2 .th{border-radius:14px!important}html.skD .r2 em{color:var(--t1)!important}
+html.skD .abBand{background:var(--s1);border:0!important;border-radius:20px!important;margin:12px 12px 0!important}
+html.skD .abBand .sl{border-radius:12px!important}html.skD .abBand b{color:var(--t1)!important}html.skD .abBand small{color:var(--t2)!important}
+html.skD .hFoot{border-top:0!important;color:var(--t3)!important}
+html.skD .tabs{background:rgba(255,255,255,.94)!important;border-top:0!important;box-shadow:0 -1px 0 var(--ln)}
+html.skD .tabs button{color:var(--t3)!important}html.skD .tabs button.on{color:var(--t1)!important}
+html.skD .toTop{background:#fff!important;color:var(--t1)!important;box-shadow:0 4px 12px rgba(0,0,0,.08)!important;border-radius:50%!important}
+
+/* ================= E 시네마틱 셸프(Spotify · Netflix) ================= */
+html.skE{--bg:#121212;--s1:#1a1a1a;--s2:#242424;--ln:rgba(255,255,255,.08);--ac:#e8c27a;--t1:#ffffff;--t2:#b3b3b3;--t3:#7a7a7a;
+ --ink:#fff;--ink-2:#d6d6d6;--ink-3:#a7a7a7;--gold:#e8c27a;--gold-2:#e8c27a}
+html.skE body,html.skE .home{background:var(--bg)!important}
+html.skE .hHead{background:rgba(18,18,18,.82)!important;backdrop-filter:blur(20px) saturate(1.6)!important}
+html.skE .hHead::after{display:none!important}
+html.skE .hHead .wvA{border-radius:999px!important;background:rgba(255,255,255,.1)!important;color:#fff!important;box-shadow:none!important}
+html.skE .pills{gap:8px!important;padding:10px 0 10px!important}
+html.skE .pills button{background:#2a2a2a!important;color:#fff!important;border-radius:999px!important;font-size:13px!important;font-weight:600!important;padding:7px 14px!important;box-shadow:none!important}
+html.skE .pills button.on{background:var(--ac)!important;color:#121212!important}
+/* 칸마다 작품 색이 위에서 번짐(Spotify 동적 그라데이션) */
+html.skE .home .hSec{margin-top:8px!important;padding-top:26px!important;background:linear-gradient(180deg,var(--tint,rgba(255,255,255,.04)) 0%,rgba(18,18,18,0) 140px)!important}
+html.skE .home .hSec.ny{--tint:rgba(160,52,40,.32)}
+html.skE .home #secJt{--tint:rgba(190,150,80,.16)}
+html.skE .home #secTarot{--tint:rgba(110,70,160,.22)}
+html.skE .home #secLoveHub{--tint:rgba(200,80,110,.18)}
+html.skE .home #secDohwa{--tint:rgba(230,120,140,.18)}
+html.skE .home #secCat{--tint:rgba(240,170,190,.14)}
+html.skE .home #secJob{--tint:rgba(200,160,90,.16)}
+html.skE .home .sh{padding:0 16px 14px!important;display:block}
+html.skE .home .sh small{color:var(--t2)!important;font-size:12px!important;font-weight:500!important;letter-spacing:0!important}
+html.skE .home .sh b{color:#fff!important;font-size:22px!important;font-weight:800!important;letter-spacing:-.03em!important;margin-top:4px}
+html.skE .home .fzAll,html.skE .home .ny .fzAll{color:var(--t2)!important;font-weight:700}
+html.skE .home .pc{border-radius:12px!important;box-shadow:0 8px 24px rgba(0,0,0,.5)!important}
+html.skE .home .pc .chip,html.skE .home .pc .chip.open,html.skE .home .pc .chip.new{border-radius:4px!important;background:var(--ac)!important;color:#121212!important;border:0!important;font-weight:800}
+html.skE .home .pc .play{border-radius:50%!important;background:var(--ac)!important}
+html.skE .home .pc .play::after{border-left-color:#121212!important}
+html.skE .home .band{background:transparent!important}
+html.skE .home .band .sh b,html.skE .home .band .fzc,html.skE .home .band .om{color:#fff!important}
+html.skE .home .band .sh small{color:var(--t2)!important}
+html.skE .home .band .tool,html.skE .home .ppg,html.skE .home .dbBand .dbx,html.skE .home .jbFun,html.skE .home .fort,html.skE .home .today,html.skE .home .back2salon,html.skE .home .gl{background:var(--s1)!important;border:0!important;border-radius:12px!important;box-shadow:none!important;color:#fff!important}
+html.skE .home .ppg b,html.skE .home .band .tool b,html.skE .home .back2salon b{color:#fff!important}
+html.skE .home .ppg em,html.skE .home .band .tool small,html.skE .home .band .fzc .ds,html.skE .home .band .om small,html.skE .home .back2salon small{color:var(--t2)!important}
+html.skE .home .ppg small,html.skE .home .band .tool small em,html.skE .home .back2salon i,html.skE .home .jbFun .jh span{color:var(--ac)!important}
+html.skE .home .ppg .tg{background-color:var(--s2)!important;border-radius:50%!important}
+html.skE .home .band .tiles span{background:var(--s2)!important;border-radius:6px!important}
+html.skE .home .jbFun .jg a{background:var(--s2)!important;color:#fff!important;border-radius:10px!important;box-shadow:none!important}
+html.skE .home .jbFun .jg small,html.skE .home .jbFun .jn{color:var(--t3)!important}
+html.skE .home .tday{border-radius:16px!important;margin-left:12px;margin-right:12px}
+html.skE .home .ngt{border-radius:12px!important;margin-left:12px!important;margin-right:12px!important}
+html.skE .home .ngt .pic,html.skE .home .cRow button span,html.skE .home .back2salon .av,html.skE .home .jbFun .jg i,html.skE .dspD a i,html.skE .dspB .fc i{border-radius:50%!important}
+html.skE .home .lhub,html.skE .home .myoC,html.skE .home .myChar,html.skE .home .bookC{border-radius:12px!important;overflow:hidden}
+html.skE .home .lhub .go,html.skE .home .bookC .go,html.skE .home button.go{border-radius:999px!important;background:var(--ac)!important;color:#121212!important}
+html.skE .dsp .pc,html.skE .dspC .tdy{border-radius:12px!important}
+html.skE .dsp .bd{border-radius:4px!important;background:var(--ac)!important;color:#121212!important;border:0!important}
+html.skE .dsp .sh small{color:var(--t2)!important}
+html.skE .dspD a{border:0!important;background:var(--s1);border-radius:10px;padding:10px 12px!important;margin-top:6px}
+html.skE .rkL{background:var(--bg)!important;color:#fff}
+html.skE .rkL .sh b,html.skE .r2 b{color:#fff!important}html.skE .rkL .sh small{color:var(--t2)!important}
+html.skE .r2{border-top:0!important;padding:7px 0!important}html.skE .r2 .th{border-radius:6px!important}
+html.skE .r2 small{color:var(--t2)!important}html.skE .r2 em{color:#fff!important;font-family:var(--sans)!important}
+html.skE .abBand{background:var(--s1);border:0!important;border-radius:12px!important}
+html.skE .abBand .sl{border-radius:8px!important}
+html.skE .tabs{background:linear-gradient(180deg,rgba(18,18,18,.6),#121212 40%)!important;border-top:0!important;backdrop-filter:blur(10px)}
+html.skE .tabs button.on{color:#fff!important}
+html.skE .toTop{border-radius:50%!important;background:#fff!important;color:#121212!important}

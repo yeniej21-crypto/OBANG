@@ -46,20 +46,6 @@ button,select,input{font-family:inherit}
 .th.gone{opacity:0;transition:opacity .8s,height .9s}
 .sub{position:absolute;left:22px;right:22px;bottom:var(--sb,150px);z-index:6;text-align:center;font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.6;color:#f6efe2;text-shadow:0 2px 10px rgba(0,0,0,.85);opacity:0;transition:opacity .35s,bottom .9s;pointer-events:none}
 .sub.on{opacity:1}
-.sub span,.hsub span,.ssub span{background:rgba(12,10,8,.64);padding:3px 10px;line-height:1.95;text-shadow:none;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.sub.top{top:calc(env(safe-area-inset-top,0px) + 62px);bottom:auto!important;font-size:15.5px}
-.cc{height:30px;padding:0 10px;border:1px solid rgba(255,255,255,.6);background:rgba(0,0,0,.35);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.06em;cursor:pointer;border-radius:0;font-family:inherit}
-.cc.on{background:#f6efe2;border-color:#f6efe2;color:#171512}
-.tbar .cc{margin-left:auto}.tbar{transition:background .3s}.tbar.solid{background:rgba(14,11,9,.92)}.tbar .snd{margin-left:6px}
-.hero .cc,.seal .fr .cc{position:absolute;top:12px;right:12px;z-index:4}
-.frl0{margin:16px 0 -6px;text-align:center;font-size:12px;line-height:1.6;color:rgba(243,234,217,.75)}
-.frl{margin:16px 0 0;padding:10px 12px;border:1px solid var(--rule);font-size:12.5px;line-height:1.75;color:var(--ink-2)}
-.frl b{display:inline-block;min-width:56px;margin-right:6px;font-family:var(--serif);font-weight:900;color:var(--ink)}.frl b.pd{color:var(--seal)}
-.frd{margin:26px 0 14px;text-align:center}.frd span{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:14px;font-weight:900;color:var(--seal);letter-spacing:.08em}
-.frd span::before,.frd span::after{content:"";flex:1;height:1px;background:var(--seal);opacity:.45}
-.frd p{margin:8px 0 0;font-family:var(--serif);font-size:14px;line-height:1.65;color:var(--ink-2)}
-.lock .blw{position:relative}.lock .pk .tq{margin:4px 0 6px}
-.lock .ov .stat{font-family:var(--serif);font-size:13.5px;font-weight:700;color:var(--seal)}
 .tbar{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px}
 .tbar .back{width:36px;height:36px;border-radius:50%;border:0;background:rgba(0,0,0,.35);display:grid;place-items:center;color:#fff;cursor:pointer;backdrop-filter:blur(6px)}
 .tbar .back svg{width:18px;height:18px}
@@ -344,11 +330,10 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
 <div class="stage" id="stage">
   <div class="th" id="th"><div class="pst" id="thP"></div><video id="va" playsinline preload="auto"></video><video id="vb" playsinline preload="auto"></video></div>
   <div class="sub" id="sub"></div>
-  <div class="tbar" id="tbar"><button class="back" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="tbT">명리관 · 소헌 선생</b><button class="cc" type="button" aria-label="자막 켜고 끄기">자막</button><button class="snd" id="sndOn" type="button"><i></i>소리 켜기</button></div>
+  <div class="tbar" id="tbar"><button class="back" id="back1" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button><b id="tbT">명리관 · 소헌 선생</b><button class="snd" id="sndOn" type="button"><i></i>소리 켜기</button></div>
 
   <div class="scr on" id="sRoom">
     <div class="plate"><small>明理館 · 2027 丁未年</small><h1>소헌 선생의<br>명리 감정서</h1><p>절기의 시각으로 여덟 글자를 세우고, 한 글자씩 근거를 짚어 읽습니다.</p></div>
-    <p class="frl0">원국부터 세운 총평까지는 무료로 보시고, 봉투 안 본문 아홉 장은 결제 후 열립니다</p>
     <button class="enter" id="enterBtn" type="button">의뢰서 쓰기</button>
     <p class="ailbl">소헌 선생은 AI로 만든 가상의 명리가입니다</p>
   </div>
@@ -364,7 +349,6 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
         <div class="r"><span>생시</span><div><select id="bh" aria-label="태어난 시"></select></div></div>
       </div>
       <div id="intake"></div>
-      <p class="frl"><b>무료</b>원국 · 오행과 강약 · 대운 · 세운 총평 · 물음의 실마리<br><b class="pd">19,900원</b>봉투 안 본문 아홉 장 · 물음의 답 · 열두 달 · 길일</p>
       <button class="go" id="goBtn">의뢰서 올리기</button>
       <p class="fine">자시(23:30~01:29)는 당일 기준 · 시를 모르면 세 기둥으로 감정합니다</p>
       <div id="scope"></div>
@@ -389,7 +373,7 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
   </div>
 
   <div class="scr" id="sRep">
-    <div class="hero noprint" id="hero"><div class="pst" id="heroP"></div><video id="hv" playsinline preload="none"></video><video id="hv2" playsinline muted loop preload="none"></video><div class="hsub" id="hsub"></div><button class="cc noprint" type="button" aria-label="자막 켜고 끄기">자막</button></div>
+    <div class="hero noprint" id="hero"><div class="pst" id="heroP"></div><video id="hv" playsinline preload="none"></video><video id="hv2" playsinline muted loop preload="none"></video><div class="hsub" id="hsub"></div></div>
     <div class="htl"><small>明理館 鑑定書</small><h2>2027 명리 감정서</h2></div>
     <div class="rep" id="rep">
       <div class="doc" id="dHead"></div>
@@ -403,8 +387,7 @@ table.wk{width:100%;border-collapse:collapse;text-align:center;table-layout:fixe
       <div class="cov noprint" data-img="IMG_INK" data-vid="VID_GRIND"><div><small>附錄</small><b>절기로 읽는 열두 달</b></div></div>
       <div class="doc" id="dJ"></div>
       <div class="ask noprint"><div class="pst" style="background-image:url('img/soheon.jpg')"></div><video data-vid="VID_IDLE" muted loop playsinline preload="none"></video><div class="in"><h3>소헌 선생에게 묻기</h3><p>감정서를 읽다 걸리는 대목이 있으면 물어보게. 자네 원국의 근거를 짚어 가며 답하겠네. 세 번까지 물을 수 있어요.</p><div class="qs"><button data-q="올해 이직을 해도 되겠습니까">올해 이직을 해도 되겠습니까</button><button data-q="돈은 언제 모이겠습니까">돈은 언제 모이겠습니까</button><button data-q="조심할 달은 언제입니까">조심할 달은 언제입니까</button></div><button class="go" id="askBtn">소헌 선생에게 묻기</button></div></div>
-      <div class="frd noprint"><span>여기까지가 무료 감정일세</span><p>봉투 안에는 자네 물음의 답과 열두 달의 날짜가 이미 적혀 있네.</p></div>
-      <div class="seal noprint" id="sealBox"><div class="fr" id="sealFr"><video id="sv" playsinline preload="none"></video><video id="sv2" playsinline muted loop preload="none"></video><div class="ssub" id="ssub"></div><button class="cc" type="button" aria-label="자막 켜고 끄기">자막</button></div>
+      <div class="seal noprint" id="sealBox"><div class="fr" id="sealFr"><video id="sv" playsinline preload="none"></video><video id="sv2" playsinline muted loop preload="none"></video><div class="ssub" id="ssub"></div></div>
         <div class="in"><h3>봉투 안의 감정서</h3>
           <ul class="toc"><li><em>한눈에</em>한눈에 보는 2027 · 열두 달 곡선 · 오행 · 대운</li><li><em>제5장</em>자네가 물은 것 · 답과 달 · 분기 계획 · 고른 날</li><li><em>제6장</em>타고난 그릇 · 십성 분포 · 원국의 별</li><li><em>제7장</em>대운의 흐름 · 지금과 다음 10년</li><li><em>제8장</em>2027 세운 정밀</li><li><em>제9장</em>열두 달 월운 · 달마다 좋은 날과 피할 날</li><li><em>제10장</em>영역별 감정 · 재물 · 일 · 인연 · 사람 · 몸</li><li><em>제11장</em>자주 묻는 다섯 가지</li><li><em>제12장</em>소헌 선생의 권고 · 열두 달 개운표</li><li><em>제13장</em>길일표 · 맺음말 · 관인 감정서</li></ul>
           <p class="pr"><s>29,000원</s> <b>19,900원</b> · 2027 신년 한정</p>
@@ -623,7 +606,6 @@ function render(name,sol,h,orig){
   $('d4').innerHTML=`<div class="ch"><em>제4장</em><b>2027 세운 총평</b></div><div class="yr"><div class="sc">${ys}<small>/100</small></div><div class="lb"><b>${['문이 열리는 해','다지고 쌓는 해','바람이 센 해'][tier]}</b>정미(丁未)년 · ${S_.tgStem(dm,YS)} · ${S_.tgBranch(dm,YB)}의 해</div></div>${yh}${notes()}`;
   window.SNF={name,nick,male,P,dm,st,cnt,ys,tier,cur,curFav,inp:{y:sol.y,m:sol.m,d:sol.d,h,g:gender},docNo:docNo(sol,h),td,ask:ASK};
   try{ if(window.MRPrem&&MRPrem.teaser) MRPrem.teaser($('dQ')); }catch(e){ $('dQ').hidden=true; }
-  try{ if(window.MRPrem&&MRPrem.peek) MRPrem.peek($('dLock')); }catch(e){}
   const pr=$('prem'); pr.hidden=true; pr.innerHTML=''; $('dLock').hidden=false; $('pay').classList.remove('done'); $('payBtn').textContent='감정서 전체 열기';
 }
 function openAsk(first){ if(!window.AskChat||!ASKU) return; AskChat.open({persona:'soheon',theme:'paper',root:$('stage'),avatar:'img/soheon_av.jpg',user:ASKU,first,tier:'default'}); }
@@ -637,18 +619,9 @@ const A=window.MR2A;
 const muted=()=>{ try{ return sessionStorage.getItem('obSnd')==='0'; }catch(e){ return false; } };
 /* 극장: 말하는 영상 → 끝나면 반복 영상(idle)으로. 영상 두 장을 교차시켜 끊김 없게 */
 let cur=$('va'), nxt=$('vb'), tok=0, loopSrc=null, soundBlocked=false;
-/* 자막: 은주 10/4 — 소리를 끈 사람(또는 소리가 막힌 경우)에게는 자동으로, 소리를 켠 사람에게는 숨김. 볼륨 0은 웹에서 알 수 없어 '자막' 버튼으로 직접 켜고, 선택은 기억(obCC) */
-const ccPref=()=>{ try{ return localStorage.getItem('obCC'); }catch(e){ return null; } };
-const silent=()=>[typeof cur!=='undefined'?cur:null,$('hv'),$('sv')].some(v=>v&&!v.paused&&!v.loop&&v.muted);
-function ccVis(){ const p=ccPref(); if(p==='1') return true; if(p==='0') return false; return muted()||soundBlocked||silent(); }
-function ccSync(){ const on=ccVis(); document.querySelectorAll('.cc').forEach(b=>b.classList.toggle('on',on)); ['sub','hsub','ssub'].forEach(id=>{ const el=$(id); if(el) el.classList.toggle('on',!!(on&&el._t)); }); }
-function subOn(el,t){ el._t=t||''; el.classList.remove('on'); setTimeout(()=>{ if(el._t!==(t||'')) return; el.innerHTML=t?`<span>${t}</span>`:''; if(t&&ccVis()) el.classList.add('on'); },160); }
-document.addEventListener('click',e=>{ const b=e.target.closest('.cc'); if(!b) return; try{ localStorage.setItem('obCC',ccVis()?'0':'1'); }catch(e){} ccSync(); });
-/* 삼성 인터넷 동영상 도우미 등 브라우저가 띄우는 영상 단추를 줄이는 표시 */
-function noVA(){ document.querySelectorAll('video').forEach(v=>{ if(v._nv) return; v._nv=1; v.setAttribute('disablepictureinpicture',''); v.setAttribute('disableremoteplayback',''); v.setAttribute('controlslist','nofullscreen noremoteplayback nodownload noplaybackrate'); v.setAttribute('x-webkit-airplay','deny'); try{ v.disablePictureInPicture=true; v.disableRemotePlayback=true; }catch(e){} }); }
-noVA();
+function subOn(el,t){ el.classList.remove('on'); setTimeout(()=>{ el.textContent=t||''; if(t) el.classList.add('on'); },160); }
 function playOn(v,src,{loop=false,mute=false}={}){ return new Promise(res=>{ v.loop=loop; if(v.getAttribute('src')!==src) v.src=src; try{ v.currentTime=0; }catch(e){}
-  v.muted=mute||muted(); const p=v.play(); if(p&&p.then) p.then(()=>res(true)).catch(()=>{ v.muted=true; soundBlocked=!mute; if(soundBlocked) $('sndOn').classList.add('on'); ccSync(); v.play().then(()=>res(true)).catch(()=>res(false)); }); else res(true); }); }
+  v.muted=mute||muted(); const p=v.play(); if(p&&p.then) p.then(()=>res(true)).catch(()=>{ v.muted=true; soundBlocked=!mute; if(soundBlocked) $('sndOn').classList.add('on'); v.play().then(()=>res(true)).catch(()=>res(false)); }); else res(true); }); }
 function swap(){ cur.classList.remove('on'); nxt.classList.add('on'); const o=cur; cur=nxt; nxt=o; setTimeout(()=>{ try{ nxt.pause(); }catch(e){} },600); }
 /* 대사: 자막은 [[초, 문장]...] */
 function say(src,subs,{after=null,sb}={}){ const my=++tok; if(sb!=null) $('sub').style.setProperty('--sb',sb+'px');
@@ -659,26 +632,22 @@ function say(src,subs,{after=null,sb}={}){ const my=++tok; if(sb!=null) $('sub')
     v.onended=fin; setTimeout(()=>{ if(!v.ended&&v.currentTime<.1) fin(); },12000); }); }
 function loopTo(src){ const v=nxt; playOn(v,src,{loop:true,mute:true}).then(()=>swap()); }
 function setPoster(url){ $('thP').style.backgroundImage=`url('${url}')`; }
-$('sndOn').onclick=()=>{ try{ sessionStorage.removeItem('obSnd'); }catch(e){} soundBlocked=false; $('sndOn').classList.remove('on'); [cur,$('hv'),$('sv')].forEach(v=>{ if(v&&!v.loop&&!v.paused){ v.muted=false; } }); ccSync(); };
-document.addEventListener('touchend',()=>{ if(soundBlocked&&!muted()){ [cur,$('hv'),$('sv')].forEach(v=>{ if(v&&!v.loop&&!v.paused){ v.muted=false; } }); soundBlocked=false; $('sndOn').classList.remove('on'); ccSync(); } },{passive:true});
+$('sndOn').onclick=()=>{ try{ sessionStorage.removeItem('obSnd'); }catch(e){} soundBlocked=false; $('sndOn').classList.remove('on'); [cur,$('hv'),$('sv')].forEach(v=>{ if(v&&!v.loop&&!v.paused){ v.muted=false; } }); };
+document.addEventListener('touchend',()=>{ if(soundBlocked&&!muted()){ [cur,$('hv'),$('sv')].forEach(v=>{ if(v&&!v.loop&&!v.paused){ v.muted=false; } }); soundBlocked=false; $('sndOn').classList.remove('on'); } },{passive:true});
 
 /* 화면 전환 */
 const SCR=['sRoom','sIntro','sInk','sWrite','sRep'];
 function show(id){ SCR.forEach(s=>$(s).classList.toggle('on',s===id)); $('pay').classList.toggle('on',id==='sRep'&&false);
   $('th').classList.toggle('half',id==='sIntro'); $('th').classList.toggle('gone',id==='sRep'); $('sub').style.display=id==='sRep'?'none':'';
-  $('tbar').style.display=id==='sRep'?'none':''; if(id!=='sIntro'){ $('sub').classList.remove('top'); $('tbar').classList.remove('solid'); } $('tbT').textContent=id==='sInk'?'먹을 가는 중':id==='sWrite'?'원국을 세우는 중':'명리관 · 소헌 선생'; }
+  $('tbar').style.display=id==='sRep'?'none':''; $('tbT').textContent=id==='sInk'?'먹을 가는 중':id==='sWrite'?'원국을 세우는 중':'명리관 · 소헌 선생'; }
 
 /* 1. 입실 */
 setPoster(A.IMG_SOHEON);
-say(A.T_ENTER,[[1.0,'왔는가. 거기 앉게.'],[3.3,'오늘은 자네의 여덟 글자를, 제대로 읽어 봄세.']],{after:A.VID_IDLE,sb:roomSub()}).then(()=>{});
+say(A.T_ENTER,[[1.0,'왔는가. 거기 앉게.'],[3.3,'오늘은 자네의 여덟 글자를, 제대로 읽어 봄세.']],{after:A.VID_IDLE,sb:300}).then(()=>{});
 setTimeout(()=>$('enterBtn').classList.add('on'),1600);
 if(window.ObIntake){ ObIntake.mount($('intake'),{voice:'soheon'}); $('scope').innerHTML=ObScope.html({free:['원국','오행과 강약','대운 속의 2027','세운 총평','절기로 읽는 열두 달','자네 물음의 실마리'],paid:['자네가 물은 것의 답','한눈에 보는 2027','타고난 그릇','대운','세운 정밀','열두 달 월운과 좋은 날','영역별 감정','자주 묻는 다섯 가지','권고와 개운표','길일표','PDF 저장'],price:'19,900원',was:'29,000원',tag:'2027 신년 한정'}); }
-function placeSub(){ if(!$('sIntro').classList.contains('on')) return; const thB=$('th').getBoundingClientRect().bottom, rq=document.querySelector('#sIntro .req').getBoundingClientRect().top, edge=Math.min(thB,rq), s=$('sub'), sb0=$('stage').getBoundingClientRect().bottom;
-  $('tbar').classList.toggle('solid',rq<70); if(edge<170) s.classList.add('top'); else { s.classList.remove('top'); s.style.setProperty('--sb',(sb0-edge+16)+'px'); } }
-function roomSub(){ const pl=document.querySelector('#sRoom .plate'); if(!pl) return 300; return Math.round($('stage').getBoundingClientRect().bottom-pl.getBoundingClientRect().top+14); }
-$('sIntro').addEventListener('scroll',placeSub,{passive:true}); addEventListener('resize',placeSub);
-$('enterBtn').onclick=()=>{ setPoster(A.IMG_FORM); show('sIntro'); placeSub(); setTimeout(placeSub,950); say(A.T_FORM,[[1.0,'태어난 날짜와 시간을 적어 주게.'],[4.0,'시간을 모르면, 비워 두어도 괜찮네.']],{after:A.VID_IDLE}); };
-$('back1').onclick=()=>{ if($('sIntro').classList.contains('on')){ show('sRoom'); $('sub').style.setProperty('--sb',roomSub()+'px'); return; } if(history.length>1) history.back(); else location.href='./'; };
+$('enterBtn').onclick=()=>{ setPoster(A.IMG_FORM); show('sIntro'); $('sub').style.setProperty('--sb',(innerHeight*0.6+16)+'px'); say(A.T_FORM,[[1.0,'태어난 날짜와 시간을 적어 주게.'],[4.0,'시간을 모르면, 비워 두어도 괜찮네.']],{after:A.VID_IDLE}); };
+$('back1').onclick=()=>{ if($('sIntro').classList.contains('on')){ show('sRoom'); $('sub').style.setProperty('--sb','250px'); return; } if(history.length>1) history.back(); else location.href='./'; };
 
 /* 2. 먹 갈기: 손가락으로 원을 그리면 먹 가는 영상이 그만큼 움직이고, 갈리는 소리가 남 */
 let inkP=0, inkDone=null, last=null, ac=null, noise=null, gainN=null, inkStop=0;
@@ -721,7 +690,7 @@ ritual=async function(name,sol,h,P,DU){
 
 /* 4. 감정서: 맨 위에서 소헌 선생이 원국을 짚고, 끝나면 서재 반복 */
 const _render=render;
-render=function(name,sol,h,orig){ _render(name,sol,h,orig); jeolgi(); fields(); covers(); noVA(); ccSync(); };
+render=function(name,sol,h,orig){ _render(name,sol,h,orig); jeolgi(); fields(); covers(); };
 const _go=$('goBtn').onclick;
 $('goBtn').onclick=async()=>{ tok++; await _go(); heroTalk(); };
 function heroTalk(){ const hv=$('hv'), h2=$('hv2'); $('heroP').style.backgroundImage=`url('${A.IMG_SOHEON}')`; h2.src=A.VID_IDLE;

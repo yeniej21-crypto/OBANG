@@ -9,7 +9,7 @@ SP=os.path.dirname(os.path.abspath(__file__)); P=SP+'/proto'; W=SP+'/_fz'; os.ma
 VER='1'  # 글꼴 내용이 바뀌면 숫자를 올린다(fonts 폴더는 1년 고정 캐시)
 sys.path.insert(0,W)
 from fontTools.ttLib import TTFont
-from simp import simplify
+sys.path.insert(0,SP); from fontsimp import simplify
 from fontTools.ttLib.scaleUpem import scale_upem
 
 f=TTFont(P+'/fonts/obrush.woff2'); simplify(f,2); scale_upem(f,512); f.flavor=None; f.save(W+'/master.ttf')

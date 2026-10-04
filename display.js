@@ -1,7 +1,7 @@
-/* 오방도감 홈 전시 영역(10/4 시안) — 설정(ROOMS · SLOTS)만 고치면 홈 어디에든 특집 칸이 생긴다.
+/* 오방도감 홈 전시 영역(10/4, 은주 확정: A 별관 + D 한 줄 다리) — 설정(ROOMS · SLOTS)만 고치면 홈 어디에든 특집 칸이 생긴다.
    지금: 이 파일의 설정 → 정식: 같은 모양의 설정을 서버(어드민)에서 받아 그대로 그림(ObDisplay.render(cfg)).
    칸 종류: carousel(별관 · 가로로 넘기는 포스터) · split(낮의 방 / 밤의 방 두 문) · daily(오늘 고른 방 하나) · bridge(관련 칸 아래 한 줄 다리)
-   칸 공통: id · type · at(기준 칸 선택자) · where(before|after) · cats(홈 분류 탭 data-cats) · from/to(YYYY-MM-DD, 선택) · hours([시작시,끝시], 선택) */
+   칸 공통: id · on(false면 홈에서 안 그림 · 시안 보관) · type · at(기준 칸 선택자) · where(before|after) · cats(홈 분류 탭 data-cats) · from/to(YYYY-MM-DD, 선택) · hours([시작시,끝시], 선택) */
 (function(){
 const D8='https://d8j0ntlcm91z4.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/', D2='https://d2ol7oe51mr4n9.cloudfront.net/user_39PvKg67WRq5T66HczulEDxUKSm/';
 /* 방(메뉴) 사전: 한 번 적어 두면 어느 칸에서나 쓴다 */
@@ -15,9 +15,9 @@ const ROOMS={
  meokmul:{who:'묘당 검은 고양이',t:'먹물의 오늘 한 장',line:'하루에 딱 한 장. 같은 걸 두 번 물으면 카드가 삐져',img:'img/cat/water.jpg',v:D2+'6c50abf3-653a-4ed5-92bc-0cacbdcb72b0.mp4',href:'meokmul.html',badge:'하루 한 장 무료',c:'#bfb7ff',pos:'center 30%'}
 };
 const SLOTS=[
- {id:'annex',type:'carousel',at:'#secBook',where:'before',cats:'all love heart gaeun',k:'오방도감 별관',h:'이번 주, 문을 연 방',items:['yeonseo','heuk','redthread','lovemini','geum','meokmul','sam']},
- {id:'alley',type:'split',at:'#secBook',where:'before',cats:'all love heart gaeun',day:'yeonseo',night:['heuk','geum','sam']},
- {id:'today',type:'daily',at:'#secBook',where:'before',cats:'all love heart gaeun',pool:['yeonseo','heuk','redthread','lovemini','geum','meokmul','sam']},
+ {id:'annex',type:'carousel',at:'#secBook',where:'before',cats:'all love heart gaeun',k:'오방도감 별관',h:'이번 주, 문을 연 방',items:['yeonseo','heuk','redthread','geum','lovemini','meokmul','sam']},
+ {id:'alley',on:false,type:'split',at:'#secBook',where:'before',cats:'all love heart gaeun',day:'yeonseo',night:['heuk','geum','sam']},
+ {id:'today',on:false,type:'daily',at:'#secBook',where:'before',cats:'all love heart gaeun',pool:['yeonseo','heuk','redthread','lovemini','geum','meokmul','sam']},
  {id:'br-love',type:'bridge',at:'#secLoveHub',where:'after',cats:'all love heart re',item:'yeonseo',text:'연서당 · 너에게 올 편지 한 통, 먼저 열어 보기'},
  {id:'br-dohwa',type:'bridge',at:'#secDohwa',where:'after',cats:'all love match',item:'redthread',text:'월하의 붉은 실 궁합 · 두 사람의 실이 어디서 엉키는지'},
  {id:'br-cat',type:'bridge',at:'#secCat',where:'after',cats:'all love heart',item:'meokmul',text:'먹물의 오늘 한 장 · 아직 안 뽑았으면 하루 한 장 무료'}
@@ -77,7 +77,7 @@ function playOnView(root){ const vs=root.querySelectorAll('video[data-src]'); if
   const io=new IntersectionObserver(es=>es.forEach(e=>{ const v=e.target; if(e.isIntersecting){ if(!v.src) v.src=v.dataset.src; v.muted=true; const p=v.play(); if(p&&p.then) p.then(()=>v.classList.add('on')).catch(()=>{}); } else { try{ v.pause(); }catch(x){} } }),{threshold:.35});
   vs.forEach(v=>{ v.addEventListener('error',()=>v.remove()); io.observe(v); }); }
 function render(only,cfg){ css(); const slots=(cfg&&cfg.slots)||SLOTS; if(cfg&&cfg.rooms) Object.assign(ROOMS,cfg.rooms);
-  const out=[]; slots.forEach(s=>{ if(only&&!only.includes(s.id)) return; if(!live(s)||!DRAW[s.type]) return; const at=document.querySelector(s.at); if(!at) return;
+  const out=[]; slots.forEach(s=>{ if(only?!only.includes(s.id):s.on===false) return; if(!live(s)||!DRAW[s.type]) return; const at=document.querySelector(s.at); if(!at) return;
     const el=document.createElement(s.type==='bridge'?'div':'section'); el.className=(s.type==='bridge'?'':'hSec ')+'dsp '+CLS[s.type]; el.dataset.dsp=s.id; if(s.cats) el.dataset.cats=s.cats;
     el.innerHTML=DRAW[s.type](s); if(s.where==='after') at.after(el); else at.before(el); playOnView(el); out.push(el); });
   return out; }
